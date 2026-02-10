@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Visione Sostenibile - Convex + Next.js
 
-## Getting Started
+Sito vetrina per azienda di giardinaggio realizzato con **Convex** (backend/database) e **Next.js** (frontend).
 
-First, run the development server:
+## 🗂️ Struttura del Sito
+
+| Pagina | Route | Descrizione |
+|--------|-------|-------------|
+| Home | `/` | Hero, servizi in evidenza, recensioni |
+| Chi Siamo | `/chi-siamo` | Storia azienda e valori |
+| Servizi | `/servizi` | Lista 12 servizi |
+| Dettaglio Servizio | `/servizi/[slug]` | Pagina singolo servizio |
+| Galleria | `/galleria` | Foto lavori con filtri |
+| Recensioni | `/recensioni` | Testimonianze + form |
+| Contatti | `/contatti` | Form contatto + info |
+| Privacy | `/privacy` | Privacy policy |
+
+## 🚀 Quick Start
+
+### 1. Configurazione Convex
+
+```bash
+cd my-app
+npx convex dev
+```
+
+Questo comando:
+- Fa login con GitHub
+- Crea un progetto Convex
+- Genera `.env.local` con `NEXT_PUBLIC_CONVEX_URL`
+- Crea la cartella `convex/` con le API
+
+### 2. Seed Dati Iniziali
+
+Nel **Convex Dashboard** (si apre automaticamente), vai nella sezione "Functions" e chiama:
+
+```javascript
+api.services.seed()
+```
+
+Questo popola i 12 servizi di default.
+
+### 3. Avvia Next.js
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Apri [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🗄️ Database Schema
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Tabelle Convex:
 
-## Learn More
+| Tabella | Scopo |
+|---------|-------|
+| `pages` | Contenuto pagine statiche (Home, Chi siamo, etc) |
+| `services` | 12 servizi di giardinaggio |
+| `gallery` | Immagini galleria |
+| `reviews` | Recensioni clienti (con moderazione) |
+| `contactSubmissions` | Richieste dal form contatti |
+| `settings` | Configurazioni sito |
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 File Importanti
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+convex/
+├── schema.ts          # Definizione database
+├── services.ts        # Query/Mutation servizi
+├── pages.ts           # Query pagine statiche
+├── gallery.ts         # Query galleria
+├── reviews.ts         # Query/Mutation recensioni
+└── contacts.ts        # Mutation form contatti
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+app/
+├── page.tsx           # Homepage
+├── layout.tsx         # Root layout + ConvexProvider
+├── servizi/
+│   ├── page.tsx       # Lista servizi
+│   └── [slug]/        # Dettaglio servizio dinamico
+├── galleria/
+├── recensioni/
+├── contatti/
+├── chi-siamo/
+├── privacy/
+└── components/        # Navbar, Footer
+```
 
-## Deploy on Vercel
+## 🛠️ Comandi Utili
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Sviluppo
+npm run dev              # Next.js dev server
+npx convex dev           # Convex dev (altro terminale)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Database
+npx convex dashboard     # Apri dashboard Convex
+
+# Deploy
+npx convex deploy        # Deploy backend
+npm run build          # Build Next.js
+```
+
+## 📝 Popolare Contenuti
+
+### Aggiungere una recensione (via Dashboard):
+```javascript
+api.reviews.submit({
+  authorName: "Mario Rossi",
+  authorLocation: "Roma",
+  rating: 5,
+  text: "Ottimo servizio, giardino meraviglioso!"
+})
+```
+
+### Approvare recensione:
+```javascript
+api.reviews.approve({ reviewId: "your-review-id" })
+```
+
+### Aggiungere immagine galleria:
+```javascript
+api.gallery.add({
+  title: "Giardino Moderno",
+  imageUrl: "https://...",
+  category: "giardini",
+  order: 1
+})
+```
+
+## 🎨 Personalizzazione
+
+- Colori: modifica Tailwind in `app/globals.css`
+- Logo: sostituisci testo in `app/components/Navbar.tsx`
+- Contatti: aggiorna `app/components/Footer.tsx` e `app/contatti/page.tsx`
+
+## 📚 Documentazione
+
+- [Convex Docs](https://docs.convex.dev)
+- [Next.js Docs](https://nextjs.org/docs)
