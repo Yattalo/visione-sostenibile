@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "./ui/Badge";
 import TiltedCard from "./TiltedCard";
