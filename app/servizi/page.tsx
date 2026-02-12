@@ -36,25 +36,16 @@ export default function ServiziPage() {
       <section className="relative overflow-hidden bg-moss-900 pt-32 pb-24 lg:pt-40 lg:pb-32">
         {/* Background with video support */}
         <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-15"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
-            }}
-          />
           <video
             autoPlay
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920"
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
+            className="absolute inset-0 w-full h-full object-cover opacity-50"
           >
-            <source src="/videos/nature-garden-flowers.webm" type="video/webm" />
             <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/95 via-moss-800/85 to-charcoal-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/75 via-moss-800/55 to-charcoal-900/65" />
         </div>
 
         {/* Organic decorative blobs */}

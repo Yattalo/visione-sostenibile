@@ -89,19 +89,14 @@ export default function HomePage() {
       >
         {/* Background with video support */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-moss-900/80 via-moss-800/60 to-charcoal-900/70" />
-          </div>
-          {/* Video overlay fallback - replace with actual video */}
+          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/80 via-moss-800/60 to-charcoal-900/70" />
           <video
             autoPlay
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           >
-            <source src="/videos/garden-bloom-timelapse.webm" type="video/webm" />
             <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
           </video>
           {/* Decorative organic blobs */}
