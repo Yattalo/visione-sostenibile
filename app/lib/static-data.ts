@@ -16,7 +16,9 @@ export const staticServices = [
 ];
 
 export const staticReviews = [
-  { _id: "1", authorName: "Marco Rossi", authorLocation: "Roma", rating: 5, text: "Ottimo lavoro! Hanno trasformato il mio giardino in un paradiso verde. Professionalità e competenza al top.", isApproved: true },
-  { _id: "2", authorName: "Laura Bianchi", authorLocation: "Fiumicino", rating: 5, text: "Servizio impeccabile dalla progettazione alla realizzazione. Consigliatissimi!", isApproved: true },
-  { _id: "3", authorName: "Giuseppe Verdi", authorLocation: "Ostia", rating: 4, text: "Buon lavoro e prezzi onesti. Tornerò sicuramente per la manutenzione stagionale.", isApproved: true },
+  { _id: "1", authorName: "Marco Rossi", authorLocation: "Roma", rating: 5, text: "Ottimo lavoro! Hanno trasformato il mio giardino in un paradiso verde. Professionalità e competenza al top.", serviceSlug: "progettazione-giardini", isApproved: true },
+  { _id: "2", authorName: "Laura Bianchi", authorLocation: "Fiumicino", rating: 5, text: "Servizio impeccabile dalla progettazione alla realizzazione. Consigliatissimi!", serviceSlug: "realizzazione-giardini", isApproved: true },
+  { _id: "3", authorName: "Giuseppe Verdi", authorLocation: "Ostia", rating: 4, text: "Buon lavoro e prezzi onesti. Tornerò sicuramente per la manutenzione stagionale.", serviceSlug: "manutenzioni", isApproved: true },
+  { _id: "4", authorName: "Anna Neri", authorLocation: "Roma", rating: 5, text: "Le piante scelte erano perfette per il mio terrazzo. Consulenza eccellente!", serviceSlug: "scelta-piante", isApproved: true },
+  { _id: "5", authorName: "Carlo Bruno", authorLocation: "Ciampino", rating: 5, text: "L'impianto di irrigazione installato funziona perfettamente. Risparmio davvero acqua!", serviceSlug: "impianti-irrigazione", isApproved: true },
 ];
