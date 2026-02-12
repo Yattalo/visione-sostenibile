@@ -5,24 +5,23 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "earth";
+  variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
   loading?: boolean;
 }
 
 const buttonVariants = {
-  primary: "bg-primary-600 text-white hover:bg-primary-500 focus-visible:ring-primary-500",
-  secondary: "bg-earth-600 text-white hover:bg-earth-500 focus-visible:ring-earth-500",
-  outline: "border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-500",
-  ghost: "text-foreground hover:bg-muted focus-visible:ring-foreground/50",
-  earth: "bg-earth-500 text-white hover:bg-earth-400 focus-visible:ring-earth-500",
+  primary: "bg-terracotta-500 text-white hover:bg-terracotta-600",
+  secondary: "bg-moss-700 text-white hover:bg-moss-600",
+  outline: "border-2 border-charcoal-300 text-charcoal-700 hover:bg-charcoal-100",
+  ghost: "text-charcoal-600 hover:text-terracotta-600",
 };
 
 const buttonSizes = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-6 text-base",
-  lg: "h-14 px-8 text-lg",
+  sm: "h-10 px-5 text-sm",
+  md: "h-12 px-7 text-base",
+  lg: "h-14 px-9 text-lg",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -45,10 +44,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className={cn(
-          "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300",
+          "inline-flex items-center justify-center font-sans uppercase tracking-wider font-medium rounded-full transition-all duration-300",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
           "disabled:opacity-50 disabled:cursor-not-allowed",
-          "overflow-hidden relative",
           buttonVariants[variant],
           buttonSizes[size],
           className
@@ -73,7 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 cy="12"
                 r="10"
                 stroke="currentColor"
-                strokeWidth="4"
+                strokeWidth="3"
               />
               <path
                 className="opacity-75"
@@ -90,13 +88,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         >
           {children}
         </motion.span>
-        {variant === "primary" && (
-          <motion.div
-            initial={{ x: "-100%" }}
-            whileHover={{ x: "100%" }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          />
-        )}
       </motion.button>
     );
   }

@@ -15,45 +15,20 @@ import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Badge } from "../../components/ui/Badge";
-import { SlideUp, StaggerContainer, StaggerItem } from "../../components/animations";
-
-const mockBlogPosts = [
-  {
-    _id: "1",
-    title: "Come Mantenere il Giardino in Autunno",
-    slug: "come-mantenere-giardino-autunno",
-    category: "Manutenzione",
-    author: "Team Visione Sostenibile",
-    publishedAt: Date.now(),
-    readTime: "5 min",
-    isPublished: true,
-  },
-  {
-    _id: "2",
-    title: "Tendenze Giardini 2024",
-    slug: "tendenze-giardini-2024",
-    category: "Tendenze",
-    author: "Marco Verde",
-    publishedAt: Date.now() - 86400000,
-    readTime: "4 min",
-    isPublished: true,
-  },
-  {
-    _id: "3",
-    title: "Le Migliori Piante per Terreni in Pendio",
-    slug: "piante-pendio",
-    category: "Progettazione",
-    author: "Laura Fiori",
-    readTime: "6 min",
-    isPublished: false,
-  },
-];
+import { SlideUp, StaggerItem } from "../../components/animations";
+import { blogPosts } from "../../lib/blog";
 
 export default function AdminBlogPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "published" | "draft">("all");
 
-  const filteredPosts = mockBlogPosts.filter((post) => {
+  const posts = blogPosts.map((post) => ({
+    ...post,
+    isPublished: true,
+    publishedAt: Date.parse(post.publishedAt),
+  }));
+
+  const filteredPosts = posts.filter((post) => {
     const matchesSearch = post.title
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
@@ -104,7 +79,7 @@ export default function AdminBlogPage() {
                 onClick={() => setFilter(f.key)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   filter === f.key
-                    ? "bg-primary-600 text-white"
+                    ? "bg-terracotta-600 text-white"
                     : "bg-white border border-border hover:bg-muted"
                 }`}
               >
@@ -126,7 +101,7 @@ export default function AdminBlogPage() {
       <SlideUp delay={0.2}>
         <div className="grid gap-4">
           {filteredPosts.map((post, index) => (
-            <StaggerItem key={post._id} delay={index * 0.05}>
+            <StaggerItem key={post.slug} delay={index * 0.05}>
               <Card variant="default" className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex flex-col lg:flex-row lg:items-center gap-4">

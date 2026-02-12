@@ -2,22 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Leaf,
-  Mail,
-  Phone,
-  MapPin,
-  Instagram,
-  Facebook,
-  Linkedin,
-  Clock,
-} from "lucide-react";
-import { cn } from "../lib/utils";
+import { Leaf, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Clock } from "lucide-react";
 
 const services = [
   { label: "Progettazione Giardini", href: "/servizi/progettazione-giardini" },
-  { label: "Realizzazione", href: "/servizi/realizzazione" },
-  { label: "Manutenzione", href: "/servizi/manutenzione" },
+  { label: "Realizzazione", href: "/servizi/realizzazione-giardini" },
+  { label: "Manutenzione", href: "/servizi/manutenzioni" },
   { label: "Potature", href: "/servizi/potature" },
 ];
 
@@ -25,50 +15,45 @@ const company = [
   { label: "Chi Siamo", href: "/chi-siamo" },
   { label: "I Nostri Servizi", href: "/servizi" },
   { label: "Galleria", href: "/galleria" },
-  { label: "Blog", href: "/blog" },
   { label: "Recensioni", href: "/recensioni" },
-];
-
-const info = [
+  { label: "Blog", href: "/blog" },
+  { label: "Qualità", href: "/qualita" },
   { label: "Contatti", href: "/contatti" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Termini e Condizioni", href: "/termini" },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-earth-900 text-earth-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-charcoal-900 text-cream-100">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <Link href="/" className="flex items-center gap-2">
-              <Leaf className="w-8 h-8 text-primary-500" />
-              <span className="font-display text-xl font-bold text-white">
-                Visione<span className="text-primary-500">Sostenibile</span>
+            <Link href="/" className="flex items-center gap-3">
+              <Leaf className="w-8 h-8 text-terracotta-500" />
+              <span className="font-display text-2xl tracking-wide text-white">
+                Visione<span className="italic text-terracotta-400">Sostenibile</span>
               </span>
             </Link>
-            <p className="text-earth-300 text-sm leading-relaxed">
-              Trasformiamo i tuoi spazi verdi in opere d'arte naturali.
-              Professionalità, passione e sostenibilità al servizio del
-              verde.
+            <p className="font-body text-cream-300 text-sm leading-relaxed">
+              Creiamo giardini che respirano, che raccontano storie, che
+              abbracciano la natura e la celebrano.
             </p>
             <div className="flex gap-4">
               {[
                 { icon: Instagram, href: "#" },
                 { icon: Facebook, href: "#" },
                 { icon: Linkedin, href: "#" },
-              ].map((social, index) => (
+              ].map((social) => (
                 <motion.a
                   key={social.icon.name}
                   href={social.href}
                   whileHover={{ y: -3, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full bg-earth-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+                  className="w-10 h-10 rounded-full bg-charcoal-800 flex items-center justify-center hover:bg-terracotta-500 transition-colors"
                 >
                   <social.icon className="w-5 h-5" />
                 </motion.a>
@@ -83,7 +68,7 @@ export function Footer() {
             transition={{ delay: 0.1 }}
             className="space-y-6"
           >
-            <h3 className="font-display text-lg font-bold text-white">
+            <h3 className="font-display text-lg font-normal text-white">
               Servizi
             </h3>
             <ul className="space-y-3">
@@ -91,7 +76,7 @@ export function Footer() {
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="text-earth-300 hover:text-primary-400 transition-colors text-sm"
+                    className="font-body text-sm text-cream-400 hover:text-terracotta-400 transition-colors"
                   >
                     {service.label}
                   </Link>
@@ -107,7 +92,7 @@ export function Footer() {
             transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            <h3 className="font-display text-lg font-bold text-white">
+            <h3 className="font-display text-lg font-normal text-white">
               Azienda
             </h3>
             <ul className="space-y-3">
@@ -115,7 +100,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-earth-300 hover:text-primary-400 transition-colors text-sm"
+                    className="font-body text-sm text-cream-400 hover:text-terracotta-400 transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -131,39 +116,39 @@ export function Footer() {
             transition={{ delay: 0.3 }}
             className="space-y-6"
           >
-            <h3 className="font-display text-lg font-bold text-white">
+            <h3 className="font-display text-lg font-normal text-white">
               Contatti
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" />
-                <span className="text-earth-300 text-sm">
+                <MapPin className="w-5 h-5 text-terracotta-500 mt-0.5 flex-shrink-0" />
+                <span className="font-body text-sm text-cream-300">
                   Via del Verde, 123
                   <br />
                   00100 Roma (RM)
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary-500 flex-shrink-0" />
+                <Phone className="w-5 h-5 text-terracotta-500 flex-shrink-0" />
                 <a
                   href="tel:+39061234567"
-                  className="text-earth-300 hover:text-primary-400 transition-colors text-sm"
+                  className="font-body text-sm text-cream-300 hover:text-terracotta-400 transition-colors"
                 >
                   +39 06 1234567
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary-500 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-terracotta-500 flex-shrink-0" />
                 <a
                   href="mailto:info@visionesostenibile.it"
-                  className="text-earth-300 hover:text-primary-400 transition-colors text-sm"
+                  className="font-body text-sm text-cream-300 hover:text-terracotta-400 transition-colors"
                 >
                   info@visionesostenibile.it
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-primary-500 flex-shrink-0" />
-                <span className="text-earth-300 text-sm">
+                <Clock className="w-5 h-5 text-terracotta-500 flex-shrink-0" />
+                <span className="font-body text-sm text-cream-300">
                   Lun-Ven: 8:00-18:00
                   <br />
                   Sab: 8:00-13:00
@@ -177,19 +162,22 @@ export function Footer() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="py-8 border-t border-earth-800"
+          className="py-8 border-t border-charcoal-800"
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-earth-400 text-sm">
+            <p className="font-body text-sm text-cream-500">
               © {new Date().getFullYear()} Visione Sostenibile. Tutti i diritti
               riservati.
             </p>
             <div className="flex gap-6">
-              {info.map((item) => (
+              {[
+                { label: "Privacy", href: "/privacy" },
+                { label: "Termini", href: "/termini" },
+              ].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-earth-400 hover:text-primary-400 transition-colors text-sm"
+                  className="font-body text-sm text-cream-500 hover:text-terracotta-400 transition-colors"
                 >
                   {item.label}
                 </Link>

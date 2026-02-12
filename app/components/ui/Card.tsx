@@ -11,10 +11,10 @@ interface CardProps extends Omit<HTMLMotionProps<"div">, "children"> {
 }
 
 const cardVariants = {
-  default: "bg-card text-card-foreground border border-border",
-  elevated: "bg-card text-card-foreground shadow-card hover:shadow-card-hover",
-  outline: "bg-transparent text-foreground border-2 border-border hover:border-primary-500",
-  glass: "bg-white/80 dark:bg-earth-900/80 backdrop-blur-xl text-foreground border border-white/20",
+  default: "bg-white border border-cream-200",
+  elevated: "bg-white shadow-floating",
+  outline: "bg-transparent border-2 border-cream-300 hover:border-terracotta-400",
+  glass: "bg-white/80 backdrop-blur-xl border border-white/20",
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -37,8 +37,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         transition={transition}
         className={cn(
           "rounded-2xl p-6",
-          "transition-all duration-300",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+          "transition-all duration-500",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-500",
           cardVariants[variant],
           className
         )}
@@ -72,7 +72,7 @@ export function CardTitle({ className, as: Tag = "h3", children, ...props }: Car
   return (
     <Tag
       className={cn(
-        "font-display text-xl md:text-2xl font-bold text-foreground",
+        "font-display text-xl md:text-2xl font-bold text-charcoal-800",
         className
       )}
       {...props}
@@ -82,19 +82,27 @@ export function CardTitle({ className, as: Tag = "h3", children, ...props }: Car
   );
 }
 
-interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
 
-export function CardDescription({ className, children, ...props }: CardDescriptionProps) {
+export function CardDescription({
+  className,
+  children,
+  ...props
+}: CardDescriptionProps) {
   return (
-    <p className={cn("text-muted-foreground text-sm md:text-base", className)} {...props}>
+    <p className={cn("text-cream-500 text-sm md:text-base", className)} {...props}>
       {children}
     </p>
   );
 }
 
-interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+type CardContentProps = React.HTMLAttributes<HTMLDivElement>;
 
-export function CardContent({ className, children, ...props }: CardContentProps) {
+export function CardContent({
+  className,
+  children,
+  ...props
+}: CardContentProps) {
   return (
     <div className={cn("", className)} {...props}>
       {children}
@@ -102,12 +110,16 @@ export function CardContent({ className, children, ...props }: CardContentProps)
   );
 }
 
-interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+type CardFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
-export function CardFooter({ className, children, ...props }: CardFooterProps) {
+export function CardFooter({
+  className,
+  children,
+  ...props
+}: CardFooterProps) {
   return (
     <div
-      className={cn("mt-6 pt-4 border-t border-border/50 flex items-center gap-3", className)}
+      className={cn("mt-6 pt-4 border-t border-cream-200 flex items-center gap-3", className)}
       {...props}
     >
       {children}

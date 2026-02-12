@@ -2,54 +2,29 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useQuery } from "convex/react";
 import {
   Plus,
   Search,
   Edit,
   Trash2,
   Eye,
-  MoreVertical,
   ArrowUp,
   ArrowDown,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card";
+import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Badge } from "../../components/ui/Badge";
 import { SlideUp } from "../../components/animations";
-
-const mockServices = [
-  {
-    _id: "1",
-    title: "Progettazione Giardini",
-    slug: "progettazione-giardini",
-    shortDescription: "Progetti personalizzati per il tuo spazio verde",
-    order: 1,
-    isActive: true,
-  },
-  {
-    _id: "2",
-    title: "Realizzazione Giardini",
-    slug: "realizzazione-giardini",
-    shortDescription: "Trasformiamo i progetti in realtà",
-    order: 2,
-    isActive: true,
-  },
-  {
-    _id: "3",
-    title: "Manutenzioni",
-    slug: "manutenzioni",
-    shortDescription: "Servizi di manutenzione programmata",
-    order: 12,
-    isActive: true,
-  },
-];
+import { api } from "../../../convex/_generated/api";
 
 export default function AdminServicesPage() {
+  const services = useQuery(api.services.getAll) ?? [];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
-  const filteredServices = mockServices.filter(
+  const filteredServices = services.filter(
     (service) =>
       service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       service.slug.toLowerCase().includes(searchQuery.toLowerCase())
@@ -83,7 +58,7 @@ export default function AdminServicesPage() {
           </div>
           <Button>
             <Plus className="w-4 h-4 mr-2" />
-            Aggiungi Servizio
+            Nuovo servizio
           </Button>
         </div>
       </SlideUp>

@@ -1,7 +1,6 @@
 "use client";
 
 import { SkeletonCard, SkeletonHero, SkeletonStats, SkeletonGallery, SkeletonReview, SkeletonForm } from "./ui/Skeleton";
-import { Card, CardContent } from "./ui/Card";
 
 interface LoadingStateProps {
   variant?: "default" | "hero" | "stats" | "gallery" | "reviews" | "form" | "cards";
@@ -12,7 +11,7 @@ export function LoadingState({ variant = "default", count = 6 }: LoadingStatePro
   switch (variant) {
     case "hero":
       return (
-        <section className="py-20 bg-earth-900">
+        <section className="py-20 bg-moss-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SkeletonHero />
           </div>
@@ -20,7 +19,7 @@ export function LoadingState({ variant = "default", count = 6 }: LoadingStatePro
       );
     case "stats":
       return (
-        <section className="py-12 bg-earth-900">
+        <section className="py-12 bg-moss-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SkeletonStats />
           </div>
@@ -75,7 +74,7 @@ export function LoadingState({ variant = "default", count = 6 }: LoadingStatePro
 
 export function PageLoader() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-earth-50 to-white py-24">
+    <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white py-24">
       <LoadingState variant="hero" />
       <LoadingState variant="cards" count={3} />
       <LoadingState variant="stats" />

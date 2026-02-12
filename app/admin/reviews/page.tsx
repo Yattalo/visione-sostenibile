@@ -1,55 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation, useQuery } from "convex/react";
 import {
-  Plus,
   Search,
-  Edit,
   Trash2,
-  Eye,
   Check,
   X,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card";
+import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { Badge } from "../../components/ui/Badge";
-import { SlideUp, StaggerContainer, StaggerItem } from "../../components/animations";
-
-const mockReviews = [
-  {
-    _id: "1",
-    authorName: "Marco Rossi",
-    authorLocation: "Roma",
-    rating: 5,
-    text: "Servizio eccellente, molto professionali! Hanno trasformato il mio giardino in un paradiso verde.",
-    isApproved: false,
-    createdAt: Date.now(),
-  },
-  {
-    _id: "2",
-    authorName: "Laura Bianchi",
-    authorLocation: "Fiumicino",
-    rating: 5,
-    text: "Ottimo lavoro, giardino splendente! Consigliatissimi.",
-    isApproved: true,
-    createdAt: Date.now() - 86400000,
-  },
-  {
-    _id: "3",
-    authorName: "Giuseppe Verdi",
-    rating: 4,
-    text: "Buon servizio, professionali e puntuali.",
-    isApproved: true,
-    createdAt: Date.now() - 172800000,
-  },
-];
+import { SlideUp } from "../../components/animations";
+import { api } from "../../../convex/_generated/api";
 
 export default function AdminReviewsPage() {
+  const reviews = useQuery(api.reviews.getAll) ?? [];
+  const approveReview = useMutation(api.reviews.approve);
   const [filter, setFilter] = useState<"all" | "pending" | "approved">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredReviews = mockReviews.filter((review) => {
+  const filteredReviews = reviews.filter((review) => {
     const matchesSearch =
       review.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       review.text.toLowerCase().includes(searchQuery.toLowerCase());
@@ -98,14 +70,14 @@ export default function AdminReviewsPage() {
                 onClick={() => setFilter(f)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   filter === f
-                    ? "bg-primary-600 text-white"
+                    ? "bg-terracotta-600 text-white"
                     : "bg-white border border-border hover:bg-muted"
                 }`}
               >
                 {f === "all" ? "Tutte" : f === "pending" ? "In attesa" : "Approvate"}
                 {f === "pending" && (
                   <span className="ml-2 px-2 py-0.5 text-xs bg-yellow-500 text-white rounded-full">
-                    {mockReviews.filter((r) => !r.isApproved).length}
+                    {reviews.filter((r) => !r.isApproved).length}
                   </span>
                 )}
               </button>
@@ -130,7 +102,7 @@ export default function AdminReviewsPage() {
                 <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-earth-400 flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-terracotta-400 to-moss-500 flex items-center justify-center text-white font-bold">
                         {review.authorName.charAt(0)}
                       </div>
                       <div>
@@ -155,11 +127,17 @@ export default function AdminReviewsPage() {
                   <div className="flex lg:flex-col gap-2">
                     {!review.isApproved && (
                       <>
-                        <Button variant="outline" size="sm">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            approveReview({ reviewId: review._id })
+                          }
+                        >
                           <Check className="w-4 h-4 mr-1" />
                           Approva
                         </Button>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" disabled>
                           <X className="w-4 h-4 mr-1" />
                           Rifiuta
                         </Button>

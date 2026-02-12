@@ -235,7 +235,7 @@ export function TypingText({ text, className, speed = 50, delay = 0 }: TypingTex
       <motion.span
         animate={{ opacity: [0, 1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity }}
-        className="inline-block w-0.5 h-5 ml-1 bg-primary-500 align-middle"
+        className="inline-block w-0.5 h-5 ml-1 bg-terracotta-500 align-middle"
       />
     </span>
   );

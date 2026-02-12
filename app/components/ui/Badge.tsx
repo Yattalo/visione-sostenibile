@@ -8,17 +8,17 @@ interface BadgeProps {
 }
 
 const badgeVariants = {
-  default: "bg-muted text-muted-foreground",
-  primary: "bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300",
-  earth: "bg-earth-100 text-earth-700 dark:bg-earth-900 dark:text-earth-300",
-  success: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
-  warning: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
-  outline: "border border-border text-foreground bg-transparent",
+  default: "bg-cream-200 text-charcoal-700",
+  primary: "bg-terracotta-100 text-terracotta-700",
+  earth: "bg-moss-100 text-moss-700",
+  success: "bg-green-100 text-green-700",
+  warning: "bg-yellow-100 text-yellow-700",
+  outline: "border border-cream-400 text-charcoal-700 bg-transparent",
 };
 
 const badgeSizes = {
-  sm: "px-2 py-0.5 text-xs",
-  md: "px-3 py-1 text-sm",
+  sm: "px-2.5 py-1 text-xs",
+  md: "px-4 py-1.5 text-sm",
 };
 
 export function Badge({
@@ -30,7 +30,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center font-medium rounded-full",
+        "inline-flex items-center font-sans uppercase tracking-wider font-medium rounded-full",
         badgeVariants[variant],
         badgeSizes[size],
         className

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useQuery } from "convex/react";
 import {
   FileText,
   Image,
@@ -8,93 +9,63 @@ import {
   Star,
   TrendingUp,
   ArrowRight,
-  Clock,
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp } from "../components/animations";
-
-const stats = [
-  {
-    title: "Servizi Attivi",
-    value: "12",
-    icon: FileText,
-    color: "from-primary-500 to-primary-600",
-    href: "/admin/services",
-  },
-  {
-    title: "Immagini Galleria",
-    value: "48",
-    icon: Image,
-    color: "from-earth-500 to-earth-600",
-    href: "/admin/gallery",
-  },
-  {
-    title: "Recensioni Approvate",
-    value: "24",
-    icon: Star,
-    color: "from-yellow-500 to-yellow-600",
-    href: "/admin/reviews",
-  },
-  {
-    title: "Messaggi Ricevuti",
-    value: "8",
-    icon: MessageSquare,
-    color: "from-blue-500 to-blue-600",
-    href: "/admin/contacts",
-  },
-];
-
-const recentContacts = [
-  {
-    id: "1",
-    name: "Marco Rossi",
-    email: "marco@email.com",
-    subject: "Richiesta preventivo giardino",
-    service: "Progettazione Giardini",
-    date: "10 Feb 2026",
-    isRead: false,
-  },
-  {
-    id: "2",
-    name: "Laura Bianchi",
-    email: "laura@email.com",
-    subject: "Informazioni manutenzione",
-    service: "Manutenzioni",
-    date: "9 Feb 2026",
-    isRead: false,
-  },
-  {
-    id: "3",
-    name: "Giuseppe Verdi",
-    email: "giuseppe@email.com",
-    subject: "Richiesta.call",
-    service: "Illuminazione Esterni",
-    date: "8 Feb 2026",
-    isRead: true,
-  },
-];
-
-const recentReviews = [
-  {
-    id: "1",
-    author: "Anna M.",
-    rating: 5,
-    text: "Servizio eccellente, molto professionali!",
-    isApproved: false,
-  },
-  {
-    id: "2",
-    author: "Paolo L.",
-    rating: 5,
-    text: "Ottimo lavoro, giardino splendente!",
-    isApproved: true,
-  },
-];
+import { api } from "../../convex/_generated/api";
 
 export default function AdminDashboard() {
+  const services = useQuery(api.services.getAll) ?? [];
+  const gallery = useQuery(api.gallery.getAll) ?? [];
+  const reviews = useQuery(api.reviews.getAll) ?? [];
+  const contacts = useQuery(api.contacts.getAll) ?? [];
+
+  const approvedReviews = reviews.filter((review) => review.isApproved);
+  const pendingReviews = reviews.filter((review) => !review.isApproved);
+  const recentContacts = contacts.slice(0, 3);
+  const recentReviews = reviews.slice(0, 2);
+
+  const stats = [
+    {
+      title: "Servizi Attivi",
+      value: services.length.toString(),
+      icon: FileText,
+      color: "from-moss-500 to-moss-600",
+      href: "/admin/services",
+    },
+    {
+      title: "Immagini Galleria",
+      value: gallery.length.toString(),
+      icon: Image,
+      color: "from-terracotta-500 to-terracotta-600",
+      href: "/admin/gallery",
+    },
+    {
+      title: "Recensioni Approvate",
+      value: approvedReviews.length.toString(),
+      icon: Star,
+      color: "from-yellow-500 to-yellow-600",
+      href: "/admin/reviews",
+    },
+    {
+      title: "Messaggi Ricevuti",
+      value: contacts.length.toString(),
+      icon: MessageSquare,
+      color: "from-blue-500 to-blue-600",
+      href: "/admin/contacts",
+    },
+  ];
+
+  const formatDate = (timestamp: number) =>
+    new Date(timestamp).toLocaleDateString("it-IT", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
   return (
     <div className="space-y-8">
       <SlideUp>
@@ -110,7 +81,7 @@ export default function AdminDashboard() {
 
       <SlideUp delay={0.1}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <Link key={stat.title} href={stat.href}>
               <Card variant="elevated" hover className="h-full">
                 <CardContent className="p-6">
@@ -127,7 +98,7 @@ export default function AdminDashboard() {
                       <stat.icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 mt-4 text-primary-600 text-sm">
+                  <div className="flex items-center gap-1 mt-4 text-terracotta-600 text-sm">
                     <TrendingUp className="w-4 h-4" />
                     <span>+12% questo mese</span>
                   </div>
@@ -143,11 +114,11 @@ export default function AdminDashboard() {
           <Card variant="default">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-primary-600" />
+                <MessageSquare className="w-5 h-5 text-terracotta-600" />
                 Richieste Recenti
               </CardTitle>
               <Link href="/admin/contacts">
-                <Badge variant="outline" className="cursor-pointer hover:bg-primary-50">
+                <Badge variant="outline" className="cursor-pointer hover:bg-terracotta-50">
                   Vedi tutti
                   <ArrowRight className="w-3 h-3 ml-1" />
                 </Badge>
@@ -157,11 +128,11 @@ export default function AdminDashboard() {
               <div className="space-y-4">
                 {recentContacts.slice(0, 3).map((contact) => (
                   <div
-                    key={contact.id}
+                    key={contact._id}
                     className={`p-4 rounded-lg border ${
                       contact.isRead
                         ? "bg-white border-border"
-                        : "bg-primary-50 border-primary-200"
+                        : "bg-terracotta-50 border-terracotta-200"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -181,10 +152,10 @@ export default function AdminDashboard() {
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           <Badge variant="earth" size="sm">
-                            {contact.service}
+                            {contact.serviceInterest || "Generico"}
                           </Badge>
                           <span className="text-xs text-muted-foreground">
-                            {contact.date}
+                            {formatDate(contact.createdAt)}
                           </span>
                         </div>
                       </div>
@@ -204,7 +175,7 @@ export default function AdminDashboard() {
                 Recensioni da Moderare
               </CardTitle>
               <Link href="/admin/reviews">
-                <Badge variant="outline" className="cursor-pointer hover:bg-primary-50">
+                <Badge variant="outline" className="cursor-pointer hover:bg-terracotta-50">
                   Vedi tutti
                   <ArrowRight className="w-3 h-3 ml-1" />
                 </Badge>
@@ -214,13 +185,13 @@ export default function AdminDashboard() {
               <div className="space-y-4">
                 {recentReviews.map((review) => (
                   <div
-                    key={review.id}
+                    key={review._id}
                     className="p-4 rounded-lg bg-muted/50 border border-border"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold">{review.author}</span>
+                          <span className="font-semibold">{review.authorName}</span>
                           <div className="flex items-center gap-1">
                             {[...Array(review.rating)].map((_, i) => (
                               <Star
@@ -242,10 +213,10 @@ export default function AdminDashboard() {
                     </div>
                     {!review.isApproved && (
                       <div className="flex gap-2 mt-3">
-                        <button className="px-3 py-1 text-sm bg-primary-600 text-white rounded-lg hover:bg-primary-500 transition-colors">
+                        <button className="px-3 py-1 text-sm bg-terracotta-600 text-white rounded-lg opacity-60 cursor-not-allowed">
                           Approva
                         </button>
-                        <button className="px-3 py-1 text-sm border border-border rounded-lg hover:bg-muted transition-colors">
+                        <button className="px-3 py-1 text-sm border border-border rounded-lg opacity-60 cursor-not-allowed">
                           Rifiuta
                         </button>
                       </div>
@@ -265,18 +236,18 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { label: "Aggiungi Servizio", href: "/admin/services/new", icon: FileText },
-                { label: "Aggiungi Foto", href: "/admin/gallery/new", icon: Image },
-                { label: "Rispondi ai Messaggi", href: "/admin/contacts", icon: MessageSquare },
-                { label: "Modera Recensioni", href: "/admin/reviews", icon: Star },
-              ].map((action) => (
+                {[
+                  { label: "Gestisci Servizi", href: "/admin/services", icon: FileText },
+                  { label: "Gestisci Galleria", href: "/admin/gallery", icon: Image },
+                  { label: "Rispondi ai Messaggi", href: "/admin/contacts", icon: MessageSquare },
+                  { label: `Modera Recensioni (${pendingReviews.length})`, href: "/admin/reviews", icon: Star },
+                ].map((action) => (
                 <Link
                   key={action.label}
                   href={action.href}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/50 hover:bg-primary-50 border border-border hover:border-primary-200 transition-all group"
+                  className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/50 hover:bg-terracotta-50 border border-border hover:border-terracotta-200 transition-all group"
                 >
-                  <action.icon className="w-6 h-6 text-primary-600 group-hover:scale-110 transition-transform" />
+                  <action.icon className="w-6 h-6 text-terracotta-600 group-hover:scale-110 transition-transform" />
                   <span className="text-sm font-medium text-center">{action.label}</span>
                 </Link>
               ))}
