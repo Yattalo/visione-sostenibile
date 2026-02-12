@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "./ui/Badge";
-import TiltedCard from "./TiltedCard";
 
 interface ServiceCardProps {
   slug: string;
@@ -54,55 +54,45 @@ export function ServiceCard({
 }: ServiceCardProps) {
   const gradientClass = serviceAccentMap[slug] || "from-moss-600 to-moss-800";
   const tagline = category || serviceTaglineMap[slug] || "Servizio";
+  const indexLabel = (index + 1).toString().padStart(2, "0");
 
   return (
     <Link href={`/servizi/${slug}`} className="block h-full group">
-      <div className="h-full bg-white rounded-2xl border border-cream-200 overflow-hidden transition-all duration-500 hover:shadow-floating hover:border-cream-300 hover:-translate-y-1">
-        <TiltedCard
-          imageSrc={image}
-          altText={title}
-          captionText={title}
-          containerHeight="220px"
-          containerWidth="100%"
-          imageHeight="220px"
-          imageWidth="100%"
-          scaleOnHover={1.03}
-          rotateAmplitude={8}
-          showTooltip={true}
-          className="rounded-t-2xl overflow-hidden"
-        >
-          <div className="flex items-center justify-between">
-            <Badge
-              className={`bg-gradient-to-r ${gradientClass} text-white border-0 text-xs`}
-            >
-              {tagline}
-            </Badge>
-          </div>
-        </TiltedCard>
-
-        <div className="p-6">
-          <span className="font-sans text-xs tracking-widest text-charcoal-300 font-medium">
-            {(index + 1).toString().padStart(2, "0")}
+      <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-cream-200 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-cream-300 hover:shadow-floating">
+        <div className="relative aspect-[16/10] overflow-hidden border-b border-cream-100">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/45 via-charcoal-900/10 to-transparent" />
+          <Badge
+            className={`absolute left-4 top-4 border-0 bg-gradient-to-r ${gradientClass} text-[11px] text-white`}
+          >
+            {tagline}
+          </Badge>
+          <span className="absolute bottom-4 left-4 font-sans text-xs uppercase tracking-[0.16em] text-white/85">
+            {indexLabel}
           </span>
+        </div>
 
-          <h3 className="font-display text-xl text-charcoal-800 mb-3 leading-snug group-hover:text-moss-800 transition-colors duration-300 mt-2">
+        <div className="flex flex-1 flex-col p-6">
+          <h3 className="font-display text-xl leading-snug text-charcoal-800 transition-colors duration-300 group-hover:text-moss-800">
             {title}
           </h3>
 
-          <p className="font-body text-charcoal-500 leading-relaxed mb-4 text-sm">
+          <p className="mt-3 font-body text-sm leading-relaxed text-charcoal-500">
             {shortDescription}
           </p>
 
-          <div className="flex items-center text-terracotta-600 font-sans text-sm tracking-wide uppercase">
-            <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-              Scopri
-            </span>
-            <ArrowRight className="w-4 h-4 ml-1 -translate-x-4 group-hover:translate-x-0 transition-transform duration-300" />
+          <div className="mt-6 inline-flex items-center gap-1.5 font-sans text-xs uppercase tracking-[0.14em] text-terracotta-600">
+            Scopri servizio
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </div>
         </div>
-
-        <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-terracotta-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      </div>
+      </article>
     </Link>
   );
 }

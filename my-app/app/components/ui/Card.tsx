@@ -11,10 +11,10 @@ interface CardProps extends Omit<HTMLMotionProps<"div">, "children"> {
 }
 
 const cardVariants = {
-  default: "bg-white border border-cream-200",
-  elevated: "bg-white shadow-floating",
-  outline: "bg-transparent border-2 border-cream-300 hover:border-terracotta-400",
-  glass: "bg-white/80 backdrop-blur-xl border border-white/20",
+  default: "bg-white border border-cream-200 shadow-soft",
+  elevated: "bg-white border border-cream-200 shadow-floating",
+  outline: "bg-transparent border border-cream-300 hover:border-terracotta-400",
+  glass: "bg-white/80 backdrop-blur-xl border border-white/30 shadow-soft",
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -24,7 +24,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = "default",
       hover = false,
       children,
-      whileHover = hover ? { y: -8 } : undefined,
+      whileHover = hover ? { y: -6 } : undefined,
       transition = { type: "spring", stiffness: 300, damping: 20 },
       ...props
     },
@@ -36,9 +36,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         whileHover={whileHover}
         transition={transition}
         className={cn(
-          "rounded-2xl p-6",
-          "transition-all duration-500",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-500",
+          "relative rounded-2xl p-6",
+          "transition-all duration-300",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-400",
           cardVariants[variant],
           className
         )}
@@ -90,7 +90,7 @@ export function CardDescription({
   ...props
 }: CardDescriptionProps) {
   return (
-    <p className={cn("text-cream-500 text-sm md:text-base", className)} {...props}>
+    <p className={cn("text-charcoal-500 text-sm md:text-base", className)} {...props}>
       {children}
     </p>
   );

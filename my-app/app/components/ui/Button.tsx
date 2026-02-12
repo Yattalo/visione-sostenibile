@@ -12,16 +12,16 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
 }
 
 const buttonVariants = {
-  primary: "bg-terracotta-500 text-white hover:bg-terracotta-600",
-  secondary: "bg-moss-700 text-white hover:bg-moss-600",
-  outline: "border-2 border-charcoal-300 text-charcoal-700 hover:bg-charcoal-100",
-  ghost: "text-charcoal-600 hover:text-terracotta-600",
+  primary: "bg-terracotta-500 text-white hover:bg-terracotta-600 border border-transparent",
+  secondary: "bg-moss-700 text-white hover:bg-moss-600 border border-transparent",
+  outline: "border border-charcoal-300 text-charcoal-700 hover:bg-charcoal-100 hover:border-charcoal-400",
+  ghost: "text-charcoal-600 hover:text-terracotta-600 border border-transparent hover:bg-terracotta-50/50",
 };
 
 const buttonSizes = {
-  sm: "h-10 px-5 text-sm",
-  md: "h-12 px-7 text-base",
-  lg: "h-14 px-9 text-lg",
+  sm: "h-10 px-5 text-xs",
+  md: "h-12 px-7 text-sm",
+  lg: "h-14 px-9 text-base",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -37,15 +37,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const isDisabled = loading || disabled;
+
     return (
       <motion.button
         ref={ref}
-        disabled={loading || disabled}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        disabled={isDisabled}
+        aria-busy={loading}
+        whileHover={isDisabled ? undefined : { scale: 1.01 }}
+        whileTap={isDisabled ? undefined : { scale: 0.98 }}
         className={cn(
-          "inline-flex items-center justify-center font-sans uppercase tracking-wider font-medium rounded-full transition-all duration-300",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+          "relative inline-flex items-center justify-center gap-2 rounded-full",
+          "font-sans uppercase tracking-[0.12em] font-medium whitespace-nowrap",
+          "transition-all duration-300",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-400",
+          "focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           buttonVariants[variant],
           buttonSizes[size],
