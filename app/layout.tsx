@@ -4,6 +4,8 @@ import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 
+export const dynamic = "force-dynamic";
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
