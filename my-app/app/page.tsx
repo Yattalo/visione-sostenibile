@@ -18,6 +18,7 @@ import {
   Mail,
   Bug,
   Flower2,
+  Wind,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
@@ -54,19 +55,28 @@ const services = [
 
 const philosophy = [
   {
-    icon: Leaf,
-    title: "Impatto Zero",
-    description: "Ripristiniamo i danni ambientali degli interventi invasivi. Il bilancio netto e sempre zero.",
+    icon: Flower2,
+    title: "Terra",
+    description:
+      "Rigeneriamo il suolo con pratiche biodinamiche che aumentano fertilita, vita microbica e stabilita.",
   },
   {
     icon: Droplets,
-    title: "Zero Chimici",
-    description: "Nessun pesticida, nessun rischio per bambini e animali domestici. Solo natura.",
+    title: "Acqua",
+    description:
+      "Gestione idrica efficiente per ridurre sprechi e mantenere il verde sano durante tutto l'anno.",
   },
   {
-    icon: Flower2,
-    title: "Bassa Manutenzione",
-    description: "Terreni ricchi di vita che favoriscono la crescita naturale delle piante.",
+    icon: Wind,
+    title: "Aria",
+    description:
+      "Progettiamo spazi aperti e vitali che migliorano il microclima e il benessere delle persone.",
+  },
+  {
+    icon: Sun,
+    title: "Fuoco",
+    description:
+      "Luce, energia e cicli naturali guidano ogni scelta progettuale per un equilibrio duraturo.",
   },
 ];
 
@@ -139,33 +149,50 @@ export default function HomePage() {
             </div>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-balance">
-              Il Verde che
-              <span className="block italic text-terracotta-300">Vive</span>
+              Giardini sostenibili
+              <span className="block italic text-terracotta-300">
+                a impatto zero
+              </span>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-cream-200 max-w-2xl mx-auto mb-12 leading-relaxed">
-              Giardini e orti sostenibili a impatto zero. Nessun prodotto chimico,
-              nessun rischio. Solo natura che cresce e si rigenera.
+              Progettazione, realizzazione e manutenzione con metodi biodinamici.
+              Zero chimica, piu valore nel tempo, meno interventi futuri.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/servizi">
+              <Link href="/contatti">
                 <Button
                   size="lg"
-                  className="bg-terracotta-500 hover:bg-terracotta-600 text-white border-0 px-8 py-4 text-lg tracking-wide"
+                  variant="secondary"
+                  className="px-8 py-4 text-lg tracking-wide"
                 >
-                  Scopri i Nostri Giardini
+                  Richiedi Preventivo
                 </Button>
               </Link>
-              <Link href="/contatti">
+              <Link href="/servizi">
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-white/40 text-white hover:bg-white/10 hover:border-white px-8 py-4 text-lg tracking-wide"
                 >
-                  Parliamo del Tuo Progetto
+                  Vedi i Servizi
                 </Button>
               </Link>
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-cream-200/90">
+              <span className="font-sans text-xs uppercase tracking-[0.14em]">
+                20+ anni in biodinamica
+              </span>
+              <span className="hidden sm:block h-4 w-px bg-cream-300/40" />
+              <span className="font-sans text-xs uppercase tracking-[0.14em]">
+                Zero prodotti chimici
+              </span>
+              <span className="hidden sm:block h-4 w-px bg-cream-300/40" />
+              <span className="font-sans text-xs uppercase tracking-[0.14em]">
+                Piemonte e Lombardia
+              </span>
             </div>
           </motion.div>
 
@@ -191,27 +218,25 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <span className="font-display italic text-terracotta-600 text-lg">
-              La nostra filosofia
+              Metodo biodinamico
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 mb-8 leading-tight">
-              Non creiamo semplicemente giardini.
+              Terra, acqua, aria e fuoco.
               <span className="block text-moss-700">
-                Creiamo ecosistemi vivi.
+                Un equilibrio reale, non solo estetico.
               </span>
             </h2>
             <p className="font-body text-lg text-charcoal-600 leading-relaxed max-w-2xl mx-auto">
-              Andrea Giordano pratica l&apos;agricoltura biodinamica da oltre 20 anni.
-              Ogni progetto ripristina i danni causati all&apos;ambiente durante gli interventi
-              invasivi, eliminando completamente il rischio di intossicazione per persone,
-              bambini e animali domestici. Il risultato? Terreni ricchi di vita che
-              favoriscono la crescita naturale, riducendo drasticamente la manutenzione.
+              Ogni progetto nasce da un principio semplice: il giardino deve essere
+              bello, sano e gestibile nel tempo. Per questo lavoriamo sui 4 elementi
+              biodinamici con soluzioni concrete, misurabili e sostenibili.
             </p>
           </motion.div>
         </div>
 
         {/* Philosophy icons */}
         <div className="max-w-5xl mx-auto mt-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {philosophy.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -254,22 +279,22 @@ export default function HomePage() {
                 I Nostri Servizi
               </Badge>
               <h2 className="font-display text-4xl md:text-5xl leading-tight mb-6">
-                Tre modi per
+                Tre servizi, un solo obiettivo:
                 <span className="block italic text-moss-300">
-                  trasformare il tuo spazio
+                  un verde bello e sostenibile
                 </span>
               </h2>
               <p className="font-body text-lg text-cream-200 mb-8 leading-relaxed">
-                Dalla progettazione iniziale alla cura quotidiana, vi
-                accompagniamo in ogni fase del percorso. Ogni servizio è
-                pensato per creare risultati straordinari.
+                Interveniamo dove conta: progettazione chiara, realizzazione
+                ordinata, manutenzione efficace. Un percorso unico, con risultati
+                concreti per il tuo spazio esterno.
               </p>
               <Link href="/servizi">
                 <Button
                   variant="outline"
                   className="border-cream-400/30 text-cream-100 hover:bg-cream-100/10"
                 >
-                  Tutti i Servizi
+                  Scopri tutti i servizi
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
