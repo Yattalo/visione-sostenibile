@@ -2,7 +2,7 @@ import { cn } from "../../lib/utils";
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: "default" | "primary" | "earth" | "success" | "warning" | "outline";
+  variant?: "default" | "primary" | "earth" | "success" | "warning" | "outline" | "eco" | "biodynamic";
   size?: "sm" | "md";
   className?: string;
 }
@@ -14,6 +14,8 @@ const badgeVariants = {
   success: "bg-green-100 text-green-700",
   warning: "bg-yellow-100 text-yellow-700",
   outline: "border border-cream-400 text-charcoal-700 bg-transparent",
+  eco: "bg-emerald-100 text-emerald-700 border border-emerald-200",
+  biodynamic: "bg-amber-100 text-amber-700 border border-amber-200",
 };
 
 const badgeSizes = {
