@@ -1,0 +1,259 @@
+{
+  "portfolio": "Visione Sostenibile",
+  "generated": "2026-02-12",
+  "photo_standards": {
+    "hero": {
+      "dimensions": "1920x1080",
+      "ratio": "16:9"
+    },
+    "gallery": {
+      "dimensions": "1800x1200",
+      "ratio": "3:2"
+    },
+    "thumbnail": {
+      "dimensions": "600x400",
+      "ratio": "3:2"
+    },
+    "format": "JPEG",
+    "quality": 88,
+    "color_grading": {
+      "brightness_target": 128,
+      "contrast_boost": 1.08,
+      "saturation_boost": 1.06,
+      "warmth_shift": 3,
+      "sharpness": 1.15
+    }
+  },
+  "total_projects": 11,
+  "projects_with_photos": 7,
+  "projects": [
+    {
+      "slug": "baveno-lago-maggiore",
+      "title": "Baveno – Lago Maggiore",
+      "location": "Baveno, VB",
+      "region": "Piemonte",
+      "area_mq": 2800,
+      "type": "Realizzazione parco",
+      "tags": [
+        "parco",
+        "irrigazione",
+        "robot-tagliaerba",
+        "alto-fusto",
+        "aiuole"
+      ],
+      "photo_count": 4,
+      "render_count": 0,
+      "has_photos": true,
+      "hero_image": "photos/baveno-lago-maggiore/baveno-lago-maggiore_hero.jpg",
+      "thumbnail": "photos/baveno-lago-maggiore/baveno-lago-maggiore_hero_thumb.jpg",
+      "markdown_file": "projects/baveno-lago-maggiore.md"
+    },
+    {
+      "slug": "castagneto-po-marta",
+      "title": "Castagneto Po – Progetto Marta",
+      "location": "Castagneto Po, TO",
+      "region": "Piemonte",
+      "area_mq": 200,
+      "type": "Garden design",
+      "tags": [
+        "garden-design",
+        "bassa-manutenzione",
+        "irrigazione-wifi",
+        "robot-tagliaerba",
+        "prato-macroterme"
+      ],
+      "photo_count": 6,
+      "render_count": 0,
+      "has_photos": true,
+      "hero_image": "photos/castagneto-po-marta/castagneto-po-marta_hero.jpg",
+      "thumbnail": "photos/castagneto-po-marta/castagneto-po-marta_hero_thumb.jpg",
+      "markdown_file": "projects/castagneto-po-marta.md"
+    },
+    {
+      "slug": "veronica",
+      "title": "Veronica – Rifacimento Giardino",
+      "location": "Zona residenziale",
+      "region": "Piemonte",
+      "area_mq": null,
+      "type": "Rifacimento giardino",
+      "tags": [
+        "rifacimento",
+        "trifoglio",
+        "camminamenti",
+        "bassa-manutenzione",
+        "irrigazione"
+      ],
+      "photo_count": 4,
+      "render_count": 3,
+      "has_photos": true,
+      "hero_image": "photos/veronica/veronica_hero.jpg",
+      "thumbnail": "photos/veronica/veronica_hero_thumb.jpg",
+      "markdown_file": "projects/veronica.md"
+    },
+    {
+      "slug": "maria-rosa-santhia",
+      "title": "Maria Rosa – Santhià",
+      "location": "Santhià, VC",
+      "region": "Piemonte",
+      "area_mq": 200,
+      "type": "Allestimento giardino",
+      "tags": [
+        "prato-sintetico",
+        "dry-garden",
+        "bassa-manutenzione",
+        "aiuole",
+        "ghiaie"
+      ],
+      "photo_count": 3,
+      "render_count": 0,
+      "has_photos": true,
+      "hero_image": "photos/maria-rosa-santhia/maria-rosa-santhia_hero.jpg",
+      "thumbnail": "photos/maria-rosa-santhia/maria-rosa-santhia_hero_thumb.jpg",
+      "markdown_file": "projects/maria-rosa-santhia.md"
+    },
+    {
+      "slug": "agriturismo-durando-portacomaro",
+      "title": "Agriturismo Durando – Portacomaro",
+      "location": "Portacomaro, AT",
+      "region": "Piemonte – Monferrato",
+      "area_mq": 1800,
+      "type": "Realizzazione parco completo",
+      "tags": [
+        "agriturismo",
+        "irrigazione-wifi",
+        "anti-zanzare",
+        "robot-gps",
+        "solare",
+        "piscina",
+        "officinali"
+      ],
+      "photo_count": 7,
+      "render_count": 0,
+      "has_photos": true,
+      "hero_image": "photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero.jpg",
+      "thumbnail": "photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero_thumb.jpg",
+      "markdown_file": "projects/agriturismo-durando-portacomaro.md"
+    },
+    {
+      "slug": "portacomaro-ruta",
+      "title": "Portacomaro – Ruta",
+      "location": "Portacomaro, AT",
+      "region": "Piemonte – Monferrato",
+      "area_mq": null,
+      "type": "Progetto giardino",
+      "tags": [
+        "giardino",
+        "monferrato"
+      ],
+      "photo_count": 5,
+      "render_count": 1,
+      "has_photos": true,
+      "hero_image": "photos/portacomaro-ruta/portacomaro-ruta_hero.jpg",
+      "thumbnail": "photos/portacomaro-ruta/portacomaro-ruta_hero_thumb.jpg",
+      "markdown_file": "projects/portacomaro-ruta.md"
+    },
+    {
+      "slug": "porto-val-travaglia",
+      "title": "Porto Val Travaglia",
+      "location": "Porto Valtravaglia, VA",
+      "region": "Lombardia – Lago Maggiore",
+      "area_mq": 1800,
+      "type": "Realizzazione parco",
+      "tags": [
+        "parco",
+        "pergola",
+        "ortensie",
+        "aiuola-rialzata",
+        "lagestroemia",
+        "illuminazione-solare"
+      ],
+      "photo_count": 14,
+      "render_count": 0,
+      "has_photos": true,
+      "hero_image": "photos/porto-val-travaglia/porto-val-travaglia_hero.jpg",
+      "thumbnail": "photos/porto-val-travaglia/porto-val-travaglia_hero_thumb.jpg",
+      "markdown_file": "projects/porto-val-travaglia.md"
+    },
+    {
+      "slug": "cortemilia-silvio",
+      "title": "Cortemilia – Silvio",
+      "location": "Cortemilia, CN",
+      "region": "Piemonte – Langhe",
+      "area_mq": 350,
+      "type": "Prato sintetico e giardino roccioso",
+      "tags": [
+        "prato-sintetico",
+        "giardino-roccioso"
+      ],
+      "photo_count": 0,
+      "render_count": 0,
+      "has_photos": false,
+      "hero_image": null,
+      "thumbnail": null,
+      "markdown_file": "projects/cortemilia-silvio.md"
+    },
+    {
+      "slug": "stefano-cortemilia",
+      "title": "Stefano – Cortemilia",
+      "location": "Cortemilia, CN",
+      "region": "Piemonte – Langhe",
+      "area_mq": null,
+      "type": "Allestimento giardino storico",
+      "tags": [
+        "giardino-storico",
+        "irrigazione-wifi",
+        "ulivi-secolari",
+        "siepe",
+        "terrazzi"
+      ],
+      "photo_count": 0,
+      "render_count": 0,
+      "has_photos": false,
+      "hero_image": null,
+      "thumbnail": null,
+      "markdown_file": "projects/stefano-cortemilia.md"
+    },
+    {
+      "slug": "chieri-paola",
+      "title": "Chieri – Paola",
+      "location": "Chieri, TO",
+      "region": "Piemonte",
+      "area_mq": 450,
+      "type": "Allestimento giardino villa",
+      "tags": [
+        "garden-design",
+        "irrigazione-wifi",
+        "robot-gps",
+        "terrazzamenti",
+        "ulivo-secolare"
+      ],
+      "photo_count": 0,
+      "render_count": 0,
+      "has_photos": false,
+      "hero_image": null,
+      "thumbnail": null,
+      "markdown_file": "projects/chieri-paola.md"
+    },
+    {
+      "slug": "castagneto-po-silvano",
+      "title": "Castagneto Po – Silvano",
+      "location": "Castagneto Po, TO",
+      "region": "Piemonte",
+      "area_mq": 350,
+      "type": "Garden design",
+      "tags": [
+        "garden-design",
+        "dry-garden",
+        "irrigazione-wifi",
+        "robot-tagliaerba",
+        "pietra-naturale"
+      ],
+      "photo_count": 0,
+      "render_count": 0,
+      "has_photos": false,
+      "hero_image": null,
+      "thumbnail": null,
+      "markdown_file": "projects/castagneto-po-silvano.md"
+    }
+  ]
+}

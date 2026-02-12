@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Quicksand", system-ui, sans-serif;
+  --font-body: "Cormorant Garamond", Georgia, serif;
+
+  --color-cream-50: #fdfcf8;
+  --color-cream-100: #f9f7f0;
+  --color-cream-200: #f0e9d8;
+  --color-cream-300: #e4d4b8;
+  --color-cream-400: #d4bfa6;
+  --color-cream-500: #c4a882;
+  --color-cream-600: #a88a63;
+  --color-cream-700: #8a6f4f;
+  --color-cream-800: #735c43;
+  --color-cream-900: #5e4d38;
+  --color-cream-950: #32281a;
+
+  --color-moss-50: #f5f7f0;
+  --color-moss-100: #e8edda;
+  --color-moss-200: #d1dabb;
+  --color-moss-300: #b5c293;
+  --color-moss-400: #95a668;
+  --color-moss-500: #788b4a;
+  --color-moss-600: #5f6f3a;
+  --color-moss-700: #4b562e;
+  --color-moss-800: #3d4628;
+  --color-moss-900: #343c24;
+  --color-moss-950: #1a2112;
+
+  --color-terracotta-50: #fdf5f2;
+  --color-terracotta-100: #fae6dd;
+  --color-terracotta-200: #f5d0c1;
+  --color-terracotta-300: #e8afa0;
+  --color-terracotta-400: #d98876;
+  --color-terracotta-500: #cb6a56;
+  --color-terracotta-600: #b85345;
+  --color-terracotta-700: #92423a;
+  --color-terracotta-800: #763933;
+  --color-terracotta-900: #61302c;
+  --color-terracotta-950: #351716;
+
+  --color-charcoal-50: #f5f5f5;
+  --color-charcoal-100: #e8e8e8;
+  --color-charcoal-200: #d4d4d4;
+  --color-charcoal-300: #a3a3a3;
+  --color-charcoal-400: #737373;
+  --color-charcoal-500: #525252;
+  --color-charcoal-600: #404040;
+  --color-charcoal-700: #262626;
+  --color-charcoal-800: #1f1f1f;
+  --color-charcoal-900: #1a1a1a;
+  --color-charcoal-950: #0f0f0f;
+
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 8px 30px -4px rgba(0, 0, 0, 0.12);
+  --shadow-deep: 0 16px 50px -8px rgba(0, 0, 0, 0.16);
+  --shadow-floating: 0 25px 60px -12px rgba(92, 70, 50, 0.15);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-drift: drift 8s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  25% { transform: translateX(10px) rotate(2deg); }
+  75% { transform: translateX(-10px) rotate(-2deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+:root {
+  --background: var(--color-cream-50);
+  --foreground: var(--color-charcoal-800);
+  --card: #ffffff;
+  --card-foreground: var(--color-charcoal-800);
+  --muted: var(--color-cream-200);
+  --muted-foreground: var(--color-charcoal-500);
+  --border: var(--color-cream-300);
+  --accent: var(--color-terracotta-500);
+  --accent-foreground: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-body), Georgia, serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(135deg, var(--color-terracotta-500), var(--color-moss-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-earth {
+  background: linear-gradient(180deg, var(--color-charcoal-800), var(--color-moss-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-cream-gradient {
+  background: linear-gradient(180deg, var(--color-cream-50) 0%, var(--color-cream-100) 100%);
+}
+
+.bg-moss-gradient {
+  background: linear-gradient(135deg, var(--color-moss-700), var(--color-moss-900));
+}
+
+.bg-terracotta-gradient {
+  background: linear-gradient(135deg, var(--color-terracotta-500), var(--color-terracotta-700));
+}
+
+.bg-organic-noise {
+  position: relative;
+}
+
+.bg-organic-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.border-organic {
+  border-radius: 2px;
+}
+
+.border-decorative {
+  position: relative;
+}
+
+.border-decorative::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-cream-400);
+  border-radius: inherit;
+  mask-image: linear-gradient(135deg, transparent 20%, black 20%, black 80%, transparent 80%);
+  mask-size: 20px 20px;
+  -webkit-mask-image: linear-gradient(135deg, transparent 20%, black 20%, black 80%, transparent 80%);
+  -webkit-mask-size: 20px 20px;
+}
+
+.bg-blob {
+  filter: blur(60px);
+  opacity: 0.5;
+}
+
+::selection {
+  background: var(--color-terracotta-200);
+  color: var(--color-terracotta-900);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-moss-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-moss-500);
+}

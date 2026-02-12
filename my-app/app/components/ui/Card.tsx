@@ -1,0 +1,128 @@
+"use client";
+
+import { forwardRef } from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
+import { cn } from "../../lib/utils";
+
+interface CardProps extends Omit<HTMLMotionProps<"div">, "children"> {
+  variant?: "default" | "elevated" | "outline" | "glass";
+  hover?: boolean;
+  children: React.ReactNode;
+}
+
+const cardVariants = {
+  default: "bg-white border border-cream-200",
+  elevated: "bg-white shadow-floating",
+  outline: "bg-transparent border-2 border-cream-300 hover:border-terracotta-400",
+  glass: "bg-white/80 backdrop-blur-xl border border-white/20",
+};
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  (
+    {
+      className,
+      variant = "default",
+      hover = false,
+      children,
+      whileHover = hover ? { y: -8 } : undefined,
+      transition = { type: "spring", stiffness: 300, damping: 20 },
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <motion.div
+        ref={ref}
+        whileHover={whileHover}
+        transition={transition}
+        className={cn(
+          "rounded-2xl p-6",
+          "transition-all duration-500",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-500",
+          cardVariants[variant],
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
+
+Card.displayName = "Card";
+
+interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export function CardHeader({ className, children, ...props }: CardHeaderProps) {
+  return (
+    <div className={cn("mb-4", className)} {...props}>
+      {children}
+    </div>
+  );
+}
+
+interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  as?: "h2" | "h3" | "h4";
+}
+
+export function CardTitle({ className, as: Tag = "h3", children, ...props }: CardTitleProps) {
+  return (
+    <Tag
+      className={cn(
+        "font-display text-xl md:text-2xl font-bold text-charcoal-800",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+
+export function CardDescription({
+  className,
+  children,
+  ...props
+}: CardDescriptionProps) {
+  return (
+    <p className={cn("text-cream-500 text-sm md:text-base", className)} {...props}>
+      {children}
+    </p>
+  );
+}
+
+type CardContentProps = React.HTMLAttributes<HTMLDivElement>;
+
+export function CardContent({
+  className,
+  children,
+  ...props
+}: CardContentProps) {
+  return (
+    <div className={cn("", className)} {...props}>
+      {children}
+    </div>
+  );
+}
+
+type CardFooterProps = React.HTMLAttributes<HTMLDivElement>;
+
+export function CardFooter({
+  className,
+  children,
+  ...props
+}: CardFooterProps) {
+  return (
+    <div
+      className={cn("mt-6 pt-4 border-t border-cream-200 flex items-center gap-3", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}

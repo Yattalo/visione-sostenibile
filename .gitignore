@@ -1,0 +1,67 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Next.js build
+.next/
+out/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment variables (secrets)
+.env
+.env.local
+.env.production
+.env.development
+# Keep examples
+!.env.example
+!.env.local.example
+
+# Vercel / Netlify
+.vercel/
+.netlify/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# pnpm / yarn
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Test coverage
+coverage/
+
+# Temp files
+tmp/
+
+# Documenti riservati (contratti, documenti identita)
+Visione sostenibile/Burocrazia/
+
+# Root npm lockfile (progetto usa pnpm)
+/package-lock.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# PEM keys
+*.pem
+
+# Git backup (migrazione repo)
+.git-backup/
