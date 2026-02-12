@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { Leaf, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Clock } from "lucide-react";
 
 const services = [
-  { label: "Progettazione Giardini", href: "/servizi/progettazione-giardini" },
-  { label: "Realizzazione", href: "/servizi/realizzazione-giardini" },
-  { label: "Manutenzione", href: "/servizi/manutenzioni" },
-  { label: "Potature", href: "/servizi/potature" },
+  { label: "Progettazione Giardini e Orti", href: "/servizi/progettazione-giardini-orti" },
+  { label: "Realizzazione Chiavi in Mano", href: "/servizi/realizzazione-chiavi-in-mano" },
+  { label: "Manutenzione Sostenibile", href: "/servizi/manutenzione-sostenibile" },
+  { label: "Potatura Professionale", href: "/servizi/potatura-professionale" },
 ];
 
 const company = [
@@ -44,12 +44,12 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: Instagram, href: "#" },
-                { icon: Facebook, href: "#" },
-                { icon: Linkedin, href: "#" },
+                { icon: Instagram, href: "https://www.instagram.com/visionesostenibile", key: "instagram" },
+                { icon: Facebook, href: "https://www.facebook.com/visionesostenibilegiardinieortisostenibili", key: "facebook" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/andrea-giordano-16810626a", key: "linkedin" },
               ].map((social) => (
                 <motion.a
-                  key={social.icon.name}
+                  key={social.key}
                   href={social.href}
                   whileHover={{ y: -3, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -123,27 +123,27 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-terracotta-500 mt-0.5 flex-shrink-0" />
                 <span className="font-body text-sm text-cream-300">
-                  Via del Verde, 123
+                  Via San Francesco D&apos;Assisi, 14
                   <br />
-                  00100 Roma (RM)
+                  10122 Torino (TO)
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-terracotta-500 flex-shrink-0" />
                 <a
-                  href="tel:+39061234567"
+                  href="tel:+393714821825"
                   className="font-body text-sm text-cream-300 hover:text-terracotta-400 transition-colors"
                 >
-                  +39 06 1234567
+                  +39 371 482 1825
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-terracotta-500 flex-shrink-0" />
                 <a
-                  href="mailto:info@visionesostenibile.it"
+                  href="mailto:visionesostenibile96@gmail.com"
                   className="font-body text-sm text-cream-300 hover:text-terracotta-400 transition-colors"
                 >
-                  info@visionesostenibile.it
+                  visionesostenibile96@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">

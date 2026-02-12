@@ -22,18 +22,11 @@ import { Input, Textarea } from "../components/ui/Input";
 import { SlideUp, FadeIn } from "../components/animations";
 
 const services = [
-  "Progettazione Giardini",
-  "Realizzazione Giardini",
-  "Scelta Piante",
-  "Trattamenti Piante",
-  "Impianti Irrigazione",
-  "Camminamenti in Pietra",
-  "Illuminazione Esterni",
-  "Ingegneria Naturalistica",
-  "Arredamento Esterni",
-  "Potature",
-  "Rigenerazione Terreni",
-  "Manutenzioni",
+  "Progettazione Giardini e Orti Sostenibili",
+  "Realizzazione Completa Chiavi in Mano",
+  "Manutenzione con Pratiche Sostenibili",
+  "Potatura Professionale",
+  "Gestione del Verde Biodinamica",
   "Altro",
 ];
 
@@ -112,17 +105,17 @@ export default function ContattiPage() {
     {
       icon: MapPin,
       title: "Indirizzo",
-      lines: ["Via del Verde, 123", "00100 Roma (RM)", "Italia"],
+      lines: ["Via San Francesco D'Assisi, 14", "10122 Torino (TO)", "Italia"],
     },
     {
       icon: Phone,
       title: "Telefono",
-      lines: ["+39 06 1234567", "+39 333 1234567"],
+      lines: ["+39 371 482 1825"],
     },
     {
       icon: Mail,
       title: "Email",
-      lines: ["info@visionesostenibile.it", "preventivi@visionesostenibile.it"],
+      lines: ["visionesostenibile96@gmail.com"],
     },
     {
       icon: Clock,
@@ -230,10 +223,10 @@ export default function ContattiPage() {
                       <MapPin className="w-7 h-7 text-moss-700" />
                     </div>
                     <p className="font-display text-2xl text-moss-800">
-                      Roma e Provincia
+                      Piemonte e Lombardia
                     </p>
                     <p className="font-body text-sm text-moss-600 mt-1">
-                      Operiamo in tutto il Lazio
+                      Torino, Chivasso, Asti, Lago Maggiore
                     </p>
                   </div>
                 </div>
@@ -480,7 +473,7 @@ export default function ContattiPage() {
               al venerdi, dalle 8 alle 18.
             </p>
 
-            <a href="tel:+39061234567">
+            <a href="tel:+393714821825">
               <Button
                 size="lg"
                 className="bg-terracotta-500 hover:bg-terracotta-600 text-white border-0 px-8 py-4 text-lg tracking-wide"
@@ -493,11 +486,11 @@ export default function ContattiPage() {
             <div className="mt-12 flex flex-wrap justify-center gap-8 text-cream-300 font-body text-sm">
               <span className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-terracotta-400" />
-                Roma e provincia
+                Piemonte e Lombardia
               </span>
               <span className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-terracotta-400" />
-                info@visionesostenibile.it
+                visionesostenibile96@gmail.com
               </span>
             </div>
           </SlideUp>

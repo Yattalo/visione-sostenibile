@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   Phone,
+  Bug,
 } from "lucide-react";
 import { staticServices } from "../lib/static-data";
 import { Button } from "../components/ui/Button";
@@ -19,7 +20,7 @@ import {
 export const metadata: Metadata = {
   title: "I Nostri Servizi | Visione Sostenibile",
   description:
-    "Scopri tutti i nostri servizi di giardinaggio: progettazione, realizzazione e manutenzione giardini. Soluzioni complete per il tuo spazio verde a Roma.",
+    "Scopri tutti i nostri servizi di giardinaggio sostenibile: progettazione, realizzazione e manutenzione giardini e orti a impatto zero. Piemonte e Lombardia.",
 };
 
 export default function ServiziPage() {
@@ -33,7 +34,7 @@ export default function ServiziPage() {
           decorative blobs, serif italic heading
       ═══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-moss-900 pt-32 pb-24 lg:pt-40 lg:pb-32">
-        {/* Background image with overlay */}
+        {/* Background with video support */}
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-15"
@@ -42,6 +43,17 @@ export default function ServiziPage() {
                 "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
             }}
           />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920"
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+          >
+            <source src="/videos/nature-garden-flowers.webm" type="video/webm" />
+            <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-br from-moss-900/95 via-moss-800/85 to-charcoal-900/90" />
         </div>
 
@@ -55,9 +67,15 @@ export default function ServiziPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <FadeIn>
-            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-cream-200 mb-8 px-6 py-2 text-xs tracking-widest uppercase">
-              I Nostri Servizi
-            </Badge>
+            <div className="flex flex-wrap gap-3 mb-8">
+              <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-cream-200 px-4 py-1.5 text-xs tracking-widest uppercase">
+                I Nostri Servizi
+              </Badge>
+              <Badge variant="eco" className="px-4 py-1.5 text-xs tracking-widest uppercase">
+                <Bug className="w-3 h-3 mr-1.5 inline" />
+                Metodi Biodinamici
+              </Badge>
+            </div>
           </FadeIn>
 
           <SlideUp>
@@ -70,10 +88,10 @@ export default function ServiziPage() {
           </SlideUp>
 
           <SlideUp delay={0.2}>
-            <p className="font-body text-xl md:text-2xl text-cream-200/80 max-w-2xl leading-relaxed">
-              Dalla progettazione alla manutenzione, dodici servizi professionali
-              per trasformare e custodire i tuoi spazi verdi con competenza e
-              passione.
+            <p className="font-body text-xl md:text-2xl text-cream-200/80 max-w-2xl leading-relaxed mb-8">
+              Dalla progettazione alla manutenzione, un servizio completo chiavi
+              in mano per giardini e orti sostenibili a impatto zero, con metodi
+              biodinamici nel pieno rispetto della biodiversita.
             </p>
           </SlideUp>
 
@@ -107,7 +125,7 @@ export default function ServiziPage() {
                 Cosa possiamo fare per te
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-charcoal-800 mt-3 leading-tight">
-                Dodici competenze,{" "}
+                Competenza e sostenibilita,{" "}
                 <span className="text-moss-700">una sola visione</span>
               </h2>
               <div className="w-16 h-px bg-terracotta-400 mt-6" />
@@ -263,7 +281,7 @@ export default function ServiziPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+39061234567">
+              <a href="tel:+393714821825">
                 <Button
                   size="lg"
                   className="bg-terracotta-500 hover:bg-terracotta-600 text-white border-0 px-8"

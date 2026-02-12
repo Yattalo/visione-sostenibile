@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Leaf, Award, Users, Shield } from "lucide-react";
+import { Leaf, Award, Users, Bug, Droplets, Flower2 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -15,41 +15,41 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Chi Siamo | Visione Sostenibile",
   description:
-    "Scopri Visione Sostenibile: passione per il verde, professionalità e sostenibilità. Dal 2009 creiamo giardini unici a Roma e provincia.",
+    "Scopri Visione Sostenibile: Andrea Giordano e la passione per il giardinaggio sostenibile a impatto zero. Oltre 20 anni di biodinamica in Piemonte e Lombardia.",
 };
 
 const values = [
   {
     icon: Leaf,
-    title: "Sostenibilità",
+    title: "Impatto Zero",
     description:
-      "Tecniche a basso impatto e materiali eco-compatibili per proteggere il pianeta che ci ospita.",
+      "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi. Il bilancio ambientale netto e sempre zero.",
+  },
+  {
+    icon: Bug,
+    title: "Zero Rischi",
+    description:
+      "Eliminazione totale del rischio di intossicazione per persone, bambini e animali domestici. Nessun prodotto chimico.",
   },
   {
     icon: Award,
-    title: "Qualità",
+    title: "Biodinamica",
     description:
-      "Ogni progetto è curato nei minimi dettagli, con piante e materiali selezionati uno ad uno.",
+      "Oltre 20 anni di pratica biodinamica integrata in ogni progetto per un verde sano e rigoglioso.",
   },
   {
     icon: Users,
-    title: "Professionalità",
+    title: "Bassa Manutenzione",
     description:
-      "Agronomi, paesaggisti e giardinieri esperti al servizio della vostra visione.",
-  },
-  {
-    icon: Shield,
-    title: "Affidabilità",
-    description:
-      "Rispetto rigoroso dei tempi, trasparenza nei costi e garanzia su ogni intervento.",
+      "Terreni ricchi di vita che favoriscono la crescita naturale delle piante, riducendo drasticamente gli interventi.",
   },
 ];
 
 const stats = [
-  { value: "15+", label: "Anni di esperienza" },
-  { value: "500+", label: "Clienti soddisfatti" },
-  { value: "1000+", label: "Progetti realizzati" },
-  { value: "50+", label: "Tipologie servizi" },
+  { value: "20+", label: "Anni in biodinamica" },
+  { value: "10+", label: "Anni di giardinaggio" },
+  { value: "100%", label: "Impatto zero" },
+  { value: "0", label: "Prodotti chimici" },
 ];
 
 export default function ChiSiamoPage() {
@@ -73,15 +73,15 @@ export default function ChiSiamoPage() {
             </Badge>
 
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
-              Passione per il Verde
+              Giardinaggio Sostenibile
               <span className="block italic text-terracotta-300">
-                dal 2009
+                a Impatto Zero
               </span>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-cream-200 max-w-2xl mx-auto leading-relaxed">
-              Creiamo giardini che armonizzano bellezza estetica e profondo
-              rispetto per l&apos;ambiente.
+              Andrea Giordano e Visione Sostenibile: oltre 20 anni di biodinamica
+              al servizio del verde in Piemonte e Lombardia.
             </p>
           </SlideUp>
 
@@ -125,21 +125,20 @@ export default function ChiSiamoPage() {
               </h2>
               <div className="space-y-6 font-body text-charcoal-600">
                 <p className="text-lg leading-relaxed">
-                  Da oltre quindici anni operiamo nel settore del giardinaggio e
-                  della progettazione del paesaggio, trasformando giardini,
-                  terrazze e spazi esterni in luoghi unici e rigogliosi.
+                  Andrea Giordano, fondatore di Visione Sostenibile, pratica
+                  l&apos;agricoltura biodinamica da oltre 20 anni e ha oltre 10 anni
+                  di esperienza nella realizzazione di giardini e orti sostenibili.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  Il nostro team è composto da professionisti qualificati:
-                  agronomi, architetti del paesaggio, giardinieri esperti e
-                  tecnici specializzati nelle diverse aree dell&apos;ingegneria
-                  naturalistica.
+                  Operiamo in Piemonte e Lombardia con un approccio unico:
+                  siamo l&apos;unico giardiniere nel territorio che realizza giardini
+                  a impatto zero, ripristinando completamente i danni ambientali
+                  causati durante gli interventi.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  Crediamo fermamente che ogni spazio verde debba essere
-                  progettato considerando l&apos;equilibrio naturale, la
-                  sostenibilità ambientale e le esigenze specifiche di chi lo
-                  vivrà ogni giorno.
+                  La nostra missione nasce dalla definizione ONU di sostenibilita:
+                  garantire i bisogni della generazione presente senza compromettere
+                  quelli delle generazioni future. Preservare l&apos;ambiente per i nostri figli.
                 </p>
               </div>
             </SlideUp>
@@ -189,6 +188,83 @@ export default function ChiSiamoPage() {
               ))}
             </div>
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Eco/Sustainability Dedicated Section */}
+      <section className="py-28 md:py-36 px-6 relative overflow-hidden bg-moss-900">
+        <div className="absolute inset-0 opacity-10">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')",
+            }}
+          />
+        </div>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-terracotta-500/40 to-transparent" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <SlideUp>
+              <Badge variant="eco" className="mb-6">
+                <Bug className="w-3 h-3 mr-1.5 inline" />
+                Il Nostro Approccio
+              </Badge>
+              <h2 className="font-display text-4xl md:text-5xl text-cream-50 leading-tight mb-8">
+                Sostenibilita ambientale
+                <span className="block italic text-terracotta-300">
+                  a impatto zero
+                </span>
+              </h2>
+              <div className="space-y-6 font-body text-cream-200/80 leading-relaxed">
+                <p className="text-lg">
+                  Il nostro approccio si distingue per il <strong>giardinaggio a impatto zero</strong>:
+                  ripristiniamo i danni causati all&apos;ambiente durante gli interventi invasivi,
+                  garantendo un bilancio ambientale netto pari a zero.
+                </p>
+                <p className="text-lg">
+                  Eliminiamo completamente il <strong>rischio di intossicazione</strong> per
+                  persone, bambini e animali domestici. Nessun pesticida, nessun prodotto chimico.
+                </p>
+                <p className="text-lg">
+                  I nostri giardini sono progettati per essere a <strong>bassa manutenzione</strong>:
+                  terreni ricchi di vita che favoriscono la crescita naturale delle piante,
+                  trasformando ogni spazio in un ecosistema autosufficiente.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-4 mt-8">
+                <Badge variant="biodynamic" className="px-4 py-2">
+                  20+ Anni di Biodinamica
+                </Badge>
+                <Badge variant="eco" className="px-4 py-2">
+                  Impatto Zero
+                </Badge>
+                <Badge variant="eco" className="px-4 py-2">
+                  Zero Prodotti Chimici
+                </Badge>
+              </div>
+            </SlideUp>
+
+            <SlideUp delay={0.2}>
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { icon: Leaf, label: "Impatto ambientale zero" },
+                  { icon: Bug, label: "Zero rischio intossicazione" },
+                  { icon: Flower2, label: "Bassa manutenzione" },
+                  { icon: Droplets, label: "Metodi biodinamici" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center"
+                  >
+                    <item.icon className="w-8 h-8 mx-auto text-terracotta-400 mb-3" />
+                    <p className="font-body text-sm text-cream-200">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </SlideUp>
+          </div>
         </div>
       </section>
 

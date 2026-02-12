@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, CheckCircle, Shield, Star, Leaf, Users, Clock, Target } from "lucide-react";
+import { Award, CheckCircle, Shield, Star, Leaf, Users, Clock, Target, Bug } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -8,32 +8,28 @@ import { SlideUp, StaggerContainer, StaggerItem } from "../components/animations
 
 const certifications = [
   {
-    icon: Shield,
-    title: "Certificazione ISO 9001",
-    description: "Sistema di gestione della qualità certificato per garantire standard elevati in ogni progetto.",
-    issuedBy: "Bureau Veritas",
-    year: "2020",
-  },
-  {
     icon: Leaf,
-    title: "Certificazione Ambientale",
-    description: "Impegno concreto per la sostenibilità con pratiche eco-friendly in tutti i nostri servizi.",
-    issuedBy: "Associazione Verde Italia",
-    year: "2019",
+    title: "Biodinamica Certificata",
+    description: "Andrea Giordano pratica l'agricoltura biodinamica da oltre 20 anni, integrando questi metodi in ogni progetto di giardinaggio sostenibile.",
+    issuedBy: "Associazione per l'Agricoltura Biodinamica",
+    year: "",
+    category: "biodynamic",
   },
   {
-    icon: Award,
-    title: "Premio Excellence Giardinaggio",
-    description: "Riconoscimento regionale per l'eccellenza nella progettazione di spazi verdi urbani.",
-    issuedBy: "Regione Lazio",
-    year: "2023",
+    icon: Shield,
+    title: "Giardinaggio a Impatto Zero",
+    description: "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi, garantendo un impatto ambientale netto pari a zero.",
+    issuedBy: "Visione Sostenibile",
+    year: "",
+    category: "eco",
   },
   {
     icon: CheckCircle,
-    title: "Abilitazione Professionale",
-    description: "Team di professionisti abilitati e qualificati con certificazioni specifiche del settore.",
-    issuedBy: "Ordine Agronomi Lazio",
-    year: "2015",
+    title: "Zero Prodotti Chimici",
+    description: "Eliminazione totale del rischio di intossicazione per persone, bambini e animali domestici. Nessun pesticida, nessun prodotto chimico.",
+    issuedBy: "Visione Sostenibile",
+    year: "",
+    category: "eco",
   },
 ];
 
@@ -61,10 +57,10 @@ const commitments = [
 ];
 
 const stats = [
-  { value: "15+", label: "Anni di esperienza" },
-  { value: "500+", label: "Clienti soddisfatti" },
-  { value: "100%", label: "Professionisti certificati" },
-  { value: "98%", label: "Progetti completati in tempo" },
+  { value: "20+", label: "Anni in biodinamica" },
+  { value: "10+", label: "Anni di giardinaggio" },
+  { value: "100%", label: "Impatto zero" },
+  { value: "0", label: "Prodotti chimici" },
 ];
 
 export default function QualitaPage() {
@@ -120,7 +116,10 @@ export default function QualitaPage() {
                           <h3 className="font-display text-xl text-charcoal-800">
                             {cert.title}
                           </h3>
-                          <Badge variant="primary" size="sm">
+                          <Badge
+                            variant={cert.category === "eco" || cert.category === "biodynamic" ? "eco" : "primary"}
+                            size="sm"
+                          >
                             {cert.year}
                           </Badge>
                         </div>

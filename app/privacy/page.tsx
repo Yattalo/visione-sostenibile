@@ -16,8 +16,8 @@ const sections = [
     title: "Titolare del Trattamento",
     content: (
       <p className="font-body text-charcoal-500 leading-relaxed">
-        Il titolare del trattamento dei dati personali è Visione Sostenibile S.r.l.,
-        con sede in via del Verde, 123 - 00100 Roma (RM), P.IVA 12345678901.
+        Il titolare del trattamento dei dati personali è Visione Sostenibile s.a.s.,
+        con sede in Via San Francesco D&apos;Assisi, 14 - 10122 Torino (TO), P.IVA 12671210016.
       </p>
     ),
   },
@@ -141,7 +141,7 @@ const sections = [
     content: (
       <p className="font-body text-charcoal-500 leading-relaxed">
         Per esercitare i tuoi diritti o per qualsiasi informazione sul trattamento dei dati,
-        puoi contattarci all&apos;indirizzo email: <strong className="text-charcoal-700">privacy@visionesostenibile.it</strong>
+        puoi contattarci all&apos;indirizzo email: <strong className="text-charcoal-700">visionesostenibile96@gmail.com</strong>
       </p>
     ),
   },
@@ -293,19 +293,19 @@ export default function PrivacyPage() {
 
                     <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
                       <a
-                        href="mailto:privacy@visionesostenibile.it"
+                        href="mailto:visionesostenibile96@gmail.com"
                         className="inline-flex items-center gap-2.5 text-terracotta-600 hover:text-terracotta-700 transition-colors font-sans text-sm font-medium group"
                       >
                         <div className="w-9 h-9 rounded-lg bg-terracotta-100 flex items-center justify-center group-hover:bg-terracotta-200 transition-colors">
                           <Mail className="w-4 h-4" />
                         </div>
-                        privacy@visionesostenibile.it
+                        visionesostenibile96@gmail.com
                       </a>
                       <span className="inline-flex items-center gap-2.5 text-charcoal-500 font-sans text-sm">
                         <div className="w-9 h-9 rounded-lg bg-cream-200 flex items-center justify-center">
                           <Phone className="w-4 h-4" />
                         </div>
-                        +39 06 1234567
+                        +39 371 482 1825
                       </span>
                     </div>
                   </div>

@@ -16,6 +16,8 @@ import {
   Clock,
   MapPin,
   Mail,
+  Bug,
+  Flower2,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
@@ -25,26 +27,26 @@ import { useRef } from "react";
 
 const services = [
   {
-    slug: "progettazione-giardini",
+    slug: "progettazione-giardini-orti",
     title: "Progettazione",
-    tagline: "Visioni che prendono forma",
-    description: "Creazioni su misura che rispettano l'anima del luogo.",
+    tagline: "Giardini e orti sostenibili",
+    description: "Progetti su misura a impatto zero per il tuo spazio verde.",
     icon: Sprout,
     color: "bg-moss-700",
   },
   {
-    slug: "realizzazione-giardini",
+    slug: "realizzazione-chiavi-in-mano",
     title: "Realizzazione",
-    tagline: "Dal sogno alla realtà",
-    description: "Ogni dettaglio curato, ogni pianta scelta con amore.",
+    tagline: "Chiavi in mano",
+    description: "Dalla progettazione alla posa, un servizio completo.",
     icon: Trees,
     color: "bg-terracotta-600",
   },
   {
-    slug: "manutenzioni",
+    slug: "manutenzione-sostenibile",
     title: "Manutenzione",
-    tagline: "Cura quotidiana",
-    description: "Il verde che fiorisce giorno dopo giorno.",
+    tagline: "Pratiche sostenibili",
+    description: "Cura del verde con metodi naturali e biodinamici.",
     icon: Leaf,
     color: "bg-moss-600",
   },
@@ -52,19 +54,19 @@ const services = [
 
 const philosophy = [
   {
-    icon: Sun,
-    title: "Luce",
-    description: "Ogni giardino cattura e riflette la luce del sole.",
+    icon: Leaf,
+    title: "Impatto Zero",
+    description: "Ripristiniamo i danni ambientali degli interventi invasivi. Il bilancio netto e sempre zero.",
   },
   {
     icon: Droplets,
-    title: "Acqua",
-    description: "Il flusso vitale che nutre e trasforma.",
+    title: "Zero Chimici",
+    description: "Nessun pesticida, nessun rischio per bambini e animali domestici. Solo natura.",
   },
   {
-    icon: Star,
-    title: "Armonia",
-    description: "Equilibrio tra natura, uomo e spazio.",
+    icon: Flower2,
+    title: "Bassa Manutenzione",
+    description: "Terreni ricchi di vita che favoriscono la crescita naturale delle piante.",
   },
 ];
 
@@ -85,11 +87,23 @@ export default function HomePage() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background with organic shapes */}
+        {/* Background with video support */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')] bg-cover bg-center">
             <div className="absolute inset-0 bg-gradient-to-br from-moss-900/80 via-moss-800/60 to-charcoal-900/70" />
           </div>
+          {/* Video overlay fallback - replace with actual video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920"
+            className="absolute inset-0 w-full h-full object-cover opacity-50"
+          >
+            <source src="/videos/garden-bloom-timelapse.webm" type="video/webm" />
+            <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
+          </video>
           {/* Decorative organic blobs */}
           <motion.div
             style={{ y, opacity }}
@@ -119,9 +133,15 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-cream-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
-              Dal 2009
-            </Badge>
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-cream-100 px-6 py-2 text-sm tracking-widest uppercase">
+                Dal 2009
+              </Badge>
+              <Badge variant="eco" className="px-4 py-1.5 text-xs tracking-widest uppercase">
+                <Bug className="w-3 h-3 mr-1.5 inline" />
+                Biodinamica Certificata
+              </Badge>
+            </div>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-balance">
               Il Verde che
@@ -129,8 +149,8 @@ export default function HomePage() {
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-cream-200 max-w-2xl mx-auto mb-12 leading-relaxed">
-              Creiamo giardini che respirano, che raccontano storie, che
-              abbracciano la natura e la celebrano.
+              Giardini e orti sostenibili a impatto zero. Nessun prodotto chimico,
+              nessun rischio. Solo natura che cresce e si rigenera.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -181,14 +201,15 @@ export default function HomePage() {
             <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 mb-8 leading-tight">
               Non creiamo semplicemente giardini.
               <span className="block text-moss-700">
-                Creiamo ecosistemi.
+                Creiamo ecosistemi vivi.
               </span>
             </h2>
             <p className="font-body text-lg text-charcoal-600 leading-relaxed max-w-2xl mx-auto">
-              Ogni progetto è un dialogo tra uomo e natura. Ascoltiamo,
-              osserviamo, poi creiamo. Il risultato è uno spazio che vive
-              e respira, che cambia con le stagioni e che racconta la
-              vostra storia.
+              Andrea Giordano pratica l&apos;agricoltura biodinamica da oltre 20 anni.
+              Ogni progetto ripristina i danni causati all&apos;ambiente durante gli interventi
+              invasivi, eliminando completamente il rischio di intossicazione per persone,
+              bambini e animali domestici. Il risultato? Terreni ricchi di vita che
+              favoriscono la crescita naturale, riducendo drasticamente la manutenzione.
             </p>
           </motion.div>
         </div>
@@ -304,10 +325,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { value: "15+", label: "Anni di esperienza", icon: Clock },
-              { value: "500+", label: "Clienti soddisfatti", icon: Star },
-              { value: "100%", label: "Passione garantita", icon: Heart },
-              { value: "50+", label: "Progetti unici", icon: Award },
+              { value: "20+", label: "Anni in biodinamica", icon: Clock },
+              { value: "10+", label: "Anni di giardinaggio", icon: Star },
+              { value: "100%", label: "Impatto zero", icon: Heart },
+              { value: "0", label: "Prodotti chimici", icon: Award },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -432,7 +453,7 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+39061234567">
+            <a href="tel:+393714821825">
               <Button className="bg-terracotta-500 hover:bg-terracotta-600 text-white px-8 py-4">
                 <Phone className="mr-2 w-5 h-5" />
                 Chiama Ora
@@ -451,11 +472,11 @@ export default function HomePage() {
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-cream-300">
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              Roma e provincia
+              Piemonte e Lombardia
             </span>
             <span className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              info@visionesostenibile.it
+              visionesostenibile96@gmail.com
             </span>
           </div>
         </motion.div>
