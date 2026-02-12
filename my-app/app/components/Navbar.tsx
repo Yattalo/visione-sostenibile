@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Leaf } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
 
 const navLinks = [
@@ -19,14 +20,33 @@ const navLinks = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const isActivePath = (href: string) => {
+    if (href === "/") {
+      return pathname === href;
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const hasDarkHeroAtTop =
+    pathname === "/" ||
+    pathname.startsWith("/servizi") ||
+    pathname.startsWith("/portfolio") ||
+    pathname.startsWith("/blog") ||
+    pathname === "/chi-siamo" ||
+    pathname === "/qualita" ||
+    pathname === "/contatti";
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 24);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const transparentHeader = hasDarkHeroAtTop && !scrolled;
 
   return (
     <motion.header
@@ -34,56 +54,60 @@ export function Navbar() {
       animate={{ y: 0 }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm"
-          : "bg-gradient-to-b from-charcoal-900/80 via-charcoal-800/60 to-transparent"
+        transparentHeader
+          ? "bg-gradient-to-b from-charcoal-900/70 via-charcoal-900/40 to-transparent"
+          : "bg-white/95 backdrop-blur-md shadow-sm border-b border-cream-200/80"
       )}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-3 group">
-            <motion.div
-              whileHover={{ rotate: 180 }}
-              transition={{ duration: 0.5 }}
-              className="relative"
-            >
+            <div className="relative">
               <Leaf
                 className={cn(
                   "w-7 h-7 transition-colors duration-300",
-                  scrolled ? "text-terracotta-500" : "text-white"
+                  transparentHeader ? "text-cream-100" : "text-terracotta-500"
                 )}
               />
-            </motion.div>
+            </div>
             <span
               className={cn(
                 "font-display text-xl tracking-wide transition-colors duration-300",
-                scrolled ? "text-charcoal-800" : "text-white"
+                transparentHeader ? "text-white" : "text-charcoal-800"
               )}
             >
-              Visione<span className={cn("italic", scrolled ? "text-terracotta-500" : "text-terracotta-300")}>Sostenibile</span>
+              Visione
+              <span
+                className={cn(
+                  "italic",
+                  transparentHeader ? "text-terracotta-300" : "text-terracotta-500"
+                )}
+              >
+                Sostenibile
+              </span>
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
-              <motion.div key={link.href} whileHover={{ y: -2 }}>
+              <div key={link.href}>
                 <Link
                   href={link.href}
                   className={cn(
-                    "font-sans text-sm uppercase tracking-widest transition-colors relative py-2",
-                    scrolled
-                      ? "text-charcoal-600 hover:text-terracotta-500"
-                      : "text-white/90 hover:text-white"
+                    "font-sans text-xs uppercase tracking-[0.16em] transition-colors relative py-2 border-b",
+                    isActivePath(link.href)
+                      ? "border-terracotta-500 text-terracotta-500"
+                      : cn(
+                          "border-transparent",
+                          transparentHeader
+                            ? "text-white/90 hover:text-white"
+                            : "text-charcoal-600 hover:text-terracotta-500"
+                        )
                   )}
                 >
                   {link.label}
-                  <motion.span
-                    className="absolute -bottom-0 left-0 w-0 h-px bg-terracotta-400"
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </nav>
 
@@ -95,21 +119,24 @@ export function Navbar() {
             <Link
               href="/contatti"
               className={cn(
-                "px-6 py-2.5 rounded-full font-sans text-sm uppercase tracking-wider transition-all",
-                scrolled
-                  ? "bg-moss-700 text-white hover:bg-moss-600"
-                  : "bg-white text-moss-900 hover:bg-white/90"
+                "px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-[0.14em] font-medium transition-all",
+                transparentHeader
+                  ? "bg-white text-moss-900 hover:bg-cream-100"
+                  : "bg-moss-700 text-white hover:bg-moss-600"
               )}
             >
-              Preventivo
+              Richiedi Preventivo
             </Link>
           </motion.div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
+            aria-label={isOpen ? "Chiudi menu" : "Apri menu"}
             className={cn(
               "lg:hidden p-2 transition-colors",
-              scrolled ? "text-charcoal-800" : "text-white"
+              transparentHeader ? "text-white" : "text-charcoal-800"
             )}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -120,12 +147,13 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-cream-200"
+            className="lg:hidden bg-white border-t border-cream-200 shadow-medium"
           >
-            <nav className="px-6 py-6 space-y-2">
+            <nav className="px-6 py-6 space-y-1">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
@@ -135,13 +163,27 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="block py-3 font-sans text-charcoal-700 hover:text-terracotta-500 transition-colors"
+                    className={cn(
+                      "block py-3 font-sans text-sm uppercase tracking-widest transition-colors border-b border-cream-100",
+                      isActivePath(link.href)
+                        ? "text-terracotta-500"
+                        : "text-charcoal-700 hover:text-terracotta-500"
+                    )}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
+              <div className="pt-4">
+                <Link
+                  href="/contatti"
+                  className="inline-flex items-center justify-center w-full h-11 px-6 rounded-full bg-moss-700 text-white font-sans text-xs uppercase tracking-[0.14em] font-medium hover:bg-moss-600 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Richiedi Preventivo
+                </Link>
+              </div>
             </nav>
           </motion.div>
         )}

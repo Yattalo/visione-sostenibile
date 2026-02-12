@@ -14,11 +14,11 @@ const services = [
 const company = [
   { label: "Chi Siamo", href: "/chi-siamo" },
   { label: "I Nostri Servizi", href: "/servizi" },
-  { label: "Galleria", href: "/galleria" },
-  { label: "Recensioni", href: "/recensioni" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Blog", href: "/blog" },
   { label: "Qualità", href: "/qualita" },
   { label: "Contatti", href: "/contatti" },
+  { label: "Privacy", href: "/privacy" },
 ];
 
 export function Footer() {
