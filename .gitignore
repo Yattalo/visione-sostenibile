@@ -65,3 +65,6 @@ Visione sostenibile/Burocrazia/
 
 # Git backup (migrazione repo)
 .git-backup/
+
+# Git worktrees
+.worktrees/
