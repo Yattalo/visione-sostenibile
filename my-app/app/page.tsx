@@ -4,13 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  ArrowRight,
   Phone,
-  Leaf,
-  Sprout,
-  Trees,
-  Scissors,
-  Star,
   Award,
   Clock,
   MapPin,
@@ -18,41 +12,18 @@ import {
   Bug,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
-import { Card } from "./components/ui/Card";
 import { Badge } from "./components/ui/Badge";
+import { ServiceCard } from "./components/ServiceCard";
 import { ReviewsWidget } from "./components/ReviewsWidget";
 import { PhilosophySection } from "./components/PhilosophySection";
+import { staticServices, serviceImages } from "./lib/static-data";
 import { useRef } from "react";
 
-const services = [
-  {
-    slug: "manutenzione-sostenibile",
-    title: "Manutenzione",
-    description:
-      "Forniamo cure regolari per mantenere i tuoi spazi esterni funzionali e attraenti tutto l'anno, utilizzando metodi biologici e rispettosi dell'ecosistema locale.",
-    icon: Leaf,
-  },
-  {
-    slug: "potatura-professionale",
-    title: "Cura degli Alberi",
-    description:
-      "I nostri servizi assicurano che i tuoi alberi rimangano sani, sicuri e visivamente gradevoli, attraverso potature specializzate e diagnosi fitopatologiche naturali.",
-    icon: Scissors,
-  },
-  {
-    slug: "progettazione-giardini-orti",
-    title: "Progettazione",
-    description:
-      "Creiamo spazi esterni pratici e attraenti su misura per le tue esigenze, integrando piante autoctone e sistemi di irrigazione a risparmio idrico.",
-    icon: Sprout,
-  },
-  {
-    slug: "realizzazione-chiavi-in-mano",
-    title: "Realizzazione",
-    description:
-      "Dalla carta alla realta: trasformiamo il progetto in un giardino vivente. Gestiamo ogni fase del cantiere con materiali sostenibili e tecniche a basso impatto.",
-    icon: Trees,
-  },
+const featuredSlugs = [
+  "progettazione-giardini-orti",
+  "realizzazione-chiavi-in-mano",
+  "potatura-professionale",
+  "manutenzione-sostenibile",
 ];
 
 export default function HomePage() {
@@ -239,33 +210,27 @@ export default function HomePage() {
 
           {/* Card grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-              >
-                <Link href={`/servizi/${service.slug}`}>
-                  <div className="group relative bg-white border border-cream-300 rounded-2xl p-8 shadow-soft hover:shadow-deep hover:border-moss-500 transition-all duration-300 flex flex-col h-full cursor-pointer">
-                    <div className="mb-6 text-charcoal-400 group-hover:text-moss-600 transition-colors">
-                      <service.icon className="w-12 h-12" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="font-display text-xl font-bold text-moss-700 mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="font-body text-sm text-charcoal-500 leading-relaxed mb-8 flex-grow">
-                      {service.description}
-                    </p>
-                    <span className="inline-flex items-center text-sm font-bold text-moss-600 group-hover:text-terracotta-500 transition-colors mt-auto group-hover:translate-x-1 duration-300 font-sans">
-                      Leggi di piu
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+            {featuredSlugs.map((slug, index) => {
+              const service = staticServices.find((s) => s.slug === slug);
+              if (!service) return null;
+              return (
+                <motion.div
+                  key={slug}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                >
+                  <ServiceCard
+                    slug={service.slug}
+                    title={service.title}
+                    shortDescription={service.shortDescription}
+                    image={serviceImages[service.slug] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"}
+                    index={index}
+                  />
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* CTA button */}
@@ -279,7 +244,7 @@ export default function HomePage() {
             <Link
               href="/servizi"
               className="border-2 border-moss-600 text-moss-700 hover:bg-moss-700 hover:text-white
-                         px-10 py-3 rounded-md text-sm font-bold tracking-widest uppercase
+                         px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase
                          transition-all duration-300 shadow-sm hover:shadow-medium font-sans"
             >
               Tutti i Servizi
@@ -331,7 +296,7 @@ export default function HomePage() {
                     ),
                   },
                   {
-                    value: "10+",
+                    value: "20+",
                     label: "Anni di Esperienza",
                     icon: (
                       <Clock className="w-10 h-10" />
