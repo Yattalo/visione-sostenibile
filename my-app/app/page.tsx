@@ -9,21 +9,18 @@ import {
   Leaf,
   Sprout,
   Trees,
-  Sun,
-  Droplets,
   Star,
   Award,
   Clock,
   MapPin,
   Mail,
   Bug,
-  Flower2,
-  Wind,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Card } from "./components/ui/Card";
 import { Badge } from "./components/ui/Badge";
 import { ReviewsWidget } from "./components/ReviewsWidget";
+import { PhilosophySection } from "./components/PhilosophySection";
 import { useRef } from "react";
 
 const services = [
@@ -50,33 +47,6 @@ const services = [
     description: "Cura del verde con metodi naturali e biodinamici.",
     icon: Leaf,
     color: "bg-moss-600",
-  },
-];
-
-const philosophy = [
-  {
-    icon: Flower2,
-    title: "Terra",
-    description:
-      "Rigeneriamo il suolo con pratiche biodinamiche che aumentano fertilita, vita microbica e stabilita.",
-  },
-  {
-    icon: Droplets,
-    title: "Acqua",
-    description:
-      "Gestione idrica efficiente per ridurre sprechi e mantenere il verde sano durante tutto l'anno.",
-  },
-  {
-    icon: Wind,
-    title: "Aria",
-    description:
-      "Progettiamo spazi aperti e vitali che migliorano il microclima e il benessere delle persone.",
-  },
-  {
-    icon: Sun,
-    title: "Fuoco",
-    description:
-      "Luce, energia e cicli naturali guidano ogni scelta progettuale per un equilibrio duraturo.",
   },
 ];
 
@@ -208,58 +178,8 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-32 px-6 relative">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="font-display italic text-terracotta-600 text-lg">
-              Metodo biodinamico
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 mb-8 leading-tight">
-              Terra, acqua, aria e fuoco.
-              <span className="block text-moss-700">
-                Un equilibrio reale, non solo estetico.
-              </span>
-            </h2>
-            <p className="font-body text-lg text-charcoal-600 leading-relaxed max-w-2xl mx-auto">
-              Ogni progetto nasce da un principio semplice: il giardino deve essere
-              bello, sano e gestibile nel tempo. Per questo lavoriamo sui 4 elementi
-              biodinamici con soluzioni concrete, misurabili e sostenibili.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Philosophy icons */}
-        <div className="max-w-5xl mx-auto mt-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {philosophy.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                className="text-center"
-              >
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-cream-100 mb-6">
-                  <item.icon className="w-10 h-10 text-terracotta-600" />
-                </div>
-                <h3 className="font-display text-2xl text-charcoal-800 mb-3">
-                  {item.title}
-                </h3>
-                <p className="font-body text-charcoal-600">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Philosophy — Cinematic sticky scroll */}
+      <PhilosophySection />
 
       {/* Services - Editorial Layout */}
       <section className="py-32 bg-moss-900 text-cream-50 relative overflow-hidden">
@@ -289,18 +209,16 @@ export default function HomePage() {
                 ordinata, manutenzione efficace. Un percorso unico, con risultati
                 concreti per il tuo spazio esterno.
               </p>
-              <Link href="/servizi">
-                <Button
-                  variant="outline"
-                  className="border-cream-400/30 text-cream-100 hover:bg-cream-100/10"
-                >
-                  Scopri tutti i servizi
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
+              <Link
+                href="/servizi"
+                className="inline-flex items-center justify-center px-8 py-3 border border-white/30 rounded-full text-white hover:bg-white hover:text-moss-900 transition-all duration-300 text-sm font-bold tracking-wider uppercase"
+              >
+                Tutti i servizi
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </motion.div>
 
-            <div className="space-y-8">
+            <div className="flex flex-col gap-6">
               {services.map((service, index) => (
                 <motion.div
                   key={service.title}
@@ -310,28 +228,24 @@ export default function HomePage() {
                   transition={{ delay: index * 0.15, duration: 0.6 }}
                 >
                   <Link href={`/servizi/${service.slug}`}>
-                    <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-500 group cursor-pointer">
-                      <div className="p-8">
-                        <div className="flex items-start gap-6">
-                          <div
-                            className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500`}
-                          >
-                            <service.icon className="w-8 h-8 text-white" />
-                          </div>
-                          <div>
-                            <span className="font-sans text-xs tracking-widest uppercase text-moss-300 mb-2 block">
-                              {service.tagline}
-                            </span>
-                            <h3 className="font-display text-2xl mb-3 text-cream-50 group-hover:text-terracotta-200 transition-colors">
-                              {service.title}
-                            </h3>
-                            <p className="font-body text-cream-300 leading-relaxed">
-                              {service.description}
-                            </p>
-                          </div>
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer">
+                      <div className="flex items-start gap-6">
+                        <div className="bg-white/10 p-4 rounded-xl text-terracotta-400 group-hover:bg-terracotta-500 group-hover:text-white transition-colors flex-shrink-0">
+                          <service.icon className="w-7 h-7" />
+                        </div>
+                        <div>
+                          <span className="font-sans text-xs font-bold tracking-widest uppercase text-cream-400 mb-2 block">
+                            {service.tagline}
+                          </span>
+                          <h3 className="font-display text-2xl mb-3 text-white group-hover:text-terracotta-300 transition-colors">
+                            {service.title}
+                          </h3>
+                          <p className="font-body text-cream-300 leading-relaxed">
+                            {service.description}
+                          </p>
                         </div>
                       </div>
-                    </Card>
+                    </div>
                   </Link>
                 </motion.div>
               ))}
@@ -340,35 +254,86 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats / Trust */}
-      <section className="py-24 px-6 bg-cream-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-            {[
-              { value: "20+", label: "Anni in biodinamica", icon: Clock },
-              { value: "10+", label: "Anni di giardinaggio", icon: Star },
-              { value: "100%", label: "Impatto zero", icon: Heart },
-              { value: "0", label: "Prodotti chimici", icon: Award },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <stat.icon className="w-8 h-8 mx-auto text-terracotta-500 mb-4" />
-                <p className="font-display text-4xl md:text-5xl text-charcoal-800 mb-2">
-                  {stat.value}
+      {/* Stats / Trust — Stitch-inspired dark split panel */}
+      <section className="py-24 px-4 md:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-deep"
+        >
+          <div className="bg-moss-900 grid grid-cols-1 lg:grid-cols-12">
+            {/* Left — Title panel */}
+            <div className="lg:col-span-5 bg-moss-800 p-10 md:p-16 flex flex-col justify-center relative">
+              <div className="absolute inset-0 bg-moss-700/10 mix-blend-overlay" />
+              <div className="relative z-10">
+                <span className="block font-sans text-xs font-bold tracking-[0.2em] uppercase text-terracotta-400 mb-4">
+                  I Nostri Numeri
+                </span>
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
+                  Cosa abbiamo{" "}
+                  <span className="block italic text-cream-200">
+                    fatto finora
+                  </span>
+                </h2>
+                <p className="font-body text-cream-300 text-sm md:text-base leading-relaxed max-w-md">
+                  Ogni numero rappresenta un passo avanti verso un futuro piu
+                  verde. La nostra dedizione alla sostenibilita e misurabile e
+                  tangibile.
                 </p>
-                <p className="font-sans text-sm uppercase tracking-widest text-charcoal-500">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
+              </div>
+            </div>
+
+            {/* Right — Stats grid */}
+            <div className="lg:col-span-7 p-10 md:p-16 flex items-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+                {[
+                  {
+                    value: "250+",
+                    label: "Progetti Completati",
+                    icon: (
+                      <Award className="w-10 h-10" />
+                    ),
+                  },
+                  {
+                    value: "10+",
+                    label: "Anni di Esperienza",
+                    icon: (
+                      <Clock className="w-10 h-10" />
+                    ),
+                  },
+                  {
+                    value: "100%",
+                    label: "Impatto Zero",
+                    icon: (
+                      <Heart className="w-10 h-10" />
+                    ),
+                  },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 }}
+                    className="flex flex-col items-center md:items-start text-center md:text-left group"
+                  >
+                    <div className="mb-4 text-white group-hover:text-terracotta-400 transition-colors duration-300">
+                      {stat.icon}
+                    </div>
+                    <span className="font-sans text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2">
+                      {stat.value}
+                    </span>
+                    <span className="text-xs font-bold tracking-widest text-cream-400 uppercase border-t border-cream-600/30 pt-4 w-full">
+                      {stat.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Reviews Widget */}
