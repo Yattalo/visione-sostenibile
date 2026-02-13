@@ -24,7 +24,7 @@ Rendere il sito piu leggibile, commerciale e coerente nei pattern UI (menu, card
 - [ ] Definire un unico `header pattern` (trasparente su hero + bianco sticky leggibile).
 - [ ] Rendere la CTA header persistente e coerente (stesso testo/azione in tutte le pagine).
 - [ ] Standardizzare i bottoni (`primary`, `secondary`, `outline`) con stati hover/focus/disabled uniformi.
-- [ ] Standardizzare card servizi/portfolio/reviews: titolo, descrizione breve, CTA chiara, altezza coerente.
+- [ ] Standardizzare card servizi/progetti/reviews: titolo, descrizione breve, CTA chiara, altezza coerente.
 - [ ] Uniformare spaziatura verticale sezioni (scala unica: es. 24/32/48/72/96).
 - [ ] Uniformare struttura hero per tutte le pagine interne (eyebrow, H1, intro, CTA opzionale).
 
@@ -61,11 +61,11 @@ Rendere il sito piu leggibile, commerciale e coerente nei pattern UI (menu, card
 ### Should
 - [ ] Inserire filtri o cluster visuali (progettazione/realizzazione/manutenzione) se utile alla scansione.
 
-## Portfolio (`/portfolio`)
+## Progetti (`/progetti`)
 ### Must
 - [ ] Card progetto: titolo + localita + tipologia + CTA, gerarchia piu netta.
 - [ ] Barra filtri sticky: semplificare density visiva e stati attivo/non attivo.
-- [ ] Hero portfolio piu asciutta, orientata a "proof".
+- [ ] Hero progetti piu asciutta, orientata a "proof".
 
 ### Should
 - [ ] Inserire un "progetto in evidenza" con struttura case-study.
@@ -133,7 +133,7 @@ Rendere il sito piu leggibile, commerciale e coerente nei pattern UI (menu, card
 
 1. Header + bottoni + card system (fondazione)
 2. Home + Servizi (impatto conversione)
-3. Portfolio + Contatti (proof + lead capture)
+3. Progetti + Contatti (proof + lead capture)
 4. Chi siamo + Qualita + Blog (allineamento brand e trust)
 5. QA responsive/accessibilita e rifiniture motion
 

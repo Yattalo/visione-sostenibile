@@ -12,6 +12,7 @@ import type * as blog from "../blog.js";
 import type * as contacts from "../contacts.js";
 import type * as gallery from "../gallery.js";
 import type * as pages from "../pages.js";
+import type * as projects from "../projects.js";
 import type * as reviews from "../reviews.js";
 import type * as services from "../services.js";
 import type * as shareEvents from "../shareEvents.js";
@@ -27,6 +28,7 @@ declare const fullApi: ApiFromModules<{
   contacts: typeof contacts;
   gallery: typeof gallery;
   pages: typeof pages;
+  projects: typeof projects;
   reviews: typeof reviews;
   services: typeof services;
   shareEvents: typeof shareEvents;
