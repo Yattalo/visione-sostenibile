@@ -18,8 +18,8 @@ import {
   getProjectsWithoutPhotos,
   getAllTags,
   formatTag,
-} from "../lib/portfolio-data";
-import type { PortfolioProject } from "../lib/portfolio-data";
+} from "../lib/progetti-data";
+import type { ProgettiProject } from "../lib/progetti-data";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import {
@@ -30,9 +30,9 @@ import {
 } from "../components/animations";
 import { cn } from "../lib/utils";
 
-function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
+function ProjectCard({ project, index }: { project: ProgettiProject; index: number }) {
   return (
-    <Link href={`/portfolio/${project.slug}`} className="group block">
+    <Link href={`/progetti/${project.slug}`} className="group block">
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -100,9 +100,9 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
   );
 }
 
-function TextProjectCard({ project }: { project: PortfolioProject }) {
+function TextProjectCard({ project }: { project: ProgettiProject }) {
   return (
-    <Link href={`/portfolio/${project.slug}`} className="group block">
+    <Link href={`/progetti/${project.slug}`} className="group block">
       <div className="flex items-start gap-4 py-4 border-b border-cream-200 last:border-0 group-hover:bg-cream-50/50 -mx-4 px-4 rounded-lg transition-colors">
         <div className="w-10 h-10 rounded-xl bg-moss-100 flex items-center justify-center flex-shrink-0 group-hover:bg-moss-200 transition-colors">
           <Leaf className="w-5 h-5 text-moss-600" />
@@ -128,7 +128,7 @@ function TextProjectCard({ project }: { project: PortfolioProject }) {
   );
 }
 
-export default function PortfolioPage() {
+export default function ProgettiPage() {
   const projectsWithPhotos = getProjectsWithPhotos();
   const projectsWithoutPhotos = getProjectsWithoutPhotos();
   const allTags = getAllTags();
@@ -153,7 +153,7 @@ export default function PortfolioPage() {
           {projectsWithPhotos[0]?.hero_image && (
             <Image
               src={projectsWithPhotos[0].hero_image}
-              alt="Portfolio Visione Sostenibile"
+              alt="Progetti Visione Sostenibile"
               fill
               className="object-cover opacity-20"
               priority
@@ -178,7 +178,7 @@ export default function PortfolioPage() {
 
           <SlideUp>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-cream-50 leading-tight max-w-4xl mb-8">
-              Portfolio
+              Progetti
               <span className="block italic text-terracotta-300">
                 realizzazioni
               </span>

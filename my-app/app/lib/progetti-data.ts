@@ -1,4 +1,4 @@
-export interface PortfolioPhoto {
+export interface ProgettiPhoto {
   src: string;
   thumb: string;
   alt: string;
@@ -7,7 +7,7 @@ export interface PortfolioPhoto {
   dimensions?: string;
 }
 
-export interface PortfolioProject {
+export interface ProgettiProject {
   slug: string;
   title: string;
   location: string;
@@ -22,21 +22,21 @@ export interface PortfolioProject {
   hero_image: string | null;
   hero_alt: string;
   thumbnail: string | null;
-  photos: PortfolioPhoto[];
-  renders: PortfolioPhoto[];
+  photos: ProgettiPhoto[];
+  renders: ProgettiPhoto[];
   features: string[];
   description: string;
 }
 
-/** All portfolio photo paths are relative to /portfolio/ in the public folder */
-const BASE = "/portfolio";
+/** All progetti photo paths are relative to /progetti/ in the public folder */
+const BASE = "/progetti";
 
 function p(path: string | null): string | null {
   if (!path) return null;
   return `${BASE}/${path}`;
 }
 
-export const portfolioProjects: PortfolioProject[] = [
+export const progettiProjects: ProgettiProject[] = [
   {
     slug: "baveno-lago-maggiore",
     title: "Baveno – Lago Maggiore",
@@ -49,37 +49,37 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: false,
     photo_count: 4,
     render_count: 0,
-    hero_image: p("photos/baveno-lago-maggiore/baveno-lago-maggiore_hero.jpg"),
+    hero_image: p("baveno-lago-maggiore/baveno-lago-maggiore_hero.jpg"),
     hero_alt: "Baveno – Lago Maggiore – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/baveno-lago-maggiore/baveno-lago-maggiore_hero_thumb.jpg"),
+    thumbnail: p("baveno-lago-maggiore/baveno-lago-maggiore_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_hero.jpg`,
-        thumb: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_hero_thumb.jpg`,
+        src: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_hero.jpg`,
+        thumb: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_hero_thumb.jpg`,
         alt: "Baveno – Lago Maggiore – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Baveno – Lago Maggiore",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_gallery-01.jpg`,
-        thumb: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_gallery-01_thumb.jpg`,
+        src: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_gallery-01.jpg`,
+        thumb: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_gallery-01_thumb.jpg`,
         alt: "Baveno – Lago Maggiore – Visione Sostenibile: faggio e liquidambar alto fusto 13,50 m",
         caption: "Faggio e liquidambar alto fusto 13,50 m",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_gallery-02.jpg`,
-        thumb: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_gallery-02_thumb.jpg`,
+        src: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_gallery-02.jpg`,
+        thumb: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_gallery-02_thumb.jpg`,
         alt: "Baveno – Lago Maggiore – Visione Sostenibile: impianto irrigazione automatizzato",
         caption: "Impianto irrigazione automatizzato",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_gallery-03.jpg`,
-        thumb: `${BASE}/photos/baveno-lago-maggiore/baveno-lago-maggiore_gallery-03_thumb.jpg`,
+        src: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_gallery-03.jpg`,
+        thumb: `${BASE}/baveno-lago-maggiore/baveno-lago-maggiore_gallery-03_thumb.jpg`,
         alt: "Baveno – Lago Maggiore – Visione Sostenibile: 2 robot tagliaerba",
         caption: "2 robot tagliaerba",
         type: "gallery",
@@ -108,53 +108,53 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: false,
     photo_count: 6,
     render_count: 0,
-    hero_image: p("photos/castagneto-po-marta/castagneto-po-marta_hero.jpg"),
+    hero_image: p("castagneto-po-marta/castagneto-po-marta_hero.jpg"),
     hero_alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/castagneto-po-marta/castagneto-po-marta_hero_thumb.jpg"),
+    thumbnail: p("castagneto-po-marta/castagneto-po-marta_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_hero.jpg`,
-        thumb: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_hero_thumb.jpg`,
+        src: `${BASE}/castagneto-po-marta/castagneto-po-marta_hero.jpg`,
+        thumb: `${BASE}/castagneto-po-marta/castagneto-po-marta_hero_thumb.jpg`,
         alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Marta a Castagneto Po",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-01.jpg`,
-        thumb: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-01_thumb.jpg`,
+        src: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-01.jpg`,
+        thumb: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-01_thumb.jpg`,
         alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: aiuola bassa manutenzione 200 mq",
         caption: "Aiuola bassa manutenzione 200 mq",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-02.jpg`,
-        thumb: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-02_thumb.jpg`,
+        src: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-02.jpg`,
+        thumb: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-02_thumb.jpg`,
         alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: irrigazione wi-fi a basso consumo",
         caption: "Irrigazione Wi-Fi a basso consumo",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-03.jpg`,
-        thumb: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-03_thumb.jpg`,
+        src: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-03.jpg`,
+        thumb: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-03_thumb.jpg`,
         alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: prato macroterme cynodon a rotoli",
         caption: "Prato macroterme Cynodon a rotoli",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-04.jpg`,
-        thumb: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-04_thumb.jpg`,
+        src: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-04.jpg`,
+        thumb: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-04_thumb.jpg`,
         alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: robot tagliaerba con sensore visivo",
         caption: "Robot tagliaerba con sensore visivo",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-05.jpg`,
-        thumb: `${BASE}/photos/castagneto-po-marta/castagneto-po-marta_gallery-05_thumb.jpg`,
+        src: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-05.jpg`,
+        thumb: `${BASE}/castagneto-po-marta/castagneto-po-marta_gallery-05_thumb.jpg`,
         alt: "Castagneto Po – Progetto Marta – Visione Sostenibile: dettaglio intervento",
         caption: "Dettaglio intervento",
         type: "gallery",
@@ -183,37 +183,37 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: true,
     photo_count: 4,
     render_count: 3,
-    hero_image: p("photos/veronica/veronica_hero.jpg"),
+    hero_image: p("veronica/veronica_hero.jpg"),
     hero_alt: "Veronica – Rifacimento Giardino – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/veronica/veronica_hero_thumb.jpg"),
+    thumbnail: p("veronica/veronica_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/veronica/veronica_hero.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_hero_thumb.jpg`,
+        src: `${BASE}/veronica/veronica_hero.jpg`,
+        thumb: `${BASE}/veronica/veronica_hero_thumb.jpg`,
         alt: "Veronica – Rifacimento Giardino – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Veronica – Rifacimento Giardino",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/veronica/veronica_gallery-01.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_gallery-01_thumb.jpg`,
+        src: `${BASE}/veronica/veronica_gallery-01.jpg`,
+        thumb: `${BASE}/veronica/veronica_gallery-01_thumb.jpg`,
         alt: "Veronica – Rifacimento Giardino – Visione Sostenibile: prato di trifoglio a crescita bassa",
         caption: "Prato di trifoglio a crescita bassa",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/veronica/veronica_gallery-02.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_gallery-02_thumb.jpg`,
+        src: `${BASE}/veronica/veronica_gallery-02.jpg`,
+        thumb: `${BASE}/veronica/veronica_gallery-02_thumb.jpg`,
         alt: "Veronica – Rifacimento Giardino – Visione Sostenibile: camminamenti in traversine certificate",
         caption: "Camminamenti in traversine certificate",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/veronica/veronica_gallery-03.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_gallery-03_thumb.jpg`,
+        src: `${BASE}/veronica/veronica_gallery-03.jpg`,
+        thumb: `${BASE}/veronica/veronica_gallery-03_thumb.jpg`,
         alt: "Veronica – Rifacimento Giardino – Visione Sostenibile: acero japonico e camelie",
         caption: "Acero japonico e camelie",
         type: "gallery",
@@ -222,22 +222,22 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     renders: [
       {
-        src: `${BASE}/photos/veronica/veronica_render-00.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_render-00.jpg`,
+        src: `${BASE}/veronica/veronica_render-00.jpg`,
+        thumb: `${BASE}/veronica/veronica_render-00.jpg`,
         alt: "Veronica – Rifacimento Giardino – render/progetto 1",
         caption: "Progetto e render 1",
         type: "render",
       },
       {
-        src: `${BASE}/photos/veronica/veronica_render-01.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_render-01.jpg`,
+        src: `${BASE}/veronica/veronica_render-01.jpg`,
+        thumb: `${BASE}/veronica/veronica_render-01.jpg`,
         alt: "Veronica – Rifacimento Giardino – render/progetto 2",
         caption: "Progetto e render 2",
         type: "render",
       },
       {
-        src: `${BASE}/photos/veronica/veronica_render-02.jpg`,
-        thumb: `${BASE}/photos/veronica/veronica_render-02.jpg`,
+        src: `${BASE}/veronica/veronica_render-02.jpg`,
+        thumb: `${BASE}/veronica/veronica_render-02.jpg`,
         alt: "Veronica – Rifacimento Giardino – render/progetto 3",
         caption: "Progetto e render 3",
         type: "render",
@@ -264,29 +264,29 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: false,
     photo_count: 3,
     render_count: 0,
-    hero_image: p("photos/maria-rosa-santhia/maria-rosa-santhia_hero.jpg"),
+    hero_image: p("maria-rosa-santhia/maria-rosa-santhia_hero.jpg"),
     hero_alt: "Maria Rosa – Santhià – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/maria-rosa-santhia/maria-rosa-santhia_hero_thumb.jpg"),
+    thumbnail: p("maria-rosa-santhia/maria-rosa-santhia_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/maria-rosa-santhia/maria-rosa-santhia_hero.jpg`,
-        thumb: `${BASE}/photos/maria-rosa-santhia/maria-rosa-santhia_hero_thumb.jpg`,
+        src: `${BASE}/maria-rosa-santhia/maria-rosa-santhia_hero.jpg`,
+        thumb: `${BASE}/maria-rosa-santhia/maria-rosa-santhia_hero_thumb.jpg`,
         alt: "Maria Rosa – Santhià – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Maria Rosa a Santhià",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/maria-rosa-santhia/maria-rosa-santhia_gallery-01.jpg`,
-        thumb: `${BASE}/photos/maria-rosa-santhia/maria-rosa-santhia_gallery-01_thumb.jpg`,
+        src: `${BASE}/maria-rosa-santhia/maria-rosa-santhia_gallery-01.jpg`,
+        thumb: `${BASE}/maria-rosa-santhia/maria-rosa-santhia_gallery-01_thumb.jpg`,
         alt: "Maria Rosa – Santhià – Visione Sostenibile: aiuole dry garden a bassa manutenzione",
         caption: "Aiuole dry garden a bassa manutenzione",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/maria-rosa-santhia/maria-rosa-santhia_gallery-02.jpg`,
-        thumb: `${BASE}/photos/maria-rosa-santhia/maria-rosa-santhia_gallery-02_thumb.jpg`,
+        src: `${BASE}/maria-rosa-santhia/maria-rosa-santhia_gallery-02.jpg`,
+        thumb: `${BASE}/maria-rosa-santhia/maria-rosa-santhia_gallery-02_thumb.jpg`,
         alt: "Maria Rosa – Santhià – Visione Sostenibile: lapillo vulcanico di copertura",
         caption: "Lapillo vulcanico di copertura",
         type: "gallery",
@@ -315,61 +315,61 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: false,
     photo_count: 7,
     render_count: 0,
-    hero_image: p("photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero.jpg"),
+    hero_image: p("agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero.jpg"),
     hero_alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero_thumb.jpg"),
+    thumbnail: p("agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_hero_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Agriturismo Durando – Portacomaro",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-01.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-01_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-01.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-01_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: irrigazione wi-fi con stazione meteo",
         caption: "Irrigazione Wi-Fi con stazione meteo",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-02.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-02_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-02.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-02_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: impianto anti-zanzare perimetrale",
         caption: "Impianto anti-zanzare perimetrale",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-03.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-03_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-03.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-03_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: robot tagliaerba gps 3 ruote motrici",
         caption: "Robot tagliaerba GPS 3 ruote motrici",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-04.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-04_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-04.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-04_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: 45 essenze officinali a km/0",
         caption: "45 essenze officinali a km/0",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-05.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-05_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-05.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-05_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: illuminazione solare professionale",
         caption: "Illuminazione solare professionale",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-06.jpg`,
-        thumb: `${BASE}/photos/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-06_thumb.jpg`,
+        src: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-06.jpg`,
+        thumb: `${BASE}/agriturismo-durando-portacomaro/agriturismo-durando-portacomaro_gallery-06_thumb.jpg`,
         alt: "Agriturismo Durando – Portacomaro – Visione Sostenibile: 3.000 cultivar messe a dimora",
         caption: "3.000 cultivar messe a dimora",
         type: "gallery",
@@ -400,45 +400,45 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: true,
     photo_count: 5,
     render_count: 1,
-    hero_image: p("photos/portacomaro-ruta/portacomaro-ruta_hero.jpg"),
+    hero_image: p("portacomaro-ruta/portacomaro-ruta_hero.jpg"),
     hero_alt: "Portacomaro – Ruta – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/portacomaro-ruta/portacomaro-ruta_hero_thumb.jpg"),
+    thumbnail: p("portacomaro-ruta/portacomaro-ruta_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_hero.jpg`,
-        thumb: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_hero_thumb.jpg`,
+        src: `${BASE}/portacomaro-ruta/portacomaro-ruta_hero.jpg`,
+        thumb: `${BASE}/portacomaro-ruta/portacomaro-ruta_hero_thumb.jpg`,
         alt: "Portacomaro – Ruta – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Portacomaro Ruta",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-01.jpg`,
-        thumb: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-01_thumb.jpg`,
+        src: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-01.jpg`,
+        thumb: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-01_thumb.jpg`,
         alt: "Portacomaro – Ruta – Visione Sostenibile: area monferrato",
         caption: "Area Monferrato",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-02.jpg`,
-        thumb: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-02_thumb.jpg`,
+        src: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-02.jpg`,
+        thumb: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-02_thumb.jpg`,
         alt: "Portacomaro – Ruta – Visione Sostenibile: dettaglio 3 di 5",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-03.jpg`,
-        thumb: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-03_thumb.jpg`,
+        src: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-03.jpg`,
+        thumb: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-03_thumb.jpg`,
         alt: "Portacomaro – Ruta – Visione Sostenibile: dettaglio 4 di 5",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-04.jpg`,
-        thumb: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_gallery-04_thumb.jpg`,
+        src: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-04.jpg`,
+        thumb: `${BASE}/portacomaro-ruta/portacomaro-ruta_gallery-04_thumb.jpg`,
         alt: "Portacomaro – Ruta – Visione Sostenibile: dettaglio 5 di 5",
         caption: "Dettaglio intervento",
         type: "gallery",
@@ -447,8 +447,8 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     renders: [
       {
-        src: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_render-00.jpg`,
-        thumb: `${BASE}/photos/portacomaro-ruta/portacomaro-ruta_render-00.jpg`,
+        src: `${BASE}/portacomaro-ruta/portacomaro-ruta_render-00.jpg`,
+        thumb: `${BASE}/portacomaro-ruta/portacomaro-ruta_render-00.jpg`,
         alt: "Portacomaro – Ruta – render/progetto",
         caption: "Progetto e render",
         type: "render",
@@ -472,117 +472,117 @@ export const portfolioProjects: PortfolioProject[] = [
     has_renders: false,
     photo_count: 14,
     render_count: 0,
-    hero_image: p("photos/porto-val-travaglia/porto-val-travaglia_hero.jpg"),
+    hero_image: p("porto-val-travaglia/porto-val-travaglia_hero.jpg"),
     hero_alt: "Porto Val Travaglia – Visione Sostenibile: vista d'insieme del progetto realizzato",
-    thumbnail: p("photos/porto-val-travaglia/porto-val-travaglia_hero_thumb.jpg"),
+    thumbnail: p("porto-val-travaglia/porto-val-travaglia_hero_thumb.jpg"),
     photos: [
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_hero.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_hero_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_hero.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_hero_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: vista d'insieme del progetto realizzato",
         caption: "Panoramica del progetto Porto Val Travaglia",
         type: "hero",
         dimensions: "1920x1080",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-01.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-01_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-01.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-01_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: pergola 20 m con uva da tavola",
         caption: "Pergola 20 m con uva da tavola",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-02.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-02_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-02.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-02_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: ortensie paniculate vanille 50 m",
         caption: "Ortensie paniculate Vanille 50 m",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-03.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-03_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-03.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-03_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: aiuola rialzata 200 mq con lagestroemia",
         caption: "Aiuola rialzata 200 mq con lagestroemia",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-04.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-04_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-04.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-04_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: pietra di cave locali",
         caption: "Pietra di cave locali",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-05.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-05_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-05.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-05_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: illuminazione solare professionale",
         caption: "Illuminazione solare professionale",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-06.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-06_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-06.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-06_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 7 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-07.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-07_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-07.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-07_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 8 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-08.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-08_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-08.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-08_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 9 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-09.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-09_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-09.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-09_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 10 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-10.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-10_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-10.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-10_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 11 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-11.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-11_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-11.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-11_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 12 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-12.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-12_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-12.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-12_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 13 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
         dimensions: "1800x1200",
       },
       {
-        src: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-13.jpg`,
-        thumb: `${BASE}/photos/porto-val-travaglia/porto-val-travaglia_gallery-13_thumb.jpg`,
+        src: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-13.jpg`,
+        thumb: `${BASE}/porto-val-travaglia/porto-val-travaglia_gallery-13_thumb.jpg`,
         alt: "Porto Val Travaglia – Visione Sostenibile: dettaglio 14 di 14",
         caption: "Dettaglio intervento",
         type: "gallery",
@@ -705,7 +705,7 @@ export const portfolioProjects: PortfolioProject[] = [
 /** Get all unique tags across all projects */
 export function getAllTags(): string[] {
   const tags = new Set<string>();
-  for (const project of portfolioProjects) {
+  for (const project of progettiProjects) {
     for (const tag of project.tags) {
       tags.add(tag);
     }
@@ -714,18 +714,18 @@ export function getAllTags(): string[] {
 }
 
 /** Get projects with photos (for the visual grid) */
-export function getProjectsWithPhotos(): PortfolioProject[] {
-  return portfolioProjects.filter((p) => p.has_photos);
+export function getProjectsWithPhotos(): ProgettiProject[] {
+  return progettiProjects.filter((p) => p.has_photos);
 }
 
 /** Get projects without photos (for the text list) */
-export function getProjectsWithoutPhotos(): PortfolioProject[] {
-  return portfolioProjects.filter((p) => !p.has_photos);
+export function getProjectsWithoutPhotos(): ProgettiProject[] {
+  return progettiProjects.filter((p) => !p.has_photos);
 }
 
 /** Find a project by slug */
-export function getProjectBySlug(slug: string): PortfolioProject | undefined {
-  return portfolioProjects.find((p) => p.slug === slug);
+export function getProjectBySlug(slug: string): ProgettiProject | undefined {
+  return progettiProjects.find((p) => p.slug === slug);
 }
 
 /** Format tag for display (kebab-case to Title Case) */

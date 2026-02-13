@@ -22,11 +22,11 @@ import {
   Tag,
 } from "lucide-react";
 import {
-  portfolioProjects,
+  progettiProjects,
   getProjectBySlug,
   formatTag,
-} from "../../lib/portfolio-data";
-import type { PortfolioPhoto } from "../../lib/portfolio-data";
+} from "../../lib/progetti-data";
+import type { ProgettiPhoto } from "../../lib/progetti-data";
 import { Button } from "../../components/ui/Button";
 import { Badge } from "../../components/ui/Badge";
 import { cn } from "../../lib/utils";
@@ -38,7 +38,7 @@ function Lightbox({
   initialIndex,
   onClose,
 }: {
-  photos: PortfolioPhoto[];
+  photos: ProgettiPhoto[];
   initialIndex: number;
   onClose: () => void;
 }) {
@@ -159,20 +159,20 @@ const fadeUp = {
 
 /* ─── Main Component ─── */
 
-export default function PortfolioDetailPage() {
+export default function ProgettiDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const project = getProjectBySlug(slug);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [lightboxPhotos, setLightboxPhotos] = useState<PortfolioPhoto[]>([]);
+  const [lightboxPhotos, setLightboxPhotos] = useState<ProgettiPhoto[]>([]);
 
-  const projectIndex = portfolioProjects.findIndex((p) => p.slug === slug);
-  const nextProject = projectIndex < portfolioProjects.length - 1
-    ? portfolioProjects[projectIndex + 1]
+  const projectIndex = progettiProjects.findIndex((p) => p.slug === slug);
+  const nextProject = projectIndex < progettiProjects.length - 1
+    ? progettiProjects[projectIndex + 1]
     : null;
-  const prevProject = projectIndex > 0 ? portfolioProjects[projectIndex - 1] : null;
+  const prevProject = projectIndex > 0 ? progettiProjects[projectIndex - 1] : null;
 
-  const openLightbox = (photos: PortfolioPhoto[], index: number) => {
+  const openLightbox = (photos: ProgettiPhoto[], index: number) => {
     setLightboxPhotos(photos);
     setLightboxIndex(index);
   };
@@ -191,10 +191,10 @@ export default function PortfolioDetailPage() {
             Il progetto che stai cercando non esiste o potrebbe essere stato
             rimosso.
           </p>
-          <Link href="/portfolio">
+          <Link href="/progetti">
             <Button variant="secondary">
               <ArrowLeft className="mr-2 w-4 h-4" />
-              Torna al Portfolio
+              Torna al Progetti
             </Button>
           </Link>
         </div>
@@ -245,8 +245,8 @@ export default function PortfolioDetailPage() {
               Home
             </Link>
             <span className="text-cream-600">/</span>
-            <Link href="/portfolio" className="font-sans text-cream-400 hover:text-cream-200 transition-colors tracking-wide">
-              Portfolio
+            <Link href="/progetti" className="font-sans text-cream-400 hover:text-cream-200 transition-colors tracking-wide">
+              Progetti
             </Link>
             <span className="text-cream-600">/</span>
             <span className="font-sans text-cream-200 tracking-wide">
@@ -568,7 +568,7 @@ export default function PortfolioDetailPage() {
                       {project.tags.map((tag) => (
                         <Link
                           key={tag}
-                          href={`/portfolio?tag=${tag}`}
+                          href={`/progetti?tag=${tag}`}
                           className="px-3 py-1.5 rounded-full bg-white text-charcoal-600 text-sm font-sans hover:bg-moss-100 hover:text-moss-700 transition-colors border border-cream-200"
                         >
                           {formatTag(tag)}
@@ -631,7 +631,7 @@ export default function PortfolioDetailPage() {
             <div className="py-8 lg:py-12 pr-0 md:pr-8">
               {prevProject ? (
                 <Link
-                  href={`/portfolio/${prevProject.slug}`}
+                  href={`/progetti/${prevProject.slug}`}
                   className="group flex items-center gap-4"
                 >
                   <div className="w-12 h-12 rounded-full border border-cream-300 flex items-center justify-center group-hover:border-terracotta-400 group-hover:bg-terracotta-50 transition-all flex-shrink-0">
@@ -647,7 +647,7 @@ export default function PortfolioDetailPage() {
                   </div>
                 </Link>
               ) : (
-                <Link href="/portfolio" className="group flex items-center gap-4">
+                <Link href="/progetti" className="group flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full border border-cream-300 flex items-center justify-center group-hover:border-terracotta-400 group-hover:bg-terracotta-50 transition-all flex-shrink-0">
                     <ArrowLeft className="w-5 h-5 text-charcoal-400 group-hover:text-terracotta-600 transition-colors" />
                   </div>
@@ -667,7 +667,7 @@ export default function PortfolioDetailPage() {
             <div className="py-8 lg:py-12 pl-0 md:pl-8">
               {nextProject ? (
                 <Link
-                  href={`/portfolio/${nextProject.slug}`}
+                  href={`/progetti/${nextProject.slug}`}
                   className="group flex items-center justify-end gap-4 text-right"
                 >
                   <div>
@@ -684,7 +684,7 @@ export default function PortfolioDetailPage() {
                 </Link>
               ) : (
                 <Link
-                  href="/portfolio"
+                  href="/progetti"
                   className="group flex items-center justify-end gap-4 text-right"
                 >
                   <div>
