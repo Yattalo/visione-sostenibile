@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/chi-siamo", label: "Chi Siamo" },
   { href: "/servizi", label: "Servizi" },
-  { href: "/portfolio", label: "Portfolio" },
+  { href: "/progetti", label: "Progetti" },
   { href: "/blog", label: "Blog" },
   { href: "/qualita", label: "Qualità" },
   { href: "/contatti", label: "Contatti" },
@@ -32,7 +32,7 @@ export function Navbar() {
   const hasDarkHeroAtTop =
     pathname === "/" ||
     pathname.startsWith("/servizi") ||
-    pathname.startsWith("/portfolio") ||
+    pathname.startsWith("/progetti") ||
     pathname.startsWith("/blog") ||
     pathname === "/chi-siamo" ||
     pathname === "/qualita" ||
