@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Leaf, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Clock } from "lucide-react";
+import { Leaf, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Youtube, Clock } from "lucide-react";
 
 const services = [
   { label: "Progettazione Giardini e Orti", href: "/servizi/progettazione-giardini-orti" },
@@ -14,7 +14,7 @@ const services = [
 const company = [
   { label: "Chi Siamo", href: "/chi-siamo" },
   { label: "I Nostri Servizi", href: "/servizi" },
-  { label: "Portfolio", href: "/portfolio" },
+  { label: "Progetti", href: "/progetti" },
   { label: "Blog", href: "/blog" },
   { label: "Qualità", href: "/qualita" },
   { label: "Contatti", href: "/contatti" },
@@ -47,6 +47,7 @@ export function Footer() {
                 { icon: Instagram, href: "https://www.instagram.com/visionesostenibile", key: "instagram" },
                 { icon: Facebook, href: "https://www.facebook.com/visionesostenibilegiardinieortisostenibili", key: "facebook" },
                 { icon: Linkedin, href: "https://www.linkedin.com/in/andrea-giordano-16810626a", key: "linkedin" },
+                { icon: Youtube, href: "https://www.youtube.com/@AndreaGiordano-vk8el", key: "youtube" },
               ].map((social) => (
                 <motion.a
                   key={social.key}
