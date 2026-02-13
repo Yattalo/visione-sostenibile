@@ -5,7 +5,7 @@ import {
   Phone,
   Bug,
 } from "lucide-react";
-import { staticServices } from "../lib/static-data";
+import { staticServices, serviceImages } from "../lib/static-data";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { ReviewsWidget } from "../components/ReviewsWidget";
@@ -125,34 +125,17 @@ export default function ServiziPage() {
 
           <StaggerContainer delay={0.1}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {services.map((service, index) => {
-                const imageUrls: Record<string, string> = {
-                  "progettazione-giardini": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
-                  "realizzazione-giardini": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-                  "scelta-piante": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600",
-                  "trattamenti-piante": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600",
-                  "impianti-irrigazione": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600",
-                  "camminamenti-pietra": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600",
-                  "illuminazione-esterni": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600",
-                  "ingegneria-naturalistica": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-                  "arredamento-esterni": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
-                  "potature": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600",
-                  "rigenerazione-terreni": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-                  "manutenzioni": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
-                };
-
-                return (
-                  <StaggerItem key={service._id} delay={index * 0.05}>
-                    <ServiceCard
-                      slug={service.slug}
-                      title={service.title}
-                      shortDescription={service.shortDescription}
-                      image={imageUrls[service.slug] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"}
-                      index={index}
-                    />
-                  </StaggerItem>
-                );
-              })}
+              {services.map((service, index) => (
+                <StaggerItem key={service._id} delay={index * 0.05}>
+                  <ServiceCard
+                    slug={service.slug}
+                    title={service.title}
+                    shortDescription={service.shortDescription}
+                    image={serviceImages[service.slug] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"}
+                    index={index}
+                  />
+                </StaggerItem>
+              ))}
             </div>
           </StaggerContainer>
         </div>
