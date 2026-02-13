@@ -1,11 +1,18 @@
 // Dati statici di fallback quando Convex non è connesso
 
 export const staticServices = [
-  { _id: "1", slug: "progettazione-giardini-orti", title: "Progettazione Giardini e Orti Sostenibili", shortDescription: "Progetti personalizzati per giardini e orti a impatto zero", fullDescription: "", order: 1, isActive: true },
-  { _id: "2", slug: "realizzazione-chiavi-in-mano", title: "Realizzazione Completa Chiavi in Mano", shortDescription: "Dalla progettazione alla posa, un servizio completo", fullDescription: "", order: 2, isActive: true },
-  { _id: "3", slug: "manutenzione-sostenibile", title: "Manutenzione con Pratiche Sostenibili", shortDescription: "Cura del verde con metodi naturali e biodinamici", fullDescription: "", order: 3, isActive: true },
-  { _id: "4", slug: "potatura-professionale", title: "Potatura Professionale", shortDescription: "Potatura non invasiva per la salute delle piante", fullDescription: "", order: 4, isActive: true },
-  { _id: "5", slug: "gestione-verde-biodinamica", title: "Gestione del Verde Biodinamica", shortDescription: "Metodologie biodinamiche per un verde sano e rigoglioso", fullDescription: "", order: 5, isActive: true },
+  { _id: "1", slug: "progettazione-giardini-orti", title: "Progettazione Giardini", shortDescription: "Progetti personalizzati per giardini e orti a impatto zero", fullDescription: "", order: 1, isActive: true },
+  { _id: "2", slug: "realizzazione-chiavi-in-mano", title: "Realizzazione Giardini", shortDescription: "Dalla progettazione alla posa, un servizio completo chiavi in mano", fullDescription: "", order: 2, isActive: true },
+  { _id: "3", slug: "ampia-scelta-piante", title: "Ampia Scelta di Piante", shortDescription: "Piante autoctone, ornamentali e da frutto selezionate per il tuo territorio", fullDescription: "", order: 3, isActive: true },
+  { _id: "4", slug: "trattamenti-curativi-nutrizionali", title: "Trattamenti Curativi e Nutrizionali", shortDescription: "Interventi biologici per la salute e la nutrizione delle piante", fullDescription: "", order: 4, isActive: true },
+  { _id: "5", slug: "impianti-irrigazione", title: "Impianti di Irrigazione", shortDescription: "Sistemi di irrigazione efficienti per ridurre sprechi e consumi idrici", fullDescription: "", order: 5, isActive: true },
+  { _id: "6", slug: "camminamenti-muretti-pietra", title: "Posa Camminamenti e Muretti in Pietra", shortDescription: "Realizzazione di percorsi e muretti con materiali naturali e locali", fullDescription: "", order: 6, isActive: true },
+  { _id: "7", slug: "illuminazione-esterni", title: "Illuminazione per Esterni", shortDescription: "Soluzioni luminose a basso consumo per valorizzare gli spazi verdi", fullDescription: "", order: 7, isActive: true },
+  { _id: "8", slug: "ingegneria-naturalistica", title: "Ingegneria Naturalistica", shortDescription: "Tecniche di consolidamento e recupero ambientale con metodi naturali", fullDescription: "", order: 8, isActive: true },
+  { _id: "9", slug: "arredamento-esterni", title: "Arredamento per Esterni", shortDescription: "Arredi e complementi sostenibili per vivere al meglio il tuo giardino", fullDescription: "", order: 9, isActive: true },
+  { _id: "10", slug: "potatura-professionale", title: "Potature e Abbattimenti in Quota", shortDescription: "Potatura e abbattimento controllato con tecniche di tree climbing", fullDescription: "", order: 10, isActive: true },
+  { _id: "11", slug: "rigenerazione-terreni", title: "Rigenerazione dei Terreni", shortDescription: "Metodologie biodinamiche per rigenerare suoli impoveriti e compattati", fullDescription: "", order: 11, isActive: true },
+  { _id: "12", slug: "manutenzione-sostenibile", title: "Manutenzioni", shortDescription: "Cura del verde con metodi naturali e biodinamici durante tutto l'anno", fullDescription: "", order: 12, isActive: true },
 ];
 
 // Recensioni vuote - da popolare con recensioni reali del cliente

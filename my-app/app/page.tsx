@@ -9,6 +9,7 @@ import {
   Leaf,
   Sprout,
   Trees,
+  Scissors,
   Star,
   Award,
   Clock,
@@ -25,28 +26,32 @@ import { useRef } from "react";
 
 const services = [
   {
+    slug: "manutenzione-sostenibile",
+    title: "Manutenzione",
+    description:
+      "Forniamo cure regolari per mantenere i tuoi spazi esterni funzionali e attraenti tutto l'anno, utilizzando metodi biologici e rispettosi dell'ecosistema locale.",
+    icon: Leaf,
+  },
+  {
+    slug: "potatura-professionale",
+    title: "Cura degli Alberi",
+    description:
+      "I nostri servizi assicurano che i tuoi alberi rimangano sani, sicuri e visivamente gradevoli, attraverso potature specializzate e diagnosi fitopatologiche naturali.",
+    icon: Scissors,
+  },
+  {
     slug: "progettazione-giardini-orti",
     title: "Progettazione",
-    tagline: "Giardini e orti sostenibili",
-    description: "Progetti su misura a impatto zero per il tuo spazio verde.",
+    description:
+      "Creiamo spazi esterni pratici e attraenti su misura per le tue esigenze, integrando piante autoctone e sistemi di irrigazione a risparmio idrico.",
     icon: Sprout,
-    color: "bg-moss-700",
   },
   {
     slug: "realizzazione-chiavi-in-mano",
     title: "Realizzazione",
-    tagline: "Chiavi in mano",
-    description: "Dalla progettazione alla posa, un servizio completo.",
+    description:
+      "Dalla carta alla realta: trasformiamo il progetto in un giardino vivente. Gestiamo ogni fase del cantiere con materiali sostenibili e tecniche a basso impatto.",
     icon: Trees,
-    color: "bg-terracotta-600",
-  },
-  {
-    slug: "manutenzione-sostenibile",
-    title: "Manutenzione",
-    tagline: "Pratiche sostenibili",
-    description: "Cura del verde con metodi naturali e biodinamici.",
-    icon: Leaf,
-    color: "bg-moss-600",
   },
 ];
 
@@ -181,76 +186,105 @@ export default function HomePage() {
       {/* Philosophy — Cinematic sticky scroll */}
       <PhilosophySection />
 
-      {/* Services - Editorial Layout */}
-      <section className="py-32 bg-moss-900 text-cream-50 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-terracotta-500/20 to-transparent" />
+      {/* Services — Stitch-inspired card grid */}
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        {/* Topographic background pattern */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <svg
+            className="absolute top-0 left-0 w-full h-full text-cream-300"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 1440 800"
+          >
+            <path
+              d="M-100 200 C 100 400, 300 0, 600 200 S 900 600, 1400 400 V 800 H -100 Z"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M-100 400 C 100 600, 400 300, 700 500 S 1100 800, 1500 600"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M-100 100 C 200 100, 400 400, 800 300 S 1200 100, 1500 200"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+          </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <Badge className="bg-terracotta-500/20 border-terracotta-400/30 text-terracotta-200 mb-6">
-                I Nostri Servizi
-              </Badge>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight mb-6">
-                Tre servizi, un solo obiettivo:
-                <span className="block italic text-moss-300">
-                  un verde bello e sostenibile
-                </span>
-              </h2>
-              <p className="font-body text-lg text-cream-200 mb-8 leading-relaxed">
-                Interveniamo dove conta: progettazione chiara, realizzazione
-                ordinata, manutenzione efficace. Un percorso unico, con risultati
-                concreti per il tuo spazio esterno.
-              </p>
-              <Link
-                href="/servizi"
-                className="inline-flex items-center justify-center px-8 py-3 border border-white/30 rounded-full text-white hover:bg-white hover:text-moss-900 transition-all duration-300 text-sm font-bold tracking-wider uppercase"
-              >
-                Tutti i servizi
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </motion.div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="mb-16 md:mb-20 max-w-3xl"
+          >
+            <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-charcoal-400 mb-4 block">
+              La migliore scelta eco-friendly
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-moss-700 mb-6 leading-tight">
+              Servizi che offriamo...
+            </h2>
+            <p className="font-body text-lg text-charcoal-500 leading-relaxed max-w-2xl">
+              Con una pianificazione attenta ed un&apos;esecuzione efficiente,
+              garantiamo che ogni progetto rispetti alti standard di
+              funzionalita e sostenibilita. Il nostro approccio offre risultati
+              pratici e duraturi.
+            </p>
+          </motion.div>
 
-            <div className="flex flex-col gap-6">
-              {services.map((service, index) => (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15, duration: 0.6 }}
-                >
-                  <Link href={`/servizi/${service.slug}`}>
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer">
-                      <div className="flex items-start gap-6">
-                        <div className="bg-white/10 p-4 rounded-xl text-terracotta-400 group-hover:bg-terracotta-500 group-hover:text-white transition-colors flex-shrink-0">
-                          <service.icon className="w-7 h-7" />
-                        </div>
-                        <div>
-                          <span className="font-sans text-xs font-bold tracking-widest uppercase text-cream-400 mb-2 block">
-                            {service.tagline}
-                          </span>
-                          <h3 className="font-display text-2xl mb-3 text-white group-hover:text-terracotta-300 transition-colors">
-                            {service.title}
-                          </h3>
-                          <p className="font-body text-cream-300 leading-relaxed">
-                            {service.description}
-                          </p>
-                        </div>
-                      </div>
+          {/* Card grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+              >
+                <Link href={`/servizi/${service.slug}`}>
+                  <div className="group relative bg-white border border-cream-300 rounded-2xl p-8 shadow-soft hover:shadow-deep hover:border-moss-500 transition-all duration-300 flex flex-col h-full cursor-pointer">
+                    <div className="mb-6 text-charcoal-400 group-hover:text-moss-600 transition-colors">
+                      <service.icon className="w-12 h-12" strokeWidth={1.5} />
                     </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+                    <h3 className="font-display text-xl font-bold text-moss-700 mb-4">
+                      {service.title}
+                    </h3>
+                    <p className="font-body text-sm text-charcoal-500 leading-relaxed mb-8 flex-grow">
+                      {service.description}
+                    </p>
+                    <span className="inline-flex items-center text-sm font-bold text-moss-600 group-hover:text-terracotta-500 transition-colors mt-auto group-hover:translate-x-1 duration-300 font-sans">
+                      Leggi di piu
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
+
+          {/* CTA button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-16 flex justify-center"
+          >
+            <Link
+              href="/servizi"
+              className="border-2 border-moss-600 text-moss-700 hover:bg-moss-700 hover:text-white
+                         px-10 py-3 rounded-md text-sm font-bold tracking-widest uppercase
+                         transition-all duration-300 shadow-sm hover:shadow-medium font-sans"
+            >
+              Tutti i Servizi
+            </Link>
+          </motion.div>
         </div>
       </section>
 
