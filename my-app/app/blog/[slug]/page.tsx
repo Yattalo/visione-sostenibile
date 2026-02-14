@@ -16,22 +16,100 @@ type FaqItem = {
 
 const SITE_URL = "https://www.visionesostenibile.it";
 
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (cover 1.1):
+// Giardino autunnale italiano, foglie rosse/arancio/gialle,
+// prato con muschio, piante aromatiche, luce mattutina dorata,
+// stile foto editoriale italiana, palette: terra, ruggine, oro
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (cover 2.1):
+// Giardino contemporaneo minimal, linee geometriche, pietra grigia,
+// piante strutturate verdi scuro, illuminazione LED calda,
+// stile architettura del paesaggio italiana
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (cover 3.1):
+// Terreno in pendio terrazzato con piante verdi striscianti,
+// muretti in pietra naturale, luce laterale,
+// stile giardino mediterraneo italiano
+// ═══════════════════════════════════════════════════════════
 const coverImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno":
-    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200",
-  "tendenze-giardini-2024":
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200",
-  "piante-pendio":
-    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200",
+  "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
+  "tendenze-giardini-2024": "/images/blog/tendenze-cover.png",
+  "piante-pendio": "/images/blog/pendio-cover.png",
 };
 
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (thumb 1.2):
+// Thumbnail giardino autunnale, foglie colorate su prato,
+// formato quadrato, luce calda, palette autunno
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (thumb 2.2):
+// Thumbnail giardino moderno, piante geometriche, pietra,
+// formato quadrato, toni verdi e grigi
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (thumb 3.2):
+// Thumbnail pendio verde terrazzato, piante coprisuolo,
+// formato quadrato, toni verdi e terra
+// ═══════════════════════════════════════════════════════════
 const thumbImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno":
-    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600",
-  "tendenze-giardini-2024":
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-  "piante-pendio":
-    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
+  "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
+  "tendenze-giardini-2024": "/images/blog/tendenze-cover.png",
+  "piante-pendio": "/images/blog/pendio-cover.png",
+};
+
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (infografica 1.2):
+// Calendario visivo autunno-inverno per giardinaggio,
+// 4 mesi in colonne (SET-OTT-NOV-DIC), icone piante/attrezzi,
+// colori caldi terracotta e verde muschio, design italiano minimal
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (infografica 2.2):
+// 5 cerchi colorati collegati, icone per ogni tendenza
+// (foglia-basso costo, ape-biodiversita, casa-soggiorno esterno,
+// chip-tecnologia, pennello-colori), palette moss green e terracotta
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (infografica 3.2):
+// Schema infografico pendio sezione laterale, radici profonde
+// evidenziate, frecce erosione bloccata, 8 piante con icona
+// e funzione, palette verde muschio e terra
+// ═══════════════════════════════════════════════════════════
+const infographicImages: Record<string, string> = {
+  "come-mantenere-giardino-autunno": "/images/blog/autunno-calendario.png",
+  "tendenze-giardini-2024": "/images/blog/tendenze-infografica.png",
+  "piante-pendio": "/images/blog/pendio-infografica.png",
+};
+
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (schema 1.3):
+// Tabella illustrata piante sensibili al freddo, 6 piante con
+// icona + metodo protezione (telo/pacciame/vaso), sfondo crema,
+// linee verde muschio
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (foto 1.4):
+// Close-up mani che applicano pacciamatura, foglie secche,
+// terra umida, stile fotografico rustico italiano
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (foto 2.3):
+// Sistema irrigazione a goccia con sensore umidita, giardino
+// moderno sullo sfondo, luce naturale, stile tech lifestyle
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (foto 2.4):
+// Angolo giardino con divano outdoor, fire pit, luci calde,
+// piante in vaso, atmosfera serale cozy, design italiano
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (schema 3.3):
+// Tutorial visivo 4 step installazione geotessile, sezioni
+// progressive con frecce, colori terracotta e verde, design
+// italiano chiaro
+// ═══════════════════════════════════════════════════════════
+// NANO BANANA PROMPT (foto 3.4):
+// Pendio soleggiato con lavanda in fiore, vista dall'alto,
+// colori viola e verde argenteo, stile fotografico aereo
+// ═══════════════════════════════════════════════════════════
+const schemaImages: Record<string, string> = {
+  "come-mantenere-giardino-autunno": "/images/blog/autunno-protezione-piante.png",
+  "tendenze-giardini-2024": "/images/blog/tendenze-irrigazione-smart.png",
+  "piante-pendio": "/images/blog/pendio-geotessile.png",
 };
 
 const quickAnswers: Record<string, string> = {
@@ -45,22 +123,31 @@ const quickAnswers: Record<string, string> = {
 
 const articleSteps: Record<string, string[]> = {
   "come-mantenere-giardino-autunno": [
-    "Rimuovi foglie secche e parti danneggiate.",
-    "Proteggi le specie sensibili con teli traspiranti e pacciamatura.",
-    "Programma una concimazione autunnale ricca di potassio.",
-    "Pianifica piantumazioni stagionali e piccoli interventi di potatura.",
+    "Pulisci il giardino: rimuovi foglie secche, fiori appassiti e rami danneggiati.",
+    "Esegui le potature leggere su perenni e arbusti sfioriti (taglia a 10-15 cm).",
+    "Proteggi le piante sensibili al freddo con TNT, pacciamatura e isolamento vasi.",
+    "Pianta bulbi primaverili e arbusti a foglia caduca nel terreno ancora caldo.",
+    "Concima con prodotto a lento rilascio ricco di potassio (rapporto es. 5-5-15).",
+    "Prepara l'impianto di irrigazione per l'inverno: svuota i tubi e chiudi le valvole.",
+    "Composta le foglie raccolte e pianifica i lavori primaverili.",
   ],
   "tendenze-giardini-2024": [
-    "Scegli specie autoctone e resistenti.",
-    "Integra elementi per biodiversita (insetti utili, uccelli, impollinatori).",
-    "Progetta aree living esterne con funzioni precise.",
-    "Automatizza irrigazione e illuminazione per ridurre sprechi.",
+    "Analizza il tuo giardino attuale: consumi idrici, ore di manutenzione, biodiversita presente.",
+    "Sostituisci gradualmente le piante esotiche con specie autoctone resistenti alla siccita.",
+    "Integra almeno 3 elementi per la biodiversita: hotel insetti, mangiatoie, piante nettarifere.",
+    "Progetta un'area living esterna con funzione definita (relax, cucina o lavoro).",
+    "Installa irrigazione smart con sensori di umidita e programmazione meteo.",
+    "Scegli una palette cromatica di massimo 3 colori e pianifica fioriture scalari.",
   ],
   "piante-pendio": [
-    "Valuta esposizione solare e livello di pendenza.",
-    "Installa stabilizzazione (geotessili o terrazzamenti leggeri).",
-    "Usa mix di arbusti, coprisuolo e aromatiche antierosione.",
-    "Attiva irrigazione mirata e manutenzione periodica iniziale.",
+    "Misura inclinazione ed esposizione del pendio (bussola e clinometro o app).",
+    "Analizza il tipo di suolo: argilloso, sabbioso o misto.",
+    "Stendi geotessile dall'alto verso il basso, fissandolo con picchetti ogni 50 cm.",
+    "Scegli le specie in base all'esposizione: aromatiche al sole, felci e edera all'ombra.",
+    "Pianta densamente a quinconce (6-9 coprisuolo/mq, 3-4 arbusti/mq) partendo dal basso.",
+    "Installa irrigazione a goccia seguendo le curve di livello del pendio.",
+    "Mantieni irrigazione frequente il primo anno (2-3 volte/settimana in estate).",
+    "Dal secondo anno riduci gli interventi: potature e controllo geotessile.",
   ],
 };
 
@@ -74,46 +161,76 @@ const articleFaqs: Record<string, FaqItem[]> = {
     {
       question: "Quanto irrigare il giardino in autunno?",
       answer:
-        "L'irrigazione va ridotta rispetto all'estate ma non interrotta del tutto. Frequenza e quantita dipendono da piogge, tipo di suolo e specie presenti, con preferenza per irrigazioni meno frequenti ma profonde.",
+        "L'irrigazione va ridotta rispetto all'estate ma non interrotta del tutto. Frequenza e quantita dipendono da piogge, tipo di suolo e specie presenti, con preferenza per irrigazioni meno frequenti ma profonde, circa una volta ogni 10-15 giorni.",
     },
     {
       question: "Che concime usare prima dell'inverno?",
       answer:
-        "In genere conviene un concime a rilascio lento con potassio, utile a rinforzare le radici. Si evitano formulazioni troppo azotate che stimolano una crescita tardiva poco adatta ai mesi freddi.",
+        "In genere conviene un concime a rilascio lento con potassio, utile a rinforzare le radici. Si evitano formulazioni troppo azotate che stimolano una crescita tardiva poco adatta ai mesi freddi. Un rapporto NPK orientativo e 5-5-15.",
+    },
+    {
+      question: "Quando piantare i bulbi primaverili?",
+      answer:
+        "Il periodo ideale per piantare bulbi come tulipani, narcisi e giacinti e tra ottobre e novembre, quando il terreno e ancora lavorabile ma le temperature sono scese stabilmente sotto i 15 gradi. In Italia centrale, fine ottobre e il momento perfetto.",
+    },
+    {
+      question: "Come proteggere le piante in vaso dal gelo?",
+      answer:
+        "Avvolgi i vasi con tessuto isolante o pluriball, posizionali vicino a un muro esposto a sud che accumula calore durante il giorno, e solleva i vasi da terra con piedini per evitare il contatto con superfici gelate. Riduci le innaffiature ma non sospenderle.",
     },
   ],
   "tendenze-giardini-2024": [
     {
       question: "Qual e la tendenza principale per i giardini nel 2024?",
       answer:
-        "La tendenza principale e la riduzione della manutenzione con approccio sostenibile: piante resistenti, automazione dell'irrigazione e scelte progettuali che riducono consumi di acqua e tempo.",
+        "La tendenza principale e la riduzione della manutenzione con approccio sostenibile: piante resistenti, automazione dell'irrigazione e scelte progettuali che riducono consumi di acqua e tempo. Un giardino a bassa manutenzione ben progettato richiede solo 2-3 ore al mese.",
     },
     {
       question: "Come rendere il giardino piu sostenibile?",
       answer:
-        "Si parte da specie adatte al clima locale, irrigazione intelligente, suolo protetto con pacciamatura e integrazione di habitat utili alla biodiversita. Questo migliora equilibrio ecologico e costi di gestione.",
+        "Si parte da specie adatte al clima locale, irrigazione intelligente con sensori di umidita, suolo protetto con pacciamatura e integrazione di habitat utili alla biodiversita. Questo migliora equilibrio ecologico e riduce i costi di gestione fino al 60%.",
     },
     {
       question: "Tecnologia e giardinaggio possono convivere?",
       answer:
-        "Si. Sensori di umidita, centraline smart e illuminazione controllata permettono gestione piu efficiente del verde, mantenendo qualita estetica e riducendo sprechi energetici e idrici.",
+        "Si. Sensori di umidita, centraline smart e illuminazione controllata permettono gestione piu efficiente del verde, mantenendo qualita estetica e riducendo sprechi energetici e idrici. Il ritorno sull'investimento medio e di 2-3 anni.",
+    },
+    {
+      question: "Quanto si risparmia con l'irrigazione smart?",
+      answer:
+        "Un sistema di irrigazione smart con sensori di umidita e collegamento alle previsioni meteo riduce i consumi idrici del 40-60% rispetto a un impianto tradizionale a timer. Su un giardino di 200 mq, questo puo significare un risparmio di 30.000-40.000 litri d'acqua all'anno.",
+    },
+    {
+      question: "Come creare un'area living esterna funzionale?",
+      answer:
+        "Definisci una funzione principale (cucina, relax o lavoro), scegli materiali resistenti come legno termottrattato e tessuti outdoor anti-UV, prevedi illuminazione scenografica a LED e prese elettriche. Un fire pit estende l'uso dello spazio da marzo a novembre.",
     },
   ],
   "piante-pendio": [
     {
       question: "Come evitare l'erosione in un terreno in pendenza?",
       answer:
-        "Per limitare erosione servono radici stabilizzanti, copertura vegetale continua e gestione corretta dell'acqua. Spesso si combinano coprisuolo, arbusti e sistemi di drenaggio o geotessili.",
+        "Per limitare erosione servono radici stabilizzanti, copertura vegetale continua e gestione corretta dell'acqua. Spesso si combinano coprisuolo, arbusti e sistemi di drenaggio o geotessili. La chiave e piantare densamente: 6-9 piante per metro quadro.",
     },
     {
       question: "Quali piante usare in pendio soleggiato?",
       answer:
-        "In pendio soleggiato funzionano bene aromatiche e specie rustiche come lavanda, rosmarino, salvia e diversi coprisuolo mediterranei, selezionati in base al tipo di terreno.",
+        "In pendio soleggiato funzionano bene aromatiche e specie rustiche come lavanda, rosmarino prostrato, salvia, ginestra e cisto. I coprisuolo come timo strisciante e santolina completano la copertura. Tutte queste specie tollerano siccita e terreni poveri.",
     },
     {
       question: "E utile l'irrigazione a goccia in pendenza?",
       answer:
-        "Si, e spesso la scelta migliore. L'irrigazione a goccia distribuisce acqua in modo progressivo e controllato, riducendo ruscellamento superficiale e consumi idrici.",
+        "Si, e spesso la scelta migliore. L'irrigazione a goccia distribuisce acqua in modo progressivo e controllato, riducendo ruscellamento superficiale e consumi idrici del 60-70%. Le linee vanno installate orizzontalmente, seguendo le curve di livello del pendio.",
+    },
+    {
+      question: "Come installare i geotessili su un pendio?",
+      answer:
+        "Stendi il geotessile dall'alto verso il basso, fissalo con picchetti a U ogni 50 cm lungo i bordi e ogni metro al centro. Sovrapponi i teli di almeno 15 cm. Taglia aperture a croce dove pianterai e ricopri con 3-5 cm di pacciamatura dopo la piantumazione.",
+    },
+    {
+      question: "Quanto tempo serve prima che un pendio diventi autosufficiente?",
+      answer:
+        "Il primo anno e critico e richiede irrigazione frequente e diserbo manuale ogni 2-3 settimane. Dal secondo anno gli interventi si dimezzano. Dal terzo anno un pendio ben piantato diventa quasi autosufficiente, richiedendo solo potature di contenimento 1-2 volte l'anno.",
     },
   ],
 };
