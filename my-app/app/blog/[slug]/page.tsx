@@ -34,7 +34,7 @@ const SITE_URL = "https://www.visionesostenibile.it";
 // ═══════════════════════════════════════════════════════════
 const coverImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
-  "tendenze-giardini-2024": "/images/blog/tendenze-cover.png",
+  "tendenze-giardini-2026": "/images/blog/tendenze-cover.png",
   "piante-pendio": "/images/blog/pendio-cover.png",
 };
 
@@ -53,7 +53,7 @@ const coverImages: Record<string, string> = {
 // ═══════════════════════════════════════════════════════════
 const thumbImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
-  "tendenze-giardini-2024": "/images/blog/tendenze-cover.png",
+  "tendenze-giardini-2026": "/images/blog/tendenze-cover.png",
   "piante-pendio": "/images/blog/pendio-cover.png",
 };
 
@@ -75,7 +75,7 @@ const thumbImages: Record<string, string> = {
 // ═══════════════════════════════════════════════════════════
 const infographicImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-calendario.png",
-  "tendenze-giardini-2024": "/images/blog/tendenze-infografica.png",
+  "tendenze-giardini-2026": "/images/blog/tendenze-infografica.png",
   "piante-pendio": "/images/blog/pendio-infografica.png",
 };
 
@@ -108,17 +108,17 @@ const infographicImages: Record<string, string> = {
 // ═══════════════════════════════════════════════════════════
 const schemaImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-protezione-piante.png",
-  "tendenze-giardini-2024": "/images/blog/tendenze-irrigazione-smart.png",
+  "tendenze-giardini-2026": "/images/blog/tendenze-irrigazione-smart.png",
   "piante-pendio": "/images/blog/pendio-geotessile.png",
 };
 
 const quickAnswers: Record<string, string> = {
   "come-mantenere-giardino-autunno":
     "Per mantenere il giardino in autunno conviene pulire foglie e residui, proteggere le piante sensibili dal freddo, ridurre ma non azzerare l'irrigazione e concimare con prodotti ricchi di potassio. In questa fase prepari le radici all'inverno e migliori la ripresa vegetativa primaverile.",
-  "tendenze-giardini-2024":
-    "Le tendenze giardino 2024 puntano su bassa manutenzione, biodiversita e tecnologia smart: piante resistenti, irrigazione automatizzata, aree living esterne e illuminazione efficiente. L'obiettivo e avere spazi belli, funzionali e sostenibili con minori consumi nel tempo.",
+  "tendenze-giardini-2026":
+    "Le tendenze giardino 2026 puntano su bassa manutenzione, biodiversità e tecnologia smart: piante resistenti, irrigazione automatizzata, aree living esterne e illuminazione efficiente. L'obiettivo è avere spazi belli, funzionali e sostenibili con minori consumi nel tempo.",
   "piante-pendio":
-    "Le migliori piante per terreni in pendio sono quelle con radici robuste, buona tolleranza alla siccita e funzione antierosione. In pratica: lavanda, rosmarino, coprisuolo come vinca e timo strisciante, piu una posa corretta con geotessili e irrigazione a goccia.",
+    "Le migliori piante per terreni in pendio sono quelle con radici robuste, buona tolleranza alla siccità e funzione antierosione. In pratica: lavanda, rosmarino, coprisuolo come vinca e timo strisciante, più una posa corretta con geotessili e irrigazione a goccia.",
 };
 
 const articleSteps: Record<string, string[]> = {
@@ -131,12 +131,12 @@ const articleSteps: Record<string, string[]> = {
     "Prepara l'impianto di irrigazione per l'inverno: svuota i tubi e chiudi le valvole.",
     "Composta le foglie raccolte e pianifica i lavori primaverili.",
   ],
-  "tendenze-giardini-2024": [
-    "Analizza il tuo giardino attuale: consumi idrici, ore di manutenzione, biodiversita presente.",
-    "Sostituisci gradualmente le piante esotiche con specie autoctone resistenti alla siccita.",
-    "Integra almeno 3 elementi per la biodiversita: hotel insetti, mangiatoie, piante nettarifere.",
+  "tendenze-giardini-2026": [
+    "Analizza il tuo giardino attuale: consumi idrici, ore di manutenzione, biodiversità presente.",
+    "Sostituisci gradualmente le piante esotiche con specie autoctone resistenti alla siccità.",
+    "Integra almeno 3 elementi per la biodiversità: hotel insetti, mangiatoie, piante nettarifere.",
     "Progetta un'area living esterna con funzione definita (relax, cucina o lavoro).",
-    "Installa irrigazione smart con sensori di umidita e programmazione meteo.",
+    "Installa irrigazione smart con sensori di umidità e programmazione meteo.",
     "Scegli una palette cromatica di massimo 3 colori e pianifica fioriture scalari.",
   ],
   "piante-pendio": [
@@ -179,26 +179,26 @@ const articleFaqs: Record<string, FaqItem[]> = {
         "Avvolgi i vasi con tessuto isolante o pluriball, posizionali vicino a un muro esposto a sud che accumula calore durante il giorno, e solleva i vasi da terra con piedini per evitare il contatto con superfici gelate. Riduci le innaffiature ma non sospenderle.",
     },
   ],
-  "tendenze-giardini-2024": [
+  "tendenze-giardini-2026": [
     {
-      question: "Qual e la tendenza principale per i giardini nel 2024?",
+      question: "Qual è la tendenza principale per i giardini nel 2026?",
       answer:
-        "La tendenza principale e la riduzione della manutenzione con approccio sostenibile: piante resistenti, automazione dell'irrigazione e scelte progettuali che riducono consumi di acqua e tempo. Un giardino a bassa manutenzione ben progettato richiede solo 2-3 ore al mese.",
+        "La tendenza principale è la riduzione della manutenzione con approccio sostenibile: piante resistenti, automazione dell'irrigazione e scelte progettuali che riducono consumi di acqua e tempo. Un giardino a bassa manutenzione ben progettato richiede solo 2-3 ore al mese.",
     },
     {
-      question: "Come rendere il giardino piu sostenibile?",
+      question: "Come rendere il giardino più sostenibile?",
       answer:
-        "Si parte da specie adatte al clima locale, irrigazione intelligente con sensori di umidita, suolo protetto con pacciamatura e integrazione di habitat utili alla biodiversita. Questo migliora equilibrio ecologico e riduce i costi di gestione fino al 60%.",
+        "Si parte da specie adatte al clima locale, irrigazione intelligente con sensori di umidità, suolo protetto con pacciamatura e integrazione di habitat utili alla biodiversità. Questo migliora equilibrio ecologico e riduce i costi di gestione fino al 60%.",
     },
     {
       question: "Tecnologia e giardinaggio possono convivere?",
       answer:
-        "Si. Sensori di umidita, centraline smart e illuminazione controllata permettono gestione piu efficiente del verde, mantenendo qualita estetica e riducendo sprechi energetici e idrici. Il ritorno sull'investimento medio e di 2-3 anni.",
+        "Sì. Sensori di umidità, centraline smart e illuminazione controllata permettono gestione più efficiente del verde, mantenendo qualità estetica e riducendo sprechi energetici e idrici. Il ritorno sull'investimento medio è di 2-3 anni.",
     },
     {
       question: "Quanto si risparmia con l'irrigazione smart?",
       answer:
-        "Un sistema di irrigazione smart con sensori di umidita e collegamento alle previsioni meteo riduce i consumi idrici del 40-60% rispetto a un impianto tradizionale a timer. Su un giardino di 200 mq, questo puo significare un risparmio di 30.000-40.000 litri d'acqua all'anno.",
+        "Un sistema di irrigazione smart con sensori di umidità e collegamento alle previsioni meteo riduce i consumi idrici del 40-60% rispetto a un impianto tradizionale a timer. Su un giardino di 200 mq, questo può significare un risparmio di 30.000-40.000 litri d'acqua all'anno.",
     },
     {
       question: "Come creare un'area living esterna funzionale?",
@@ -255,78 +255,135 @@ function resolveTemplate(
   return ((normalizedIndex % 3) + 1) as TemplateVariant;
 }
 
+function processMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+}
+
 function renderArticleContent(content: string) {
-  return content
+  const combined = content
     .trim()
-    .split("\n\n")
-    .map((paragraph, index) => {
-      const line = paragraph.trim();
+    .replace(/### Il dato\n\n/g, "### Il dato|||");
 
-      if (line.startsWith("## ")) {
-        return (
-          <h2
-            key={`h2-${index}`}
-            className="font-display text-2xl lg:text-3xl font-normal text-charcoal-800 mt-12 mb-5"
-          >
-            {line.replace("## ", "")}
-          </h2>
-        );
-      }
+  const blocks = combined.split("\n\n");
+  let processed: React.ReactNode[] = [];
+  let i = 0;
 
-      if (line.startsWith("### ")) {
-        return (
-          <h3
-            key={`h3-${index}`}
-            className="font-display text-xl lg:text-2xl font-normal text-charcoal-800 mt-8 mb-4"
-          >
-            {line.replace("### ", "")}
-          </h3>
-        );
-      }
+  while (i < blocks.length) {
+    const block = blocks[i].trim();
+    const nextBlock = blocks[i + 1]?.trim();
 
-      if (line.startsWith("- ")) {
-        return (
-          <ul key={`ul-${index}`} className="my-6 space-y-3 pl-0 list-none">
-            {line.split("\n").map((item, i) => (
-              <li key={`li-${i}`} className="flex items-start gap-3 text-charcoal-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-terracotta-400 mt-2.5 shrink-0" />
-                <span>{item.replace("- ", "")}</span>
-              </li>
-            ))}
-          </ul>
-        );
-      }
-
-      if (/^\d+\.\s/.test(line)) {
-        return (
-          <ol key={`ol-${index}`} className="my-6 space-y-3 pl-0 list-none">
-            {line.split("\n").map((item, i) => (
-              <li key={`oli-${i}`} className="flex items-start gap-3 text-charcoal-600">
-                <span className="font-sans text-sm font-medium text-terracotta-500 mt-0.5 shrink-0 w-5">
-                  {i + 1}.
-                </span>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item
-                      .replace(/^\d+\.\s*/, "")
-                      .replace(
-                        /\*\*(.*?)\*\*/g,
-                        '<strong class="font-semibold text-charcoal-800">$1</strong>'
-                      ),
-                  }}
-                />
-              </li>
-            ))}
-          </ol>
-        );
-      }
-
-      return (
-        <p key={`p-${index}`} className="mb-6 text-charcoal-600 leading-relaxed">
-          {line}
-        </p>
+    if (block.startsWith("### Il dato")) {
+      const headingText = block.replace("### Il dato|||", "").replace("### Il dato", "");
+      const fullText = nextBlock && !nextBlock.startsWith("##") && !nextBlock.startsWith("###")
+        ? `${headingText} ${nextBlock}`
+        : headingText;
+      
+      processed.push(
+        <blockquote
+          key={`blockquote-${i}`}
+          className="my-8 border-l-4 border-terracotta-500 bg-terracotta-50 rounded-r-lg p-5 pl-6"
+        >
+          <p className="font-display text-lg text-terracotta-800 italic mb-2">
+            Il dato
+          </p>
+          <p 
+            className="text-charcoal-600 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: processMarkdown(fullText) }}
+          />
+        </blockquote>
       );
-    });
+      
+      if (fullText === headingText && nextBlock && !nextBlock.startsWith("##") && !nextBlock.startsWith("###")) {
+        i += 2;
+      } else {
+        i += 1;
+      }
+      continue;
+    }
+
+    if (block.startsWith("## ")) {
+      processed.push(
+        <h2
+          key={`h2-${i}`}
+          className="font-display text-3xl lg:text-4xl font-bold text-moss-800 mt-12 mb-6 tracking-tight"
+        >
+          {block.replace("## ", "")}
+        </h2>
+      );
+      i += 1;
+      continue;
+    }
+
+    if (block.startsWith("### ")) {
+      processed.push(
+        <h3
+          key={`h3-${i}`}
+          className="font-display text-xl lg:text-2xl font-semibold text-moss-700 mt-8 mb-4"
+        >
+          {block.replace("### ", "")}
+        </h3>
+      );
+      i += 1;
+      continue;
+    }
+
+    if (block.startsWith("- ")) {
+      processed.push(
+        <ul key={`ul-${i}`} className="my-6 space-y-3 pl-0 list-none">
+          {block.split("\n").map((item, j) => (
+            <li key={`li-${j}`} className="flex items-start gap-3 text-charcoal-600">
+              <span className="w-1.5 h-1.5 rounded-full bg-terracotta-400 mt-2.5 shrink-0" />
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: processMarkdown(item.replace("- ", "")),
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+      );
+      i += 1;
+      continue;
+    }
+
+    if (/^\d+\.\s/.test(block)) {
+      processed.push(
+        <ol key={`ol-${i}`} className="my-6 space-y-3 pl-0 list-none">
+          {block.split("\n").map((item, j) => (
+            <li key={`oli-${j}`} className="flex items-start gap-3 text-charcoal-600">
+              <span className="font-sans text-sm font-medium text-terracotta-500 mt-0.5 shrink-0 w-5">
+                {j + 1}.
+              </span>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: processMarkdown(item.replace(/^\d+\.\s*/, "")),
+                }}
+              />
+            </li>
+          ))}
+        </ol>
+      );
+      i += 1;
+      continue;
+    }
+
+    if (block) {
+      processed.push(
+        <p
+          key={`p-${i}`}
+          className="mb-6 text-charcoal-600 leading-relaxed"
+          dangerouslySetInnerHTML={{
+            __html: processMarkdown(block),
+          }}
+        />
+      );
+    }
+    i += 1;
+  }
+
+  return processed;
 }
 
 export async function generateStaticParams() {
@@ -417,6 +474,21 @@ export default async function BlogPostPage({
     })),
   };
 
+  const howToJsonLd = steps.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: post.title,
+        description: post.excerpt,
+        step: steps.map((stepText, index) => ({
+          "@type": "HowToStep",
+          position: index + 1,
+          name: `Step ${index + 1}`,
+          text: stepText,
+        })),
+      }
+    : null;
+
   return (
     <div className="min-h-screen bg-cream-50">
       <script
@@ -427,6 +499,12 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      {howToJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        />
+      )}
 
       <section className="relative overflow-hidden bg-moss-900 pt-32 pb-16 lg:pt-40 lg:pb-20">
         <div className="absolute inset-0">

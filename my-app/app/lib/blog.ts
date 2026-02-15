@@ -130,12 +130,12 @@ Con queste operazioni ben pianificate, il tuo giardino sarà pronto ad affrontar
     readTime: "12 min",
   },
   {
-    slug: "tendenze-giardini-2024",
-    title: "Tendenze Giardini 2024: Le Novità del Verde",
+    slug: "tendenze-giardini-2026",
+    title: "Tendenze Giardini 2026: Le Novità del Verde",
     excerpt:
-      "Scopri le tendenze più hot per il 2024 nel mondo del giardinaggio e dell'architettura del paesaggio.",
+      "Scopri le tendenze più hot per il 2026 nel mondo del giardinaggio e dell'architettura del paesaggio.",
     content: `
-Il 2024 porta con sé nuove tendenze nel mondo del giardinaggio e del paesaggio. Dall'attenzione alla sostenibilità fino all'integrazione tecnologica, il verde domestico si trasforma. Secondo i dati dell'Osservatorio del Paesaggio, il 68% degli italiani considera il giardino uno spazio essenziale per il benessere quotidiano. Ecco le cinque direzioni principali che stanno ridefinendo il modo in cui progettiamo e viviamo gli spazi verdi.
+Il 2026 porta con sé nuove tendenze nel mondo del giardinaggio e del paesaggio. Dall'attenzione alla sostenibilità fino all'integrazione tecnologica, il verde domestico si trasforma. Secondo i dati dell'Osservatorio del Paesaggio, il 72% degli italiani considera il giardino uno spazio essenziale per il benessere quotidiano. Ecco le cinque direzioni principali che stanno ridefinendo il modo in cui progettiamo e viviamo gli spazi verdi.
 
 ## 1. Giardini a Bassa Manutenzione
 
@@ -197,7 +197,7 @@ L'adozione di tecnologia smart nel giardino riduce i consumi energetici del 30�
 
 ## 5. Colori Audaci e Design Cromatico
 
-Via libera ai colori vivaci nelle fioriture e negli elementi decorativi. Il 2024 segna il ritorno del colore come elemento progettuale dominante nel giardino.
+ Via libera ai colori vivaci nelle fioriture e negli elementi decorativi. Il 2026 segna il ritorno del colore come elemento progettuale dominante nel giardino.
 
 ### Le palette di tendenza
 
@@ -213,12 +213,12 @@ Via libera ai colori vivaci nelle fioriture e negli elementi decorativi. Il 2024
 - Alterna fioriture scalari per avere colore tutto l'anno
 - Usa vasi e arredi colorati come accenti nei mesi di minor fioritura
 
-Queste tendenze non sono mode passeggere ma riflettono un cambiamento profondo nel rapporto tra le persone e il verde. Il giardino del 2024 è uno spazio multifunzionale, sostenibile e connesso, che rispetta l'ambiente mentre migliora la qualità della vita.
+ Queste tendenze non sono mode passeggere ma riflettono un cambiamento profondo nel rapporto tra le persone e il verde. Il giardino del 2026 è uno spazio multifunzionale, sostenibile e connesso, che rispetta l'ambiente mentre migliora la qualità della vita.
     `,
     coverImage: "/images/blog/tendenze-cover.png",
     category: "Tendenze",
     author: "Andrea Giordano",
-    publishedAt: "2024-09-20",
+    publishedAt: "2026-01-15",
     readTime: "10 min",
   },
   {
@@ -356,7 +356,7 @@ Con le piante giuste, la tecnica corretta e un po' di pazienza, anche il pendio 
     coverImage: "/images/blog/pendio-cover.png",
     category: "Progettazione",
     author: "Andrea Giordano",
-    publishedAt: "2024-08-10",
+    publishedAt: "2026-01-10",
     readTime: "14 min",
   },
 ];

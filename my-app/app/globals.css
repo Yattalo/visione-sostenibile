@@ -2,9 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme inline {
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Quicksand", system-ui, sans-serif;
-  --font-body: "Cormorant Garamond", Georgia, serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-quicksand), system-ui, sans-serif;
+  --font-body: var(--font-playfair), Georgia, serif;
 
   --color-cream-50: #fdfcf8;
   --color-cream-100: #f9f7f0;

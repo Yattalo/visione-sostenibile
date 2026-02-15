@@ -3,6 +3,19 @@ import "./globals.css";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { Playfair_Display, Quicksand } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+  display: "swap",
+});
 
 export const dynamic = "force-dynamic";
 
@@ -47,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" suppressHydrationWarning>
-      <body className="antialiased min-h-screen flex flex-col bg-cream-gradient">
+      <body className={`${playfair.variable} ${quicksand.variable} antialiased min-h-screen flex flex-col bg-cream-gradient`}>
         <ConvexClientProvider>
           <Navbar />
           <main className="flex-grow">{children}</main>

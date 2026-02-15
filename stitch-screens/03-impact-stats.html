@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Visione Sostenibile - Impact Stats</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#4d6b42", // Muted forest green from the 'Visione Sostenibile' darker sections
+                        secondary: "#D48166", // The reddish-brown accent color seen in the logo/icons
+                        "background-light": "#F9F8F4", // Warm off-white/cream from the light sections
+                        "background-dark": "#2E3A2B", // Deep organic green from the dark sections
+                        "text-light": "#2E3A2B",
+                        "text-dark": "#F9F8F4",
+                        "card-dark": "#3A4736", // Slightly lighter green for cards in dark mode
+                    },
+                    fontFamily: {
+                        display: ["Playfair Display", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark antialiased transition-colors duration-300">
+<nav class="w-full py-6 px-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<svg class="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M12 2V4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M12 20V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2 12H4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M20 12H22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="font-display font-semibold text-xl tracking-tight text-primary dark:text-white">Visione<span class="text-secondary italic font-normal">Sostenibile</span></span>
+</div>
+<div class="hidden md:flex gap-8 text-sm font-medium tracking-wide text-gray-600 dark:text-gray-300">
+<a class="hover:text-primary dark:hover:text-white transition" href="#">HOME</a>
+<a class="hover:text-primary dark:hover:text-white transition" href="#">CHI SIAMO</a>
+<a class="hover:text-primary dark:hover:text-white transition" href="#">SERVIZI</a>
+<a class="hover:text-primary dark:hover:text-white transition" href="#">BLOG</a>
+<a class="hover:text-primary dark:hover:text-white transition" href="#">CONTATTI</a>
+</div>
+<button class="bg-primary hover:bg-[#3d5635] text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition shadow-lg hidden md:block">
+            Preventivo
+        </button>
+</nav>
+<main class="relative overflow-hidden w-full px-4 md:px-12 py-16">
+<div class="absolute top-0 right-0 -z-10 w-full h-full opacity-10 pointer-events-none">
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+<path d="M900,100c0,0-50,200-200,200s-200,100-200,300s150,300,300,300s150-100,150-300" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M800,50c0,0-40,180-180,180s-180,90-180,280s130,280,280,280s130-90,130-280" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M0,800c0,0,100-50,200-150s200-200,400-200s300,100,300,300" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<section class="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-2xl relative">
+<div class="bg-[#2E3A2B] dark:bg-[#20291e] grid grid-cols-1 lg:grid-cols-12 min-h-[400px]">
+<div class="lg:col-span-5 bg-[#364433] dark:bg-[#2a3626] p-10 md:p-16 flex flex-col justify-center relative">
+<div class="absolute inset-0 bg-primary opacity-10 mix-blend-overlay"></div>
+<div class="relative z-10">
+<span class="block text-secondary font-sans text-xs font-bold tracking-[0.2em] uppercase mb-4">
+                            I Nostri Numeri
+                        </span>
+<h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
+                            Cosa abbiamo <br/>
+<span class="italic text-[#d8e0d6]">fatto finora</span>
+</h2>
+<p class="text-gray-300 font-sans text-sm md:text-base leading-relaxed max-w-md">
+                            Ogni numero rappresenta un passo avanti verso un futuro più verde. La nostra dedizione alla sostenibilità è misurabile e tangibile.
+                        </p>
+</div>
+</div>
+<div class="lg:col-span-7 bg-[#2E3A2B] dark:bg-[#20291e] p-10 md:p-16 flex items-center">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+<div class="flex flex-col items-center md:items-start text-center md:text-left group">
+<div class="mb-4 text-white group-hover:text-secondary transition-colors duration-300">
+<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+</div>
+<span class="font-sans text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2">
+                                250+
+                            </span>
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase border-t border-gray-600 pt-4 w-full md:w-auto">
+                                Progetti Completati
+                            </span>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left group">
+<div class="mb-4 text-white group-hover:text-secondary transition-colors duration-300">
+<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+</div>
+<span class="font-sans text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2">
+                                10+
+                            </span>
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase border-t border-gray-600 pt-4 w-full md:w-auto">
+                                Anni di Esperienza
+                            </span>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left group">
+<div class="mb-4 text-white group-hover:text-secondary transition-colors duration-300">
+<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+</div>
+<span class="font-sans text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2">
+                                100%
+                            </span>
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase border-t border-gray-600 pt-4 w-full md:w-auto">
+                                Impatto Zero
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto items-center">
+<div>
+<img alt="Lush green garden pathway with vibrant flowers" class="rounded-2xl shadow-xl w-full h-auto object-cover aspect-[4/3]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEqOLB-CkrU95jOa3ZwhvIShWCalwkw2wXmfchPqqZTL8JJtPCr1ThRkMDED5qFV0BjDln1O2ZSx2UVep4D2t6YIMajVRtyTi7QqXExh_qBW_1Gyatc6P95omDeffv_noT9PqL65cEtZh7CSoi8b9RD795V_1fCdtyJmbV77OAZ9eag99gjK2nDOyyabRoGbqsR9NmL0nAa4nVuLl28rUnJxQyo_aFf9NzI7SL_61tH-CEX2veC2O3Nt_-ulGDBow3Ke-9yVGR0rRH"/>
+</div>
+<div class="space-y-6">
+<div class="inline-block bg-primary/10 dark:bg-primary/20 text-primary dark:text-green-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    Realizzazioni
+                </div>
+<h3 class="font-display text-4xl text-gray-900 dark:text-white leading-tight">
+                    Ogni giardino è una <span class="text-secondary italic">storia unica</span>
+</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Dai un'occhiata ai nostri progetti realizzati. Ogni giardino racconta una storia diversa, ma tutti condividono lo stesso denominatore comune: la passione per il verde e il rispetto per l'ambiente.
+                </p>
+<a class="inline-flex items-center text-primary dark:text-green-400 font-bold hover:underline underline-offset-4 decoration-2" href="#">
+                    Visualizza i progetti
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</div>
+</main>
+<footer class="bg-background-light dark:bg-background-dark py-12 border-t border-gray-200 dark:border-gray-800 mt-12">
+<div class="max-w-7xl mx-auto px-6 text-center text-gray-500 dark:text-gray-400 text-sm">
+            © 2024 Visione Sostenibile. All rights reserved.
+        </div>
+</footer>
+
+</body></html>

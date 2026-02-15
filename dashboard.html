@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>visione_sostenibile — Task Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {} }
+    };
+  </script>
+  <style>
+    [x-cloak] { display: none !important; }
+    .kanban-col { min-height: 400px; }
+    .kanban-card { transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+    .kanban-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .modal-backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+    .progress-bar { transition: width 0.5s ease; }
+    .tab-active { border-bottom: 2px solid #06b6d4; color: #06b6d4; }
+    .status-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 9999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .agent-badge { font-size: 0.65rem; padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+    .mermaid svg { max-width: 100%; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .pulse-dot { animation: pulse-dot 2s infinite; }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen font-mono" x-data="dashboard()" x-init="init()">
+
+  <!-- Header -->
+  <header class="bg-gray-900 border-gray-800 border-b px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <h1 class="text-lg font-bold tracking-tight">visione_sostenibile</h1>
+      <span class="text-xs text-gray-500">Task Dashboard</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 text-xs text-gray-400">
+        <span class="w-2 h-2 rounded-full pulse-dot" :class="connected ? 'bg-green-500' : 'bg-red-500'"></span>
+        <span x-text="connected ? 'Connected' : 'Disconnected'"></span>
+      </div>
+      <span class="text-xs text-gray-500" x-text="'Updated: ' + lastUpdated"></span>
+      <button @click="fetchAll()" class="text-xs px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 transition">Refresh</button>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="bg-gray-900 border-gray-800 border-b px-6 flex gap-1">
+    <button @click="activeTab = 'kanban'" :class="activeTab === 'kanban' ? 'tab-active' : ''" class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition">Kanban</button>
+    <button @click="activeTab = 'graph'" :class="activeTab === 'graph' ? 'tab-active' : ''" class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition">Graph</button>
+    <button @click="activeTab = 'table'" :class="activeTab === 'table' ? 'tab-active' : ''" class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition">Table</button>
+    <button @click="activeTab = 'agents'" :class="activeTab === 'agents' ? 'tab-active' : ''" class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition">Agents</button>
+    <button @click="activeTab = 'stats'" :class="activeTab === 'stats' ? 'tab-active' : ''" class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition">Stats</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="p-6">
+
+    <!-- Kanban View -->
+    <div x-show="activeTab === 'kanban'" x-cloak>
+      <div class="flex gap-4 overflow-x-auto pb-4">
+        <!-- To Do Column -->
+        <div class="flex-shrink-0 w-72 bg-gray-900 rounded-lg kanban-col">
+          <div class="bg-gray-800 rounded-t-lg px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+              <span class="text-sm font-semibold">To Do</span>
+            </div>
+            <span class="text-xs text-gray-400" x-text="(kanban['todo'] || []).length"></span>
+          </div>
+          <div class="p-2 flex flex-col gap-2">
+            <template x-for="task in (kanban['todo'] || [])" :key="task.taskId">
+              <div @click="openTask(task)" class="kanban-card bg-gray-800 border-gray-700 border rounded-lg p-3">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-blue-400" x-text="task.taskId"></span>
+                  <span class="agent-badge" :style="'background:' + (AGENTS[task.agent]?.color || '#666') + '22; color:' + (AGENTS[task.agent]?.color || '#999')" x-text="AGENTS[task.agent]?.icon || task.agent"></span>
+                </div>
+                <p class="text-sm leading-tight" x-text="task.title"></p>
+                <div class="mt-2 flex items-center gap-2">
+                  <span class="text-xs text-gray-500" x-text="task.priority"></span>
+                  <template x-if="task.category">
+                    <span class="text-xs text-gray-600" x-text="'#' + task.category"></span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <!-- In Progress Column -->
+        <div class="flex-shrink-0 w-72 bg-gray-900 rounded-lg kanban-col">
+          <div class="bg-gray-800 rounded-t-lg px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+              <span class="text-sm font-semibold">In Progress</span>
+            </div>
+            <span class="text-xs text-gray-400" x-text="(kanban['in_progress'] || []).length"></span>
+          </div>
+          <div class="p-2 flex flex-col gap-2">
+            <template x-for="task in (kanban['in_progress'] || [])" :key="task.taskId">
+              <div @click="openTask(task)" class="kanban-card bg-gray-800 border-gray-700 border rounded-lg p-3">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-cyan-400" x-text="task.taskId"></span>
+                  <span class="agent-badge" :style="'background:' + (AGENTS[task.agent]?.color || '#666') + '22; color:' + (AGENTS[task.agent]?.color || '#999')" x-text="AGENTS[task.agent]?.icon || task.agent"></span>
+                </div>
+                <p class="text-sm leading-tight" x-text="task.title"></p>
+                <div class="mt-2 flex items-center gap-2">
+                  <span class="text-xs text-gray-500" x-text="task.priority"></span>
+                  <template x-if="task.category">
+                    <span class="text-xs text-gray-600" x-text="'#' + task.category"></span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <!-- Blocked Column -->
+        <div class="flex-shrink-0 w-72 bg-gray-900 rounded-lg kanban-col">
+          <div class="bg-gray-800 rounded-t-lg px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+              <span class="text-sm font-semibold">Blocked</span>
+            </div>
+            <span class="text-xs text-gray-400" x-text="(kanban['blocked'] || []).length"></span>
+          </div>
+          <div class="p-2 flex flex-col gap-2">
+            <template x-for="task in (kanban['blocked'] || [])" :key="task.taskId">
+              <div @click="openTask(task)" class="kanban-card bg-gray-800 border-gray-700 border rounded-lg p-3">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-red-400" x-text="task.taskId"></span>
+                  <span class="agent-badge" :style="'background:' + (AGENTS[task.agent]?.color || '#666') + '22; color:' + (AGENTS[task.agent]?.color || '#999')" x-text="AGENTS[task.agent]?.icon || task.agent"></span>
+                </div>
+                <p class="text-sm leading-tight" x-text="task.title"></p>
+                <div class="mt-2 flex items-center gap-2">
+                  <span class="text-xs text-gray-500" x-text="task.priority"></span>
+                  <template x-if="task.category">
+                    <span class="text-xs text-gray-600" x-text="'#' + task.category"></span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <!-- In Review Column -->
+        <div class="flex-shrink-0 w-72 bg-gray-900 rounded-lg kanban-col">
+          <div class="bg-gray-800 rounded-t-lg px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+              <span class="text-sm font-semibold">In Review</span>
+            </div>
+            <span class="text-xs text-gray-400" x-text="(kanban['review'] || []).length"></span>
+          </div>
+          <div class="p-2 flex flex-col gap-2">
+            <template x-for="task in (kanban['review'] || [])" :key="task.taskId">
+              <div @click="openTask(task)" class="kanban-card bg-gray-800 border-gray-700 border rounded-lg p-3">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-yellow-400" x-text="task.taskId"></span>
+                  <span class="agent-badge" :style="'background:' + (AGENTS[task.agent]?.color || '#666') + '22; color:' + (AGENTS[task.agent]?.color || '#999')" x-text="AGENTS[task.agent]?.icon || task.agent"></span>
+                </div>
+                <p class="text-sm leading-tight" x-text="task.title"></p>
+                <div class="mt-2 flex items-center gap-2">
+                  <span class="text-xs text-gray-500" x-text="task.priority"></span>
+                  <template x-if="task.category">
+                    <span class="text-xs text-gray-600" x-text="'#' + task.category"></span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <!-- Done Column -->
+        <div class="flex-shrink-0 w-72 bg-gray-900 rounded-lg kanban-col">
+          <div class="bg-gray-800 rounded-t-lg px-3 py-2 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+              <span class="text-sm font-semibold">Done</span>
+            </div>
+            <span class="text-xs text-gray-400" x-text="(kanban['done'] || []).length"></span>
+          </div>
+          <div class="p-2 flex flex-col gap-2">
+            <template x-for="task in (kanban['done'] || [])" :key="task.taskId">
+              <div @click="openTask(task)" class="kanban-card bg-gray-800 border-gray-700 border rounded-lg p-3">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-green-400" x-text="task.taskId"></span>
+                  <span class="agent-badge" :style="'background:' + (AGENTS[task.agent]?.color || '#666') + '22; color:' + (AGENTS[task.agent]?.color || '#999')" x-text="AGENTS[task.agent]?.icon || task.agent"></span>
+                </div>
+                <p class="text-sm leading-tight" x-text="task.title"></p>
+                <div class="mt-2 flex items-center gap-2">
+                  <span class="text-xs text-gray-500" x-text="task.priority"></span>
+                  <template x-if="task.category">
+                    <span class="text-xs text-gray-600" x-text="'#' + task.category"></span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graph View -->
+    <div x-show="activeTab === 'graph'" x-cloak>
+      <div class="bg-gray-900 rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold">Dependency Graph</h2>
+          <button @click="renderGraph()" class="text-xs px-3 py-1 rounded bg-gray-800 hover:bg-gray-700 transition">Re-render</button>
+        </div>
+        <div id="mermaid-graph" class="overflow-auto"></div>
+      </div>
+    </div>
+
+    <!-- Table View -->
+    <div x-show="activeTab === 'table'" x-cloak>
+      <div class="bg-gray-900 rounded-lg overflow-hidden">
+        <div class="px-4 py-3 flex items-center gap-4 border-gray-800 border-b">
+          <input type="text" x-model="tableFilter" placeholder="Filter tasks..." class="flex-1 px-3 py-1.5 text-sm rounded bg-gray-800 border-gray-700 text-gray-200 placeholder-gray-500 border focus:outline-none focus:ring-1 focus:ring-cyan-500">
+          <select x-model="tableStatusFilter" class="px-2 py-1.5 text-sm rounded bg-gray-800 border-gray-700 text-gray-200 border">
+            <option value="">All Statuses</option>
+            <option value="todo">To Do</option>
+            <option value="in_progress">In Progress</option>
+            <option value="blocked">Blocked</option>
+            <option value="review">Review</option>
+            <option value="done">Done</option>
+          </select>
+          <select x-model="tableAgentFilter" class="px-2 py-1.5 text-sm rounded bg-gray-800 border-gray-700 text-gray-200 border">
+            <option value="">All Agents</option>
+            <option value="claude">Claude Code</option>
+            <option value="gemini">Gemini CLI</option>
+            <option value="codex">Codex</option>
+          </select>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-800 text-gray-400">
+                <th class="text-left px-4 py-2 cursor-pointer" @click="sortTable('taskId')">ID</th>
+                <th class="text-left px-4 py-2 cursor-pointer" @click="sortTable('title')">Title</th>
+                <th class="text-left px-4 py-2 cursor-pointer" @click="sortTable('status')">Status</th>
+                <th class="text-left px-4 py-2 cursor-pointer" @click="sortTable('agent')">Agent</th>
+                <th class="text-left px-4 py-2 cursor-pointer" @click="sortTable('priority')">Priority</th>
+                <th class="text-left px-4 py-2">Category</th>
+                <th class="text-left px-4 py-2">Dependencies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="task in filteredTasks()" :key="task.taskId">
+                <tr @click="openTask(task)" class="cursor-pointer hover:bg-gray-800 border-gray-800 border-t transition">
+                  <td class="px-4 py-2 font-bold" :class="statusColor(task.status)" x-text="task.taskId"></td>
+                  <td class="px-4 py-2" x-text="task.title"></td>
+                  <td class="px-4 py-2"><span class="status-badge" :class="statusBadgeClass(task.status)" x-text="task.status"></span></td>
+                  <td class="px-4 py-2"><span class="agent-badge" :style="'background:' + (AGENTS[task.agent]?.color || '#666') + '22; color:' + (AGENTS[task.agent]?.color || '#999')" x-text="AGENTS[task.agent]?.label || task.agent"></span></td>
+                  <td class="px-4 py-2" x-text="task.priority"></td>
+                  <td class="px-4 py-2 text-xs text-gray-500" x-text="task.category || '—'"></td>
+                  <td class="px-4 py-2 text-xs text-gray-500" x-text="(task.dependencies || []).join(', ') || '—'"></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agents View -->
+    <div x-show="activeTab === 'agents'" x-cloak>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <template x-for="[agentKey, agentInfo] in Object.entries(AGENTS)" :key="agentKey">
+          <div class="bg-gray-900 border-gray-800 border rounded-lg p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold" :style="'background:' + agentInfo.color + '33; color:' + agentInfo.color" x-text="agentInfo.icon"></div>
+              <div>
+                <h3 class="font-semibold" x-text="agentInfo.label"></h3>
+                <span class="text-xs text-gray-500" x-text="agentKey"></span>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-gray-400">Progress</span>
+                  <span x-text="agentProgress(agentKey) + '%'"></span>
+                </div>
+                <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full progress-bar" :style="'width:' + agentProgress(agentKey) + '%; background:' + agentInfo.color"></div>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-gray-800 rounded p-2">
+                  <div class="text-lg font-bold" x-text="agentStat(agentKey, 'total')"></div>
+                  <div class="text-xs text-gray-500">Total</div>
+                </div>
+                <div class="bg-gray-800 rounded p-2">
+                  <div class="text-lg font-bold text-cyan-400" x-text="agentStat(agentKey, 'active')"></div>
+                  <div class="text-xs text-gray-500">Active</div>
+                </div>
+                <div class="bg-gray-800 rounded p-2">
+                  <div class="text-lg font-bold text-green-400" x-text="agentStat(agentKey, 'done')"></div>
+                  <div class="text-xs text-gray-500">Done</div>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-xs font-semibold text-gray-400 mb-2">Status Breakdown</h4>
+                <template x-for="s in ['todo','in_progress','blocked','review','done']" :key="s">
+                  <div class="flex items-center gap-2 text-xs mb-1">
+                    <span class="w-16 text-gray-500" x-text="s"></span>
+                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                      <div class="h-full rounded-full" :class="statusBarColor(s)" :style="'width:' + agentStatusPct(agentKey, s) + '%'"></div>
+                    </div>
+                    <span class="w-6 text-right" x-text="agentStatusCount(agentKey, s)"></span>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Stats View -->
+    <div x-show="activeTab === 'stats'" x-cloak>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Overall Progress -->
+        <div class="bg-gray-900 border-gray-800 border rounded-lg p-6">
+          <h2 class="text-lg font-semibold mb-4">Overall Progress</h2>
+          <div class="flex items-end gap-4 mb-4">
+            <span class="text-5xl font-bold text-cyan-400" x-text="stats.completionPct + '%'"></span>
+            <span class="text-sm text-gray-500 mb-1" x-text="stats.done + '/' + stats.total + ' tasks'"></span>
+          </div>
+          <div class="w-full h-4 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-cyan-500 rounded-full progress-bar" :style="'width:' + stats.completionPct + '%'"></div>
+          </div>
+        </div>
+        <!-- Status Distribution -->
+        <div class="bg-gray-900 border-gray-800 border rounded-lg p-6">
+          <h2 class="text-lg font-semibold mb-4">Status Distribution</h2>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>To Do</span>
+                <span x-text="stats.byStatus?.todo ?? 0"></span>
+              </div>
+              <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-500 rounded-full progress-bar" :style="'width:' + statusPct('todo') + '%'"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>In Progress</span>
+                <span x-text="stats.byStatus?.in_progress ?? 0"></span>
+              </div>
+              <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full bg-cyan-500 rounded-full progress-bar" :style="'width:' + statusPct('in_progress') + '%'"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>Blocked</span>
+                <span x-text="stats.byStatus?.blocked ?? 0"></span>
+              </div>
+              <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full bg-red-500 rounded-full progress-bar" :style="'width:' + statusPct('blocked') + '%'"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>In Review</span>
+                <span x-text="stats.byStatus?.review ?? 0"></span>
+              </div>
+              <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full bg-yellow-500 rounded-full progress-bar" :style="'width:' + statusPct('review') + '%'"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>Done</span>
+                <span x-text="stats.byStatus?.done ?? 0"></span>
+              </div>
+              <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 rounded-full progress-bar" :style="'width:' + statusPct('done') + '%'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Priority Breakdown -->
+        <div class="bg-gray-900 border-gray-800 border rounded-lg p-6">
+          <h2 class="text-lg font-semibold mb-4">Priority Breakdown</h2>
+          <div class="grid grid-cols-4 gap-3">
+            <div class="bg-gray-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-red-400" x-text="stats.byPriority?.critical ?? 0"></div>
+              <div class="text-xs text-gray-500 mt-1">Critical</div>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-orange-400" x-text="stats.byPriority?.high ?? 0"></div>
+              <div class="text-xs text-gray-500 mt-1">High</div>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-yellow-400" x-text="stats.byPriority?.medium ?? 0"></div>
+              <div class="text-xs text-gray-500 mt-1">Medium</div>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-green-400" x-text="stats.byPriority?.low ?? 0"></div>
+              <div class="text-xs text-gray-500 mt-1">Low</div>
+            </div>
+          </div>
+        </div>
+        <!-- Category Breakdown -->
+        <div class="bg-gray-900 border-gray-800 border rounded-lg p-6">
+          <h2 class="text-lg font-semibold mb-4">Categories</h2>
+          <div class="space-y-2">
+            <template x-for="[cat, count] in Object.entries(stats.byCategory || {})" :key="cat">
+              <div class="flex items-center gap-3">
+                <span class="w-24 text-sm truncate" x-text="cat"></span>
+                <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-cyan-500 rounded-full progress-bar" :style="'width:' + (stats.total ? (count/stats.total*100) : 0) + '%'"></div>
+                </div>
+                <span class="w-8 text-right text-sm" x-text="count"></span>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Task Detail Modal -->
+  <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop" @click.self="modalOpen = false" @keydown.escape.window="modalOpen = false">
+    <div class="bg-gray-900 border-gray-700 border rounded-xl w-full max-w-2xl mx-4 max-h-[85vh] overflow-y-auto shadow-2xl" @click.stop>
+      <!-- Modal Header -->
+      <div class="border-gray-800 border-b px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-lg font-bold" :class="statusColor(selectedTask?.status)" x-text="selectedTask?.taskId"></span>
+          <span class="status-badge" :class="statusBadgeClass(selectedTask?.status)" x-text="selectedTask?.status"></span>
+        </div>
+        <button @click="modalOpen = false" class="text-gray-400 hover:text-gray-200 text-xl">&times;</button>
+      </div>
+      <!-- Modal Body -->
+      <div class="px-6 py-4 space-y-4">
+        <h2 class="text-xl font-semibold" x-text="selectedTask?.title"></h2>
+        <p class="text-sm text-gray-400 whitespace-pre-wrap" x-text="selectedTask?.description || 'No description'"></p>
+
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <span class="text-gray-500">Agent</span>
+            <div class="mt-1"><span class="agent-badge" :style="'background:' + (AGENTS[selectedTask?.agent]?.color || '#666') + '22; color:' + (AGENTS[selectedTask?.agent]?.color || '#999')" x-text="AGENTS[selectedTask?.agent]?.label || selectedTask?.agent"></span></div>
+          </div>
+          <div>
+            <span class="text-gray-500">Priority</span>
+            <div class="mt-1 font-medium" x-text="selectedTask?.priority"></div>
+          </div>
+          <div>
+            <span class="text-gray-500">Category</span>
+            <div class="mt-1" x-text="selectedTask?.category || '—'"></div>
+          </div>
+          <div>
+            <span class="text-gray-500">Wave</span>
+            <div class="mt-1" x-text="selectedTask?.wave ?? '—'"></div>
+          </div>
+        </div>
+
+        <div x-show="selectedTask?.dependencies?.length > 0">
+          <span class="text-sm text-gray-500">Dependencies</span>
+          <div class="flex flex-wrap gap-1 mt-1">
+            <template x-for="dep in selectedTask?.dependencies || []" :key="dep">
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300" x-text="dep"></span>
+            </template>
+          </div>
+        </div>
+
+        <div x-show="selectedTask?.blockers?.length > 0">
+          <span class="text-sm text-red-400">Blockers</span>
+          <div class="space-y-1 mt-1">
+            <template x-for="(blocker, idx) in selectedTask?.blockers || []" :key="idx">
+              <div class="flex items-center gap-2 text-sm">
+                <span class="w-5 h-5 rounded flex items-center justify-center text-xs" :class="blocker.resolved ? 'bg-green-900 text-green-400' : 'bg-red-900 text-red-400'" x-text="blocker.resolved ? '✓' : '!'"></span>
+                <span x-text="blocker.reason"></span>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <div x-show="selectedTask?.tags?.length > 0">
+          <span class="text-sm text-gray-500">Tags</span>
+          <div class="flex flex-wrap gap-1 mt-1">
+            <template x-for="tag in selectedTask?.tags || []" :key="tag">
+              <span class="text-xs px-2 py-0.5 rounded bg-cyan-900/30 text-cyan-400" x-text="tag"></span>
+            </template>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="border-gray-800 bg-gray-900/50 border-t px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <label class="text-sm text-gray-400">Change Status:</label>
+          <select x-model="newStatus" class="px-3 py-1.5 text-sm rounded bg-gray-800 border-gray-700 text-gray-200 border">
+            <option value="backlog">Backlog</option>
+            <option value="todo">To Do</option>
+            <option value="in_progress">In Progress</option>
+            <option value="blocked">Blocked</option>
+            <option value="review">Review</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="modalOpen = false" class="px-4 py-2 text-sm rounded bg-gray-800 hover:bg-gray-700 text-gray-300 transition">Cancel</button>
+          <button @click="updateTaskStatus()" :disabled="updating" class="px-4 py-2 text-sm rounded bg-cyan-600 hover:bg-cyan-500 text-white font-medium transition disabled:opacity-50">
+            <span x-show="!updating">Update</span>
+            <span x-show="updating">Updating...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Configuration ---
+    const CONFIG = {
+      // IMPORTANT: Set your Convex HTTP Actions URL here
+      // Find it in your Convex dashboard → Settings → URL
+      // It looks like: https://your-project-123.convex.site
+      CONVEX_URL: localStorage.getItem('CONVEX_URL') || '',
+      POLLING_INTERVAL: 5000,
+      THEME: 'dark',
+    };
+
+    const AGENTS = {
+      'claude': { label: 'Claude Code', icon: 'C', color: '#35401E' },
+      'gemini': { label: 'Gemini CLI', icon: 'G', color: '#8C8354' },
+      'codex': { label: 'Codex', icon: 'X', color: '#733E20' },
+    };
+
+    const STATUS_COLORS = {
+      backlog: 'text-gray-500',
+      todo: 'text-blue-400',
+      in_progress: 'text-cyan-400',
+      blocked: 'text-red-400',
+      review: 'text-yellow-400',
+      done: 'text-green-400',
+      archived: 'text-gray-600',
+    };
+
+    const STATUS_BADGE_CLASSES = {
+      backlog: 'bg-gray-800 text-gray-400',
+      todo: 'bg-blue-900/40 text-blue-400',
+      in_progress: 'bg-cyan-900/40 text-cyan-400',
+      blocked: 'bg-red-900/40 text-red-400',
+      review: 'bg-yellow-900/40 text-yellow-400',
+      done: 'bg-green-900/40 text-green-400',
+      archived: 'bg-gray-800 text-gray-500',
+    };
+
+    const STATUS_BAR_COLORS = {
+      todo: 'bg-blue-500',
+      in_progress: 'bg-cyan-500',
+      blocked: 'bg-red-500',
+      review: 'bg-yellow-500',
+      done: 'bg-green-500',
+    };
+
+    // --- API Client ---
+    async function api(path, options = {}) {
+      if (!CONFIG.CONVEX_URL) {
+        console.warn('CONVEX_URL not configured. Set it in localStorage or edit dashboard.html');
+        return null;
+      }
+      const url = new URL(path, CONFIG.CONVEX_URL);
+      if (options.params) {
+        Object.entries(options.params).forEach(([k, v]) => {
+          if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, v);
+        });
+      }
+      try {
+        const res = await fetch(url.toString(), {
+          method: options.method || 'GET',
+          headers: options.body ? { 'Content-Type': 'application/json' } : {},
+          body: options.body ? JSON.stringify(options.body) : undefined,
+        });
+        if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        return await res.json();
+      } catch (err) {
+        console.error('API error:', path, err);
+        return null;
+      }
+    }
+
+    // --- Alpine.js Dashboard Component ---
+    function dashboard() {
+      return {
+        // State
+        activeTab: 'kanban',
+        tasks: [],
+        kanban: {},
+        stats: { total: 0, done: 0, completionPct: 0, byStatus: {}, byPriority: {}, byCategory: {} },
+        connected: false,
+        lastUpdated: 'never',
+        pollingTimer: null,
+
+        // Modal
+        modalOpen: false,
+        selectedTask: null,
+        newStatus: '',
+        updating: false,
+
+        // Table
+        tableFilter: '',
+        tableStatusFilter: '',
+        tableAgentFilter: '',
+        tableSortKey: 'taskId',
+        tableSortDir: 'asc',
+
+        // Constants
+        AGENTS,
+
+        async init() {
+          // Check for URL in query string
+          const params = new URLSearchParams(window.location.search);
+          const urlParam = params.get('convex_url');
+          if (urlParam) {
+            CONFIG.CONVEX_URL = urlParam;
+            localStorage.setItem('CONVEX_URL', urlParam);
+          }
+
+          if (!CONFIG.CONVEX_URL) {
+            const url = prompt('Enter your Convex HTTP Actions URL (e.g. https://your-project.convex.site):');
+            if (url) {
+              CONFIG.CONVEX_URL = url.replace(/\/$/, '');
+              localStorage.setItem('CONVEX_URL', CONFIG.CONVEX_URL);
+            }
+          }
+
+          mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+          await this.fetchAll();
+          this.pollingTimer = setInterval(() => this.fetchAll(), CONFIG.POLLING_INTERVAL);
+        },
+
+        async fetchAll() {
+          const [tasksData, statsData, kanbanData] = await Promise.all([
+            api('/api/tasks/list'),
+            api('/api/tasks/stats'),
+            api('/api/tasks/kanban'),
+          ]);
+
+          if (tasksData !== null) {
+            this.tasks = Array.isArray(tasksData) ? tasksData : (tasksData.tasks || []);
+            this.connected = true;
+          } else {
+            this.connected = false;
+          }
+
+          if (statsData) {
+            this.stats = {
+              total: statsData.total ?? this.tasks.length,
+              done: statsData.done ?? this.tasks.filter(t => t.status === 'done').length,
+              completionPct: statsData.completionPct ?? (this.tasks.length ? Math.round(this.tasks.filter(t => t.status === 'done').length / this.tasks.length * 100) : 0),
+              byStatus: statsData.byStatus ?? {},
+              byPriority: statsData.byPriority ?? {},
+              byCategory: statsData.byCategory ?? {},
+              byAgent: statsData.byAgent ?? {},
+            };
+          }
+
+          if (kanbanData) {
+            this.kanban = kanbanData;
+          } else if (this.tasks.length) {
+            // Build kanban locally from tasks
+            this.kanban = {};
+            this.tasks.forEach(t => {
+              if (!this.kanban[t.status]) this.kanban[t.status] = [];
+              this.kanban[t.status].push(t);
+            });
+          }
+
+          this.lastUpdated = new Date().toLocaleTimeString();
+
+          // Re-render graph if visible
+          if (this.activeTab === 'graph') this.renderGraph();
+        },
+
+        openTask(task) {
+          this.selectedTask = { ...task };
+          this.newStatus = task.status;
+          this.modalOpen = true;
+        },
+
+        async updateTaskStatus() {
+          if (!this.selectedTask || this.newStatus === this.selectedTask.status) return;
+          this.updating = true;
+          const result = await api('/api/tasks/changeStatus', {
+            method: 'POST',
+            body: { taskId: this.selectedTask.taskId, newStatus: this.newStatus, note: 'Updated via dashboard', agent: 'dashboard' },
+          });
+          this.updating = false;
+          if (result !== null) {
+            this.modalOpen = false;
+            await this.fetchAll();
+          }
+        },
+
+        filteredTasks() {
+          let result = [...this.tasks];
+          if (this.tableFilter) {
+            const q = this.tableFilter.toLowerCase();
+            result = result.filter(t => t.taskId?.toLowerCase().includes(q) || t.title?.toLowerCase().includes(q) || t.description?.toLowerCase().includes(q));
+          }
+          if (this.tableStatusFilter) result = result.filter(t => t.status === this.tableStatusFilter);
+          if (this.tableAgentFilter) result = result.filter(t => t.agent === this.tableAgentFilter);
+
+          result.sort((a, b) => {
+            const aVal = a[this.tableSortKey] ?? '';
+            const bVal = b[this.tableSortKey] ?? '';
+            const cmp = String(aVal).localeCompare(String(bVal));
+            return this.tableSortDir === 'asc' ? cmp : -cmp;
+          });
+          return result;
+        },
+
+        sortTable(key) {
+          if (this.tableSortKey === key) {
+            this.tableSortDir = this.tableSortDir === 'asc' ? 'desc' : 'asc';
+          } else {
+            this.tableSortKey = key;
+            this.tableSortDir = 'asc';
+          }
+        },
+
+        async renderGraph() {
+          const container = document.getElementById('mermaid-graph');
+          if (!container || !this.tasks.length) return;
+
+          let diagram = 'flowchart LR\n';
+          const statusStyles = { todo: 'fill:#3b82f6,color:#fff', in_progress: 'fill:#06b6d4,color:#fff', blocked: 'fill:#ef4444,color:#fff', review: 'fill:#eab308,color:#000', done: 'fill:#22c55e,color:#fff' };
+
+          this.tasks.forEach(t => {
+            const safe = (t.title || '').replace(/"/g, "'").substring(0, 40);
+            diagram += '  ' + t.taskId + '["' + t.taskId + ': ' + safe + '"]\n';
+          });
+
+          this.tasks.forEach(t => {
+            (t.dependencies || []).forEach(dep => {
+              diagram += '  ' + dep + ' --> ' + t.taskId + '\n';
+            });
+          });
+
+          // Apply styles
+          this.tasks.forEach(t => {
+            const style = statusStyles[t.status] || 'fill:#6b7280,color:#fff';
+            diagram += '  style ' + t.taskId + ' ' + style + '\n';
+          });
+
+          try {
+            const { svg } = await mermaid.render('graph-' + Date.now(), diagram);
+            container.innerHTML = svg;
+          } catch (err) {
+            container.innerHTML = '<p class="text-red-400 text-sm">Failed to render graph: ' + err.message + '</p>';
+          }
+        },
+
+        agentTasks(agentKey) {
+          return this.tasks.filter(t => t.agent === agentKey);
+        },
+
+        agentProgress(agentKey) {
+          const at = this.agentTasks(agentKey);
+          if (!at.length) return 0;
+          return Math.round(at.filter(t => t.status === 'done').length / at.length * 100);
+        },
+
+        agentStat(agentKey, type) {
+          const at = this.agentTasks(agentKey);
+          if (type === 'total') return at.length;
+          if (type === 'active') return at.filter(t => t.status === 'in_progress').length;
+          if (type === 'done') return at.filter(t => t.status === 'done').length;
+          return 0;
+        },
+
+        agentStatusCount(agentKey, status) {
+          return this.agentTasks(agentKey).filter(t => t.status === status).length;
+        },
+
+        agentStatusPct(agentKey, status) {
+          const at = this.agentTasks(agentKey);
+          if (!at.length) return 0;
+          return Math.round(at.filter(t => t.status === status).length / at.length * 100);
+        },
+
+        statusPct(status) {
+          if (!this.stats.total) return 0;
+          return Math.round((this.stats.byStatus?.[status] ?? 0) / this.stats.total * 100);
+        },
+
+        statusColor(status) {
+          return STATUS_COLORS[status] || 'text-gray-400';
+        },
+
+        statusBadgeClass(status) {
+          return STATUS_BADGE_CLASSES[status] || '';
+        },
+
+        statusBarColor(status) {
+          return STATUS_BAR_COLORS[status] || 'bg-gray-500';
+        },
+      };
+    }
+  </script>
+</body>
+</html>

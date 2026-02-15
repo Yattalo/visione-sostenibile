@@ -14,7 +14,7 @@ import {
 const coverImages: Record<string, string> = {
   "come-mantenere-giardino-autunno":
     "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600",
-  "tendenze-giardini-2024":
+  "tendenze-giardini-2026":
     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
   "piante-pendio":
     "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",

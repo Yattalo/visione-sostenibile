@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Visione Sostenibile - Eco Landscaping</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3E5C41", // Deep Forest Green from the 'Preventivo' button
+                        secondary: "#D48166", // Rusty orange/terracotta accent color from the logo/text
+                        "primary-dark": "#2C422F",
+                        "background-light": "#FDFDF8", // Warm off-white/cream from the Visione Sostenibile background
+                        "background-dark": "#1A1C1A", // Dark charcoal for dark mode
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#262626",
+                        "text-light": "#333333",
+                        "text-dark": "#E5E5E5",
+                        "text-muted-light": "#555555",
+                        "text-muted-dark": "#A3A3A3",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        display: ["DM Serif Display", "serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=2832&auto=format&fit=crop')",
+                    }
+                },
+            },
+        };
+    </script>
+<style>html { scroll-behavior: smooth; }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .text-shadow-lg { text-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans transition-colors duration-300 antialiased">
+<nav class="fixed top-6 left-0 right-0 z-50 px-4 md:px-8 max-w-7xl mx-auto">
+<div class="bg-surface-light dark:bg-surface-dark/95 backdrop-blur shadow-lg rounded-2xl px-6 py-4 flex items-center justify-between transition-all duration-300 border border-gray-100 dark:border-gray-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-3xl">eco</span>
+<div class="flex flex-col md:flex-row md:items-baseline gap-0 md:gap-1">
+<span class="font-display text-xl md:text-2xl text-primary dark:text-white leading-none">Visione</span>
+<span class="font-display text-xl md:text-2xl text-secondary italic leading-none">Sostenibile</span>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wide uppercase text-text-muted-light dark:text-text-muted-dark">
+<a class="hover:text-primary dark:hover:text-white transition-colors" href="#">Home</a>
+<a class="hover:text-primary dark:hover:text-white transition-colors" href="#">Chi Siamo</a>
+<a class="hover:text-primary dark:hover:text-white transition-colors" href="#">Servizi</a>
+<a class="hover:text-primary dark:hover:text-white transition-colors" href="#">Blog</a>
+<a class="hover:text-primary dark:hover:text-white transition-colors" href="#">Qualità</a>
+<a class="hover:text-primary dark:hover:text-white transition-colors" href="#">Contatti</a>
+</div>
+<div class="flex items-center gap-4">
+<a class="bg-primary hover:bg-primary-dark text-white text-sm font-semibold py-3 px-6 rounded-xl transition-all shadow-md hover:shadow-lg uppercase tracking-wider hidden sm:inline-block" href="#">
+                    Preventivo
+                </a>
+<button class="lg:hidden p-2 text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<header class="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Beautiful lush modern garden path with sunlight" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOE3qsyXl1HYU5fRTW3TeEcijhspNr1XfxxzbzoJPpyo8iu7Jkhm2t-VDhK2PO6gzrMq_J5ufN6gBCZHIJyR3UnVA7GtwQXVomJlOSvb1BWrRUP1nLjk7eomTW1y2Sl3GN_rkkONdLniIaFtGh5VOlsLLO4xLul29x-srCL-FWd7xaD8FB5pdWA3NfG1PChauBff1teiGHLyQxtaFqBUadcor4a_OvSQbkoWUKFxyaos4oUTR0cUttJth7iHsHqnEudsCL4TvHK45N"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent dark:from-black/80 dark:via-black/60 dark:to-black/30"></div>
+</div>
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20">
+<div class="max-w-2xl text-white">
+<p class="text-secondary dark:text-secondary font-semibold tracking-[0.2em] mb-4 uppercase text-sm md:text-base animate-fade-in-up">
+                    Istantaneo. Semplice. Intelligente.
+                </p>
+<h1 class="font-display text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-shadow-lg">
+                    Ogni giardino è una <br/>
+<span class="italic text-secondary">storia unica</span>
+</h1>
+<p class="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed font-light max-w-lg">
+                    Dal progetto iniziale alla cura quotidiana. Trasformiamo i vostri spazi esterni in ecosistemi vivi, sostenibili e belli da vivere.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="bg-surface-light text-primary hover:bg-gray-100 font-bold py-4 px-8 rounded-xl transition-all shadow-lg text-center min-w-[160px]" href="#servizi">
+                        I Nostri Servizi
+                    </a>
+<a class="border-2 border-white text-white hover:bg-white/10 font-bold py-4 px-8 rounded-xl transition-all text-center min-w-[160px]" href="#progetti">
+                        Progetti
+                    </a>
+</div>
+</div>
+</div>
+</header>
+<section class="bg-surface-light dark:bg-surface-dark py-12 border-b border-gray-100 dark:border-gray-800">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+<div class="flex flex-col items-center text-center group">
+<span class="material-symbols-outlined text-secondary text-4xl mb-3 group-hover:scale-110 transition-transform">schedule</span>
+<h3 class="font-display text-4xl text-text-light dark:text-text-dark mb-1">20+</h3>
+<p class="text-xs uppercase tracking-widest text-text-muted-light dark:text-text-muted-dark">Anni in Biodinamica</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<span class="material-symbols-outlined text-secondary text-4xl mb-3 group-hover:scale-110 transition-transform">star</span>
+<h3 class="font-display text-4xl text-text-light dark:text-text-dark mb-1">10+</h3>
+<p class="text-xs uppercase tracking-widest text-text-muted-light dark:text-text-muted-dark">Anni di Giardinaggio</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<span class="material-symbols-outlined text-secondary text-4xl mb-3 group-hover:scale-110 transition-transform">favorite</span>
+<h3 class="font-display text-4xl text-text-light dark:text-text-dark mb-1">100%</h3>
+<p class="text-xs uppercase tracking-widest text-text-muted-light dark:text-text-muted-dark">Impatto Zero</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<span class="material-symbols-outlined text-secondary text-4xl mb-3 group-hover:scale-110 transition-transform">verified</span>
+<h3 class="font-display text-4xl text-text-light dark:text-text-dark mb-1">0</h3>
+<p class="text-xs uppercase tracking-widest text-text-muted-light dark:text-text-muted-dark">Prodotti Chimici</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 md:py-32 bg-background-light dark:bg-background-dark relative overflow-hidden">
+<div class="absolute top-0 right-0 w-full h-full pointer-events-none opacity-5 dark:opacity-[0.02]">
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+<path d="M856,634Q782,768,634,856Q486,944,328,856Q170,768,96,634Q22,500,96,366Q170,232,328,144Q486,56,634,144Q782,232,856,366Q930,500,856,634Z" fill="#3E5C41"></path>
+</svg>
+</div>
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+<div class="relative order-2 lg:order-1">
+<div class="rounded-3xl overflow-hidden shadow-2xl transform transition hover:scale-[1.01] duration-500">
+<img alt="Detailed shot of beautiful pink flowers in a maintained garden" class="w-full h-[500px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF_fhN3nSrAzfnhHrAQaNx7DxzGWie5E-z5J-UYYcTcS0M7nV_vJGETOgUvj62OjIZVcXNHBmEw-qROalTcSHF0CRJqWpwTWJhUEo4sn859PMOMMypt2pJjCDCt7242JYyXSIbeEIN6TPJsTOkYVuaFAsXU-twPb16BMsk3QbR5SAhQuItqdlMYeQKEDtoeqo05CwUhMp7tdCt013yoFJWqzWnpcz2HFmAtRg-FE9tFXbPrEMLLSO5Rk64B1yV5W0XL5RGr67ckz3B"/>
+</div>
+<div class="absolute -bottom-6 -right-6 bg-surface-light dark:bg-surface-dark p-6 rounded-2xl shadow-xl hidden md:block max-w-xs border border-gray-100 dark:border-gray-700">
+<p class="font-display text-2xl text-primary mb-2">Design Bioclimatico</p>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark">Progettiamo per il futuro del pianeta.</p>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<div class="inline-block bg-primary/10 dark:bg-primary/20 rounded-full px-4 py-1 mb-6">
+<span class="text-primary dark:text-green-400 text-xs font-bold tracking-widest uppercase">Realizzazioni</span>
+</div>
+<h2 class="font-display text-5xl md:text-6xl text-text-light dark:text-text-dark mb-6 leading-tight">
+                    Paesaggi progettati <br/>
+<span class="text-primary italic">con il pensiero</span>
+</h2>
+<p class="text-text-muted-light dark:text-text-muted-dark text-lg leading-relaxed mb-6">
+                    Siamo specializzati nella creazione di spazi esterni funzionali, sostenibili e visivamente integrati con la vostra proprietà. Concentrandoci su design pratici ed esecuzione efficiente, ci assicuriamo che ogni dettaglio supporti l'usabilità e la manutenzione a lungo termine dello spazio.
+                </p>
+<p class="text-text-muted-light dark:text-text-muted-dark text-lg leading-relaxed mb-8">
+                    Dai un'occhiata ai nostri progetti realizzati. Ogni giardino racconta una storia diversa, ma tutti condividono lo stesso denominatore comune: la passione per il verde.
+                </p>
+<a class="inline-flex items-center text-primary dark:text-white font-semibold hover:text-secondary dark:hover:text-secondary transition-colors group" href="#">
+                    Scopri di più su di noi
+                    <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<section class="bg-primary dark:bg-black/40 py-24 relative overflow-hidden" id="servizi">
+<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDo4w1M8My5uiIRBTUtnX501rEQqqS-j-1-5mqpPVv73istRtR_-HJ2YghGa3iQCKXQAtLjuPYWC033sVOy2NwT86lZ65LTaA5cxE9sqVFXo9hFxKfi8iEn4k1YtXYdapcMIOE_-jHhbr7aIZa0Gh4lghcZYAw9gy2hDBgzXd9vRqe4iR1VM6EaxfiAi4vUmiyD-kMPO2VwMXO_keH1clMfKDOMwOWrjn8SNemTulMZjZyF_3V8x3qUzNz1a0yzh4-3qg25mTAPU30n');"></div>
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="max-w-3xl mb-16">
+<div class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1 mb-6">
+<span class="text-white text-xs font-bold tracking-widest uppercase">I Nostri Servizi</span>
+</div>
+<h2 class="font-display text-4xl md:text-6xl text-white mb-6">
+                    Tre modi per <br/>
+<span class="text-secondary italic">trasformare il tuo spazio</span>
+</h2>
+<p class="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed">
+                    Dalla progettazione iniziale alla cura quotidiana, vi accompagniamo in ogni fase del percorso. Ogni servizio è pensato per creare risultati straordinari.
+                </p>
+<div class="mt-8">
+<a class="inline-flex items-center justify-center px-8 py-3 border border-white/30 rounded-full text-white hover:bg-white hover:text-primary transition-all duration-300 text-sm font-bold tracking-wider uppercase" href="#">
+                        Tutti i servizi <span class="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="hidden lg:block">
+</div>
+<div class="flex flex-col gap-6 -mt-0 lg:-mt-48">
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer">
+<div class="flex items-start gap-6">
+<div class="bg-white/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">design_services</span>
+</div>
+<div>
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-2 block">Giardini e Orti Sostenibili</span>
+<h3 class="font-display text-2xl text-white mb-3 group-hover:text-secondary transition-colors">Progettazione</h3>
+<p class="text-gray-300 leading-relaxed">
+                                    Progetti su misura a impatto zero per il tuo spazio verde. Analizziamo il suolo e l'esposizione per garantire la riuscita.
+                                </p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer">
+<div class="flex items-start gap-6">
+<div class="bg-secondary p-4 rounded-xl text-white shadow-lg group-hover:bg-white group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-3xl">forest</span>
+</div>
+<div>
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-2 block">Chiavi in mano</span>
+<h3 class="font-display text-2xl text-white mb-3 group-hover:text-secondary transition-colors">Realizzazione</h3>
+<p class="text-gray-300 leading-relaxed">
+                                    Dalla progettazione alla posa, un servizio completo. Utilizziamo materiali locali e tecniche antiche per risultati duraturi.
+                                </p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer">
+<div class="flex items-start gap-6">
+<div class="bg-white/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">grass</span>
+</div>
+<div>
+<span class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-2 block">Pratiche Sostenibili</span>
+<h3 class="font-display text-2xl text-white mb-3 group-hover:text-secondary transition-colors">Manutenzione</h3>
+<p class="text-gray-300 leading-relaxed">
+                                    Cura del verde con metodi naturali e biodinamici. Niente chimica, solo biologia per nutrire la tua terra.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</body></html>
