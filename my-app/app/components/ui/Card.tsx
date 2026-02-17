@@ -24,8 +24,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       variant = "default",
       hover = false,
       children,
-      whileHover = hover ? { y: -6 } : undefined,
-      transition = { type: "spring", stiffness: 300, damping: 20 },
+      whileHover = hover ? { y: -4 } : undefined,
+      transition = { duration: 0.4, ease: [0.34, 1.56, 0.64, 1] },
       ...props
     },
     ref
@@ -39,6 +39,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           "relative rounded-2xl p-6",
           "transition-all duration-300",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-400",
+          hover && "hover-germoglio",
           cardVariants[variant],
           className
         )}

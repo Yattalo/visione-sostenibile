@@ -312,6 +312,81 @@ h4, h5, h6 {
   opacity: 0.5;
 }
 
+/* ── F4: Paper Canvas Texture ────────────────── */
+.bg-paper-canvas {
+  background-color: var(--color-paper-100);
+  position: relative;
+}
+
+.bg-paper-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-paper-canvas > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Print Utilities ────────────────── */
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: block;
+  }
+  .no-print {
+    display: none;
+  }
+}
+
+/* ── BMAD Z-Index System ────────────────── */
+.z-header { z-index: 100; }
+.z-modal  { z-index: 200; }
+.z-tooltip { z-index: 300; }
+
+/* ── F6: Germoglio (Sprout) Hover Effects ────────────────── */
+
+/* Card hover: lift + Leaf Green shadow */
+.hover-germoglio {
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-germoglio:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px -4px rgba(34, 88, 44, 0.10);
+}
+
+/* Sun Accent button: scale + inner glow */
+.hover-sun {
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-sun:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 20px rgba(234, 184, 49, 0.3),
+              0 4px 16px -2px rgba(234, 184, 49, 0.25);
+}
+
+/* Leaf border accent on hover */
+.hover-leaf-border {
+  transition: border-color 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-color: transparent;
+}
+
+.hover-leaf-border:hover {
+  border-color: var(--color-leaf-700);
+}
+
 ::selection {
   background: var(--color-sun-200);
   color: var(--color-forest-950);

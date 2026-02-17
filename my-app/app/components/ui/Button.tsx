@@ -44,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={isDisabled}
         aria-busy={loading}
-        whileHover={isDisabled ? undefined : { scale: 1.01 }}
+        whileHover={isDisabled ? undefined : { scale: variant === "primary" ? 1.05 : 1.01 }}
         whileTap={isDisabled ? undefined : { scale: 0.98 }}
         className={cn(
           "relative inline-flex items-center justify-center gap-2 rounded-full",
@@ -53,6 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-400",
           "focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50",
           "disabled:opacity-50 disabled:cursor-not-allowed",
+          variant === "primary" && "hover-sun",
           buttonVariants[variant],
           buttonSizes[size],
           className
