@@ -3,17 +3,18 @@ import "./globals.css";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { Playfair_Display, Quicksand } from "next/font/google";
+import localFont from "next/font/local";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  variable: "--font-quicksand",
+const walkway = localFont({
+  src: [
+    { path: "../public/walkway/Walkway SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../public/walkway/Walkway Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/walkway/Walkway Black.ttf", weight: "900", style: "normal" },
+    { path: "../public/walkway/Walkway Oblique.ttf", weight: "400", style: "italic" },
+    { path: "../public/walkway/Walkway Oblique Bold.ttf", weight: "700", style: "italic" },
+    { path: "../public/walkway/Walkway Oblique Black.ttf", weight: "900", style: "italic" },
+  ],
+  variable: "--font-walkway",
   display: "swap",
 });
 
@@ -22,7 +23,7 @@ export const dynamic = "force-dynamic";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#4b562e",
+  themeColor: "#0B1E0E",
 };
 
 export const metadata: Metadata = {
@@ -37,7 +38,8 @@ export const metadata: Metadata = {
     "progettazione paesaggistica",
     "design verde",
     "realizzazione giardini",
-    "Roma",
+    "Torino",
+    "Piemonte",
   ],
   openGraph: {
     type: "website",
@@ -60,7 +62,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" suppressHydrationWarning>
-      <body className={`${playfair.variable} ${quicksand.variable} antialiased min-h-screen flex flex-col bg-cream-gradient`}>
+      <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
         <ConvexClientProvider>
           <Navbar />
           <main className="flex-grow">{children}</main>

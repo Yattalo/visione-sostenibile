@@ -2,9 +2,10 @@
 @plugin "@tailwindcss/typography";
 
 @theme inline {
-  --font-display: var(--font-playfair), Georgia, serif;
-  --font-sans: var(--font-quicksand), system-ui, sans-serif;
-  --font-body: var(--font-playfair), Georgia, serif;
+  /* Walkway Family — all font tokens mapped for backward compat */
+  --font-display: var(--font-walkway), system-ui, sans-serif;
+  --font-sans: var(--font-walkway), system-ui, sans-serif;
+  --font-body: var(--font-walkway), system-ui, sans-serif;
 
   --color-cream-50: #fdfcf8;
   --color-cream-100: #f9f7f0;
@@ -54,6 +55,60 @@
   --color-charcoal-900: #1a1a1a;
   --color-charcoal-950: #0f0f0f;
 
+  /* ── BMAD High-Contrast Nature Palette ────────────────── */
+
+  /* Paper Canvas — warm neutral base (#F2F0EC) */
+  --color-paper-50: #FAF9F7;
+  --color-paper-100: #F2F0EC;
+  --color-paper-200: #E8E5DF;
+  --color-paper-300: #D4CFC6;
+  --color-paper-400: #B8B2A6;
+  --color-paper-500: #9C958A;
+  --color-paper-600: #7D776C;
+  --color-paper-700: #615C53;
+  --color-paper-800: #48443C;
+  --color-paper-900: #31302A;
+  --color-paper-950: #1D1C18;
+
+  /* Deep Forest — authority, bold text (#0B1E0E) */
+  --color-forest-50: #EEFAEF;
+  --color-forest-100: #D8F3DA;
+  --color-forest-200: #B4E5B8;
+  --color-forest-300: #84D18C;
+  --color-forest-400: #58B863;
+  --color-forest-500: #3A9A47;
+  --color-forest-600: #2B7C36;
+  --color-forest-700: #22612C;
+  --color-forest-800: #1B4D23;
+  --color-forest-900: #153D1C;
+  --color-forest-950: #0B1E0E;
+
+  /* Leaf Green — botanical accents (#22582C base, #4FA45A bright) */
+  --color-leaf-50: #F0FAF2;
+  --color-leaf-100: #DCF2E0;
+  --color-leaf-200: #BCE5C3;
+  --color-leaf-300: #90D19B;
+  --color-leaf-400: #65B873;
+  --color-leaf-500: #4FA45A;
+  --color-leaf-600: #3A8744;
+  --color-leaf-700: #22582C;
+  --color-leaf-800: #1F4A27;
+  --color-leaf-900: #1A3D22;
+  --color-leaf-950: #0E2414;
+
+  /* Sun Accent — CTA only, "se è giallo deve cliccare" (#EAB831) */
+  --color-sun-50: #FEFCEE;
+  --color-sun-100: #FDF6CE;
+  --color-sun-200: #FBED9E;
+  --color-sun-300: #F7DC65;
+  --color-sun-400: #EAB831;
+  --color-sun-500: #D49E1B;
+  --color-sun-600: #B57B13;
+  --color-sun-700: #915B13;
+  --color-sun-800: #784917;
+  --color-sun-900: #643D19;
+  --color-sun-950: #3A200A;
+
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
   --shadow-medium: 0 8px 30px -4px rgba(0, 0, 0, 0.12);
   --shadow-deep: 0 16px 50px -8px rgba(0, 0, 0, 0.16);
@@ -82,15 +137,18 @@
 }
 
 :root {
-  --background: var(--color-cream-50);
-  --foreground: var(--color-charcoal-800);
-  --card: #ffffff;
-  --card-foreground: var(--color-charcoal-800);
-  --muted: var(--color-cream-200);
-  --muted-foreground: var(--color-charcoal-500);
-  --border: var(--color-cream-300);
-  --accent: var(--color-terracotta-500);
-  --accent-foreground: #ffffff;
+  /* Semantic tokens — BMAD High-Contrast Nature */
+  --background: var(--color-paper-100);
+  --foreground: var(--color-forest-950);
+  --card: var(--color-paper-50);
+  --card-foreground: var(--color-forest-950);
+  --muted: var(--color-paper-200);
+  --muted-foreground: var(--color-paper-600);
+  --border: var(--color-paper-300);
+  --accent: var(--color-sun-400);
+  --accent-foreground: var(--color-forest-950);
+  --primary: var(--color-leaf-700);
+  --primary-foreground: var(--color-paper-50);
 }
 
 html {
@@ -100,19 +158,42 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), Georgia, serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 400;
+/* BMAD Typography Scale — Walkway Family */
+h1 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
 }
 
 .font-sans {
@@ -120,7 +201,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .font-body {
-  font-family: var(--font-body), Georgia, serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* BMAD Micro-copy: Walkway Oblique Black, 12px, ALL CAPS */
+.text-micro {
+  font-style: italic;
+  font-weight: 900;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* BMAD Enfasi: Walkway Oblique for forward-looking emphasis */
+.text-emphasis {
+  font-style: italic;
+  font-weight: 400;
 }
 
 .text-balance {
@@ -151,6 +247,31 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-terracotta-gradient {
   background: linear-gradient(135deg, var(--color-terracotta-500), var(--color-terracotta-700));
+}
+
+/* ── BMAD Gradient Utilities ────────────────── */
+
+.bg-paper-gradient {
+  background: linear-gradient(180deg, var(--color-paper-50) 0%, var(--color-paper-100) 100%);
+}
+
+.bg-forest-gradient {
+  background: linear-gradient(135deg, var(--color-forest-900), var(--color-forest-950));
+}
+
+.bg-leaf-gradient {
+  background: linear-gradient(135deg, var(--color-leaf-600), var(--color-leaf-800));
+}
+
+.bg-sun-gradient {
+  background: linear-gradient(135deg, var(--color-sun-300), var(--color-sun-500));
+}
+
+.text-gradient-nature {
+  background: linear-gradient(135deg, var(--color-leaf-700), var(--color-forest-800));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .bg-organic-noise {
@@ -192,8 +313,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::selection {
-  background: var(--color-terracotta-200);
-  color: var(--color-terracotta-900);
+  background: var(--color-sun-200);
+  color: var(--color-forest-950);
 }
 
 ::-webkit-scrollbar {
@@ -201,14 +322,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-cream-100);
+  background: var(--color-paper-200);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-moss-400);
+  background: var(--color-leaf-500);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-moss-500);
+  background: var(--color-leaf-600);
 }

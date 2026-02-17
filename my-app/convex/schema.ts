@@ -161,4 +161,27 @@ export default defineSchema({
     updatedAt: v.number(),
   })
     .index("by_key", ["key"]),
+
+  // ── Lead Magnet / Micro-funnel ──
+  leads: defineTable({
+    quizAnswers: v.array(
+      v.object({
+        questionId: v.string(),
+        answer: v.string(),
+        score: v.number(),
+      })
+    ),
+    totalScore: v.number(),
+    scorecardId: v.string(),
+    name: v.string(),
+    email: v.string(),
+    phone: v.optional(v.string()),
+    createdAt: v.number(),
+    isContacted: v.boolean(),
+    notes: v.optional(v.string()),
+  })
+    .index("by_scorecardId", ["scorecardId"])
+    .index("by_email", ["email"])
+    .index("by_date", ["createdAt"])
+    .index("by_contacted", ["isContacted", "createdAt"]),
 });
