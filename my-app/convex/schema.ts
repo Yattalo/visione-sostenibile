@@ -1,7 +1,12 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { taskSystemTables } from "./taskSystem/schema";
 
 export default defineSchema({
+  // Task System (UCA orchestration layer)
+  ...taskSystemTables,
+
+  // ── Visione Sostenibile domain tables ──
   pages: defineTable({
     slug: v.string(),
     title: v.string(),
