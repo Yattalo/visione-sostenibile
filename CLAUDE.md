@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-"Visione Sostenibile" — showcase website for an Italian gardening company (Rome area). All UI copy is in Italian.
+"Visione Sostenibile" — showcase website for an Italian gardening company based in **Torino, Piemonte** (projects in Piemonte/Lombardia). Founded by Andrea Giordano. Biodinamico approach. All UI copy is in Italian.
+
+**Evolution status**: The site is live and functional. Current phase is **BMAD-guided evolution** (not a rebuild) toward a premium lead-acquisition platform. See `my-app/docs/foundation_docs/CLAUDE.md` for the full BMAD vision.
 
 ## Commands
 
@@ -25,6 +27,12 @@ vercel --prod         # Frontend to Vercel (mil1 region)
 
 # Database
 npx convex dashboard  # Open Convex web dashboard
+
+# Task System (UCA Orchestration)
+npx convex run taskSystem/tasks:list '{}'
+npx convex run taskSystem/orchestrator:getStats '{}'
+npx convex run taskSystem/orchestrator:getKanban '{}'
+npx convex run taskSystem/orchestrator:updateStatus '{"taskId":"F1","newStatus":"in_progress","agent":"claude"}'
 ```
 
 ## Architecture
@@ -37,31 +45,50 @@ npx convex dashboard  # Open Convex web dashboard
 
 ### Data Layer — Dual Strategy
 
-- **Convex** (`convex/`): Primary backend. Schema in `convex/schema.ts` with 7 tables: `pages`, `services`, `gallery`, `reviews`, `contactSubmissions`, `blogPosts`, `settings`. Each module (e.g. `convex/services.ts`) exports queries and mutations.
-- **Static fallback** (`app/lib/static-data.ts`, `app/lib/blog.ts`): Hardcoded data used when Convex is not connected. Blog content currently lives entirely in `app/lib/blog.ts` as static data.
+- **Convex** (`convex/`): Primary backend. Schema in `convex/schema.ts` with **9 domain tables**: `pages`, `services`, `gallery`, `reviews`, `contactSubmissions`, `blogPosts`, `projects`, `shareEvents`, `settings`. Plus task system tables via `...taskSystemTables`.
+- **Static fallback** (`app/lib/static-data.ts`, `app/lib/blog.ts`, `app/lib/progetti-data.ts`): Hardcoded data used when Convex is not connected. **Migration target**: move blog and projects data entirely to Convex (tables exist, data doesn't yet).
 
 Seed initial services via Convex Dashboard: call `api.services.seed()`.
 
 ### Frontend Structure
 
-- `app/` — Next.js App Router pages. Routes map to Italian paths (`/servizi`, `/chi-siamo`, `/contatti`, `/galleria`, `/recensioni`, `/privacy`, `/qualita`, `/blog`).
-- `app/admin/` — Admin panel with its own layout (sidebar + header). Routes: `/admin/services`, `/admin/contacts`, `/admin/reviews`, `/admin/blog`.
-- `app/components/` — Shared components: `Navbar`, `Footer`, `LoadingState`, `animations.tsx`.
-- `app/components/ui/` — Primitives: `Button`, `Card`, `Badge`, `Input`, `Modal`, `Skeleton`.
-- `app/template.tsx` — Framer Motion page transitions (fade + slide) wrapping every route.
-- `app/ConvexClientProvider.tsx` — Client-side Convex provider. Requires `NEXT_PUBLIC_CONVEX_URL` env var.
+- `app/` — Next.js App Router pages.
+- `app/admin/` — Admin panel with its own layout (sidebar + header). **No auth implemented yet.**
+
+#### Public Routes (12)
+`/` (homepage), `/chi-siamo`, `/servizi`, `/servizi/[slug]`, `/progetti`, `/progetti/[slug]`, `/blog`, `/blog/[slug]`, `/contatti`, `/qualita`, `/privacy`, `/termini`
+
+#### Admin Routes (7)
+`/admin` (dashboard), `/admin/services`, `/admin/gallery`, `/admin/contacts`, `/admin/reviews`, `/admin/blog`, `/admin/settings`
+
+### Component Library
+
+- `app/components/` — Shared: `Navbar`, `Footer`, `LoadingState`, `ServiceCard`, `ReviewsWidget`, `PhilosophySection`, `TiltedCard`, `animations.tsx`.
+- `app/components/ui/` — Primitives: `Button` (4 variants), `Card` (4 variants), `Badge` (8 variants), `Input`, `Modal` (Portal), `Skeleton` (6 variants).
+- `app/template.tsx` — Framer Motion page transitions (fade + slide).
+- `app/ConvexClientProvider.tsx` — Client-side Convex provider. Requires `NEXT_PUBLIC_CONVEX_URL`.
 
 ### Design System
 
-Tailwind v4 with `@theme` tokens in `globals.css`. Four custom color palettes:
-- **cream** (warm beige backgrounds)
-- **moss** (green accents, brand color `#4b562e`)
-- **terracotta** (warm accent/CTA)
-- **charcoal** (text/dark)
+Tailwind v4 with `@theme` tokens in `globals.css`.
+
+**Current palette** (in code):
+- **cream** (warm beige backgrounds, base `#fdfcf8`)
+- **moss** (green accents, brand `#4b562e`)
+- **terracotta** (warm accent/CTA `#cb6a56`)
+- **charcoal** (text/dark `#0f0f0f`)
+
+**Target palette** (BMAD "High-Contrast Nature"):
+- **Paper Canvas** `#F2F0EC` — base with noise texture
+- **Deep Forest** `#0B1E0E` — authority, bold typography
+- **Leaf Green** `#22582C` / `#4FA45A` — botanical accents
+- **Sun Accent** `#EAB831` — CTA only (if yellow, user must click)
+
+**Current typography**: `Playfair Display` (display/body via `--font-display`, `--font-body`) + `Quicksand` (sans via `--font-sans`).
+
+**Target typography** (BMAD): `Walkway Family` (font files in `public/walkway/`).
 
 Custom CSS utilities: `.bg-cream-gradient`, `.bg-moss-gradient`, `.text-gradient-warm`, `.text-gradient-earth`, `.bg-organic-noise`.
-
-Typography: `Cormorant Garamond` (display/body via `--font-display`, `--font-body`) and `Quicksand` (sans via `--font-sans`). Use `font-display`, `font-sans`, `font-body` classes.
 
 `cn()` helper in `app/lib/utils.ts` (clsx + tailwind-merge).
 
@@ -71,8 +98,18 @@ Typography: `Cormorant Garamond` (display/body via `--font-display`, `--font-bod
 
 ### Key Conventions
 
-- Dynamic routes use slugs (e.g. `/servizi/[slug]`, `/blog/[slug]`)
+- Dynamic routes use slugs (e.g. `/servizi/[slug]`, `/blog/[slug]`, `/progetti/[slug]`)
 - Convex queries use `withIndex()` for filtered reads (never `.filter()` alone on large tables)
 - Admin mutations use upsert pattern (check existing by slug, patch or insert)
-- Images served from Unsplash (`images.unsplash.com` allowed in `next.config.ts`)
+- Images served from Unsplash (`images.unsplash.com` allowed in `next.config.ts`) + local `/public/images/`, `/public/progetti/`
 - Icons from `lucide-react`
+- Mobile-first: readability must not depend on hover
+
+### Task System
+
+`@yattalo/task-system` v0.4.0 for UCA orchestration. Schema integrated in `convex/schema.ts`. Task definitions in `convex/taskSystem/taskDefinitions.ts`. Dashboard: `open dashboard.html`.
+
+## BMAD Evolution Reference
+
+For full BMAD context (palette, typography, micro-funnel, scorecard, roadmap), see:
+`my-app/docs/foundation_docs/CLAUDE.md`
