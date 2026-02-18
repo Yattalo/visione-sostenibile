@@ -193,4 +193,20 @@ export default defineSchema({
     .index("by_email", ["email"])
     .index("by_date", ["createdAt"])
     .index("by_contacted", ["isContacted", "createdAt"]),
+
+  quizSubmissions: defineTable({
+    answers: v.array(
+      v.object({
+        questionId: v.string(),
+        answer: v.string(),
+      })
+    ),
+    resultProfile: v.string(),
+    email: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    source: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_date", ["createdAt"])
+    .index("by_profile", ["resultProfile"]),
 });
