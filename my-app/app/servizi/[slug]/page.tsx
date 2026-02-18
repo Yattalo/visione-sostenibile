@@ -58,11 +58,11 @@ const serviceIconMap: Record<string, ElementType> = {
 };
 
 const serviceAccentMap: Record<string, string> = {
-  "progettazione-giardini-orti": "from-moss-600 to-moss-800",
-  "realizzazione-chiavi-in-mano": "from-terracotta-500 to-terracotta-700",
-  "manutenzione-sostenibile": "from-moss-500 to-terracotta-500",
-  "potatura-professionale": "from-terracotta-400 to-moss-700",
-  "gestione-verde-biodinamica": "from-moss-700 to-moss-900",
+  "progettazione-giardini-orti": "from-leaf-600 to-forest-900",
+  "realizzazione-chiavi-in-mano": "from-leaf-500 to-leaf-700",
+  "manutenzione-sostenibile": "from-leaf-500 to-leaf-500",
+  "potatura-professionale": "from-leaf-400 to-leaf-700",
+  "gestione-verde-biodinamica": "from-leaf-700 to-forest-950",
 };
 
 const serviceImageMap: Record<string, string> = {
@@ -361,18 +361,18 @@ function TemplateOne({
             />
           </div>
 
-          <div className="bg-white rounded-2xl border border-cream-200 p-7 lg:p-9">
-            <h2 className="font-display text-3xl text-charcoal-800 mb-4">Panoramica servizio</h2>
-            <p className="text-lg text-charcoal-700 leading-relaxed mb-6">{content.intro}</p>
-            <p className="text-charcoal-600 leading-relaxed">{content.body}</p>
+          <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
+            <h2 className="font-display text-3xl text-forest-950 mb-4">Panoramica servizio</h2>
+            <p className="text-lg text-forest-900 leading-relaxed mb-6">{content.intro}</p>
+            <p className="text-forest-800 leading-relaxed">{content.body}</p>
           </div>
 
-          <div className="bg-cream-100 rounded-2xl p-7 lg:p-9">
-            <h3 className="font-display text-2xl text-charcoal-800 mb-5">Cosa include</h3>
+          <div className="bg-paper-100 rounded-2xl p-7 lg:p-9">
+            <h3 className="font-display text-2xl text-forest-950 mb-5">Cosa include</h3>
             <ul className="space-y-3">
               {content.deliverables.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-charcoal-700">
-                  <Check className="w-4 h-4 mt-1 text-moss-700 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-forest-900">
+                  <Check className="w-4 h-4 mt-1 text-leaf-700 shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -381,9 +381,9 @@ function TemplateOne({
         </article>
 
         <aside className="space-y-6">
-          <div className="bg-white rounded-2xl border border-cream-200 p-7">
-            <h3 className="font-display text-2xl text-charcoal-800 mb-3">Richiedi consulenza</h3>
-            <p className="text-charcoal-600 mb-5">
+          <div className="bg-white rounded-2xl border border-paper-300 p-7">
+            <h3 className="font-display text-2xl text-forest-950 mb-3">Richiedi consulenza</h3>
+            <p className="text-forest-800 mb-5">
               Parliamo del tuo obiettivo e definiamo il percorso migliore per {service.title.toLowerCase()}.
             </p>
             <Link href="/contatti" className="block mb-5">
@@ -392,7 +392,7 @@ function TemplateOne({
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <div className="space-y-3 text-sm text-charcoal-600">
+            <div className="space-y-3 text-sm text-forest-800">
               <p className="flex items-center gap-2">
                 <Phone className="w-4 h-4" /> +39 06 1234567
               </p>
@@ -405,24 +405,24 @@ function TemplateOne({
             </div>
           </div>
 
-          <div className="bg-moss-900 rounded-2xl p-7 text-cream-100">
+          <div className="bg-forest-950 rounded-2xl p-7 text-paper-100">
             <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${gradientClass} mb-4`} />
             <h3 className="font-display text-xl mb-3">Video del servizio</h3>
             <video controls className="w-full rounded-xl mb-5" preload="metadata">
               <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
             </video>
-            <Button className="w-full bg-terracotta-500 hover:bg-terracotta-600 border-0" onClick={onShare}>
+            <Button className="w-full bg-sun-400 hover:bg-sun-500 border-0" onClick={onShare}>
               <MessageCircle className="mr-2 w-4 h-4" />
               Condividi su WhatsApp
             </Button>
             {shareState === "success" && (
-              <p className="mt-3 text-sm text-cream-200 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-moss-300" />
+              <p className="mt-3 text-sm text-paper-300 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-leaf-300" />
                 WhatsApp aperto. Scegli un contatto.
               </p>
             )}
             {shareState === "error" && (
-              <p className="mt-3 text-sm text-terracotta-200">Non siamo riusciti ad aprire WhatsApp. Riprova.</p>
+              <p className="mt-3 text-sm text-leaf-300">Non siamo riusciti ad aprire WhatsApp. Riprova.</p>
             )}
           </div>
         </aside>
@@ -442,12 +442,12 @@ function TemplateTwo({
 }) {
   return (
     <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-18 space-y-8">
-      <div className="bg-white rounded-2xl border border-cream-200 p-7 lg:p-9">
-        <h2 className="font-display text-3xl text-charcoal-800 mb-4">Processo in 4 fasi</h2>
+      <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
+        <h2 className="font-display text-3xl text-forest-950 mb-4">Processo in 4 fasi</h2>
         <ol className="space-y-4">
           {content.process.map((step, index) => (
-            <li key={step} className="flex items-start gap-3 text-charcoal-700 text-lg">
-              <span className="text-terracotta-600 font-semibold mt-0.5">{index + 1}.</span>
+            <li key={step} className="flex items-start gap-3 text-forest-900 text-lg">
+              <span className="text-leaf-600 font-semibold mt-0.5">{index + 1}.</span>
               <span>{step}</span>
             </li>
           ))}
@@ -456,45 +456,45 @@ function TemplateTwo({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {content.results.map((result) => (
-          <div key={result} className="bg-cream-100 rounded-2xl p-6">
-            <h3 className="font-display text-xl text-charcoal-800 mb-3">Risultato atteso</h3>
-            <p className="text-charcoal-600">{result}</p>
+          <div key={result} className="bg-paper-100 rounded-2xl p-6">
+            <h3 className="font-display text-xl text-forest-950 mb-3">Risultato atteso</h3>
+            <p className="text-forest-800">{result}</p>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white rounded-2xl border border-cream-200 p-7 lg:p-9">
-          <h3 className="font-display text-2xl text-charcoal-800 mb-4">Elementi inclusi</h3>
+        <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
+          <h3 className="font-display text-2xl text-forest-950 mb-4">Elementi inclusi</h3>
           <ul className="space-y-3">
             {content.deliverables.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-charcoal-700">
-                <Check className="w-4 h-4 mt-1 text-moss-700 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-forest-900">
+                <Check className="w-4 h-4 mt-1 text-leaf-700 shrink-0" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-charcoal-900 rounded-2xl p-7 lg:p-9 text-cream-100">
+        <div className="bg-forest-950 rounded-2xl p-7 lg:p-9 text-paper-100">
           <h3 className="font-display text-2xl mb-4">Spazio video</h3>
-          <p className="text-cream-200/85 mb-4">
+          <p className="text-paper-300/85 mb-4">
             Panoramica operativa del servizio, utile per capire metodo e risultato.
           </p>
           <video controls className="w-full rounded-xl mb-5" preload="metadata">
             <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
           </video>
-          <Button className="w-full bg-terracotta-500 hover:bg-terracotta-600 border-0" onClick={onShare}>
+          <Button className="w-full bg-sun-400 hover:bg-sun-500 border-0" onClick={onShare}>
             <MessageCircle className="mr-2 w-4 h-4" />
             Condividi su WhatsApp
           </Button>
           {shareState === "success" && (
-            <p className="mt-3 text-sm text-cream-200 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-moss-300" />
+            <p className="mt-3 text-sm text-paper-300 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-leaf-300" />
               Link aperto su WhatsApp.
             </p>
           )}
-          {shareState === "error" && <p className="mt-3 text-sm text-terracotta-200">Riprova tra poco.</p>}
+          {shareState === "error" && <p className="mt-3 text-sm text-leaf-300">Riprova tra poco.</p>}
         </div>
       </div>
     </section>
@@ -513,23 +513,23 @@ function TemplateThree({
   return (
     <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-18 space-y-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white rounded-2xl border border-cream-200 p-7 lg:p-9">
-          <h2 className="font-display text-3xl text-charcoal-800 mb-4">Quando scegliere questo servizio</h2>
+        <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
+          <h2 className="font-display text-3xl text-forest-950 mb-4">Quando scegliere questo servizio</h2>
           <ul className="space-y-3">
             {content.whenToChoose.map((item) => (
-              <li key={item} className="flex gap-3 text-charcoal-700">
-                <Check className="w-4 h-4 mt-1 text-moss-700 shrink-0" />
+              <li key={item} className="flex gap-3 text-forest-900">
+                <Check className="w-4 h-4 mt-1 text-leaf-700 shrink-0" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-cream-100 rounded-2xl p-7 lg:p-9">
-          <h3 className="font-display text-2xl text-charcoal-800 mb-4">Benefici principali</h3>
+        <div className="bg-paper-100 rounded-2xl p-7 lg:p-9">
+          <h3 className="font-display text-2xl text-forest-950 mb-4">Benefici principali</h3>
           <ul className="space-y-3">
             {content.results.map((item) => (
-              <li key={item} className="text-charcoal-700">
+              <li key={item} className="text-forest-900">
                 {item}
               </li>
             ))}
@@ -537,52 +537,52 @@ function TemplateThree({
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-cream-200 p-7 lg:p-9 overflow-x-auto">
-        <h3 className="font-display text-2xl text-charcoal-800 mb-5">Confronto rapido</h3>
+      <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9 overflow-x-auto">
+        <h3 className="font-display text-2xl text-forest-950 mb-5">Confronto rapido</h3>
         <table className="w-full min-w-[620px] text-left border-collapse">
           <thead>
-            <tr className="border-b border-cream-200">
-              <th className="py-3 pr-4 font-display text-charcoal-800">Aspetto</th>
-              <th className="py-3 pr-4 font-display text-charcoal-800">Gestione autonoma</th>
-              <th className="py-3 font-display text-charcoal-800">Con servizio professionale</th>
+            <tr className="border-b border-paper-300">
+              <th className="py-3 pr-4 font-display text-forest-950">Aspetto</th>
+              <th className="py-3 pr-4 font-display text-forest-950">Gestione autonoma</th>
+              <th className="py-3 font-display text-forest-950">Con servizio professionale</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-cream-200">
+            <tr className="border-b border-paper-300">
               <td className="py-3 pr-4">Pianificazione</td>
-              <td className="py-3 pr-4 text-charcoal-600">Spesso frammentata</td>
-              <td className="py-3 text-charcoal-600">Roadmap chiara e progressiva</td>
+              <td className="py-3 pr-4 text-forest-800">Spesso frammentata</td>
+              <td className="py-3 text-forest-800">Roadmap chiara e progressiva</td>
             </tr>
-            <tr className="border-b border-cream-200">
+            <tr className="border-b border-paper-300">
               <td className="py-3 pr-4">Controllo qualita</td>
-              <td className="py-3 pr-4 text-charcoal-600">Variabile</td>
-              <td className="py-3 text-charcoal-600">Standard operativi costanti</td>
+              <td className="py-3 pr-4 text-forest-800">Variabile</td>
+              <td className="py-3 text-forest-800">Standard operativi costanti</td>
             </tr>
             <tr>
               <td className="py-3 pr-4">Continuita nel tempo</td>
-              <td className="py-3 pr-4 text-charcoal-600">Dipende dalla disponibilita</td>
-              <td className="py-3 text-charcoal-600">Programmazione periodica affidabile</td>
+              <td className="py-3 pr-4 text-forest-800">Dipende dalla disponibilita</td>
+              <td className="py-3 text-forest-800">Programmazione periodica affidabile</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div className="bg-moss-900 rounded-2xl p-7 lg:p-9 text-cream-100">
+      <div className="bg-forest-950 rounded-2xl p-7 lg:p-9 text-paper-100">
         <h3 className="font-display text-2xl mb-4">Video e condivisione</h3>
         <video controls className="w-full rounded-xl mb-5" preload="metadata">
           <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
         </video>
-        <Button className="bg-terracotta-500 hover:bg-terracotta-600 border-0" onClick={onShare}>
+        <Button className="bg-sun-400 hover:bg-sun-500 border-0" onClick={onShare}>
           <MessageCircle className="mr-2 w-4 h-4" />
           Condividi su WhatsApp
         </Button>
         {shareState === "success" && (
-          <p className="mt-3 text-sm text-cream-200 flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-moss-300" />
+          <p className="mt-3 text-sm text-paper-300 flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-leaf-300" />
             WhatsApp aperto correttamente.
           </p>
         )}
-        {shareState === "error" && <p className="mt-3 text-sm text-terracotta-200">Condivisione non riuscita.</p>}
+        {shareState === "error" && <p className="mt-3 text-sm text-leaf-300">Condivisione non riuscita.</p>}
       </div>
     </section>
   );
@@ -619,13 +619,13 @@ export default function ServiceDetailPage() {
 
   if (!service) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream-50">
+      <div className="min-h-screen flex items-center justify-center bg-paper-50">
         <div className="text-center max-w-md px-6">
-          <div className="w-20 h-20 rounded-full bg-cream-200 flex items-center justify-center mx-auto mb-6">
-            <Sprout className="w-10 h-10 text-charcoal-400" />
+          <div className="w-20 h-20 rounded-full bg-paper-300 flex items-center justify-center mx-auto mb-6">
+            <Sprout className="w-10 h-10 text-forest-800/60" />
           </div>
-          <h1 className="font-display text-3xl text-charcoal-800 mb-4">Servizio non trovato</h1>
-          <p className="font-body text-charcoal-500 mb-8">
+          <h1 className="font-display text-3xl text-forest-950 mb-4">Servizio non trovato</h1>
+          <p className="font-body text-forest-800/70 mb-8">
             Il servizio che stai cercando non esiste o potrebbe essere stato rimosso.
           </p>
           <Link href="/servizi">
@@ -641,7 +641,7 @@ export default function ServiceDetailPage() {
 
   const template = resolveTemplate(searchParams.get("template"), serviceIndex);
   const IconComponent = serviceIconMap[service.slug] || Sprout;
-  const gradientClass = serviceAccentMap[service.slug] || "from-moss-600 to-moss-800";
+  const gradientClass = serviceAccentMap[service.slug] || "from-leaf-600 to-forest-900";
   const imageUrl =
     serviceImageMap[service.slug] ||
     "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200";
@@ -732,7 +732,7 @@ export default function ServiceDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-paper-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
@@ -742,26 +742,26 @@ export default function ServiceDetailPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <section className="relative overflow-hidden bg-moss-900 pt-28 pb-20 lg:pt-36 lg:pb-24">
+      <section className="relative overflow-hidden bg-forest-950 pt-28 pb-20 lg:pt-36 lg:pb-24">
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-20"
             style={{ backgroundImage: `url('${imageUrl}')` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/95 via-moss-800/85 to-charcoal-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm mb-9">
-            <Link href="/" className="text-cream-400 hover:text-cream-200 transition-colors">
+            <Link href="/" className="text-paper-400 hover:text-paper-300 transition-colors">
               Home
             </Link>
-            <span className="text-cream-600">/</span>
-            <Link href="/servizi" className="text-cream-400 hover:text-cream-200 transition-colors">
+            <span className="text-paper-600">/</span>
+            <Link href="/servizi" className="text-paper-400 hover:text-paper-300 transition-colors">
               Servizi
             </Link>
-            <span className="text-cream-600">/</span>
-            <span className="text-cream-200">{service.title}</span>
+            <span className="text-paper-600">/</span>
+            <span className="text-paper-300">{service.title}</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
@@ -771,27 +771,27 @@ export default function ServiceDetailPage() {
               </div>
 
               <div className="flex flex-wrap gap-3 mb-6">
-                <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-cream-200 px-5 py-1.5 text-xs tracking-widest uppercase">
+                <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 px-5 py-1.5 text-xs tracking-widest uppercase">
                   Servizio {(serviceIndex + 1).toString().padStart(2, "0")}
                 </Badge>
-                <Badge className="bg-terracotta-500/20 border border-terracotta-300/30 text-terracotta-100">
+                <Badge className="bg-sun-400/20 border border-leaf-500/30 text-leaf-200">
                   {templateLabels[template]}
                 </Badge>
               </div>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-cream-50 leading-tight mb-5">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-paper-50 leading-tight mb-5">
                 {service.title}
               </h1>
-              <p className="text-xl text-cream-200/85 leading-relaxed">{service.shortDescription}</p>
+              <p className="text-xl text-paper-300/85 leading-relaxed">{service.shortDescription}</p>
             </div>
           </div>
         </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-6 lg:px-8 py-10 lg:py-12">
-        <div className="bg-white border border-cream-200 rounded-2xl p-6 lg:p-8">
-          <h2 className="font-display text-2xl lg:text-3xl text-charcoal-800 mb-4">Risposta rapida</h2>
-          <p className="text-lg text-charcoal-700 leading-relaxed">{content.quickAnswer}</p>
+        <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
+          <h2 className="font-display text-2xl lg:text-3xl text-forest-950 mb-4">Risposta rapida</h2>
+          <p className="text-lg text-forest-900 leading-relaxed">{content.quickAnswer}</p>
         </div>
       </section>
 
@@ -815,45 +815,45 @@ export default function ServiceDetailPage() {
       )}
 
       <section className="max-w-6xl mx-auto px-6 lg:px-8 pb-16">
-        <div className="bg-white border border-cream-200 rounded-2xl p-7 lg:p-9">
-          <h2 className="font-display text-3xl text-charcoal-800 mb-6">FAQ servizio</h2>
+        <div className="bg-white border border-paper-300 rounded-2xl p-7 lg:p-9">
+          <h2 className="font-display text-3xl text-forest-950 mb-6">FAQ servizio</h2>
           <div className="space-y-4">
             {content.faqs.map((faq) => (
-              <details key={faq.question} className="rounded-xl border border-cream-200 p-4 open:bg-cream-50">
-                <summary className="cursor-pointer list-none font-display text-lg text-charcoal-800">
+              <details key={faq.question} className="rounded-xl border border-paper-300 p-4 open:bg-paper-50">
+                <summary className="cursor-pointer list-none font-display text-lg text-forest-950">
                   {faq.question}
                 </summary>
-                <p className="mt-3 text-charcoal-600 leading-relaxed">{faq.answer}</p>
+                <p className="mt-3 text-forest-800 leading-relaxed">{faq.answer}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-cream-200">
+      <section className="border-t border-paper-300">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-cream-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-paper-300">
             <div className="py-8 lg:py-12 pr-0 md:pr-8">
               {prevService ? (
                 <Link href={`/servizi/${prevService.slug}`} className="group flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full border border-cream-300 flex items-center justify-center group-hover:border-terracotta-400 group-hover:bg-terracotta-50 transition-all">
-                    <ArrowLeft className="w-5 h-5 text-charcoal-400 group-hover:text-terracotta-600 transition-colors" />
+                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                    <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                   </div>
                   <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-charcoal-400 mb-1">Precedente</p>
-                    <p className="font-display text-lg text-charcoal-700 group-hover:text-terracotta-600 transition-colors">
+                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Precedente</p>
+                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                       {prevService.title}
                     </p>
                   </div>
                 </Link>
               ) : (
                 <Link href="/servizi" className="group flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full border border-cream-300 flex items-center justify-center group-hover:border-terracotta-400 group-hover:bg-terracotta-50 transition-all">
-                    <ArrowLeft className="w-5 h-5 text-charcoal-400 group-hover:text-terracotta-600 transition-colors" />
+                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                    <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                   </div>
                   <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-charcoal-400 mb-1">Torna a</p>
-                    <p className="font-display text-lg text-charcoal-700 group-hover:text-terracotta-600 transition-colors">
+                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Torna a</p>
+                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                       Tutti i Servizi
                     </p>
                   </div>
@@ -868,25 +868,25 @@ export default function ServiceDetailPage() {
                   className="group flex items-center justify-end gap-4 text-right"
                 >
                   <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-charcoal-400 mb-1">Successivo</p>
-                    <p className="font-display text-lg text-charcoal-700 group-hover:text-terracotta-600 transition-colors">
+                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Successivo</p>
+                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                       {nextService.title}
                     </p>
                   </div>
-                  <div className="w-12 h-12 rounded-full border border-cream-300 flex items-center justify-center group-hover:border-terracotta-400 group-hover:bg-terracotta-50 transition-all">
-                    <ArrowRight className="w-5 h-5 text-charcoal-400 group-hover:text-terracotta-600 transition-colors" />
+                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                    <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                   </div>
                 </Link>
               ) : (
                 <Link href="/servizi" className="group flex items-center justify-end gap-4 text-right">
                   <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-charcoal-400 mb-1">Esplora</p>
-                    <p className="font-display text-lg text-charcoal-700 group-hover:text-terracotta-600 transition-colors">
+                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Esplora</p>
+                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                       Tutti i Servizi
                     </p>
                   </div>
-                  <div className="w-12 h-12 rounded-full border border-cream-300 flex items-center justify-center group-hover:border-terracotta-400 group-hover:bg-terracotta-50 transition-all">
-                    <ArrowRight className="w-5 h-5 text-charcoal-400 group-hover:text-terracotta-600 transition-colors" />
+                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                    <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                   </div>
                 </Link>
               )}
@@ -895,7 +895,7 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      <section className="relative py-24 lg:py-32 bg-moss-900 text-cream-50 overflow-hidden">
+      <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-10"
@@ -904,16 +904,16 @@ export default function ServiceDetailPage() {
                 "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-moss-900 via-moss-800/90 to-moss-900" />
+          <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <span className="font-display italic text-terracotta-300 text-lg">Preventivo gratuito</span>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-cream-50 mt-4 mb-6 leading-tight">
+          <span className="font-display italic text-leaf-400 text-lg">Preventivo gratuito</span>
+          <h2 className="font-display text-4xl md:text-5xl font-light text-paper-50 mt-4 mb-6 leading-tight">
             Inizia il tuo progetto di
-            <span className="block italic text-terracotta-300">{service.title.toLowerCase()}</span>
+            <span className="block italic text-leaf-400">{service.title.toLowerCase()}</span>
           </h2>
-          <p className="text-lg text-cream-200/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-paper-300/80 mb-10 max-w-2xl mx-auto leading-relaxed">
             Contattaci per una consulenza senza impegno. Definiamo insieme il percorso migliore per il tuo spazio verde.
           </p>
 
@@ -921,7 +921,7 @@ export default function ServiceDetailPage() {
             <a href="tel:+39061234567">
               <Button
                 size="lg"
-                className="bg-terracotta-500 hover:bg-terracotta-600 text-white border-0 px-8"
+                className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8"
               >
                 <Phone className="mr-2 w-5 h-5" />
                 Chiama ora
@@ -931,7 +931,7 @@ export default function ServiceDetailPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-cream-400/30 text-cream-100 hover:bg-cream-100/10 hover:border-cream-300/50 px-8"
+                className="border-paper-400/30 text-paper-100 hover:bg-paper-100/10 hover:border-paper-400/50 px-8"
               >
                 Richiedi preventivo
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -939,7 +939,7 @@ export default function ServiceDetailPage() {
             </Link>
           </div>
 
-          <div className="mt-8 text-sm text-cream-300/80 flex flex-col sm:flex-row justify-center gap-4">
+          <div className="mt-8 text-sm text-paper-400/80 flex flex-col sm:flex-row justify-center gap-4">
             <span className="inline-flex items-center gap-2 justify-center">
               <MapPin className="w-4 h-4" />
               Piemonte e Lombardia

@@ -135,7 +135,7 @@ export default function TiltedCard({
         )}
 
         {children && (
-          <motion.div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/80 via-transparent to-transparent rounded-2xl [transform:translateZ(20px)]">
+          <motion.div className="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent rounded-2xl [transform:translateZ(20px)]">
             <div className="absolute bottom-0 left-0 right-0 p-6">
               {children}
             </div>
@@ -145,7 +145,7 @@ export default function TiltedCard({
 
       {showTooltip && captionText && (
         <motion.figcaption
-          className="pointer-events-none absolute left-0 top-0 rounded-lg bg-white/95 backdrop-blur-sm px-4 py-2 text-sm text-charcoal-800 opacity-0 z-[3] hidden sm:block shadow-lg border border-cream-200"
+          className="pointer-events-none absolute left-0 top-0 rounded-lg bg-paper-50/95 backdrop-blur-sm px-4 py-2 text-sm text-forest-950 opacity-0 z-[3] hidden sm:block shadow-lg border border-paper-300"
           style={{
             x,
             y,

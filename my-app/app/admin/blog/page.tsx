@@ -79,7 +79,7 @@ export default function AdminBlogPage() {
                 onClick={() => setFilter(f.key)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   filter === f.key
-                    ? "bg-terracotta-600 text-white"
+                    ? "bg-sun-500 text-white"
                     : "bg-white border border-border hover:bg-muted"
                 }`}
               >

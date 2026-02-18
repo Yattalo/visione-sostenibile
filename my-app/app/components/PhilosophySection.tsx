@@ -118,7 +118,7 @@ export function PhilosophySection() {
   return (
     <>
       {/* ── Intro text ───────────────────────────────────── */}
-      <section className="py-32 px-6 relative bg-cream-50">
+      <section className="py-32 px-6 relative bg-paper-50">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -126,16 +126,16 @@ export function PhilosophySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="font-display italic text-terracotta-600 text-lg">
+            <span className="font-display italic text-leaf-600 text-lg">
               Metodo biodinamico
             </span>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 mb-8 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
               Terra, acqua, aria e fuoco.
-              <span className="block text-moss-700">
+              <span className="block text-leaf-700">
                 Un equilibrio reale, non solo estetico.
               </span>
             </h2>
-            <p className="font-body text-lg text-charcoal-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="font-body text-lg text-forest-800 leading-relaxed max-w-2xl mx-auto">
               Ogni progetto nasce da un principio semplice: il giardino deve
               essere bello, sano e gestibile nel tempo. Per questo lavoriamo sui
               4 elementi biodinamici con soluzioni concrete, misurabili e

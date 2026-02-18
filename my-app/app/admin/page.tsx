@@ -33,14 +33,14 @@ export default function AdminDashboard() {
       title: "Servizi Attivi",
       value: services.length.toString(),
       icon: FileText,
-      color: "from-moss-500 to-moss-600",
+      color: "from-leaf-500 to-leaf-600",
       href: "/admin/services",
     },
     {
       title: "Immagini Galleria",
       value: gallery.length.toString(),
       icon: Image,
-      color: "from-terracotta-500 to-terracotta-600",
+      color: "from-leaf-500 to-leaf-600",
       href: "/admin/gallery",
     },
     {
@@ -98,7 +98,7 @@ export default function AdminDashboard() {
                       <stat.icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 mt-4 text-terracotta-600 text-sm">
+                  <div className="flex items-center gap-1 mt-4 text-leaf-600 text-sm">
                     <TrendingUp className="w-4 h-4" />
                     <span>+12% questo mese</span>
                   </div>
@@ -114,11 +114,11 @@ export default function AdminDashboard() {
           <Card variant="default">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-terracotta-600" />
+                <MessageSquare className="w-5 h-5 text-leaf-600" />
                 Richieste Recenti
               </CardTitle>
               <Link href="/admin/contacts">
-                <Badge variant="outline" className="cursor-pointer hover:bg-terracotta-50">
+                <Badge variant="outline" className="cursor-pointer hover:bg-leaf-50">
                   Vedi tutti
                   <ArrowRight className="w-3 h-3 ml-1" />
                 </Badge>
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
                     className={`p-4 rounded-lg border ${
                       contact.isRead
                         ? "bg-white border-border"
-                        : "bg-terracotta-50 border-terracotta-200"
+                        : "bg-leaf-50 border-leaf-200"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -175,7 +175,7 @@ export default function AdminDashboard() {
                 Recensioni da Moderare
               </CardTitle>
               <Link href="/admin/reviews">
-                <Badge variant="outline" className="cursor-pointer hover:bg-terracotta-50">
+                <Badge variant="outline" className="cursor-pointer hover:bg-leaf-50">
                   Vedi tutti
                   <ArrowRight className="w-3 h-3 ml-1" />
                 </Badge>
@@ -213,7 +213,7 @@ export default function AdminDashboard() {
                     </div>
                     {!review.isApproved && (
                       <div className="flex gap-2 mt-3">
-                        <button className="px-3 py-1 text-sm bg-terracotta-600 text-white rounded-lg opacity-60 cursor-not-allowed">
+                        <button className="px-3 py-1 text-sm bg-sun-500 text-white rounded-lg opacity-60 cursor-not-allowed">
                           Approva
                         </button>
                         <button className="px-3 py-1 text-sm border border-border rounded-lg opacity-60 cursor-not-allowed">
@@ -245,9 +245,9 @@ export default function AdminDashboard() {
                 <Link
                   key={action.label}
                   href={action.href}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/50 hover:bg-terracotta-50 border border-border hover:border-terracotta-200 transition-all group"
+                  className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/50 hover:bg-leaf-50 border border-border hover:border-leaf-200 transition-all group"
                 >
-                  <action.icon className="w-6 h-6 text-terracotta-600 group-hover:scale-110 transition-transform" />
+                  <action.icon className="w-6 h-6 text-leaf-600 group-hover:scale-110 transition-transform" />
                   <span className="text-sm font-medium text-center">{action.label}</span>
                 </Link>
               ))}

@@ -54,32 +54,32 @@ const stats = [
 
 export default function ChiSiamoPage() {
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-paper-50">
       {/* Hero Section */}
       <section className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1920')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-moss-900/90 via-moss-800/80 to-charcoal-900/85" />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/90 via-forest-900/80 to-forest-950/85" />
           </div>
           {/* Decorative organic blobs */}
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-terracotta-500/15 rounded-full blur-3xl animate-pulse-slow" />
-          <div className="absolute bottom-1/4 -right-24 w-80 h-80 bg-moss-500/15 rounded-full blur-3xl animate-drift" />
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
+          <div className="absolute bottom-1/4 -right-24 w-80 h-80 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <SlideUp>
-            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-cream-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
+            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               Chi Siamo
             </Badge>
 
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
               Giardinaggio Sostenibile
-              <span className="block italic text-terracotta-300">
+              <span className="block italic text-leaf-400">
                 a Impatto Zero
               </span>
             </h1>
 
-            <p className="font-body text-xl md:text-2xl text-cream-200 max-w-2xl mx-auto leading-relaxed">
+            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
               Andrea Giordano e Visione Sostenibile: oltre 20 anni di biodinamica
               al servizio del verde in Piemonte e Lombardia.
             </p>
@@ -101,7 +101,7 @@ export default function ChiSiamoPage() {
             <SlideUp>
               <div className="relative">
                 {/* Decorative offset shadow element */}
-                <div className="absolute -bottom-6 -right-6 w-full h-full bg-terracotta-200/40 rounded-3xl" />
+                <div className="absolute -bottom-6 -right-6 w-full h-full bg-leaf-200/40 rounded-3xl" />
                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-floating">
                   <Image
                     src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800"
@@ -110,20 +110,20 @@ export default function ChiSiamoPage() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-moss-900/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-forest-950/30 to-transparent" />
                 </div>
               </div>
             </SlideUp>
 
             <SlideUp delay={0.2}>
-              <span className="font-display italic text-terracotta-600 text-lg">
+              <span className="font-display italic text-leaf-600 text-lg">
                 La nostra storia
               </span>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 mb-8 leading-tight">
+              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
                 Creiamo spazi verdi
-                <span className="block text-moss-700">che ispirano</span>
+                <span className="block text-leaf-700">che ispirano</span>
               </h2>
-              <div className="space-y-6 font-body text-charcoal-600">
+              <div className="space-y-6 font-body text-forest-800">
                 <p className="text-lg leading-relaxed">
                   Andrea Giordano, fondatore di Visione Sostenibile, pratica
                   l&apos;agricoltura biodinamica da oltre 20 anni e ha oltre 10 anni
@@ -147,19 +147,19 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-28 md:py-36 px-6 bg-cream-100 relative overflow-hidden">
+      <section className="py-28 md:py-36 px-6 bg-paper-100 relative overflow-hidden">
         {/* Subtle decorative background */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-moss-100/30 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-100/30 to-transparent" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <SlideUp>
             <div className="text-center mb-20">
-              <span className="font-display italic text-terracotta-600 text-lg">
+              <span className="font-display italic text-leaf-600 text-lg">
                 I nostri valori
               </span>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 leading-tight">
+              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 leading-tight">
                 Cosa ci
-                <span className="italic text-moss-700"> guida</span>
+                <span className="italic text-leaf-700"> guida</span>
               </h2>
             </div>
           </SlideUp>
@@ -170,16 +170,16 @@ export default function ChiSiamoPage() {
                 <StaggerItem key={value.title} delay={index * 0.1}>
                   <Card
                     variant="default"
-                    className="h-full text-center bg-white border-cream-200 hover:shadow-medium transition-shadow duration-500"
+                    className="h-full text-center bg-white border-paper-300 hover:shadow-medium transition-shadow duration-500"
                   >
                     <CardContent className="p-8">
-                      <div className="w-16 h-16 rounded-2xl bg-moss-100 flex items-center justify-center mx-auto mb-6">
-                        <value.icon className="w-8 h-8 text-moss-700" />
+                      <div className="w-16 h-16 rounded-2xl bg-leaf-100 flex items-center justify-center mx-auto mb-6">
+                        <value.icon className="w-8 h-8 text-leaf-700" />
                       </div>
-                      <h3 className="font-display text-2xl text-charcoal-800 mb-3">
+                      <h3 className="font-display text-2xl text-forest-950 mb-3">
                         {value.title}
                       </h3>
-                      <p className="font-body text-charcoal-500 leading-relaxed">
+                      <p className="font-body text-forest-800/70 leading-relaxed">
                         {value.description}
                       </p>
                     </CardContent>
@@ -192,7 +192,7 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* Eco/Sustainability Dedicated Section */}
-      <section className="py-28 md:py-36 px-6 relative overflow-hidden bg-moss-900">
+      <section className="py-28 md:py-36 px-6 relative overflow-hidden bg-forest-950">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0 bg-cover bg-center"
@@ -202,7 +202,7 @@ export default function ChiSiamoPage() {
             }}
           />
         </div>
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-terracotta-500/40 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-leaf-500/40 to-transparent" />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -211,13 +211,13 @@ export default function ChiSiamoPage() {
                 <Bug className="w-3 h-3 mr-1.5 inline" />
                 Il Nostro Approccio
               </Badge>
-              <h2 className="font-display text-4xl md:text-5xl text-cream-50 leading-tight mb-8">
+              <h2 className="font-display text-4xl md:text-5xl text-paper-50 leading-tight mb-8">
                 Sostenibilita ambientale
-                <span className="block italic text-terracotta-300">
+                <span className="block italic text-leaf-400">
                   a impatto zero
                 </span>
               </h2>
-              <div className="space-y-6 font-body text-cream-200/80 leading-relaxed">
+              <div className="space-y-6 font-body text-paper-300/80 leading-relaxed">
                 <p className="text-lg">
                   Il nostro approccio si distingue per il <strong>giardinaggio a impatto zero</strong>:
                   ripristiniamo i danni causati all&apos;ambiente durante gli interventi invasivi,
@@ -258,8 +258,8 @@ export default function ChiSiamoPage() {
                     key={item.label}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center"
                   >
-                    <item.icon className="w-8 h-8 mx-auto text-terracotta-400 mb-3" />
-                    <p className="font-body text-sm text-cream-200">{item.label}</p>
+                    <item.icon className="w-8 h-8 mx-auto text-leaf-400 mb-3" />
+                    <p className="font-body text-sm text-paper-300">{item.label}</p>
                   </div>
                 ))}
               </div>
@@ -269,24 +269,24 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-28 md:py-36 bg-moss-900 text-cream-50 relative overflow-hidden">
+      <section className="py-28 md:py-36 bg-forest-950 text-paper-50 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')] bg-cover bg-center opacity-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-moss-900 via-moss-800/90 to-moss-900" />
+          <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
         {/* Decorative blobs */}
-        <div className="absolute top-1/3 -left-20 w-72 h-72 bg-terracotta-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-16 w-64 h-64 bg-moss-400/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -left-20 w-72 h-72 bg-sun-400/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-16 w-64 h-64 bg-leaf-400/10 rounded-full blur-3xl" />
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <SlideUp>
             <div className="text-center mb-20">
-              <Badge className="bg-terracotta-500/20 border-terracotta-400/30 text-terracotta-200 mb-6">
+              <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-6">
                 I numeri che parlano
               </Badge>
               <h2 className="font-display text-4xl md:text-5xl font-light leading-tight">
                 Risultati che
-                <span className="block italic text-terracotta-300">
+                <span className="block italic text-leaf-400">
                   raccontano
                 </span>
               </h2>
@@ -297,10 +297,10 @@ export default function ChiSiamoPage() {
             {stats.map((stat, index) => (
               <SlideUp key={stat.label} delay={index * 0.1}>
                 <div className="text-center">
-                  <p className="font-display text-5xl md:text-6xl font-light text-terracotta-400 mb-3">
+                  <p className="font-display text-5xl md:text-6xl font-light text-leaf-400 mb-3">
                     {stat.value}
                   </p>
-                  <p className="font-sans text-sm uppercase tracking-widest text-cream-300">
+                  <p className="font-sans text-sm uppercase tracking-widest text-paper-400">
                     {stat.label}
                   </p>
                 </div>
@@ -312,20 +312,20 @@ export default function ChiSiamoPage() {
 
       {/* CTA Section */}
       <section className="py-28 md:py-36 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-cream-50" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-terracotta-100/40 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-moss-100/50 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-paper-50" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-leaf-100/40 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-leaf-100/50 rounded-full blur-3xl" />
 
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <SlideUp>
-            <span className="font-display italic text-terracotta-600 text-lg">
+            <span className="font-display italic text-leaf-600 text-lg">
               Iniziamo insieme
             </span>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mt-4 mb-8 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
               Vuoi conoscerci
-              <span className="block italic text-moss-700">meglio?</span>
+              <span className="block italic text-leaf-700">meglio?</span>
             </h2>
-            <p className="font-body text-lg text-charcoal-600 leading-relaxed max-w-2xl mx-auto mb-12">
+            <p className="font-body text-lg text-forest-800 leading-relaxed max-w-2xl mx-auto mb-12">
               Siamo sempre disponibili per una consulenza gratuita o per
               accompagnarvi nella visita di alcuni dei nostri progetti
               realizzati. Ogni grande giardino inizia con una conversazione.
@@ -335,7 +335,7 @@ export default function ChiSiamoPage() {
               <Link href="/contatti">
                 <Button
                   size="lg"
-                  className="bg-terracotta-500 hover:bg-terracotta-600 text-white border-0 px-8 py-4 text-lg tracking-wide"
+                  className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8 py-4 text-lg tracking-wide"
                 >
                   Contattaci Ora
                 </Button>
@@ -344,7 +344,7 @@ export default function ChiSiamoPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-charcoal-300 text-charcoal-700 hover:bg-charcoal-100 px-8 py-4 text-lg tracking-wide"
+                  className="border-forest-700 text-forest-900 hover:bg-paper-300 px-8 py-4 text-lg tracking-wide"
                 >
                   I Nostri Servizi
                 </Button>

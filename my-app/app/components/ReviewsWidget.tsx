@@ -35,8 +35,8 @@ function Stars({ rating }: { rating: number }) {
           className={cn(
             "w-4 h-4",
             i < rating
-              ? "fill-terracotta-500 text-terracotta-500"
-              : "text-cream-300"
+              ? "fill-sun-400 text-leaf-500"
+              : "text-paper-400"
           )}
         />
       ))}
@@ -68,12 +68,12 @@ export function ReviewsWidget({
       {(title || subtitle) && (
         <div className="text-center mb-10">
           {title && (
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal-800 mb-3">
+            <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-3">
               {title}
             </h2>
           )}
           {subtitle && (
-            <p className="font-body text-lg text-charcoal-500 max-w-2xl mx-auto">
+            <p className="font-body text-lg text-forest-800/70 max-w-2xl mx-auto">
               {subtitle}
             </p>
           )}
@@ -83,17 +83,17 @@ export function ReviewsWidget({
       {variant === "grid" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayReviews.map((review) => (
-            <Card key={review._id} variant="default" className="h-full bg-white">
+            <Card key={review._id} variant="default" className="h-full bg-paper-50">
               <CardContent>
                 <Stars rating={review.rating} />
-                <p className="font-body text-charcoal-600 leading-relaxed mt-4 mb-4">
+                <p className="font-body text-forest-800 leading-relaxed mt-4 mb-4">
                   &ldquo;{review.text}&rdquo;
                 </p>
-                <div className="border-t border-cream-100 pt-3 mt-3">
-                  <p className="font-sans text-sm uppercase tracking-wider text-charcoal-700">
+                <div className="border-t border-paper-100 pt-3 mt-3">
+                  <p className="font-sans text-sm uppercase tracking-wider text-forest-900">
                     {review.authorName}
                   </p>
-                  <p className="font-body text-sm text-charcoal-400">
+                  <p className="font-body text-sm text-forest-800/60">
                     {review.authorLocation}
                   </p>
                 </div>
@@ -109,24 +109,24 @@ export function ReviewsWidget({
             <Card
               key={review._id}
               variant="default"
-              className="h-full bg-white border-l-4 border-l-terracotta-500"
+              className="h-full bg-paper-50 border-l-4 border-l-leaf-500"
             >
               <CardContent>
                 <Stars rating={review.rating} />
-                <p className="font-body text-lg text-charcoal-600 leading-relaxed mt-4 mb-4">
+                <p className="font-body text-lg text-forest-800 leading-relaxed mt-4 mb-4">
                   &ldquo;{review.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-moss-100 flex items-center justify-center">
-                    <span className="font-sans text-sm font-medium text-moss-700">
+                  <div className="w-10 h-10 rounded-full bg-leaf-100 flex items-center justify-center">
+                    <span className="font-sans text-sm font-medium text-leaf-700">
                       {review.authorName.charAt(0)}
                     </span>
                   </div>
                   <div>
-                    <p className="font-sans text-sm uppercase tracking-wider text-charcoal-700">
+                    <p className="font-sans text-sm uppercase tracking-wider text-forest-900">
                       {review.authorName}
                     </p>
-                    <p className="font-body text-sm text-charcoal-400">
+                    <p className="font-body text-sm text-forest-800/60">
                       {review.authorLocation}
                     </p>
                   </div>
@@ -141,17 +141,17 @@ export function ReviewsWidget({
         <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
           {displayReviews.map((review) => (
             <div key={review._id} className="snap-start shrink-0 w-full md:w-[400px]">
-              <Card variant="default" className="h-full bg-white">
+              <Card variant="default" className="h-full bg-paper-50">
                 <CardContent>
                   <Stars rating={review.rating} />
-                  <p className="font-body text-charcoal-600 leading-relaxed mt-4 mb-4">
+                  <p className="font-body text-forest-800 leading-relaxed mt-4 mb-4">
                     &ldquo;{review.text}&rdquo;
                   </p>
-                  <div className="border-t border-cream-100 pt-3 mt-3">
-                    <p className="font-sans text-sm uppercase tracking-wider text-charcoal-700">
+                  <div className="border-t border-paper-100 pt-3 mt-3">
+                    <p className="font-sans text-sm uppercase tracking-wider text-forest-900">
                       {review.authorName}
                     </p>
-                    <p className="font-body text-sm text-charcoal-400">
+                    <p className="font-body text-sm text-forest-800/60">
                       {review.authorLocation}
                     </p>
                   </div>

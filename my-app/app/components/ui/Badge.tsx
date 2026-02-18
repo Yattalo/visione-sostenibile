@@ -8,12 +8,12 @@ interface BadgeProps {
 }
 
 const badgeVariants = {
-  default: "bg-cream-200 text-charcoal-700",
-  primary: "bg-terracotta-100 text-terracotta-700",
-  earth: "bg-moss-100 text-moss-700",
+  default: "bg-paper-300 text-forest-900",
+  primary: "bg-leaf-100 text-leaf-700",
+  earth: "bg-leaf-100 text-leaf-700",
   success: "bg-green-100 text-green-700",
   warning: "bg-yellow-100 text-yellow-700",
-  outline: "border border-cream-400 text-charcoal-700 bg-transparent",
+  outline: "border border-paper-400 text-forest-900 bg-transparent",
   eco: "bg-emerald-100 text-emerald-700 border border-emerald-200",
   biodynamic: "bg-amber-100 text-amber-700 border border-amber-200",
 };

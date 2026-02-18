@@ -72,7 +72,7 @@ export default function AdminContactsPage() {
                 onClick={() => setFilter(f.key)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   filter === f.key
-                    ? "bg-terracotta-600 text-white"
+                    ? "bg-sun-500 text-white"
                     : "bg-white border border-border hover:bg-muted"
                 }`}
               >
@@ -102,13 +102,13 @@ export default function AdminContactsPage() {
             <Card
               key={contact._id}
               variant="default"
-              className={contact.isRead ? "" : "border-terracotta-200 bg-terracotta-50/30"}
+              className={contact.isRead ? "" : "border-leaf-200 bg-leaf-50/30"}
             >
               <CardContent className="p-6">
                 <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-terracotta-400 to-moss-500 flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-leaf-400 to-leaf-500 flex items-center justify-center text-white font-bold">
                         {contact.name.charAt(0)}
                       </div>
                       <div>
@@ -129,14 +129,14 @@ export default function AdminContactsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3 text-sm">
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Mail className="w-4 h-4" />
-                        <a href={`mailto:${contact.email}`} className="hover:text-terracotta-600">
+                        <a href={`mailto:${contact.email}`} className="hover:text-leaf-600">
                           {contact.email}
                         </a>
                       </div>
                       {contact.phone && (
                         <div className="flex items-center gap-2 text-muted-foreground">
                           <Phone className="w-4 h-4" />
-                          <a href={`tel:${contact.phone}`} className="hover:text-terracotta-600">
+                          <a href={`tel:${contact.phone}`} className="hover:text-leaf-600">
                             {contact.phone}
                           </a>
                         </div>

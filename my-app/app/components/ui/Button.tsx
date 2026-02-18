@@ -12,10 +12,10 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
 }
 
 const buttonVariants = {
-  primary: "bg-terracotta-500 text-white hover:bg-terracotta-600 border border-transparent",
-  secondary: "bg-moss-700 text-white hover:bg-moss-600 border border-transparent",
-  outline: "border border-charcoal-300 text-charcoal-700 hover:bg-charcoal-100 hover:border-charcoal-400",
-  ghost: "text-charcoal-600 hover:text-terracotta-600 border border-transparent hover:bg-terracotta-50/50",
+  primary: "bg-sun-400 text-forest-950 hover:bg-sun-300 border border-transparent",
+  secondary: "bg-forest-950 text-paper-50 hover:bg-forest-900 border border-transparent",
+  outline: "border border-leaf-700 text-forest-950 hover:bg-leaf-50 hover:border-leaf-600",
+  ghost: "text-forest-800 hover:text-leaf-700 border border-transparent hover:bg-paper-200",
 };
 
 const buttonSizes = {
@@ -50,8 +50,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "relative inline-flex items-center justify-center gap-2 rounded-full",
           "font-sans uppercase tracking-[0.12em] font-medium whitespace-nowrap",
           "transition-all duration-300",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-400",
-          "focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-400",
+          "focus-visible:ring-offset-2 focus-visible:ring-offset-paper-50",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           variant === "primary" && "hover-sun",
           buttonVariants[variant],

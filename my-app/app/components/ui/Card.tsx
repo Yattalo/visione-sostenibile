@@ -5,16 +5,15 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 interface CardProps extends Omit<HTMLMotionProps<"div">, "children"> {
-  variant?: "default" | "elevated" | "outline" | "glass";
+  variant?: "default" | "elevated" | "outline";
   hover?: boolean;
   children: React.ReactNode;
 }
 
 const cardVariants = {
-  default: "bg-white border border-cream-200 shadow-soft",
-  elevated: "bg-white border border-cream-200 shadow-floating",
-  outline: "bg-transparent border border-cream-300 hover:border-terracotta-400",
-  glass: "bg-white/80 backdrop-blur-xl border border-white/30 shadow-soft",
+  default: "bg-paper-50 border border-leaf-700/20 shadow-soft",
+  elevated: "bg-paper-50 border border-leaf-700/20 shadow-floating",
+  outline: "bg-transparent border border-leaf-600 hover:border-leaf-500",
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -38,7 +37,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         className={cn(
           "relative rounded-2xl p-6",
           "transition-all duration-300",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta-400",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-400",
           hover && "hover-germoglio",
           cardVariants[variant],
           className
@@ -73,7 +72,7 @@ export function CardTitle({ className, as: Tag = "h3", children, ...props }: Car
   return (
     <Tag
       className={cn(
-        "font-display text-xl md:text-2xl font-bold text-charcoal-800",
+        "font-display text-xl md:text-2xl font-bold text-forest-950",
         className
       )}
       {...props}
@@ -91,7 +90,7 @@ export function CardDescription({
   ...props
 }: CardDescriptionProps) {
   return (
-    <p className={cn("text-charcoal-500 text-sm md:text-base", className)} {...props}>
+    <p className={cn("text-forest-800/70 text-sm md:text-base", className)} {...props}>
       {children}
     </p>
   );
@@ -120,7 +119,7 @@ export function CardFooter({
 }: CardFooterProps) {
   return (
     <div
-      className={cn("mt-6 pt-4 border-t border-cream-200 flex items-center gap-3", className)}
+      className={cn("mt-6 pt-4 border-t border-paper-300 flex items-center gap-3", className)}
       {...props}
     >
       {children}

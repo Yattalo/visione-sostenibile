@@ -37,7 +37,7 @@ export default function HomePage() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-paper-50">
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -45,7 +45,7 @@ export default function HomePage() {
       >
         {/* Background with video support */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/80 via-moss-800/60 to-charcoal-900/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/80 via-forest-900/60 to-forest-950/70" />
           <video
             autoPlay
             loop
@@ -58,7 +58,7 @@ export default function HomePage() {
           {/* Decorative organic blobs */}
           <motion.div
             style={{ y, opacity }}
-            className="absolute top-1/4 -left-20 w-96 h-96 bg-terracotta-500/20 rounded-full blur-3xl"
+            className="absolute top-1/4 -left-20 w-96 h-96 bg-sun-400/20 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
               x: [0, 30, 0],
@@ -66,7 +66,7 @@ export default function HomePage() {
             transition={{ duration: 10, repeat: Infinity }}
           />
           <motion.div
-            className="absolute bottom-1/4 -right-20 w-80 h-80 bg-moss-500/20 rounded-full blur-3xl"
+            className="absolute bottom-1/4 -right-20 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl"
             animate={{
               scale: [1.2, 1, 1.2],
               x: [0, -30, 0],
@@ -85,7 +85,7 @@ export default function HomePage() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-cream-100 px-6 py-2 text-sm tracking-widest uppercase">
+              <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 px-6 py-2 text-sm tracking-widest uppercase">
                 Dal 2009
               </Badge>
               <Badge variant="eco" className="px-4 py-1.5 text-xs tracking-widest uppercase">
@@ -96,12 +96,12 @@ export default function HomePage() {
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-balance">
               Giardini sostenibili
-              <span className="block italic text-terracotta-300">
+              <span className="block italic text-leaf-400">
                 a impatto zero
               </span>
             </h1>
 
-            <p className="font-body text-xl md:text-2xl text-cream-200 max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto mb-12 leading-relaxed">
               Progettazione, realizzazione e manutenzione con metodi biodinamici.
               Zero chimica, piu valore nel tempo, meno interventi futuri.
             </p>
@@ -127,15 +127,15 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-cream-200/90">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-paper-300/90">
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
                 20+ anni in biodinamica
               </span>
-              <span className="hidden sm:block h-4 w-px bg-cream-300/40" />
+              <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
                 Zero prodotti chimici
               </span>
-              <span className="hidden sm:block h-4 w-px bg-cream-300/40" />
+              <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
                 Piemonte e Lombardia
               </span>
@@ -162,7 +162,7 @@ export default function HomePage() {
         {/* Topographic background pattern */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <svg
-            className="absolute top-0 left-0 w-full h-full text-cream-300"
+            className="absolute top-0 left-0 w-full h-full text-paper-400"
             fill="none"
             preserveAspectRatio="none"
             viewBox="0 0 1440 800"
@@ -194,13 +194,13 @@ export default function HomePage() {
             transition={{ duration: 0.7 }}
             className="mb-16 md:mb-20 max-w-3xl"
           >
-            <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-charcoal-400 mb-4 block">
+            <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
               La migliore scelta eco-friendly
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-moss-700 mb-6 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-leaf-700 mb-6 leading-tight">
               Servizi che offriamo...
             </h2>
-            <p className="font-body text-lg text-charcoal-500 leading-relaxed max-w-2xl">
+            <p className="font-body text-lg text-forest-800/70 leading-relaxed max-w-2xl">
               Con una pianificazione attenta ed un&apos;esecuzione efficiente,
               garantiamo che ogni progetto rispetti alti standard di
               funzionalita e sostenibilita. Il nostro approccio offre risultati
@@ -243,7 +243,7 @@ export default function HomePage() {
           >
             <Link
               href="/servizi"
-              className="border-2 border-moss-600 text-moss-700 hover:bg-moss-700 hover:text-white
+              className="border-2 border-leaf-600 text-leaf-700 hover:bg-leaf-700 hover:text-white
                          px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase
                          transition-all duration-300 shadow-sm hover:shadow-medium font-sans"
             >
@@ -262,21 +262,21 @@ export default function HomePage() {
           transition={{ duration: 0.8 }}
           className="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-deep"
         >
-          <div className="bg-moss-900 grid grid-cols-1 lg:grid-cols-12">
+          <div className="bg-forest-950 grid grid-cols-1 lg:grid-cols-12">
             {/* Left — Title panel */}
-            <div className="lg:col-span-5 bg-moss-800 p-10 md:p-16 flex flex-col justify-center relative">
-              <div className="absolute inset-0 bg-moss-700/10 mix-blend-overlay" />
+            <div className="lg:col-span-5 bg-forest-900 p-10 md:p-16 flex flex-col justify-center relative">
+              <div className="absolute inset-0 bg-leaf-700/10 mix-blend-overlay" />
               <div className="relative z-10">
-                <span className="block font-sans text-xs font-bold tracking-[0.2em] uppercase text-terracotta-400 mb-4">
+                <span className="block font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-400 mb-4">
                   I Nostri Numeri
                 </span>
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
                   Cosa abbiamo{" "}
-                  <span className="block italic text-cream-200">
+                  <span className="block italic text-paper-300">
                     fatto finora
                   </span>
                 </h2>
-                <p className="font-body text-cream-300 text-sm md:text-base leading-relaxed max-w-md">
+                <p className="font-body text-paper-400 text-sm md:text-base leading-relaxed max-w-md">
                   Ogni numero rappresenta un passo avanti verso un futuro piu
                   verde. La nostra dedizione alla sostenibilita e misurabile e
                   tangibile.
@@ -318,13 +318,13 @@ export default function HomePage() {
                     transition={{ delay: index * 0.15 }}
                     className="flex flex-col items-center md:items-start text-center md:text-left group"
                   >
-                    <div className="mb-4 text-white group-hover:text-terracotta-400 transition-colors duration-300">
+                    <div className="mb-4 text-white group-hover:text-leaf-400 transition-colors duration-300">
                       {stat.icon}
                     </div>
                     <span className="font-sans text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2">
                       {stat.value}
                     </span>
-                    <span className="text-xs font-bold tracking-widest text-cream-400 uppercase border-t border-cream-600/30 pt-4 w-full">
+                    <span className="text-xs font-bold tracking-widest text-paper-400 uppercase border-t border-paper-600/30 pt-4 w-full">
                       {stat.label}
                     </span>
                   </motion.div>
@@ -345,8 +345,8 @@ export default function HomePage() {
 
       {/* Featured Project / CTA */}
       <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-moss-50" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-terracotta-100/50 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-leaf-50" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-leaf-100/50 rounded-full blur-3xl" />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -365,10 +365,10 @@ export default function HomePage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-moss-900/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/40 to-transparent" />
               </div>
               {/* Decorative element */}
-              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-terracotta-200/30 rounded-3xl -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-leaf-200/30 rounded-3xl -z-10" />
             </motion.div>
 
             <motion.div
@@ -377,16 +377,16 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Badge className="bg-moss-100 text-moss-700 mb-6">
+              <Badge className="bg-leaf-100 text-leaf-700 mb-6">
                 Realizzazioni
               </Badge>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal-800 mb-6 leading-tight">
+              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-6 leading-tight">
                 Ogni giardino è una
-                <span className="block italic text-terracotta-600">
+                <span className="block italic text-leaf-600">
                   storia unica
                 </span>
               </h2>
-              <p className="font-body text-lg text-charcoal-600 leading-relaxed mb-8">
+              <p className="font-body text-lg text-forest-800 leading-relaxed mb-8">
                 Dai un&apos;occhiata ai nostri progetti realizzati. Ogni giardino
                 racconta una storia diversa, ma tutti condividono lo stesso
                 denominatore comune: la passione per il verde.
@@ -394,14 +394,14 @@ export default function HomePage() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/contatti">
-                  <Button className="bg-moss-700 hover:bg-moss-600 text-white px-8 py-4">
+                  <Button className="bg-leaf-700 hover:bg-leaf-600 text-white px-8 py-4">
                     Richiedi una Consulenza
                   </Button>
                 </Link>
                 <Link href="/qualita">
                   <Button
                     variant="outline"
-                    className="border-charcoal-300 text-charcoal-700 hover:bg-charcoal-100 px-8 py-4"
+                    className="border-forest-700 text-forest-900 hover:bg-paper-300 px-8 py-4"
                   >
                     Perché Scegliere Noi
                   </Button>
@@ -413,10 +413,10 @@ export default function HomePage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-24 bg-moss-900 text-white relative overflow-hidden">
+      <section className="py-24 bg-forest-950 text-white relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')] bg-cover bg-center opacity-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-moss-900 via-moss-800/90 to-moss-900" />
+          <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
 
         <motion.div
@@ -427,18 +427,18 @@ export default function HomePage() {
         >
           <h2 className="font-display text-4xl md:text-5xl mb-6 leading-tight">
             Pronto a trasformare il tuo
-            <span className="block italic text-terracotta-300">
+            <span className="block italic text-leaf-400">
               spazio verde?
             </span>
           </h2>
-          <p className="font-body text-lg text-cream-200 mb-10 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-paper-300 mb-10 max-w-2xl mx-auto">
             Contattaci per una consulenza senza impegno. Insieme,
             creeremo il giardino che hai sempre sognato.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+393714821825">
-              <Button className="bg-terracotta-500 hover:bg-terracotta-600 text-white px-8 py-4">
+              <Button className="bg-sun-400 hover:bg-sun-500 text-white px-8 py-4">
                 <Phone className="mr-2 w-5 h-5" />
                 Chiama Ora
               </Button>
@@ -453,7 +453,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-8 text-cream-300">
+          <div className="mt-12 flex flex-wrap justify-center gap-8 text-paper-400">
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               Piemonte e Lombardia

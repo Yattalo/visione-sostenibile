@@ -283,13 +283,13 @@ function renderArticleContent(content: string) {
       processed.push(
         <blockquote
           key={`blockquote-${i}`}
-          className="my-8 border-l-4 border-terracotta-500 bg-terracotta-50 rounded-r-lg p-5 pl-6"
+          className="my-8 border-l-4 border-leaf-600 bg-leaf-50 rounded-r-lg p-5 pl-6"
         >
-          <p className="font-display text-lg text-terracotta-800 italic mb-2">
+          <p className="font-display text-lg text-leaf-800 italic mb-2">
             Il dato
           </p>
           <p 
-            className="text-charcoal-600 leading-relaxed"
+            className="text-forest-800 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: processMarkdown(fullText) }}
           />
         </blockquote>
@@ -307,7 +307,7 @@ function renderArticleContent(content: string) {
       processed.push(
         <h2
           key={`h2-${i}`}
-          className="font-display text-3xl lg:text-4xl font-bold text-moss-800 mt-12 mb-6 tracking-tight"
+          className="font-display text-3xl lg:text-4xl font-bold text-forest-900 mt-12 mb-6 tracking-tight"
         >
           {block.replace("## ", "")}
         </h2>
@@ -320,7 +320,7 @@ function renderArticleContent(content: string) {
       processed.push(
         <h3
           key={`h3-${i}`}
-          className="font-display text-xl lg:text-2xl font-semibold text-moss-700 mt-8 mb-4"
+          className="font-display text-xl lg:text-2xl font-semibold text-leaf-700 mt-8 mb-4"
         >
           {block.replace("### ", "")}
         </h3>
@@ -333,8 +333,8 @@ function renderArticleContent(content: string) {
       processed.push(
         <ul key={`ul-${i}`} className="my-6 space-y-3 pl-0 list-none">
           {block.split("\n").map((item, j) => (
-            <li key={`li-${j}`} className="flex items-start gap-3 text-charcoal-600">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta-400 mt-2.5 shrink-0" />
+            <li key={`li-${j}`} className="flex items-start gap-3 text-forest-800">
+              <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
               <span
                 dangerouslySetInnerHTML={{
                   __html: processMarkdown(item.replace("- ", "")),
@@ -352,8 +352,8 @@ function renderArticleContent(content: string) {
       processed.push(
         <ol key={`ol-${i}`} className="my-6 space-y-3 pl-0 list-none">
           {block.split("\n").map((item, j) => (
-            <li key={`oli-${j}`} className="flex items-start gap-3 text-charcoal-600">
-              <span className="font-sans text-sm font-medium text-terracotta-500 mt-0.5 shrink-0 w-5">
+            <li key={`oli-${j}`} className="flex items-start gap-3 text-forest-800">
+              <span className="font-sans text-sm font-medium text-leaf-500 mt-0.5 shrink-0 w-5">
                 {j + 1}.
               </span>
               <span
@@ -373,7 +373,7 @@ function renderArticleContent(content: string) {
       processed.push(
         <p
           key={`p-${i}`}
-          className="mb-6 text-charcoal-600 leading-relaxed"
+          className="mb-6 text-forest-800 leading-relaxed"
           dangerouslySetInnerHTML={{
             __html: processMarkdown(block),
           }}
@@ -490,7 +490,7 @@ export default async function BlogPostPage({
     : null;
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-paper-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -506,23 +506,23 @@ export default async function BlogPostPage({
         />
       )}
 
-      <section className="relative overflow-hidden bg-moss-900 pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-16 lg:pt-40 lg:pb-20">
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-10"
             style={{ backgroundImage: `url('${articleImage}')` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/95 via-moss-800/85 to-charcoal-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
         </div>
 
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-terracotta-500/15 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-moss-500/20 rounded-full blur-3xl animate-drift" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8">
           <FadeIn>
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-cream-300 hover:text-terracotta-300 transition-colors duration-300 mb-8 group"
+              className="inline-flex items-center gap-2 text-paper-400 hover:text-leaf-400 transition-colors duration-300 mb-8 group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
               <span className="font-sans text-sm tracking-wide">Torna al Blog</span>
@@ -534,16 +534,16 @@ export default async function BlogPostPage({
               <Badge variant="primary" size="sm">
                 {post.category}
               </Badge>
-              <Badge className="bg-white/10 backdrop-blur-sm border border-white/20 text-cream-100">
+              <Badge className="bg-white/10 backdrop-blur-sm border border-white/20 text-paper-100">
                 {templateLabels[template]}
               </Badge>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-cream-50 mb-6 leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-paper-50 mb-6 leading-tight">
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-6 text-sm text-cream-300/80">
+            <div className="flex flex-wrap items-center gap-6 text-sm text-paper-400/80">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4" />
                 {post.author}
@@ -566,12 +566,12 @@ export default async function BlogPostPage({
       </section>
 
       <section className="max-w-5xl mx-auto px-6 lg:px-8 py-10 lg:py-12">
-        <div className="bg-white border border-cream-200 rounded-2xl p-6 lg:p-8">
+        <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
           <div className="flex items-center gap-2 mb-4">
-            <ListChecks className="w-5 h-5 text-terracotta-600" />
-            <h2 className="font-display text-2xl text-charcoal-800">Risposta rapida</h2>
+            <ListChecks className="w-5 h-5 text-leaf-600" />
+            <h2 className="font-display text-2xl text-forest-950">Risposta rapida</h2>
           </div>
-          <p className="font-body text-charcoal-700 leading-relaxed text-lg">{quickAnswer}</p>
+          <p className="font-body text-forest-900 leading-relaxed text-lg">{quickAnswer}</p>
         </div>
       </section>
 
@@ -590,7 +590,7 @@ export default async function BlogPostPage({
           </div>
 
           <article className="max-w-3xl mx-auto px-6 lg:px-8 py-16">
-            <div className="font-body text-lg text-charcoal-700">{renderArticleContent(post.content)}</div>
+            <div className="font-body text-lg text-forest-900">{renderArticleContent(post.content)}</div>
           </article>
         </>
       )}
@@ -598,26 +598,26 @@ export default async function BlogPostPage({
       {template === 2 && (
         <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
-            <article className="lg:col-span-2 bg-white rounded-2xl border border-cream-200 p-7 lg:p-10">
-              <h2 className="font-display text-3xl text-charcoal-800 mb-6">Guida pratica</h2>
-              <div className="font-body text-lg text-charcoal-700">{renderArticleContent(post.content)}</div>
+            <article className="lg:col-span-2 bg-white rounded-2xl border border-paper-300 p-7 lg:p-10">
+              <h2 className="font-display text-3xl text-forest-950 mb-6">Guida pratica</h2>
+              <div className="font-body text-lg text-forest-900">{renderArticleContent(post.content)}</div>
             </article>
 
             <aside className="space-y-6">
-              <div className="bg-cream-100 rounded-2xl p-6">
-                <h3 className="font-display text-xl text-charcoal-800 mb-4">Passi chiave</h3>
+              <div className="bg-paper-100 rounded-2xl p-6">
+                <h3 className="font-display text-xl text-forest-950 mb-4">Passi chiave</h3>
                 <ol className="space-y-3">
                   {steps.map((step, index) => (
-                    <li key={step} className="flex gap-3 text-charcoal-700">
-                      <span className="text-terracotta-600 font-semibold">{index + 1}.</span>
+                    <li key={step} className="flex gap-3 text-forest-900">
+                      <span className="text-leaf-600 font-semibold">{index + 1}.</span>
                       <span>{step}</span>
                     </li>
                   ))}
                 </ol>
               </div>
-              <div className="bg-moss-900 rounded-2xl p-6 text-cream-100">
+              <div className="bg-forest-950 rounded-2xl p-6 text-paper-100">
                 <h3 className="font-display text-xl mb-3">Da vedere</h3>
-                <p className="text-cream-200/90 mb-4">Video dimostrativo del metodo operativo.</p>
+                <p className="text-paper-300/90 mb-4">Video dimostrativo del metodo operativo.</p>
                 <video controls className="w-full rounded-xl" preload="metadata">
                   <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
                 </video>
@@ -629,24 +629,24 @@ export default async function BlogPostPage({
 
       {template === 3 && (
         <section className="max-w-5xl mx-auto px-6 lg:px-8 py-14 lg:py-16 space-y-8">
-          <div className="bg-white border border-cream-200 rounded-2xl p-6 lg:p-8">
-            <h2 className="font-display text-3xl text-charcoal-800 mb-5">Checklist operativa</h2>
+          <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
+            <h2 className="font-display text-3xl text-forest-950 mb-5">Checklist operativa</h2>
             <ol className="space-y-4">
               {steps.map((step, index) => (
-                <li key={step} className="flex items-start gap-3 text-charcoal-700 text-lg">
-                  <span className="mt-0.5 font-semibold text-terracotta-600">{index + 1}.</span>
+                <li key={step} className="flex items-start gap-3 text-forest-900 text-lg">
+                  <span className="mt-0.5 font-semibold text-leaf-600">{index + 1}.</span>
                   <span>{step}</span>
                 </li>
               ))}
             </ol>
           </div>
 
-          <div className="bg-cream-100 rounded-2xl p-6 lg:p-8">
-            <h3 className="font-display text-2xl text-charcoal-800 mb-4">Approfondimento</h3>
-            <div className="font-body text-lg text-charcoal-700">{renderArticleContent(post.content)}</div>
+          <div className="bg-paper-100 rounded-2xl p-6 lg:p-8">
+            <h3 className="font-display text-2xl text-forest-950 mb-4">Approfondimento</h3>
+            <div className="font-body text-lg text-forest-900">{renderArticleContent(post.content)}</div>
           </div>
 
-          <div className="bg-charcoal-900 rounded-2xl p-6 lg:p-8 text-cream-100">
+          <div className="bg-forest-950 rounded-2xl p-6 lg:p-8 text-paper-100">
             <h3 className="font-display text-2xl mb-4">Video esplicativo</h3>
             <video controls className="w-full rounded-xl" preload="metadata">
               <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
@@ -656,15 +656,15 @@ export default async function BlogPostPage({
       )}
 
       <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-16">
-        <div className="bg-white rounded-2xl border border-cream-200 p-6 lg:p-8">
-          <h2 className="font-display text-3xl text-charcoal-800 mb-6">FAQ</h2>
+        <div className="bg-white rounded-2xl border border-paper-300 p-6 lg:p-8">
+          <h2 className="font-display text-3xl text-forest-950 mb-6">FAQ</h2>
           <div className="space-y-4">
             {faqs.map((faq) => (
-              <details key={faq.question} className="group rounded-xl border border-cream-200 p-4 open:bg-cream-50">
-                <summary className="cursor-pointer list-none font-display text-lg text-charcoal-800">
+              <details key={faq.question} className="group rounded-xl border border-paper-300 p-4 open:bg-paper-50">
+                <summary className="cursor-pointer list-none font-display text-lg text-forest-950">
                   {faq.question}
                 </summary>
-                <p className="mt-3 text-charcoal-600 leading-relaxed">{faq.answer}</p>
+                <p className="mt-3 text-forest-800 leading-relaxed">{faq.answer}</p>
               </details>
             ))}
           </div>
@@ -672,11 +672,11 @@ export default async function BlogPostPage({
       </section>
 
       {relatedPosts.length > 0 && (
-        <section className="border-t border-cream-200 bg-cream-50">
+        <section className="border-t border-paper-300 bg-paper-50">
           <div className="max-w-5xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
             <SlideUp>
-              <h2 className="font-display text-3xl lg:text-4xl font-light text-charcoal-800 mb-12">
-                Articoli <span className="italic text-moss-700">Correlati</span>
+              <h2 className="font-display text-3xl lg:text-4xl font-light text-forest-950 mb-12">
+                Articoli <span className="italic text-leaf-700">Correlati</span>
               </h2>
             </SlideUp>
 
@@ -700,7 +700,7 @@ export default async function BlogPostPage({
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-forest-950/20 to-transparent" />
                         <div className="absolute top-4 left-4">
                           <Badge variant="earth" size="sm">
                             {relatedPost.category}
@@ -709,13 +709,13 @@ export default async function BlogPostPage({
                       </div>
 
                       <CardContent className="p-6">
-                        <h3 className="font-display text-xl font-light text-charcoal-800 mb-2 group-hover:text-moss-700 transition-colors duration-300 leading-snug">
+                        <h3 className="font-display text-xl font-light text-forest-950 mb-2 group-hover:text-leaf-700 transition-colors duration-300 leading-snug">
                           {relatedPost.title}
                         </h3>
-                        <p className="font-body text-sm text-charcoal-500 line-clamp-2 mb-4">
+                        <p className="font-body text-sm text-forest-800/70 line-clamp-2 mb-4">
                           {relatedPost.excerpt}
                         </p>
-                        <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-terracotta-600 group-hover:text-terracotta-700 transition-colors">
+                        <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-leaf-600 group-hover:text-leaf-700 transition-colors">
                           Leggi
                           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                         </span>

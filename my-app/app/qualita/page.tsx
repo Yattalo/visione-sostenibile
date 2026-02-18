@@ -65,22 +65,22 @@ const stats = [
 
 export default function QualitaPage() {
   return (
-    <div className="min-h-screen bg-cream-50 pt-20">
+    <div className="min-h-screen bg-paper-50 pt-20">
       {/* Hero */}
-      <section className="relative py-32 px-6 bg-moss-900 text-white overflow-hidden">
+      <section className="relative py-32 px-6 bg-forest-950 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-terracotta-500/30 to-transparent" />
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-500/30 to-transparent" />
         </div>
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <SlideUp>
-            <Badge className="bg-terracotta-500/20 border-terracotta-400/30 text-terracotta-200 mb-6">
+            <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-6">
               Qualità Certificata
             </Badge>
             <h1 className="font-display text-5xl md:text-6xl font-light leading-tight mb-6">
               Il Nostro Impegno per
-              <span className="block italic text-terracotta-300">l&apos;Eccellenza</span>
+              <span className="block italic text-leaf-400">l&apos;Eccellenza</span>
             </h1>
-            <p className="font-body text-lg text-cream-200 max-w-2xl mx-auto leading-relaxed">
+            <p className="font-body text-lg text-paper-300 max-w-2xl mx-auto leading-relaxed">
               Ogni progetto è realizzato con professionalità, competenza e passione.
               Scopri le nostre certificazioni e gli standard che ci guidano.
             </p>
@@ -93,10 +93,10 @@ export default function QualitaPage() {
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
-              <Badge className="bg-moss-100 text-moss-700 mb-4">
+              <Badge className="bg-leaf-100 text-leaf-700 mb-4">
                 Le Nostre Certificazioni
               </Badge>
-              <h2 className="font-display text-4xl text-charcoal-800">
+              <h2 className="font-display text-4xl text-forest-950">
                 Standard di Eccellenza
               </h2>
             </div>
@@ -108,12 +108,12 @@ export default function QualitaPage() {
                 <StaggerItem key={cert.title} delay={index * 0.1}>
                   <Card variant="elevated" className="h-full group hover:shadow-floating transition-all duration-500">
                     <div className="flex items-start gap-6">
-                      <div className="w-16 h-16 rounded-2xl bg-terracotta-100 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
-                        <cert.icon className="w-8 h-8 text-terracotta-600" />
+                      <div className="w-16 h-16 rounded-2xl bg-leaf-100 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
+                        <cert.icon className="w-8 h-8 text-leaf-600" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-display text-xl text-charcoal-800">
+                          <h3 className="font-display text-xl text-forest-950">
                             {cert.title}
                           </h3>
                           <Badge
@@ -123,10 +123,10 @@ export default function QualitaPage() {
                             {cert.year}
                           </Badge>
                         </div>
-                        <p className="font-body text-charcoal-600 mb-2">
+                        <p className="font-body text-forest-800 mb-2">
                           {cert.description}
                         </p>
-                        <p className="font-body text-sm text-cream-500">
+                        <p className="font-body text-sm text-paper-500">
                           <span className="font-medium">Rilasciato da:</span> {cert.issuedBy}
                         </p>
                       </div>
@@ -140,11 +140,11 @@ export default function QualitaPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-20 bg-moss-900 text-white">
+      <section className="py-20 bg-forest-950 text-white">
         <div className="max-w-6xl mx-auto px-6">
           <SlideUp>
             <div className="text-center mb-12">
-              <Badge className="bg-terracotta-500/20 border-terracotta-400/30 text-terracotta-200 mb-4">
+              <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-4">
                 I Nostri Numeri
               </Badge>
               <h2 className="font-display text-4xl">
@@ -157,10 +157,10 @@ export default function QualitaPage() {
             {stats.map((stat, index) => (
               <SlideUp key={stat.label} delay={index * 0.1}>
                 <div className="text-center">
-                  <p className="font-display text-5xl text-terracotta-400 mb-2">
+                  <p className="font-display text-5xl text-leaf-400 mb-2">
                     {stat.value}
                   </p>
-                  <p className="font-sans text-sm uppercase tracking-widest text-cream-300">
+                  <p className="font-sans text-sm uppercase tracking-widest text-paper-400">
                     {stat.label}
                   </p>
                 </div>
@@ -175,10 +175,10 @@ export default function QualitaPage() {
         <div className="max-w-6xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
-              <Badge className="bg-cream-200 text-charcoal-700 mb-4">
+              <Badge className="bg-paper-300 text-forest-900 mb-4">
                 I Nostri Valori
               </Badge>
-              <h2 className="font-display text-4xl text-charcoal-800">
+              <h2 className="font-display text-4xl text-forest-950">
                 Cosa Ci Guida
               </h2>
             </div>
@@ -187,14 +187,14 @@ export default function QualitaPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {commitments.map((commitment, index) => (
               <StaggerItem key={commitment.title} delay={index * 0.1}>
-                <Card variant="outline" className="h-full text-center group hover:border-terracotta-300 transition-colors duration-300">
-                  <div className="w-14 h-14 rounded-2xl bg-moss-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-terracotta-100 transition-colors duration-300">
-                    <commitment.icon className="w-7 h-7 text-moss-700 group-hover:text-terracotta-600 transition-colors" />
+                <Card variant="outline" className="h-full text-center group hover:border-leaf-500 transition-colors duration-300">
+                  <div className="w-14 h-14 rounded-2xl bg-leaf-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-leaf-100 transition-colors duration-300">
+                    <commitment.icon className="w-7 h-7 text-leaf-700 group-hover:text-leaf-600 transition-colors" />
                   </div>
-                  <h3 className="font-display text-lg text-charcoal-800 mb-2">
+                  <h3 className="font-display text-lg text-forest-950 mb-2">
                     {commitment.title}
                   </h3>
-                  <p className="font-body text-sm text-charcoal-600">
+                  <p className="font-body text-sm text-forest-800">
                     {commitment.description}
                   </p>
                 </Card>
@@ -205,20 +205,20 @@ export default function QualitaPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-cream-100">
+      <section className="py-24 px-6 bg-paper-100">
         <div className="max-w-2xl mx-auto text-center">
           <SlideUp>
-            <Badge className="bg-terracotta-100 text-terracotta-700 mb-4">
+            <Badge className="bg-leaf-100 text-leaf-700 mb-4">
               Garanzia
             </Badge>
-            <h2 className="font-display text-4xl text-charcoal-800 mb-6">
+            <h2 className="font-display text-4xl text-forest-950 mb-6">
               La Tua Tranquillità è la Nostra Priorità
             </h2>
-            <p className="font-body text-lg text-charcoal-600 mb-8">
+            <p className="font-body text-lg text-forest-800 mb-8">
               Ogni servizio è coperto da garanzia. Il nostro team è sempre a tua disposizione
               per qualsiasi necessità post-intervento.
             </p>
-            <Button className="bg-moss-700 hover:bg-moss-600 text-white">
+            <Button className="bg-leaf-700 hover:bg-leaf-600 text-white">
               Contattaci per una Consulenza
             </Button>
           </SlideUp>

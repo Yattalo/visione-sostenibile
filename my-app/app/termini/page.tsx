@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 
 export default function TerminiPage() {
   return (
-    <div className="min-h-screen bg-cream-50 pt-24 pb-20">
+    <div className="min-h-screen bg-paper-50 pt-24 pb-20">
       <section className="max-w-4xl mx-auto px-6">
-        <Badge className="bg-moss-100 text-moss-700 mb-4">Termini</Badge>
-        <h1 className="font-display text-4xl text-charcoal-800 mb-8">
+        <Badge className="bg-leaf-100 text-leaf-700 mb-4">Termini</Badge>
+        <h1 className="font-display text-4xl text-forest-950 mb-8">
           Termini e Condizioni
         </h1>
 
-        <div className="space-y-8 font-body text-charcoal-600 leading-relaxed">
+        <div className="space-y-8 font-body text-forest-800 leading-relaxed">
           <section>
-            <h2 className="font-display text-2xl text-charcoal-800 mb-3">
+            <h2 className="font-display text-2xl text-forest-950 mb-3">
               1. Oggetto
             </h2>
             <p>
@@ -29,7 +29,7 @@ export default function TerminiPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-charcoal-800 mb-3">
+            <h2 className="font-display text-2xl text-forest-950 mb-3">
               2. Uso del sito
             </h2>
             <p>
@@ -40,7 +40,7 @@ export default function TerminiPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-charcoal-800 mb-3">
+            <h2 className="font-display text-2xl text-forest-950 mb-3">
               3. Proprietà intellettuale
             </h2>
             <p>
@@ -51,7 +51,7 @@ export default function TerminiPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-charcoal-800 mb-3">
+            <h2 className="font-display text-2xl text-forest-950 mb-3">
               4. Limitazione di responsabilità
             </h2>
             <p>
@@ -62,14 +62,14 @@ export default function TerminiPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl text-charcoal-800 mb-3">
+            <h2 className="font-display text-2xl text-forest-950 mb-3">
               5. Contatti
             </h2>
             <p>
               Per informazioni sui presenti termini:{" "}
               <a
                 href="mailto:info@visionesostenibile.it"
-                className="text-terracotta-600 hover:text-terracotta-700"
+                className="text-leaf-600 hover:text-leaf-700"
               >
                 info@visionesostenibile.it
               </a>

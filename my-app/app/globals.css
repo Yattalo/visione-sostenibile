@@ -149,6 +149,14 @@
   --accent-foreground: var(--color-forest-950);
   --primary: var(--color-leaf-700);
   --primary-foreground: var(--color-paper-50);
+
+  /* ── BMAD Spacing System (8px grid) ────────────────── */
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-6: 48px;
+  --spacing-8: 64px;
+  --spacing-12: 96px;
 }
 
 html {
@@ -351,6 +359,48 @@ h4, h5, h6 {
 .z-header { z-index: 100; }
 .z-modal  { z-index: 200; }
 .z-tooltip { z-index: 300; }
+
+/* ── BMAD Spacing Utilities ────────────────── */
+.section-padding {
+  padding-top: var(--spacing-6);
+  padding-bottom: var(--spacing-6);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--spacing-8);
+    padding-bottom: var(--spacing-8);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: var(--spacing-12);
+    padding-bottom: var(--spacing-12);
+  }
+}
+
+.section-padding-sm {
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+}
+
+@media (min-width: 768px) {
+  .section-padding-sm {
+    padding-top: var(--spacing-6);
+    padding-bottom: var(--spacing-6);
+  }
+}
+
+.card-padding {
+  padding: var(--spacing-2);
+}
+
+@media (min-width: 768px) {
+  .card-padding {
+    padding: var(--spacing-3);
+  }
+}
 
 /* ── F6: Germoglio (Sprout) Hover Effects ────────────────── */
 

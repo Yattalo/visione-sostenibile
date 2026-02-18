@@ -45,8 +45,8 @@ export default function AdminGalleryPage() {
             <Card key={item._id}>
               <CardContent className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-moss-100 flex items-center justify-center">
-                    <ImageIcon className="w-5 h-5 text-moss-700" />
+                  <div className="w-10 h-10 rounded-xl bg-leaf-100 flex items-center justify-center">
+                    <ImageIcon className="w-5 h-5 text-leaf-700" />
                   </div>
                   <div>
                     <p className="font-medium">{item.title}</p>

@@ -24,13 +24,13 @@ export default function BlogPage() {
   const [featuredPost, ...remainingPosts] = blogPosts;
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-paper-50">
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
           Matches site-wide organic aesthetic: dark moss bg,
           decorative blobs, serif italic heading
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-moss-900 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
         {/* Background texture */}
         <div className="absolute inset-0">
           <div
@@ -40,33 +40,33 @@ export default function BlogPage() {
                 "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-moss-900/95 via-moss-800/85 to-charcoal-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
         </div>
 
         {/* Organic decorative blobs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-terracotta-500/15 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-moss-500/20 rounded-full blur-3xl animate-drift" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-terracotta-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sun-400/5 rounded-full blur-3xl" />
 
         {/* Thin decorative accent line */}
-        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-terracotta-400/30 to-transparent" />
+        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-leaf-400/30 to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <FadeIn>
-            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-cream-200 mb-8 px-6 py-2 text-xs tracking-widest uppercase">
+            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 mb-8 px-6 py-2 text-xs tracking-widest uppercase">
               Blog
             </Badge>
           </FadeIn>
 
           <SlideUp>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-cream-50 leading-tight max-w-4xl mb-8">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
               Il Nostro
-              <span className="block italic text-terracotta-300">Blog</span>
+              <span className="block italic text-leaf-400">Blog</span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.2}>
-            <p className="font-body text-xl md:text-2xl text-cream-200/80 max-w-2xl leading-relaxed">
+            <p className="font-body text-xl md:text-2xl text-paper-300/80 max-w-2xl leading-relaxed">
               Consigli, tendenze e approfondimenti dal mondo del giardinaggio
               sostenibile e della progettazione del verde.
             </p>
@@ -75,7 +75,7 @@ export default function BlogPage() {
           {/* Scroll indicator */}
           <SlideUp delay={0.5}>
             <div className="mt-16">
-              <div className="w-px h-16 bg-gradient-to-b from-cream-300/50 to-transparent mx-0" />
+              <div className="w-px h-16 bg-gradient-to-b from-paper-400/50 to-transparent mx-0" />
             </div>
           </SlideUp>
         </div>
@@ -88,7 +88,7 @@ export default function BlogPage() {
       ═══════════════════════════════════════════════════ */}
       <section className="relative py-20 lg:py-28">
         {/* Subtle top gradient blending hero into content */}
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-moss-900/5 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-forest-950/5 to-transparent" />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <SlideUp>
@@ -111,7 +111,7 @@ export default function BlogPage() {
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest-950/30 to-transparent" />
                     <div className="absolute top-6 left-6">
                       <Badge variant="primary" size="sm">
                         {featuredPost.category}
@@ -121,16 +121,16 @@ export default function BlogPage() {
 
                   {/* Content */}
                   <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
-                    <span className="font-sans text-xs uppercase tracking-widest text-terracotta-500 mb-4">
+                    <span className="font-sans text-xs uppercase tracking-widest text-leaf-500 mb-4">
                       Articolo in evidenza
                     </span>
-                    <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-light text-charcoal-800 mb-4 leading-snug group-hover:text-moss-700 transition-colors duration-300">
+                    <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-light text-forest-950 mb-4 leading-snug group-hover:text-leaf-700 transition-colors duration-300">
                       {featuredPost.title}
                     </h2>
-                    <p className="font-body text-charcoal-500 text-lg leading-relaxed mb-6 line-clamp-3">
+                    <p className="font-body text-forest-800/70 text-lg leading-relaxed mb-6 line-clamp-3">
                       {featuredPost.excerpt}
                     </p>
-                    <div className="flex items-center gap-6 text-sm text-charcoal-400 mb-8">
+                    <div className="flex items-center gap-6 text-sm text-forest-800/60 mb-8">
                       <span className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         {new Date(featuredPost.publishedAt).toLocaleDateString(
@@ -147,7 +147,7 @@ export default function BlogPage() {
                         {featuredPost.readTime}
                       </span>
                     </div>
-                    <span className="inline-flex items-center gap-2 font-sans text-sm font-medium text-terracotta-600 group-hover:text-terracotta-700 transition-colors">
+                    <span className="inline-flex items-center gap-2 font-sans text-sm font-medium text-leaf-600 group-hover:text-leaf-700 transition-colors">
                       Leggi l&apos;articolo
                       <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
@@ -183,7 +183,7 @@ export default function BlogPage() {
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-forest-950/20 to-transparent" />
                         <div className="absolute top-4 left-4">
                           <Badge variant="earth" size="sm">
                             {post.category}
@@ -193,14 +193,14 @@ export default function BlogPage() {
 
                       {/* Content */}
                       <CardContent className="p-6 lg:p-8">
-                        <h2 className="font-display text-xl lg:text-2xl font-light text-charcoal-800 mb-3 leading-snug group-hover:text-moss-700 transition-colors duration-300 line-clamp-2">
+                        <h2 className="font-display text-xl lg:text-2xl font-light text-forest-950 mb-3 leading-snug group-hover:text-leaf-700 transition-colors duration-300 line-clamp-2">
                           {post.title}
                         </h2>
-                        <p className="font-body text-charcoal-500 text-base leading-relaxed mb-5 line-clamp-3">
+                        <p className="font-body text-forest-800/70 text-base leading-relaxed mb-5 line-clamp-3">
                           {post.excerpt}
                         </p>
-                        <div className="flex items-center justify-between pt-5 border-t border-cream-200">
-                          <div className="flex items-center gap-4 text-xs text-charcoal-400">
+                        <div className="flex items-center justify-between pt-5 border-t border-paper-300">
+                          <div className="flex items-center gap-4 text-xs text-forest-800/60">
                             <span className="flex items-center gap-1.5">
                               <Calendar className="w-3.5 h-3.5" />
                               {new Date(post.publishedAt).toLocaleDateString(
@@ -217,7 +217,7 @@ export default function BlogPage() {
                               {post.readTime}
                             </span>
                           </div>
-                          <ArrowRight className="w-4 h-4 text-charcoal-300 group-hover:text-terracotta-500 transition-all duration-300 group-hover:translate-x-1" />
+                          <ArrowRight className="w-4 h-4 text-forest-700 group-hover:text-leaf-500 transition-all duration-300 group-hover:translate-x-1" />
                         </div>
                       </CardContent>
                     </Card>

@@ -155,6 +155,15 @@ export default defineSchema({
     .index("by_active_order", ["isActive", "order"])
     .index("by_tag", ["isActive"]),
 
+  adminSessions: defineTable({
+    token: v.string(),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+    isActive: v.boolean(),
+  })
+    .index("by_token", ["token"])
+    .index("by_active", ["isActive", "expiresAt"]),
+
   settings: defineTable({
     key: v.string(),
     value: v.any(),

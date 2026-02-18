@@ -70,7 +70,7 @@ export default function AdminReviewsPage() {
                 onClick={() => setFilter(f)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   filter === f
-                    ? "bg-terracotta-600 text-white"
+                    ? "bg-sun-500 text-white"
                     : "bg-white border border-border hover:bg-muted"
                 }`}
               >
@@ -102,7 +102,7 @@ export default function AdminReviewsPage() {
                 <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-terracotta-400 to-moss-500 flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-leaf-400 to-leaf-500 flex items-center justify-center text-white font-bold">
                         {review.authorName.charAt(0)}
                       </div>
                       <div>
