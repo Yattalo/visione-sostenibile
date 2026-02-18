@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -13,13 +13,8 @@ import {
   X,
   Leaf,
 } from "lucide-react";
-import {
-  getProjectsWithPhotos,
-  getProjectsWithoutPhotos,
-  getAllTags,
-  formatTag,
-} from "../lib/progetti-data";
-import type { ProgettiProject } from "../lib/progetti-data";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import {
@@ -29,8 +24,31 @@ import {
   StaggerItem,
 } from "../components/animations";
 import { cn } from "../lib/utils";
+import { Skeleton } from "../components/ui/Skeleton";
 
-function ProjectCard({ project, index }: { project: ProgettiProject; index: number }) {
+function formatTag(tag: string): string {
+  return tag
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+interface Project {
+  slug: string;
+  title: string;
+  location: string;
+  region: string;
+  area_mq?: number | null;
+  type: string;
+  tags: string[];
+  has_photos: boolean;
+  hero_image?: string | null;
+  hero_alt?: string;
+  thumbnail?: string | null;
+  photo_count: number;
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <Link href={`/progetti/${project.slug}`} className="group block">
       <motion.article
@@ -100,7 +118,7 @@ function ProjectCard({ project, index }: { project: ProgettiProject; index: numb
   );
 }
 
-function TextProjectCard({ project }: { project: ProgettiProject }) {
+function TextProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/progetti/${project.slug}`} className="group block">
       <div className="flex items-start gap-4 py-4 border-b border-paper-300 last:border-0 group-hover:bg-paper-50/50 -mx-4 px-4 rounded-lg transition-colors">
@@ -129,11 +147,30 @@ function TextProjectCard({ project }: { project: ProgettiProject }) {
 }
 
 export default function ProgettiPage() {
-  const projectsWithPhotos = getProjectsWithPhotos();
-  const projectsWithoutPhotos = getProjectsWithoutPhotos();
-  const allTags = getAllTags();
+  const allProjects = useQuery(api.projects.getAll);
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+
+  const projectsWithPhotos = useMemo(() => {
+    if (!allProjects) return [];
+    return allProjects.filter((p) => p.has_photos);
+  }, [allProjects]);
+
+  const projectsWithoutPhotos = useMemo(() => {
+    if (!allProjects) return [];
+    return allProjects.filter((p) => !p.has_photos);
+  }, [allProjects]);
+
+  const allTags = useMemo(() => {
+    if (!allProjects) return [];
+    const tags = new Set<string>();
+    for (const project of allProjects) {
+      for (const tag of project.tags) {
+        tags.add(tag);
+      }
+    }
+    return Array.from(tags).sort();
+  }, [allProjects]);
 
   const filteredProjects = activeTag
     ? projectsWithPhotos.filter((p) => p.tags.includes(activeTag))
@@ -142,6 +179,38 @@ export default function ProgettiPage() {
   const filteredTextProjects = activeTag
     ? projectsWithoutPhotos.filter((p) => p.tags.includes(activeTag))
     : projectsWithoutPhotos;
+
+  if (allProjects === undefined) {
+    return (
+      <div className="min-h-screen bg-paper-50">
+        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+            <Skeleton className="h-4 w-32 mb-8" />
+            <Skeleton className="h-16 w-64 mb-8" />
+            <Skeleton className="h-6 w-96" />
+          </div>
+        </section>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-paper-300">
+                <Skeleton className="aspect-[3/2] w-full" />
+                <div className="p-6 space-y-3">
+                  <Skeleton className="h-6 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const totalProjects = filteredProjects.length + filteredTextProjects.length;
 
   return (
     <div className="min-h-screen bg-paper-50">
@@ -197,7 +266,7 @@ export default function ProgettiPage() {
             <div className="flex items-center gap-8 text-paper-400/70">
               <div>
                 <span className="font-display text-3xl text-leaf-400">
-                  {projectsWithPhotos.length + projectsWithoutPhotos.length}
+                  {totalProjects}
                 </span>
                 <span className="font-sans text-xs uppercase tracking-widest ml-2">
                   Progetti

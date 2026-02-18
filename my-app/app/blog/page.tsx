@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Calendar, ArrowRight } from "lucide-react";
-import { blogPosts } from "../lib/blog";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import {
@@ -10,6 +13,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "../components/animations";
+import { Skeleton } from "../components/ui/Skeleton";
 
 const coverImages: Record<string, string> = {
   "come-mantenere-giardino-autunno":
@@ -20,8 +24,96 @@ const coverImages: Record<string, string> = {
     "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
 };
 
+function LoadingState() {
+  return (
+    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="bg-white rounded-2xl overflow-hidden border border-paper-300">
+            <Skeleton className="aspect-[16/10] w-full" />
+            <div className="p-6 space-y-4">
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-6 w-3/4" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-2/3" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
+      <p className="font-body text-forest-800/70">Nessun articolo pubblicato.</p>
+    </div>
+  );
+}
+
 export default function BlogPage() {
-  const [featuredPost, ...remainingPosts] = blogPosts;
+  const posts = useQuery(api.blog.getAll);
+
+  if (posts === undefined) {
+    return (
+      <div className="min-h-screen bg-paper-50">
+        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+          <div className="absolute inset-0">
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-10"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+            <Skeleton className="h-4 w-20 mb-8" />
+            <Skeleton className="h-16 w-64 mb-8" />
+            <Skeleton className="h-6 w-96" />
+          </div>
+        </section>
+        <LoadingState />
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-screen bg-paper-50">
+        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+          <div className="absolute inset-0">
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-10"
+              style={{
+                backgroundImage:
+                  "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 mb-8 px-6 py-2 text-xs tracking-widest uppercase">
+              Blog
+            </Badge>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
+              Il Nostro
+              <span className="block italic text-leaf-400">Blog</span>
+            </h1>
+            <p className="font-body text-xl md:text-2xl text-paper-300/80 max-w-2xl leading-relaxed">
+              Consigli, tendenze e approfondimenti dal mondo del giardinaggio
+              sostenibile e della progettazione del verde.
+            </p>
+          </div>
+        </section>
+        <EmptyState />
+      </div>
+    );
+  }
+
+  const [featuredPost, ...remainingPosts] = posts;
 
   return (
     <div className="min-h-screen bg-paper-50">

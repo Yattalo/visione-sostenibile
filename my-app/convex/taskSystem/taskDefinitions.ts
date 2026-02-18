@@ -965,4 +965,798 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     ],
     filesExpected: [],
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // LEAD MAGNETS & FEATURED SNIPPETS (from 2026-02-13 plan)
+  // Phase 1: Quiz Foundation
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "C10",
+    agent: "claude",
+    title: "Add quizSubmissions table to Convex schema",
+    description:
+      "Add 'quizSubmissions' table to convex/schema.ts (separate from 'leads' table). Fields: answers (array of {questionId, answer}), resultProfile (string), email (optional), phone (optional), source (string: homepage|servizi|blog), createdAt (number). Indexes: by_date, by_profile. Create convex/quiz.ts with submit mutation and list query.",
+    status: "todo",
+    priority: "high",
+    category: "backend",
+    phaseId: "features",
+    wave: 7,
+    estimatedHours: 2,
+    dependencies: [],
+    tags: ["convex", "schema", "quiz", "lead-magnet"],
+    acceptanceCriteria: [
+      "quizSubmissions table added to convex/schema.ts with by_date and by_profile indexes",
+      "convex/quiz.ts exports submit mutation and list query",
+      "npx convex dev --once deploys without errors",
+    ],
+    filesExpected: [
+      "convex/schema.ts",
+      "convex/quiz.ts",
+    ],
+  },
+
+  {
+    taskId: "C11",
+    agent: "claude",
+    title: "Create QuizGiardino multi-step quiz component",
+    description:
+      "Build QuizGiardino.tsx: 6 questions with questionId/label/options, 4 result profiles (Contemplativo, Sostenibile, Familiare, Rappresentativo) with scoring logic. Multi-step form using Framer Motion AnimatePresence. Progress bar with Leaf Green. Result screen with profile name, description, recommended services. Email capture post-result. Convex mutation call via api.quiz.submit. Props: source (homepage|servizi|blog), onComplete?. Use BMAD palette (Leaf Green progress, Paper Canvas bg, Sun Accent CTA).",
+    status: "todo",
+    priority: "critical",
+    category: "frontend",
+    phaseId: "features",
+    wave: 7,
+    estimatedHours: 8,
+    dependencies: ["C10"],
+    tags: ["quiz", "component", "framer-motion", "lead-magnet"],
+    acceptanceCriteria: [
+      "6 questions render as clickable option cards (tile-style)",
+      "AnimatePresence transitions between steps",
+      "Progress bar fills with Leaf Green",
+      "4 result profiles computed from answers",
+      "Result screen shows profile + recommended services",
+      "Email capture form submits to Convex",
+      "Mobile-first, touch-friendly tiles",
+    ],
+    filesExpected: [
+      "app/components/QuizGiardino.tsx",
+    ],
+  },
+
+  {
+    taskId: "C12",
+    agent: "claude",
+    title: "Create QuizCTA and QuizMiniPreview components",
+    description:
+      "QuizCTA.tsx: banner/card component linking to /quiz with 3 variants (sidebar: vertical card with Sprout icon; inline: horizontal full-width banner; compact: minimal text + link). Uses BMAD Button and Card components. QuizMiniPreview.tsx: embedded homepage teaser showing first quiz question as clickable tiles. On click redirects to /quiz?start=2. Paper Canvas bg with Leaf Green accents.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 7,
+    estimatedHours: 3,
+    dependencies: [],
+    tags: ["quiz", "cta", "component", "lead-magnet"],
+    acceptanceCriteria: [
+      "QuizCTA renders in sidebar, inline, and compact variants",
+      "QuizMiniPreview shows first question as teaser",
+      "Click on MiniPreview redirects to /quiz?start=2",
+      "Uses BMAD palette and Walkway typography",
+      "All variants link to /quiz",
+    ],
+    filesExpected: [
+      "app/components/QuizCTA.tsx",
+      "app/components/QuizMiniPreview.tsx",
+    ],
+  },
+
+  {
+    taskId: "C13",
+    agent: "claude",
+    title: "Create /quiz dedicated page route",
+    description:
+      "Server component wrapper at app/quiz/page.tsx. Exports metadata (title: 'Che Giardino Fa Per Te? | Quiz'). Renders QuizGiardino component with source='quiz-page' in a centered layout. Deep Forest header with title + subtitle, Paper Canvas body. Back link to homepage.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 7,
+    estimatedHours: 1,
+    dependencies: ["C11"],
+    tags: ["quiz", "page", "route"],
+    acceptanceCriteria: [
+      "/quiz route renders the quiz component",
+      "Metadata includes title and description",
+      "Quiz questions advance and result shows",
+      "Responsive layout at all breakpoints",
+    ],
+    filesExpected: [
+      "app/quiz/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // Phase 2: Quiz Integration
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "C14",
+    agent: "claude",
+    title: "Integrate quiz section into homepage",
+    description:
+      "Add QuizMiniPreview section to homepage (app/page.tsx) between services section and stats. New section with Paper Canvas bg, eyebrow 'Scopri il tuo stile', H2 'Che giardino fa per te?', intro paragraph, and QuizMiniPreview component. Use Framer Motion for scroll-in animation.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 8,
+    estimatedHours: 2,
+    dependencies: ["C13", "C12"],
+    tags: ["quiz", "homepage", "integration"],
+    acceptanceCriteria: [
+      "Quiz section visible on homepage between services and stats",
+      "QuizMiniPreview renders with scroll-in animation",
+      "Clicking option redirects to /quiz",
+      "Section responsive at all breakpoints",
+    ],
+    filesExpected: [
+      "app/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "C15",
+    agent: "claude",
+    title: "Add QuizCTA sidebar to service detail pages",
+    description:
+      "Add <QuizCTA variant='sidebar' /> to the service detail page sidebar (app/servizi/[slug]/page.tsx), after existing contact card and video card in the aside section.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 8,
+    estimatedHours: 1,
+    dependencies: ["C12", "C13"],
+    tags: ["quiz", "servizi", "integration", "cta"],
+    acceptanceCriteria: [
+      "QuizCTA card visible in service page sidebar",
+      "Links to /quiz correctly",
+      "Does not break existing sidebar layout",
+    ],
+    filesExpected: [
+      "app/servizi/[slug]/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "C16",
+    agent: "claude",
+    title: "Add quiz CTAs to blog posts (mid + end article)",
+    description:
+      "Add QuizCTA to blog detail page (app/blog/[slug]/page.tsx). Mid-article: inline variant after quick answer section. End-article: section with Paper Canvas bg, H3 'Prossimo passo', CTA button linking to /quiz. Import QuizCTA component.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 8,
+    estimatedHours: 1,
+    dependencies: ["C12", "C13"],
+    tags: ["quiz", "blog", "integration", "cta"],
+    acceptanceCriteria: [
+      "Mid-article QuizCTA renders inline after quick answer",
+      "End-article CTA section renders before related posts",
+      "Both CTAs link to /quiz",
+      "Does not break existing blog layout",
+    ],
+    filesExpected: [
+      "app/blog/[slug]/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // Phase 3: Featured Snippets — Schema
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "C17",
+    agent: "claude",
+    title: "Add Organization, LocalBusiness, WebSite JSON-LD to layout",
+    description:
+      "Add three <script type='application/ld+json'> blocks to app/layout.tsx: Organization (name, url, logo, foundingDate:2009, areaServed:[Piemonte,Lombardia], contactPoint), LocalBusiness (telephone, email, priceRange, knowsAbout), WebSite (name, url). All data for Visione Sostenibile, Torino.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "polish",
+    wave: 9,
+    estimatedHours: 2,
+    dependencies: [],
+    tags: ["seo", "json-ld", "structured-data", "featured-snippets"],
+    acceptanceCriteria: [
+      "Organization JSON-LD in layout <head>",
+      "LocalBusiness JSON-LD with Torino address",
+      "WebSite JSON-LD present",
+      "Valid JSON-LD in page source",
+    ],
+    filesExpected: [
+      "app/layout.tsx",
+    ],
+  },
+
+  {
+    taskId: "C18",
+    agent: "claude",
+    title: "Add BreadcrumbList JSON-LD to service and blog pages",
+    description:
+      "Add BreadcrumbList structured data to app/servizi/[slug]/page.tsx (Home > Servizi > Service Title) and app/blog/[slug]/page.tsx (Home > Blog > Post Title). Use SITE_URL constant. Add <script type='application/ld+json'> blocks near existing JSON-LD.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "polish",
+    wave: 9,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["seo", "json-ld", "breadcrumbs", "featured-snippets"],
+    acceptanceCriteria: [
+      "BreadcrumbList schema on all service detail pages",
+      "BreadcrumbList schema on all blog detail pages",
+      "Validates with Google Rich Results Test",
+    ],
+    filesExpected: [
+      "app/servizi/[slug]/page.tsx",
+      "app/blog/[slug]/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "C19",
+    agent: "claude",
+    title: "Add HowTo JSON-LD schema to blog posts",
+    description:
+      "Generate HowTo structured data from existing articleSteps in blog posts. Create conditional <script type='application/ld+json'> block: only render when steps.length > 0. Fields: name (post.title), description (post.excerpt), step[] with position and text.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "polish",
+    wave: 9,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["seo", "json-ld", "howto", "featured-snippets"],
+    acceptanceCriteria: [
+      "HowTo schema renders for blog posts with steps",
+      "No HowTo schema for posts without steps",
+      "Valid JSON-LD in page source",
+    ],
+    filesExpected: [
+      "app/blog/[slug]/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // Phase 4: Featured Snippets — Content Optimization
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "C20",
+    agent: "claude",
+    title: "Restructure blog H2 headings to question format",
+    description:
+      "Update H2 headings in app/lib/blog.ts to question format for featured snippets. Examples: 'Pulizia e Manutenzione' → 'Come fare la pulizia del giardino in autunno?', 'Protezione dal Freddo' → 'Come proteggere le piante dal freddo invernale?'. Apply to all 3 blog posts (autunno, tendenze-2024, piante-pendio).",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "polish",
+    wave: 9,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["seo", "content", "h2", "featured-snippets"],
+    acceptanceCriteria: [
+      "All blog H2s are in Italian question format",
+      "Blog posts render correctly with new H2 text",
+      "Questions are natural and keyword-rich",
+    ],
+    filesExpected: [
+      "app/lib/blog.ts",
+    ],
+  },
+
+  {
+    taskId: "C21",
+    agent: "claude",
+    title: "Optimize quick answers to 40-60 word sweet spot",
+    description:
+      "Verify and adjust quick answer lengths in blog and service pages. Target: 40-60 Italian words per quick answer (sweet spot for Google paragraph snippets). Check blog quickAnswers in app/blog/[slug]/page.tsx and service quickAnswers in app/servizi/[slug]/page.tsx. Trim or expand as needed.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "polish",
+    wave: 9,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["seo", "content", "featured-snippets"],
+    acceptanceCriteria: [
+      "All quick answers are 40-60 words",
+      "Content still reads naturally in Italian",
+      "No broken formatting after edits",
+    ],
+    filesExpected: [
+      "app/blog/[slug]/page.tsx",
+      "app/servizi/[slug]/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "C22",
+    agent: "claude",
+    title: "Add question-format H2 to service quick answer sections",
+    description:
+      "Replace generic 'Risposta rapida' H2 in service pages with slug-specific question H2s. Create serviceQuestionH2 map: e.g. 'progettazione-giardini-orti' → 'Quanto costa la progettazione di un giardino sostenibile?'. Fallback to 'Risposta rapida' for unmapped slugs.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "polish",
+    wave: 9,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["seo", "content", "services", "featured-snippets"],
+    acceptanceCriteria: [
+      "Each service page has a unique question H2",
+      "Fallback works for unmapped slugs",
+      "Questions are natural Italian search queries",
+    ],
+    filesExpected: [
+      "app/servizi/[slug]/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // Phase 5: Template Audit & Final Verification
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "C23",
+    agent: "claude",
+    title: "Systematic template audit — service pages",
+    description:
+      "Audit each service page against SEO checklist: H1 unique and keyword-focused, quick answer ≤60 words, at least 1 H2 in question format, FAQPage schema present, BreadcrumbList schema present, lists with 5-8 items, meta description ≤160 chars with keyword, HowTo schema if contains steps. Fix any issues found.",
+    status: "todo",
+    priority: "high",
+    category: "review",
+    phaseId: "deploy",
+    wave: 10,
+    estimatedHours: 3,
+    dependencies: ["C14", "C15", "C16", "C17", "C18", "C19", "C20", "C21", "C22"],
+    tags: ["audit", "seo", "services", "qa"],
+    acceptanceCriteria: [
+      "All service pages pass the SEO checklist",
+      "No missing H1, H2 question, or schema",
+      "Quick answers within word limit",
+      "Meta descriptions optimized",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "C24",
+    agent: "claude",
+    title: "Systematic template audit — blog posts",
+    description:
+      "Audit each blog post against same SEO checklist as C23. Verify: H1 unique, quick answer ≤60 words, H2s in question format, FAQPage schema, BreadcrumbList schema, HowTo schema for step-based posts, meta descriptions. Fix any issues found.",
+    status: "todo",
+    priority: "high",
+    category: "review",
+    phaseId: "deploy",
+    wave: 10,
+    estimatedHours: 2,
+    dependencies: ["C14", "C15", "C16", "C17", "C18", "C19", "C20", "C21", "C22"],
+    tags: ["audit", "seo", "blog", "qa"],
+    acceptanceCriteria: [
+      "All blog posts pass the SEO checklist",
+      "H2s are in question format",
+      "HowTo schema present where applicable",
+      "Meta descriptions optimized",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "C25",
+    agent: "claude",
+    title: "Final build verification for lead magnets & snippets",
+    description:
+      "Run pnpm build + pnpm lint. Verify all pages load: / (homepage with quiz section), /quiz (dedicated quiz page), /servizi/[slug] (sidebar CTA), /blog/[slug] (mid + end CTAs). View page source for all JSON-LD schemas. Check no regressions introduced.",
+    status: "todo",
+    priority: "critical",
+    category: "devops",
+    phaseId: "deploy",
+    wave: 10,
+    estimatedHours: 2,
+    dependencies: ["C23", "C24"],
+    tags: ["build", "verification", "qa", "lead-magnet"],
+    acceptanceCriteria: [
+      "pnpm build succeeds with zero errors",
+      "pnpm lint passes",
+      "Homepage quiz section renders",
+      "/quiz page works end-to-end",
+      "Service sidebar CTA visible",
+      "Blog CTAs render correctly",
+      "All JSON-LD schemas valid in page source",
+    ],
+    filesExpected: [],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // STITCH DESIGN ALIGNMENT (from Stitch project 3153873536110529222)
+  // Reference: docs/design-refs/stitch-blog-template.html
+  // Service page template → propagate across entire site
+  // ═══════════════════════════════════════════════════════════
+
+  // --- SD Phase 1: Design Tokens & Foundation ---
+
+  {
+    taskId: "SD1",
+    agent: "claude",
+    title: "Extract Stitch design tokens and merge into globals.css",
+    description:
+      "Extract design tokens from Stitch template and merge into existing BMAD globals.css. Add: (1) .glass-nav utility (bg rgba(255,255,255,0.15), backdrop-filter blur(12px), border rgba(255,255,255,0.1), box-shadow), (2) .shadow-neumorphic token (10px 10px 20px rgba(0,0,0,0.05), -5px -5px 15px rgba(255,255,255,0.8)), (3) .rounded-carousel (border-radius: 30px), (4) extend tracking scale for headings (tracking-[0.16em] pattern), (5) .text-stitch-heading utility (uppercase, font-light, tracking-wide, leading-[0.9]). Map Stitch colors to BMAD palette: Stitch primary #2D5A27 → Leaf Green #22582C, Stitch accent #D4A373 → Sun Accent #EAB831. Do NOT replace existing tokens, ADD new utilities alongside.",
+    status: "todo",
+    priority: "critical",
+    category: "uiux",
+    phaseId: "core",
+    wave: 4,
+    estimatedHours: 2,
+    dependencies: [],
+    tags: ["stitch", "design-tokens", "glass-morphism", "neumorphic"],
+    acceptanceCriteria: [
+      ".glass-nav utility renders frosted glass effect",
+      ".shadow-neumorphic produces inset-light shadow on cards",
+      ".rounded-carousel applies 30px border-radius",
+      ".text-stitch-heading produces uppercase font-light tracking-wide text",
+      "Existing BMAD tokens unaffected (no regressions)",
+      "pnpm build passes",
+    ],
+    filesExpected: [
+      "app/globals.css",
+    ],
+  },
+
+  // --- SD Phase 2: New Stitch Components ---
+
+  {
+    taskId: "SD2",
+    agent: "claude",
+    title: "Build ServiceHero full-bleed component from Stitch design",
+    description:
+      "Create app/components/ServiceHero.tsx based on Stitch template hero pattern. Full-bleed image covering 85-95vh. Gradient overlay: bg-gradient-to-t from-black/60 via-black/20 to-black/30. Content positioned bottom-left (pb-32). H1: uppercase, font-light Walkway, text-5xl md:text-7xl, with <span> accent word (font-normal or italic). Accepts props: image (string), title (string), accentWord (string), breadcrumbs? (array). Use Framer Motion for fade-in entrance. Glassmorphism nav must overlay correctly (z-index coordination).",
+    status: "todo",
+    priority: "critical",
+    category: "frontend",
+    phaseId: "core",
+    wave: 4,
+    estimatedHours: 3,
+    dependencies: ["SD1"],
+    tags: ["stitch", "hero", "full-bleed", "component"],
+    acceptanceCriteria: [
+      "Hero covers 85-95vh with full-bleed image",
+      "Gradient overlay from bottom creates readable text zone",
+      "H1 positioned bottom-left, uppercase with accent word",
+      "Responsive: scales gracefully at 375px-1440px",
+      "Nav floats over hero without z-index conflict",
+      "Framer Motion entrance animation works",
+    ],
+    filesExpected: [
+      "app/components/ServiceHero.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD3",
+    agent: "claude",
+    title: "Build ImageCarousel 3-card depth component",
+    description:
+      "Create app/components/ImageCarousel.tsx based on Stitch carousel pattern. 3 visible cards: center card elevated (z-20, larger, shadow-2xl), side cards dimmed (brightness-75 or opacity-60, smaller). All images use rounded-[30px]. Dot pagination below (accent color active, 40% opacity inactive). Props: images (array of {src, alt}), autoPlay? (boolean). Use Framer Motion for transitions. Center card slightly translated up (-translate-y-4). Container uses perspective: 1000px for depth.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "core",
+    wave: 5,
+    estimatedHours: 4,
+    dependencies: ["SD1"],
+    tags: ["stitch", "carousel", "gallery", "component"],
+    acceptanceCriteria: [
+      "3-card layout with center card elevated and sides dimmed",
+      "30px rounded corners on all image cards",
+      "Dot pagination reflects current slide",
+      "Swipe/click navigation works",
+      "Responsive: stacks on mobile, 3-card on desktop",
+      "Smooth Framer Motion transitions",
+    ],
+    filesExpected: [
+      "app/components/ImageCarousel.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD4",
+    agent: "claude",
+    title: "Build ProcessSteps numbered card grid component",
+    description:
+      "Create app/components/ProcessSteps.tsx based on Stitch '4 Fasi' pattern. Layout: 12-col grid, title section (col-span-5) with H2 uppercase font-light + accent subtitle (tracking-widest xs uppercase Leaf Green), steps grid (col-span-7) as 2x2 sm:grid-cols-2. Each step card: white bg, rounded-md/xl, neumorphic shadow (.shadow-neumorphic or .step-card), oversized number (text-7xl font-display text-[#D1D1D1] font-medium), title (font-normal text-sm), description (text-xs text-slate-500 font-light). Props: title, accentSubtitle, steps[] (number, title, description). Max 4 steps per grid.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "core",
+    wave: 5,
+    estimatedHours: 3,
+    dependencies: ["SD1"],
+    tags: ["stitch", "process", "steps", "component"],
+    acceptanceCriteria: [
+      "12-col grid: title left (5), cards right (7)",
+      "Oversized numbers (7xl+) in light gray",
+      "Neumorphic card shadows",
+      "Responsive: stacks on mobile",
+      "Accepts dynamic steps array",
+      "Typography matches Stitch spec",
+    ],
+    filesExpected: [
+      "app/components/ProcessSteps.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD5",
+    agent: "claude",
+    title: "Build VideoShowcase play-button overlay component",
+    description:
+      "Create app/components/VideoShowcase.tsx based on Stitch 'Che cosa Aspettarsi' pattern. Full-width container with rounded-[30px], image or video background covering h-[450-500px]. Dark overlay (bg-black/20-30). Centered content: H2 uppercase tracking-wide font-light with <strong> accent word, play button (white/90 backdrop-blur-sm rounded-full w-20 h-20, play_arrow icon). Group hover: image scale-105 transition 700ms, play button scale-110. Props: title, accentWord, backgroundImage, videoUrl?. If videoUrl provided, clicking play opens video in modal or inline.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "core",
+    wave: 5,
+    estimatedHours: 3,
+    dependencies: ["SD1"],
+    tags: ["stitch", "video", "play-button", "component"],
+    acceptanceCriteria: [
+      "Full-width rounded container with background image",
+      "Play button centered with glass-morphism effect",
+      "Hover: image zooms 105%, button scales 110%",
+      "H2 with uppercase accent word",
+      "Video plays on click (modal or inline)",
+      "Responsive at all breakpoints",
+    ],
+    filesExpected: [
+      "app/components/VideoShowcase.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD6",
+    agent: "claude",
+    title: "Build AccordionFAQ styled component from Stitch design",
+    description:
+      "Create app/components/AccordionFAQ.tsx based on Stitch FAQ pattern. Uses HTML <details>/<summary> for no-JS progressive enhancement. Each item: bg-[#F5F5F5] or white, rounded-lg, shadow-lg/sm, p-6 px-8. Summary: flex between, text in primary green (Leaf Green), font-medium text-lg tracking-wide. Expand icon: material-icons expand_more (or lucide ChevronDown), rotate-180 on open via group-open. Content: px-8 pb-8 text-sm text-slate-500. Hover: translateY(-2px) with 300ms ease. Props: items[] ({question, answer}), title? (string, e.g. 'FAQ'). Title: centered uppercase font-light tracking-wide text-5xl.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "core",
+    wave: 5,
+    estimatedHours: 2,
+    dependencies: ["SD1"],
+    tags: ["stitch", "faq", "accordion", "component"],
+    acceptanceCriteria: [
+      "Accordion items expand/collapse with smooth animation",
+      "Chevron rotates 180° on open",
+      "Hover lift effect (translateY -2px)",
+      "Question text in Leaf Green, answer in neutral gray",
+      "Progressive enhancement: works without JS",
+      "Accepts dynamic items array",
+    ],
+    filesExpected: [
+      "app/components/AccordionFAQ.tsx",
+    ],
+  },
+
+  // --- SD Phase 2b: Align Existing Components ---
+
+  {
+    taskId: "SD8",
+    agent: "claude",
+    title: "Align Navbar with Stitch glass-morphism floating pattern",
+    description:
+      "Update app/components/Navbar.tsx to match Stitch floating nav pattern. When over hero (dark background): apply .glass-nav (frosted glass with backdrop-blur-12px, rounded-lg or rounded-full, bg rgba(255,255,255,0.15), border rgba(255,255,255,0.1)). Navbar should float with top-8 and max-w-[1200px] margin auto, not full-width stuck to top. Nav links: text-[11px] font-medium uppercase tracking-widest. Keep existing scroll-based transition for non-hero pages. CTA button: keep Sun Accent. Mobile: preserve hamburger behavior. Logo: simplify to 'V' bold tracking-tighter when in glass mode.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "core",
+    wave: 5,
+    estimatedHours: 4,
+    dependencies: ["SD1"],
+    tags: ["stitch", "navbar", "glass-morphism", "alignment"],
+    acceptanceCriteria: [
+      "Nav floats with glass-morphism on hero pages",
+      "Rounded container (not full-width) with frosted glass",
+      "Links are uppercase tracking-widest xs size",
+      "Transitions smoothly to solid on scroll",
+      "Mobile hamburger still works",
+      "No z-index conflicts with hero content",
+    ],
+    filesExpected: [
+      "app/components/Navbar.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD9",
+    agent: "claude",
+    title: "Align Footer with Stitch centered minimal pattern",
+    description:
+      "Update app/components/Footer.tsx to match Stitch footer pattern. Replace current 4-column grid with centered layout. Structure: (1) Centered 'Visione' logo (text-4xl font-bold tracking-tighter italic font-serif/display), (2) Tagline paragraph (text-white/50 text-xs max-w-md mx-auto, font-light tracking-wide), (3) Social icons as small rounded circles (w-8 h-8 rounded bg-white/5, hover bg-white/20), (4) Copyright in uppercase tracking-widest text-[10px] text-white/30 with border-top separator. Background: bg-[#2C3E33] or bg-forest-950. Keep existing link destinations but simplify visual structure.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "core",
+    wave: 5,
+    estimatedHours: 2,
+    dependencies: ["SD1"],
+    tags: ["stitch", "footer", "alignment", "minimal"],
+    acceptanceCriteria: [
+      "Footer is centered (not multi-column grid)",
+      "'Visione' italic logo centered prominently",
+      "Social icons as small rounded circles",
+      "Copyright uppercase tracking-widest at bottom",
+      "Dark green/forest background maintained",
+      "Responsive centered layout",
+    ],
+    filesExpected: [
+      "app/components/Footer.tsx",
+    ],
+  },
+
+  // --- SD Phase 3: Page Assembly ---
+
+  {
+    taskId: "SD7",
+    agent: "claude",
+    title: "Compose Stitch service detail page template",
+    description:
+      "Redesign app/servizi/[slug]/page.tsx using all new Stitch components. Replace current 3-template system with unified Stitch layout. Section order: (1) ServiceHero full-bleed with service image + title, (2) 2-column content section (H2 with italic accent left, body text right, subtitle in Leaf Green tracking-widest), (3) ImageCarousel with service gallery images, (4) ProcessSteps with service-specific 4-step process, (5) VideoShowcase 'Che cosa aspettarsi' section, (6) AccordionFAQ with service-specific questions, (7) Service navigation (prev/next), (8) CTA section. Keep existing Convex data loading, JSON-LD, and SEO metadata. Each service loads its data dynamically.",
+    status: "todo",
+    priority: "critical",
+    category: "frontend",
+    phaseId: "features",
+    wave: 6,
+    estimatedHours: 8,
+    dependencies: ["SD2", "SD3", "SD4", "SD5", "SD6"],
+    tags: ["stitch", "service-page", "redesign", "composition"],
+    acceptanceCriteria: [
+      "All service pages render with unified Stitch layout",
+      "ServiceHero renders full-bleed with service image",
+      "Content section uses 2-column split (title/body)",
+      "ImageCarousel shows service gallery",
+      "ProcessSteps shows 4-step process per service",
+      "VideoShowcase section with play button",
+      "AccordionFAQ replaces old FAQ section",
+      "Convex data loading unchanged",
+      "JSON-LD structured data preserved",
+      "Responsive at 375px, 768px, 1024px, 1440px",
+    ],
+    filesExpected: [
+      "app/servizi/[slug]/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD10",
+    agent: "claude",
+    title: "Align homepage with Stitch design language",
+    description:
+      "Update app/page.tsx to adopt Stitch visual language while preserving existing content. Changes: (1) Hero: adjust to h-[85vh] or h-[95vh], position title bottom-left with uppercase font-light + italic accent, (2) Section headings: adopt uppercase font-light tracking-wide pattern with italic accent word (replace current italic-only style), (3) Services grid: ensure ServiceCards use consistent Card + Germoglio pattern, (4) Process section: use ProcessSteps component, (5) Any image sections: apply rounded-[30px] treatment. Do NOT restructure homepage sections or remove content — only align typography and visual patterns.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 6,
+    estimatedHours: 4,
+    dependencies: ["SD7", "SD8", "SD9"],
+    tags: ["stitch", "homepage", "alignment", "typography"],
+    acceptanceCriteria: [
+      "Hero uses h-[85-95vh] with bottom-left title positioning",
+      "All section headings use Stitch uppercase + italic accent pattern",
+      "Process section uses ProcessSteps component",
+      "Image treatments use rounded-[30px]",
+      "No content removed or restructured",
+      "Glass-morphism nav overlays hero correctly",
+    ],
+    filesExpected: [
+      "app/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD11",
+    agent: "claude",
+    title: "Align blog pages with Stitch design language",
+    description:
+      "Update app/blog/page.tsx and app/blog/[slug]/page.tsx to adopt Stitch patterns. Blog listing: apply Stitch hero pattern (full-bleed or simplified), uppercase headings with italic accent. Blog detail: (1) full-bleed hero with post cover image, (2) 2-column content layout where applicable, (3) replace FAQ section with AccordionFAQ component, (4) consistent rounded image treatments. Preserve all existing content, SEO metadata, and JSON-LD schemas.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 6,
+    estimatedHours: 3,
+    dependencies: ["SD7", "SD8", "SD9"],
+    tags: ["stitch", "blog", "alignment"],
+    acceptanceCriteria: [
+      "Blog listing uses consistent Stitch heading style",
+      "Blog detail has full-bleed hero with cover image",
+      "AccordionFAQ replaces old FAQ rendering",
+      "Images use rounded treatments",
+      "JSON-LD and SEO metadata preserved",
+    ],
+    filesExpected: [
+      "app/blog/page.tsx",
+      "app/blog/[slug]/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "SD12",
+    agent: "claude",
+    title: "Align remaining pages with Stitch design language",
+    description:
+      "Update remaining public pages to adopt Stitch patterns: app/chi-siamo/page.tsx, app/contatti/page.tsx, app/qualita/page.tsx, app/progetti/page.tsx, app/progetti/[slug]/page.tsx. For each: (1) apply ServiceHero or simplified full-bleed hero with page-appropriate image, (2) section headings use Stitch uppercase font-light + italic accent, (3) consistent spacing (py-24/py-32), (4) rounded image treatments. /progetti/[slug] should use ImageCarousel for photo galleries. Preserve all existing content.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 6,
+    estimatedHours: 5,
+    dependencies: ["SD7", "SD8", "SD9"],
+    tags: ["stitch", "pages", "alignment", "site-wide"],
+    acceptanceCriteria: [
+      "Chi Siamo page uses Stitch hero + heading patterns",
+      "Contatti page uses consistent design language",
+      "Qualita page uses consistent design language",
+      "Progetti listing uses consistent design language",
+      "Progetti detail uses ImageCarousel for galleries",
+      "All pages responsive at 375-1440px",
+    ],
+    filesExpected: [
+      "app/chi-siamo/page.tsx",
+      "app/contatti/page.tsx",
+      "app/qualita/page.tsx",
+      "app/progetti/page.tsx",
+      "app/progetti/[slug]/page.tsx",
+    ],
+  },
+
+  // --- SD Phase 4: Verification ---
+
+  {
+    taskId: "SD13",
+    agent: "claude",
+    title: "Stitch design alignment — visual regression test",
+    description:
+      "Comprehensive verification after Stitch design alignment. Run pnpm build + pnpm lint. Manually test all public pages at 375px, 768px, 1024px, 1440px. Verify: (1) Glass-morphism nav works on all pages with heroes, (2) ServiceHero renders correctly for all services, (3) ImageCarousel works with real images, (4) ProcessSteps renders in all contexts, (5) AccordionFAQ expands/collapses correctly, (6) Footer centered layout consistent, (7) No typography regressions (Walkway fonts load), (8) No broken images or layout shifts. Compare visual output against Stitch reference screenshots in docs/design-refs/.",
+    status: "todo",
+    priority: "high",
+    category: "testing",
+    phaseId: "deploy",
+    wave: 7,
+    estimatedHours: 4,
+    dependencies: ["SD10", "SD11", "SD12"],
+    tags: ["stitch", "testing", "visual-regression", "qa"],
+    acceptanceCriteria: [
+      "pnpm build succeeds with zero errors",
+      "pnpm lint passes",
+      "All 12 public routes render without errors",
+      "Glass-morphism nav consistent across pages",
+      "All Stitch components render correctly",
+      "Responsive at all 4 breakpoints",
+      "No layout shifts or broken images",
+      "Visual output matches Stitch reference screenshots",
+    ],
+    filesExpected: [],
+  },
 ];

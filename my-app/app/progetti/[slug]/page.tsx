@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -21,24 +21,30 @@ import {
   PenTool,
   Tag,
 } from "lucide-react";
-import {
-  progettiProjects,
-  getProjectBySlug,
-  formatTag,
-} from "../../lib/progetti-data";
-import type { ProgettiPhoto } from "../../lib/progetti-data";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { Button } from "../../components/ui/Button";
 import { Badge } from "../../components/ui/Badge";
 import { cn } from "../../lib/utils";
+import { Skeleton } from "../../components/ui/Skeleton";
 
 /* ─── Lightbox Component ─── */
+
+type Photo = {
+  src: string;
+  thumb: string;
+  alt: string;
+  caption: string;
+  type: "hero" | "gallery" | "render";
+  dimensions?: string;
+};
 
 function Lightbox({
   photos,
   initialIndex,
   onClose,
 }: {
-  photos: ProgettiPhoto[];
+  photos: Photo[];
   initialIndex: number;
   onClose: () => void;
 }) {
@@ -162,20 +168,42 @@ const fadeUp = {
 export default function ProgettiDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
-  const project = getProjectBySlug(slug);
+  const project = useQuery(api.projects.getBySlug, { slug });
+  const allProjects = useQuery(api.projects.getAll);
+  
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [lightboxPhotos, setLightboxPhotos] = useState<ProgettiPhoto[]>([]);
+  const [lightboxPhotos, setLightboxPhotos] = useState<Array<{
+    src: string;
+    thumb: string;
+    alt: string;
+    caption: string;
+    type: "hero" | "gallery" | "render";
+    dimensions?: string;
+  }>>([]);
 
-  const projectIndex = progettiProjects.findIndex((p) => p.slug === slug);
-  const nextProject = projectIndex < progettiProjects.length - 1
-    ? progettiProjects[projectIndex + 1]
-    : null;
-  const prevProject = projectIndex > 0 ? progettiProjects[projectIndex - 1] : null;
+  const { nextProject, prevProject } = useMemo(() => {
+    if (!allProjects || !slug) return { nextProject: null, prevProject: null };
+    const projectIndex = allProjects.findIndex((p) => p.slug === slug);
+    const next = projectIndex < allProjects.length - 1 ? allProjects[projectIndex + 1] : null;
+    const prev = projectIndex > 0 ? allProjects[projectIndex - 1] : null;
+    return { nextProject: next, prevProject: prev };
+  }, [allProjects, slug]);
 
-  const openLightbox = (photos: ProgettiPhoto[], index: number) => {
+  const openLightbox = (photos: typeof lightboxPhotos, index: number) => {
     setLightboxPhotos(photos);
     setLightboxIndex(index);
   };
+
+  if (project === undefined) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-paper-50">
+        <div className="text-center space-y-4">
+          <Skeleton className="h-8 w-64 mx-auto" />
+          <Skeleton className="h-4 w-96 mx-auto" />
+        </div>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -204,6 +232,13 @@ export default function ProgettiDetailPage() {
 
   const galleryPhotos = project.photos.filter((p) => p.type === "gallery");
   const allViewablePhotos = [...project.photos];
+
+  function formatTag(tag: string): string {
+    return tag
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  }
 
   return (
     <div className="min-h-screen bg-paper-50">
@@ -302,7 +337,7 @@ export default function ProgettiDetailPage() {
           >
             <Image
               src={project.hero_image}
-              alt={project.hero_alt}
+              alt={project.hero_alt ?? project.title}
               fill
               className="object-cover"
               sizes="100vw"

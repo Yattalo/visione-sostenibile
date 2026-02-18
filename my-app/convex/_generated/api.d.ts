@@ -10,12 +10,15 @@
 
 import type * as adminAuth from "../adminAuth.js";
 import type * as blog from "../blog.js";
+import type * as blogSeed from "../blogSeed.js";
 import type * as contacts from "../contacts.js";
 import type * as gallery from "../gallery.js";
 import type * as http from "../http.js";
 import type * as leads from "../leads.js";
 import type * as pages from "../pages.js";
 import type * as projects from "../projects.js";
+import type * as projectsSeed from "../projectsSeed.js";
+import type * as quiz from "../quiz.js";
 import type * as reviews from "../reviews.js";
 import type * as services from "../services.js";
 import type * as shareEvents from "../shareEvents.js";
@@ -34,12 +37,15 @@ import type {
 declare const fullApi: ApiFromModules<{
   adminAuth: typeof adminAuth;
   blog: typeof blog;
+  blogSeed: typeof blogSeed;
   contacts: typeof contacts;
   gallery: typeof gallery;
   http: typeof http;
   leads: typeof leads;
   pages: typeof pages;
   projects: typeof projects;
+  projectsSeed: typeof projectsSeed;
+  quiz: typeof quiz;
   reviews: typeof reviews;
   services: typeof services;
   shareEvents: typeof shareEvents;
