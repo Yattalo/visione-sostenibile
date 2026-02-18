@@ -29,15 +29,6 @@ export function Navbar() {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const hasDarkHeroAtTop =
-    pathname === "/" ||
-    pathname.startsWith("/servizi") ||
-    pathname.startsWith("/progetti") ||
-    pathname.startsWith("/blog") ||
-    pathname === "/chi-siamo" ||
-    pathname === "/qualita" ||
-    pathname === "/contatti";
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
@@ -46,143 +37,137 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const transparentHeader = hasDarkHeroAtTop && !scrolled;
-
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={cn(
-        "fixed top-0 left-0 right-0 z-header transition-all duration-500",
-        transparentHeader
-          ? "bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-transparent"
-          : "bg-paper-50/95 backdrop-blur-md shadow-sm border-b border-paper-300/80"
-      )}
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-header w-[92%] max-w-5xl"
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
+      <nav
+        className={cn(
+          "rounded-full transition-all duration-500",
+          scrolled
+            ? "bg-paper-50/95 backdrop-blur-md shadow-medium border border-paper-300/80"
+            : "glass-nav"
+        )}
+      >
+        <div className="px-4 sm:px-8 py-3">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2.5 group">
               <Leaf
                 className={cn(
-                  "w-7 h-7 transition-colors duration-300",
-                  transparentHeader ? "text-paper-100" : "text-leaf-500"
+                  "w-6 h-6 transition-colors duration-300",
+                  scrolled ? "text-leaf-500" : "text-paper-100"
                 )}
               />
-            </div>
-            <span
-              className={cn(
-                "font-display text-xl tracking-wide transition-colors duration-300",
-                transparentHeader ? "text-paper-50" : "text-forest-950"
-              )}
-            >
-              Visione
               <span
                 className={cn(
-                  "italic",
-                  transparentHeader ? "text-leaf-400" : "text-leaf-500"
+                  "font-display text-lg tracking-tighter transition-colors duration-300",
+                  scrolled ? "text-forest-950" : "text-paper-50"
                 )}
               >
-                Sostenibile
+                Visione
+                <span
+                  className={cn(
+                    "italic",
+                    scrolled ? "text-leaf-500" : "text-leaf-400"
+                  )}
+                >
+                  Sostenibile
+                </span>
               </span>
-            </span>
-          </Link>
+            </Link>
 
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <div key={link.href}>
+            <div className="hidden lg:flex items-center gap-6">
+              {navLinks.map((link) => (
                 <Link
+                  key={link.href}
                   href={link.href}
                   className={cn(
-                    "font-sans text-xs uppercase tracking-[0.16em] transition-colors relative py-2 border-b",
+                    "font-sans text-[11px] uppercase tracking-[0.18em] font-semibold transition-colors relative py-1",
                     isActivePath(link.href)
-                      ? "border-leaf-500 text-leaf-500"
-                      : cn(
-                          "border-transparent",
-                          transparentHeader
-                            ? "text-paper-50/90 hover:text-paper-50"
-                            : "text-forest-800 hover:text-leaf-500"
-                        )
+                      ? scrolled
+                        ? "text-leaf-500"
+                        : "text-sun-400"
+                      : scrolled
+                        ? "text-forest-800 hover:text-leaf-500"
+                        : "text-paper-50/90 hover:text-paper-50"
                   )}
                 >
                   {link.label}
                 </Link>
-              </div>
-            ))}
-          </nav>
+              ))}
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="hidden lg:block"
-          >
-            <Link
-              href="/contatti"
-              className="px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-[0.14em] font-medium bg-sun-400 text-forest-950 hover-sun"
+            <div className="hidden lg:block">
+              <Link
+                href="/contatti"
+                className="px-5 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold bg-sun-400 text-forest-950 hover-sun"
+              >
+                Preventivo
+              </Link>
+            </div>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav"
+              aria-label={isOpen ? "Chiudi menu" : "Apri menu"}
+              className={cn(
+                "lg:hidden p-2 transition-colors",
+                scrolled ? "text-forest-950" : "text-paper-50"
+              )}
             >
-              Richiedi Preventivo
-            </Link>
-          </motion.div>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-controls="mobile-nav"
-            aria-label={isOpen ? "Chiudi menu" : "Apri menu"}
-            className={cn(
-              "lg:hidden p-2 transition-colors",
-              transparentHeader ? "text-paper-50" : "text-forest-950"
-            )}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
-      </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            id="mobile-nav"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-paper-50 border-t border-paper-300 shadow-medium"
-          >
-            <nav className="px-6 py-6 space-y-1">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              id="mobile-nav"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-paper-50 rounded-b-3xl border-t border-paper-300 overflow-hidden"
+            >
+              <div className="px-6 py-5 space-y-1">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.04 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "block py-2.5 font-sans text-xs uppercase tracking-widest transition-colors border-b border-paper-200",
+                        isActivePath(link.href)
+                          ? "text-leaf-500"
+                          : "text-forest-800 hover:text-leaf-500"
+                      )}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <div className="pt-3">
                   <Link
-                    href={link.href}
-                    className={cn(
-                      "block py-3 font-sans text-sm uppercase tracking-widest transition-colors border-b border-paper-200",
-                      isActivePath(link.href)
-                        ? "text-leaf-500"
-                        : "text-forest-800 hover:text-leaf-500"
-                    )}
+                    href="/contatti"
+                    className="inline-flex items-center justify-center w-full h-10 px-6 rounded-full bg-sun-400 text-forest-950 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover-sun"
                     onClick={() => setIsOpen(false)}
                   >
-                    {link.label}
+                    Richiedi Preventivo
                   </Link>
-                </motion.div>
-              ))}
-              <div className="pt-4">
-                <Link
-                  href="/contatti"
-                  className="inline-flex items-center justify-center w-full h-11 px-6 rounded-full bg-sun-400 text-forest-950 font-sans text-xs uppercase tracking-[0.14em] font-medium hover-sun"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Richiedi Preventivo
-                </Link>
+                </div>
               </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
     </motion.header>
   );
 }

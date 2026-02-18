@@ -22,13 +22,13 @@ import {
   Scissors,
   Leaf,
   Flower2,
+  Play,
+  ChevronDown,
 } from "lucide-react";
 import { api } from "../../../convex/_generated/api";
 import { staticServices } from "../../lib/static-data";
 import { Button } from "../../components/ui/Button";
-import { Badge } from "../../components/ui/Badge";
 
-type TemplateVariant = 1 | 2 | 3;
 type ServiceItem = (typeof staticServices)[number];
 
 type FaqItem = {
@@ -57,14 +57,6 @@ const serviceIconMap: Record<string, ElementType> = {
   "gestione-verde-biodinamica": Flower2,
 };
 
-const serviceAccentMap: Record<string, string> = {
-  "progettazione-giardini-orti": "from-leaf-600 to-forest-900",
-  "realizzazione-chiavi-in-mano": "from-leaf-500 to-leaf-700",
-  "manutenzione-sostenibile": "from-leaf-500 to-leaf-500",
-  "potatura-professionale": "from-leaf-400 to-leaf-700",
-  "gestione-verde-biodinamica": "from-leaf-700 to-forest-950",
-};
-
 const serviceImageMap: Record<string, string> = {
   "progettazione-giardini-orti":
     "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200",
@@ -78,10 +70,19 @@ const serviceImageMap: Record<string, string> = {
     "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
 };
 
-const templateLabels: Record<TemplateVariant, string> = {
-  1: "Template Consulenziale",
-  2: "Template Processo",
-  3: "Template Decisione Rapida",
+// Side images for the carousel — generic garden Unsplash photos
+const carouselSideImages = [
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+  "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800",
+  "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800",
+];
+
+const serviceSubtitles: Record<string, string> = {
+  "progettazione-giardini-orti": "Dal concept alla realtà",
+  "realizzazione-chiavi-in-mano": "Senza pensieri",
+  "manutenzione-sostenibile": "Cura continua",
+  "potatura-professionale": "Precisione e rispetto",
+  "gestione-verde-biodinamica": "Equilibrio naturale",
 };
 
 const serviceContents: Record<string, ServiceContent> = {
@@ -322,271 +323,310 @@ const serviceContents: Record<string, ServiceContent> = {
   },
 };
 
-function resolveTemplate(value: string | null, fallbackIndex: number): TemplateVariant {
-  const parsed = Number(value);
-  if (parsed === 1 || parsed === 2 || parsed === 3) {
-    return parsed;
-  }
+/* ── Section Components ────────────────── */
 
-  const normalizedIndex = fallbackIndex >= 0 ? fallbackIndex : 0;
-  return ((normalizedIndex % 3) + 1) as TemplateVariant;
+function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
+  const subtitle = serviceSubtitles[service.slug] ?? "";
+  return (
+    <section className="relative h-[85vh] w-full overflow-hidden">
+      <Image
+        src={imageUrl}
+        alt={service.title}
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      <div className="absolute inset-0 flex items-end">
+        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 pb-24">
+          <h1 className="font-display text-5xl md:text-7xl uppercase text-white leading-[0.95] tracking-tight">
+            {service.title}
+            {subtitle && (
+              <span className="block font-light italic text-4xl md:text-5xl mt-2 text-paper-200/90">
+                {subtitle}
+              </span>
+            )}
+          </h1>
+        </div>
+      </div>
+    </section>
+  );
 }
 
-function TemplateOne({
-  service,
-  content,
-  imageUrl,
-  gradientClass,
-  onShare,
-  shareState,
-}: {
-  service: ServiceItem;
-  content: ServiceContent;
-  imageUrl: string;
-  gradientClass: string;
-  onShare: () => void;
-  shareState: "idle" | "success" | "error";
-}) {
+function EditorialIntro({ content }: { content: ServiceContent }) {
   return (
-    <section className="max-w-7xl mx-auto px-6 lg:px-8 py-14 lg:py-18">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
-        <article className="lg:col-span-2 space-y-8">
-          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-deep">
-            <Image
-              src={imageUrl}
-              alt={service.title}
-              fill
-              sizes="(max-width: 1024px) 100vw, 66vw"
-              className="object-cover"
-            />
+    <section className="py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-16">
+          <div>
+            <span className="text-xs uppercase tracking-[0.2em] text-sun-400 font-semibold block mb-4">
+              Il nostro approccio
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl text-forest-950 leading-tight">
+              Un metodo{" "}
+              <span className="italic text-leaf-600">pensato</span>
+              <br />
+              per il tuo verde
+            </h2>
           </div>
-
-          <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
-            <h2 className="font-display text-3xl text-forest-950 mb-4">Panoramica servizio</h2>
-            <p className="text-lg text-forest-900 leading-relaxed mb-6">{content.intro}</p>
-            <p className="text-forest-800 leading-relaxed">{content.body}</p>
-          </div>
-
-          <div className="bg-paper-100 rounded-2xl p-7 lg:p-9">
-            <h3 className="font-display text-2xl text-forest-950 mb-5">Cosa include</h3>
-            <ul className="space-y-3">
-              {content.deliverables.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-forest-900">
-                  <Check className="w-4 h-4 mt-1 text-leaf-700 shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </article>
-
-        <aside className="space-y-6">
-          <div className="bg-white rounded-2xl border border-paper-300 p-7">
-            <h3 className="font-display text-2xl text-forest-950 mb-3">Richiedi consulenza</h3>
-            <p className="text-forest-800 mb-5">
-              Parliamo del tuo obiettivo e definiamo il percorso migliore per {service.title.toLowerCase()}.
+          <div className="space-y-6">
+            <p className="text-lg text-forest-800 leading-relaxed">
+              {content.intro}
             </p>
-            <Link href="/contatti" className="block mb-5">
-              <Button className="w-full">
-                Contattaci ora
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-            <div className="space-y-3 text-sm text-forest-800">
-              <p className="flex items-center gap-2">
-                <Phone className="w-4 h-4" /> +39 06 1234567
-              </p>
-              <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4" /> info@visionesostenibile.it
-              </p>
-              <p className="flex items-center gap-2">
-                <Clock className="w-4 h-4" /> Lun-Ven 8:00-18:00
-              </p>
+            <p className="text-lg text-forest-800/80 leading-relaxed">
+              {content.body}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ImageCarousel({ imageUrl, slug }: { imageUrl: string; slug: string }) {
+  // Pick two side images that differ from the main one
+  const sideImages = carouselSideImages.filter((img) => img !== imageUrl.replace("?w=1200", "?w=800")).slice(0, 2);
+  const leftImage = sideImages[0] ?? carouselSideImages[0];
+  const rightImage = sideImages[1] ?? carouselSideImages[1];
+
+  return (
+    <section className="bg-paper-100 py-12 overflow-hidden">
+      <div className="carousel-container max-w-6xl mx-auto px-6">
+        <div className="flex items-center justify-center gap-4 md:gap-6">
+          {/* Left side image */}
+          <div className="hidden sm:block w-1/4 h-80 rounded-carousel overflow-hidden opacity-60 shrink-0">
+            <div className="relative w-full h-full">
+              <Image
+                src={leftImage}
+                alt={`${slug} ambiente 1`}
+                fill
+                sizes="25vw"
+                className="object-cover"
+              />
             </div>
           </div>
 
-          <div className="bg-forest-950 rounded-2xl p-7 text-paper-100">
-            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${gradientClass} mb-4`} />
-            <h3 className="font-display text-xl mb-3">Video del servizio</h3>
-            <video controls className="w-full rounded-xl mb-5" preload="metadata">
-              <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
-            </video>
-            <Button className="w-full bg-sun-400 hover:bg-sun-500 border-0" onClick={onShare}>
-              <MessageCircle className="mr-2 w-4 h-4" />
-              Condividi su WhatsApp
-            </Button>
-            {shareState === "success" && (
-              <p className="mt-3 text-sm text-paper-300 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-leaf-300" />
-                WhatsApp aperto. Scegli un contatto.
-              </p>
-            )}
-            {shareState === "error" && (
-              <p className="mt-3 text-sm text-leaf-300">Non siamo riusciti ad aprire WhatsApp. Riprova.</p>
-            )}
+          {/* Center image */}
+          <div className="w-full sm:w-1/3 aspect-[4/5] rounded-carousel overflow-hidden scale-100 sm:scale-110 z-10 border-4 border-white shadow-2xl shrink-0">
+            <div className="relative w-full h-full">
+              <Image
+                src={imageUrl}
+                alt={`${slug} principale`}
+                fill
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="object-cover"
+              />
+            </div>
           </div>
-        </aside>
-      </div>
-    </section>
-  );
-}
 
-function TemplateTwo({
-  content,
-  onShare,
-  shareState,
-}: {
-  content: ServiceContent;
-  onShare: () => void;
-  shareState: "idle" | "success" | "error";
-}) {
-  return (
-    <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-18 space-y-8">
-      <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
-        <h2 className="font-display text-3xl text-forest-950 mb-4">Processo in 4 fasi</h2>
-        <ol className="space-y-4">
-          {content.process.map((step, index) => (
-            <li key={step} className="flex items-start gap-3 text-forest-900 text-lg">
-              <span className="text-leaf-600 font-semibold mt-0.5">{index + 1}.</span>
-              <span>{step}</span>
-            </li>
+          {/* Right side image */}
+          <div className="hidden sm:block w-1/4 h-80 rounded-carousel overflow-hidden opacity-60 shrink-0">
+            <div className="relative w-full h-full">
+              <Image
+                src={rightImage}
+                alt={`${slug} ambiente 2`}
+                fill
+                sizes="25vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-8">
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className={`w-2 h-2 rounded-full ${
+                i === 1 ? "bg-forest-950" : "bg-paper-400"
+              }`}
+            />
           ))}
-        </ol>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {content.results.map((result) => (
-          <div key={result} className="bg-paper-100 rounded-2xl p-6">
-            <h3 className="font-display text-xl text-forest-950 mb-3">Risultato atteso</h3>
-            <p className="text-forest-800">{result}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
-          <h3 className="font-display text-2xl text-forest-950 mb-4">Elementi inclusi</h3>
-          <ul className="space-y-3">
-            {content.deliverables.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-forest-900">
-                <Check className="w-4 h-4 mt-1 text-leaf-700 shrink-0" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="bg-forest-950 rounded-2xl p-7 lg:p-9 text-paper-100">
-          <h3 className="font-display text-2xl mb-4">Spazio video</h3>
-          <p className="text-paper-300/85 mb-4">
-            Panoramica operativa del servizio, utile per capire metodo e risultato.
-          </p>
-          <video controls className="w-full rounded-xl mb-5" preload="metadata">
-            <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
-          </video>
-          <Button className="w-full bg-sun-400 hover:bg-sun-500 border-0" onClick={onShare}>
-            <MessageCircle className="mr-2 w-4 h-4" />
-            Condividi su WhatsApp
-          </Button>
-          {shareState === "success" && (
-            <p className="mt-3 text-sm text-paper-300 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-leaf-300" />
-              Link aperto su WhatsApp.
-            </p>
-          )}
-          {shareState === "error" && <p className="mt-3 text-sm text-leaf-300">Riprova tra poco.</p>}
         </div>
       </div>
     </section>
   );
 }
 
-function TemplateThree({
-  content,
-  onShare,
-  shareState,
+function ProcessSteps({ content }: { content: ServiceContent }) {
+  return (
+    <section className="py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="lg:grid lg:grid-cols-12 gap-12">
+          {/* Left: title block */}
+          <div className="lg:col-span-4 mb-12 lg:mb-0">
+            <span className="text-xs uppercase tracking-[0.2em] text-sun-400 font-semibold block mb-4">
+              Come lavoriamo
+            </span>
+            <h2 className="font-display text-4xl text-forest-950">
+              Processo in
+              <span className="block text-6xl font-bold">
+                {content.process.length} Fasi
+              </span>
+            </h2>
+          </div>
+
+          {/* Right: step cards */}
+          <div className="lg:col-span-8">
+            <div className="grid sm:grid-cols-2 gap-6">
+              {content.process.map((step, index) => (
+                <div
+                  key={step}
+                  className="step-card bg-white p-8 rounded-xl"
+                >
+                  <span className="text-5xl font-display text-paper-300 font-bold block mb-3">
+                    {(index + 1).toString().padStart(2, "0")}
+                  </span>
+                  <h4 className="font-semibold mb-2 text-forest-950">
+                    Fase {index + 1}
+                  </h4>
+                  <p className="text-sm text-forest-800/60 leading-relaxed">
+                    {step}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VideoShowcase({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
+  return (
+    <section className="py-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="relative rounded-xl overflow-hidden h-[500px] group cursor-pointer shadow-2xl">
+          <Image
+            src={imageUrl}
+            alt={`${service.title} video`}
+            fill
+            sizes="100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+            <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tight text-white mb-8">
+              Che cosa
+              <span className="block font-bold">Aspettarsi</span>
+            </h2>
+            <div className="bg-white/20 backdrop-blur-md rounded-full p-6 transition-transform duration-300 group-hover:scale-110">
+              <Play className="w-10 h-10 text-white fill-white" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FaqAccordion({ content }: { content: ServiceContent }) {
+  return (
+    <section className="py-24">
+      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        <h2 className="font-display text-4xl text-center text-forest-950 uppercase tracking-widest mb-16">
+          Domande frequenti
+        </h2>
+        <div className="space-y-4">
+          {content.faqs.map((faq) => (
+            <details
+              key={faq.question}
+              className="faq-card bg-white rounded-xl overflow-hidden shadow-sm group"
+            >
+              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-forest-800">
+                <span>{faq.question}</span>
+                <ChevronDown className="w-5 h-5 text-forest-800/40 transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" />
+              </summary>
+              <div className="px-6 pb-6 text-forest-800/70 leading-relaxed">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PrevNextNav({
+  prevService,
+  nextService,
 }: {
-  content: ServiceContent;
-  onShare: () => void;
-  shareState: "idle" | "success" | "error";
+  prevService: ServiceItem | null;
+  nextService: ServiceItem | null;
 }) {
   return (
-    <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-18 space-y-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9">
-          <h2 className="font-display text-3xl text-forest-950 mb-4">Quando scegliere questo servizio</h2>
-          <ul className="space-y-3">
-            {content.whenToChoose.map((item) => (
-              <li key={item} className="flex gap-3 text-forest-900">
-                <Check className="w-4 h-4 mt-1 text-leaf-700 shrink-0" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+    <section className="border-t border-paper-300">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-paper-300">
+          <div className="py-8 lg:py-12 pr-0 md:pr-8">
+            {prevService ? (
+              <Link href={`/servizi/${prevService.slug}`} className="group flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
+                </div>
+                <div>
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Precedente</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
+                    {prevService.title}
+                  </p>
+                </div>
+              </Link>
+            ) : (
+              <Link href="/servizi" className="group flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
+                </div>
+                <div>
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Torna a</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
+                    Tutti i Servizi
+                  </p>
+                </div>
+              </Link>
+            )}
+          </div>
+
+          <div className="py-8 lg:py-12 pl-0 md:pl-8">
+            {nextService ? (
+              <Link
+                href={`/servizi/${nextService.slug}`}
+                className="group flex items-center justify-end gap-4 text-right"
+              >
+                <div>
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Successivo</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
+                    {nextService.title}
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
+                </div>
+              </Link>
+            ) : (
+              <Link href="/servizi" className="group flex items-center justify-end gap-4 text-right">
+                <div>
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Esplora</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
+                    Tutti i Servizi
+                  </p>
+                </div>
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
+                </div>
+              </Link>
+            )}
+          </div>
         </div>
-
-        <div className="bg-paper-100 rounded-2xl p-7 lg:p-9">
-          <h3 className="font-display text-2xl text-forest-950 mb-4">Benefici principali</h3>
-          <ul className="space-y-3">
-            {content.results.map((item) => (
-              <li key={item} className="text-forest-900">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-2xl border border-paper-300 p-7 lg:p-9 overflow-x-auto">
-        <h3 className="font-display text-2xl text-forest-950 mb-5">Confronto rapido</h3>
-        <table className="w-full min-w-[620px] text-left border-collapse">
-          <thead>
-            <tr className="border-b border-paper-300">
-              <th className="py-3 pr-4 font-display text-forest-950">Aspetto</th>
-              <th className="py-3 pr-4 font-display text-forest-950">Gestione autonoma</th>
-              <th className="py-3 font-display text-forest-950">Con servizio professionale</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b border-paper-300">
-              <td className="py-3 pr-4">Pianificazione</td>
-              <td className="py-3 pr-4 text-forest-800">Spesso frammentata</td>
-              <td className="py-3 text-forest-800">Roadmap chiara e progressiva</td>
-            </tr>
-            <tr className="border-b border-paper-300">
-              <td className="py-3 pr-4">Controllo qualita</td>
-              <td className="py-3 pr-4 text-forest-800">Variabile</td>
-              <td className="py-3 text-forest-800">Standard operativi costanti</td>
-            </tr>
-            <tr>
-              <td className="py-3 pr-4">Continuita nel tempo</td>
-              <td className="py-3 pr-4 text-forest-800">Dipende dalla disponibilita</td>
-              <td className="py-3 text-forest-800">Programmazione periodica affidabile</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div className="bg-forest-950 rounded-2xl p-7 lg:p-9 text-paper-100">
-        <h3 className="font-display text-2xl mb-4">Video e condivisione</h3>
-        <video controls className="w-full rounded-xl mb-5" preload="metadata">
-          <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
-        </video>
-        <Button className="bg-sun-400 hover:bg-sun-500 border-0" onClick={onShare}>
-          <MessageCircle className="mr-2 w-4 h-4" />
-          Condividi su WhatsApp
-        </Button>
-        {shareState === "success" && (
-          <p className="mt-3 text-sm text-paper-300 flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-leaf-300" />
-            WhatsApp aperto correttamente.
-          </p>
-        )}
-        {shareState === "error" && <p className="mt-3 text-sm text-leaf-300">Condivisione non riuscita.</p>}
       </div>
     </section>
   );
 }
+
+/* ── Main Page Component ────────────────── */
 
 export default function ServiceDetailPage() {
   const params = useParams();
@@ -639,9 +679,6 @@ export default function ServiceDetailPage() {
     );
   }
 
-  const template = resolveTemplate(searchParams.get("template"), serviceIndex);
-  const IconComponent = serviceIconMap[service.slug] || Sprout;
-  const gradientClass = serviceAccentMap[service.slug] || "from-leaf-600 to-forest-900";
   const imageUrl =
     serviceImageMap[service.slug] ||
     "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200";
@@ -742,159 +779,25 @@ export default function ServiceDetailPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <section className="relative overflow-hidden bg-forest-950 pt-28 pb-20 lg:pt-36 lg:pb-24">
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: `url('${imageUrl}')` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
-        </div>
+      {/* Section 1: Full-Bleed Hero */}
+      <HeroSection service={service} imageUrl={imageUrl} />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm mb-9">
-            <Link href="/" className="text-paper-400 hover:text-paper-300 transition-colors">
-              Home
-            </Link>
-            <span className="text-paper-600">/</span>
-            <Link href="/servizi" className="text-paper-400 hover:text-paper-300 transition-colors">
-              Servizi
-            </Link>
-            <span className="text-paper-600">/</span>
-            <span className="text-paper-300">{service.title}</span>
-          </nav>
+      {/* Section 2: Editorial Intro */}
+      <EditorialIntro content={content} />
 
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="max-w-3xl">
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${gradientClass} flex items-center justify-center mb-7`}>
-                <IconComponent className="w-8 h-8 text-white" />
-              </div>
+      {/* Section 3: Image Carousel */}
+      <ImageCarousel imageUrl={imageUrl} slug={service.slug} />
 
-              <div className="flex flex-wrap gap-3 mb-6">
-                <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 px-5 py-1.5 text-xs tracking-widest uppercase">
-                  Servizio {(serviceIndex + 1).toString().padStart(2, "0")}
-                </Badge>
-                <Badge className="bg-sun-400/20 border border-leaf-500/30 text-leaf-200">
-                  {templateLabels[template]}
-                </Badge>
-              </div>
+      {/* Section 4: Process Steps */}
+      <ProcessSteps content={content} />
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-paper-50 leading-tight mb-5">
-                {service.title}
-              </h1>
-              <p className="text-xl text-paper-300/85 leading-relaxed">{service.shortDescription}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Section 5: Video Showcase */}
+      <VideoShowcase service={service} imageUrl={imageUrl} />
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-8 py-10 lg:py-12">
-        <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
-          <h2 className="font-display text-2xl lg:text-3xl text-forest-950 mb-4">Risposta rapida</h2>
-          <p className="text-lg text-forest-900 leading-relaxed">{content.quickAnswer}</p>
-        </div>
-      </section>
+      {/* Section 6: FAQ Accordion */}
+      <FaqAccordion content={content} />
 
-      {template === 1 && (
-        <TemplateOne
-          service={service}
-          content={content}
-          imageUrl={imageUrl}
-          gradientClass={gradientClass}
-          onShare={handleShare}
-          shareState={shareState}
-        />
-      )}
-
-      {template === 2 && (
-        <TemplateTwo content={content} onShare={handleShare} shareState={shareState} />
-      )}
-
-      {template === 3 && (
-        <TemplateThree content={content} onShare={handleShare} shareState={shareState} />
-      )}
-
-      <section className="max-w-6xl mx-auto px-6 lg:px-8 pb-16">
-        <div className="bg-white border border-paper-300 rounded-2xl p-7 lg:p-9">
-          <h2 className="font-display text-3xl text-forest-950 mb-6">FAQ servizio</h2>
-          <div className="space-y-4">
-            {content.faqs.map((faq) => (
-              <details key={faq.question} className="rounded-xl border border-paper-300 p-4 open:bg-paper-50">
-                <summary className="cursor-pointer list-none font-display text-lg text-forest-950">
-                  {faq.question}
-                </summary>
-                <p className="mt-3 text-forest-800 leading-relaxed">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-paper-300">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-paper-300">
-            <div className="py-8 lg:py-12 pr-0 md:pr-8">
-              {prevService ? (
-                <Link href={`/servizi/${prevService.slug}`} className="group flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
-                    <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
-                  </div>
-                  <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Precedente</p>
-                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
-                      {prevService.title}
-                    </p>
-                  </div>
-                </Link>
-              ) : (
-                <Link href="/servizi" className="group flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
-                    <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
-                  </div>
-                  <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Torna a</p>
-                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
-                      Tutti i Servizi
-                    </p>
-                  </div>
-                </Link>
-              )}
-            </div>
-
-            <div className="py-8 lg:py-12 pl-0 md:pl-8">
-              {nextService ? (
-                <Link
-                  href={`/servizi/${nextService.slug}`}
-                  className="group flex items-center justify-end gap-4 text-right"
-                >
-                  <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Successivo</p>
-                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
-                      {nextService.title}
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
-                    <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
-                  </div>
-                </Link>
-              ) : (
-                <Link href="/servizi" className="group flex items-center justify-end gap-4 text-right">
-                  <div>
-                    <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Esplora</p>
-                    <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
-                      Tutti i Servizi
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
-                    <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
-                  </div>
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* Section 7: CTA (kept as-is) */}
       <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">
         <div className="absolute inset-0">
           <div
@@ -951,6 +854,26 @@ export default function ServiceDetailPage() {
           </div>
         </div>
       </section>
+
+      {/* WhatsApp share (floating) */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={handleShare}
+          className="bg-leaf-600 hover:bg-leaf-700 text-white rounded-full p-4 shadow-deep transition-all hover:scale-110"
+          aria-label="Condividi su WhatsApp"
+        >
+          <MessageCircle className="w-6 h-6" />
+        </button>
+        {shareState === "success" && (
+          <div className="absolute bottom-full right-0 mb-2 bg-white rounded-lg shadow-medium px-4 py-2 text-sm text-forest-800 whitespace-nowrap flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-leaf-500" />
+            WhatsApp aperto
+          </div>
+        )}
+      </div>
+
+      {/* Prev/Next Navigation */}
+      <PrevNextNav prevService={prevService} nextService={nextService} />
     </div>
   );
 }

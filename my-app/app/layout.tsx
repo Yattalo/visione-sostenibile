@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 
 const walkway = localFont({
   src: [
+    { path: "../public/walkway/Walkway SemiBold.ttf", weight: "400", style: "normal" },
     { path: "../public/walkway/Walkway SemiBold.ttf", weight: "600", style: "normal" },
     { path: "../public/walkway/Walkway Bold.ttf", weight: "700", style: "normal" },
     { path: "../public/walkway/Walkway Black.ttf", weight: "900", style: "normal" },
