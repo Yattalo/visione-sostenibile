@@ -437,6 +437,65 @@ h4, h5, h6 {
   border-color: var(--color-leaf-700);
 }
 
+/* ── SD1: Stitch Design Tokens ────────────────── */
+
+/* Glass-morphism floating navbar */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Neumorphic card shadow */
+.shadow-neumorphic {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05),
+              -5px -5px 15px rgba(255, 255, 255, 0.8);
+}
+
+/* Process step card (neumorphic + base) */
+.step-card {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05),
+              -5px -5px 15px rgba(255, 255, 255, 0.8);
+}
+
+/* Carousel rounded corners (30px radius) */
+.rounded-carousel {
+  border-radius: 30px;
+}
+
+/* Carousel perspective container for depth effect */
+.carousel-container {
+  perspective: 1000px;
+}
+
+/* Stitch heading: uppercase, light weight, wide tracking, tight leading */
+.text-stitch-heading {
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  line-height: 0.9;
+}
+
+/* FAQ card hover lift */
+.faq-card {
+  transition: transform 300ms ease;
+}
+
+.faq-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Details/summary marker removal for accordion */
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
 ::selection {
   background: var(--color-sun-200);
   color: var(--color-forest-950);

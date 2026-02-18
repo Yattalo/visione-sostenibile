@@ -13,7 +13,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "../components/animations";
-import { Skeleton } from "../components/ui/Skeleton";
+import { blogPosts as staticBlogPosts } from "../lib/blog";
 
 const coverImages: Record<string, string> = {
   "come-mantenere-giardino-autunno":
@@ -24,26 +24,6 @@ const coverImages: Record<string, string> = {
     "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
 };
 
-function LoadingState() {
-  return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-2xl overflow-hidden border border-paper-300">
-            <Skeleton className="aspect-[16/10] w-full" />
-            <div className="p-6 space-y-4">
-              <Skeleton className="h-4 w-20" />
-              <Skeleton className="h-6 w-3/4" />
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-2/3" />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function EmptyState() {
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
@@ -53,32 +33,8 @@ function EmptyState() {
 }
 
 export default function BlogPage() {
-  const posts = useQuery(api.blog.getAll);
-
-  if (posts === undefined) {
-    return (
-      <div className="min-h-screen bg-paper-50">
-        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
-          <div className="absolute inset-0">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-10"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-            <Skeleton className="h-4 w-20 mb-8" />
-            <Skeleton className="h-16 w-64 mb-8" />
-            <Skeleton className="h-6 w-96" />
-          </div>
-        </section>
-        <LoadingState />
-      </div>
-    );
-  }
+  const convexPosts = useQuery(api.blog.getAll);
+  const posts = convexPosts ?? staticBlogPosts;
 
   if (posts.length === 0) {
     return (

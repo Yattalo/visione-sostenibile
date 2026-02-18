@@ -24,7 +24,7 @@ import {
   StaggerItem,
 } from "../components/animations";
 import { cn } from "../lib/utils";
-import { Skeleton } from "../components/ui/Skeleton";
+import { progettiProjects as staticProjects } from "../lib/progetti-data";
 
 function formatTag(tag: string): string {
   return tag
@@ -147,22 +147,20 @@ function TextProjectCard({ project }: { project: Project }) {
 }
 
 export default function ProgettiPage() {
-  const allProjects = useQuery(api.projects.getAll);
+  const convexProjects = useQuery(api.projects.getAll);
+  const allProjects = convexProjects ?? staticProjects;
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
   const projectsWithPhotos = useMemo(() => {
-    if (!allProjects) return [];
     return allProjects.filter((p) => p.has_photos);
   }, [allProjects]);
 
   const projectsWithoutPhotos = useMemo(() => {
-    if (!allProjects) return [];
     return allProjects.filter((p) => !p.has_photos);
   }, [allProjects]);
 
   const allTags = useMemo(() => {
-    if (!allProjects) return [];
     const tags = new Set<string>();
     for (const project of allProjects) {
       for (const tag of project.tags) {
@@ -179,36 +177,6 @@ export default function ProgettiPage() {
   const filteredTextProjects = activeTag
     ? projectsWithoutPhotos.filter((p) => p.tags.includes(activeTag))
     : projectsWithoutPhotos;
-
-  if (allProjects === undefined) {
-    return (
-      <div className="min-h-screen bg-paper-50">
-        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-            <Skeleton className="h-4 w-32 mb-8" />
-            <Skeleton className="h-16 w-64 mb-8" />
-            <Skeleton className="h-6 w-96" />
-          </div>
-        </section>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-paper-300">
-                <Skeleton className="aspect-[3/2] w-full" />
-                <div className="p-6 space-y-3">
-                  <Skeleton className="h-6 w-3/4" />
-                  <Skeleton className="h-4 w-1/2" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const totalProjects = filteredProjects.length + filteredTextProjects.length;
 

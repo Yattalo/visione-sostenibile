@@ -9,7 +9,7 @@ import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, FadeIn } from "../components/animations";
-import { Skeleton } from "../components/ui/Skeleton";
+import { getBlogPost as staticGetBlogPost, getRelatedPosts as staticGetRelatedPosts } from "../lib/blog";
 
 type TemplateVariant = 1 | 2 | 3;
 
@@ -318,17 +318,6 @@ function renderArticleContent(content: string) {
   return processed;
 }
 
-function LoadingState() {
-  return (
-    <div className="min-h-screen bg-paper-50 flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <Skeleton className="h-8 w-64 mx-auto" />
-        <Skeleton className="h-4 w-96 mx-auto" />
-      </div>
-    </div>
-  );
-}
-
 export function BlogPostClient({
   slug,
   template,
@@ -336,12 +325,10 @@ export function BlogPostClient({
   slug: string;
   template?: string | string[];
 }) {
-  const post = useQuery(api.blog.getBySlug, { slug });
-  const relatedPosts = useQuery(api.blog.getRelated, { slug, category: post?.category ?? "" });
-
-  if (post === undefined) {
-    return <LoadingState />;
-  }
+  const convexPost = useQuery(api.blog.getBySlug, { slug });
+  const post = convexPost ?? staticGetBlogPost(slug);
+  const convexRelated = useQuery(api.blog.getRelated, { slug, category: post?.category ?? "" });
+  const relatedPosts = convexRelated ?? staticGetRelatedPosts(slug);
 
   if (!post) {
     notFound();

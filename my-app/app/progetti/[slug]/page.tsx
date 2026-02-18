@@ -26,7 +26,7 @@ import { api } from "@/convex/_generated/api";
 import { Button } from "../../components/ui/Button";
 import { Badge } from "../../components/ui/Badge";
 import { cn } from "../../lib/utils";
-import { Skeleton } from "../../components/ui/Skeleton";
+import { getProjectBySlug as staticGetProjectBySlug, progettiProjects as staticProjects } from "../../lib/progetti-data";
 
 /* ─── Lightbox Component ─── */
 
@@ -168,9 +168,11 @@ const fadeUp = {
 export default function ProgettiDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
-  const project = useQuery(api.projects.getBySlug, { slug });
-  const allProjects = useQuery(api.projects.getAll);
-  
+  const convexProject = useQuery(api.projects.getBySlug, { slug });
+  const convexAllProjects = useQuery(api.projects.getAll);
+  const project = convexProject ?? staticGetProjectBySlug(slug) ?? null;
+  const allProjects = convexAllProjects ?? staticProjects;
+
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxPhotos, setLightboxPhotos] = useState<Array<{
     src: string;
@@ -193,17 +195,6 @@ export default function ProgettiDetailPage() {
     setLightboxPhotos(photos);
     setLightboxIndex(index);
   };
-
-  if (project === undefined) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-paper-50">
-        <div className="text-center space-y-4">
-          <Skeleton className="h-8 w-64 mx-auto" />
-          <Skeleton className="h-4 w-96 mx-auto" />
-        </div>
-      </div>
-    );
-  }
 
   if (!project) {
     return (
