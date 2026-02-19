@@ -62,7 +62,7 @@ export default function HomePage() {
     ],
     founder: { "@type": "Person", name: "Andrea Giordano" },
     priceRange: "$$",
-    image: "https://www.visionesostenibile.it/og-image.png",
+    image: "https://www.visionesostenibile.it/api/og",
   };
 
   return (

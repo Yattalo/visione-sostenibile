@@ -16,6 +16,7 @@ export function Footer() {
           <Image
             src="/VS_logo_completo_bianco.svg"
             alt="Visione Sostenibile"
+            width={144}
             height={48}
             className="h-12 w-auto mx-auto"
             loading="lazy"

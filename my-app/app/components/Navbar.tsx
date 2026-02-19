@@ -63,7 +63,7 @@ export function Navbar() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <Image
-                src={useDarkText ? "/VS_logo_completo_bianco.svg" : "/VS_logo_completo_colori.svg"}
+                src={useDarkText ? "/VS_logo_completo_colori.svg" : "/VS_logo_completo_bianco.svg"}
                 alt="Visione Sostenibile"
                 width={120}
                 height={40}
@@ -71,7 +71,7 @@ export function Navbar() {
                 priority
               />
               <Image
-                src={useDarkText ? "/VS_logo_completo_bianco.svg" : "/VS_logo_completo_colori.svg"}
+                src={useDarkText ? "/VS_logo_completo_colori.svg" : "/VS_logo_completo_bianco.svg"}
                 alt="Visione Sostenibile"
                 width={96}
                 height={32}
