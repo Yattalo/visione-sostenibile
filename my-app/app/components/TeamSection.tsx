@@ -1,35 +1,41 @@
 "use client";
 
-import Image from "next/image";
+import { useRouter } from "next/navigation";
+import ProfileCard from "@/components/ProfileCard";
 import { SlideUp, StaggerContainer, StaggerItem } from "./animations";
 
 interface TeamMember {
   name: string;
+  title: string;
   role: string;
+  handle: string;
   image: string;
+  avatarFocus: string;
 }
 
 const teamMembers: TeamMember[] = [
-  { name: "Bogdan", role: "Tree climbing, abbattimenti e potature in quota", image: "/images/team/bogdan.jpg" },
-  { name: "Daniele", role: "Dottore forestale specializzato in funghi agenti di carie", image: "/images/team/daniele.jpg" },
-  { name: "Moreno", role: "Fitoiatra - Entomologo ETT certificato", image: "/images/team/moreno.jpg" },
-  { name: "Besnik", role: "Allestimento giardini e impianti di irrigazione", image: "/images/team/besnik.jpg" },
-  { name: "Michele", role: "Posa prato sintetico", image: "/images/team/michele.avif" },
-  { name: "Nicolò", role: "Allestimento terrazzi, attici e relativi impianti", image: "/images/team/nicolo.jpg" },
-  { name: "Agi", role: "Manutenzioni, potatura siepi, sfalcio erba", image: "/images/team/agi.jpg" },
-  { name: "Flavio", role: "Installazione impianti antizanzare omologati", image: "/images/team/flavio.jpg" },
-  { name: "Danilo", role: "Impianti per robot taglia erba e assistenza", image: "/images/team/danilo.jpg" },
-  { name: "Francesca", role: "Arredamento floreale per esterni ed interni", image: "/images/team/francesca.jpg" },
-  { name: "Paolo e Dario", role: "Impianti elettrici e illuminazioni per esterni", image: "/images/team/paolo-dario.jpg" },
-  { name: "Roberto", role: "Impianti di irrigazione e posa prato", image: "/images/team/roberto.jpg" },
-  { name: "Lleshi", role: "Posa cubetto, ciotolo in pietra", image: "/images/team/lleshi.jpg" },
-  { name: "Claudio", role: "Lavorazione pietra arenaria di Langa", image: "/images/team/claudio.jpg" },
-  { name: "Fabrizio", role: "Realizzazione giardini giapponesi", image: "/images/team/fabrizio.jpg" },
-  { name: "Ercole", role: "Recinzioni, staccionate e palificazioni in legno", image: "/images/team/ercole.jpg" },
-  { name: "Carlo", role: "Manutenzione giardini", image: "/images/team/carlo.jpg" },
+  { name: "Bogdan", title: "Tree Climbing", role: "Tree climbing, abbattimenti e potature in quota", handle: "bogdan.vs", image: "/images/team/bogdan.jpg", avatarFocus: "50% 18%" },
+  { name: "Daniele", title: "Dottore Forestale", role: "Dottore forestale specializzato in funghi agenti di carie", handle: "daniele.vs", image: "/images/team/daniele.jpg", avatarFocus: "50% 20%" },
+  { name: "Moreno", title: "Fitoiatra", role: "Fitoiatra - Entomologo ETT certificato", handle: "moreno.vs", image: "/images/team/moreno.jpg", avatarFocus: "50% 20%" },
+  { name: "Besnik", title: "Allestimento Verde", role: "Allestimento giardini e impianti di irrigazione", handle: "besnik.vs", image: "/images/team/besnik.jpg", avatarFocus: "50% 18%" },
+  { name: "Michele", title: "Posa Prato", role: "Posa prato sintetico", handle: "michele.vs", image: "/images/team/michele.avif", avatarFocus: "50% 12%" },
+  { name: "Nicolò", title: "Terrazzi e Attici", role: "Allestimento terrazzi, attici e relativi impianti", handle: "nicolo.vs", image: "/images/team/nicolo.jpg", avatarFocus: "50% 18%" },
+  { name: "Agi", title: "Manutenzione Verde", role: "Manutenzioni, potatura siepi, sfalcio erba", handle: "agi.vs", image: "/images/team/agi.jpg", avatarFocus: "50% 16%" },
+  { name: "Flavio", title: "Antizanzare", role: "Installazione impianti antizanzare omologati", handle: "flavio.vs", image: "/images/team/flavio.jpg", avatarFocus: "50% 16%" },
+  { name: "Danilo", title: "Robot Tagliaerba", role: "Impianti per robot taglia erba e assistenza", handle: "danilo.vs", image: "/images/team/danilo.jpg", avatarFocus: "50% 17%" },
+  { name: "Francesca", title: "Floral Designer", role: "Arredamento floreale per esterni ed interni", handle: "francesca.vs", image: "/images/team/francesca.jpg", avatarFocus: "50% 18%" },
+  { name: "Paolo e Dario", title: "Illuminazione", role: "Impianti elettrici e illuminazioni per esterni", handle: "paolo-dario.vs", image: "/images/team/paolo-dario.jpg", avatarFocus: "50% 24%" },
+  { name: "Roberto", title: "Irrigazione", role: "Impianti di irrigazione e posa prato", handle: "roberto.vs", image: "/images/team/roberto.jpg", avatarFocus: "50% 17%" },
+  { name: "Lleshi", title: "Pietra e Cubetti", role: "Posa cubetto, ciotolo in pietra", handle: "lleshi.vs", image: "/images/team/lleshi.jpg", avatarFocus: "50% 16%" },
+  { name: "Claudio", title: "Pietra Arenaria", role: "Lavorazione pietra arenaria di Langa", handle: "claudio.vs", image: "/images/team/claudio.jpg", avatarFocus: "50% 18%" },
+  { name: "Fabrizio", title: "Giardini Giapponesi", role: "Realizzazione giardini giapponesi", handle: "fabrizio.vs", image: "/images/team/fabrizio.jpg", avatarFocus: "50% 18%" },
+  { name: "Ercole", title: "Recinzioni in Legno", role: "Recinzioni, staccionate e palificazioni in legno", handle: "ercole.vs", image: "/images/team/ercole.jpg", avatarFocus: "50% 18%" },
+  { name: "Carlo", title: "Manutenzione", role: "Manutenzione giardini", handle: "carlo.vs", image: "/images/team/carlo.jpg", avatarFocus: "50% 17%" },
 ];
 
 export function TeamSection() {
+  const router = useRouter();
+
   return (
     <section className="py-28 md:py-36 px-6 bg-paper-50">
       <div className="max-w-7xl mx-auto">
@@ -51,33 +57,35 @@ export function TeamSection() {
         </SlideUp>
 
         <StaggerContainer delay={0.1}>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 lg:gap-12">
             {teamMembers.map((member, index) => (
-              <StaggerItem key={member.name} delay={0.03}>
-                <article
-                  className="group relative overflow-hidden rounded-3xl border border-paper-300/60 bg-white
-                              transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/50 hover:shadow-floating"
-                >
-                  <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-950/60 via-forest-950/5 to-transparent" />
-                    <div className="absolute inset-0 bg-leaf-600/0 mix-blend-multiply transition-colors duration-700 group-hover:bg-leaf-600/10" />
-                  </div>
-
-                  <div className="flex flex-col p-5 text-center">
-                    <h3 className="font-display text-lg leading-tight text-forest-950 transition-colors duration-300 group-hover:text-leaf-600">
-                      {member.name}
-                    </h3>
-                    <p className="mt-1 font-body text-xs leading-relaxed text-forest-800/70 line-clamp-2">
-                      {member.role}
-                    </p>
-                  </div>
+              <StaggerItem key={member.name} delay={index * 0.03}>
+                <article className="mx-auto w-full max-w-[20rem]">
+                  <ProfileCard
+                    name={member.name}
+                    title={member.title}
+                    handle={member.handle}
+                    status="Team Visione"
+                    contactText="Contattaci"
+                    avatarUrl={member.image}
+                    miniAvatarUrl={member.image}
+                    showUserInfo
+                    enableTilt
+                    enableMobileTilt={false}
+                    onContactClick={() => router.push("/contatti")}
+                    iconUrl="/images/brand/visione-logo.png"
+                    behindGlowEnabled
+                    behindGlowColor={index % 2 === 0 ? "hsla(133, 54%, 37%, 0.44)" : "hsla(43, 80%, 56%, 0.38)"}
+                    innerGradient="linear-gradient(150deg, rgba(11, 30, 14, 0.3) 0%, rgba(34, 88, 44, 0.24) 58%, rgba(234, 184, 49, 0.18) 100%)"
+                    avatarObjectPosition={member.avatarFocus}
+                    miniAvatarObjectPosition={member.avatarFocus}
+                    className="mx-auto w-full"
+                    cardHeight="23rem"
+                    cardMaxHeight="27rem"
+                  />
+                  <p className="mt-4 px-2 text-center font-body text-sm leading-relaxed text-forest-800/75 min-h-[3.5rem]">
+                    {member.role}
+                  </p>
                 </article>
               </StaggerItem>
             ))}
