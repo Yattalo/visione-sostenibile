@@ -18,6 +18,7 @@ import { ReviewsWidget } from "./components/ReviewsWidget";
 import { PhilosophySection } from "./components/PhilosophySection";
 import { staticServices, serviceImages } from "./lib/static-data";
 import { QuizCTA } from "./components/QuizCTA";
+import { QuizMiniPreview } from "./components/QuizMiniPreview";
 import { useRef } from "react";
 
 const featuredSlugs = [
@@ -368,10 +369,31 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Quiz CTA */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <QuizCTA variant="inline" />
+      {/* Quiz Section */}
+      <section className="py-20 lg:py-28 px-6 bg-paper-100 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-leaf-100/30 rounded-full blur-3xl" />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="bg-leaf-100 text-leaf-700 mb-6">
+              Quiz Gratuito
+            </Badge>
+            <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-4 leading-tight">
+              Che giardino
+              <span className="block italic text-leaf-600">fa per te?</span>
+            </h2>
+            <p className="font-body text-lg text-forest-800/70 max-w-2xl mx-auto mb-12">
+              Rispondi a 6 domande e scopri il tuo profilo verde personalizzato.
+              Riceverai consigli su misura per il tuo spazio.
+            </p>
+          </motion.div>
+          <QuizMiniPreview />
+          <div className="mt-8">
+            <QuizCTA variant="compact" />
+          </div>
         </div>
       </section>
 
