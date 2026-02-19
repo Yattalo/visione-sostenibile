@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, Sprout, Leaf, Heart, Star, Home, TreeDeciduous, Flower2, Trees, Sofa, Utensils, Waves, Users, Gamepad2, Shovel, Waves as Nature, Building2, Castle, Warehouse, Home as Rustic } from "lucide-react";
+import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
@@ -399,6 +400,9 @@ export default function QuizPage() {
   return (
     <div className="min-h-screen bg-paper-50 py-8 px-6">
       <div className="max-w-2xl mx-auto">
+        <div className="flex justify-center mb-6">
+          <Image src="/VS_logo_monogramma_colori.svg" alt="Visione Sostenibile" width={48} height={48} loading="eager" />
+        </div>
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-medium text-forest-800/60">

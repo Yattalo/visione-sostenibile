@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import NextImage from "next/image";
 import {
   LayoutDashboard,
   FileText,
@@ -14,7 +15,6 @@ import {
   Menu,
   X,
   ChevronDown,
-  Leaf,
   ExternalLink,
 } from "lucide-react";
 import { cn } from "../lib/utils";
@@ -57,7 +57,7 @@ export default function AdminShell({
     return (
       <div className="min-h-screen bg-paper-100 flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <Leaf className="w-10 h-10 text-leaf-500" />
+          <NextImage src="/VS_logo_monogramma_colori.svg" alt="VS" width={40} height={40} />
           <p className="text-forest-800/60 font-sans text-sm">Caricamento...</p>
         </div>
       </div>
@@ -69,7 +69,7 @@ export default function AdminShell({
     return (
       <div className="min-h-screen bg-paper-100 flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <Leaf className="w-10 h-10 text-leaf-500" />
+          <NextImage src="/VS_logo_monogramma_colori.svg" alt="VS" width={40} height={40} />
           <p className="text-forest-800/60 font-sans text-sm">Reindirizzamento...</p>
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function AdminShell({
       >
         <div className="flex items-center justify-between h-16 px-6 border-b border-forest-900">
           <Link href="/admin" className="flex items-center gap-2">
-            <Leaf className="w-5 h-5 text-leaf-400" />
+            <NextImage src="/VS_logo_monogramma_bianco.svg" alt="VS" width={24} height={24} />
             <span className="font-display text-lg">Admin</span>
             <span className="text-leaf-400 font-sans text-sm">Panel</span>
           </Link>

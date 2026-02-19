@@ -61,21 +61,30 @@ export function Navbar() {
       >
         <div className="px-4 sm:px-8 py-3">
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2.5 group">
+            <Link href="/" className="relative flex items-center gap-2.5 group">
+              <span
+                className={cn(
+                  "absolute -inset-2 rounded-2xl blur-lg transition-opacity duration-500 pointer-events-none",
+                  useDarkText
+                    ? "bg-sun-400/0"
+                    : "bg-sun-400/15"
+                )}
+                aria-hidden
+              />
               <Image
                 src={useDarkText ? "/VS_logo_completo_colori.svg" : "/VS_logo_completo_bianco.svg"}
                 alt="Visione Sostenibile"
-                width={120}
-                height={40}
-                className="hidden lg:block"
+                width={175}
+                height={60}
+                className="relative hidden lg:block h-14 w-auto drop-shadow-[0_0_8px_rgba(234,184,49,0.25)]"
                 priority
               />
               <Image
                 src={useDarkText ? "/VS_logo_completo_colori.svg" : "/VS_logo_completo_bianco.svg"}
                 alt="Visione Sostenibile"
-                width={96}
-                height={32}
-                className="lg:hidden"
+                width={120}
+                height={40}
+                className="relative lg:hidden h-10 w-auto drop-shadow-[0_0_8px_rgba(234,184,49,0.25)]"
                 priority
               />
             </Link>

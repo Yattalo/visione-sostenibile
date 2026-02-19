@@ -355,8 +355,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   const shineStyle: React.CSSProperties = {
     maskImage: 'var(--icon)',
     maskMode: 'luminance',
-    maskRepeat: 'repeat',
-    maskSize: '150%',
+    maskRepeat: 'space',
+    maskSize: '35%',
     maskPosition: 'top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x))',
     filter: 'brightness(0.94) contrast(1.18) saturate(1.15) opacity(0.42)',
     animation: 'pc-holo-bg 18s linear infinite',

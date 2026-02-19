@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useQuery } from "convex/react";
 import Link from "next/link";
+import Image from "next/image";
 import { api } from "../../../convex/_generated/api";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -249,6 +250,9 @@ export default function ScorecardPage() {
       <section className="bg-forest-950 text-white py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <FadeIn>
+            <div className="flex justify-center mb-4">
+              <Image src="/VS_logo_monogramma_bianco.svg" alt="Visione Sostenibile" width={40} height={40} className="opacity-80" />
+            </div>
             <Badge variant="outline" className="mb-6 border-leaf-400 text-leaf-300">
               La tua Scorecard Personale
             </Badge>

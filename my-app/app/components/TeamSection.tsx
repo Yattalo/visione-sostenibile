@@ -64,7 +64,7 @@ export function TeamSection() {
                     avatarUrl={member.image}
                     enableTilt
                     enableMobileTilt={false}
-                    iconUrl="/images/brand/visione-logo.png"
+                    iconUrl="/VS_logo_monogramma_colori.svg"
                     behindGlowEnabled
                     behindGlowColor={index % 2 === 0 ? "hsla(133, 54%, 37%, 0.44)" : "hsla(43, 80%, 56%, 0.38)"}
                     innerGradient="linear-gradient(150deg, rgba(11, 30, 14, 0.3) 0%, rgba(34, 88, 44, 0.24) 58%, rgba(234, 184, 49, 0.18) 100%)"
