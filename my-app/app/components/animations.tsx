@@ -192,8 +192,13 @@ export function StaggerItem({
     visible: { opacity: 1, y: 0 },
   },
 }: StaggerItemProps) {
+  const { ref, controls } = useScrollAnimation(0.1);
+
   return (
     <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
       variants={variants}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className={className}

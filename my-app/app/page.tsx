@@ -20,10 +20,10 @@ import { staticServices, serviceImages } from "./lib/static-data";
 import { useRef } from "react";
 
 const featuredSlugs = [
-  "progettazione-giardini-orti",
-  "realizzazione-chiavi-in-mano",
-  "potatura-professionale",
-  "manutenzione-sostenibile",
+  "progettazione-giardini",
+  "realizzazione-giardini",
+  "potature",
+  "manutenzioni",
 ];
 
 export default function HomePage() {
