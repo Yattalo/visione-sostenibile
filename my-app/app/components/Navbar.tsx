@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
 
@@ -61,28 +62,22 @@ export function Navbar() {
         <div className="px-4 sm:px-8 py-3">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <Leaf
-                className={cn(
-                  "w-6 h-6 transition-colors duration-300",
-                  useDarkText ? "text-leaf-500" : "text-paper-100"
-                )}
+              <Image
+                src={useDarkText ? "/VS_logo_completo_bianco.svg" : "/VS_logo_completo_colori.svg"}
+                alt="Visione Sostenibile"
+                width={120}
+                height={40}
+                className="hidden lg:block"
+                priority
               />
-              <span
-                className={cn(
-                  "font-display text-lg tracking-tighter transition-colors duration-300",
-                  useDarkText ? "text-forest-950" : "text-paper-50"
-                )}
-              >
-                Visione
-                <span
-                  className={cn(
-                    "italic",
-                    useDarkText ? "text-leaf-500" : "text-leaf-400"
-                  )}
-                >
-                  Sostenibile
-                </span>
-              </span>
+              <Image
+                src={useDarkText ? "/VS_logo_completo_bianco.svg" : "/VS_logo_completo_colori.svg"}
+                alt="Visione Sostenibile"
+                width={96}
+                height={32}
+                className="lg:hidden"
+                priority
+              />
             </Link>
 
             <div className="hidden lg:flex items-center gap-6">

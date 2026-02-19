@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 649.1 632.7">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#Sfumatura_senza_nome_20);
+      }
+
+      .st1 {
+        fill: url(#Sfumatura_senza_nome_53);
+      }
+
+      .st2 {
+        fill: url(#Sfumatura_senza_nome_60);
+      }
+
+      .st3 {
+        fill: url(#Sfumatura_senza_nome_201);
+      }
+
+      .st4 {
+        fill: url(#Sfumatura_senza_nome_202);
+      }
+    </style>
+    <linearGradient id="Sfumatura_senza_nome_20" data-name="Sfumatura senza nome 20" x1="300" y1="483" x2="203.1" y2="321.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#003611"/>
+      <stop offset="1" stop-color="#005c20"/>
+    </linearGradient>
+    <linearGradient id="Sfumatura_senza_nome_53" data-name="Sfumatura senza nome 53" x1="356.8" y1="118.5" x2="504.5" y2="-17.2" gradientUnits="userSpaceOnUse">
+      <stop offset=".1" stop-color="#005c20"/>
+      <stop offset=".9" stop-color="#01a348"/>
+    </linearGradient>
+    <linearGradient id="Sfumatura_senza_nome_201" data-name="Sfumatura senza nome 20" x1="429.5" y1="316.5" x2="367.4" y2="429.8" xlink:href="#Sfumatura_senza_nome_20"/>
+    <linearGradient id="Sfumatura_senza_nome_202" data-name="Sfumatura senza nome 20" x1="509" y1="233.6" x2="556.5" y2="184.6" xlink:href="#Sfumatura_senza_nome_20"/>
+    <radialGradient id="Sfumatura_senza_nome_60" data-name="Sfumatura senza nome 60" cx="414.3" cy="219.6" fx="414.3" fy="219.6" r="218.2" gradientTransform="translate(197.6 -144.3) rotate(47.2) scale(1 .4)" gradientUnits="userSpaceOnUse">
+      <stop offset=".1" stop-color="#01a348"/>
+      <stop offset=".4" stop-color="#019d45"/>
+      <stop offset=".8" stop-color="#028f3f"/>
+      <stop offset=".9" stop-color="#03883c"/>
+    </radialGradient>
+  </defs>
+  <path class="st0" d="M324.8,383.6c-32.9,119.9-105.4,143.1-105.4,143.1h0L0,78.2s144.9-60.5,228.2,109.7l96.6,195.8"/>
+  <path class="st1" d="M342.1,61.9c27.5,40.2,84.6,64.5,84.6,64.5C485.7,92.3,500.8.6,500.8.6c0,0-111.6-11-159.1,61"/>
+  <path class="st3" d="M377.5,276.3c9.8,10.2,21.2,20.7,34.9,31.2,70,53.4,70,110.2,70,110.2h0l-62,126.3s-43,88.8-96.4,88.8-59.8-5.8-114.5-126c0,0,41.8,13.1,115.3-123.1l52.7-107.3"/>
+  <path class="st4" d="M482.5,417.6s76.6-120.1,27.4-218.9c-10.9-21.9-39.6-44.1-60.3-58h0c84-110.8,199.6-62.5,199.6-62.5l-166.7,339.5"/>
+  <path class="st2" d="M342.1,61.9c27.5,40.2,84.6,64.5,84.6,64.5,0,0,65.4,36.5,83.2,72.3,49.2,98.8-27.4,218.9-27.4,218.9,0,0,0-56.8-70-110.2-19-14.5-34-29.3-45.7-43.2-30.7-36.3-47.4-82.6-46-130.1.9-30.6,8.8-54.3,20.9-72.6"/>
+</svg>
