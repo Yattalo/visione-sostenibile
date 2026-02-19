@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 
@@ -13,9 +14,13 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="text-4xl font-bold tracking-tighter italic font-display">
-            Visione
-          </span>
+          <Image
+            src="/VS_logo_completo_bianco.svg"
+            alt="Visione Sostenibile"
+            height={48}
+            className="h-12 w-auto mx-auto"
+            loading="lazy"
+          />
         </motion.div>
 
         <motion.p
