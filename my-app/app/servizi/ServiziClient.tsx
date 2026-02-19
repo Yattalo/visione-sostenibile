@@ -8,6 +8,7 @@ import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { ReviewsWidget } from "../components/ReviewsWidget";
 import { ServiceCard } from "../components/ServiceCard";
+import { normalizeServiceSlug, staticServices } from "../lib/static-data";
 import {
   FadeIn,
   SlideUp,
@@ -16,13 +17,18 @@ import {
 } from "../components/animations";
 
 export function ServiziClient() {
-  const services = useQuery(api.services.getAll) ?? [];
+  const servicesQuery = useQuery(api.services.getAll);
+  const services =
+    servicesQuery && servicesQuery.length > 0 ? servicesQuery : staticServices;
 
-  const getImageForService = (service: { slug: string; image?: string }) => {
+  const getImageForService = (service: { slug: string; image?: string | null }) => {
+    const normalizedSlug = normalizeServiceSlug(service.slug);
+
     // Use image from Convex if available, otherwise fallback to local images
-    if (service.image && service.image.startsWith('/')) {
+    if (service.image && service.image.startsWith("/")) {
       return service.image;
     }
+
     // Fallback to local images based on slug
     const imageMap: Record<string, string> = {
       "progettazione-giardini": "/images/servizi/progettazione-giardini-cover.png",
@@ -38,7 +44,8 @@ export function ServiziClient() {
       "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.png",
       "manutenzioni": "/images/servizi/manutenzioni-cover.png",
     };
-    return imageMap[service.slug] || "/images/servizi/progettazione-giardini-cover.png";
+
+    return imageMap[normalizedSlug] || "/images/servizi/progettazione-giardini-cover.png";
   };
 
   return (
@@ -113,7 +120,7 @@ export function ServiziClient() {
               {services.map((service, index) => (
                 <StaggerItem key={service._id} delay={0.05}>
                   <ServiceCard
-                    slug={service.slug}
+                    slug={normalizeServiceSlug(service.slug)}
                     title={service.title}
                     shortDescription={service.shortDescription}
                     image={getImageForService(service)}

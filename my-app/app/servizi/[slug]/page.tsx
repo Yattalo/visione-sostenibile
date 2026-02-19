@@ -4,29 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { ElementType } from "react";
 import { useMutation } from "convex/react";
 import {
   ArrowLeft,
   ArrowRight,
   Phone,
-  Mail,
   Clock,
   MapPin,
-  Check,
   MessageCircle,
   CheckCircle2,
   Sprout,
-  PenTool,
-  Hammer,
-  Scissors,
-  Leaf,
-  Flower2,
   Play,
   ChevronDown,
 } from "lucide-react";
 import { api } from "../../../convex/_generated/api";
-import { staticServices } from "../../lib/static-data";
+import { normalizeServiceSlug, staticServices } from "../../lib/static-data";
 import { Button } from "../../components/ui/Button";
 import { cn } from "../../lib/utils";
 
@@ -50,27 +42,19 @@ type ServiceContent = {
 
 const SITE_URL = "https://www.visionesostenibile.it";
 
-const serviceIconMap: Record<string, ElementType> = {
-  "progettazione-giardini-orti": PenTool,
-  "realizzazione-chiavi-in-mano": Hammer,
-  "manutenzione-sostenibile": Leaf,
-  "potatura-professionale": Scissors,
-  "gestione-verde-biodinamica": Flower2,
-};
-
 const serviceImageMap: Record<string, string> = {
-  "progettazione-giardini-orti": "/images/servizi/progettazione-giardini-cover.png",
-  "realizzazione-chiavi-in-mano": "/images/servizi/realizzazione-giardini-cover.png",
-  "ampia-scelta-piante": "/images/servizi/scelta-piante-cover.png",
-  "trattamenti-curativi-nutrizionali": "/images/servizi/trattamenti-piante-cover.png",
+  "progettazione-giardini": "/images/servizi/progettazione-giardini-cover.png",
+  "realizzazione-giardini": "/images/servizi/realizzazione-giardini-cover.png",
+  "scelta-piante": "/images/servizi/scelta-piante-cover.png",
+  "trattamenti-piante": "/images/servizi/trattamenti-piante-cover.png",
   "impianti-irrigazione": "/images/servizi/impianti-irrigazione-cover.png",
-  "camminamenti-muretti-pietra": "/images/servizi/camminamenti-pietra-cover.png",
+  "camminamenti-pietra": "/images/servizi/camminamenti-pietra-cover.png",
   "illuminazione-esterni": "/images/servizi/illuminazione-esterni-cover.png",
   "ingegneria-naturalistica": "/images/servizi/ingegneria-naturalistica-cover.png",
   "arredamento-esterni": "/images/servizi/arredamento-esterni-cover.png",
-  "potatura-professionale": "/images/servizi/potature-cover.png",
+  potature: "/images/servizi/potature-cover.png",
   "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.png",
-  "manutenzione-sostenibile": "/images/servizi/manutenzioni-cover.png",
+  manutenzioni: "/images/servizi/manutenzioni-cover.png",
 };
 
 // All carousel images pool — service images + generic garden photos
@@ -83,15 +67,15 @@ const carouselImagesPool = [
 ];
 
 const serviceSubtitles: Record<string, string> = {
-  "progettazione-giardini-orti": "Dal concept alla realtà",
-  "realizzazione-chiavi-in-mano": "Senza pensieri",
-  "manutenzione-sostenibile": "Cura continua",
-  "potatura-professionale": "Precisione e rispetto",
-  "gestione-verde-biodinamica": "Equilibrio naturale",
+  "progettazione-giardini": "Dal concept alla realta",
+  "realizzazione-giardini": "Senza pensieri",
+  manutenzioni: "Cura continua",
+  potature: "Precisione e rispetto",
+  "rigenerazione-terreni": "Equilibrio naturale",
 };
 
 const serviceContents: Record<string, ServiceContent> = {
-  "progettazione-giardini-orti": {
+  "progettazione-giardini": {
     quickAnswer:
       "La progettazione di giardini e orti sostenibili funziona meglio quando parte da analisi del sito, obiettivi d'uso e scelta botanica locale. Cosi ottieni un progetto realizzabile, riduci errori in cantiere e abbassi i costi di manutenzione nel medio periodo.",
     intro:
@@ -138,7 +122,7 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "realizzazione-chiavi-in-mano": {
+  "realizzazione-giardini": {
     quickAnswer:
       "La realizzazione chiavi in mano ti permette di avere un unico referente dalla preparazione del terreno alla posa finale. In questo modo riduci coordinamento, tempi morti e rischi di incompatibilita tra fornitori diversi.",
     intro:
@@ -185,7 +169,7 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "manutenzione-sostenibile": {
+  manutenzioni: {
     quickAnswer:
       "La manutenzione sostenibile mantiene il giardino sano con interventi programmati, tecniche a basso impatto e prevenzione stagionale. L'approccio riduce degrado progressivo e aiuta a contenere costi straordinari nel tempo.",
     intro:
@@ -232,7 +216,7 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "potatura-professionale": {
+  potature: {
     quickAnswer:
       "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto e con tagli adeguati. Interventi non invasivi riducono stress vegetativo e aiutano una crescita equilibrata.",
     intro:
@@ -279,7 +263,7 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "gestione-verde-biodinamica": {
+  "rigenerazione-terreni": {
     quickAnswer:
       "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente, con minore dipendenza da interventi chimici e maggiore stabilita complessiva.",
     intro:
@@ -681,9 +665,10 @@ export default function ServiceDetailPage() {
   const landingTrackedRef = useRef(false);
   const [shareState, setShareState] = useState<"idle" | "success" | "error">("idle");
 
-  const slug = params.slug as string;
-  const service = staticServices.find((item) => item.slug === slug);
-  const serviceIndex = staticServices.findIndex((item) => item.slug === slug);
+  const slugParam = params.slug as string;
+  const normalizedSlug = normalizeServiceSlug(slugParam);
+  const service = staticServices.find((item) => item.slug === normalizedSlug);
+  const serviceIndex = staticServices.findIndex((item) => item.slug === normalizedSlug);
   const nextService =
     serviceIndex >= 0 && serviceIndex < staticServices.length - 1
       ? staticServices[serviceIndex + 1]
