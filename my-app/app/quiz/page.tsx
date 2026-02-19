@@ -4,13 +4,38 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check, Sprout, Leaf, Heart, Star, Home, TreeDeciduous, Flower2, Trees, Sofa, Utensils, Waves, Users, Gamepad2, Shovel, Waves as Nature, Building2, Castle, Warehouse, Home as Rustic } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Sprout,
+  Leaf,
+  Heart,
+  Star,
+  Home,
+  TreeDeciduous,
+  Flower2,
+  Trees,
+  Sofa,
+  Utensils,
+  Waves,
+  Users,
+  Gamepad2,
+  Shovel,
+  Waves as Nature,
+  Building2,
+  Castle,
+  Warehouse,
+  User,
+  Mail,
+  Phone,
+} from "lucide-react";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
-import { FadeIn, SlideUp, ScaleIn, StaggerContainer, StaggerItem } from "../components/animations";
+import { Badge } from "../components/ui/Badge";
+import { SlideUp, FadeIn, ScaleIn, StaggerContainer, StaggerItem } from "../components/animations";
 import { cn } from "../lib/utils";
 
 type ProfileType = "Contemplativo" | "Sostenibile" | "Familiare" | "Rappresentativo";
@@ -108,11 +133,17 @@ const profileDescriptions: Record<ProfileType, { title: string; description: str
   },
 };
 
+const leadSteps = [
+  { id: 1, title: "Nome", icon: User },
+  { id: 2, title: "Email", icon: Mail },
+  { id: 3, title: "Invio", icon: Check },
+];
+
 export default function QuizPage() {
   const router = useRouter();
   const submitQuiz = useMutation(api.quiz.submit);
   const submitLead = useMutation(api.leads.submit);
-  
+
   const [started, setStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
@@ -222,6 +253,7 @@ export default function QuizPage() {
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
+  // ── HERO / LANDING ──────────────────────────────────────
   if (!started) {
     return (
       <div className="min-h-screen bg-paper-50">
@@ -236,10 +268,9 @@ export default function QuizPage() {
 
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <SlideUp>
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-2 rounded-full mb-8">
-                <Sprout className="w-5 h-5 text-leaf-400" />
-                <span className="text-paper-100 text-sm font-medium tracking-widest uppercase">Quiz Interattivo</span>
-              </div>
+              <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
+                Quiz Interattivo
+              </Badge>
 
               <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
                 Che giardino
@@ -247,19 +278,19 @@ export default function QuizPage() {
               </h1>
 
               <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed mb-12">
-                Rispondi a 6 domande e scopri il tuo profilo verde ideale. 
+                Rispondi a 6 domande e scopri il tuo profilo verde ideale.
                 Riceverai un report personalizzato con suggerimenti su misura per te.
               </p>
 
               <Button
                 onClick={handleStart}
-                className="bg-sun-400 hover:bg-sun-500 text-white px-12 py-5 text-lg tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-all duration-300"
+                className="bg-sun-400 hover:bg-sun-500 text-white px-12 py-5 text-lg tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-all duration-300 uppercase"
               >
                 Inizia il Quiz
                 <ArrowRight className="ml-3 w-5 h-5" />
               </Button>
 
-              <div className="mt-16 flex flex-wrap justify-center gap-8 text-paper-300 text-sm">
+              <div className="mt-16 flex flex-wrap justify-center gap-8 text-paper-300 text-micro">
                 <span className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-leaf-400" />
                   6 domande
@@ -274,18 +305,29 @@ export default function QuizPage() {
                 </span>
               </div>
             </SlideUp>
+
+            <FadeIn delay={1.2}>
+              <div className="mt-16">
+                <div className="w-px h-20 bg-gradient-to-b from-sun-400/50 to-transparent mx-auto" />
+              </div>
+            </FadeIn>
           </div>
         </section>
       </div>
     );
   }
 
+  // ── RESULT + LEAD FORM ──────────────────────────────────
   if (showResult && resultProfile) {
     const profile = profileDescriptions[resultProfile];
 
     return (
-      <div className="min-h-screen bg-paper-50 py-12 px-6">
-        <div className="max-w-2xl mx-auto">
+      <div className="min-h-screen bg-paper-canvas py-16 px-6 relative overflow-hidden">
+        {/* Decorative organic blobs */}
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-leaf-100/40 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 -right-24 w-80 h-80 bg-sun-100/30 rounded-full blur-3xl" />
+
+        <div className="max-w-2xl mx-auto relative z-10">
           <AnimatePresence mode="wait">
             {!submitted ? (
               <motion.div
@@ -295,27 +337,54 @@ export default function QuizPage() {
                 exit={{ opacity: 0, y: -20 }}
               >
                 <FadeIn>
-                  <div className="text-center mb-10">
-                    <span className="text-micro text-leaf-600 block mb-4">Il tuo profilo</span>
-                    <h1 className="font-display text-4xl md:text-5xl text-forest-950 mb-6">
-                      {profile.title}
+                  <div className="text-center mb-12">
+                    <span className="text-micro text-leaf-600 block mb-4">
+                      Il tuo profilo
+                    </span>
+                    <h1 className="font-display text-4xl md:text-6xl text-forest-950 leading-[1.1] tracking-tight mb-6">
+                      {profile.title.split(" ")[0]}
+                      <span className="block italic text-leaf-700 font-light">
+                        {profile.title.split(" ").slice(1).join(" ")}
+                      </span>
                     </h1>
-                    <p className="text-lg text-forest-800/70 leading-relaxed">
+                    <p className="text-lg text-forest-800/70 font-body leading-relaxed max-w-lg mx-auto">
                       {profile.description}
                     </p>
                   </div>
                 </FadeIn>
 
                 <ScaleIn delay={0.2}>
-                  <Card className="bg-white border-leaf-700/10 rounded-2xl overflow-hidden mb-10">
-                    <CardContent className="p-8">
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-16 h-16 rounded-full bg-leaf-50 flex items-center justify-center">
-                          <Sprout className="w-8 h-8 text-leaf-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-display text-xl text-forest-950 font-bold">Report Completo</h3>
-                          <p className="text-sm text-forest-800/60">Inserisci i tuoi dati per riceverlo</p>
+                  <Card className="bg-white shadow-floating border-paper-100 rounded-[40px] overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sun-400 to-leaf-500" />
+                    <CardContent className="p-8 md:p-12 pt-10">
+                      <span className="text-micro text-sun-500 block mb-4">
+                        Ultimo passaggio
+                      </span>
+                      <h2 className="font-display text-2xl md:text-3xl text-forest-950 mb-3 uppercase tracking-tight">
+                        Ricevi il tuo <span className="italic font-light">report</span>
+                      </h2>
+                      <p className="text-sm text-forest-800/60 font-body mb-10">
+                        Inserisci i tuoi dati per ricevere la scorecard completa
+                      </p>
+
+                      {/* Step indicators */}
+                      <div className="mb-10">
+                        <div className="flex items-center justify-between">
+                          {leadSteps.map((step) => (
+                            <div key={step.id} className="flex items-center flex-1 last:flex-none">
+                              <div className={cn(
+                                "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500",
+                                step.id === 3
+                                  ? "bg-paper-100 text-forest-800/40"
+                                  : "bg-sun-400 text-white ring-4 ring-sun-50 shadow-soft"
+                              )}>
+                                <step.icon className="w-4 h-4" />
+                              </div>
+                              {step.id < 3 && (
+                                <div className="flex-1 h-0.5 mx-3 rounded-full bg-sun-200" />
+                              )}
+                            </div>
+                          ))}
                         </div>
                       </div>
 
@@ -325,7 +394,7 @@ export default function QuizPage() {
                           placeholder="es. Mario Rossi"
                           value={leadForm.name}
                           onChange={(e) => setLeadForm((prev) => ({ ...prev, name: e.target.value }))}
-                          className="h-12 rounded-xl"
+                          className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                           required
                         />
                         <Input
@@ -334,7 +403,7 @@ export default function QuizPage() {
                           placeholder="mario@email.com"
                           value={leadForm.email}
                           onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
-                          className="h-12 rounded-xl"
+                          className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                           required
                         />
                         <Input
@@ -343,26 +412,26 @@ export default function QuizPage() {
                           placeholder="+39 333 ..."
                           value={leadForm.phone}
                           onChange={(e) => setLeadForm((prev) => ({ ...prev, phone: e.target.value }))}
-                          className="h-12 rounded-xl"
+                          className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                         />
 
                         <Button
                           type="submit"
                           disabled={isSubmitting || !leadForm.name || !leadForm.email}
-                          className="w-full bg-sun-400 hover:bg-sun-500 text-white h-14 rounded-xl shadow-medium font-bold uppercase tracking-wider"
+                          className="w-full bg-sun-400 hover:bg-sun-500 text-white h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                         >
                           {isSubmitting ? "Invio in corso..." : "Ricevi il tuo Report"}
                         </Button>
 
-                        <p className="text-xs text-forest-800/50 text-center">
-                          I tuoi dati saranno trattati secondo la Privacy Policy
+                        <p className="text-xs text-forest-800/50 text-center font-body italic">
+                          * I tuoi dati saranno trattati secondo la Privacy Policy
                         </p>
                       </form>
                     </CardContent>
                   </Card>
                 </ScaleIn>
 
-                <div className="text-center">
+                <div className="text-center mt-8">
                   <Button
                     variant="ghost"
                     onClick={() => {
@@ -371,7 +440,7 @@ export default function QuizPage() {
                       setAnswers([]);
                       setCurrentQuestion(0);
                     }}
-                    className="text-forest-800 hover:text-forest-950"
+                    className="text-forest-800/60 hover:text-forest-950 font-bold uppercase text-xs tracking-widest"
                   >
                     Ripeti il Quiz
                   </Button>
@@ -387,8 +456,12 @@ export default function QuizPage() {
                 <div className="w-24 h-24 rounded-full bg-leaf-50 flex items-center justify-center mx-auto mb-8 shadow-inner">
                   <Check className="w-12 h-12 text-leaf-600" />
                 </div>
-                <h2 className="font-display text-3xl text-forest-950 mb-4">Report Inviato!</h2>
-                <p className="text-forest-800/70">Tra un istante verrai reindirizzato al tuo profilo...</p>
+                <h2 className="font-display text-3xl text-forest-950 mb-4 uppercase tracking-tight font-bold">
+                  Report Inviato!
+                </h2>
+                <p className="text-forest-800/70 font-body">
+                  Tra un istante verrai reindirizzato al tuo profilo...
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -397,24 +470,32 @@ export default function QuizPage() {
     );
   }
 
+  // ── QUESTIONS ──────────────────────────────────────
   return (
-    <div className="min-h-screen bg-paper-50 py-8 px-6">
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-center mb-6">
+    <div className="min-h-screen bg-paper-canvas py-10 px-6 relative overflow-hidden">
+      {/* Decorative organic blobs */}
+      <div className="absolute top-1/4 -right-32 w-80 h-80 bg-leaf-100/30 rounded-full blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-1/3 -left-20 w-64 h-64 bg-sun-100/20 rounded-full blur-3xl animate-drift" />
+
+      <div className="max-w-2xl mx-auto relative z-10">
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
           <Image src="/VS_logo_monogramma_colori.svg" alt="Visione Sostenibile" width={48} height={48} loading="eager" />
         </div>
-        <div className="mb-8">
+
+        {/* Progress bar */}
+        <div className="mb-10">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-forest-800/60">
+            <span className="text-micro text-forest-800/60">
               Domanda {currentQuestion + 1} di {questions.length}
             </span>
-            <span className="text-sm font-medium text-leaf-600">
+            <span className="text-micro text-leaf-600">
               {Math.round(progress)}%
             </span>
           </div>
           <div className="h-2 bg-paper-200 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-leaf-500 rounded-full"
+              className="h-full bg-gradient-to-r from-sun-400 to-leaf-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
@@ -430,31 +511,30 @@ export default function QuizPage() {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
           >
-            <SlideUp>
-              <h2 className="font-display text-2xl md:text-3xl text-forest-950 text-center mb-8">
-                {questions[currentQuestion].label}
-              </h2>
-            </SlideUp>
+            <h2 className="font-display text-3xl md:text-4xl text-forest-950 text-center mb-10 leading-tight tracking-tight">
+              {questions[currentQuestion].label}
+            </h2>
 
             <StaggerContainer>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {questions[currentQuestion].options.map((option, index) => (
                   <StaggerItem key={option.id} delay={index * 0.1}>
-                    <motion.button
+                    <button
                       onClick={() => handleAnswer(option.id)}
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-white border border-leaf-700/20 rounded-2xl p-6 text-left hover:border-leaf-500 hover:shadow-medium transition-all cursor-pointer group"
+                      className="w-full bg-white border border-paper-200/50 rounded-[30px] p-7 text-left
+                                 step-card hover-germoglio cursor-pointer group"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-leaf-50 flex items-center justify-center text-leaf-600 group-hover:bg-leaf-100 group-hover:text-leaf-700 transition-colors">
+                        <div className="w-12 h-12 rounded-2xl bg-leaf-50 flex items-center justify-center
+                                        text-leaf-600 shrink-0 transition-colors duration-300
+                                        group-hover:bg-leaf-100 group-hover:text-leaf-700">
                           {option.icon}
                         </div>
-                        <span className="text-base font-medium text-forest-950 pt-1">
+                        <span className="text-base font-medium text-forest-950 pt-2 leading-snug">
                           {option.label}
                         </span>
                       </div>
-                    </motion.button>
+                    </button>
                   </StaggerItem>
                 ))}
               </div>

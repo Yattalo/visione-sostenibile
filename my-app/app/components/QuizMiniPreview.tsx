@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { cn } from "@/app/lib/utils";
 
 const FIRST_QUESTION = {
@@ -27,19 +26,27 @@ export function QuizMiniPreview({ className }: QuizMiniPreviewProps) {
 
   return (
     <div className={cn("max-w-2xl mx-auto", className)}>
-      <p className="text-sm text-forest-800/60 text-center mb-6 font-medium">{FIRST_QUESTION.label}</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <p className="text-micro text-leaf-600 text-center mb-8">
+        {FIRST_QUESTION.label}
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {FIRST_QUESTION.options.map((option) => (
-          <motion.button
+          <button
             key={option.id}
             onClick={handleOptionClick}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-paper-50 border border-leaf-700/20 rounded-xl p-5 text-left hover-germoglio transition-all cursor-pointer"
+            className="bg-white border border-paper-200/50 rounded-[30px] p-7 text-left
+                       step-card hover-germoglio cursor-pointer group"
           >
-            <span className="text-2xl mb-2 block">{option.emoji}</span>
-            <span className="text-sm font-medium text-forest-950">{option.label}</span>
-          </motion.button>
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-leaf-50 flex items-center justify-center
+                              text-2xl shrink-0 transition-colors group-hover:bg-leaf-100">
+                {option.emoji}
+              </div>
+              <span className="text-base font-medium text-forest-950 pt-2 leading-snug">
+                {option.label}
+              </span>
+            </div>
+          </button>
         ))}
       </div>
     </div>
