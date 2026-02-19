@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { normalizeServiceSlug } from "../lib/static-data";
 
 interface ServiceCardProps {
   slug: string;
@@ -14,18 +15,18 @@ interface ServiceCardProps {
 }
 
 const serviceCategoryMap: Record<string, string> = {
-  "progettazione-giardini-orti": "Progettazione",
-  "realizzazione-chiavi-in-mano": "Realizzazione",
-  "ampia-scelta-piante": "Piante",
-  "trattamenti-curativi-nutrizionali": "Cura Piante",
+  "progettazione-giardini": "Progettazione",
+  "realizzazione-giardini": "Realizzazione",
+  "scelta-piante": "Piante",
+  "trattamenti-piante": "Cura Piante",
   "impianti-irrigazione": "Irrigazione",
-  "camminamenti-muretti-pietra": "Hardscape",
+  "camminamenti-pietra": "Hardscape",
   "illuminazione-esterni": "Illuminazione",
   "ingegneria-naturalistica": "Naturalistica",
   "arredamento-esterni": "Arredamento",
-  "potatura-professionale": "Potature",
+  "potature": "Potature",
   "rigenerazione-terreni": "Rigenerazione",
-  "manutenzione-sostenibile": "Manutenzione",
+  "manutenzioni": "Manutenzione",
 };
 
 export function ServiceCard({
@@ -36,11 +37,12 @@ export function ServiceCard({
   image,
   index,
 }: ServiceCardProps) {
-  const tagline = category || serviceCategoryMap[slug] || "Servizio";
+  const normalizedSlug = normalizeServiceSlug(slug);
+  const tagline = category || serviceCategoryMap[normalizedSlug] || "Servizio";
   const indexLabel = (index + 1).toString().padStart(2, "0");
 
   return (
-    <Link href={`/servizi/${slug}`} className="block h-full group">
+    <Link href={`/servizi/${normalizedSlug}`} className="block h-full group">
       <article
         className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-paper-300/60 bg-paper-50
                     transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/50 hover:shadow-floating"
