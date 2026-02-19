@@ -3,6 +3,7 @@ import "./globals.css";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { Analytics } from "./components/Analytics";
 import localFont from "next/font/local";
 
 const walkway = localFont({
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
         <ConvexClientProvider>
           <Navbar />
+          <Analytics />
           <main className="flex-grow">{children}</main>
           <Footer />
         </ConvexClientProvider>
