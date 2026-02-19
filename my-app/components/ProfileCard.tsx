@@ -566,9 +566,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                         }}
                       />
                     </div>
-                    <div className="min-w-0 flex flex-col items-start gap-1">
-                      <div className="truncate text-[1.05rem] text-white/78 leading-none">{status}</div>
-                    </div>
                   </div>
                   <button
                     className="shrink-0 border border-white/20 rounded-lg px-3 py-2 text-[11px] font-semibold leading-none text-white/95 cursor-pointer backdrop-blur-[10px] transition-all duration-200 ease-out hover:border-white/60 hover:-translate-y-px"
