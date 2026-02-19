@@ -17,6 +17,7 @@ import { ServiceCard } from "./components/ServiceCard";
 import { ReviewsWidget } from "./components/ReviewsWidget";
 import { PhilosophySection } from "./components/PhilosophySection";
 import { staticServices, serviceImages } from "./lib/static-data";
+import { QuizCTA } from "./components/QuizCTA";
 import { useRef } from "react";
 
 const featuredSlugs = [
@@ -36,8 +37,40 @@ export default function HomePage() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Visione Sostenibile",
+    description: "Progettazione e realizzazione di giardini biodinamici a Torino. Trasformiamo spazi verdi in ecosistemi sostenibili.",
+    url: "https://www.visionesostenibile.it",
+    telephone: "+393714821825",
+    email: "visionesostenibile96@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Torino",
+      addressRegion: "Piemonte",
+      addressCountry: "IT",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 45.0703,
+      longitude: 7.6869,
+    },
+    areaServed: [
+      { "@type": "State", name: "Piemonte" },
+      { "@type": "State", name: "Lombardia" },
+    ],
+    founder: { "@type": "Person", name: "Andrea Giordano" },
+    priceRange: "$$",
+    image: "https://www.visionesostenibile.it/og-image.png",
+  };
+
   return (
     <div className="min-h-screen bg-paper-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+      />
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -333,6 +366,13 @@ export default function HomePage() {
             </div>
           </div>
         </motion.div>
+      </section>
+
+      {/* Quiz CTA */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <QuizCTA variant="inline" />
+        </div>
       </section>
 
       {/* Reviews Widget */}

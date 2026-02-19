@@ -21,6 +21,7 @@ import { api } from "../../../convex/_generated/api";
 import { normalizeServiceSlug, staticServices } from "../../lib/static-data";
 import { Button } from "../../components/ui/Button";
 import { cn } from "../../lib/utils";
+import { ScrollCTA } from "../../components/ScrollCTA";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -905,6 +906,9 @@ export default function ServiceDetailPage() {
 
       {/* Prev/Next Navigation */}
       <PrevNextNav prevService={prevService} nextService={nextService} />
+
+      {/* Scroll-triggered Quiz CTA */}
+      <ScrollCTA />
     </div>
   );
 }

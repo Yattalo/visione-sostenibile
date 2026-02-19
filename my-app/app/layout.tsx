@@ -4,6 +4,7 @@ import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
+import { CookieConsent } from "./components/CookieConsent";
 import localFont from "next/font/local";
 
 const walkway = localFont({
@@ -41,6 +42,7 @@ export const metadata: Metadata = {
     "Torino",
     "Piemonte",
   ],
+  metadataBase: new URL("https://www.visionesostenibile.it"),
   openGraph: {
     type: "website",
     locale: "it_IT",
@@ -49,6 +51,17 @@ export const metadata: Metadata = {
     title: "Visione Sostenibile - Il Verde che Vive",
     description:
       "Progettazione e realizzazione di giardini straordinari.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Visione Sostenibile - Giardini Biodinamici a Torino",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/",
   },
   icons: {
     icon: [
@@ -71,6 +84,7 @@ export default function RootLayout({
           <Analytics />
           <main className="flex-grow">{children}</main>
           <Footer />
+          <CookieConsent />
         </ConvexClientProvider>
       </body>
     </html>

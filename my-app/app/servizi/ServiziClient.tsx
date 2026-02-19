@@ -7,6 +7,7 @@ import { api } from "../../convex/_generated/api";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { ReviewsWidget } from "../components/ReviewsWidget";
+import { QuizCTA } from "../components/QuizCTA";
 import { ServiceCard } from "../components/ServiceCard";
 import { normalizeServiceSlug, staticServices } from "../lib/static-data";
 import {
@@ -130,6 +131,13 @@ export function ServiziClient() {
               ))}
             </div>
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Quiz CTA */}
+      <section className="py-12 px-6">
+        <div className="max-w-4xl mx-auto">
+          <QuizCTA variant="inline" />
         </div>
       </section>
 

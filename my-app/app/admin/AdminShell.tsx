@@ -40,6 +40,18 @@ export default function AdminShell({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { isAuthenticated, isCheckingAuth, logout } = useAdminAuth();
 
+  // Auth guard: redirect to login (must be before any early return to respect Rules of Hooks)
+  useEffect(() => {
+    if (!isAuthenticated && !isCheckingAuth) {
+      router.replace("/admin/login");
+    }
+  }, [isAuthenticated, isCheckingAuth, router]);
+
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/admin/login");
+  };
+
   // Auth guard: loading state
   if (isCheckingAuth) {
     return (
@@ -52,13 +64,6 @@ export default function AdminShell({
     );
   }
 
-  // Auth guard: redirect to login (useEffect to avoid setState during render)
-  useEffect(() => {
-    if (!isAuthenticated && !isCheckingAuth) {
-      router.replace("/admin/login");
-    }
-  }, [isAuthenticated, isCheckingAuth, router]);
-
   // Show loading while redirecting
   if (!isAuthenticated) {
     return (
@@ -70,11 +75,6 @@ export default function AdminShell({
       </div>
     );
   }
-
-  const handleLogout = async () => {
-    await logout();
-    router.replace("/admin/login");
-  };
 
   return (
     <div className="min-h-screen bg-paper-100">
