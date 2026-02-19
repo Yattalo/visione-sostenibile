@@ -1,14 +1,15 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { staticReviews } from "../lib/static-data";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import { Card, CardContent } from "./ui/Card";
 import { cn } from "../lib/utils";
 
 interface Review {
   _id: string;
   authorName: string;
-  authorLocation: string;
+  authorLocation?: string;
   rating: number;
   text: string;
   serviceSlug?: string;
@@ -45,7 +46,7 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export function ReviewsWidget({
-  reviews = staticReviews.filter((r) => r.isApproved),
+  reviews: reviewsProp,
   title = "Cosa dicono i nostri clienti",
   subtitle,
   maxReviews = 6,
@@ -53,6 +54,8 @@ export function ReviewsWidget({
   filterByService,
   className,
 }: ReviewsWidgetProps) {
+  const convexReviews = useQuery(api.reviews.getFeatured, { limit: maxReviews });
+  const reviews = reviewsProp ?? (convexReviews as Review[] | undefined) ?? [];
   const filteredReviews = filterByService
     ? reviews.filter((r) => r.serviceSlug === filterByService)
     : reviews;

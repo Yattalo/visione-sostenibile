@@ -18,6 +18,8 @@ import { api } from "../../../convex/_generated/api";
 export default function AdminReviewsPage() {
   const reviews = useQuery(api.reviews.getAll) ?? [];
   const approveReview = useMutation(api.reviews.approve);
+  const rejectReview = useMutation(api.reviews.reject);
+  const removeReview = useMutation(api.reviews.remove);
   const [filter, setFilter] = useState<"all" | "pending" | "approved">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -137,13 +139,25 @@ export default function AdminReviewsPage() {
                           <Check className="w-4 h-4 mr-1" />
                           Approva
                         </Button>
-                        <Button variant="outline" size="sm" disabled>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            rejectReview({ reviewId: review._id })
+                          }
+                        >
                           <X className="w-4 h-4 mr-1" />
                           Rifiuta
                         </Button>
                       </>
                     )}
-                    <Button variant="ghost" size="sm">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() =>
+                        removeReview({ reviewId: review._id })
+                      }
+                    >
                       <Trash2 className="w-4 h-4 mr-1" />
                       Elimina
                     </Button>

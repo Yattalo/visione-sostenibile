@@ -50,7 +50,10 @@ export const metadata: Metadata = {
       "Progettazione e realizzazione di giardini straordinari.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
   },
 };
 
