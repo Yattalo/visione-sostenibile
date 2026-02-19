@@ -72,19 +72,11 @@ export function Navbar() {
                 aria-hidden
               />
               <Image
-                src={useDarkText ? "/VS_logo_completo_colori.svg" : "/VS_logo_completo_bianco.svg"}
+                src={useDarkText ? "/VS_logo_monogramma_colori.svg" : "/VS_logo_monogramma_bianco.svg"}
                 alt="Visione Sostenibile"
-                width={175}
-                height={60}
-                className="relative hidden lg:block h-14 w-auto drop-shadow-[0_0_8px_rgba(234,184,49,0.25)]"
-                priority
-              />
-              <Image
-                src={useDarkText ? "/VS_logo_completo_colori.svg" : "/VS_logo_completo_bianco.svg"}
-                alt="Visione Sostenibile"
-                width={120}
+                width={40}
                 height={40}
-                className="relative lg:hidden h-10 w-auto drop-shadow-[0_0_8px_rgba(234,184,49,0.25)]"
+                className="relative h-9 w-auto drop-shadow-[0_0_8px_rgba(234,184,49,0.25)]"
                 priority
               />
             </Link>
