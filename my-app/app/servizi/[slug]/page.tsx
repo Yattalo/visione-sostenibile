@@ -28,6 +28,7 @@ import {
 import { api } from "../../../convex/_generated/api";
 import { staticServices } from "../../lib/static-data";
 import { Button } from "../../components/ui/Button";
+import { cn } from "../../lib/utils";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -70,11 +71,13 @@ const serviceImageMap: Record<string, string> = {
     "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
 };
 
-// Side images for the carousel — generic garden Unsplash photos
-const carouselSideImages = [
+// All carousel images pool — service images + generic garden photos
+const carouselImagesPool = [
+  "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800",
   "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
   "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800",
   "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800",
+  "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800",
 ];
 
 const serviceSubtitles: Record<string, string> = {
@@ -327,8 +330,14 @@ const serviceContents: Record<string, ServiceContent> = {
 
 function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
   const subtitle = serviceSubtitles[service.slug] ?? "";
+  
+  // Split title for thin/bold effect
+  const words = service.title.split(" ");
+  const firstPart = words.slice(0, words.length > 2 ? 1 : 1).join(" ");
+  const secondPart = words.slice(words.length > 2 ? 1 : 1).join(" ");
+
   return (
-    <section className="relative h-[85vh] w-full overflow-hidden">
+    <section className="relative h-[90vh] w-full overflow-hidden">
       <Image
         src={imageUrl}
         alt={service.title}
@@ -337,13 +346,17 @@ function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: st
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      {/* Double gradient: pronounced top and deep bottom for text legibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+      
       <div className="absolute inset-0 flex items-end">
-        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 pb-24">
-          <h1 className="font-display text-5xl md:text-7xl uppercase text-white leading-[0.95] tracking-tight">
-            {service.title}
+        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 pb-20 md:pb-32">
+          <h1 className="text-stitch-heading text-5xl md:text-8xl text-white">
+            <span className="font-light block mb-2">{firstPart}</span>
+            <span className="font-bold block">{secondPart}</span>
             {subtitle && (
-              <span className="block font-light italic text-4xl md:text-5xl mt-2 text-paper-200/90">
+              <span className="block font-light italic text-2xl md:text-4xl mt-6 text-paper-200/90 tracking-normal normal-case">
                 {subtitle}
               </span>
             )}
@@ -356,25 +369,22 @@ function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: st
 
 function EditorialIntro({ content }: { content: ServiceContent }) {
   return (
-    <section className="py-24">
+    <section className="py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
-            <span className="text-xs uppercase tracking-[0.2em] text-sun-400 font-semibold block mb-4">
-              Il nostro approccio
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl text-forest-950 leading-tight">
-              Un metodo{" "}
-              <span className="italic text-leaf-600">pensato</span>
-              <br />
-              per il tuo verde
+            <h2 className="font-display text-4xl md:text-5xl text-leaf-700 leading-[1.1] tracking-tight uppercase">
+              <span className="font-light block">Il tuo giardino</span>
+              <span className="font-light block">può tingersi di</span>
+              <span className="font-bold block">Fascino</span>
             </h2>
+            <p className="mt-4 text-micro text-leaf-600/60 font-bold italic tracking-widest">Anche nelle ore serali</p>
           </div>
-          <div className="space-y-6">
-            <p className="text-lg text-forest-800 leading-relaxed">
+          <div className="space-y-8">
+            <p className="text-lg text-forest-900/80 leading-relaxed">
               {content.intro}
             </p>
-            <p className="text-lg text-forest-800/80 leading-relaxed">
+            <p className="text-lg text-forest-800/60 leading-relaxed">
               {content.body}
             </p>
           </div>
@@ -385,63 +395,98 @@ function EditorialIntro({ content }: { content: ServiceContent }) {
 }
 
 function ImageCarousel({ imageUrl, slug }: { imageUrl: string; slug: string }) {
-  // Pick two side images that differ from the main one
-  const sideImages = carouselSideImages.filter((img) => img !== imageUrl.replace("?w=1200", "?w=800")).slice(0, 2);
-  const leftImage = sideImages[0] ?? carouselSideImages[0];
-  const rightImage = sideImages[1] ?? carouselSideImages[1];
+  const [current, setCurrent] = useState(0);
+
+  // Build image list: main image first, then pool (deduplicated)
+  const mainThumb = imageUrl.replace("?w=1200", "?w=800");
+  const images = [mainThumb, ...carouselImagesPool.filter((img) => img !== mainThumb)];
+  const total = images.length;
+
+  const prev = () => setCurrent((c) => (c - 1 + total) % total);
+  const next = () => setCurrent((c) => (c + 1) % total);
+
+  // Auto-advance every 4s
+  useEffect(() => {
+    const timer = setInterval(() => setCurrent((c) => (c + 1) % total), 4000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  // Positions: -1, 0 (center), +1
+  const getOffset = (index: number) => {
+    let diff = index - current;
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+    return diff;
+  };
 
   return (
-    <section className="bg-paper-100 py-12 overflow-hidden">
-      <div className="carousel-container max-w-6xl mx-auto px-6">
-        <div className="flex items-center justify-center gap-4 md:gap-6">
-          {/* Left side image */}
-          <div className="hidden sm:block w-1/4 h-80 rounded-carousel overflow-hidden opacity-60 shrink-0">
-            <div className="relative w-full h-full">
-              <Image
-                src={leftImage}
-                alt={`${slug} ambiente 1`}
-                fill
-                sizes="25vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
+    <section className="bg-paper-100 py-24 overflow-hidden">
+      <div className="carousel-container max-w-5xl mx-auto px-6">
+        {/* Horizontal Carousel - Single Level, No Tilt */}
+        <div className="relative h-[480px] flex items-center justify-center">
+          {images.map((img, index) => {
+            const offset = getOffset(index);
+            const absOffset = Math.abs(offset);
 
-          {/* Center image */}
-          <div className="w-full sm:w-1/3 aspect-[4/5] rounded-carousel overflow-hidden scale-100 sm:scale-110 z-10 border-4 border-white shadow-2xl shrink-0">
-            <div className="relative w-full h-full">
-              <Image
-                src={imageUrl}
-                alt={`${slug} principale`}
-                fill
-                sizes="(max-width: 640px) 100vw, 33vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
+            // Show 3 cards (center + sides)
+            if (absOffset > 1) return null;
 
-          {/* Right side image */}
-          <div className="hidden sm:block w-1/4 h-80 rounded-carousel overflow-hidden opacity-60 shrink-0">
-            <div className="relative w-full h-full">
-              <Image
-                src={rightImage}
-                alt={`${slug} ambiente 2`}
-                fill
-                sizes="25vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
+            const isCenter = offset === 0;
+            
+            // X: Controlled overlap
+            const translateX = offset * 240; 
+            // Scale: Sides are smaller as requested
+            const scale = isCenter ? 1 : 0.85;
+            const zIndex = isCenter ? 20 : 10;
+            const opacity = isCenter ? 1 : 0.7;
+
+            return (
+              <div
+                key={img}
+                className="absolute transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer"
+                style={{
+                  transform: `translateX(${translateX}px) scale(${scale})`,
+                  zIndex,
+                  opacity,
+                }}
+                onClick={() => {
+                  if (offset < 0) prev();
+                  if (offset > 0) next();
+                }}
+              >
+                <div
+                  className={cn(
+                    "relative w-64 md:w-80 aspect-[3.5/4.5] rounded-[40px] overflow-hidden transition-all duration-500",
+                    isCenter
+                      ? "shadow-floating"
+                      : "shadow-medium"
+                  )}
+                >
+                  <Image
+                    src={img}
+                    alt={`${slug} foto ${index + 1}`}
+                    fill
+                    sizes="400px"
+                    className="object-cover"
+                  />
+                  {!isCenter && <div className="absolute inset-0 bg-black/10" />}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-8">
-          {[0, 1, 2, 3].map((i) => (
-            <div
+        {/* Dot indicators - Gold/Yellow */}
+        <div className="flex justify-center gap-2.5 mt-12">
+          {images.map((_, i) => (
+            <button
               key={i}
-              className={`w-2 h-2 rounded-full ${
-                i === 1 ? "bg-forest-950" : "bg-paper-400"
-              }`}
+              onClick={() => setCurrent(i)}
+              aria-label={`Vai alla foto ${i + 1}`}
+              className={cn(
+                "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                i === current ? "bg-sun-400 w-8" : "bg-sun-200/40"
+              )}
             />
           ))}
         </div>
@@ -452,39 +497,36 @@ function ImageCarousel({ imageUrl, slug }: { imageUrl: string; slug: string }) {
 
 function ProcessSteps({ content }: { content: ServiceContent }) {
   return (
-    <section className="py-24">
+    <section className="py-24 lg:py-32 bg-paper-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-12 gap-12">
+        <div className="lg:grid lg:grid-cols-12 gap-16 items-center">
           {/* Left: title block */}
-          <div className="lg:col-span-4 mb-12 lg:mb-0">
-            <span className="text-xs uppercase tracking-[0.2em] text-sun-400 font-semibold block mb-4">
-              Come lavoriamo
-            </span>
-            <h2 className="font-display text-4xl text-forest-950">
-              Processo in
-              <span className="block text-6xl font-bold">
-                {content.process.length} Fasi
-              </span>
+          <div className="lg:col-span-4 mb-16 lg:mb-0">
+            <h2 className="font-display text-5xl md:text-6xl text-leaf-600 uppercase tracking-tight leading-none">
+              <span className="font-light block">Processo in</span>
+              <span className="font-bold block">{content.process.length} Fasi</span>
             </h2>
+            <p className="mt-6 text-micro text-forest-800/40">
+              Dall&apos;idea alla realizzazione
+            </p>
           </div>
 
-          {/* Right: step cards */}
+          {/* Right: step cards - 2x2 Neumorphic Grid */}
           <div className="lg:col-span-8">
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
               {content.process.map((step, index) => (
                 <div
                   key={step}
-                  className="step-card bg-white p-8 rounded-xl"
+                  className="step-card bg-white p-6 md:p-10 rounded-[20px] flex gap-6 md:gap-10 items-center min-h-[160px]"
                 >
-                  <span className="text-5xl font-display text-paper-300 font-bold block mb-3">
-                    {(index + 1).toString().padStart(2, "0")}
+                  <span className="text-7xl md:text-8xl font-display text-paper-200/50 font-black leading-none shrink-0">
+                    {index + 1}
                   </span>
-                  <h4 className="font-semibold mb-2 text-forest-950">
-                    Fase {index + 1}
-                  </h4>
-                  <p className="text-sm text-forest-800/60 leading-relaxed">
-                    {step}
-                  </p>
+                  <div>
+                    <p className="text-base md:text-lg text-forest-900 leading-snug font-medium">
+                      {step}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -497,24 +539,24 @@ function ProcessSteps({ content }: { content: ServiceContent }) {
 
 function VideoShowcase({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
   return (
-    <section className="py-12">
+    <section className="py-12 lg:py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="relative rounded-xl overflow-hidden h-[500px] group cursor-pointer shadow-2xl">
+        <div className="relative rounded-[30px] md:rounded-[50px] overflow-hidden h-[400px] md:h-[600px] group cursor-pointer shadow-deep">
           <Image
             src={imageUrl}
             alt={`${service.title} video`}
             fill
             sizes="100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover transition-transform duration-1000 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-            <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tight text-white mb-8">
+            <h2 className="text-stitch-heading text-4xl md:text-7xl text-white mb-10 drop-shadow-lg">
               Che cosa
               <span className="block font-bold">Aspettarsi</span>
             </h2>
-            <div className="bg-white/20 backdrop-blur-md rounded-full p-6 transition-transform duration-300 group-hover:scale-110">
-              <Play className="w-10 h-10 text-white fill-white" />
+            <div className="bg-white/90 backdrop-blur-md rounded-full p-6 md:p-8 transition-all duration-500 group-hover:scale-110 shadow-xl">
+              <Play className="w-8 h-8 md:w-12 md:h-12 text-forest-900 fill-forest-900" />
             </div>
           </div>
         </div>
@@ -525,22 +567,24 @@ function VideoShowcase({ service, imageUrl }: { service: ServiceItem; imageUrl: 
 
 function FaqAccordion({ content }: { content: ServiceContent }) {
   return (
-    <section className="py-24">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
-        <h2 className="font-display text-4xl text-center text-forest-950 uppercase tracking-widest mb-16">
-          Domande frequenti
-        </h2>
+    <section className="py-24 lg:py-32 bg-paper-50">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-4xl md:text-5xl text-leaf-600 uppercase tracking-tight">
+            FAQ
+          </h2>
+        </div>
         <div className="space-y-4">
           {content.faqs.map((faq) => (
             <details
               key={faq.question}
-              className="faq-card bg-white rounded-xl overflow-hidden shadow-sm group"
+              className="faq-card bg-white rounded-xl overflow-hidden shadow-sm group border border-paper-200/30"
             >
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-forest-800">
-                <span>{faq.question}</span>
-                <ChevronDown className="w-5 h-5 text-forest-800/40 transition-transform duration-300 group-open:rotate-180 shrink-0 ml-4" />
+              <summary className="flex items-center justify-between p-6 cursor-pointer font-medium text-forest-900">
+                <span className="text-lg">{faq.question}</span>
+                <ChevronDown className="w-5 h-5 text-leaf-600 transition-transform duration-500 group-open:rotate-180 shrink-0 ml-4" />
               </summary>
-              <div className="px-6 pb-6 text-forest-800/70 leading-relaxed">
+              <div className="px-6 pb-6 text-forest-800/70 leading-relaxed text-lg border-t border-paper-50 pt-4">
                 {faq.answer}
               </div>
             </details>
