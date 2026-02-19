@@ -59,16 +59,18 @@ const serviceIconMap: Record<string, ElementType> = {
 };
 
 const serviceImageMap: Record<string, string> = {
-  "progettazione-giardini-orti":
-    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200",
-  "realizzazione-chiavi-in-mano":
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200",
-  "manutenzione-sostenibile":
-    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200",
-  "potatura-professionale":
-    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200",
-  "gestione-verde-biodinamica":
-    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
+  "progettazione-giardini-orti": "/images/servizi/progettazione-giardini-cover.png",
+  "realizzazione-chiavi-in-mano": "/images/servizi/realizzazione-giardini-cover.png",
+  "ampia-scelta-piante": "/images/servizi/scelta-piante-cover.png",
+  "trattamenti-curativi-nutrizionali": "/images/servizi/trattamenti-piante-cover.png",
+  "impianti-irrigazione": "/images/servizi/impianti-irrigazione-cover.png",
+  "camminamenti-muretti-pietra": "/images/servizi/camminamenti-pietra-cover.png",
+  "illuminazione-esterni": "/images/servizi/illuminazione-esterni-cover.png",
+  "ingegneria-naturalistica": "/images/servizi/ingegneria-naturalistica-cover.png",
+  "arredamento-esterni": "/images/servizi/arredamento-esterni-cover.png",
+  "potatura-professionale": "/images/servizi/potature-cover.png",
+  "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.png",
+  "manutenzione-sostenibile": "/images/servizi/manutenzioni-cover.png",
 };
 
 // All carousel images pool — service images + generic garden photos

@@ -15,19 +15,20 @@ export const staticServices = [
   { _id: "12", slug: "manutenzione-sostenibile", title: "Manutenzioni", shortDescription: "Cura del verde con metodi naturali e biodinamici durante tutto l'anno", fullDescription: "", order: 12, isActive: true },
 ];
 
+// Immagini servizi - usa path locali dalla cartella servizi
 export const serviceImages: Record<string, string> = {
-  "progettazione-giardini-orti": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80",
-  "realizzazione-chiavi-in-mano": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-  "ampia-scelta-piante": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
-  "trattamenti-curativi-nutrizionali": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80",
-  "impianti-irrigazione": "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=800&q=80",
-  "camminamenti-muretti-pietra": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
-  "illuminazione-esterni": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80",
-  "ingegneria-naturalistica": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-  "arredamento-esterni": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800&q=80",
-  "potatura-professionale": "https://images.unsplash.com/photo-1542273917363-1f3e45e3a1d4?w=800&q=80",
-  "rigenerazione-terreni": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80",
-  "manutenzione-sostenibile": "https://images.unsplash.com/photo-1557429287-b2e26467fc2b?w=800&q=80",
+  "progettazione-giardini-orti": "/images/servizi/progettazione-giardini-cover.png",
+  "realizzazione-chiavi-in-mano": "/images/servizi/realizzazione-giardini-cover.png",
+  "ampia-scelta-piante": "/images/servizi/scelta-piante-cover.png",
+  "trattamenti-curativi-nutrizionali": "/images/servizi/trattamenti-piante-cover.png",
+  "impianti-irrigazione": "/images/servizi/impianti-irrigazione-cover.png",
+  "camminamenti-muretti-pietra": "/images/servizi/camminamenti-pietra-cover.png",
+  "illuminazione-esterni": "/images/servizi/illuminazione-esterni-cover.png",
+  "ingegneria-naturalistica": "/images/servizi/ingegneria-naturalistica-cover.png",
+  "arredamento-esterni": "/images/servizi/arredamento-esterni-cover.png",
+  "potatura-professionale": "/images/servizi/potature-cover.png",
+  "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.png",
+  "manutenzione-sostenibile": "/images/servizi/manutenzioni-cover.png",
 };
 
 // Recensioni vuote - da popolare con recensioni reali del cliente

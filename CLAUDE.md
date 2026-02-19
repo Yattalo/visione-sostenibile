@@ -107,7 +107,7 @@ Custom CSS utilities: `.bg-cream-gradient`, `.bg-moss-gradient`, `.text-gradient
 
 ### Task System
 
-`@yattalo/task-system` v0.4.0 for UCA orchestration. Schema integrated in `convex/schema.ts`. Task definitions in `convex/taskSystem/taskDefinitions.ts`. Dashboard: `open dashboard.html`.
+`@yattalo/task-system` v0.5.0 for UCA orchestration. Schema integrated in `convex/schema.ts`. Task definitions in `convex/taskSystem/taskDefinitions.ts`. Dashboard: `task-system dashboard` (bundled React SPA).
 
 ## BMAD Evolution Reference
 

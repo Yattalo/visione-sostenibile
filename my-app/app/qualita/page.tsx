@@ -65,9 +65,9 @@ const stats = [
 
 export default function QualitaPage() {
   return (
-    <div className="min-h-screen bg-paper-50 pt-20">
+    <div className="min-h-screen bg-paper-50">
       {/* Hero */}
-      <section className="relative py-32 px-6 bg-forest-950 text-white overflow-hidden">
+      <section className="relative pt-44 pb-32 px-6 bg-forest-950 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-500/30 to-transparent" />
         </div>

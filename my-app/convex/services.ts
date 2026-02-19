@@ -176,7 +176,7 @@ export const seed = mutation({
           ...svc,
           fullDescription: "",
           icon: "",
-          image: "",
+          image: svc.image, // Use the image from seed data
           gallery: [],
           features: [],
           isActive: true,

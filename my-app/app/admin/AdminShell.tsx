@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   FileText,
@@ -52,10 +52,23 @@ export default function AdminShell({
     );
   }
 
-  // Auth guard: redirect to login
+  // Auth guard: redirect to login (useEffect to avoid setState during render)
+  useEffect(() => {
+    if (!isAuthenticated && !isCheckingAuth) {
+      router.replace("/admin/login");
+    }
+  }, [isAuthenticated, isCheckingAuth, router]);
+
+  // Show loading while redirecting
   if (!isAuthenticated) {
-    router.replace("/admin/login");
-    return null;
+    return (
+      <div className="min-h-screen bg-paper-100 flex items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <Leaf className="w-10 h-10 text-leaf-500" />
+          <p className="text-forest-800/60 font-sans text-sm">Reindirizzamento...</p>
+        </div>
+      </div>
+    );
   }
 
   const handleLogout = async () => {

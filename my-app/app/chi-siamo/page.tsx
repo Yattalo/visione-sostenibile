@@ -11,6 +11,7 @@ import {
   FadeIn,
 } from "../components/animations";
 import Link from "next/link";
+import { TeamSection } from "../components/TeamSection";
 
 export const metadata: Metadata = {
   title: "Chi Siamo | Visione Sostenibile",
@@ -23,7 +24,7 @@ const values = [
     icon: Leaf,
     title: "Impatto Zero",
     description:
-      "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi. Il bilancio ambientale netto e sempre zero.",
+      "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi. Il bilancio ambientale netto è sempre zero.",
   },
   {
     icon: Bug,
@@ -35,7 +36,7 @@ const values = [
     icon: Award,
     title: "Biodinamica",
     description:
-      "Oltre 20 anni di pratica biodinamica integrata in ogni progetto per un verde sano e rigoglioso.",
+      "Pratichiamo l'agricoltura biodinamica integrata in ogni progetto per un verde sano e rigoglioso.",
   },
   {
     icon: Users,
@@ -43,6 +44,13 @@ const values = [
     description:
       "Terreni ricchi di vita che favoriscono la crescita naturale delle piante, riducendo drasticamente gli interventi.",
   },
+];
+
+const storyContent = [
+  "Una ventina di anni fa ho iniziato a capire che qualcosa nel clima non funzionava più come doveva, che i cibi di cui ci nutriamo quotidianamente non avevano più le caratteristiche nutrizionali di qualche decennio prima.",
+  "Ho iniziato a preoccuparmi dello sfruttamento del suolo, della non corretta gestione delle lavorazioni e dello spropositato utilizzo di prodotti fitosanitari, causando così terreni sterili e desertificazione che avanza a dismisura.",
+  "Ho intrapreso così la strada della sostenibilità, un cammino lungo che ancora oggi non smette di insegnarmi qualcosa e di stupirmi.",
+  "Oggi siamo la prima realtà a poter certificare il nostro lavoro e giardino SOSTENIBILE Agri Bio Dinamica. Cert. N° 54/23 del 11-06-2023",
 ];
 
 const stats = [
@@ -58,7 +66,7 @@ export default function ChiSiamoPage() {
       {/* Hero Section */}
       <section className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1920')] bg-cover bg-center">
+          <div className="absolute inset-0 bg-[url('/images/chi-siamo/hero.jpg')] bg-cover bg-center">
             <div className="absolute inset-0 bg-gradient-to-br from-forest-950/90 via-forest-900/80 to-forest-950/85" />
           </div>
           {/* Decorative organic blobs */}
@@ -100,12 +108,11 @@ export default function ChiSiamoPage() {
           <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
             <SlideUp>
               <div className="relative">
-                {/* Decorative offset shadow element */}
                 <div className="absolute -bottom-6 -right-6 w-full h-full bg-leaf-200/40 rounded-3xl" />
                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-floating">
                   <Image
-                    src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800"
-                    alt="Giardino rigoglioso con piante curate"
+                    src="/images/chi-siamo/andrea.jpg"
+                    alt="Andrea Giordano - Fondatore Visione Sostenibile"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
@@ -124,31 +131,46 @@ export default function ChiSiamoPage() {
                 <span className="block text-leaf-700">che ispirano</span>
               </h2>
               <div className="space-y-6 font-body text-forest-800">
-                <p className="text-lg leading-relaxed">
-                  Andrea Giordano, fondatore di Visione Sostenibile, pratica
-                  l&apos;agricoltura biodinamica da oltre 20 anni e ha oltre 10 anni
-                  di esperienza nella realizzazione di giardini e orti sostenibili.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  Operiamo in Piemonte e Lombardia con un approccio unico:
-                  siamo l&apos;unico giardiniere nel territorio che realizza giardini
-                  a impatto zero, ripristinando completamente i danni ambientali
-                  causati durante gli interventi.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  La nostra missione nasce dalla definizione ONU di sostenibilita:
-                  garantire i bisogni della generazione presente senza compromettere
-                  quelli delle generazioni future. Preservare l&apos;ambiente per i nostri figli.
-                </p>
+                {storyContent.map((paragraph, index) => (
+                  <p key={index} className="text-lg leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </SlideUp>
           </div>
         </div>
       </section>
 
+      {/* Certification Section */}
+      <section className="py-20 px-6 bg-paper-100">
+        <div className="max-w-4xl mx-auto text-center">
+          <SlideUp>
+            <Badge variant="biodynamic" className="mb-6 px-6 py-3">
+              La Prima Certificazione in Italia
+            </Badge>
+            <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-6">
+              Giardino Sostenibile <span className="italic text-leaf-600">Agri Bio Dinamica</span>
+            </h2>
+            <p className="text-lg text-forest-800 mb-8 max-w-2xl mx-auto">
+              Siamo la prima realtà in Italia a poter certificare il nostro lavoro e i nostri giardini come sostenibili con il metodo Agri Bio Dinamica.
+            </p>
+            <div className="inline-flex items-center justify-center bg-white rounded-2xl p-6 shadow-medium">
+              <Image
+                src="/images/chi-siamo/certificazione-agri-bio.jpg"
+                alt="Certificazione Agri Bio Dinamica N° 54/23"
+                width={200}
+                height={80}
+                className="object-contain"
+              />
+            </div>
+            <p className="mt-4 text-sm text-forest-600">Cert. N° 54/23 del 11-06-2023</p>
+          </SlideUp>
+        </div>
+      </section>
+
       {/* Values Section */}
       <section className="py-28 md:py-36 px-6 bg-paper-100 relative overflow-hidden">
-        {/* Subtle decorative background */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-100/30 to-transparent" />
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -198,7 +220,7 @@ export default function ChiSiamoPage() {
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')",
+                "url('/images/chi-siamo/approccio.jpg')",
             }}
           />
         </div>
@@ -268,10 +290,12 @@ export default function ChiSiamoPage() {
         </div>
       </section>
 
+      <TeamSection />
+
       {/* Stats Section */}
       <section className="py-28 md:py-36 bg-forest-950 text-paper-50 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')] bg-cover bg-center opacity-10" />
+          <div className="absolute inset-0 bg-[url('/images/chi-siamo/approccio.jpg')] bg-cover bg-center opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
         {/* Decorative blobs */}

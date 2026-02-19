@@ -123,7 +123,7 @@ Chi vive nella zona di Roma e nel Lazio gode di un clima generalmente mite, ma n
 
 Con queste operazioni ben pianificate, il tuo giardino sarà pronto ad affrontare l'inverno e tornerà più bello che mai con la primavera. Ricorda: il lavoro fatto in autunno è il miglior investimento per la stagione che verrà.
     `,
-    coverImage: "/images/blog/autunno-cover.png",
+    coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80",
     category: "Manutenzione",
     author: "Andrea Giordano",
     publishedAt: "2024-10-15",
@@ -215,7 +215,7 @@ L'adozione di tecnologia smart nel giardino riduce i consumi energetici del 30�
 
  Queste tendenze non sono mode passeggere ma riflettono un cambiamento profondo nel rapporto tra le persone e il verde. Il giardino del 2026 è uno spazio multifunzionale, sostenibile e connesso, che rispetta l'ambiente mentre migliora la qualità della vita.
     `,
-    coverImage: "/images/blog/tendenze-cover.png",
+    coverImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
     category: "Tendenze",
     author: "Andrea Giordano",
     publishedAt: "2026-01-15",
@@ -353,7 +353,7 @@ Un pendio ben piantato diventa quasi autosufficiente. Gli interventi si riducono
 
 Con le piante giuste, la tecnica corretta e un po' di pazienza, anche il pendio più impegnativo può diventare un giardino mozzafiato e a bassa manutenzione. L'investimento iniziale si ripaga in pochi anni con un risultato che migliora stagione dopo stagione.
     `,
-    coverImage: "/images/blog/pendio-cover.png",
+    coverImage: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80",
     category: "Progettazione",
     author: "Andrea Giordano",
     publishedAt: "2026-01-10",

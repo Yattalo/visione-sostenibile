@@ -17,6 +17,9 @@ const navLinks = [
   { href: "/contatti", label: "Contatti" },
 ];
 
+// Pages that do NOT have a dark hero at top
+const lightTopPages = ["/termini", "/privacy"];
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -28,6 +31,10 @@ export function Navbar() {
     }
     return pathname === href || pathname.startsWith(`${href}/`);
   };
+
+  const hasLightTop = lightTopPages.includes(pathname);
+  // On light pages OR when scrolled → use dark text with opaque bg
+  const useDarkText = hasLightTop || scrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +53,7 @@ export function Navbar() {
       <nav
         className={cn(
           "rounded-full transition-all duration-500",
-          scrolled
+          useDarkText
             ? "bg-paper-50/95 backdrop-blur-md shadow-medium border border-paper-300/80"
             : "glass-nav"
         )}
@@ -57,20 +64,20 @@ export function Navbar() {
               <Leaf
                 className={cn(
                   "w-6 h-6 transition-colors duration-300",
-                  scrolled ? "text-leaf-500" : "text-paper-100"
+                  useDarkText ? "text-leaf-500" : "text-paper-100"
                 )}
               />
               <span
                 className={cn(
                   "font-display text-lg tracking-tighter transition-colors duration-300",
-                  scrolled ? "text-forest-950" : "text-paper-50"
+                  useDarkText ? "text-forest-950" : "text-paper-50"
                 )}
               >
                 Visione
                 <span
                   className={cn(
                     "italic",
-                    scrolled ? "text-leaf-500" : "text-leaf-400"
+                    useDarkText ? "text-leaf-500" : "text-leaf-400"
                   )}
                 >
                   Sostenibile
@@ -86,10 +93,10 @@ export function Navbar() {
                   className={cn(
                     "font-sans text-[11px] uppercase tracking-[0.18em] font-semibold transition-colors relative py-1",
                     isActivePath(link.href)
-                      ? scrolled
+                      ? useDarkText
                         ? "text-leaf-500"
                         : "text-sun-400"
-                      : scrolled
+                      : useDarkText
                         ? "text-forest-800 hover:text-leaf-500"
                         : "text-paper-50/90 hover:text-paper-50"
                   )}
@@ -115,7 +122,7 @@ export function Navbar() {
               aria-label={isOpen ? "Chiudi menu" : "Apri menu"}
               className={cn(
                 "lg:hidden p-2 transition-colors",
-                scrolled ? "text-forest-950" : "text-paper-50"
+                useDarkText ? "text-forest-950" : "text-paper-50"
               )}
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
