@@ -38,17 +38,11 @@ interface ProfileCardProps {
   enableTilt?: boolean;
   enableMobileTilt?: boolean;
   mobileTiltSensitivity?: number;
-  miniAvatarUrl?: string;
   name?: string;
   title?: string;
-  status?: string;
-  contactText?: string;
-  showUserInfo?: boolean;
-  onContactClick?: () => void;
   cardHeight?: string;
   cardMaxHeight?: string;
   avatarObjectPosition?: string;
-  miniAvatarObjectPosition?: string;
 }
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
@@ -63,22 +57,16 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   enableTilt = true,
   enableMobileTilt = false,
   mobileTiltSensitivity = 5,
-  miniAvatarUrl,
   name = 'Javi A. Torres',
   title = 'Software Engineer',
-  status = 'Online',
-  contactText = 'Contact',
-  showUserInfo = true,
-  onContactClick,
   cardHeight = '22rem',
   cardMaxHeight = '26rem',
   avatarObjectPosition = '50% 20%',
-  miniAvatarObjectPosition
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
 
-  const enterTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const enterTimerRef = useRef<number | null>(null);
   const leaveRafRef = useRef<number | null>(null);
 
   const tiltEngine = useMemo<TiltEngine | null>(() => {
@@ -285,7 +273,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     const handleClick = () => {
       if (!enableMobileTilt || location.protocol !== 'https:') return;
-      const anyMotion = window.DeviceMotionEvent;
+      const anyMotion = window.DeviceMotionEvent as unknown as { requestPermission?: () => Promise<'granted' | 'denied'> } | undefined;
       if (anyMotion && typeof anyMotion.requestPermission === 'function') {
         anyMotion
           .requestPermission()
@@ -364,10 +352,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize, cardRadius]
   );
 
-  const handleContactClick = useCallback(() => {
-    onContactClick?.();
-  }, [onContactClick]);
-
   const shineStyle: React.CSSProperties = {
     maskImage: 'var(--icon)',
     maskMode: 'luminance',
@@ -378,8 +362,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     animation: 'pc-holo-bg 18s linear infinite',
     animationPlayState: 'running',
     mixBlendMode: 'screen',
-    '--space': '5%',
-    '--angle': '-45deg',
+    ...{ '--space': '5%', '--angle': '-45deg' } as React.CSSProperties,
     transform: 'translate3d(0, 0, 1px)',
     overflow: 'hidden',
     zIndex: 3,
@@ -528,62 +511,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   borderRadius: cardRadius
                 }}
               />
-              {showUserInfo && (
-                <div
-                  className="absolute z-[2] flex items-center gap-2 backdrop-blur-[14px] border border-white/20 pointer-events-auto"
-                  style={{
-                    '--ui-inset': '14px',
-                    '--ui-radius-bias': '6px',
-                    bottom: 'var(--ui-inset)',
-                    left: 'var(--ui-inset)',
-                    right: 'var(--ui-inset)',
-                    background: 'rgba(7, 16, 8, 0.58)',
-                    borderRadius: 'calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)))',
-                    padding: '9px 10px'
-                  }}
-                >
-                  <div className="flex min-w-0 flex-1 items-center gap-2.5">
-                    <div
-                      className="rounded-full overflow-hidden border border-white/10 flex-shrink-0"
-                      style={{ width: '42px', height: '42px' }}
-                    >
-                      <img
-                        className="w-full h-full object-cover rounded-full"
-                        src={miniAvatarUrl || avatarUrl}
-                        alt={`${name || 'User'} mini avatar`}
-                        loading="lazy"
-                        style={{
-                          display: 'block',
-                          gridArea: 'auto',
-                          borderRadius: '50%',
-                          pointerEvents: 'auto',
-                          objectPosition: miniAvatarObjectPosition || avatarObjectPosition
-                        }}
-                        onError={e => {
-                          const t = e.target as HTMLImageElement;
-                          t.style.opacity = '0.5';
-                          t.src = avatarUrl;
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <button
-                    className="shrink-0 border border-white/20 rounded-lg px-3 py-2 text-[11px] font-semibold leading-none text-white/95 cursor-pointer backdrop-blur-[10px] transition-all duration-200 ease-out hover:border-white/60 hover:-translate-y-px"
-                    onClick={handleContactClick}
-                    style={{
-                      pointerEvents: 'auto',
-                      display: 'block',
-                      gridArea: 'auto',
-                      borderRadius: '8px',
-                      background: 'rgba(234, 184, 49, 0.2)'
-                    }}
-                    type="button"
-                    aria-label={`Contact ${name || 'user'}`}
-                  >
-                    {contactText}
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* Details content */}
@@ -598,51 +525,57 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 pointerEvents: 'none'
               }}
             >
-              <div
-                className="absolute left-0 right-0 mx-auto flex w-fit flex-col rounded-xl px-4 py-2"
-                style={{
-                  bottom: showUserInfo ? '5.1rem' : '1.1rem',
-                  display: 'flex',
-                  gridArea: 'auto',
-                  background: 'rgba(7, 16, 8, 0.32)',
-                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                  backdropFilter: 'blur(8px)'
-                }}
-              >
-                <h3
-                  className="m-0 whitespace-nowrap font-semibold"
+              {name && (
+                <div
+                  className="absolute left-0 right-0 mx-auto flex w-fit flex-col rounded-xl px-4 py-3"
                   style={{
-                    fontSize: 'clamp(1.9rem, 5.2vw, 2.8rem)',
-                    color: '#f6fbf2',
-                    lineHeight: 1,
-                    textShadow: '0 2px 8px rgba(0,0,0,0.35)',
-                    display: 'block',
+                    bottom: '1rem',
+                    left: '1rem',
+                    right: '1rem',
+                    display: 'flex',
                     gridArea: 'auto',
-                    borderRadius: '0',
-                    pointerEvents: 'auto'
+                    background: 'rgba(7, 16, 8, 0.42)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    backdropFilter: 'blur(8px)'
                   }}
                 >
-                  {name}
-                </h3>
-                <p
-                  className="mx-auto w-fit whitespace-nowrap font-semibold"
-                  style={{
-                    position: 'relative',
-                    top: '0',
-                    fontSize: '14px',
-                    margin: '0 auto',
-                    color: '#f6d97a',
-                    letterSpacing: '0.02em',
-                    textShadow: '0 1px 6px rgba(0,0,0,0.35)',
-                    display: 'block',
-                    gridArea: 'auto',
-                    borderRadius: '0',
-                    pointerEvents: 'auto'
-                  }}
-                >
-                  {title}
-                </p>
-              </div>
+                  <h3
+                    className="m-0 whitespace-nowrap font-semibold text-center w-full"
+                    style={{
+                      fontSize: name.length > 15 ? 'clamp(1rem, 3vw, 1.4rem)' : name.length > 10 ? 'clamp(1.3rem, 4vw, 1.8rem)' : 'clamp(1.6rem, 5vw, 2.2rem)',
+                      color: '#f6fbf2',
+                      lineHeight: 1.2,
+                      textShadow: '0 2px 8px rgba(0,0,0,0.35)',
+                      display: 'block',
+                      gridArea: 'auto',
+                      borderRadius: '0',
+                      pointerEvents: 'auto'
+                    }}
+                  >
+                    {name}
+                  </h3>
+                  {title && (
+                    <p
+                      className="mx-auto w-fit whitespace-nowrap font-semibold text-center"
+                      style={{
+                        position: 'relative',
+                        top: '0',
+                        fontSize: name.length > 15 ? '0.65rem' : '0.75rem',
+                        margin: '0.25rem auto 0',
+                        color: '#f6d97a',
+                        letterSpacing: '0.04em',
+                        textShadow: '0 1px 6px rgba(0,0,0,0.35)',
+                        display: 'block',
+                        gridArea: 'auto',
+                        borderRadius: '0',
+                        pointerEvents: 'auto'
+                      }}
+                    >
+                      {title}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </section>
