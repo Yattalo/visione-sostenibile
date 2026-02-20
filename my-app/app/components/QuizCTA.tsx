@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Sprout } from "lucide-react";
+import { ArrowRight, Sprout } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/app/lib/utils";
@@ -14,10 +14,16 @@ interface QuizCTAProps {
 export function QuizCTA({ variant = "sidebar", className }: QuizCTAProps) {
   if (variant === "compact") {
     return (
-      <div className={cn("flex items-center gap-3", className)}>
-        <Sprout className="w-5 h-5 text-leaf-500" />
-        <Link href="/quiz" className="text-sm font-medium text-leaf-700 hover:text-leaf-500 underline underline-offset-4">
-          Scopri che giardino fa per te
+      <div className={cn("flex items-center justify-center", className)}>
+        <Link
+          href="/quiz"
+          className="group inline-flex items-center gap-2.5 rounded-full border border-leaf-700/25 bg-paper-50/85 px-6 py-3
+                     font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-leaf-700 transition-all duration-300
+                     hover:-translate-y-0.5 hover:border-leaf-600/45 hover:bg-leaf-50"
+        >
+          <Sprout className="h-4 w-4 text-leaf-500 transition-colors group-hover:text-leaf-700" />
+          Inizia il quiz completo
+          <ArrowRight className="h-3.5 w-3.5 text-leaf-500/80 transition-all group-hover:translate-x-0.5 group-hover:text-leaf-700" />
         </Link>
       </div>
     );

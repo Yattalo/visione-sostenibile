@@ -86,17 +86,19 @@ export function ServiziClient() {
 
           <SlideUp>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
-              Soluzioni per ogni
+              Cosa possiamo
               <span className="block italic text-leaf-400">
-                esigenza verde
+                fare per te
               </span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.1}>
-            <p className="font-body text-lg text-paper-300/80 max-w-2xl mb-10">
-              Progettazione, realizzazione e manutenzione di giardini sostenibili.
-              Un approccio biodinamico per spazi verdi che rispettano l&apos;ambiente.
+            <p className="font-body text-lg text-paper-300/80 max-w-2xl mb-6">
+              Organizziamo i servizi in tre livelli, così puoi scegliere quello che ti serve davvero — senza pezzi inutili.
+            </p>
+            <p className="font-body text-lg italic text-leaf-400 max-w-2xl mb-10">
+              Non vendiamo pezzi. Progettiamo sistemi.
             </p>
           </SlideUp>
 
@@ -113,24 +115,104 @@ export function ServiziClient() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Services by Level */}
       <section className="py-20 lg:py-28 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <StaggerContainer>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {services.map((service, index) => (
-                <StaggerItem key={service._id} delay={0.05}>
-                  <ServiceCard
-                    slug={normalizeServiceSlug(service.slug)}
-                    title={service.title}
-                    shortDescription={service.shortDescription}
-                    image={getImageForService(service)}
-                    index={index}
-                  />
-                </StaggerItem>
-              ))}
+          {/* Livello A: Verde sostenibile (core) */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-600 bg-leaf-50 px-4 py-2 rounded-full">
+                Livello 1
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl text-forest-950">
+                Verde sostenibile <span className="italic text-leaf-700">(core)</span>
+              </h2>
             </div>
-          </StaggerContainer>
+            <p className="font-body text-forest-800/70 max-w-2xl mb-8">
+              Il cuore del nostro lavoro: progettazione, realizzazione e manutenzione di giardini che resistono al clima di oggi.
+            </p>
+            <StaggerContainer>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {services.filter(s => 
+                  ['progettazione-giardini', 'realizzazione-giardini', 'manutenzioni', 'rigenerazione-terreni', 'impianti-irrigazione', 'potature'].includes(s.slug)
+                ).slice(0, 6).map((service, index) => (
+                  <StaggerItem key={service._id} delay={0.05}>
+                    <ServiceCard
+                      slug={normalizeServiceSlug(service.slug)}
+                      title={service.title}
+                      shortDescription={service.shortDescription}
+                      image={getImageForService(service)}
+                      index={index}
+                    />
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerContainer>
+          </div>
+
+          {/* Livello B: Outdoor living (comfort) */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-sun-500 bg-sun-50 px-4 py-2 rounded-full">
+                Livello 2
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl text-forest-950">
+                Outdoor living <span className="italic text-leaf-700">(comfort)</span>
+              </h2>
+            </div>
+            <p className="font-body text-forest-800/70 max-w-2xl mb-8">
+              Trasformiamo il tuo giardino in uno spazio da vivere: luce, arredi, strutture per stare all&apos;aperto.
+            </p>
+            <StaggerContainer>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {services.filter(s => 
+                  ['arredamento-esterni', 'illuminazione-esterni', 'camminamenti-pietra'].includes(s.slug)
+                ).slice(0, 3).map((service, index) => (
+                  <StaggerItem key={service._id} delay={0.05}>
+                    <ServiceCard
+                      slug={normalizeServiceSlug(service.slug)}
+                      title={service.title}
+                      shortDescription={service.shortDescription}
+                      image={getImageForService(service)}
+                      index={index}
+                    />
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerContainer>
+          </div>
+
+          {/* Livello C: Acqua e benessere (premium) */}
+          <div>
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-700 bg-leaf-100 px-4 py-2 rounded-full">
+                Livello 3
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl text-forest-950">
+                Acqua e benessere <span className="italic text-leaf-700">(premium)</span>
+              </h2>
+            </div>
+            <p className="font-body text-forest-800/70 max-w-2xl mb-8">
+              In partnership con selezionati specialisti: laghetti, punti acqua e integrazioni paesaggistiche che valorizzano lo spazio.
+            </p>
+            <StaggerContainer>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {services.filter(s => 
+                  ['ingegneria-naturalistica'].includes(s.slug)
+                ).slice(0, 3).map((service, index) => (
+                  <StaggerItem key={service._id} delay={0.05}>
+                    <ServiceCard
+                      slug={normalizeServiceSlug(service.slug)}
+                      title={service.title}
+                      shortDescription={service.shortDescription}
+                      image={getImageForService(service)}
+                      index={index}
+                    />
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerContainer>
+          </div>
         </div>
       </section>
 
@@ -154,17 +236,16 @@ export function ServiziClient() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <SlideUp>
             <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-6">
-              Inizia il tuo progetto
+              Parliamone
             </Badge>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-paper-50 leading-tight mb-6">
-              Pronto a trasformare
+              Ti diciamo cosa serve
               <span className="block italic text-leaf-400">
-                il tuo giardino?
+                davvero
               </span>
             </h2>
             <p className="font-body text-lg text-paper-300/70 max-w-xl mx-auto mb-10">
-              Prenota una consulenza gratuita. Insieme progetteremo lo spazio verde
-              che hai sempre desiderato.
+              Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a capire cosa serve — e cosa no.
             </p>
           </SlideUp>
 
@@ -172,17 +253,7 @@ export function ServiziClient() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contatti">
                 <Button size="lg" className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg">
-                  Contattaci Ora
-                </Button>
-              </Link>
-              <Link href="/progetti">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-paper-400/30 text-paper-100 hover:bg-paper-100/10 px-8 py-4 text-lg"
-                >
-                  Guarda i Nostri Progetti
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  Richiedi un sopralluogo
                 </Button>
               </Link>
             </div>

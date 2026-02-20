@@ -129,49 +129,47 @@ export default function HomePage() {
             </div>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-balance">
-              Giardini sostenibili
+              Il tuo giardino sostenibile,
               <span className="block italic text-leaf-400">
-                a impatto zero
+                senza coordinare 5 fornitori
               </span>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto mb-12 leading-relaxed">
-              Progettazione, realizzazione e manutenzione con metodi biodinamici.
-              Zero chimica, piu valore nel tempo, meno interventi futuri.
+              Con Visione Sostenibile hai un unico interlocutore che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contatti">
                 <Button
                   size="lg"
-                  variant="secondary"
-                  className="px-8 py-4 text-lg tracking-wide"
+                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg tracking-wide"
                 >
-                  Richiedi Preventivo
+                  Richiedi un sopralluogo
                 </Button>
               </Link>
-              <Link href="/servizi">
+              <Link href="/contatti">
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-white/40 text-white hover:bg-white/10 hover:border-white px-8 py-4 text-lg tracking-wide"
                 >
-                  Vedi i Servizi
+                  Sono un&apos;azienda/condominio
                 </Button>
               </Link>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-paper-300/90">
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                20+ anni in biodinamica
+                Un referente
               </span>
               <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Zero prodotti chimici
+                Team modulare
               </span>
               <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Piemonte e Lombardia
+                Operativi in Piemonte e Trentino. In espansione in Lombardia.
               </span>
             </div>
           </motion.div>
@@ -229,16 +227,76 @@ export default function HomePage() {
             className="mb-16 md:mb-20 max-w-3xl"
           >
             <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
-              La migliore scelta eco-friendly
+              Perché funziona
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-leaf-700 mb-6 leading-tight">
-              Servizi che offriamo...
+              Un referente, una squadra su misura
             </h2>
             <p className="font-body text-lg text-forest-800/70 leading-relaxed max-w-2xl">
-              Con una pianificazione attenta ed un&apos;esecuzione efficiente,
-              garantiamo che ogni progetto rispetti alti standard di
-              funzionalita e sostenibilita. Il nostro approccio offre risultati
-              pratici e duraturi.
+              Non facciamo giardini Instagram. Facciamo giardini che superano agosto: belli oggi, funzionano domani.
+            </p>
+          </motion.div>
+
+          {/* Tre card di valore */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {[
+              {
+                title: "Un referente",
+                subtitle: "Andrea coordina. Tu respiri.",
+                description: "Un solo contatto per tempi, scelte e budget: niente rimbalzi tra fornitori.",
+              },
+              {
+                title: "Sostenibile vero",
+                subtitle: "Meno sprechi, più durata.",
+                description: "Scelte botaniche e tecniche orientate a resilienza, acqua e suolo: il giardino è bello oggi e funziona domani.",
+              },
+              {
+                title: "Team modulare",
+                subtitle: "Entrano solo le competenze che servono.",
+                description: "Professionisti verticali e partner affidabili che si attivano fase per fase, in un piano lavori coerente.",
+              },
+            ].map((card, index) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="bg-white rounded-2xl p-8 shadow-soft hover:shadow-medium transition-all duration-500 border border-paper-100"
+              >
+                <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-600 mb-4 block">
+                  {index + 1}
+                </span>
+                <h3 className="font-display text-2xl text-forest-950 mb-2">
+                  {card.title}
+                </h3>
+                <p className="font-display text-lg italic text-leaf-700 mb-4">
+                  {card.subtitle}
+                </p>
+                <p className="font-body text-forest-800/70 leading-relaxed">
+                  {card.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Manifesto Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="bg-forest-950 rounded-3xl p-10 md:p-14 text-center mb-16"
+          >
+            <h3 className="font-display text-2xl md:text-3xl text-paper-50 mb-6 italic">
+              Bello. Sostenibile. Gestibile.
+            </h3>
+            <p className="font-body text-paper-300 max-w-2xl mx-auto mb-4">
+              Un referente, un metodo, una squadra su misura.<br />
+              Scelte spiegate, risultati che durano.
+            </p>
+            <p className="font-body text-sm text-leaf-400">
+              Non facciamo giardini Instagram. Facciamo giardini che superano agosto.
             </p>
           </motion.div>
 
@@ -370,30 +428,39 @@ export default function HomePage() {
       </section>
 
       {/* Quiz Section */}
-      <section className="py-20 lg:py-28 px-6 bg-paper-100 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-leaf-100/30 rounded-full blur-3xl" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <section className="relative overflow-hidden bg-paper-canvas px-6 py-24 lg:py-32">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-leaf-300/45 to-transparent" />
+          <div className="absolute -top-20 left-1/2 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-leaf-100/35 blur-3xl" />
+          <div className="absolute -bottom-24 -left-10 h-80 w-80 rounded-full bg-leaf-200/30 blur-3xl" />
+          <div className="absolute -bottom-24 -right-8 h-72 w-72 rounded-full bg-sun-100/45 blur-3xl" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Badge className="bg-leaf-100 text-leaf-700 mb-6">
-              Quiz Gratuito
-            </Badge>
-            <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-4 leading-tight">
-              Che giardino
-              <span className="block italic text-leaf-600">fa per te?</span>
-            </h2>
-            <p className="font-body text-lg text-forest-800/70 max-w-2xl mx-auto mb-12">
-              Rispondi a 6 domande e scopri il tuo profilo verde personalizzato.
-              Riceverai consigli su misura per il tuo spazio.
-            </p>
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <Badge className="mb-6 border border-leaf-300/70 bg-leaf-50 px-5 py-1.5 text-leaf-700">
+                Quiz Gratuito
+              </Badge>
+              <h2 className="mb-5 font-display text-5xl leading-[1.05] text-forest-950 md:text-6xl">
+                Che giardino
+                <span className="block italic text-leaf-600">fa per te?</span>
+              </h2>
+              <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-forest-800/72 md:text-xl">
+                Rispondi a 6 domande e scopri il tuo profilo verde personalizzato.
+                Riceverai consigli su misura per il tuo spazio.
+              </p>
+            </div>
+
+            <QuizMiniPreview />
+            <div className="mt-10">
+              <QuizCTA variant="compact" />
+            </div>
           </motion.div>
-          <QuizMiniPreview />
-          <div className="mt-8">
-            <QuizCTA variant="compact" />
-          </div>
         </div>
       </section>
 
@@ -488,21 +555,20 @@ export default function HomePage() {
           className="relative z-10 max-w-4xl mx-auto text-center px-6"
         >
           <h2 className="font-display text-4xl md:text-5xl mb-6 leading-tight">
-            Pronto a trasformare il tuo
+            Parliamone:
             <span className="block italic text-leaf-400">
-              spazio verde?
+              ti diciamo cosa serve davvero
             </span>
           </h2>
           <p className="font-body text-lg text-paper-300 mb-10 max-w-2xl mx-auto">
-            Contattaci per una consulenza senza impegno. Insieme,
-            creeremo il giardino che hai sempre sognato.
+            Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorità, fasi e investimenti.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+393714821825">
-              <Button className="bg-sun-400 hover:bg-sun-500 text-white px-8 py-4">
+              <Button className="bg-sun-400 hover:bg-sun-500 text-forest-950 px-8 py-4">
                 <Phone className="mr-2 w-5 h-5" />
-                Chiama Ora
+                Richiedi un sopralluogo
               </Button>
             </a>
             <Link href="/contatti">
@@ -510,7 +576,7 @@ export default function HomePage() {
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white/10 px-8 py-4"
               >
-                Scrivici
+                Richiedi una call (aziende/condomini)
               </Button>
             </Link>
           </div>
@@ -518,11 +584,11 @@ export default function HomePage() {
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-paper-400">
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              Piemonte e Lombardia
+              Rispondiamo entro 48 ore lavorative
             </span>
             <span className="flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              visionesostenibile96@gmail.com
+              <MapPin className="w-4 h-4" />
+              Operativi in Piemonte e Trentino Alto-Adige. In espansione in Lombardia.
             </span>
           </div>
         </motion.div>

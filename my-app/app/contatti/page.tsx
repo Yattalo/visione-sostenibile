@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useMutation } from "convex/react";
+import Link from "next/link";
 import {
   Phone,
   Mail,
@@ -144,15 +145,14 @@ export default function ContattiPage() {
             </Badge>
 
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
-              Parliamo del tuo
+              Parliamone:
               <span className="block italic text-leaf-400">
-                prossimo progetto
+                ti diciamo cosa serve davvero
               </span>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Siamo al tuo servizio per trasformare la tua visione in realtà. 
-              Compila il modulo per una consulenza gratuita o un preventivo personalizzato.
+              Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorità, fasi e investimenti.
             </p>
           </SlideUp>
 
@@ -303,8 +303,7 @@ export default function ContattiPage() {
                         Richiesta inviata
                       </h3>
                       <p className="font-body text-lg text-forest-800/70 leading-relaxed max-w-sm mx-auto">
-                        Il nostro team prenderà in carico il tuo messaggio e ti risponderà 
-                        all&apos;indirizzo indicato entro 24 ore lavorative.
+                        Ti rispondiamo entro 48 ore lavorative. Ti diciamo cosa serve davvero — e cosa no.
                       </p>
                       <Button 
                         variant="ghost" 
@@ -467,34 +466,43 @@ export default function ContattiPage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <SlideUp>
             <h2 className="font-display text-4xl md:text-6xl font-light mb-6 leading-tight uppercase tracking-tight">
-              Preferisci parlare
+              Ti diciamo cosa serve
               <span className="block italic text-leaf-400 font-light">
-                direttamente?
+                davvero
               </span>
             </h2>
             <p className="font-body text-xl text-paper-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Chiamaci per un confronto immediato. Siamo disponibili dal lunedì
-              al venerdì, dalle 8:00 alle 18:00.
+              Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorità, fasi e investimenti.
             </p>
 
-            <a href="tel:+393714821825">
-              <Button
-                size="lg"
-                className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-12 py-5 text-xl tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-transform"
-              >
-                <Phone className="mr-3 w-6 h-6" />
-                CHIAMA ORA
-              </Button>
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Link href="/contatti">
+                <Button
+                  size="lg"
+                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-12 py-5 text-xl tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-transform"
+                >
+                  Richiedi un sopralluogo
+                </Button>
+              </Link>
+              <Link href="/contatti">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-paper-400/30 text-paper-100 hover:bg-paper-100/10 px-12 py-5 text-xl tracking-wider font-bold rounded-2xl"
+                >
+                  Richiedi una call (aziende/condomini)
+                </Button>
+              </Link>
+            </div>
 
             <div className="mt-16 flex flex-wrap justify-center gap-10 text-paper-400 text-micro">
               <span className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-leaf-400" />
-                Piemonte e Lombardia
+                Rispondiamo entro 48 ore lavorative
               </span>
               <span className="flex items-center gap-2">
-                <Mail className="w-5 h-5 text-leaf-400" />
-                visionesostenibile96@gmail.com
+                <MapPin className="w-5 h-5 text-leaf-400" />
+                Operativi in Piemonte e Trentino Alto-Adige. In espansione in Lombardia.
               </span>
             </div>
           </SlideUp>

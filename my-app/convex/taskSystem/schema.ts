@@ -17,6 +17,8 @@ export const taskSystemTables = {
       v.literal("claude"),
       v.literal("gemini"),
       v.literal("codex"),
+      v.literal("opencode"),
+      v.literal("human"),
     ),
 
     // Content
@@ -229,6 +231,8 @@ export const taskSystemTables = {
       v.literal("claude"),
       v.literal("gemini"),
       v.literal("codex"),
+      v.literal("opencode"),
+      v.literal("human"),
     ),
     prompt: v.string(),
     executionMode: v.union(v.literal("isolated"), v.literal("read-only"), v.literal("dry-run")),
@@ -273,6 +277,8 @@ export const taskSystemTables = {
       v.literal("claude"),
       v.literal("gemini"),
       v.literal("codex"),
+      v.literal("opencode"),
+      v.literal("human"),
     ),
     prompt: v.string(),
     executionMode: v.string(),

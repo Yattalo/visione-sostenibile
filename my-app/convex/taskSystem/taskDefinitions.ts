@@ -1759,4 +1759,171 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     ],
     filesExpected: [],
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // BARBARA TRIFECTA — Narrative + Copy + Content Seeding
+  // Parallel dispatch: Gemini (narrative), Codex (seed), OpenCode (copy)
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-B0",
+    agent: "claude",
+    title: "Setup Barbara directories + Walkway font audit",
+    description:
+      "Create docs/barbara-output/narrative/ directory. Audit Walkway font usage across all components to ensure no hardcoded font-family overrides exist. Verify all --font-* tokens point to Walkway.",
+    status: "done",
+    priority: "high",
+    category: "devops",
+    phaseId: "foundation",
+    wave: 13,
+    estimatedHours: 0.5,
+    dependencies: [],
+    tags: ["barbara", "setup", "font-audit"],
+    acceptanceCriteria: [
+      "docs/barbara-output/narrative/ directory exists",
+      "No hardcoded font-family overrides in app/ (except OG image)",
+      "All --font-* tokens reference Walkway",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "VS-B1",
+    agent: "gemini",
+    title: "Generate 8 Barbara narrative files",
+    description:
+      "Using the storytelling document as input, generate 8 structured narrative files in docs/barbara-output/narrative/: positioning.md, metodo.md, servizi.md, pacchetti-b2c.md, pacchetti-b2b.md, faq.md, case-study.md, struttura-sito.md. Expand and structure the raw content into production-ready narrative architecture with Barbara anti-rhetoric tone.",
+    status: "todo",
+    priority: "critical",
+    category: "documentation",
+    phaseId: "features",
+    wave: 13,
+    estimatedHours: 3,
+    dependencies: ["VS-B0"],
+    tags: ["barbara", "narrative", "gemini", "storytelling"],
+    acceptanceCriteria: [
+      "8 .md files created in docs/barbara-output/narrative/",
+      "Each file has clear structure (H1/H2/sections)",
+      "Anti-rhetoric tone: concrete, no buzzwords",
+      "B2C and B2B messaging clearly differentiated",
+      "Italian language throughout",
+    ],
+    filesExpected: [
+      "docs/barbara-output/narrative/positioning.md",
+      "docs/barbara-output/narrative/metodo.md",
+      "docs/barbara-output/narrative/servizi.md",
+      "docs/barbara-output/narrative/pacchetti-b2c.md",
+      "docs/barbara-output/narrative/pacchetti-b2b.md",
+      "docs/barbara-output/narrative/faq.md",
+      "docs/barbara-output/narrative/case-study.md",
+      "docs/barbara-output/narrative/struttura-sito.md",
+    ],
+  },
+
+  {
+    taskId: "VS-B2",
+    agent: "codex",
+    title: "Create Barbara seed content files",
+    description:
+      "Create TypeScript data files for Barbara content seeding: barbara-reviews.ts (8 reviews with author, text, rating, source), barbara-blog.ts (4 blog post objects with title, slug, excerpt, content sections, SEO), barbara-servizi.ts (12 complete service cards with title, slug, description, benefits, pricing-hint, icon), barbara-scorecard.ts (scorecard advice content per profile). Plus a Convex seed script. All in app/lib/.",
+    status: "todo",
+    priority: "critical",
+    category: "backend",
+    phaseId: "features",
+    wave: 13,
+    estimatedHours: 4,
+    dependencies: ["VS-B0"],
+    tags: ["barbara", "content", "codex", "seed"],
+    acceptanceCriteria: [
+      "app/lib/barbara-reviews.ts exports 8 review objects",
+      "app/lib/barbara-blog.ts exports 4 blog post objects",
+      "app/lib/barbara-servizi.ts exports 12 service card objects",
+      "app/lib/barbara-scorecard.ts exports scorecard advice",
+      "All content in Italian, anti-rhetoric Barbara tone",
+      "TypeScript types correct, no `any`",
+    ],
+    filesExpected: [
+      "app/lib/barbara-reviews.ts",
+      "app/lib/barbara-blog.ts",
+      "app/lib/barbara-servizi.ts",
+      "app/lib/barbara-scorecard.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-B3",
+    agent: "opencode",
+    title: "Rewrite 4 pages with Barbara anti-rhetoric copy",
+    description:
+      "Rewrite 4 main pages with Barbara storytelling copy: homepage (app/page.tsx), chi-siamo (app/chi-siamo/page.tsx), servizi (app/servizi/page.tsx), contatti (app/contatti/page.tsx). Use the storytelling document as source. Maintain existing component structure, Convex data loading, and BMAD design system. Replace placeholder/generic copy with Barbara's concrete, anti-rhetoric Italian. Font must be Walkway throughout (use font-display, font-body CSS classes).",
+    status: "todo",
+    priority: "critical",
+    category: "frontend",
+    phaseId: "features",
+    wave: 13,
+    estimatedHours: 6,
+    dependencies: ["VS-B0"],
+    tags: ["barbara", "copy", "opencode", "rewrite"],
+    acceptanceCriteria: [
+      "Homepage hero uses Barbara positioning copy",
+      "Chi-siamo has Andrea Giordano bio (human version)",
+      "Servizi page uses benefit-driven copy per service",
+      "Contatti has Barbara CTA copy and reassurance text",
+      "All pages use Walkway font tokens (font-display, font-body)",
+      "No Playfair/Quicksand references",
+      "Existing Convex queries and component imports preserved",
+      "pnpm build passes",
+    ],
+    filesExpected: [
+      "app/page.tsx",
+      "app/chi-siamo/page.tsx",
+      "app/servizi/page.tsx",
+      "app/contatti/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "VS-B4",
+    agent: "claude",
+    title: "Post-dispatch verification (tsc + build)",
+    description:
+      "After all 3 Barbara agents complete: run tsc --noEmit, pnpm build, verify no type errors or build failures. Fix any issues introduced by agents.",
+    status: "todo",
+    priority: "critical",
+    category: "testing",
+    phaseId: "deploy",
+    wave: 14,
+    estimatedHours: 2,
+    dependencies: ["VS-B1", "VS-B2", "VS-B3"],
+    tags: ["barbara", "verification", "build"],
+    acceptanceCriteria: [
+      "tsc --noEmit passes with zero errors",
+      "pnpm build succeeds",
+      "No runtime errors on localhost:3000",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "VS-B5",
+    agent: "claude",
+    title: "Walkway font consistency pass",
+    description:
+      "Final pass to ensure Walkway font is visually consistent across the entire site after Barbara rewrites. Check all components use font-display/font-body/font-sans classes. Verify heading weights map correctly (Black=900 for H1, Bold=700 for H2, SemiBold=600 for H3). Visual coherence with the full Visione Sostenibile logo.",
+    status: "todo",
+    priority: "high",
+    category: "review",
+    phaseId: "deploy",
+    wave: 14,
+    estimatedHours: 1,
+    dependencies: ["VS-B4"],
+    tags: ["barbara", "font", "walkway", "consistency"],
+    acceptanceCriteria: [
+      "All pages use Walkway font exclusively",
+      "H1-H3 weight hierarchy correct per BMAD spec",
+      "No system font fallbacks visible on load",
+      "Visual coherence with Visione Sostenibile logo",
+    ],
+    filesExpected: [],
+  },
 ];

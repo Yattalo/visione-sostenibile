@@ -16,41 +16,41 @@ import { TeamSection } from "../components/TeamSection";
 export const metadata: Metadata = {
   title: "Chi Siamo | Visione Sostenibile",
   description:
-    "Scopri Visione Sostenibile: Andrea Giordano e la passione per il giardinaggio sostenibile a impatto zero. Oltre 20 anni di biodinamica in Piemonte e Lombardia.",
+    "Andrea Giordano: il giardiniere che ti spiega il perché. Un unico referente per progettazione, realizzazione e manutenzione di giardini sostenibili in Piemonte e Trentino.",
 };
 
 const values = [
   {
     icon: Leaf,
-    title: "Impatto Zero",
+    title: "Sostenibile non è una moda",
     description:
-      "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi. Il bilancio ambientale netto è sempre zero.",
+      "È una strategia. Un giardino sostenibile è progettato per ridurre sprechi e interventi inutili, gestire meglio l'acqua, favorire equilibrio e biodiversità, durare nel tempo con costi più controllabili.",
   },
   {
     icon: Bug,
-    title: "Zero Rischi",
+    title: "Zero chimica",
     description:
-      "Eliminazione totale del rischio di intossicazione per persone, bambini e animali domestici. Nessun prodotto chimico.",
+      "Nessun prodotto fitosanitario. L'approccio biodinamico crea terreni ricchi di vita che favoriscono la crescita naturale delle piante.",
   },
   {
     icon: Award,
-    title: "Biodinamica",
+    title: "Un referente",
     description:
-      "Pratichiamo l'agricoltura biodinamica integrata in ogni progetto per un verde sano e rigoglioso.",
+      "Un solo interlocutore per tempi, scelte e budget: niente rimbalzi tra fornitori. Andrea coordina competenze verticali e partner selezionati.",
   },
   {
     icon: Users,
-    title: "Bassa Manutenzione",
+    title: "Manutenzione programmata",
     description:
-      "Terreni ricchi di vita che favoriscono la crescita naturale delle piante, riducendo drasticamente gli interventi.",
+      "La sostenibilità è anche gestione. Interventi mirati, prevenzione, calendario stagionale: il verde resta un valore, non torna un problema.",
   },
 ];
 
 const storyContent = [
-  "Una ventina di anni fa ho iniziato a capire che qualcosa nel clima non funzionava più come doveva, che i cibi di cui ci nutriamo quotidianamente non avevano più le caratteristiche nutrizionali di qualche decennio prima.",
-  "Ho iniziato a preoccuparmi dello sfruttamento del suolo, della non corretta gestione delle lavorazioni e dello spropositato utilizzo di prodotti fitosanitari, causando così terreni sterili e desertificazione che avanza a dismisura.",
-  "Ho intrapreso così la strada della sostenibilità, un cammino lungo che ancora oggi non smette di insegnarmi qualcosa e di stupirmi.",
-  "Oggi siamo la prima realtà a poter certificare il nostro lavoro e giardino SOSTENIBILE Agri Bio Dinamica. Cert. N° 54/23 del 11-06-2023",
+  "Andrea è il volto di Visione Sostenibile: appassionato, curioso, in continua ricerca.",
+  "Lavora in ascolto: delle persone, degli spazi, e di ciò che la natura sta dicendo oggi (anche quando è scomodo).",
+  "Ama raccontare cosa fa e come lo fa, ma soprattutto perché sceglie una soluzione e non un'altra: perché per Andrea un giardino non è un lavoro da finire, è un equilibrio da costruire.",
+  "Coordina un team di competenze verticali e partnership selezionate, e nel frattempo continua a formarsi, confrontarsi e tenere corsi dal vivo: perché il futuro del verde — tra clima che cambia e risorse da gestire meglio — si costruisce con scelte consapevoli, non con scorciatoie.",
 ];
 
 const stats = [
@@ -81,15 +81,15 @@ export default function ChiSiamoPage() {
             </Badge>
 
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
-              Giardinaggio Sostenibile
+              Andrea Giordano:
               <span className="block italic text-leaf-400">
-                a Impatto Zero
+                il giardiniere che ti spiega il perché
               </span>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Andrea Giordano e Visione Sostenibile: oltre 20 anni di biodinamica
-              al servizio del verde in Piemonte e Lombardia.
+              Il volto di Visione Sostenibile: appassionato, curioso, in continua ricerca. 
+              Un unico referente che coordina competenze verticali e partnership selezionate.
             </p>
           </SlideUp>
 
@@ -127,8 +127,8 @@ export default function ChiSiamoPage() {
                 La nostra storia
               </span>
               <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
-                Creiamo spazi verdi
-                <span className="block text-leaf-700">che ispirano</span>
+                Un giardino non è un lavoro da finire.
+                <span className="block text-leaf-700">È un equilibrio da costruire.</span>
               </h2>
               <div className="space-y-6 font-body text-forest-800">
                 {storyContent.map((paragraph, index) => (
@@ -142,29 +142,18 @@ export default function ChiSiamoPage() {
         </div>
       </section>
 
-      {/* Certification Section */}
-      <section className="py-20 px-6 bg-paper-100">
+      {/* Manifesto Section */}
+      <section className="py-20 px-6 bg-leaf-50">
         <div className="max-w-4xl mx-auto text-center">
           <SlideUp>
-            <Badge variant="biodynamic" className="mb-6 px-6 py-3">
-              La Prima Certificazione in Italia
-            </Badge>
-            <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-6">
-              Giardino Sostenibile <span className="italic text-leaf-600">Agri Bio Dinamica</span>
+            <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-8 leading-tight">
+              Bello. Sostenibile. Gestibile.<br />
+              <span className="italic text-leaf-700">Un referente, un metodo, una squadra su misura.</span>
             </h2>
-            <p className="text-lg text-forest-800 mb-8 max-w-2xl mx-auto">
-              Siamo la prima realtà in Italia a poter certificare il nostro lavoro e i nostri giardini come sostenibili con il metodo Agri Bio Dinamica.
+            <p className="font-body text-forest-800 max-w-2xl mx-auto">
+              Scelte spiegate, risultati che durano.<br />
+              Non facciamo giardini Instagram. Facciamo giardini che superano agosto.
             </p>
-            <div className="inline-flex items-center justify-center bg-white rounded-2xl p-6 shadow-medium">
-              <Image
-                src="/images/chi-siamo/certificazione-agri-bio.jpg"
-                alt="Certificazione Agri Bio Dinamica N° 54/23"
-                width={200}
-                height={80}
-                className="object-contain"
-              />
-            </div>
-            <p className="mt-4 text-sm text-forest-600">Cert. N° 54/23 del 11-06-2023</p>
           </SlideUp>
         </div>
       </section>
@@ -231,39 +220,46 @@ export default function ChiSiamoPage() {
             <SlideUp>
               <Badge variant="eco" className="mb-6">
                 <Bug className="w-3 h-3 mr-1.5 inline" />
-                Il Nostro Approccio
+                Sostenibile non è una moda
               </Badge>
               <h2 className="font-display text-4xl md:text-5xl text-paper-50 leading-tight mb-8">
-                Sostenibilita ambientale
+                È una strategia.
                 <span className="block italic text-leaf-400">
-                  a impatto zero
+                  Meno sprechi, più durata.
                 </span>
               </h2>
               <div className="space-y-6 font-body text-paper-300/80 leading-relaxed">
                 <p className="text-lg">
-                  Il nostro approccio si distingue per il <strong>giardinaggio a impatto zero</strong>:
-                  ripristiniamo i danni causati all&apos;ambiente durante gli interventi invasivi,
-                  garantendo un bilancio ambientale netto pari a zero.
+                  <strong>Un giardino sostenibile è progettato per:</strong>
                 </p>
-                <p className="text-lg">
-                  Eliminiamo completamente il <strong>rischio di intossicazione</strong> per
-                  persone, bambini e animali domestici. Nessun pesticida, nessun prodotto chimico.
-                </p>
-                <p className="text-lg">
-                  I nostri giardini sono progettati per essere a <strong>bassa manutenzione</strong>:
-                  terreni ricchi di vita che favoriscono la crescita naturale delle piante,
-                  trasformando ogni spazio in un ecosistema autosufficiente.
-                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <span className="text-leaf-400 mt-1">•</span>
+                    <span>ridurre sprechi e interventi inutili</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-leaf-400 mt-1">•</span>
+                    <span>gestire meglio l&apos;acqua</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-leaf-400 mt-1">•</span>
+                    <span>favorire equilibrio e biodiversità</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-leaf-400 mt-1">•</span>
+                    <span>durare nel tempo con costi più controllabili</span>
+                  </li>
+                </ul>
               </div>
               <div className="flex flex-wrap gap-4 mt-8">
                 <Badge variant="biodynamic" className="px-4 py-2">
                   20+ Anni di Biodinamica
                 </Badge>
                 <Badge variant="eco" className="px-4 py-2">
-                  Impatto Zero
+                  Zero Prodotti Chimici
                 </Badge>
                 <Badge variant="eco" className="px-4 py-2">
-                  Zero Prodotti Chimici
+                  Manutenzione Programmata
                 </Badge>
               </div>
             </SlideUp>
@@ -343,17 +339,18 @@ export default function ChiSiamoPage() {
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <SlideUp>
             <span className="font-display italic text-leaf-600 text-lg">
-              Iniziamo insieme
+              Il nostro manifesto
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
-              Vuoi conoscerci
-              <span className="block italic text-leaf-700">meglio?</span>
+              Visione Sostenibile nasce dall&apos;ascolto:
+              <span className="block italic text-leaf-700">delle persone, dei luoghi, della natura che cambia.</span>
             </h2>
-            <p className="font-body text-lg text-forest-800 leading-relaxed max-w-2xl mx-auto mb-12">
-              Siamo sempre disponibili per una consulenza gratuita o per
-              accompagnarvi nella visita di alcuni dei nostri progetti
-              realizzati. Ogni grande giardino inizia con una conversazione.
-            </p>
+            <div className="font-body text-lg text-forest-800 leading-relaxed max-w-2xl mx-auto space-y-4 mb-8">
+              <p>Crediamo in giardini belli, sì — ma soprattutto <strong>stabili, gestibili e capaci di durare</strong>.</p>
+              <p>Ogni scelta ha un motivo: <strong>spieghiamo il perché</strong>, valutiamo alternative, costruiamo consapevolezza.</p>
+              <p>Lavoriamo con un&apos;unica regia e competenze verticali: <strong>un referente, una squadra su misura</strong>.</p>
+              <p>Perché il futuro del verde non è una moda: è <strong>cura, metodo e responsabilità</strong>.</p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contatti">
@@ -361,16 +358,16 @@ export default function ChiSiamoPage() {
                   size="lg"
                   className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8 py-4 text-lg tracking-wide"
                 >
-                  Contattaci Ora
+                  Richiedi un sopralluogo
                 </Button>
               </Link>
-              <Link href="/servizi">
+              <Link href="/contatti">
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-forest-700 text-forest-900 hover:bg-paper-300 px-8 py-4 text-lg tracking-wide"
                 >
-                  I Nostri Servizi
+                  Guarda Andrea in 2 minuti
                 </Button>
               </Link>
             </div>
