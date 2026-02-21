@@ -6,7 +6,9 @@ import {
   FileText,
   Image,
   MessageSquare,
+  Mail,
   Star,
+  Users,
   TrendingUp,
   ArrowRight,
   CheckCircle,
@@ -22,6 +24,8 @@ export default function AdminDashboard() {
   const gallery = useQuery(api.gallery.getAll) ?? [];
   const reviews = useQuery(api.reviews.getAll) ?? [];
   const contacts = useQuery(api.contacts.getAll) ?? [];
+  const crmContacts = useQuery(api.crm.listContacts, { limit: 500 }) ?? [];
+  const deliveries = useQuery(api.emails.listDeliveries, { limit: 500 }) ?? [];
 
   const approvedReviews = reviews.filter((review) => review.isApproved);
   const pendingReviews = reviews.filter((review) => !review.isApproved);
@@ -56,6 +60,20 @@ export default function AdminDashboard() {
       icon: MessageSquare,
       color: "from-blue-500 to-blue-600",
       href: "/admin/contacts",
+    },
+    {
+      title: "Contatti CRM",
+      value: crmContacts.length.toString(),
+      icon: Users,
+      color: "from-emerald-500 to-emerald-600",
+      href: "/admin/crm",
+    },
+    {
+      title: "Email Tracciate",
+      value: deliveries.length.toString(),
+      icon: Mail,
+      color: "from-indigo-500 to-indigo-600",
+      href: "/admin/emails",
     },
   ];
 
@@ -240,6 +258,8 @@ export default function AdminDashboard() {
                   { label: "Gestisci Servizi", href: "/admin/services", icon: FileText },
                   { label: "Gestisci Galleria", href: "/admin/gallery", icon: Image },
                   { label: "Rispondi ai Messaggi", href: "/admin/contacts", icon: MessageSquare },
+                  { label: "Apri CRM", href: "/admin/crm", icon: Users },
+                  { label: "Template Email", href: "/admin/emails", icon: Mail },
                   { label: `Modera Recensioni (${pendingReviews.length})`, href: "/admin/reviews", icon: Star },
                 ].map((action) => (
                 <Link

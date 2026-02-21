@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { useMutation, useQuery } from "convex/react";
+import Link from "next/link";
 import {
   Search,
   Mail,
   Phone,
   Trash2,
   EyeOff,
+  ExternalLink,
 } from "lucide-react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -165,6 +167,13 @@ export default function AdminContactsPage() {
                         Rispondi
                       </Button>
                     )}
+                    <Link
+                      href={`/admin/crm?email=${encodeURIComponent(contact.email)}`}
+                      className="inline-flex items-center justify-center h-10 px-5 rounded-full border border-leaf-700 text-forest-950 hover:bg-leaf-50 hover:border-leaf-600 text-xs uppercase tracking-[0.12em] font-medium"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-1" />
+                      Apri CRM
+                    </Link>
                     {!contact.isRead && (
                       <Button
                         variant="ghost"
