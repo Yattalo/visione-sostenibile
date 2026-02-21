@@ -26,6 +26,12 @@ export function buildMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: url,
+      languages: {
+        it: url,
+      },
+    },
     openGraph: {
       title,
       description,

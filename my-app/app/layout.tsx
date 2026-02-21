@@ -53,9 +53,6 @@ export const metadata: Metadata = {
     "Piemonte",
   ],
   metadataBase: new URL(SITE_URL),
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32" },
