@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html><head><style>
+html { background: #F2F0EC; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, sans-serif; display: flex; background-image: url('bg-light.png'); background-size: cover; }
+.wrap { margin: 28pt 40pt; width: 640pt; }
+.topbar { margin: 0 0 6pt 0; }
+h1 { color: #0B1E0E; font-size: 26pt; margin: 0 0 16pt 0; font-weight: bold; }
+.stack { display: flex; gap: 8pt; margin: 0 0 18pt 0; }
+.tech { background: #0B1E0E; border-radius: 6pt; padding: 8pt 12pt; text-align: center; }
+.tech p { color: #4FA45A; font-size: 10pt; margin: 0; }
+.rows { margin: 0; }
+.row { display: flex; gap: 14pt; margin: 0 0 10pt 0; }
+.card { flex: 1; background: #FFFFFF; border: 1pt solid #D4CFC6; border-radius: 8pt; padding: 12pt; }
+.card h2 { color: #22582C; font-size: 12pt; margin: 0 0 6pt 0; font-weight: bold; }
+.card p { color: #333; font-size: 9pt; line-height: 1.5; margin: 0 0 2pt 0; }
+.card-accent { border-left: 3pt solid #EAB831; }
+</style></head>
+<body>
+<div class="wrap">
+  <img src="bar-leaf.png" class="topbar" style="width: 60pt; height: 4pt;">
+  <h1>Lo Stack</h1>
+  <div class="stack">
+    <div class="tech"><p><b>Next.js 16</b></p></div>
+    <div class="tech"><p><b>Convex</b></p></div>
+    <div class="tech"><p><b>Tailwind v4</b></p></div>
+    <div class="tech"><p><b>Framer Motion</b></p></div>
+    <div class="tech"><p><b>React 19</b></p></div>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <div class="card card-accent">
+        <h2>Architettura Dati Dual</h2>
+        <p>Convex = source of truth</p>
+        <p>Fallback statico per resilienza</p>
+        <p>Se il backend e' giu', il sito funziona</p>
+      </div>
+      <div class="card">
+        <h2>Migrazioni Completate</h2>
+        <p>Blog: da file statici a Convex DB</p>
+        <p>Progetti: 25+ case study migrati</p>
+        <p>Editabili da admin senza deploy</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card">
+        <h2>Admin Panel (80%)</h2>
+        <p>Dashboard, blog CRUD, reviews, contacts</p>
+        <p>Auth con sessioni token-based</p>
+        <p>Mancano: servizi/gallery/settings mutations</p>
+      </div>
+      <div class="card">
+        <h2>Task Orchestration</h2>
+        <p>@yattalo/task-system v0.5.0</p>
+        <p>76 task tracciate su Convex</p>
+        <p>Multi-agent: claude, gemini, codex, human</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

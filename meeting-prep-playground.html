@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visione Sostenibile — Meeting Prep</title>
+<style>
+  :root {
+    --paper: #F2F0EC;
+    --forest: #0B1E0E;
+    --forest-light: #153D1C;
+    --leaf: #22582C;
+    --leaf-bright: #4FA45A;
+    --sun: #EAB831;
+    --sun-dim: #C99A1D;
+    --bg: #0a150c;
+    --surface: #111f14;
+    --surface-2: #1a2e1e;
+    --border: #2a4030;
+    --text: #e8e5df;
+    --text-dim: #9c958a;
+    --text-muted: #6b6560;
+    --radius: 10px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+  }
+  header .logo {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--leaf), var(--leaf-bright));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  header h1 { font-size: 16px; font-weight: 600; letter-spacing: -0.3px; }
+  header h1 span { color: var(--leaf-bright); }
+  header .badge {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--leaf);
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    grid-template-rows: 1fr auto;
+    height: calc(100vh - 57px);
+  }
+
+  /* ── Controls Panel ── */
+  .controls {
+    padding: 20px;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: var(--surface);
+  }
+  .section { margin-bottom: 24px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--leaf-bright);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-title::before {
+    content: '';
+    width: 3px; height: 14px;
+    background: var(--leaf-bright);
+    border-radius: 2px;
+  }
+
+  /* Radio pills */
+  .pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill {
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .pill:hover { border-color: var(--leaf); color: var(--text); }
+  .pill.active {
+    background: var(--leaf);
+    border-color: var(--leaf);
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* Checkboxes */
+  .check-group { display: flex; flex-direction: column; gap: 8px; }
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 13px;
+  }
+  .check-item:hover { border-color: var(--leaf); background: var(--surface-2); }
+  .check-item.active {
+    border-color: var(--leaf);
+    background: rgba(34,88,44,0.15);
+  }
+  .check-item .icon { font-size: 16px; width: 22px; text-align: center; }
+  .check-item .cb {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    margin-left: auto;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .check-item.active .cb {
+    background: var(--leaf-bright);
+    border-color: var(--leaf-bright);
+  }
+  .check-item.active .cb::after {
+    content: '✓';
+    font-size: 11px;
+    color: white;
+    font-weight: 700;
+  }
+
+  /* Sliders */
+  .slider-row {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .slider-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    outline: none;
+  }
+  .slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--leaf-bright);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+  .slider-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sun);
+    min-width: 45px;
+    text-align: right;
+  }
+
+  /* Team emphasis */
+  .team-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0;
+  }
+  .team-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .team-name { font-size: 13px; min-width: 70px; }
+  .team-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border);
+    outline: none;
+  }
+  .team-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+
+  /* Presets */
+  .presets { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+  .preset-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px dashed var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .preset-btn:hover {
+    border-color: var(--sun);
+    color: var(--sun);
+    border-style: solid;
+  }
+
+  /* ── Preview Panel ── */
+  .preview {
+    padding: 24px 32px;
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .preview-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .preview-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .preview-header .timer {
+    font-size: 13px;
+    color: var(--sun);
+    font-weight: 500;
+  }
+
+  .tp-section {
+    margin-bottom: 20px;
+    padding: 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tp-section.highlight {
+    border-color: var(--leaf);
+    background: rgba(34,88,44,0.08);
+  }
+  .tp-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tp-title .tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .tp-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .tp-body ul { padding-left: 18px; }
+  .tp-body li { margin-bottom: 4px; }
+  .tp-body strong { color: var(--text); font-weight: 600; }
+  .tp-body .team-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .tag-luca { background: rgba(34,88,44,0.3); color: var(--leaf-bright); }
+  .tag-barbara { background: rgba(234,184,49,0.2); color: var(--sun); }
+  .tag-guglielmo { background: rgba(79,164,90,0.2); color: #7dd88a; }
+  .tag-team { background: rgba(242,240,236,0.1); color: var(--paper); }
+
+  .progress-strip {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .progress-bar-bg {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--leaf), var(--leaf-bright), var(--sun));
+    transition: width 0.3s;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* ── Prompt Output ── */
+  .prompt-area {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 240px;
+  }
+  .prompt-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .prompt-bar label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--leaf-bright);
+  }
+  .copy-btn {
+    margin-left: auto;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: none;
+    background: var(--sun);
+    color: var(--forest);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: var(--sun-dim); }
+  .copy-btn.copied { background: var(--leaf-bright); color: white; }
+  .prompt-text {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    overflow-y: auto;
+    flex: 1;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🌿</div>
+  <h1>Meeting Prep — <span>Visione Sostenibile</span></h1>
+  <div class="badge">Riunione di Allineamento</div>
+</header>
+
+<div class="layout">
+
+  <!-- ── Controls ── -->
+  <div class="controls">
+
+    <div class="presets">
+      <button class="preset-btn" onclick="applyPreset('quick')">⚡ Quick Sync</button>
+      <button class="preset-btn" onclick="applyPreset('teamfocus')">👥 Team Focus</button>
+      <button class="preset-btn" onclick="applyPreset('progress')">📊 Progress Report</button>
+      <button class="preset-btn" onclick="applyPreset('nextsteps')">🎯 Next Steps</button>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Tono</div>
+      <div class="pill-group" id="tone-group">
+        <button class="pill" data-val="formale" onclick="setTone(this)">Formale</button>
+        <button class="pill active" data-val="informale" onclick="setTone(this)">Informale</button>
+        <button class="pill" data-val="entusiasta" onclick="setTone(this)">Entusiasta</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Durata</div>
+      <div class="pill-group" id="duration-group">
+        <button class="pill" data-val="5" onclick="setDuration(this)">5 min</button>
+        <button class="pill active" data-val="10" onclick="setDuration(this)">10 min</button>
+        <button class="pill" data-val="15" onclick="setDuration(this)">15 min</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Aree da Enfatizzare</div>
+      <div class="check-group" id="areas-group">
+        <div class="check-item active" data-val="team" onclick="toggleArea(this)">
+          <span class="icon">👥</span> Lavoro di squadra
+          <span class="cb"></span>
+        </div>
+        <div class="check-item active" data-val="design" onclick="toggleArea(this)">
+          <span class="icon">🎨</span> Design & UX
+          <span class="cb"></span>
+        </div>
+        <div class="check-item active" data-val="tech" onclick="toggleArea(this)">
+          <span class="icon">⚙️</span> Tech & Architettura
+          <span class="cb"></span>
+        </div>
+        <div class="check-item active" data-val="content" onclick="toggleArea(this)">
+          <span class="icon">✍️</span> Content & Narrativa
+          <span class="cb"></span>
+        </div>
+        <div class="check-item" data-val="progress" onclick="toggleArea(this)">
+          <span class="icon">📊</span> Numeri & Progresso
+          <span class="cb"></span>
+        </div>
+        <div class="check-item" data-val="next" onclick="toggleArea(this)">
+          <span class="icon">🎯</span> Prossimi Passi
+          <span class="cb"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Enfasi Contributi Team</div>
+      <div class="team-row">
+        <div class="team-avatar" style="background:rgba(34,88,44,0.4);color:var(--leaf-bright)">L</div>
+        <span class="team-name">Luca</span>
+        <input type="range" id="emp-luca" min="0" max="3" value="2" step="1"
+               style="accent-color:var(--leaf-bright)"
+               oninput="state.emphasisLuca=+this.value;updateAll()">
+      </div>
+      <div class="team-row">
+        <div class="team-avatar" style="background:rgba(234,184,49,0.25);color:var(--sun)">B</div>
+        <span class="team-name">Barbara</span>
+        <input type="range" id="emp-barbara" min="0" max="3" value="2" step="1"
+               style="accent-color:var(--sun)"
+               oninput="state.emphasisBarbara=+this.value;updateAll()">
+      </div>
+      <div class="team-row">
+        <div class="team-avatar" style="background:rgba(79,164,90,0.25);color:#7dd88a">G</div>
+        <span class="team-name">Guglielmo</span>
+        <input type="range" id="emp-guglielmo" min="0" max="3" value="2" step="1"
+               style="accent-color:#7dd88a"
+               oninput="state.emphasisGuglielmo=+this.value;updateAll()">
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:center">
+        0 = ometti &nbsp; 1 = menzione &nbsp; 2 = enfasi &nbsp; 3 = protagonista
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Focus Speciale</div>
+      <div class="check-group">
+        <div class="check-item" data-val="quiz" onclick="toggleSpecial(this)" id="sp-quiz">
+          <span class="icon">🧩</span> Quiz micro-funnel
+          <span class="cb"></span>
+        </div>
+        <div class="check-item" data-val="seo" onclick="toggleSpecial(this)" id="sp-seo">
+          <span class="icon">🔍</span> SEO & Indicizzazione
+          <span class="cb"></span>
+        </div>
+        <div class="check-item" data-val="bmad" onclick="toggleSpecial(this)" id="sp-bmad">
+          <span class="icon">🎭</span> Design System BMAD
+          <span class="cb"></span>
+        </div>
+        <div class="check-item" data-val="barbara" onclick="toggleSpecial(this)" id="sp-barbara">
+          <span class="icon">📖</span> Barbara Trifecta
+          <span class="cb"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Preview ── -->
+  <div class="preview" id="preview">
+  </div>
+
+  <!-- ── Prompt Output ── -->
+  <div class="prompt-area">
+    <div class="prompt-bar">
+      <label>Prompt Generato</label>
+      <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copia Prompt</button>
+    </div>
+    <div class="prompt-text" id="prompt-output"></div>
+  </div>
+</div>
+
+<script>
+const DEFAULTS = {
+  tone: 'informale',
+  duration: 10,
+  areas: ['team','design','tech','content'],
+  specials: [],
+  emphasisLuca: 2,
+  emphasisBarbara: 2,
+  emphasisGuglielmo: 2,
+};
+
+const state = {
+  tone: 'informale',
+  duration: 10,
+  areas: new Set(['team','design','tech','content']),
+  specials: new Set(),
+  emphasisLuca: 2,
+  emphasisBarbara: 2,
+  emphasisGuglielmo: 2,
+};
+
+function setTone(el) {
+  document.querySelectorAll('#tone-group .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  state.tone = el.dataset.val;
+  updateAll();
+}
+
+function setDuration(el) {
+  document.querySelectorAll('#duration-group .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  state.duration = +el.dataset.val;
+  updateAll();
+}
+
+function toggleArea(el) {
+  el.classList.toggle('active');
+  const v = el.dataset.val;
+  if (state.areas.has(v)) state.areas.delete(v); else state.areas.add(v);
+  updateAll();
+}
+
+function toggleSpecial(el) {
+  el.classList.toggle('active');
+  const v = el.dataset.val;
+  if (state.specials.has(v)) state.specials.delete(v); else state.specials.add(v);
+  updateAll();
+}
+
+function applyPreset(name) {
+  const presets = {
+    quick: { tone:'informale', duration:5, areas:['team','progress'], specials:[], luca:1, barbara:1, guglielmo:1 },
+    teamfocus: { tone:'entusiasta', duration:10, areas:['team','design','content','tech'], specials:['barbara'], luca:2, barbara:3, guglielmo:3 },
+    progress: { tone:'formale', duration:10, areas:['progress','tech','next'], specials:[], luca:2, barbara:1, guglielmo:1 },
+    nextsteps: { tone:'informale', duration:15, areas:['progress','next','team','tech','design'], specials:['bmad'], luca:2, barbara:2, guglielmo:3 },
+  };
+  const p = presets[name];
+  state.tone = p.tone;
+  state.duration = p.duration;
+  state.areas = new Set(p.areas);
+  state.specials = new Set(p.specials);
+  state.emphasisLuca = p.luca;
+  state.emphasisBarbara = p.barbara;
+  state.emphasisGuglielmo = p.guglielmo;
+  syncControls();
+  updateAll();
+}
+
+function syncControls() {
+  document.querySelectorAll('#tone-group .pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.val === state.tone);
+  });
+  document.querySelectorAll('#duration-group .pill').forEach(p => {
+    p.classList.toggle('active', +p.dataset.val === state.duration);
+  });
+  document.querySelectorAll('#areas-group .check-item').forEach(c => {
+    c.classList.toggle('active', state.areas.has(c.dataset.val));
+  });
+  document.querySelectorAll('[id^="sp-"]').forEach(c => {
+    c.classList.toggle('active', state.specials.has(c.dataset.val));
+  });
+  document.getElementById('emp-luca').value = state.emphasisLuca;
+  document.getElementById('emp-barbara').value = state.emphasisBarbara;
+  document.getElementById('emp-guglielmo').value = state.emphasisGuglielmo;
+}
+
+const tag = (name, cls) => `<span class="team-tag tag-${cls}">${name}</span>`;
+const L = tag('Luca','luca'), B = tag('Barbara','barbara'), G = tag('Guglielmo','guglielmo'), T = tag('Team','team');
+
+function renderPreview() {
+  const el = document.getElementById('preview');
+  let html = '';
+
+  const toneLabels = { formale:'Tono Formale', informale:'Tono Informale', entusiasta:'Tono Entusiasta' };
+  const toneColors = { formale:'var(--text-dim)', informale:'var(--leaf-bright)', entusiasta:'var(--sun)' };
+
+  html += `<div class="preview-header">
+    <h2>Talking Points</h2>
+    <span class="timer">${state.duration} min &middot; ${toneLabels[state.tone]}</span>
+  </div>`;
+
+  html += `<div class="progress-strip">
+    <div class="progress-label">
+      <span>Progresso Progetto</span>
+      <span style="color:var(--leaf-bright);font-weight:600">31/76 task (41%)</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:41%"></div></div>
+  </div>`;
+
+  // ── APERTURA
+  const openers = {
+    formale: `Buongiorno a tutti. Vorrei fare il punto sullo stato di avanzamento del progetto Visione Sostenibile.`,
+    informale: `Ciao a tutti! Facciamo un veloce punto su dove siamo con Visione Sostenibile.`,
+    entusiasta: `Ragazzi, abbiamo fatto un lavoro incredibile! Vi racconto dove siamo arrivati con Visione Sostenibile.`,
+  };
+  html += sec('Apertura', '👋', [openers[state.tone]], false, '1 min');
+
+  // ── TEAM
+  if (state.areas.has('team')) {
+    const points = [];
+    points.push(`Il progetto sta avanzando grazie a un <strong>lavoro di squadra</strong> reale, dove ogni competenza si integra con le altre. ${T}`);
+
+    if (state.emphasisBarbara >= 2) {
+      points.push(`${B} ha costruito l'<strong>architettura narrativa</strong> del brand &mdash; il concept "Il Verde che Vive", 8 file di storytelling, seed content per ogni pagina, e il <strong>copy rewrite completo</strong> di 4 pagine principali. La voce del brand nasce dal suo lavoro.`);
+    } else if (state.emphasisBarbara === 1) {
+      points.push(`${B} ha definito la voce del brand con la narrativa "Il Verde che Vive" e riscritto il copy di 4 pagine.`);
+    }
+
+    if (state.emphasisGuglielmo >= 2) {
+      points.push(`${G} ha creato i <strong>template Stitch</strong> per il design system &mdash; ogni componente del sito parte dal suo lavoro visuale. La palette "High-Contrast Nature", i card rounded, lo spacing system, tutto nasce dai suoi mockup.`);
+    } else if (state.emphasisGuglielmo === 1) {
+      points.push(`${G} ha progettato i template Stitch e il design system visuale che guida tutti i componenti.`);
+    }
+
+    if (state.emphasisLuca >= 2) {
+      points.push(`${L} ha fatto l'<strong>implementazione full-stack</strong> &mdash; tradurre il design di Guglielmo e la narrativa di Barbara in codice funzionante, architettura backend con Convex, sistema di task tracking, SEO, quiz interattivo.`);
+    } else if (state.emphasisLuca === 1) {
+      points.push(`${L} ha curato l'implementazione tecnica e l'architettura del progetto.`);
+    }
+
+    if (state.emphasisBarbara >= 2 && state.emphasisGuglielmo >= 2 && state.emphasisLuca >= 2) {
+      points.push(`Il punto chiave: <strong>nessuno ha lavorato in isolamento</strong>. Il copy di Barbara guida il design di Guglielmo, che a sua volta definisce i vincoli tecnici per Luca. Un ciclo virtuoso. ${T}`);
+    }
+    html += sec('Lavoro di Squadra', '👥', points, true, state.duration >= 10 ? '2-3 min' : '1 min');
+  }
+
+  // ── DESIGN
+  if (state.areas.has('design')) {
+    const dp = [];
+    dp.push(`Design system <strong>BMAD "High-Contrast Nature"</strong> completamente implementato ${G}`);
+    dp.push(`Palette: Paper Canvas, Deep Forest, Leaf Green, Sun Accent &mdash; ogni colore ha un ruolo semantico`);
+    dp.push(`Font Walkway integrato, componenti standardizzati: Chameleon Header, Card system, PageHero uniforme ${G} ${L}`);
+    dp.push(`Design tokens di Stitch estratti e operativi in CSS &mdash; il bridge tra design e codice funziona ${G} ${L}`);
+    html += sec('Design & Visual Identity', '🎨', dp, state.areas.size <= 3, state.duration >= 10 ? '2 min' : '1 min');
+  }
+
+  // ── CONTENT
+  if (state.areas.has('content')) {
+    const cp = [];
+    cp.push(`<strong>Barbara Trifecta</strong> completata: 8 file narrativi + 4 seed content + copy rewrite di 4 pagine ${B}`);
+    cp.push(`Concept "Il Verde che Vive" &mdash; non e' solo un tagline, e' l'architettura narrativa dell'intero brand ${B}`);
+    cp.push(`Blog con 4+ articoli e progetti con 25+ case study, tutti migrati nel database ${L}`);
+    if (state.specials.has('barbara')) {
+      cp.push(`Il processo Barbara: prima la <strong>narrativa</strong> (chi siamo, cosa crediamo), poi il <strong>seed</strong> (contenuti tipo per ogni pagina), infine il <strong>rewrite</strong> (testo definitivo). Metodo replicabile per qualsiasi brand. ${B}`);
+    }
+    html += sec('Content & Storytelling', '✍️', cp, state.areas.size <= 3, state.duration >= 10 ? '2 min' : '1 min');
+  }
+
+  // ── TECH
+  if (state.areas.has('tech')) {
+    const tp = [];
+    tp.push(`Stack: <strong>Next.js 16 + Convex + Tailwind v4 + Framer Motion</strong> ${L}`);
+    tp.push(`Architettura dati dual: Convex come source of truth + fallback statico per resilienza ${L}`);
+    tp.push(`Quiz micro-funnel a 6 step con scorecard personalizzata &mdash; lead generation automatica ${L}`);
+    tp.push(`SEO completo: JSON-LD LocalBusiness, OpenGraph, sitemap dinamico, canonical URLs ${L}`);
+    if (state.specials.has('quiz')) {
+      tp.push(`Il quiz profila il visitatore in 6 domande, genera una <strong>scorecard</strong> con tipo di giardiniere, e cattura email/telefono. Micro-funnel integrato in homepage e pagine servizi. ${L}`);
+    }
+    if (state.specials.has('seo')) {
+      tp.push(`Schema.org su ogni tipo di pagina (LocalBusiness, BlogPosting, LocalService), OG image 1200x630 generata dinamicamente, cookie consent GDPR, robots.txt ottimizzato. ${L}`);
+    }
+    html += sec('Tech & Architettura', '⚙️', tp, state.areas.size <= 3, state.duration >= 10 ? '2 min' : '1 min');
+  }
+
+  // ── PROGRESS
+  if (state.areas.has('progress')) {
+    const pp = [];
+    pp.push(`<strong>31 task su 76 completate (41%)</strong> &mdash; rispetto alla settimana scorsa, +8 task chiuse`);
+    pp.push(`Foundation 100% ✅ &mdash; palette, font, texture, auth, schema leads`);
+    pp.push(`Core 80% ✅ &mdash; header, buttons, cards, spacing, PageHero`);
+    pp.push(`Content 100% ✅ &mdash; narrativa, seed, copy rewrite, font audit`);
+    pp.push(`SEO 100% ✅ &mdash; JSON-LD, OpenGraph, sitemap, GDPR consent`);
+    pp.push(`Dati migrati ✅ &mdash; blog e progetti ora su database Convex`);
+    pp.push(`Quiz funnel ✅ &mdash; operativo con lead capture`);
+    html += sec('Numeri & Progresso', '📊', pp, false, '1-2 min');
+  }
+
+  // ── NEXT STEPS
+  if (state.areas.has('next')) {
+    const np = [];
+    np.push(`<strong>Prossima wave</strong>: implementare i restanti componenti Stitch (SD2-SD9) dai template di ${G}`);
+    np.push(`Redesign pagine pubbliche (chi-siamo, servizi, blog, progetti) con nuovo design system ${G} ${L}`);
+    np.push(`Completare admin CRUD (al 70%, mancano mutations servizi/gallery) ${L}`);
+    np.push(`Polish finale: animazioni, micro-interazioni, performance ${L}`);
+    np.push(`Deploy pipeline: staging → production su Vercel + Convex Cloud ${L}`);
+    if (state.specials.has('bmad')) {
+      np.push(`Il design system BMAD prevede ancora: rounded-[30px] cards, neumorphic shadows su tutti i componenti, carousel FAQ accordion &mdash; tutto gia' tokenizzato, serve implementazione. ${G} ${L}`);
+    }
+    html += sec('Prossimi Passi', '🎯', np, false, '2 min');
+  }
+
+  // ── CHIUSURA
+  const closers = {
+    formale: `In sintesi: il progetto procede nei tempi previsti. Il lavoro di team sta producendo risultati concreti. Resto a disposizione per domande.`,
+    informale: `Insomma, siamo a buon punto! Il bello e' che ogni pezzo si incastra perche' lavoriamo bene insieme. Domande?`,
+    entusiasta: `Siamo al 41% e il meglio deve ancora venire! Quando il design di Guglielmo incontra il copy di Barbara e diventa codice... magia. Forza team!`,
+  };
+  html += sec('Chiusura', '🏁', [closers[state.tone]], false, '30 sec');
+
+  el.innerHTML = html;
+}
+
+function sec(title, icon, points, highlight, time) {
+  const cls = highlight ? 'tp-section highlight' : 'tp-section';
+  const timeTag = time ? `<span class="tag" style="background:var(--surface-2);color:var(--text-muted)">~${time}</span>` : '';
+  let body = '<ul>';
+  for (const p of points) body += `<li>${p}</li>`;
+  body += '</ul>';
+  return `<div class="${cls}">
+    <div class="tp-title">${icon} ${title} ${timeTag}</div>
+    <div class="tp-body">${body}</div>
+  </div>`;
+}
+
+function updatePrompt() {
+  const parts = [];
+
+  parts.push(`Genera talking points per una riunione di allineamento di ${state.duration} minuti sul progetto Visione Sostenibile (sito web per azienda di giardinaggio biodinamico a Torino, fondatore Andrea Giordano).`);
+
+  parts.push(`\nTono: ${state.tone}.`);
+
+  const areaNames = {
+    team: 'lavoro di squadra',
+    design: 'design e UX',
+    tech: 'tecnologia e architettura',
+    content: 'content e storytelling',
+    progress: 'numeri e progresso',
+    next: 'prossimi passi',
+  };
+  if (state.areas.size > 0) {
+    parts.push(`Aree da coprire: ${[...state.areas].map(a => areaNames[a]).join(', ')}.`);
+  }
+
+  const empLevels = ['ometti', 'menziona brevemente', 'enfatizza', 'rendi protagonista'];
+  parts.push(`\nTeam e contributi:`);
+  parts.push(`- Luca (tech lead): ${empLevels[state.emphasisLuca]}. Ha fatto implementazione full-stack, architettura Next.js 16 + Convex, quiz micro-funnel, SEO, orchestrazione task system.`);
+  parts.push(`- Barbara (storytelling): ${empLevels[state.emphasisBarbara]}. Ha creato l'architettura narrativa "Il Verde che Vive", 8 file narrativi, seed content, copy rewrite di 4 pagine (Barbara Trifecta).`);
+  parts.push(`- Guglielmo (designer): ${empLevels[state.emphasisGuglielmo]}. Ha creato i template Stitch, design system BMAD "High-Contrast Nature", palette colori, componenti visuali.`);
+
+  parts.push(`\nEnfatizza il lavoro di team: come ogni contributo si integra con gli altri (narrativa guida design, design guida implementazione).`);
+
+  parts.push(`\nProgresso: 31/76 task completate (41%). Foundation 100%, Core 80%, Content 100%, SEO 100%.`);
+
+  if (state.specials.size > 0) {
+    const specialNames = {
+      quiz: 'quiz micro-funnel a 6 step con scorecard e lead capture',
+      seo: 'SEO completo (JSON-LD, OpenGraph, sitemap, GDPR)',
+      bmad: 'design system BMAD e prossimi componenti Stitch',
+      barbara: 'processo Barbara Trifecta (narrativa → seed → rewrite)',
+    };
+    parts.push(`\nApprofondisci in particolare: ${[...state.specials].map(s => specialNames[s]).join('; ')}.`);
+  }
+
+  parts.push(`\nStruttura l'output come lista di talking points per sezione, con indicazione dei tempi per ogni blocco.`);
+
+  document.getElementById('prompt-output').textContent = parts.join('\n');
+}
+
+function updateAll() {
+  renderPreview();
+  updatePrompt();
+}
+
+function copyPrompt() {
+  const text = document.getElementById('prompt-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copiato!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copia Prompt'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Init
+updateAll();
+</script>
+</body>
+</html>
