@@ -16,6 +16,7 @@
   "dependencies": {
     "@huggingface/inference": "^4.13.12",
     "@tailwindcss/typography": "^0.5.19",
+    "@yattalo/task-system": "file:../../task-system-scaffold/packages/cli",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "convex": "^1.31.7",

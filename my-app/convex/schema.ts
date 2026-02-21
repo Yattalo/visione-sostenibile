@@ -80,7 +80,8 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_date", ["createdAt"])
-    .index("by_read", ["isRead"]),
+    .index("by_read", ["isRead"])
+    .index("by_email_date", ["email", "createdAt"]),
 
   shareEvents: defineTable({
     eventName: v.union(v.literal("share_clicked"), v.literal("share_landing")),
@@ -170,6 +171,72 @@ export default defineSchema({
     updatedAt: v.number(),
   })
     .index("by_key", ["key"]),
+
+  // ── Email system (templates + deliveries) ──
+  emailTemplates: defineTable({
+    key: v.string(),
+    name: v.string(),
+    category: v.string(), // transactional | newsletter | custom
+    subject: v.string(),
+    html: v.string(),
+    text: v.optional(v.string()),
+    isSystem: v.boolean(),
+    isActive: v.boolean(),
+    updatedAt: v.number(),
+    createdAt: v.number(),
+  })
+    .index("by_key", ["key"])
+    .index("by_category", ["category", "updatedAt"])
+    .index("by_updated", ["updatedAt"]),
+
+  emailDeliveries: defineTable({
+    to: v.string(),
+    subject: v.string(),
+    templateKey: v.optional(v.string()),
+    html: v.string(),
+    text: v.optional(v.string()),
+    status: v.string(), // queued | sent | failed | skipped
+    provider: v.optional(v.string()),
+    providerMessageId: v.optional(v.string()),
+    error: v.optional(v.string()),
+    relatedType: v.optional(v.string()), // contactSubmission | lead | crmContact
+    relatedId: v.optional(v.string()),
+    createdBy: v.optional(v.string()),
+    createdAt: v.number(),
+    sentAt: v.optional(v.number()),
+  })
+    .index("by_date", ["createdAt"])
+    .index("by_to_date", ["to", "createdAt"])
+    .index("by_status_date", ["status", "createdAt"]),
+
+  // ── Basic CRM ──
+  crmContacts: defineTable({
+    name: v.string(),
+    email: v.string(),
+    phone: v.optional(v.string()),
+    source: v.string(), // contact_form | quiz | manual
+    status: v.string(), // new | contacted | qualified | archived
+    tags: v.array(v.string()),
+    notes: v.optional(v.string()),
+    lastInteractionAt: v.number(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_status", ["status", "lastInteractionAt"])
+    .index("by_last_interaction", ["lastInteractionAt"]),
+
+  crmActivities: defineTable({
+    contactId: v.id("crmContacts"),
+    type: v.string(), // contact_form | quiz_completion | email_sent | note
+    title: v.string(),
+    description: v.optional(v.string()),
+    payload: v.optional(v.string()), // json string
+    createdBy: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_contact_date", ["contactId", "createdAt"])
+    .index("by_type_date", ["type", "createdAt"]),
 
   // ── Lead Magnet / Micro-funnel ──
   leads: defineTable({

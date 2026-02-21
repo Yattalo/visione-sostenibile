@@ -1,5 +1,6 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 
 function generateScorecardId(): string {
   const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -8,6 +9,29 @@ function generateScorecardId(): string {
     id += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return id;
+}
+
+function computeProfileFromScore(scores: number[]): string {
+  const buckets: Record<string, number> = {
+    Contemplativo: 0,
+    Sostenibile: 0,
+    Familiare: 0,
+    Rappresentativo: 0,
+  };
+
+  const map: Record<number, keyof typeof buckets> = {
+    1: "Contemplativo",
+    2: "Sostenibile",
+    3: "Familiare",
+    4: "Rappresentativo",
+  };
+
+  for (const score of scores) {
+    const profile = map[score];
+    if (profile) buckets[profile] += 1;
+  }
+
+  return Object.entries(buckets).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "Sostenibile";
 }
 
 // Submit quiz lead (public — micro-funnel completion)
@@ -27,12 +51,32 @@ export const submit = mutation({
   },
   handler: async (ctx, args) => {
     const scorecardId = generateScorecardId();
-    await ctx.db.insert("leads", {
+    const resultProfile = computeProfileFromScore(args.quizAnswers.map((a) => a.score));
+    const leadId = await ctx.db.insert("leads", {
       ...args,
       scorecardId,
       createdAt: Date.now(),
       isContacted: false,
     });
+
+    await ctx.scheduler.runAfter(0, internal.crm.upsertFromQuizLead, {
+      leadId: String(leadId),
+      scorecardId,
+      name: args.name,
+      email: args.email,
+      phone: args.phone,
+      resultProfile,
+    });
+
+    await ctx.scheduler.runAfter(0, internal.emails.sendQuizNotifications, {
+      leadId: String(leadId),
+      scorecardId,
+      name: args.name,
+      email: args.email,
+      phone: args.phone,
+      resultProfile,
+    });
+
     return { scorecardId };
   },
 });

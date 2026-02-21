@@ -177,6 +177,7 @@ export const getStats = query({
   },
 });
 
+
 export const checkDependencies = query({
   args: { taskId: v.string(), projectId: v.optional(v.string()) },
   handler: async (ctx, { taskId, projectId }) => {
@@ -381,5 +382,70 @@ export const addCommit = mutation({
     }];
     await ctx.db.patch(task._id, { commits, updatedAt: Date.now() });
     await checkAgentOpsTriggers(ctx, scope, "commit", { taskId: args.taskId, agent: task.agent, priority: task.priority });
+  },
+});
+
+export const projects = query({
+  handler: async (ctx) => {
+    const all = await ctx.db.query(TABLE).collect();
+    return [...new Set(all.map((t) => t.projectId).filter(Boolean))].sort();
+  },
+});
+
+export const stats = query({
+  args: { projectId: v.optional(v.string()) },
+  handler: async (ctx, { projectId }) => {
+    const scope = resolveProjectId(projectId);
+    const all = await ctx.db.query(TABLE).withIndex("by_projectId", (q) => q.eq("projectId", scope)).collect();
+    const byStatus: Record<string, number> = {};
+    const byAgent: Record<string, number> = {};
+    let done = 0;
+    for (const t of all) {
+      byStatus[t.status] = (byStatus[t.status] ?? 0) + 1;
+      byAgent[t.agent] = (byAgent[t.agent] ?? 0) + 1;
+      if (t.status === "done") done++;
+    }
+    return { total: all.length, byStatus, byAgent, done };
+  },
+});
+
+export const getByTaskId = query({
+  args: { taskId: v.string(), projectId: v.optional(v.string()) },
+  handler: async (ctx, { taskId, projectId }) => {
+    const scope = resolveProjectId(projectId);
+    return await ctx.db.query(TABLE).withIndex("by_project_taskId", (q) => q.eq("projectId", scope).eq("taskId", taskId)).unique();
+  },
+});
+
+export const updateNotes = mutation({
+  args: { taskId: v.string(), notes: v.string(), projectId: v.optional(v.string()) },
+  handler: async (ctx, { taskId, notes, projectId }) => {
+    const scope = resolveProjectId(projectId);
+    const task = await ctx.db.query(TABLE).withIndex("by_project_taskId", (q) => q.eq("projectId", scope).eq("taskId", taskId)).unique();
+    if (!task) throw new Error(`Task ${taskId} not found`);
+    await ctx.db.patch(task._id, { notes, updatedAt: Date.now() });
+  },
+});
+
+export const updateStatus = mutation({
+  args: { taskId: v.string(), newStatus: v.string(), note: v.optional(v.string()), agent: v.optional(v.string()), projectId: v.optional(v.string()) },
+  handler: async (ctx, { taskId, newStatus, note, agent, projectId }) => {
+    const scope = resolveProjectId(projectId);
+    const task = await ctx.db.query(TABLE).withIndex("by_project_taskId", (q) => q.eq("projectId", scope).eq("taskId", taskId)).unique();
+    if (!task) throw new Error(`Task ${taskId} not found`);
+    const now = Date.now();
+    const history = [...(task.statusHistory ?? []), { status: newStatus, timestamp: now, note, agent }];
+    const patch: Record<string, unknown> = { status: newStatus, statusHistory: history, updatedAt: now };
+    if (newStatus === "in_progress" && !task.startedAt) patch.startedAt = now;
+    if (newStatus === "done") patch.completedAt = now;
+    await ctx.db.patch(task._id, patch);
+    if (newStatus === "done") {
+      const all = await ctx.db.query(TABLE).withIndex("by_projectId", (q) => q.eq("projectId", scope)).collect();
+      for (const t of all) {
+        if (t.status !== "blocked" || !t.dependencies?.includes(taskId)) continue;
+        const allMet = t.dependencies.every((d) => d === taskId || all.find((x) => x.taskId === d)?.status === "done");
+        if (allMet) await ctx.db.patch(t._id, { status: "todo", updatedAt: now });
+      }
+    }
   },
 });

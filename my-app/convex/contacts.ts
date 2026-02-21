@@ -1,5 +1,6 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 
 // Submit contact form
 export const submit = mutation({
@@ -12,12 +13,22 @@ export const submit = mutation({
     serviceInterest: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.insert("contactSubmissions", {
+    const submissionId = await ctx.db.insert("contactSubmissions", {
       ...args,
       isRead: false,
       isReplied: false,
       createdAt: Date.now(),
     });
+
+    const payload = {
+      ...args,
+      submissionId: String(submissionId),
+    };
+
+    await ctx.scheduler.runAfter(0, internal.crm.upsertFromContactSubmission, payload);
+    await ctx.scheduler.runAfter(0, internal.emails.sendContactFormNotifications, payload);
+
+    return submissionId;
   },
 });
 
