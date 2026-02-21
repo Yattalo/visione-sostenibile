@@ -75,6 +75,36 @@ const serviceSubtitles: Record<string, string> = {
   "rigenerazione-terreni": "Equilibrio naturale",
 };
 
+const blogArticlesBySlug: Record<string, { title: string; slug: string }> = {
+  "come-mantenere-giardino-autunno": {
+    slug: "come-mantenere-giardino-autunno",
+    title: "Come Mantenere il Giardino in Autunno: Guida Completa",
+  },
+  "tendenze-giardini-2026": {
+    slug: "tendenze-giardini-2026",
+    title: "Tendenze Giardini 2026: Le Novita del Verde",
+  },
+  "piante-pendio": {
+    slug: "piante-pendio",
+    title: "Le Migliori Piante per Terreni in Pendio",
+  },
+};
+
+const relatedBlogSlugsByService: Record<string, string[]> = {
+  "progettazione-giardini": ["tendenze-giardini-2026"],
+  "realizzazione-giardini": ["tendenze-giardini-2026"],
+  manutenzioni: ["come-mantenere-giardino-autunno"],
+  potature: ["come-mantenere-giardino-autunno"],
+  "rigenerazione-terreni": ["piante-pendio"],
+  "scelta-piante": ["piante-pendio"],
+  "trattamenti-piante": ["come-mantenere-giardino-autunno"],
+  "impianti-irrigazione": ["tendenze-giardini-2026"],
+  "camminamenti-pietra": ["tendenze-giardini-2026"],
+  "illuminazione-esterni": ["tendenze-giardini-2026"],
+  "arredamento-esterni": ["tendenze-giardini-2026"],
+  "ingegneria-naturalistica": ["piante-pendio"],
+};
+
 const serviceContents: Record<string, ServiceContent> = {
   "progettazione-giardini": {
     quickAnswer:
@@ -582,6 +612,43 @@ function FaqAccordion({ content }: { content: ServiceContent }) {
   );
 }
 
+function RelatedBlogSection({ serviceSlug }: { serviceSlug: string }) {
+  const relatedBlogPosts = (relatedBlogSlugsByService[serviceSlug] ?? [])
+    .map((slug) => blogArticlesBySlug[slug])
+    .filter(Boolean);
+
+  if (relatedBlogPosts.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="py-24 bg-paper-100">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+        <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-10 leading-tight">
+          Approfondisci nel blog
+        </h2>
+        <div className="grid gap-5 md:grid-cols-2">
+          {relatedBlogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group rounded-2xl border border-paper-300 bg-white px-6 py-5 hover:border-leaf-400 hover:shadow-soft transition-all"
+            >
+              <p className="font-display text-2xl text-forest-950 group-hover:text-leaf-700 transition-colors mb-3">
+                {post.title}
+              </p>
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-leaf-700">
+                Leggi articolo
+                <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PrevNextNav({
   prevService,
   nextService,
@@ -867,7 +934,10 @@ export default function ServiceDetailPage() {
       {/* Section 6: FAQ Accordion */}
       <FaqAccordion content={content} />
 
-      {/* Section 7: CTA (kept as-is) */}
+      {/* Section 7: Blog internal links */}
+      <RelatedBlogSection serviceSlug={service.slug} />
+
+      {/* Section 8: CTA (kept as-is) */}
       <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">
         <div className="absolute inset-0">
           <div

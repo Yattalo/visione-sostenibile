@@ -173,6 +173,30 @@ const templateLabels: Record<TemplateVariant, string> = {
   3: "Template Checklist",
 };
 
+const serviceLinksByPostSlug: Record<
+  string,
+  { href: string; label: string; summary: string }
+> = {
+  "come-mantenere-giardino-autunno": {
+    href: "/servizi/manutenzioni",
+    label: "Manutenzione Giardini",
+    summary:
+      "Per applicare il piano stagionale in modo continuativo, scopri il nostro servizio di manutenzione programmata.",
+  },
+  "tendenze-giardini-2026": {
+    href: "/servizi/progettazione-giardini",
+    label: "Progettazione Giardini",
+    summary:
+      "Vuoi tradurre i trend 2026 in un progetto concreto? Parti da una progettazione su misura con metodo biodinamico.",
+  },
+  "piante-pendio": {
+    href: "/servizi/rigenerazione-terreni",
+    label: "Rigenerazione Terreni",
+    summary:
+      "Per stabilizzare pendii e migliorare il suolo nel tempo, approfondisci il servizio di rigenerazione terreni.",
+  },
+};
+
 function resolveTemplate(
   value: string | string[] | undefined,
   fallbackIndex: number
@@ -338,6 +362,7 @@ export function BlogPostClient({
   const resolvedTemplate = resolveTemplate(template, postIndex);
 
   const quickAnswer = quickAnswers[slug] ?? post.excerpt;
+  const relatedService = serviceLinksByPostSlug[slug];
   const steps = articleSteps[slug] ?? [
     "Analizza il contesto del giardino.",
     "Definisci obiettivi e priorita.",
@@ -609,6 +634,24 @@ export function BlogPostClient({
           </div>
         </div>
       </section>
+
+      {relatedService && (
+        <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-16">
+          <div className="bg-paper-100 rounded-2xl border border-paper-300 p-6 lg:p-8">
+            <h2 className="font-display text-3xl text-forest-950 mb-4">
+              Approfondisci con un servizio dedicato
+            </h2>
+            <p className="text-forest-800 leading-relaxed mb-6">{relatedService.summary}</p>
+            <Link
+              href={relatedService.href}
+              className="inline-flex items-center gap-2 text-leaf-700 font-sans text-sm uppercase tracking-wide hover:text-leaf-600 transition-colors"
+            >
+              Scopri {relatedService.label}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </section>
+      )}
 
       {relatedPosts && relatedPosts.length > 0 && (
         <section className="border-t border-paper-300 bg-paper-50">
