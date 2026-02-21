@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getProjectBySlug } from "../../lib/progetti-data";
+import { buildMetadata } from "../../lib/seo-metadata";
 
 function toMetaDescription(description: string): string {
   if (description.length <= 155) {
@@ -18,17 +19,20 @@ export async function generateMetadata({
   const project = getProjectBySlug(slug);
 
   if (!project) {
-    return {
+    return buildMetadata({
       title: "Progetto non trovato | Visione Sostenibile",
       description:
         "Il progetto richiesto non e disponibile. Scopri il portfolio giardini di Visione Sostenibile.",
-    };
+      path: `/progetti/${slug}`,
+    });
   }
 
-  return {
+  return buildMetadata({
     title: `${project.title} | Progetti Visione Sostenibile`,
     description: toMetaDescription(project.description),
-  };
+    path: `/progetti/${slug}`,
+    image: project.thumbnail ?? project.hero_image ?? undefined,
+  });
 }
 
 export default function ProgettiDetailLayout({

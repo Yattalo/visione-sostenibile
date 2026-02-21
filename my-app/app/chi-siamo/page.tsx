@@ -13,10 +13,15 @@ import {
 import Link from "next/link";
 import { TeamSection } from "../components/TeamSection";
 import { pageSeo } from "../lib/seo-data";
+import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
-  title: pageSeo.chiSiamo.title,
-  description: pageSeo.chiSiamo.description,
+  ...buildMetadata({
+    title: pageSeo.chiSiamo.title,
+    description: pageSeo.chiSiamo.description,
+    path: "/chi-siamo",
+    image: "/images/chi-siamo/hero.jpg",
+  }),
 };
 
 const values = [

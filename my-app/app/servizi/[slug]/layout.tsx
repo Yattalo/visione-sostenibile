@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getServiceSeo } from "../../lib/seo-data";
-import { normalizeServiceSlug, staticServices } from "../../lib/static-data";
+import { buildMetadata } from "../../lib/seo-metadata";
+import { normalizeServiceSlug, serviceImages, staticServices } from "../../lib/static-data";
 
 export async function generateMetadata({
   params,
@@ -12,19 +13,22 @@ export async function generateMetadata({
   const service = staticServices.find((item) => item.slug === slug);
 
   if (!service) {
-    return {
+    return buildMetadata({
       title: "Servizio non trovato | Visione Sostenibile",
       description:
         "Il servizio richiesto non e disponibile. Esplora tutti i servizi di giardinaggio sostenibile di Visione Sostenibile.",
-    };
+      path: `/servizi/${rawSlug}`,
+    });
   }
 
   const seo = getServiceSeo(slug, service.title);
 
-  return {
+  return buildMetadata({
     title: seo.title,
     description: seo.description,
-  };
+    path: `/servizi/${slug}`,
+    image: serviceImages[slug],
+  });
 }
 
 export default function ServiceDetailLayout({

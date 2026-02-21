@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getBlogPost } from "../../lib/blog";
+import { buildMetadata } from "../../lib/seo-metadata";
 import { BlogPostClient } from "../BlogPostClient";
 
 export async function generateStaticParams() {
@@ -12,18 +14,26 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPost(slug);
 
   if (!post) {
-    return {};
+    return buildMetadata({
+      title: "Articolo non trovato | Blog Visione Sostenibile",
+      description:
+        "L'articolo richiesto non e disponibile. Esplora il blog di Visione Sostenibile per altri contenuti.",
+      path: `/blog/${slug}`,
+    });
   }
 
-  return {
+  return buildMetadata({
     title: `${post.title} | Blog Visione Sostenibile`,
     description: post.excerpt,
-  };
+    path: `/blog/${post.slug}`,
+    image: post.coverImage,
+    type: "article",
+  });
 }
 
 export default async function BlogPostPage({

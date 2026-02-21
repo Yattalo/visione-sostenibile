@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import { Shield, Mail, Phone, Lock, FileText, Database, Scale, Clock, UserCheck } from "lucide-react";
 import { Card, CardContent } from "../components/ui/Card";
 import { SlideUp, FadeIn } from "../components/animations";
+import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Visione Sostenibile",
-  description:
-    "Informativa sulla privacy e trattamento dei dati personali di Visione Sostenibile. Scopri come gestiamo i tuoi dati.",
+  ...buildMetadata({
+    title: "Privacy Policy | Visione Sostenibile",
+    description:
+      "Informativa sulla privacy e trattamento dei dati personali di Visione Sostenibile. Scopri come gestiamo i tuoi dati.",
+    path: "/privacy",
+  }),
 };
 
 const sections = [

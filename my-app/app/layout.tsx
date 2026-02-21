@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
 import { CookieConsent } from "./components/CookieConsent";
 import { pageSeo } from "./lib/seo-data";
+import { buildMetadata, SITE_URL } from "./lib/seo-metadata";
 import localFont from "next/font/local";
 
 const walkway = localFont({
@@ -36,8 +37,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: pageSeo.home.title,
-  description: pageSeo.home.description,
+  ...buildMetadata({
+    title: pageSeo.home.title,
+    description: pageSeo.home.description,
+    path: "/",
+    image: "/og-image.png",
+    type: "website",
+  }),
   keywords: [
     "giardini",
     "progettazione paesaggistica",
@@ -46,24 +52,7 @@ export const metadata: Metadata = {
     "Torino",
     "Piemonte",
   ],
-  metadataBase: new URL("https://www.visionesostenibile.it"),
-  openGraph: {
-    type: "website",
-    locale: "it_IT",
-    url: "https://www.visionesostenibile.it",
-    siteName: "Visione Sostenibile",
-    title: "Visione Sostenibile - Il Verde che Vive",
-    description:
-      "Progettazione e realizzazione di giardini straordinari.",
-    images: [
-      {
-        url: "/api/og",
-        width: 1200,
-        height: 630,
-        alt: "Visione Sostenibile - Giardini Biodinamici a Torino",
-      },
-    ],
-  },
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
   },

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Badge } from "../components/ui/Badge";
+import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
-  title: "Termini e Condizioni | Visione Sostenibile",
-  description:
-    "Termini e condizioni di utilizzo del sito Visione Sostenibile.",
+  ...buildMetadata({
+    title: "Termini e Condizioni | Visione Sostenibile",
+    description: "Termini e condizioni di utilizzo del sito Visione Sostenibile.",
+    path: "/termini",
+  }),
 };
 
 export default function TerminiPage() {

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { pageSeo } from "../lib/seo-data";
+import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
-  title: pageSeo.quiz.title,
-  description: pageSeo.quiz.description,
+  ...buildMetadata({
+    title: pageSeo.quiz.title,
+    description: pageSeo.quiz.description,
+    path: "/quiz",
+  }),
 };
 
 export default function QuizLayout({

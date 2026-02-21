@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { pageSeo } from "../lib/seo-data";
+import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
-  title: pageSeo.blog.title,
-  description: pageSeo.blog.description,
+  ...buildMetadata({
+    title: pageSeo.blog.title,
+    description: pageSeo.blog.description,
+    path: "/blog",
+    image: "/images/blog/tendenze-cover.png",
+  }),
 };
 
 export default function BlogLayout({
