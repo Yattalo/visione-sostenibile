@@ -853,7 +853,7 @@ export default function ServiceDetailPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+39061234567">
+            <a href="tel:+393714821825">
               <Button
                 size="lg"
                 className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8"
