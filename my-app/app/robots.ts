@@ -3,10 +3,9 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/admin/',
+      userAgent: "*",
+      allow: "/",
     },
-    sitemap: 'https://www.visionesostenibile.it/sitemap.xml',
+    sitemap: "https://www.visionesostenibile.it/sitemap.xml",
   };
 }
