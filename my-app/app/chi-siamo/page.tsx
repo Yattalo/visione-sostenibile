@@ -12,11 +12,11 @@ import {
 } from "../components/animations";
 import Link from "next/link";
 import { TeamSection } from "../components/TeamSection";
+import { pageSeo } from "../lib/seo-data";
 
 export const metadata: Metadata = {
-  title: "Chi Siamo | Visione Sostenibile",
-  description:
-    "Andrea Giordano: il giardiniere che ti spiega il perché. Un unico referente per progettazione, realizzazione e manutenzione di giardini sostenibili in Piemonte e Trentino.",
+  title: pageSeo.chiSiamo.title,
+  description: pageSeo.chiSiamo.description,
 };
 
 const values = [

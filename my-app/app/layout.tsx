@@ -5,6 +5,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
 import { CookieConsent } from "./components/CookieConsent";
+import { pageSeo } from "./lib/seo-data";
 import localFont from "next/font/local";
 
 const walkway = localFont({
@@ -35,12 +36,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: {
-    template: "%s | Visione Sostenibile",
-    default: "Visione Sostenibile - Il Verde che Vive",
-  },
-  description:
-    "Progettazione e realizzazione di giardini straordinari. Trasformiamo i tuoi spazi in opere d'arte vegetali.",
+  title: pageSeo.home.title,
+  description: pageSeo.home.description,
   keywords: [
     "giardini",
     "progettazione paesaggistica",
