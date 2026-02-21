@@ -1,0 +1,59 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "Visione Sostenibile" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Visione Sostenibile" [ref=e7]
+        - generic [ref=e8]:
+          - link "Home" [ref=e9] [cursor=pointer]:
+            - /url: /
+          - link "Chi Siamo" [ref=e10] [cursor=pointer]:
+            - /url: /chi-siamo
+          - link "Servizi" [ref=e11] [cursor=pointer]:
+            - /url: /servizi
+          - link "Progetti" [ref=e12] [cursor=pointer]:
+            - /url: /progetti
+          - link "Blog" [ref=e13] [cursor=pointer]:
+            - /url: /blog
+          - link "Qualità" [ref=e14] [cursor=pointer]:
+            - /url: /qualita
+          - link "Contatti" [ref=e15] [cursor=pointer]:
+            - /url: /contatti
+        - link "Preventivo" [ref=e17] [cursor=pointer]:
+          - /url: /contatti
+  - main [ref=e18]:
+    - generic [ref=e21]:
+      - img "VS" [ref=e22]
+      - paragraph [ref=e23]: Reindirizzamento...
+  - contentinfo [ref=e24]:
+    - generic [ref=e25]:
+      - img "Visione Sostenibile" [ref=e27]
+      - paragraph [ref=e28]: Creiamo atmosfere uniche per i vostri spazi esterni, unendo design, tecnologia e rispetto per la natura.
+      - generic [ref=e29]:
+        - link [ref=e30] [cursor=pointer]:
+          - /url: https://www.instagram.com/visionesostenibile
+          - img [ref=e31]
+        - link [ref=e34] [cursor=pointer]:
+          - /url: https://www.facebook.com/visionesostenibilegiardinieortisostenibili
+          - img [ref=e35]
+        - link [ref=e37] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/andrea-giordano-16810626a
+          - img [ref=e38]
+        - link [ref=e42] [cursor=pointer]:
+          - /url: https://www.youtube.com/@AndreaGiordano-vk8el
+          - img [ref=e43]
+      - generic [ref=e46]: © 2026 Visione Sostenibile. Tutti i diritti riservati.
+  - button "Open Next.js Dev Tools" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+  - alert [ref=e47]
+  - generic [ref=e58]:
+    - paragraph [ref=e59]:
+      - text: Utilizziamo cookie tecnici e di analisi per migliorare la tua esperienza. I cookie analitici (Google Analytics, Meta Pixel) vengono attivati solo con il tuo consenso.
+      - link "Privacy Policy" [ref=e60] [cursor=pointer]:
+        - /url: /privacy
+    - generic [ref=e61]:
+      - button "Accetta tutto" [ref=e62]:
+        - generic [ref=e63]: Accetta tutto
+      - button "Solo necessari" [ref=e64]:
+        - generic [ref=e65]: Solo necessari

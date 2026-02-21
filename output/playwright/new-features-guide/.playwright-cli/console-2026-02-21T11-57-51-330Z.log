@@ -1,0 +1,546 @@
+[     227ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function HomePage} serverProvidedParams={{...}}>
+                    <HomePage params={Promise} searchParams={Promise}>
+                      <div className="min-h-scre...">
+                        <script>
+                        <section>
+                        <PhilosophySection>
+                          <section>
+                          <section ref={{current:null}} className="relative" style={{height:"500vh"}}>
+                            <div className="sticky top...">
+                              <motion.div>
+                              <motion.div>
+                              <motion.div>
+                              <motion.div>
+                              <motion.div className={"absolute..."} style={{...}} animate={{scale:[...]}} ...>
+                                <div
++                                 className={"absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2\n          ..."}
+-                                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[..."
+                                  aria-hidden="true"
+                                  style={{backgroundColor:"rgba(203, ...",transform:"none"}}
+                                  ref={function useMotionRef.useCallback}
+                                >
+                              <div>
+                              <motion.div>
+                              <motion.div>
+                              <motion.div>
+                              <motion.div>
+                              ...
+                                <div className="grid lg:gr...">
+                                  <div className="relative">
+                                    <motion.span className={"absolute..."} animate={{opacity:0.03,y:0}} ...>
+                                      <span
++                                       className={"absolute -top-12 -left-2 md:-top-20 md:-left-6\n                 ..."}
+-                                       className="absolute -top-12 -left-2 md:-top-20 md:-left-6 font-display text-[8..."
+                                        aria-hidden="true"
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       01
+                                    <motion.span className={"relative..."} style={{color:"#cb..."}} ...>
+                                      <span
++                                       className={"relative font-sans text-xs md:text-sm\n                          ..."}
+-                                       className="relative font-sans text-xs md:text-sm tracking-[0.3em] uppercase mb..."
+                                        style={{color:"#cb6a56"}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
+                                    <motion.h3 className={"relative..."} animate={{opacity:1,y:0, ...}} ...>
+                                      <h3
++                                       className={"relative font-display text-6xl sm:text-7xl md:text-8xl\n         ..."}
+-                                       className="relative font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl ..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Terra
+                                    <motion.div>
+                                    <motion.p className={"relative..."} animate={{opacity:1,y:0}} ...>
+                                      <p
++                                       className={"relative font-body text-lg md:text-xl\n                          ..."}
+-                                       className="relative font-body text-lg md:text-xl text-white/60 leading-relaxed..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Rigeneriamo il suolo con pratiche biodinamiche che aumentano fertilita, vita mi...
+                                  ...
+                                    <div className="relative" style={{}} ref={function useMotionRef.useCallback}>
+                                      <motion.div>
+                                      <motion.div>
+                                      <motion.div className={"relative..."} style={{...}} animate={{rotate:[...], ...}} ...>
+                                        <div
++                                         className={"relative w-40 h-40 md:w-52 md:h-52 rounded-full\n              ..."}
+-                                         className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border flex items..."
+                                          style={{borderColor:"#cb6a5625",backgroundColor:"#cb6a5608"}}
+                                          ref={function useMotionRef.useCallback}
+                                        >
+                              ...
+                                <div className="grid lg:gr...">
+                                  <div className="relative">
+                                    <motion.span className={"absolute..."} animate={{opacity:0,y:40}} ...>
+                                      <span
++                                       className={"absolute -top-12 -left-2 md:-top-20 md:-left-6\n                 ..."}
+-                                       className="absolute -top-12 -left-2 md:-top-20 md:-left-6 font-display text-[8..."
+                                        aria-hidden="true"
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       02
+                                    <motion.span className={"relative..."} style={{color:"#95..."}} ...>
+                                      <span
++                                       className={"relative font-sans text-xs md:text-sm\n                          ..."}
+-                                       className="relative font-sans text-xs md:text-sm tracking-[0.3em] uppercase mb..."
+                                        style={{color:"#95a668"}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
+                                    <motion.h3 className={"relative..."} animate={{opacity:0,y:50, ...}} ...>
+                                      <h3
++                                       className={"relative font-display text-6xl sm:text-7xl md:text-8xl\n         ..."}
+-                                       className="relative font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl ..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Acqua
+                                    <motion.div>
+                                    <motion.p className={"relative..."} animate={{opacity:0,y:25}} ...>
+                                      <p
++                                       className={"relative font-body text-lg md:text-xl\n                          ..."}
+-                                       className="relative font-body text-lg md:text-xl text-white/60 leading-relaxed..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       {"Gestione idrica efficiente per ridurre sprechi e mantenere il verde sano d..."}
+                                  ...
+                                    <div className="relative" style={{}} ref={function useMotionRef.useCallback}>
+                                      <motion.div>
+                                      <motion.div>
+                                      <motion.div className={"relative..."} style={{...}} ...>
+                                        <div
++                                         className={"relative w-40 h-40 md:w-52 md:h-52 rounded-full\n              ..."}
+-                                         className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border flex items..."
+                                          style={{borderColor:"#95a66825",backgroundColor:"#95a66808"}}
+                                          ref={function useMotionRef.useCallback}
+                                        >
+                              ...
+                                <div className="grid lg:gr...">
+                                  <div className="relative">
+                                    <motion.span className={"absolute..."} animate={{opacity:0,y:40}} ...>
+                                      <span
++                                       className={"absolute -top-12 -left-2 md:-top-20 md:-left-6\n                 ..."}
+-                                       className="absolute -top-12 -left-2 md:-top-20 md:-left-6 font-display text-[8..."
+                                        aria-hidden="true"
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       03
+                                    <motion.span className={"relative..."} style={{color:"#e4..."}} ...>
+                                      <span
++                                       className={"relative font-sans text-xs md:text-sm\n                          ..."}
+-                                       className="relative font-sans text-xs md:text-sm tracking-[0.3em] uppercase mb..."
+                                        style={{color:"#e4d4b8"}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
+                                    <motion.h3 className={"relative..."} animate={{opacity:0,y:50, ...}} ...>
+                                      <h3
++                                       className={"relative font-display text-6xl sm:text-7xl md:text-8xl\n         ..."}
+-                                       className="relative font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl ..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Aria
+                                    <motion.div>
+                                    <motion.p className={"relative..."} animate={{opacity:0,y:25}} ...>
+                                      <p
++                                       className={"relative font-body text-lg md:text-xl\n                          ..."}
+-                                       className="relative font-body text-lg md:text-xl text-white/60 leading-relaxed..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Progettiamo spazi aperti e vitali che migliorano il microclima e il benessere d...
+                                  ...
+                                    <div className="relative" style={{}} ref={function useMotionRef.useCallback}>
+                                      <motion.div>
+                                      <motion.div>
+                                      <motion.div className={"relative..."} style={{...}} ...>
+                                        <div
++                                         className={"relative w-40 h-40 md:w-52 md:h-52 rounded-full\n              ..."}
+-                                         className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border flex items..."
+                                          style={{borderColor:"#e4d4b825",backgroundColor:"#e4d4b808"}}
+                                          ref={function useMotionRef.useCallback}
+                                        >
+                              ...
+                                <div className="grid lg:gr...">
+                                  <div className="relative">
+                                    <motion.span className={"absolute..."} animate={{opacity:0,y:40}} ...>
+                                      <span
++                                       className={"absolute -top-12 -left-2 md:-top-20 md:-left-6\n                 ..."}
+-                                       className="absolute -top-12 -left-2 md:-top-20 md:-left-6 font-display text-[8..."
+                                        aria-hidden="true"
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       04
+                                    <motion.span className={"relative..."} style={{color:"#d9..."}} ...>
+                                      <span
++                                       className={"relative font-sans text-xs md:text-sm\n                          ..."}
+-                                       className="relative font-sans text-xs md:text-sm tracking-[0.3em] uppercase mb..."
+                                        style={{color:"#d98876"}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
+                                    <motion.h3 className={"relative..."} animate={{opacity:0,y:50, ...}} ...>
+                                      <h3
++                                       className={"relative font-display text-6xl sm:text-7xl md:text-8xl\n         ..."}
+-                                       className="relative font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl ..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Fuoco
+                                    <motion.div>
+                                    <motion.p className={"relative..."} animate={{opacity:0,y:25}} ...>
+                                      <p
++                                       className={"relative font-body text-lg md:text-xl\n                          ..."}
+-                                       className="relative font-body text-lg md:text-xl text-white/60 leading-relaxed..."
+                                        style={{}}
+                                        ref={function useMotionRef.useCallback}
+                                      >
++                                       Luce, energia e cicli naturali guidano ogni scelta progettuale per un equilibri...
+                                  ...
+                                    <div className="relative" style={{}} ref={function useMotionRef.useCallback}>
+                                      <motion.div>
+                                      <motion.div>
+                                      <motion.div className={"relative..."} style={{...}} ...>
+                                        <div
++                                         className={"relative w-40 h-40 md:w-52 md:h-52 rounded-full\n              ..."}
+-                                         className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border flex items..."
+                                          style={{borderColor:"#d9887625",backgroundColor:"#d9887608"}}
+                                          ref={function useMotionRef.useCallback}
+                                        >
+                              <div
++                               className={"absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20\n              ..."}
+-                               className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap..."
+                              >
+                                <div className="relative g...">
+                                  <span
++                                   className={"absolute right-7 font-sans text-[10px] md:text-xs\n                  ..."}
+-                                   className="absolute right-7 font-sans text-[10px] md:text-xs tracking-wider upperc..."
+                                  >
++                                   Terra
+                                  ...
+                                <div className="relative g...">
+                                  <span
++                                   className={"absolute right-7 font-sans text-[10px] md:text-xs\n                  ..."}
+-                                   className="absolute right-7 font-sans text-[10px] md:text-xs tracking-wider upperc..."
+                                  >
++                                   Acqua
+                                  ...
+                                <div className="relative g...">
+                                  <span
++                                   className={"absolute right-7 font-sans text-[10px] md:text-xs\n                  ..."}
+-                                   className="absolute right-7 font-sans text-[10px] md:text-xs tracking-wider upperc..."
+                                  >
++                                   Aria
+                                  ...
+                                <div className="relative g...">
+                                  <span
++                                   className={"absolute right-7 font-sans text-[10px] md:text-xs\n                  ..."}
+-                                   className="absolute right-7 font-sans text-[10px] md:text-xs tracking-wider upperc..."
+                                  >
++                                   Fuoco
+                                  ...
+                              <motion.div className={"absolute..."} animate={{opacity:0.6, ...}} ...>
+                                <div
++                                 className={"absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20\n        ..."}
+-                                 className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-c..."
+                                  style={{}}
+                                  ref={function useMotionRef.useCallback}
+                                >
+                        <section className="py-24 md:p...">
+                          <div>
+                          <div className="max-w-7xl ...">
+                            <motion.div>
+                            <div>
+                            <motion.div>
+                            <div className="grid grid-...">
+                              ...
+                                <LinkComponent href="/servizi/p..." className="block h-fu...">
+                                  <a className="block h-fu..." ref={function} onClick={function onClick} ...>
+                                    <article
++                                     className={"relative flex h-full flex-col overflow-hidden rounded-3xl border bo..."}
+-                                     className="relative flex h-full flex-col overflow-hidden rounded-3xl border bord..."
+                                    >
+                                      <div className="relative a...">
+                                        <img>
+                                        <div>
+                                        <div>
+                                        <span>
+                                        <span
++                                         className={"absolute right-5 top-5 rounded-full border border-paper-50/20 b..."}
+-                                         className="absolute right-5 top-5 rounded-full border border-paper-50/20 bg-..."
+                                        >
++                                         Progettazione
+                                      <div className="flex flex-...">
+                                        <h3
++                                         className={"font-display text-[22px] leading-tight text-forest-950 transiti..."}
+-                                         className="font-display text-[22px] leading-tight text-forest-950 transition..."
+                                        >
++                                         Progettazione Giardini
+                                        <p>
+                                        <div className="mt-6 flex ...">
+                                          <span
++                                           className={"font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-6..."}
+-                                           className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600..."
+                                          >
++                                           Scopri il servizio
+                                          <span
++                                           className={"flex h-8 w-8 items-center justify-center rounded-full bg-pape..."}
+-                                           className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-..."
+                                          >
+                                            <ArrowRight className={"h-3.5 w-..."}>
+                                              <svg
+                                                ref={null}
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={24}
+                                                height={24}
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
++                                               className={"lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 trans..."}
+-                                               className="lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 transit..."
+                                                aria-hidden="true"
+                                              >
+                              ...
+                                <LinkComponent href="/servizi/r..." className="block h-fu...">
+                                  <a className="block h-fu..." ref={function} onClick={function onClick} ...>
+                                    <article
++                                     className={"relative flex h-full flex-col overflow-hidden rounded-3xl border bo..."}
+-                                     className="relative flex h-full flex-col overflow-hidden rounded-3xl border bord..."
+                                    >
+                                      <div className="relative a...">
+                                        <img>
+                                        <div>
+                                        <div>
+                                        <span>
+                                        <span
++                                         className={"absolute right-5 top-5 rounded-full border border-paper-50/20 b..."}
+-                                         className="absolute right-5 top-5 rounded-full border border-paper-50/20 bg-..."
+                                        >
++                                         Realizzazione
+                                      <div className="flex flex-...">
+                                        <h3
++                                         className={"font-display text-[22px] leading-tight text-forest-950 transiti..."}
+-                                         className="font-display text-[22px] leading-tight text-forest-950 transition..."
+                                        >
++                                         Realizzazione Giardini
+                                        <p>
+                                        <div className="mt-6 flex ...">
+                                          <span
++                                           className={"font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-6..."}
+-                                           className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600..."
+                                          >
++                                           Scopri il servizio
+                                          <span
++                                           className={"flex h-8 w-8 items-center justify-center rounded-full bg-pape..."}
+-                                           className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-..."
+                                          >
+                                            <ArrowRight className={"h-3.5 w-..."}>
+                                              <svg
+                                                ref={null}
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={24}
+                                                height={24}
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
++                                               className={"lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 trans..."}
+-                                               className="lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 transit..."
+                                                aria-hidden="true"
+                                              >
+                              ...
+                                <LinkComponent href="/servizi/p..." className="block h-fu...">
+                                  <a className="block h-fu..." ref={function} onClick={function onClick} ...>
+                                    <article
++                                     className={"relative flex h-full flex-col overflow-hidden rounded-3xl border bo..."}
+-                                     className="relative flex h-full flex-col overflow-hidden rounded-3xl border bord..."
+                                    >
+                                      <div className="relative a...">
+                                        <img>
+                                        <div>
+                                        <div>
+                                        <span>
+                                        <span
++                                         className={"absolute right-5 top-5 rounded-full border border-paper-50/20 b..."}
+-                                         className="absolute right-5 top-5 rounded-full border border-paper-50/20 bg-..."
+                                        >
++                                         Potature
+                                      <div className="flex flex-...">
+                                        <h3
++                                         className={"font-display text-[22px] leading-tight text-forest-950 transiti..."}
+-                                         className="font-display text-[22px] leading-tight text-forest-950 transition..."
+                                        >
++                                         Potature e Abbattimenti in Quota
+                                        <p>
+                                        <div className="mt-6 flex ...">
+                                          <span
++                                           className={"font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-6..."}
+-                                           className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600..."
+                                          >
++                                           Scopri il servizio
+                                          <span
++                                           className={"flex h-8 w-8 items-center justify-center rounded-full bg-pape..."}
+-                                           className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-..."
+                                          >
+                                            <ArrowRight className={"h-3.5 w-..."}>
+                                              <svg
+                                                ref={null}
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={24}
+                                                height={24}
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
++                                               className={"lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 trans..."}
+-                                               className="lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 transit..."
+                                                aria-hidden="true"
+                                              >
+                              ...
+                                <LinkComponent href="/servizi/m..." className="block h-fu...">
+                                  <a className="block h-fu..." ref={function} onClick={function onClick} ...>
+                                    <article
++                                     className={"relative flex h-full flex-col overflow-hidden rounded-3xl border bo..."}
+-                                     className="relative flex h-full flex-col overflow-hidden rounded-3xl border bord..."
+                                    >
+                                      <div className="relative a...">
+                                        <img>
+                                        <div>
+                                        <div>
+                                        <span>
+                                        <span
++                                         className={"absolute right-5 top-5 rounded-full border border-paper-50/20 b..."}
+-                                         className="absolute right-5 top-5 rounded-full border border-paper-50/20 bg-..."
+                                        >
++                                         Manutenzione
+                                      <div className="flex flex-...">
+                                        <h3
++                                         className={"font-display text-[22px] leading-tight text-forest-950 transiti..."}
+-                                         className="font-display text-[22px] leading-tight text-forest-950 transition..."
+                                        >
++                                         Manutenzioni
+                                        <p>
+                                        <div className="mt-6 flex ...">
+                                          <span
++                                           className={"font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-6..."}
+-                                           className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600..."
+                                          >
++                                           Scopri il servizio
+                                          <span
++                                           className={"flex h-8 w-8 items-center justify-center rounded-full bg-pape..."}
+-                                           className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-..."
+                                          >
+                                            <ArrowRight className={"h-3.5 w-..."}>
+                                              <svg
+                                                ref={null}
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={24}
+                                                height={24}
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
++                                               className={"lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 trans..."}
+-                                               className="lucide lucide-arrow-right h-3.5 w-3.5 text-leaf-700 transit..."
+                                                aria-hidden="true"
+                                              >
+                            ...
+                              <div className="mt-16 flex..." style={{opacity:0, ...}} ...>
+                                <LinkComponent href="/servizi" className={"border-2..."}>
+                                  <a
++                                   className={"border-2 border-leaf-600 text-leaf-700 hover:bg-leaf-700 hover:text-w..."}
+-                                   className="border-2 border-leaf-600 text-leaf-700 hover:bg-leaf-700 hover:text-whi..."
+                                    ref={function}
+                                    onClick={function onClick}
+                                    onMouseEnter={function onMouseEnter}
+                                    onTouchStart={function onTouchStart}
+                                    href="/servizi"
+                                  >
++                                   Tutti i Servizi
+                        <section>
+                        ...
+                          <div style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                            <div>
+                            <QuizMiniPreview>
+                              <div className="mx-auto w-...">
+                                <div className="relative o...">
+                                  <div>
+                                  <p>
+                                  <div className="relative g...">
+                                    <button
+                                      onClick={function QuizMiniPreview[handleOptionClick]}
+                                      aria-label={"Seleziona \"Un luogo di pace e contemplazione\" e inizia il quiz"}
++                                     className={"group relative overflow-hidden rounded-[24px] border border-paper-3..."}
+-                                     className="group relative overflow-hidden rounded-[24px] border border-paper-300..."
+                                    >
+                                    <button
+                                      onClick={function QuizMiniPreview[handleOptionClick]}
+                                      aria-label={"Seleziona \"Un ecosistema sostenibile\" e inizia il quiz"}
++                                     className={"group relative overflow-hidden rounded-[24px] border border-paper-3..."}
+-                                     className="group relative overflow-hidden rounded-[24px] border border-paper-300..."
+                                    >
+                                    <button
+                                      onClick={function QuizMiniPreview[handleOptionClick]}
+                                      aria-label={"Seleziona \"Uno spazio per la famiglia\" e inizia il quiz"}
++                                     className={"group relative overflow-hidden rounded-[24px] border border-paper-3..."}
+-                                     className="group relative overflow-hidden rounded-[24px] border border-paper-300..."
+                                    >
+                                    <button
+                                      onClick={function QuizMiniPreview[handleOptionClick]}
+                                      aria-label={"Seleziona \"Un biglietto da visita elegante\" e inizia il quiz"}
++                                     className={"group relative overflow-hidden rounded-[24px] border border-paper-3..."}
+-                                     className="group relative overflow-hidden rounded-[24px] border border-paper-300..."
+                                    >
+                                  ...
+                            ...
+                              <div className="flex items...">
+                                <LinkComponent href="/quiz" className={"group in..."}>
+                                  <a
++                                   className={"group inline-flex items-center gap-2.5 rounded-full border border-lea..."}
+-                                   className="group inline-flex items-center gap-2.5 rounded-full border border-leaf-..."
+                                    ref={function}
+                                    onClick={function onClick}
+                                    onMouseEnter={function onMouseEnter}
+                                    onTouchStart={function onTouchStart}
+                                    href="/quiz"
+                                  >
+                        ...
+                ...
+              ...
+ @ http://localhost:3005/_next/static/chunks/5e669_next_dist_96ff6868._.js:3127
+[     239ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ http://localhost:3005/_next/static/chunks/5e669_next_dist_96ff6868._.js:2297

@@ -1,0 +1,310 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "Visione Sostenibile" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Visione Sostenibile" [ref=e7]
+        - generic [ref=e8]:
+          - link "Home" [ref=e9] [cursor=pointer]:
+            - /url: /
+          - link "Chi Siamo" [ref=e10] [cursor=pointer]:
+            - /url: /chi-siamo
+          - link "Servizi" [ref=e11] [cursor=pointer]:
+            - /url: /servizi
+          - link "Progetti" [ref=e12] [cursor=pointer]:
+            - /url: /progetti
+          - link "Blog" [ref=e13] [cursor=pointer]:
+            - /url: /blog
+          - link "Qualità" [ref=e14] [cursor=pointer]:
+            - /url: /qualita
+          - link "Contatti" [ref=e15] [cursor=pointer]:
+            - /url: /contatti
+        - link "Preventivo" [ref=e17] [cursor=pointer]:
+          - /url: /contatti
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]: Dal 2009
+          - generic [ref=e31]:
+            - img [ref=e32]
+            - text: Biodinamica Certificata
+        - heading "Il tuo giardino sostenibile, senza coordinare 5 fornitori" [level=1] [ref=e41]:
+          - text: Il tuo giardino sostenibile,
+          - generic [ref=e42]: senza coordinare 5 fornitori
+        - paragraph [ref=e43]: "Con Visione Sostenibile hai un unico interlocutore che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos."
+        - generic [ref=e44]:
+          - link "Richiedi un sopralluogo" [ref=e45] [cursor=pointer]:
+            - /url: /contatti
+            - button "Richiedi un sopralluogo" [ref=e46]:
+              - generic [ref=e47]: Richiedi un sopralluogo
+          - link "Sono un'azienda/condominio" [ref=e48] [cursor=pointer]:
+            - /url: /contatti
+            - button "Sono un'azienda/condominio" [ref=e49]:
+              - generic [ref=e50]: Sono un'azienda/condominio
+        - generic [ref=e51]:
+          - generic [ref=e52]: Un referente
+          - generic [ref=e54]: Team modulare
+          - generic [ref=e56]: Operativi in Piemonte e Trentino. In espansione in Lombardia.
+      - generic [ref=e61]:
+        - text: Metodo biodinamico
+        - heading "Terra, acqua, aria e fuoco. Un equilibrio reale, non solo estetico." [level=2] [ref=e62]:
+          - text: Terra, acqua, aria e fuoco.
+          - generic [ref=e63]: Un equilibrio reale, non solo estetico.
+        - paragraph [ref=e64]: "Ogni progetto nasce da un principio semplice: il giardino deve essere bello, sano e gestibile nel tempo. Per questo lavoriamo sui 4 elementi biodinamici con soluzioni concrete, misurabili e sostenibili."
+      - generic [ref=e66]:
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - generic: "01"
+            - generic [ref=e87]: 01 — 04
+            - heading "Terra" [level=3] [ref=e88]
+            - paragraph [ref=e90]: Rigeneriamo il suolo con pratiche biodinamiche che aumentano fertilita, vita microbica e stabilita.
+          - img [ref=e96]
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic: "02"
+                - generic: 02 — 04
+                - heading "Acqua" [level=3]
+                - paragraph: Gestione idrica efficiente per ridurre sprechi e mantenere il verde sano durante tutto l'anno.
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic: "03"
+                - generic: 03 — 04
+                - heading "Aria" [level=3]
+                - paragraph: Progettiamo spazi aperti e vitali che migliorano il microclima e il benessere delle persone.
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic: "04"
+                - generic: 04 — 04
+                - heading "Fuoco" [level=3]
+                - paragraph: Luce, energia e cicli naturali guidano ogni scelta progettuale per un equilibrio duraturo.
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+        - generic [ref=e101]:
+          - generic [ref=e103]: Terra
+          - generic [ref=e106]: Acqua
+          - generic [ref=e109]: Aria
+          - generic [ref=e112]: Fuoco
+        - generic [ref=e115]: Scorri
+      - generic [ref=e117]:
+        - generic:
+          - img
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - generic [ref=e120]: Perché funziona
+            - heading "Un referente, una squadra su misura" [level=2] [ref=e121]
+            - paragraph [ref=e122]: "Non facciamo giardini Instagram. Facciamo giardini che superano agosto: belli oggi, funzionano domani."
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - generic [ref=e125]: "1"
+              - heading "Un referente" [level=3] [ref=e126]
+              - paragraph [ref=e127]: Andrea coordina. Tu respiri.
+              - paragraph [ref=e128]: "Un solo contatto per tempi, scelte e budget: niente rimbalzi tra fornitori."
+            - generic [ref=e129]:
+              - generic [ref=e130]: "2"
+              - heading "Sostenibile vero" [level=3] [ref=e131]
+              - paragraph [ref=e132]: Meno sprechi, più durata.
+              - paragraph [ref=e133]: "Scelte botaniche e tecniche orientate a resilienza, acqua e suolo: il giardino è bello oggi e funziona domani."
+            - generic [ref=e134]:
+              - generic [ref=e135]: "3"
+              - heading "Team modulare" [level=3] [ref=e136]
+              - paragraph [ref=e137]: Entrano solo le competenze che servono.
+              - paragraph [ref=e138]: Professionisti verticali e partner affidabili che si attivano fase per fase, in un piano lavori coerente.
+          - generic [ref=e139]:
+            - heading "Bello. Sostenibile. Gestibile." [level=3] [ref=e140]
+            - paragraph [ref=e141]:
+              - text: Un referente, un metodo, una squadra su misura.
+              - text: Scelte spiegate, risultati che durano.
+            - paragraph [ref=e142]: Non facciamo giardini Instagram. Facciamo giardini che superano agosto.
+          - generic [ref=e143]:
+            - link [ref=e145] [cursor=pointer]:
+              - /url: /servizi/progettazione-giardini
+              - article [ref=e146]:
+                - generic [ref=e147]:
+                  - img "Progettazione Giardini" [ref=e148]
+                  - generic [ref=e151]: "01"
+                  - generic [ref=e152]: Progettazione
+                - generic [ref=e153]:
+                  - heading "Progettazione Giardini" [level=3] [ref=e154]
+                  - paragraph [ref=e155]: Progetti personalizzati per giardini e orti a impatto zero
+                  - generic [ref=e156]:
+                    - generic [ref=e157]: Scopri il servizio
+                    - img [ref=e159]
+            - link [ref=e162] [cursor=pointer]:
+              - /url: /servizi/realizzazione-giardini
+              - article [ref=e163]:
+                - generic [ref=e164]:
+                  - img "Realizzazione Giardini" [ref=e165]
+                  - generic [ref=e168]: "02"
+                  - generic [ref=e169]: Realizzazione
+                - generic [ref=e170]:
+                  - heading "Realizzazione Giardini" [level=3] [ref=e171]
+                  - paragraph [ref=e172]: Dalla progettazione alla posa, un servizio completo chiavi in mano
+                  - generic [ref=e173]:
+                    - generic [ref=e174]: Scopri il servizio
+                    - img [ref=e176]
+            - link [ref=e179] [cursor=pointer]:
+              - /url: /servizi/potature
+              - article [ref=e180]:
+                - generic [ref=e181]:
+                  - img "Potature e Abbattimenti in Quota" [ref=e182]
+                  - generic [ref=e185]: "03"
+                  - generic [ref=e186]: Potature
+                - generic [ref=e187]:
+                  - heading "Potature e Abbattimenti in Quota" [level=3] [ref=e188]
+                  - paragraph [ref=e189]: Potatura e abbattimento controllato con tecniche di tree climbing
+                  - generic [ref=e190]:
+                    - generic [ref=e191]: Scopri il servizio
+                    - img [ref=e193]
+            - link [ref=e196] [cursor=pointer]:
+              - /url: /servizi/manutenzioni
+              - article [ref=e197]:
+                - generic [ref=e198]:
+                  - img "Manutenzioni" [ref=e199]
+                  - generic [ref=e202]: "04"
+                  - generic [ref=e203]: Manutenzione
+                - generic [ref=e204]:
+                  - heading "Manutenzioni" [level=3] [ref=e205]
+                  - paragraph [ref=e206]: Cura del verde con metodi naturali e biodinamici durante tutto l'anno
+                  - generic [ref=e207]:
+                    - generic [ref=e208]: Scopri il servizio
+                    - img [ref=e210]
+          - link "Tutti i Servizi" [ref=e213] [cursor=pointer]:
+            - /url: /servizi
+      - generic [ref=e216]:
+        - generic [ref=e219]:
+          - generic [ref=e220]: I Nostri Numeri
+          - heading "Cosa abbiamo fatto finora" [level=2] [ref=e221]:
+            - text: Cosa abbiamo
+            - generic [ref=e222]: fatto finora
+          - paragraph [ref=e223]: Ogni numero rappresenta un passo avanti verso un futuro piu verde. La nostra dedizione alla sostenibilita e misurabile e tangibile.
+        - generic [ref=e225]:
+          - generic [ref=e226]:
+            - img [ref=e228]
+            - generic [ref=e231]: 250+
+            - generic [ref=e232]: Progetti Completati
+          - generic [ref=e233]:
+            - img [ref=e235]
+            - generic [ref=e238]: 20+
+            - generic [ref=e239]: Anni di Esperienza
+          - generic [ref=e240]:
+            - img [ref=e242]
+            - generic [ref=e244]: 100%
+            - generic [ref=e245]: Impatto Zero
+      - generic [ref=e248]:
+        - generic [ref=e249]:
+          - generic [ref=e250]: Quiz Gratuito
+          - heading "Che giardino fa per te?" [level=2] [ref=e251]:
+            - text: Che giardino
+            - generic [ref=e252]: fa per te?
+          - paragraph [ref=e253]: Rispondi a 6 domande e scopri il tuo profilo verde personalizzato. Riceverai consigli su misura per il tuo spazio.
+        - generic [ref=e255]:
+          - paragraph [ref=e256]: Qual è il tuo rapporto ideale con il giardino?
+          - generic [ref=e257]:
+            - button "Seleziona \"Un luogo di pace e contemplazione\" e inizia il quiz" [ref=e258]:
+              - generic [ref=e260]:
+                - img [ref=e262]
+                - generic [ref=e266]:
+                  - generic [ref=e267]: Un luogo di pace e contemplazione
+                  - img [ref=e268]
+            - button "Seleziona \"Un ecosistema sostenibile\" e inizia il quiz" [ref=e270]:
+              - generic [ref=e272]:
+                - img [ref=e274]
+                - generic [ref=e277]:
+                  - generic [ref=e278]: Un ecosistema sostenibile
+                  - img [ref=e279]
+            - button "Seleziona \"Uno spazio per la famiglia\" e inizia il quiz" [ref=e281]:
+              - generic [ref=e283]:
+                - img [ref=e285]
+                - generic [ref=e290]:
+                  - generic [ref=e291]: Uno spazio per la famiglia
+                  - img [ref=e292]
+            - button "Seleziona \"Un biglietto da visita elegante\" e inizia il quiz" [ref=e294]:
+              - generic [ref=e296]:
+                - img [ref=e298]
+                - generic [ref=e301]:
+                  - generic [ref=e302]: Un biglietto da visita elegante
+                  - img [ref=e303]
+          - paragraph [ref=e305]: Tocca una risposta per iniziare
+        - link "Inizia il quiz completo" [ref=e308] [cursor=pointer]:
+          - /url: /quiz
+          - img [ref=e309]
+          - text: Inizia il quiz completo
+          - img [ref=e312]
+      - generic [ref=e318]:
+        - img "Giardino realizzato" [ref=e321]
+        - generic [ref=e324]:
+          - generic [ref=e325]: Realizzazioni
+          - heading "Ogni giardino è una storia unica" [level=2] [ref=e326]:
+            - text: Ogni giardino è una
+            - generic [ref=e327]: storia unica
+          - paragraph [ref=e328]: "Dai un'occhiata ai nostri progetti realizzati. Ogni giardino racconta una storia diversa, ma tutti condividono lo stesso denominatore comune: la passione per il verde."
+          - generic [ref=e329]:
+            - link "Richiedi una Consulenza" [ref=e330] [cursor=pointer]:
+              - /url: /contatti
+              - button "Richiedi una Consulenza" [ref=e331]:
+                - generic [ref=e332]: Richiedi una Consulenza
+            - link "Perché Scegliere Noi" [ref=e333] [cursor=pointer]:
+              - /url: /qualita
+              - button "Perché Scegliere Noi" [ref=e334]:
+                - generic [ref=e335]: Perché Scegliere Noi
+      - generic [ref=e340]:
+        - 'heading "Parliamone: ti diciamo cosa serve davvero" [level=2] [ref=e341]':
+          - text: "Parliamone:"
+          - generic [ref=e342]: ti diciamo cosa serve davvero
+        - paragraph [ref=e343]: Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorità, fasi e investimenti.
+        - generic [ref=e344]:
+          - link "Richiedi un sopralluogo" [ref=e345] [cursor=pointer]:
+            - /url: tel:+393714821825
+            - button "Richiedi un sopralluogo" [ref=e346]:
+              - generic [ref=e347]:
+                - img [ref=e348]
+                - text: Richiedi un sopralluogo
+          - link "Richiedi una call (aziende/condomini)" [ref=e350] [cursor=pointer]:
+            - /url: /contatti
+            - button "Richiedi una call (aziende/condomini)" [ref=e351]:
+              - generic [ref=e352]: Richiedi una call (aziende/condomini)
+        - generic [ref=e353]:
+          - generic [ref=e354]:
+            - img [ref=e355]
+            - text: Rispondiamo entro 48 ore lavorative
+          - generic [ref=e358]:
+            - img [ref=e359]
+            - text: Operativi in Piemonte e Trentino Alto-Adige. In espansione in Lombardia.
+  - contentinfo [ref=e362]:
+    - generic [ref=e363]:
+      - img "Visione Sostenibile" [ref=e365]
+      - paragraph [ref=e366]: Creiamo atmosfere uniche per i vostri spazi esterni, unendo design, tecnologia e rispetto per la natura.
+      - generic [ref=e367]:
+        - link [ref=e368] [cursor=pointer]:
+          - /url: https://www.instagram.com/visionesostenibile
+          - img [ref=e369]
+        - link [ref=e372] [cursor=pointer]:
+          - /url: https://www.facebook.com/visionesostenibilegiardinieortisostenibili
+          - img [ref=e373]
+        - link [ref=e375] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/andrea-giordano-16810626a
+          - img [ref=e376]
+        - link [ref=e380] [cursor=pointer]:
+          - /url: https://www.youtube.com/@AndreaGiordano-vk8el
+          - img [ref=e381]
+      - generic [ref=e384]: © 2026 Visione Sostenibile. Tutti i diritti riservati.
+  - button "Open Next.js Dev Tools" [ref=e390] [cursor=pointer]:
+    - img [ref=e391]

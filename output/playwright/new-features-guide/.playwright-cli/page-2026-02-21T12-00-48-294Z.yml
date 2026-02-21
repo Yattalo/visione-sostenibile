@@ -1,0 +1,252 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "Visione Sostenibile" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Visione Sostenibile" [ref=e7]
+        - generic [ref=e8]:
+          - link "Home" [ref=e9] [cursor=pointer]:
+            - /url: /
+          - link "Chi Siamo" [ref=e10] [cursor=pointer]:
+            - /url: /chi-siamo
+          - link "Servizi" [ref=e11] [cursor=pointer]:
+            - /url: /servizi
+          - link "Progetti" [ref=e12] [cursor=pointer]:
+            - /url: /progetti
+          - link "Blog" [ref=e13] [cursor=pointer]:
+            - /url: /blog
+          - link "Qualità" [ref=e14] [cursor=pointer]:
+            - /url: /qualita
+          - link "Contatti" [ref=e15] [cursor=pointer]:
+            - /url: /contatti
+        - link "Preventivo" [ref=e17] [cursor=pointer]:
+          - /url: /contatti
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - complementary [ref=e57]:
+        - link "VS Admin Panel" [ref=e59] [cursor=pointer]:
+          - /url: /admin
+          - img "VS" [ref=e60]
+          - generic [ref=e61]: Admin
+          - generic [ref=e62]: Panel
+        - navigation [ref=e63]:
+          - link "Dashboard" [ref=e64] [cursor=pointer]:
+            - /url: /admin
+            - img [ref=e65]
+            - generic [ref=e70]: Dashboard
+          - link "Servizi" [ref=e71] [cursor=pointer]:
+            - /url: /admin/services
+            - img [ref=e72]
+            - generic [ref=e75]: Servizi
+          - link "Galleria" [ref=e76] [cursor=pointer]:
+            - /url: /admin/gallery
+            - img [ref=e77]
+            - generic [ref=e81]: Galleria
+          - link "Contatti" [ref=e82] [cursor=pointer]:
+            - /url: /admin/contacts
+            - img [ref=e83]
+            - generic [ref=e85]: Contatti
+          - link "CRM" [ref=e86] [cursor=pointer]:
+            - /url: /admin/crm
+            - img [ref=e87]
+            - generic [ref=e92]: CRM
+          - link "Email" [ref=e93] [cursor=pointer]:
+            - /url: /admin/emails
+            - img [ref=e94]
+            - generic [ref=e97]: Email
+          - link "Recensioni" [ref=e98] [cursor=pointer]:
+            - /url: /admin/reviews
+            - img [ref=e99]
+            - generic [ref=e101]: Recensioni
+          - link "Blog" [ref=e102] [cursor=pointer]:
+            - /url: /admin/blog
+            - img [ref=e103]
+            - generic [ref=e106]: Blog
+          - link "Impostazioni" [ref=e107] [cursor=pointer]:
+            - /url: /admin/settings
+            - img [ref=e108]
+            - generic [ref=e111]: Impostazioni
+        - generic [ref=e112]:
+          - link "Torna al Sito" [ref=e113] [cursor=pointer]:
+            - /url: /
+            - img [ref=e114]
+            - generic [ref=e118]: Torna al Sito
+          - button "Logout" [ref=e119]:
+            - img [ref=e120]
+            - generic [ref=e123]: Logout
+      - generic [ref=e124]:
+        - generic [ref=e126]:
+          - generic [ref=e127]: Benvenuto, Admin
+          - button "A" [ref=e128]:
+            - generic [ref=e129]: A
+            - img [ref=e130]
+        - main [ref=e132]:
+          - generic [ref=e133]:
+            - generic [ref=e134]:
+              - heading "CRM" [level=1] [ref=e135]
+              - paragraph [ref=e136]: Schede cliente da form e quiz, timeline e invio email one-shot.
+            - generic [ref=e137]:
+              - generic [ref=e138]:
+                - heading "Clienti" [level=3] [ref=e140]
+                - generic [ref=e141]:
+                  - textbox "Cerca nome, email o telefono" [ref=e144]
+                  - combobox [ref=e145]:
+                    - option "Tutti gli stati" [selected]
+                    - option "new"
+                    - option "contacted"
+                    - option "qualified"
+                    - option "archived"
+                  - button "Luca Demo new luca.demo@example.com Aggiornato 21/02/2026, 12:57:30" [ref=e147]:
+                    - generic [ref=e148]:
+                      - paragraph [ref=e149]: Luca Demo
+                      - generic [ref=e150]: new
+                    - paragraph [ref=e151]: luca.demo@example.com
+                    - paragraph [ref=e152]: Aggiornato 21/02/2026, 12:57:30
+              - generic [ref=e153]:
+                - generic [ref=e154]:
+                  - heading "Scheda cliente" [level=3] [ref=e156]
+                  - generic [ref=e157]:
+                    - generic [ref=e158]:
+                      - generic [ref=e159]:
+                        - generic [ref=e160]: Nome
+                        - textbox [ref=e162]: Luca Demo
+                      - generic [ref=e163]:
+                        - generic [ref=e164]: Telefono
+                        - textbox [ref=e166]: +39 333 1112222
+                    - generic [ref=e167]:
+                      - generic [ref=e168]:
+                        - generic [ref=e169]: Email
+                        - generic [ref=e170]:
+                          - img [ref=e171]
+                          - text: luca.demo@example.com
+                      - generic [ref=e174]:
+                        - generic [ref=e175]: Stato
+                        - combobox [ref=e176]:
+                          - option "new" [selected]
+                          - option "contacted"
+                          - option "qualified"
+                          - option "archived"
+                    - generic [ref=e177]:
+                      - generic [ref=e178]: Tag (separati da virgola)
+                      - textbox "es. preventivo, priorita-alta" [ref=e180]
+                    - generic [ref=e181]:
+                      - generic [ref=e182]: Note cumulative
+                      - textbox [ref=e183]
+                    - button "Salva scheda" [ref=e184]:
+                      - generic [ref=e185]:
+                        - img [ref=e186]
+                        - text: Salva scheda
+                - generic [ref=e190]:
+                  - heading "Invio email dalla scheda cliente" [level=3] [ref=e192]
+                  - generic [ref=e193]:
+                    - generic [ref=e194]:
+                      - generic [ref=e195]:
+                        - generic [ref=e196]: Invia da template
+                        - combobox [ref=e197]:
+                          - option "Seleziona template" [selected]
+                          - option "Messaggio one-shot standard (transactional-oneoff-standard)"
+                          - option "Conferma quiz - Cliente (transactional-quiz-customer)"
+                          - option "Quiz completato - Admin (transactional-quiz-admin)"
+                          - option "Conferma contatto - Cliente (transactional-contact-customer)"
+                          - option "Nuovo contatto - Admin (transactional-contact-admin)"
+                      - button "Invia da template" [ref=e199]:
+                        - generic [ref=e200]:
+                          - img [ref=e201]
+                          - text: Invia da template
+                    - generic [ref=e204]:
+                      - generic [ref=e205]: Subject one-shot
+                      - textbox [ref=e207]: Aggiornamento da Visione Sostenibile
+                    - generic [ref=e208]:
+                      - generic [ref=e209]: Body one-shot (HTML rich)
+                      - generic [ref=e210]:
+                        - generic [ref=e211]:
+                          - button "Grassetto" [ref=e212]:
+                            - img [ref=e213]
+                          - button "Corsivo" [ref=e215]:
+                            - img [ref=e216]
+                          - button "Sottolineato" [ref=e218]:
+                            - img [ref=e219]
+                          - button "Lista puntata" [ref=e221]:
+                            - img [ref=e222]
+                          - button "Lista numerata" [ref=e223]:
+                            - img [ref=e224]
+                          - button "H2" [ref=e227]
+                          - button "P" [ref=e228]
+                          - button "Link" [ref=e229]:
+                            - img [ref=e230]
+                          - button "Immagine" [ref=e233]:
+                            - img [ref=e234]
+                          - button "Rimuovi formattazione" [ref=e238]:
+                            - img [ref=e239]
+                        - generic [ref=e242]:
+                          - paragraph [ref=e243]: Ciao Luca Demo,
+                          - paragraph [ref=e244]: ti scriviamo per un aggiornamento sulla tua richiesta.
+                    - button "Invia email one-shot" [ref=e245]:
+                      - generic [ref=e246]:
+                        - img [ref=e247]
+                        - text: Invia email one-shot
+                - generic [ref=e250]:
+                  - heading "Timeline attivita" [level=3] [ref=e252]
+                  - generic [ref=e253]:
+                    - textbox "Aggiungi una nota operativa" [ref=e255]
+                    - button "Aggiungi nota" [ref=e256]:
+                      - generic [ref=e257]: Aggiungi nota
+                    - generic [ref=e258]:
+                      - generic [ref=e259]:
+                        - generic [ref=e260]:
+                          - paragraph [ref=e261]: Quiz completato
+                          - generic [ref=e262]: quiz_completion
+                        - paragraph [ref=e263]: "Profilo: Sostenibile"
+                        - paragraph [ref=e264]: 21/02/2026, 12:57:30
+                      - generic [ref=e265]:
+                        - generic [ref=e266]:
+                          - paragraph [ref=e267]: Form contatti compilato
+                          - generic [ref=e268]: contact_form
+                        - paragraph [ref=e269]: Richiesta sopralluogo
+                        - paragraph [ref=e270]: 21/02/2026, 12:57:28
+                - generic [ref=e271]:
+                  - generic [ref=e272]:
+                    - heading "Form ricevuti" [level=3] [ref=e274]
+                    - generic [ref=e276]:
+                      - paragraph [ref=e277]: Richiesta sopralluogo
+                      - paragraph [ref=e278]: Vorrei un sopralluogo per un giardino di 120 mq.
+                  - generic [ref=e279]:
+                    - heading "Quiz/lead" [level=3] [ref=e281]
+                    - generic [ref=e283]:
+                      - paragraph [ref=e284]: Score 12
+                      - paragraph [ref=e285]: sc_yog1pfbmpdnlerjl
+                  - generic [ref=e286]:
+                    - heading "Email inviate" [level=3] [ref=e288]
+                    - generic [ref=e289]:
+                      - generic [ref=e290]:
+                        - paragraph [ref=e291]: La tua scorecard verde e pronta
+                        - generic [ref=e292]:
+                          - generic [ref=e293]: skipped
+                          - generic [ref=e294]: 21/02/2026, 12:57:30
+                      - generic [ref=e295]:
+                        - paragraph [ref=e296]: Abbiamo ricevuto la tua richiesta, Luca Demo
+                        - generic [ref=e297]:
+                          - generic [ref=e298]: skipped
+                          - generic [ref=e299]: 21/02/2026, 12:57:29
+  - contentinfo [ref=e24]:
+    - generic [ref=e25]:
+      - img "Visione Sostenibile" [ref=e27]
+      - paragraph [ref=e28]: Creiamo atmosfere uniche per i vostri spazi esterni, unendo design, tecnologia e rispetto per la natura.
+      - generic [ref=e29]:
+        - link [ref=e30] [cursor=pointer]:
+          - /url: https://www.instagram.com/visionesostenibile
+          - img [ref=e31]
+        - link [ref=e34] [cursor=pointer]:
+          - /url: https://www.facebook.com/visionesostenibilegiardinieortisostenibili
+          - img [ref=e35]
+        - link [ref=e37] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/andrea-giordano-16810626a
+          - img [ref=e38]
+        - link [ref=e42] [cursor=pointer]:
+          - /url: https://www.youtube.com/@AndreaGiordano-vk8el
+          - img [ref=e43]
+      - generic [ref=e46]: © 2026 Visione Sostenibile. Tutti i diritti riservati.
+  - button "Open Next.js Dev Tools" [ref=e52] [cursor=pointer]:
+    - img [ref=e53]
+  - alert [ref=e56]
