@@ -10,11 +10,12 @@ import { Button } from "@/app/components/ui/Button";
 import { Input, Textarea } from "@/app/components/ui/Input";
 import { RichHtmlEditor } from "@/app/admin/components/RichHtmlEditor";
 import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
 
 const statusOptions = ["new", "contacted", "qualified", "archived"];
 
 type CrmContact = {
-  _id: string;
+  _id: Id<"crmContacts">;
   name: string;
   email: string;
   phone?: string;
@@ -63,7 +64,7 @@ export default function AdminCrmPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
-  const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
+  const [selectedContactId, setSelectedContactId] = useState<Id<"crmContacts"> | null>(null);
 
   const contacts = (useQuery(api.crm.listContacts, {
     search: search || undefined,
@@ -102,7 +103,7 @@ export default function AdminCrmPage() {
 
   const detail = useQuery(
     api.crm.getContactDetail,
-    selectedContactId ? ({ contactId: selectedContactId } as { contactId: string }) : "skip"
+    selectedContactId ? { contactId: selectedContactId } : "skip"
   ) as CrmContactDetail | null | undefined;
 
   const templates = (useQuery(api.emailTemplates.list, {

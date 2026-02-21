@@ -9,6 +9,7 @@ import { Button } from "@/app/components/ui/Button";
 import { Input, Textarea } from "@/app/components/ui/Input";
 import { RichHtmlEditor } from "@/app/admin/components/RichHtmlEditor";
 import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
 
 type Draft = {
   key: string;
@@ -21,7 +22,7 @@ type Draft = {
 };
 
 type EmailTemplate = {
-  _id: string;
+  _id: Id<"emailTemplates">;
   key: string;
   name: string;
   category: string;
