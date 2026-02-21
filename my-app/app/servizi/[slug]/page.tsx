@@ -749,7 +749,7 @@ export default function ServiceDetailPage() {
     provider: {
       "@type": "LocalBusiness",
       name: "Visione Sostenibile",
-      areaServed: "Piemonte e Lombardia",
+      areaServed: "Operativi in Piemonte e Trentino Alto-Adige. In espansione in Lombardia.",
     },
     url: `${SITE_URL}/servizi/${service.slug}`,
   };
@@ -877,7 +877,7 @@ export default function ServiceDetailPage() {
           <div className="mt-8 text-sm text-paper-400/80 flex flex-col sm:flex-row justify-center gap-4">
             <span className="inline-flex items-center gap-2 justify-center">
               <MapPin className="w-4 h-4" />
-              Piemonte e Lombardia
+              Piemonte · Trentino · Lombardia
             </span>
             <span className="inline-flex items-center gap-2 justify-center">
               <Clock className="w-4 h-4" />

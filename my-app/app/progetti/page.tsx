@@ -225,8 +225,9 @@ export default function ProgettiPage() {
           <SlideUp delay={0.2}>
             <p className="font-body text-xl md:text-2xl text-paper-300/80 max-w-2xl leading-relaxed mb-8">
               Ogni progetto racconta una storia unica. Scopri le nostre
-              realizzazioni in Piemonte e Lombardia: parchi, giardini e spazi
-              verdi progettati con passione e competenza.
+              realizzazioni: parchi, giardini e spazi verdi progettati con
+              passione e competenza. Operativi in Piemonte e Trentino
+              Alto-Adige. In espansione in Lombardia.
             </p>
           </SlideUp>
 

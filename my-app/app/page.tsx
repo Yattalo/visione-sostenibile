@@ -169,7 +169,7 @@ export default function HomePage() {
               </span>
               <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
               <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Operativi in Piemonte e Trentino. In espansione in Lombardia.
+                Piemonte · Trentino · Lombardia
               </span>
             </div>
           </motion.div>

@@ -222,7 +222,7 @@ export default function ContattiPage() {
                       <MapPin className="w-8 h-8 text-leaf-700" />
                     </div>
                     <p className="font-display text-3xl text-forest-950 uppercase tracking-tight font-bold">
-                      Piemonte e Lombardia
+                      Piemonte · Trentino · Lombardia
                     </p>
                     <p className="font-body text-base text-leaf-600/80 mt-2 font-medium">
                       Torino • Chivasso • Asti • Lago Maggiore
