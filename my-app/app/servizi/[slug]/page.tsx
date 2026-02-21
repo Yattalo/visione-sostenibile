@@ -68,10 +68,10 @@ const carouselImagesPool = [
 ];
 
 const serviceSubtitles: Record<string, string> = {
-  "progettazione-giardini": "Dal concept alla realta",
-  "realizzazione-giardini": "Senza pensieri",
-  manutenzioni: "Cura continua",
-  potature: "Precisione e rispetto",
+  "progettazione-giardini": "Dal concept alla realta a Torino e Piemonte",
+  "realizzazione-giardini": "Realizzazione Giardini a Torino",
+  manutenzioni: "Cura continua a Torino e Piemonte",
+  potature: "Potatura Alberi a Torino",
   "rigenerazione-terreni": "Equilibrio naturale",
 };
 
