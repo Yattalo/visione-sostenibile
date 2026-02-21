@@ -740,32 +740,64 @@ export default function ServiceDetailPage() {
 
   const content = serviceContents[service.slug] ?? fallbackContent;
 
+  const serviceUrl = `${SITE_URL}/servizi/${service.slug}`;
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: service.title,
     name: service.title,
     description: content.quickAnswer,
+    areaServed: ["Torino", "Piemonte", "Trentino Alto-Adige", "Lombardia"],
     provider: {
       "@type": "LocalBusiness",
       name: "Visione Sostenibile",
-      areaServed: "Operativi in Piemonte e Trentino Alto-Adige. In espansione in Lombardia.",
+      url: SITE_URL,
+      telephone: "+393714821825",
+      email: "visionesostenibile96@gmail.com",
     },
-    url: `${SITE_URL}/servizi/${service.slug}`,
+    url: serviceUrl,
   };
 
-  const faqJsonLd = {
+  const breadcrumbJsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: content.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
       },
-    })),
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Servizi",
+        item: `${SITE_URL}/servizi`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: serviceUrl,
+      },
+    ],
   };
+
+  const faqJsonLd =
+    service.slug === "progettazione-giardini"
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: content.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
 
   const handleShare = async () => {
     const shareUrl = new URL(`${window.location.origin}${window.location.pathname}`);
@@ -808,8 +840,14 @@ export default function ServiceDetailPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* Section 1: Full-Bleed Hero */}
       <HeroSection service={service} imageUrl={imageUrl} />

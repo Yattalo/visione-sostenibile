@@ -33,8 +33,27 @@ function EmptyState() {
 }
 
 export default function BlogPage() {
+  const siteUrl = "https://www.visionesostenibile.it";
   const convexPosts = useQuery(api.blog.getAll);
   const posts = convexPosts ?? staticBlogPosts;
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteUrl}/blog`,
+      },
+    ],
+  };
 
   if (posts.length === 0) {
     return (
@@ -73,6 +92,10 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-paper-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
           Matches site-wide organic aesthetic: dark moss bg,

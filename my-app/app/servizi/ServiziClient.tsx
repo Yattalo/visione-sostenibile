@@ -18,6 +18,7 @@ import {
 } from "../components/animations";
 
 export function ServiziClient() {
+  const siteUrl = "https://www.visionesostenibile.it";
   const servicesQuery = useQuery(api.services.getAll);
   const services =
     servicesQuery && servicesQuery.length > 0 ? servicesQuery : staticServices;
@@ -49,8 +50,31 @@ export function ServiziClient() {
     return imageMap[normalizedSlug] || "/images/servizi/progettazione-giardini-cover.png";
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Servizi",
+        item: `${siteUrl}/servizi`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-paper-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
         <div className="absolute inset-0">

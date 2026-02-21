@@ -42,28 +42,30 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Visione Sostenibile",
-    description: "Progettazione e realizzazione di giardini biodinamici a Torino. Trasformiamo spazi verdi in ecosistemi sostenibili.",
+    description:
+      "Progettazione, realizzazione e manutenzione di giardini biodinamici a impatto zero",
     url: "https://www.visionesostenibile.it",
     telephone: "+393714821825",
     email: "visionesostenibile96@gmail.com",
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Via San Francesco D'Assisi, 14",
       addressLocality: "Torino",
-      addressRegion: "Piemonte",
+      postalCode: "10122",
       addressCountry: "IT",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 45.0703,
-      longitude: 7.6869,
+    areaServed: ["Torino", "Piemonte", "Trentino Alto-Adige", "Lombardia"],
+    founder: {
+      "@type": "Person",
+      name: "Andrea Giordano",
     },
-    areaServed: [
-      { "@type": "State", name: "Piemonte" },
-      { "@type": "State", name: "Lombardia" },
+    foundingDate: "2009",
+    sameAs: [
+      "https://www.instagram.com/visionesostenibile",
+      "https://www.facebook.com/visionesostenibilegiardinieortisostenibili",
+      "https://www.linkedin.com/in/andrea-giordano-16810626a",
+      "https://www.youtube.com/@AndreaGiordano-vk8el",
     ],
-    founder: { "@type": "Person", name: "Andrea Giordano" },
-    priceRange: "$$",
-    image: "https://www.visionesostenibile.it/api/og",
   };
 
   return (
