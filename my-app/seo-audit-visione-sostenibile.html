@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Audit — Visione Sostenibile</title>
+<style>
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #d8f3dc;
+    --red: #d32f2f;
+    --orange: #ef6c00;
+    --yellow: #f9a825;
+    --blue: #1565c0;
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #e0e0e0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); color: white; padding: 3rem 0; margin-bottom: 2rem; }
+  .header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .header p { opacity: 0.85; font-size: 1.05rem; }
+  .header .meta { margin-top: 1rem; display: flex; gap: 2rem; font-size: 0.9rem; opacity: 0.7; }
+
+  /* Score badge */
+  .score-row { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .score-card { flex: 1; min-width: 180px; background: var(--card); border-radius: 12px; padding: 1.5rem; text-align: center; border: 1px solid var(--border); }
+  .score-card .number { font-size: 2.5rem; font-weight: 800; }
+  .score-card .label { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+  .score-red { color: var(--red); }
+  .score-orange { color: var(--orange); }
+  .score-yellow { color: var(--yellow); }
+  .score-green { color: var(--green-mid); }
+
+  /* Sections */
+  .section { background: var(--card); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1.5rem; overflow: hidden; }
+  .section-header { background: var(--green-pale); padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); }
+  .section-header h2 { font-size: 1.3rem; color: var(--green-dark); }
+  .section-body { padding: 1.5rem; }
+
+  /* Executive summary */
+  .summary-box { background: #f0fdf4; border-left: 4px solid var(--green-mid); padding: 1.25rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; }
+  .summary-box p { margin-bottom: 0.5rem; }
+  .summary-box strong { color: var(--green-dark); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th { background: #f5f5f5; text-align: left; padding: 0.75rem; border-bottom: 2px solid var(--border); font-weight: 600; }
+  td { padding: 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:hover { background: #fafafa; }
+
+  /* Severity badges */
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+  .badge-critical { background: #ffebee; color: var(--red); }
+  .badge-high { background: #fff3e0; color: var(--orange); }
+  .badge-medium { background: #fffde7; color: #f57f17; }
+  .badge-low { background: #e8f5e9; color: var(--green-mid); }
+  .badge-pass { background: #e8f5e9; color: #2e7d32; }
+  .badge-fail { background: #ffebee; color: var(--red); }
+  .badge-warn { background: #fff3e0; color: var(--orange); }
+
+  /* Opportunity scores */
+  .opp-high { color: var(--green-mid); font-weight: 700; }
+  .opp-medium { color: var(--orange); font-weight: 600; }
+  .opp-low { color: var(--muted); }
+
+  /* Action items */
+  .action-group { margin-bottom: 1.5rem; }
+  .action-group h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--green-dark); }
+  .action-item { display: flex; gap: 0.75rem; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; background: #f9f9f9; }
+  .action-item .icon { font-size: 1.2rem; flex-shrink: 0; }
+  .action-item .content { flex: 1; }
+  .action-item .content strong { display: block; margin-bottom: 0.15rem; }
+  .action-item .content small { color: var(--muted); }
+
+  /* Competitor table */
+  .winner { background: #e8f5e9; font-weight: 600; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.6rem; }
+    .score-row { flex-direction: column; }
+    table { font-size: 0.8rem; }
+    th, td { padding: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <h1>SEO Audit — Visione Sostenibile</h1>
+    <p>Analisi completa del sito in staging: visione.yattalo.com</p>
+    <div class="meta">
+      <span>Data: 21 Febbraio 2026</span>
+      <span>Dominio produzione: visionesostenibile.it</span>
+      <span>Tipo: Full Site Audit</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- OVERALL SCORES -->
+<div class="score-row">
+  <div class="score-card">
+    <div class="number score-orange">42</div>
+    <div class="label">SEO Score Complessivo</div>
+  </div>
+  <div class="score-card">
+    <div class="number score-red">25</div>
+    <div class="label">Title Tags & Meta</div>
+  </div>
+  <div class="score-card">
+    <div class="number score-orange">55</div>
+    <div class="label">Contenuti</div>
+  </div>
+  <div class="score-card">
+    <div class="number score-yellow">60</div>
+    <div class="label">Struttura Sito</div>
+  </div>
+  <div class="score-card">
+    <div class="number score-orange">40</div>
+    <div class="label">Keyword Targeting</div>
+  </div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="section">
+  <div class="section-header"><h2>Executive Summary</h2></div>
+  <div class="section-body">
+    <div class="summary-box">
+      <p><strong>Punto di forza principale:</strong> Visione Sostenibile ha un posizionamento di brand unico e potente — "giardinaggio biodinamico" è una nicchia quasi vuota in Piemonte. Il sito ha ottimi contenuti di vendita, un copy persuasivo e una struttura di servizi ben organizzata su 3 livelli.</p>
+      <p><strong>Le 3 priorità con maggiore impatto:</strong></p>
+      <p>1. <strong>Title tag e meta description</strong> — La maggior parte delle pagine condivide lo stesso title tag generico ("Visione Sostenibile - Il Verde che Vive") senza keyword targeting. Questo è l'errore SEO più grave e va corretto immediatamente.</p>
+      <p>2. <strong>Contenuti blog</strong> — Solo 3 articoli pubblicati. Per competere a livello organico servono almeno 15-20 articoli mirati su keyword strategiche.</p>
+      <p>3. <strong>Localizzazione SEO</strong> — Le keyword locali (Torino, Piemonte, Trentino) appaiono nel body text ma non nei title tag, negli H1 o nelle meta description delle pagine servizio.</p>
+      <p style="margin-top: 0.75rem;"><strong>Valutazione complessiva:</strong> Il sito ha una buona base strutturale e contenuti di vendita efficaci, ma necessita di interventi SEO fondamentali prima del lancio in produzione. Le correzioni più impattanti sono rapide da implementare.</p>
+    </div>
+  </div>
+</div>
+
+<!-- KEYWORD OPPORTUNITY TABLE -->
+<div class="section">
+  <div class="section-header"><h2>Keyword Opportunities</h2></div>
+  <div class="section-body">
+    <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem;">Volumi stimati basati su competitività osservata e benchmark di settore. Per dati precisi si consiglia SEOZoom o Google Keyword Planner.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Keyword</th>
+          <th>Difficoltà</th>
+          <th>Opportunità</th>
+          <th>Intento</th>
+          <th>Contenuto Consigliato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>giardiniere biodinamico Torino</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Commerciale</td>
+          <td>Landing page servizi</td>
+        </tr>
+        <tr>
+          <td><strong>giardino biodinamico</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Informativo</td>
+          <td>Pillar page / guida completa</td>
+        </tr>
+        <tr>
+          <td><strong>progettazione giardini Torino</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Commerciale</td>
+          <td>Pagina servizio + landing locale</td>
+        </tr>
+        <tr>
+          <td><strong>manutenzione giardini Torino</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Commerciale</td>
+          <td>Pagina servizio + landing locale</td>
+        </tr>
+        <tr>
+          <td><strong>potatura alberi Torino</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Commerciale</td>
+          <td>Pagina servizio + FAQ</td>
+        </tr>
+        <tr>
+          <td><strong>giardino sostenibile come fare</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Informativo</td>
+          <td>Blog post / guida</td>
+        </tr>
+        <tr>
+          <td><strong>realizzazione giardini Torino</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Commerciale</td>
+          <td>Pagina servizio dedicata</td>
+        </tr>
+        <tr>
+          <td><strong>irrigazione giardino automatica</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo/Comm.</td>
+          <td>Blog post + pagina servizio</td>
+        </tr>
+        <tr>
+          <td><strong>tree climbing potatura</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo</td>
+          <td>Blog post + video</td>
+        </tr>
+        <tr>
+          <td><strong>giardino impatto zero</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo</td>
+          <td>Pagina manifesto / blog</td>
+        </tr>
+        <tr>
+          <td><strong>piante per terreno in pendio</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo</td>
+          <td>Blog post (già presente!)</td>
+        </tr>
+        <tr>
+          <td><strong>costo progettazione giardino</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Transazionale</td>
+          <td>Blog post / FAQ page</td>
+        </tr>
+        <tr>
+          <td><strong>giardiniere ecologico</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Commerciale</td>
+          <td>Blog post + Chi Siamo</td>
+        </tr>
+        <tr>
+          <td><strong>manutenzione giardino autunno</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo</td>
+          <td>Blog post (già presente!)</td>
+        </tr>
+        <tr>
+          <td><strong>illuminazione giardino esterno</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo/Comm.</td>
+          <td>Blog post + pagina servizio</td>
+        </tr>
+        <tr>
+          <td><strong>giardino giapponese Torino</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Commerciale</td>
+          <td>Blog post + portfolio</td>
+        </tr>
+        <tr>
+          <td><strong>robot tagliaerba installazione</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-low">Bassa</span></td>
+          <td>Informativo</td>
+          <td>Blog post</td>
+        </tr>
+        <tr>
+          <td><strong>rigenerazione terreno giardino</strong></td>
+          <td><span class="badge badge-pass">Facile</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Informativo</td>
+          <td>Blog post / guida</td>
+        </tr>
+        <tr>
+          <td><strong>impianto antizanzare giardino</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Commerciale</td>
+          <td>Blog post + pagina servizio</td>
+        </tr>
+        <tr>
+          <td><strong>come eliminare le zanzare dal giardino</strong></td>
+          <td><span class="badge badge-warn">Moderata</span></td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Informativo</td>
+          <td>Blog post guida completa</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ON-PAGE ISSUES -->
+<div class="section">
+  <div class="section-header"><h2>On-Page SEO Issues</h2></div>
+  <div class="section-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Pagina</th>
+          <th>Problema</th>
+          <th>Severità</th>
+          <th>Fix Consigliato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>/qualita<br>/contatti<br>/blog<br>/servizi/*</td>
+          <td><strong>Title tag identico alla homepage</strong> — "Visione Sostenibile - Il Verde che Vive" usato su quasi tutte le pagine</td>
+          <td><span class="badge badge-critical">Critico</span></td>
+          <td>Creare title tag unici per ogni pagina con keyword target + brand. Es: "Progettazione Giardini Torino | Visione Sostenibile"</td>
+        </tr>
+        <tr>
+          <td>/chi-siamo<br>/servizi</td>
+          <td><strong>Brand duplicato nel title</strong> — "Chi Siamo | Visione Sostenibile | Visione Sostenibile"</td>
+          <td><span class="badge badge-high">Alto</span></td>
+          <td>Rimuovere la duplicazione del brand name nel title tag</td>
+        </tr>
+        <tr>
+          <td>Tutte</td>
+          <td><strong>Meta description non verificabile</strong> — Non è stato possibile verificare via JS se le meta description sono presenti</td>
+          <td><span class="badge badge-high">Alto</span></td>
+          <td>Verificare e aggiungere meta description uniche (150-160 car.) per ogni pagina con CTA</td>
+        </tr>
+        <tr>
+          <td>Homepage</td>
+          <td><strong>H1 troppo lungo</strong> — "Il tuo giardino sostenibile, senza coordinare 5 fornitori" è buono per il copy ma debole per SEO</td>
+          <td><span class="badge badge-medium">Medio</span></td>
+          <td>Mantenere il copy attuale ma includere keyword target nell'H1, es: "Giardini Sostenibili a Torino" come H1 visibile o nascosto</td>
+        </tr>
+        <tr>
+          <td>/servizi/progettazione-giardini</td>
+          <td><strong>Numero di telefono placeholder</strong> — Link tel: punta a +39061234567 (numero finto di Roma)</td>
+          <td><span class="badge badge-critical">Critico</span></td>
+          <td>Sostituire con il numero reale +39 371 482 1825</td>
+        </tr>
+        <tr>
+          <td>/contatti</td>
+          <td><strong>Email non professionale</strong> — visionesostenibile96@gmail.com</td>
+          <td><span class="badge badge-medium">Medio</span></td>
+          <td>Usare un indirizzo con dominio proprio: info@visionesostenibile.it</td>
+        </tr>
+        <tr>
+          <td>Tutte le pagine servizio</td>
+          <td><strong>Nessuna keyword locale nei titoli</strong> — "Torino", "Piemonte" non compaiono negli H1/H2 delle pagine servizio</td>
+          <td><span class="badge badge-high">Alto</span></td>
+          <td>Aggiungere la localizzazione ai titoli: "Progettazione Giardini a Torino e Piemonte"</td>
+        </tr>
+        <tr>
+          <td>/blog</td>
+          <td><strong>Solo 3 articoli pubblicati</strong> — Insufficiente per generare traffico organico</td>
+          <td><span class="badge badge-high">Alto</span></td>
+          <td>Piano editoriale: pubblicare almeno 2 articoli/mese mirati su keyword specifiche</td>
+        </tr>
+        <tr>
+          <td>Tutte</td>
+          <td><strong>Assenza di breadcrumbs</strong> — Nessun percorso di navigazione visibile</td>
+          <td><span class="badge badge-medium">Medio</span></td>
+          <td>Aggiungere breadcrumbs con markup Schema.org BreadcrumbList</td>
+        </tr>
+        <tr>
+          <td>/contatti</td>
+          <td><strong>Incoerenza zone operative</strong> — Homepage dice "Piemonte e Trentino", contatti dice "Piemonte e Lombardia"</td>
+          <td><span class="badge badge-medium">Medio</span></td>
+          <td>Allineare il messaggio su tutte le pagine con le zone operative corrette</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONTENT GAP ANALYSIS -->
+<div class="section">
+  <div class="section-header"><h2>Content Gap Analysis</h2></div>
+  <div class="section-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Topic / Keyword</th>
+          <th>Perché conta</th>
+          <th>Formato</th>
+          <th>Priorità</th>
+          <th>Effort</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Guida al giardino biodinamico</strong></td>
+          <td>Nicchia quasi vuota in Italia. Nessun competitor locale la copre. Potenziale pillar page</td>
+          <td>Guida lunga (2000+ parole)</td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>1 giorno</td>
+        </tr>
+        <tr>
+          <td><strong>Quanto costa un giardino?</strong></td>
+          <td>Keyword transazionale ad alto intento. I competitor (Edera, Quadrifoglio) non hanno una pagina dedicata ai costi</td>
+          <td>Blog post con range di prezzi</td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Mezza giornata</td>
+        </tr>
+        <tr>
+          <td><strong>Portfolio progetti con case study</strong></td>
+          <td>Edera Giardini e Lefty Gardens hanno portfolio dettagliati. La pagina /progetti esiste ma i contenuti sono limitati</td>
+          <td>Case study per progetto</td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Multi-giorno</td>
+        </tr>
+        <tr>
+          <td><strong>Pagina comparativa: biodinamico vs chimico</strong></td>
+          <td>Alto valore educativo e differenziante. Nessun competitor la ha</td>
+          <td>Blog post comparativo</td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Mezza giornata</td>
+        </tr>
+        <tr>
+          <td><strong>Guide stagionali (primavera, estate, autunno, inverno)</strong></td>
+          <td>Solo 1 guida autunnale presente. Quadrifoglio e Piemonte Giardini coprono tutte le stagioni</td>
+          <td>Serie di 4 blog post</td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>2 giorni totali</td>
+        </tr>
+        <tr>
+          <td><strong>FAQ / Glossario del giardinaggio</strong></td>
+          <td>Cattura keyword question-based (People Also Ask). Solo la pagina progettazione ha FAQ</td>
+          <td>Pagina FAQ centrale + Schema</td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Mezza giornata</td>
+        </tr>
+        <tr>
+          <td><strong>Landing page per zona</strong> (Torino, Chivasso, Asti, Lago Maggiore)</td>
+          <td>Le zone operative sono citate ma non hanno pagine dedicate. I competitor locali dominano le ricerche geo-specifiche</td>
+          <td>Landing page per località</td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>1 giorno per pagina</td>
+        </tr>
+        <tr>
+          <td><strong>Contenuti video / YouTube SEO</strong></td>
+          <td>Il canale YouTube esiste ma non è integrato nel sito. Edera e TurinGarden non hanno video</td>
+          <td>Video embed + trascrizione</td>
+          <td><span class="opp-medium">Media</span></td>
+          <td>Continuativo</td>
+        </tr>
+        <tr>
+          <td><strong>Guida anti-zanzare naturale</strong></td>
+          <td>Keyword ad alto volume ("come eliminare zanzare giardino"). Il servizio antizanzare c'è ma manca il contenuto educativo</td>
+          <td>Blog post guida</td>
+          <td><span class="opp-high">Alta</span></td>
+          <td>Mezza giornata</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TECHNICAL SEO -->
+<div class="section">
+  <div class="section-header"><h2>Technical SEO Checklist</h2></div>
+  <div class="section-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Check</th>
+          <th>Status</th>
+          <th>Dettagli</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HTTPS</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td>Il sito utilizza HTTPS correttamente</td>
+        </tr>
+        <tr>
+          <td>Viewport / Mobile</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td>Meta viewport presente, layout responsive con menu hamburger mobile</td>
+        </tr>
+        <tr>
+          <td>Navigazione</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td>Menu chiaro con 7 voci + CTA "Preventivo". Struttura logica</td>
+        </tr>
+        <tr>
+          <td>Struttura URL</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td>URL puliti e leggibili: /servizi/progettazione-giardini, /blog/tendenze-giardini-2026</td>
+        </tr>
+        <tr>
+          <td>Title Tags unici</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>Almeno 5 pagine condividono lo stesso title tag generico della homepage</td>
+        </tr>
+        <tr>
+          <td>Tag canonici</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Non verificabile via JS. Da controllare manualmente nel codice sorgente</td>
+        </tr>
+        <tr>
+          <td>Structured Data (Schema.org)</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>Nessun dato strutturato rilevato. Mancano LocalBusiness, FAQ, Service, BreadcrumbList</td>
+        </tr>
+        <tr>
+          <td>XML Sitemap</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Da verificare su /sitemap.xml prima del lancio in produzione</td>
+        </tr>
+        <tr>
+          <td>robots.txt</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Da verificare. Il sito staging potrebbe avere noindex — assicurarsi di rimuoverlo in produzione</td>
+        </tr>
+        <tr>
+          <td>Alt text immagini</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td>Le immagini principali hanno alt text descrittivi (es: "Progettazione Giardini", "Andrea Giordano - Fondatore")</td>
+        </tr>
+        <tr>
+          <td>Internal linking</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Buono tra pagine principali ma i blog post non linkano ai servizi e viceversa</td>
+        </tr>
+        <tr>
+          <td>Page Speed</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Tempi di caricamento lenti osservati (8-10s per pagina). Da ottimizzare immagini e risorse</td>
+        </tr>
+        <tr>
+          <td>Breadcrumbs</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>Nessun breadcrumb presente su nessuna pagina</td>
+        </tr>
+        <tr>
+          <td>Pagina 404 personalizzata</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Da verificare</td>
+        </tr>
+        <tr>
+          <td>Hreflang</td>
+          <td><span class="badge badge-warn">Warning</span></td>
+          <td>Il sito è solo in italiano ma il tag lang="it" andrebbe verificato nell'HTML</td>
+        </tr>
+        <tr>
+          <td>Dominio produzione</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>visionesostenibile.it ha solo 1 pagina indicizzata su Google. Redirect e SEO migration da pianificare</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- COMPETITOR COMPARISON -->
+<div class="section">
+  <div class="section-header"><h2>Competitor SEO Comparison</h2></div>
+  <div class="section-body">
+    <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem;">Confronto basato su dati pubblici e analisi dei siti. Competitor selezionati per sovrapposizione di servizi e territorio.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimensione</th>
+          <th>Visione Sostenibile</th>
+          <th>Edera Giardini</th>
+          <th>Quadrifoglio Garden</th>
+          <th>Vincitore</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Posizionamento unico</strong></td>
+          <td>Biodinamico, impatto zero, un referente</td>
+          <td>BIO, ecosostenibile, zero emissioni</td>
+          <td>Biodiversità urbana, piante autoctone</td>
+          <td class="winner">Visione Sost.</td>
+        </tr>
+        <tr>
+          <td><strong>Profondità contenuti</strong></td>
+          <td>~10 pagine, 3 blog post</td>
+          <td>~20+ pagine, blog attivo</td>
+          <td>~15 pagine, contenuti approfonditi</td>
+          <td class="winner">Edera Giardini</td>
+        </tr>
+        <tr>
+          <td><strong>Keyword targeting locale</strong></td>
+          <td>Debole — keyword locale assente nei title</td>
+          <td>Buono — "Airasca, Torino" nei titoli</td>
+          <td>Forte — "Nichelino", "Torino" nelle pagine</td>
+          <td class="winner">Quadrifoglio</td>
+        </tr>
+        <tr>
+          <td><strong>Presenza multi-dominio</strong></td>
+          <td>2 domini (yattalo + visionesostenibile.it)</td>
+          <td>3 domini (frammentazione SEO)</td>
+          <td>1 dominio consolidato</td>
+          <td class="winner">Quadrifoglio</td>
+        </tr>
+        <tr>
+          <td><strong>Social proof</strong></td>
+          <td>6 testimonial, quiz interattivo</td>
+          <td>Testimonial, portfolio</td>
+          <td>Testimonial</td>
+          <td class="winner">Visione Sost.</td>
+        </tr>
+        <tr>
+          <td><strong>UX / Design sito</strong></td>
+          <td>Moderno, animazioni, responsive</td>
+          <td>Professionale ma classico</td>
+          <td>E-commerce oriented</td>
+          <td class="winner">Visione Sost.</td>
+        </tr>
+        <tr>
+          <td><strong>Structured Data</strong></td>
+          <td>Assente</td>
+          <td>Parziale</td>
+          <td>Parziale</td>
+          <td>Nessuno</td>
+        </tr>
+        <tr>
+          <td><strong>Nicchia biodinamica</strong></td>
+          <td>20+ anni, certificata, core identity</td>
+          <td>Non dichiarata</td>
+          <td>Non dichiarata</td>
+          <td class="winner">Visione Sost.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="summary-box" style="margin-top: 1rem;">
+      <p><strong>Nota chiave:</strong> Visione Sostenibile ha il miglior posizionamento di marca e l'offerta più differenziata (biodinamica certificata), ma è indietro su volume di contenuti e ottimizzazione tecnica SEO. Il vantaggio competitivo unico nella nicchia biodinamica è una leva potente se supportata da contenuti mirati.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORITIZED ACTION PLAN -->
+<div class="section">
+  <div class="section-header"><h2>Piano d'Azione Prioritizzato</h2></div>
+  <div class="section-body">
+
+    <div class="action-group">
+      <h3>Quick Wins — Da fare questa settimana</h3>
+
+      <div class="action-item">
+        <div class="icon">🔴</div>
+        <div class="content">
+          <strong>Correggere tutti i title tag</strong>
+          Creare title unici per ogni pagina: "[Keyword Target] | Visione Sostenibile". Esempio: "Progettazione Giardini Torino | Visione Sostenibile", "Manutenzione Giardini Biodinamici | Visione Sostenibile"
+          <br><small>Impatto: Alto | Effort: 1-2 ore | Nessuna dipendenza</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">🔴</div>
+        <div class="content">
+          <strong>Correggere il numero di telefono placeholder</strong>
+          La pagina /servizi/progettazione-giardini linka a +39061234567. Sostituire con +39 371 482 1825 su tutte le pagine servizio.
+          <br><small>Impatto: Critico (UX) | Effort: 15 minuti | Nessuna dipendenza</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">🟠</div>
+        <div class="content">
+          <strong>Scrivere meta description per ogni pagina</strong>
+          150-160 caratteri, con keyword target e CTA. Esempio per homepage: "Visione Sostenibile progetta, realizza e mantiene giardini biodinamici a Torino e Piemonte. Un referente, zero chimica, impatto zero. Richiedi un sopralluogo."
+          <br><small>Impatto: Alto | Effort: 1-2 ore | Nessuna dipendenza</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">🟠</div>
+        <div class="content">
+          <strong>Aggiungere keyword locali agli H1 delle pagine servizio</strong>
+          Ogni pagina servizio dovrebbe avere "a Torino" o "in Piemonte" nel titolo H1 o H2 principale.
+          <br><small>Impatto: Alto | Effort: 30 minuti | Nessuna dipendenza</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">🟡</div>
+        <div class="content">
+          <strong>Allineare le zone operative</strong>
+          Homepage dice "Piemonte e Trentino", contatti dice "Piemonte e Lombardia". Unificare su tutte le pagine.
+          <br><small>Impatto: Medio | Effort: 15 minuti | Nessuna dipendenza</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">🟡</div>
+        <div class="content">
+          <strong>Aggiungere cross-linking blog ↔ servizi</strong>
+          L'articolo sulla manutenzione autunnale dovrebbe linkare alla pagina /servizi/manutenzioni. E viceversa.
+          <br><small>Impatto: Medio | Effort: 30 minuti | Nessuna dipendenza</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-group">
+      <h3>Investimenti Strategici — Pianificare per questo trimestre</h3>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Creare la pillar page "Giardino Biodinamico: Guida Completa"</strong>
+          2000+ parole. Unico contenuto di questo tipo in Italia. Coprire: cos'è, vantaggi, come funziona, differenze con chimico, FAQ. Linkare a tutti i servizi.
+          <br><small>Impatto: Alto | Effort: 1 giorno | Dipendenze: nessuna</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Implementare Schema.org structured data</strong>
+          LocalBusiness (con NAP e area servita), FAQPage sulle pagine con FAQ, Service per ogni servizio, BreadcrumbList per la navigazione.
+          <br><small>Impatto: Alto | Effort: Mezza giornata | Dipendenze: accesso al codice</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Creare landing page per zona</strong>
+          Pagine dedicate per Torino, Chivasso, Asti, Lago Maggiore con contenuti localizzati e testimonial della zona.
+          <br><small>Impatto: Alto | Effort: 1 giorno per pagina | Dipendenze: contenuti specifici per zona</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Piano editoriale blog: 2 articoli/mese</strong>
+          Mesi 1-3: Guida biodinamica, Costi giardino, Anti-zanzare naturale, Confronto biodinamico vs chimico, Piante per pendio (espandere), Guide stagionali primavera/estate.
+          <br><small>Impatto: Alto | Effort: Continuativo | Dipendenze: nessuna</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Creare Google Business Profile ottimizzato</strong>
+          Essenziale per le ricerche locali. Collegare al dominio di produzione visionesostenibile.it con NAP coerente.
+          <br><small>Impatto: Alto | Effort: 2 ore | Dipendenze: lancio dominio produzione</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Pianificare la migrazione SEO da staging a produzione</strong>
+          Redirect 301 se ci sono URL indicizzati su visionesostenibile.it. Verificare robots.txt, sitemap.xml, Google Search Console setup, e rimozione noindex dal dominio di produzione.
+          <br><small>Impatto: Critico | Effort: Mezza giornata | Dipendenze: lancio del sito</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Ottimizzare la velocità del sito</strong>
+          Il sito impiega 8-10 secondi a caricare. Comprimere immagini (WebP), lazy loading, minimizzare JS/CSS, verificare Core Web Vitals.
+          <br><small>Impatto: Alto | Effort: 1 giorno | Dipendenze: accesso al codice</small>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon">📝</div>
+        <div class="content">
+          <strong>Case study / portfolio dettagliato</strong>
+          Per i progetti completati: prima/dopo, descrizione tecnica, piante usate, risultati. Questo tipo di contenuto attira backlink e aumenta il tempo di permanenza.
+          <br><small>Impatto: Alto | Effort: Multi-giorno | Dipendenze: foto e dati dei progetti</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRODUCTION DOMAIN NOTE -->
+<div class="section">
+  <div class="section-header"><h2>Nota Importante: Dominio di Produzione</h2></div>
+  <div class="section-body">
+    <div class="summary-box">
+      <p>Il dominio di produzione <strong>visionesostenibile.it</strong> ha attualmente solo 1 pagina indicizzata su Google. Prima del lancio del nuovo sito:</p>
+      <p>1. Configurare <strong>Google Search Console</strong> per il dominio di produzione</p>
+      <p>2. Verificare che il <strong>robots.txt</strong> non blocchi l'indicizzazione</p>
+      <p>3. Creare e inviare una <strong>XML Sitemap</strong> completa</p>
+      <p>4. Impostare <strong>redirect 301</strong> dall'eventuale vecchio sito</p>
+      <p>5. Registrare/aggiornare il <strong>Google Business Profile</strong></p>
+      <p>6. Passare da email Gmail a <strong>info@visionesostenibile.it</strong></p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
