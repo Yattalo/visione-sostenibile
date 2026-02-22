@@ -11,7 +11,9 @@
     "start": "next start",
     "lint": "eslint",
     "generate-images": "dotenv -e .env.local -- npx tsx scripts/generate-images.ts",
-    "generate-blog-images": "dotenv -e .env.local -- npx tsx scripts/generate-blog-images.ts"
+    "generate-blog-images": "dotenv -e .env.local -- npx tsx scripts/generate-blog-images.ts",
+    "import-media-assets": "npx dotenv-cli -e .env.local -- npx tsx scripts/import-media-assets.ts",
+    "backfill-blog-covers": "npx dotenv-cli -e .env.local -- npx tsx scripts/backfill-blog-covers-from-gallery.ts"
   },
   "dependencies": {
     "@huggingface/inference": "^4.13.12",

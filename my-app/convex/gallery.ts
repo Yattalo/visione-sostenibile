@@ -1,4 +1,4 @@
-import { query, mutation, type QueryCtx } from "./_generated/server";
+import { query, mutation, type QueryCtx, type MutationCtx } from "./_generated/server";
 import { v } from "convex/values";
 import type { Id } from "./_generated/dataModel";
 
@@ -42,6 +42,45 @@ async function resolveAssetUrls<
       };
     })
   );
+}
+
+async function hasBlogStorageReference(
+  ctx: MutationCtx,
+  storageId: Id<"_storage">
+): Promise<boolean> {
+  const row = await ctx.db
+    .query("blogPosts")
+    .filter((q) => q.eq(q.field("coverStorageId"), storageId))
+    .first();
+  return Boolean(row);
+}
+
+async function hasGalleryStorageReference(
+  ctx: MutationCtx,
+  storageId: Id<"_storage">
+): Promise<boolean> {
+  const row = await ctx.db
+    .query("gallery")
+    .filter((q) => q.eq(q.field("storageId"), storageId))
+    .first();
+  return Boolean(row);
+}
+
+async function deleteStorageIfUnreferenced(
+  ctx: MutationCtx,
+  storageId: Id<"_storage">
+): Promise<boolean> {
+  const [referencedByBlog, referencedByGallery] = await Promise.all([
+    hasBlogStorageReference(ctx, storageId),
+    hasGalleryStorageReference(ctx, storageId),
+  ]);
+
+  if (referencedByBlog || referencedByGallery) {
+    return false;
+  }
+
+  await ctx.storage.delete(storageId);
+  return true;
 }
 
 // Get all active gallery images
@@ -174,10 +213,13 @@ export const remove = mutation({
   args: { id: v.id("gallery") },
   handler: async (ctx, args) => {
     const existing = await ctx.db.get(args.id);
-    if (existing?.storageId) {
-      await ctx.storage.delete(existing.storageId);
-    }
     await ctx.db.delete(args.id);
-    return { success: true };
+
+    let storageDeleted = false;
+    if (existing?.storageId) {
+      storageDeleted = await deleteStorageIfUnreferenced(ctx, existing.storageId);
+    }
+
+    return { success: true, storageDeleted };
   },
 });

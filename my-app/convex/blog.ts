@@ -1,6 +1,52 @@
-import { query, mutation, type QueryCtx } from "./_generated/server";
+import { query, mutation, type QueryCtx, type MutationCtx } from "./_generated/server";
 import { v } from "convex/values";
 import type { Id } from "./_generated/dataModel";
+
+async function hasBlogStorageReference(
+  ctx: MutationCtx,
+  storageId: Id<"_storage">,
+  excludePostId?: Id<"blogPosts">
+): Promise<boolean> {
+  const rows = await ctx.db
+    .query("blogPosts")
+    .filter((q) => q.eq(q.field("coverStorageId"), storageId))
+    .collect();
+
+  if (!excludePostId) {
+    return rows.length > 0;
+  }
+
+  return rows.some((row) => row._id !== excludePostId);
+}
+
+async function hasGalleryStorageReference(
+  ctx: MutationCtx,
+  storageId: Id<"_storage">
+): Promise<boolean> {
+  const row = await ctx.db
+    .query("gallery")
+    .filter((q) => q.eq(q.field("storageId"), storageId))
+    .first();
+  return Boolean(row);
+}
+
+async function deleteStorageIfUnreferenced(
+  ctx: MutationCtx,
+  storageId: Id<"_storage">,
+  excludePostId?: Id<"blogPosts">
+): Promise<boolean> {
+  const [referencedByBlog, referencedByGallery] = await Promise.all([
+    hasBlogStorageReference(ctx, storageId, excludePostId),
+    hasGalleryStorageReference(ctx, storageId),
+  ]);
+
+  if (referencedByBlog || referencedByGallery) {
+    return false;
+  }
+
+  await ctx.storage.delete(storageId);
+  return true;
+}
 
 async function resolveCoverImages<
   T extends {
@@ -145,14 +191,16 @@ export const update = mutation({
       throw new Error("Articolo non trovato");
     }
 
-    if (existing.coverStorageId && existing.coverStorageId !== data.coverStorageId) {
-      await ctx.storage.delete(existing.coverStorageId);
-    }
+    const previousStorageId = existing.coverStorageId;
 
     await ctx.db.patch(id, {
       ...data,
       updatedAt: Date.now(),
     });
+
+    if (previousStorageId && previousStorageId !== data.coverStorageId) {
+      await deleteStorageIfUnreferenced(ctx, previousStorageId);
+    }
     return { success: true };
   },
 });
@@ -176,10 +224,10 @@ export const remove = mutation({
   args: { id: v.id("blogPosts") },
   handler: async (ctx, args) => {
     const existing = await ctx.db.get(args.id);
-    if (existing?.coverStorageId) {
-      await ctx.storage.delete(existing.coverStorageId);
-    }
     await ctx.db.delete(args.id);
+    if (existing?.coverStorageId) {
+      await deleteStorageIfUnreferenced(ctx, existing.coverStorageId);
+    }
     return { success: true };
   },
 });

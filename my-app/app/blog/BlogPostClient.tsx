@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Calendar, User, ArrowRight, ListChecks } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, User, ArrowRight, ListChecks, Loader2 } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "../components/ui/Card";
@@ -375,10 +375,34 @@ export function BlogPostClient({
   slug: string;
   template?: string | string[];
 }) {
-  const convexPost = useQuery(api.blog.getBySlug, { slug });
-  const post = convexPost ?? staticGetBlogPost(slug);
-  const convexRelated = useQuery(api.blog.getRelated, { slug, category: post?.category ?? "" });
-  const relatedPosts = convexRelated ?? staticGetRelatedPosts(slug);
+  const hasConvexConfig = Boolean(
+    process.env.NEXT_PUBLIC_CONVEX_URL &&
+      !process.env.NEXT_PUBLIC_CONVEX_URL.includes("placeholder")
+  );
+  const convexPost = useQuery(
+    api.blog.getBySlug,
+    hasConvexConfig ? { slug } : "skip"
+  );
+  const post = hasConvexConfig ? convexPost ?? null : staticGetBlogPost(slug);
+  const convexRelated = useQuery(
+    api.blog.getRelated,
+    hasConvexConfig && post ? { slug, category: post.category } : "skip"
+  );
+  const galleryAssets = useQuery(api.gallery.getAll, hasConvexConfig ? {} : "skip");
+  const relatedPosts = hasConvexConfig
+    ? convexRelated ?? []
+    : staticGetRelatedPosts(slug);
+
+  if (hasConvexConfig && convexPost === undefined) {
+    return (
+      <div className="min-h-screen bg-paper-50 flex items-center justify-center">
+        <div className="inline-flex items-center gap-2 text-forest-800/70">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          Caricamento articolo dal CMS...
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     notFound();
@@ -389,6 +413,15 @@ export function BlogPostClient({
 
   const quickAnswer = quickAnswers[slug] ?? post.excerpt;
   const relatedService = serviceLinksByPostSlug[slug];
+  const videoAssets = (galleryAssets ?? []).filter(
+    (asset) => (asset.mediaType ?? "image") === "video" && Boolean(asset.imageUrl)
+  );
+  const templateTwoVideoUrl =
+    videoAssets[0]?.imageUrl ?? "/videos/nature-garden-flowers.mp4";
+  const templateThreeVideoUrl =
+    videoAssets[1]?.imageUrl ??
+    videoAssets[0]?.imageUrl ??
+    "/videos/garden-bloom-timelapse.mp4";
   const steps = articleSteps[slug] ?? [
     "Analizza il contesto del giardino.",
     "Definisci obiettivi e priorita.",
@@ -608,7 +641,7 @@ export function BlogPostClient({
                 <h3 className="font-display text-xl mb-3">Da vedere</h3>
                 <p className="text-paper-300/90 mb-4">Video dimostrativo del metodo operativo.</p>
                 <video controls className="w-full rounded-xl" preload="metadata">
-                  <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
+                  <source src={templateTwoVideoUrl} type="video/mp4" />
                 </video>
               </div>
             </aside>
@@ -638,7 +671,7 @@ export function BlogPostClient({
           <div className="bg-forest-950 rounded-2xl p-6 lg:p-8 text-paper-100">
             <h3 className="font-display text-2xl mb-4">Video esplicativo</h3>
             <video controls className="w-full rounded-xl" preload="metadata">
-              <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
+              <source src={templateThreeVideoUrl} type="video/mp4" />
             </video>
           </div>
         </section>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Calendar, ArrowRight } from "lucide-react";
+import { Clock, Calendar, ArrowRight, Loader2 } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "../components/ui/Card";
@@ -26,7 +26,11 @@ function EmptyState() {
 export default function BlogPage() {
   const siteUrl = "https://www.visionesostenibile.it";
   const convexPosts = useQuery(api.blog.getAll);
-  const posts = convexPosts ?? staticBlogPosts;
+  const hasConvexConfig = Boolean(
+    process.env.NEXT_PUBLIC_CONVEX_URL &&
+      !process.env.NEXT_PUBLIC_CONVEX_URL.includes("placeholder")
+  );
+  const posts = hasConvexConfig ? convexPosts ?? [] : staticBlogPosts;
   const resolveCoverImage = (coverImage?: string, fallback?: string) =>
     coverImage && coverImage.trim().length > 0
       ? coverImage
@@ -49,6 +53,17 @@ export default function BlogPage() {
       },
     ],
   };
+
+  if (hasConvexConfig && convexPosts === undefined) {
+    return (
+      <div className="min-h-screen bg-paper-50 flex items-center justify-center">
+        <div className="inline-flex items-center gap-2 text-forest-800/70">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          Caricamento articoli dal CMS...
+        </div>
+      </div>
+    );
+  }
 
   if (posts.length === 0) {
     return (

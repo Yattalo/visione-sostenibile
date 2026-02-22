@@ -17,6 +17,7 @@ import {
   UploadCloud,
   Link2,
   HardDrive,
+  Loader2,
 } from "lucide-react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -135,6 +136,7 @@ export default function AdminGalleryPage() {
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [notification, setNotification] = useState<Notification | null>(null);
+  const isLoading = galleryQuery === undefined || servicesQuery === undefined;
 
   // ── Derived ───────────────────────────────────────────────────────────────
   const categories = Array.from(
@@ -361,6 +363,17 @@ export default function AdminGalleryPage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   const effectivePreviewUrl = previewUrl ?? form.imageUrl.trim();
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[40vh] items-center justify-center">
+        <div className="inline-flex items-center gap-2 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          Caricamento libreria media...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

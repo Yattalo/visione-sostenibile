@@ -16,6 +16,7 @@ import {
   Trash2,
   ToggleLeft,
   ToggleRight,
+  Loader2,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -23,16 +24,31 @@ import { SlideUp } from "../components/animations";
 import { api } from "../../convex/_generated/api";
 
 export default function AdminDashboard() {
-  const services = useQuery(api.services.getAllAdmin) ?? [];
-  const gallery = useQuery(api.gallery.getAllAdmin) ?? [];
-  const reviews = useQuery(api.reviews.getAll) ?? [];
-  const contacts = useQuery(api.contacts.getAll) ?? [];
-  const crmContacts = useQuery(api.crm.listContacts, { limit: 500 }) ?? [];
-  const deliveries = useQuery(api.emails.listDeliveries, { limit: 500 }) ?? [];
+  const servicesQuery = useQuery(api.services.getAllAdmin);
+  const galleryQuery = useQuery(api.gallery.getAllAdmin);
+  const reviewsQuery = useQuery(api.reviews.getAll);
+  const contactsQuery = useQuery(api.contacts.getAll);
+  const crmContactsQuery = useQuery(api.crm.listContacts, { limit: 500 });
+  const deliveriesQuery = useQuery(api.emails.listDeliveries, { limit: 500 });
   const approveReview = useMutation(api.reviews.approve);
   const rejectReview = useMutation(api.reviews.reject);
   const updateGalleryAsset = useMutation(api.gallery.update);
   const removeGalleryAsset = useMutation(api.gallery.remove);
+
+  const isLoading =
+    servicesQuery === undefined ||
+    galleryQuery === undefined ||
+    reviewsQuery === undefined ||
+    contactsQuery === undefined ||
+    crmContactsQuery === undefined ||
+    deliveriesQuery === undefined;
+
+  const services = servicesQuery ?? [];
+  const gallery = galleryQuery ?? [];
+  const reviews = reviewsQuery ?? [];
+  const contacts = contactsQuery ?? [];
+  const crmContacts = crmContactsQuery ?? [];
+  const deliveries = deliveriesQuery ?? [];
 
   const activeServices = services.filter((service) => service.isActive);
   const approvedReviews = reviews.filter((review) => review.isApproved);
@@ -112,6 +128,17 @@ export default function AdminDashboard() {
     if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[40vh] items-center justify-center">
+        <div className="inline-flex items-center gap-2 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          Caricamento dashboard...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">

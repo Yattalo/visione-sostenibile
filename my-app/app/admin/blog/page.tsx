@@ -53,6 +53,19 @@ interface Notice {
   message: string;
 }
 
+interface GalleryAsset {
+  _id: Id<"gallery">;
+  title: string;
+  imageUrl: string;
+  mediaType?: "image" | "video";
+  storageId?: Id<"_storage">;
+  mimeType?: string;
+  fileName?: string;
+  sizeBytes?: number;
+  category?: string;
+  isActive: boolean;
+}
+
 // ── Helpers ──
 
 const emptyForm: BlogPostForm = {
@@ -97,6 +110,7 @@ function formatDate(timestamp: number): string {
 
 export default function AdminBlogPage() {
   const posts = useQuery(api.blog.getAllAdmin);
+  const galleryAssetsQuery = useQuery(api.gallery.getAllAdmin);
   const createPost = useMutation(api.blog.create);
   const updatePost = useMutation(api.blog.update);
   const togglePublish = useMutation(api.blog.togglePublish);
@@ -112,6 +126,8 @@ export default function AdminBlogPage() {
   const [saving, setSaving] = useState(false);
   const [uploadingCover, setUploadingCover] = useState(false);
   const [coverPreviewUrl, setCoverPreviewUrl] = useState<string | null>(null);
+  const [isMediaPickerOpen, setIsMediaPickerOpen] = useState(false);
+  const [mediaSearchQuery, setMediaSearchQuery] = useState("");
   const [deletingId, setDeletingId] = useState<Id<"blogPosts"> | null>(null);
   const [notice, setNotice] = useState<Notice | null>(null);
 
@@ -183,8 +199,8 @@ export default function AdminBlogPage() {
           coverMimeType: file.type || "",
           coverFileName: file.name,
           coverSizeBytes: file.size,
-          // If a storage file is uploaded, URL field becomes optional fallback.
-          coverImage: prev.coverImage.trim(),
+          // Prefer storage as source of truth after upload.
+          coverImage: "",
           title: prev.title || file.name.replace(/\.[^/.]+$/, ""),
         }));
         showNotice("success", "Cover caricata su Convex Storage.");
@@ -204,6 +220,8 @@ export default function AdminBlogPage() {
     clearBlobPreview();
     setEditingId(null);
     setEditingIsPublished(false);
+    setIsMediaPickerOpen(false);
+    setMediaSearchQuery("");
     setForm(emptyForm);
     setIsModalOpen(true);
   }, [clearBlobPreview]);
@@ -215,6 +233,8 @@ export default function AdminBlogPage() {
       clearBlobPreview();
       setEditingId(post._id);
       setEditingIsPublished(post.isPublished);
+      setIsMediaPickerOpen(false);
+      setMediaSearchQuery("");
       setForm({
         title: post.title,
         slug: post.slug,
@@ -233,6 +253,31 @@ export default function AdminBlogPage() {
       setIsModalOpen(true);
     },
     [clearBlobPreview]
+  );
+
+  const handleSelectCoverFromLibrary = useCallback(
+    (asset: GalleryAsset) => {
+      if (!asset.imageUrl?.trim()) {
+        showNotice("error", "Asset selezionato senza URL valido.");
+        return;
+      }
+
+      clearBlobPreview();
+      setCoverPreviewUrl(asset.imageUrl);
+      setForm((prev) => ({
+        ...prev,
+        coverImage: asset.storageId ? "" : asset.imageUrl,
+        coverStorageId: asset.storageId ?? "",
+        coverMimeType: asset.mimeType ?? "",
+        coverFileName: asset.fileName ?? asset.title,
+        coverSizeBytes: asset.sizeBytes ?? 0,
+        title: prev.title || asset.title,
+      }));
+      setIsMediaPickerOpen(false);
+      setMediaSearchQuery("");
+      showNotice("success", `Cover selezionata: ${asset.title}`);
+    },
+    [clearBlobPreview, showNotice]
   );
 
   // ── Save (create or update) ──
@@ -351,6 +396,15 @@ export default function AdminBlogPage() {
   const publishedCount = (posts ?? []).filter((p) => p.isPublished).length;
   const draftCount = (posts ?? []).filter((p) => !p.isPublished).length;
   const effectiveCoverPreview = coverPreviewUrl ?? form.coverImage.trim();
+  const galleryAssets = (galleryAssetsQuery ?? []) as GalleryAsset[];
+  const imageAssets = galleryAssets.filter(
+    (asset) => (asset.mediaType ?? "image") === "image"
+  );
+  const filteredImageAssets = imageAssets.filter((asset) =>
+    `${asset.title} ${asset.fileName ?? ""} ${asset.category ?? ""}`
+      .toLowerCase()
+      .includes(mediaSearchQuery.toLowerCase())
+  );
 
   // ── Loading state ──
 
@@ -660,6 +714,29 @@ export default function AdminBlogPage() {
             />
           </div>
 
+          <div className="rounded-xl border border-border bg-muted/20 px-4 py-3">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <p className="text-sm font-medium text-foreground">
+                  Libreria Media Convex
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Seleziona una cover gi&agrave; presente in galleria.
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsMediaPickerOpen(true)}
+                disabled={galleryAssetsQuery === undefined}
+              >
+                {galleryAssetsQuery === undefined
+                  ? "Caricamento..."
+                  : `Scegli da Libreria (${imageAssets.length})`}
+              </Button>
+            </div>
+          </div>
+
           {(form.coverStorageId || form.coverFileName) && (
             <div className="rounded-xl border border-border bg-muted/20 px-4 py-3 text-sm space-y-1">
               <p className="font-medium flex items-center gap-2">
@@ -673,13 +750,16 @@ export default function AdminBlogPage() {
                 type="button"
                 className="text-xs text-red-600 hover:text-red-700 underline mt-1"
                 onClick={() =>
-                  setForm((prev) => ({
-                    ...prev,
-                    coverStorageId: "",
-                    coverMimeType: "",
-                    coverFileName: "",
-                    coverSizeBytes: 0,
-                  }))
+                  {
+                    clearBlobPreview();
+                    setForm((prev) => ({
+                      ...prev,
+                      coverStorageId: "",
+                      coverMimeType: "",
+                      coverFileName: "",
+                      coverSizeBytes: 0,
+                    }));
+                  }
                 }
               >
                 Rimuovi cover da storage (usa URL manuale)
@@ -724,6 +804,74 @@ export default function AdminBlogPage() {
               {editingId ? "Salva Modifiche" : "Crea Articolo"}
             </Button>
           </div>
+        </div>
+      </Modal>
+
+      {/* ── Media Picker Modal ── */}
+      <Modal
+        isOpen={isMediaPickerOpen}
+        onClose={() => {
+          setIsMediaPickerOpen(false);
+          setMediaSearchQuery("");
+        }}
+        title="Seleziona cover dalla Libreria Media"
+        size="xl"
+      >
+        <div className="space-y-4">
+          <Input
+            placeholder="Cerca per titolo, file o categoria..."
+            value={mediaSearchQuery}
+            onChange={(e) => setMediaSearchQuery(e.target.value)}
+            icon={<Search className="w-4 h-4" />}
+          />
+
+          {galleryAssetsQuery === undefined ? (
+            <div className="flex items-center justify-center py-12 text-muted-foreground">
+              <Loader2 className="w-5 h-5 animate-spin mr-2" />
+              Caricamento libreria...
+            </div>
+          ) : filteredImageAssets.length === 0 ? (
+            <div className="rounded-xl border border-border bg-muted/20 px-4 py-8 text-center text-sm text-muted-foreground">
+              Nessuna immagine trovata con questi filtri.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[60vh] overflow-y-auto pr-1">
+              {filteredImageAssets.map((asset) => (
+                <button
+                  key={asset._id}
+                  type="button"
+                  onClick={() => handleSelectCoverFromLibrary(asset)}
+                  className="group text-left rounded-xl border border-border bg-white overflow-hidden hover:border-leaf-300 hover:shadow-sm transition-all"
+                >
+                  <div className="relative h-36 bg-paper-200">
+                    <img
+                      src={asset.imageUrl}
+                      alt={asset.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-3">
+                    <p className="font-medium text-sm text-foreground truncate">
+                      {asset.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1 truncate">
+                      {asset.fileName || "Senza nome file"}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge size="sm" variant="outline">
+                        {asset.category || "Generico"}
+                      </Badge>
+                      {asset.storageId && (
+                        <Badge size="sm" variant="earth">
+                          Storage
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </Modal>
 
