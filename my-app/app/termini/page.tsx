@@ -4,7 +4,7 @@ import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
   ...buildMetadata({
-    title: "Termini e Condizioni | Visione Sostenibile",
+    title: "Termini e Condizioni",
     description: "Termini e condizioni di utilizzo del sito Visione Sostenibile.",
     path: "/termini",
   }),

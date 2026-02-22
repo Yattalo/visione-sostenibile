@@ -6,7 +6,7 @@ import { buildMetadata } from "../lib/seo-metadata";
 
 export const metadata: Metadata = {
   ...buildMetadata({
-    title: "Privacy Policy | Visione Sostenibile",
+    title: "Privacy Policy",
     description:
       "Informativa sulla privacy e trattamento dei dati personali di Visione Sostenibile. Scopri come gestiamo i tuoi dati.",
     path: "/privacy",

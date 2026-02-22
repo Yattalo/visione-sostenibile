@@ -20,7 +20,7 @@ export async function generateMetadata({
 
   if (!project) {
     return buildMetadata({
-      title: "Progetto non trovato | Visione Sostenibile",
+      title: "Progetto non trovato",
       description:
         "Il progetto richiesto non e disponibile. Scopri il portfolio giardini di Visione Sostenibile.",
       path: `/progetti/${slug}`,
@@ -28,7 +28,7 @@ export async function generateMetadata({
   }
 
   return buildMetadata({
-    title: `${project.title} | Progetti Visione Sostenibile`,
+    title: `${project.title} | Progetti`,
     description: toMetaDescription(project.description),
     path: `/progetti/${slug}`,
     image: project.thumbnail ?? project.hero_image ?? undefined,

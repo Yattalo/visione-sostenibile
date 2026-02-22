@@ -20,7 +20,7 @@ export async function generateMetadata({
 
   if (!post) {
     return buildMetadata({
-      title: "Articolo non trovato | Blog Visione Sostenibile",
+      title: "Articolo non trovato | Blog",
       description:
         "L'articolo richiesto non e disponibile. Esplora il blog di Visione Sostenibile per altri contenuti.",
       path: `/blog/${slug}`,
@@ -28,7 +28,7 @@ export async function generateMetadata({
   }
 
   return buildMetadata({
-    title: `${post.title} | Blog Visione Sostenibile`,
+    title: `${post.title} | Blog`,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     image: post.coverImage,

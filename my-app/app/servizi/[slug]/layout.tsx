@@ -14,7 +14,7 @@ export async function generateMetadata({
 
   if (!service) {
     return buildMetadata({
-      title: "Servizio non trovato | Visione Sostenibile",
+      title: "Servizio non trovato",
       description:
         "Il servizio richiesto non e disponibile. Esplora tutti i servizi di giardinaggio sostenibile di Visione Sostenibile.",
       path: `/servizi/${rawSlug}`,

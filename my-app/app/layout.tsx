@@ -6,7 +6,7 @@ import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
 import { CookieConsent } from "./components/CookieConsent";
 import { pageSeo } from "./lib/seo-data";
-import { buildMetadata, SITE_URL } from "./lib/seo-metadata";
+import { buildMetadata, SITE_URL, SITE_NAME } from "./lib/seo-metadata";
 import localFont from "next/font/local";
 
 const walkway = localFont({
@@ -44,14 +44,10 @@ export const metadata: Metadata = {
     image: "/og-image.png",
     type: "website",
   }),
-  keywords: [
-    "giardini",
-    "progettazione paesaggistica",
-    "design verde",
-    "realizzazione giardini",
-    "Torino",
-    "Piemonte",
-  ],
+  title: {
+    template: "%s | Visione Sostenibile",
+    default: `${pageSeo.home.title} | ${SITE_NAME}`,
+  },
   metadataBase: new URL(SITE_URL),
   icons: {
     icon: [

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://www.visionesostenibile.it";
+export const SITE_NAME = "Visione Sostenibile";
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 
 type OpenGraphType = "website" | "article";
@@ -13,6 +14,11 @@ type BuildMetadataArgs = {
   type?: OpenGraphType;
 };
 
+/**
+ * Build page-specific metadata. The `title` param is the page-specific part
+ * WITHOUT the brand suffix — the root layout template appends " | Visione Sostenibile".
+ * OG/Twitter titles include the full branded version for social sharing.
+ */
 export function buildMetadata({
   title,
   description,
@@ -22,6 +28,7 @@ export function buildMetadata({
 }: BuildMetadataArgs): Metadata {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   const url = `${SITE_URL}${normalizedPath}`;
+  const ogTitle = `${title} | ${SITE_NAME}`;
 
   return {
     title,
@@ -33,22 +40,22 @@ export function buildMetadata({
       },
     },
     openGraph: {
-      title,
+      title: ogTitle,
       description,
       url,
       type,
       locale: "it_IT",
-      siteName: "Visione Sostenibile",
+      siteName: SITE_NAME,
       images: [
         {
           url: image,
-          alt: title,
+          alt: ogTitle,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: ogTitle,
       description,
       images: [image],
     },
