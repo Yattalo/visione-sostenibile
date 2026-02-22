@@ -20,7 +20,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { cn } from "../lib/utils";
-import { useAdminAuth } from "../hooks/useAdminAuth";
+import { useAdminAuthContext } from "./AdminAuthContext";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -43,7 +43,7 @@ export default function AdminShell({
   const isLoginPage = pathname === "/admin/login";
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isAuthenticated, isCheckingAuth, logout } = useAdminAuth();
+  const { isAuthenticated, isCheckingAuth, logout } = useAdminAuthContext();
 
   // Auth guard: redirect to login (must be before any early return to respect Rules of Hooks)
   useEffect(() => {

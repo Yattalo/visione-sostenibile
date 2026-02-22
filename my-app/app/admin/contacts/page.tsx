@@ -21,6 +21,7 @@ import { api } from "../../../convex/_generated/api";
 export default function AdminContactsPage() {
   const contacts = useQuery(api.contacts.getAll) ?? [];
   const markAsRead = useMutation(api.contacts.markAsRead);
+  const removeContact = useMutation(api.contacts.remove);
   const [filter, setFilter] = useState<"all" | "unread" | "replied">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -162,10 +163,14 @@ export default function AdminContactsPage() {
 
                   <div className="flex lg:flex-col gap-2">
                     {!contact.isReplied && (
-                      <Button variant="outline" size="sm">
-                        <Mail className="w-4 h-4 mr-1" />
-                        Rispondi
-                      </Button>
+                      <Link
+                        href={`/admin/crm?email=${encodeURIComponent(contact.email)}`}
+                      >
+                        <Button variant="outline" size="sm">
+                          <Mail className="w-4 h-4 mr-1" />
+                          Rispondi
+                        </Button>
+                      </Link>
                     )}
                     <Link
                       href={`/admin/crm?email=${encodeURIComponent(contact.email)}`}
@@ -186,7 +191,16 @@ export default function AdminContactsPage() {
                         Segna come letto
                       </Button>
                     )}
-                    <Button variant="ghost" size="sm" className="text-red-500 hover:bg-red-50">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-red-500 hover:bg-red-50"
+                      onClick={() => {
+                        if (window.confirm(`Eliminare il messaggio di ${contact.name}?`)) {
+                          removeContact({ submissionId: contact._id });
+                        }
+                      }}
+                    >
                       <Trash2 className="w-4 h-4 mr-1" />
                       Elimina
                     </Button>

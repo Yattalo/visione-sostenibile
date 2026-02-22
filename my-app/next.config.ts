@@ -12,6 +12,16 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.convex.cloud",
+        pathname: "/api/storage/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.convex.site",
+        pathname: "/api/storage/**",
+      },
     ],
   },
   async redirects() {

@@ -45,6 +45,9 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Hide public navbar on admin routes
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <motion.header
       initial={{ y: -100 }}

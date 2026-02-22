@@ -1,18 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import {
   FileText,
-  Image,
+  Image as ImageIcon,
+  Video,
   MessageSquare,
   Mail,
   Star,
   Users,
-  TrendingUp,
   ArrowRight,
   CheckCircle,
   AlertCircle,
+  Trash2,
+  ToggleLeft,
+  ToggleRight,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -20,31 +23,51 @@ import { SlideUp } from "../components/animations";
 import { api } from "../../convex/_generated/api";
 
 export default function AdminDashboard() {
-  const services = useQuery(api.services.getAll) ?? [];
-  const gallery = useQuery(api.gallery.getAll) ?? [];
+  const services = useQuery(api.services.getAllAdmin) ?? [];
+  const gallery = useQuery(api.gallery.getAllAdmin) ?? [];
   const reviews = useQuery(api.reviews.getAll) ?? [];
   const contacts = useQuery(api.contacts.getAll) ?? [];
   const crmContacts = useQuery(api.crm.listContacts, { limit: 500 }) ?? [];
   const deliveries = useQuery(api.emails.listDeliveries, { limit: 500 }) ?? [];
+  const approveReview = useMutation(api.reviews.approve);
+  const rejectReview = useMutation(api.reviews.reject);
+  const updateGalleryAsset = useMutation(api.gallery.update);
+  const removeGalleryAsset = useMutation(api.gallery.remove);
 
+  const activeServices = services.filter((service) => service.isActive);
   const approvedReviews = reviews.filter((review) => review.isApproved);
   const pendingReviews = reviews.filter((review) => !review.isApproved);
+  const imageAssets = gallery.filter((asset) => (asset.mediaType ?? "image") === "image");
+  const videoAssets = gallery.filter((asset) => (asset.mediaType ?? "image") === "video");
+  const recentAssets = [...gallery]
+    .sort(
+      (a, b) =>
+        (b.createdAt ?? b._creationTime) - (a.createdAt ?? a._creationTime)
+    )
+    .slice(0, 6);
   const recentContacts = contacts.slice(0, 3);
   const recentReviews = reviews.slice(0, 2);
 
   const stats = [
     {
       title: "Servizi Attivi",
-      value: services.length.toString(),
+      value: activeServices.length.toString(),
       icon: FileText,
       color: "from-leaf-500 to-leaf-600",
       href: "/admin/services",
     },
     {
-      title: "Immagini Galleria",
-      value: gallery.length.toString(),
-      icon: Image,
+      title: "Asset Foto",
+      value: imageAssets.length.toString(),
+      icon: ImageIcon,
       color: "from-leaf-500 to-leaf-600",
+      href: "/admin/gallery",
+    },
+    {
+      title: "Asset Video",
+      value: videoAssets.length.toString(),
+      icon: Video,
+      color: "from-violet-500 to-violet-600",
       href: "/admin/gallery",
     },
     {
@@ -84,6 +107,12 @@ export default function AdminDashboard() {
       year: "numeric",
     });
 
+  const formatFileSize = (bytes?: number) => {
+    if (!bytes || bytes <= 0) return "n/d";
+    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
   return (
     <div className="space-y-8">
       <SlideUp>
@@ -116,10 +145,9 @@ export default function AdminDashboard() {
                       <stat.icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 mt-4 text-leaf-600 text-sm">
-                    <TrendingUp className="w-4 h-4" />
-                    <span>+12% questo mese</span>
-                  </div>
+                  <p className="mt-4 text-xs text-muted-foreground">
+                    Dati reali sincronizzati da Convex
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -231,10 +259,20 @@ export default function AdminDashboard() {
                     </div>
                     {!review.isApproved && (
                       <div className="flex gap-2 mt-3">
-                        <button className="px-3 py-1 text-sm bg-sun-500 text-white rounded-lg opacity-60 cursor-not-allowed">
+                        <button
+                          onClick={() => approveReview({ reviewId: review._id })}
+                          className="px-3 py-1 text-sm bg-sun-500 text-white rounded-lg hover:bg-sun-400 transition-colors"
+                        >
                           Approva
                         </button>
-                        <button className="px-3 py-1 text-sm border border-border rounded-lg opacity-60 cursor-not-allowed">
+                        <button
+                          onClick={() => {
+                            if (window.confirm("Rifiutare e rimuovere questa recensione?")) {
+                              rejectReview({ reviewId: review._id });
+                            }
+                          }}
+                          className="px-3 py-1 text-sm border border-border rounded-lg hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors"
+                        >
                           Rifiuta
                         </button>
                       </div>
@@ -249,6 +287,108 @@ export default function AdminDashboard() {
 
       <SlideUp delay={0.4}>
         <Card variant="default">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <ImageIcon className="w-5 h-5 text-leaf-600" />
+              Gestione Rapida Asset
+            </CardTitle>
+            <Link href="/admin/gallery">
+              <Badge variant="outline" className="cursor-pointer hover:bg-leaf-50">
+                Apri Libreria Media
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Badge>
+            </Link>
+          </CardHeader>
+          <CardContent>
+            {recentAssets.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                Nessun asset disponibile. Carica foto/video da Libreria Media.
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {recentAssets.map((asset) => (
+                  <div
+                    key={asset._id}
+                    className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 p-3 rounded-xl border border-border bg-muted/20"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-medium truncate">{asset.title}</p>
+                      <div className="flex flex-wrap items-center gap-2 mt-1 text-xs text-muted-foreground">
+                        <Badge size="sm" variant="outline">
+                          {(asset.mediaType ?? "image") === "video" ? (
+                            <>
+                              <Video className="w-3 h-3 mr-1" />
+                              Video
+                            </>
+                          ) : (
+                            <>
+                              <ImageIcon className="w-3 h-3 mr-1" />
+                              Foto
+                            </>
+                          )}
+                        </Badge>
+                        <span>{asset.category || "Generico"}</span>
+                        <span>{formatFileSize(asset.sizeBytes)}</span>
+                        <span>{asset.isActive ? "Attivo" : "Disattivo"}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-border text-sm hover:bg-muted transition-colors"
+                        onClick={() =>
+                          updateGalleryAsset({
+                            id: asset._id,
+                            title: asset.title,
+                            description: asset.description,
+                            imageUrl: asset.storageId ? undefined : asset.imageUrl || undefined,
+                            mediaType: asset.mediaType ?? "image",
+                            storageId: asset.storageId,
+                            mimeType: asset.mimeType,
+                            fileName: asset.fileName,
+                            sizeBytes: asset.sizeBytes,
+                            category: asset.category,
+                            serviceId: asset.serviceId,
+                            order: asset.order,
+                            isActive: !asset.isActive,
+                          })
+                        }
+                      >
+                        {asset.isActive ? (
+                          <>
+                            <ToggleRight className="w-4 h-4 text-green-600" />
+                            Disattiva
+                          </>
+                        ) : (
+                          <>
+                            <ToggleLeft className="w-4 h-4 text-yellow-600" />
+                            Attiva
+                          </>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-red-200 text-red-600 text-sm hover:bg-red-50 transition-colors"
+                        onClick={() => {
+                          if (window.confirm(`Eliminare l'asset "${asset.title}"?`)) {
+                            removeGalleryAsset({ id: asset._id });
+                          }
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Elimina
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </SlideUp>
+
+      <SlideUp delay={0.5}>
+        <Card variant="default">
           <CardHeader>
             <CardTitle>Azioni Rapide</CardTitle>
           </CardHeader>
@@ -256,7 +396,7 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                   { label: "Gestisci Servizi", href: "/admin/services", icon: FileText },
-                  { label: "Gestisci Galleria", href: "/admin/gallery", icon: Image },
+                  { label: "Gestisci Galleria", href: "/admin/gallery", icon: ImageIcon },
                   { label: "Rispondi ai Messaggi", href: "/admin/contacts", icon: MessageSquare },
                   { label: "Apri CRM", href: "/admin/crm", icon: Users },
                   { label: "Template Email", href: "/admin/emails", icon: Mail },

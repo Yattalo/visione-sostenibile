@@ -1,15 +1,36 @@
-import { query, mutation } from "./_generated/server";
+import { query, mutation, type QueryCtx } from "./_generated/server";
 import { v } from "convex/values";
+import type { Id } from "./_generated/dataModel";
+
+async function resolveCoverImages<
+  T extends {
+    coverImage?: string;
+    coverStorageId?: Id<"_storage">;
+  },
+>(ctx: QueryCtx, rows: T[]): Promise<(T & { coverImage: string })[]> {
+  return await Promise.all(
+    rows.map(async (row) => {
+      const storageUrl = row.coverStorageId
+        ? await ctx.storage.getUrl(row.coverStorageId)
+        : null;
+      return {
+        ...row,
+        coverImage: storageUrl ?? row.coverImage ?? "",
+      };
+    })
+  );
+}
 
 // Get all published blog posts
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db
+    const rows = await ctx.db
       .query("blogPosts")
       .withIndex("by_published", (q) => q.eq("isPublished", true))
       .order("desc")
       .take(100);
+    return await resolveCoverImages(ctx, rows);
   },
 });
 
@@ -17,13 +38,14 @@ export const getAll = query({
 export const getByCategory = query({
   args: { category: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.db
+    const rows = await ctx.db
       .query("blogPosts")
       .withIndex("by_category", (q) =>
         q.eq("category", args.category).eq("isPublished", true)
       )
       .order("desc")
       .take(50);
+    return await resolveCoverImages(ctx, rows);
   },
 });
 
@@ -31,11 +53,14 @@ export const getByCategory = query({
 export const getBySlug = query({
   args: { slug: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.db
+    const post = await ctx.db
       .query("blogPosts")
       .withIndex("by_slug", (q) => q.eq("slug", args.slug))
       .filter((q) => q.eq(q.field("isPublished"), true))
       .first();
+    if (!post) return null;
+    const [resolved] = await resolveCoverImages(ctx, [post]);
+    return resolved;
   },
 });
 
@@ -50,7 +75,8 @@ export const getRelated = query({
       )
       .take(10);
 
-    return allPosts.filter((post) => post.slug !== args.slug).slice(0, 2);
+    const related = allPosts.filter((post) => post.slug !== args.slug).slice(0, 2);
+    return await resolveCoverImages(ctx, related);
   },
 });
 
@@ -62,11 +88,22 @@ export const create = mutation({
     excerpt: v.string(),
     content: v.string(),
     coverImage: v.optional(v.string()),
+    coverStorageId: v.optional(v.id("_storage")),
+    coverMimeType: v.optional(v.string()),
+    coverFileName: v.optional(v.string()),
+    coverSizeBytes: v.optional(v.number()),
     category: v.string(),
     author: v.string(),
     readTime: v.string(),
   },
   handler: async (ctx, args) => {
+    if (args.coverStorageId) {
+      const storageUrl = await ctx.storage.getUrl(args.coverStorageId);
+      if (!storageUrl) {
+        throw new Error("Cover image non trovata nello storage Convex");
+      }
+    }
+
     return await ctx.db.insert("blogPosts", {
       ...args,
       isPublished: false,
@@ -85,13 +122,33 @@ export const update = mutation({
     excerpt: v.string(),
     content: v.string(),
     coverImage: v.optional(v.string()),
+    coverStorageId: v.optional(v.id("_storage")),
+    coverMimeType: v.optional(v.string()),
+    coverFileName: v.optional(v.string()),
+    coverSizeBytes: v.optional(v.number()),
     category: v.string(),
     author: v.string(),
     readTime: v.string(),
     isPublished: v.boolean(),
   },
   handler: async (ctx, args) => {
+    if (args.coverStorageId) {
+      const storageUrl = await ctx.storage.getUrl(args.coverStorageId);
+      if (!storageUrl) {
+        throw new Error("Cover image non trovata nello storage Convex");
+      }
+    }
+
     const { id, ...data } = args;
+    const existing = await ctx.db.get(id);
+    if (!existing) {
+      throw new Error("Articolo non trovato");
+    }
+
+    if (existing.coverStorageId && existing.coverStorageId !== data.coverStorageId) {
+      await ctx.storage.delete(existing.coverStorageId);
+    }
+
     await ctx.db.patch(id, {
       ...data,
       updatedAt: Date.now(),
@@ -118,6 +175,10 @@ export const togglePublish = mutation({
 export const remove = mutation({
   args: { id: v.id("blogPosts") },
   handler: async (ctx, args) => {
+    const existing = await ctx.db.get(args.id);
+    if (existing?.coverStorageId) {
+      await ctx.storage.delete(existing.coverStorageId);
+    }
     await ctx.db.delete(args.id);
     return { success: true };
   },
@@ -127,7 +188,8 @@ export const remove = mutation({
 export const getAllAdmin = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("blogPosts").order("desc").take(100);
+    const rows = await ctx.db.query("blogPosts").order("desc").take(100);
+    return await resolveCoverImages(ctx, rows);
   },
 });
 

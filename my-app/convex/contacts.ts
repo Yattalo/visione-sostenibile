@@ -48,3 +48,12 @@ export const markAsRead = mutation({
     return { success: true };
   },
 });
+
+// Delete contact submission (admin)
+export const remove = mutation({
+  args: { submissionId: v.id("contactSubmissions") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.submissionId);
+    return { success: true };
+  },
+});

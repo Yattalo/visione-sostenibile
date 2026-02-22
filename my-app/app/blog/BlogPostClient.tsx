@@ -20,34 +20,6 @@ type FaqItem = {
 
 const SITE_URL = "https://www.visionesostenibile.it";
 
-const coverImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
-  "tendenze-giardini-2026": "/images/blog/tendenze-cover.png",
-  "piante-pendio": "/images/blog/pendio-cover.png",
-  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-cover.png",
-};
-
-const thumbImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
-  "tendenze-giardini-2026": "/images/blog/tendenze-cover.png",
-  "piante-pendio": "/images/blog/pendio-cover.png",
-  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-cover.png",
-};
-
-const infographicImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno": "/images/blog/autunno-calendario.png",
-  "tendenze-giardini-2026": "/images/blog/tendenze-infografica.png",
-  "piante-pendio": "/images/blog/pendio-infografica.png",
-  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-infografica.png",
-};
-
-const schemaImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno": "/images/blog/autunno-protezione-piante.png",
-  "tendenze-giardini-2026": "/images/blog/tendenze-irrigazione-smart.png",
-  "piante-pendio": "/images/blog/pendio-geotessile.png",
-  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-schema.png",
-};
-
 const quickAnswers: Record<string, string> = {
   "come-mantenere-giardino-autunno":
     "Per mantenere il giardino in autunno conviene pulire foglie e residui, proteggere le piante sensibili dal freddo, ridurre ma non azzerare l'irrigazione e concimare con prodotti ricchi di potassio. In questa fase prepari le radici all'inverno e migliori la ripresa vegetativa primaverile.",
@@ -214,6 +186,13 @@ const templateLabels: Record<TemplateVariant, string> = {
   3: "Template Checklist",
 };
 
+function resolveCoverImage(coverImage?: string, fallback?: string): string {
+  if (coverImage && coverImage.trim().length > 0) {
+    return coverImage;
+  }
+  return fallback ?? "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200";
+}
+
 const serviceLinksByPostSlug: Record<
   string,
   { href: string; label: string; summary: string }
@@ -270,7 +249,7 @@ function renderArticleContent(content: string) {
     .replace(/### Il dato\n\n/g, "### Il dato|||");
 
   const blocks = combined.split("\n\n");
-  let processed: React.ReactNode[] = [];
+  const processed: React.ReactNode[] = [];
   let i = 0;
 
   while (i < blocks.length) {
@@ -425,9 +404,7 @@ export function BlogPostClient({
   ];
 
   const articleUrl = `${SITE_URL}/blog/${post.slug}`;
-  const articleImage =
-    coverImages[post.slug] ??
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200";
+  const articleImage = resolveCoverImage(post.coverImage);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -722,8 +699,10 @@ export function BlogPostClient({
                       <div className="relative aspect-[16/9] overflow-hidden">
                         <Image
                           src={
-                            thumbImages[relatedPost.slug] ??
-                            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
+                            resolveCoverImage(
+                              relatedPost.coverImage,
+                              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
+                            )
                           }
                           alt={relatedPost.title}
                           width={600}

@@ -41,6 +41,7 @@ export const getFeatured = query({
 // Create/update service (admin)
 export const upsert = mutation({
   args: {
+    id: v.optional(v.id("services")),
     slug: v.string(),
     title: v.string(),
     shortDescription: v.string(),
@@ -54,23 +55,88 @@ export const upsert = mutation({
     metaDescription: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    const { id, ...data } = args;
+    const now = Date.now();
+
+    // Explicit update path: preserve current active state and prevent slug collisions.
+    if (id) {
+      const current = await ctx.db.get(id);
+      if (!current) {
+        throw new Error("Servizio non trovato");
+      }
+
+      const slugOwner = await ctx.db
+        .query("services")
+        .withIndex("by_slug", (q) => q.eq("slug", data.slug))
+        .first();
+
+      if (slugOwner && slugOwner._id !== id) {
+        throw new Error("Esiste gia' un servizio con questo slug");
+      }
+
+      await ctx.db.patch(id, {
+        ...data,
+        isActive: current.isActive,
+        updatedAt: now,
+      });
+      return id;
+    }
+
+    // Legacy upsert-by-slug path (used by seed/import workflows).
     const existing = await ctx.db
       .query("services")
-      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .withIndex("by_slug", (q) => q.eq("slug", data.slug))
       .first();
 
-    const data = {
-      ...args,
-      isActive: true,
-      updatedAt: Date.now(),
-    };
-
     if (existing) {
-      await ctx.db.patch(existing._id, data);
+      await ctx.db.patch(existing._id, {
+        ...data,
+        isActive: existing.isActive,
+        updatedAt: now,
+      });
       return existing._id;
-    } else {
-      return await ctx.db.insert("services", data);
     }
+
+    return await ctx.db.insert("services", {
+      ...data,
+      isActive: true,
+      updatedAt: now,
+    });
+  },
+});
+
+// Get all services including inactive (admin)
+export const getAllAdmin = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("services").order("asc").take(200);
+  },
+});
+
+// Delete service (admin)
+export const remove = mutation({
+  args: { id: v.id("services") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
+    return { success: true };
+  },
+});
+
+// Toggle active state (admin)
+export const toggleActive = mutation({
+  args: { id: v.id("services"), isActive: v.boolean() },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, { isActive: args.isActive, updatedAt: Date.now() });
+    return { success: true };
+  },
+});
+
+// Update order of a service (admin)
+export const updateOrder = mutation({
+  args: { id: v.id("services"), order: v.number() },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, { order: args.order, updatedAt: Date.now() });
+    return { success: true };
   },
 });
 

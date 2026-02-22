@@ -3,8 +3,14 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Hide public footer on admin routes
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <footer className="bg-forest-950 text-white py-20">
       <div className="container mx-auto px-6 text-center">

@@ -1,4 +1,5 @@
 import AdminShell from "./AdminShell";
+import { AdminAuthProvider } from "./AdminAuthContext";
 
 export const dynamic = "force-dynamic";
 
@@ -7,5 +8,9 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <AdminShell>{children}</AdminShell>;
+  return (
+    <AdminAuthProvider>
+      <AdminShell>{children}</AdminShell>
+    </AdminAuthProvider>
+  );
 }

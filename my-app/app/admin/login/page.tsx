@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Leaf, Eye, EyeOff } from "lucide-react";
-import { useAdminAuth } from "../../hooks/useAdminAuth";
+import { useAdminAuthContext } from "../AdminAuthContext";
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
@@ -11,22 +11,26 @@ export default function AdminLoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { login, isAuthenticated, isCheckingAuth } = useAdminAuth();
+  const { login, isAuthenticated, isCheckingAuth } = useAdminAuthContext();
 
-  if (isCheckingAuth) {
+  // Redirect to dashboard if already authenticated (must be in useEffect, not during render)
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/admin");
+    }
+  }, [isAuthenticated, router]);
+
+  if (isCheckingAuth || isAuthenticated) {
     return (
       <div className="min-h-screen bg-paper-canvas flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
           <Leaf className="w-10 h-10 text-leaf-500" />
-          <p className="text-forest-800/60 font-sans text-sm">Verifica sessione...</p>
+          <p className="text-forest-800/60 font-sans text-sm">
+            {isCheckingAuth ? "Verifica sessione..." : "Reindirizzamento..."}
+          </p>
         </div>
       </div>
     );
-  }
-
-  if (isAuthenticated) {
-    router.replace("/admin");
-    return null;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

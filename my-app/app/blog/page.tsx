@@ -15,15 +15,6 @@ import {
 } from "../components/animations";
 import { blogPosts as staticBlogPosts } from "../lib/blog";
 
-const coverImages: Record<string, string> = {
-  "come-mantenere-giardino-autunno":
-    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600",
-  "tendenze-giardini-2026":
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
-  "piante-pendio":
-    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600",
-};
-
 function EmptyState() {
   return (
     <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
@@ -36,6 +27,10 @@ export default function BlogPage() {
   const siteUrl = "https://www.visionesostenibile.it";
   const convexPosts = useQuery(api.blog.getAll);
   const posts = convexPosts ?? staticBlogPosts;
+  const resolveCoverImage = (coverImage?: string, fallback?: string) =>
+    coverImage && coverImage.trim().length > 0
+      ? coverImage
+      : fallback ?? "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600";
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -174,8 +169,10 @@ export default function BlogPage() {
                   <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
                     <Image
                       src={
-                        coverImages[featuredPost.slug] ??
-                        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600"
+                        resolveCoverImage(
+                          featuredPost.coverImage,
+                          "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600"
+                        )
                       }
                       alt={featuredPost.title}
                       width={800}
@@ -247,8 +244,7 @@ export default function BlogPage() {
                       <div className="relative aspect-[16/10] overflow-hidden">
                         <Image
                           src={
-                            coverImages[post.slug] ??
-                            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
+                            resolveCoverImage(post.coverImage)
                           }
                           alt={post.title}
                           width={600}
