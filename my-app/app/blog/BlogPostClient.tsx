@@ -24,24 +24,28 @@ const coverImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
   "tendenze-giardini-2026": "/images/blog/tendenze-cover.png",
   "piante-pendio": "/images/blog/pendio-cover.png",
+  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-cover.png",
 };
 
 const thumbImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-cover.png",
   "tendenze-giardini-2026": "/images/blog/tendenze-cover.png",
   "piante-pendio": "/images/blog/pendio-cover.png",
+  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-cover.png",
 };
 
 const infographicImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-calendario.png",
   "tendenze-giardini-2026": "/images/blog/tendenze-infografica.png",
   "piante-pendio": "/images/blog/pendio-infografica.png",
+  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-infografica.png",
 };
 
 const schemaImages: Record<string, string> = {
   "come-mantenere-giardino-autunno": "/images/blog/autunno-protezione-piante.png",
   "tendenze-giardini-2026": "/images/blog/tendenze-irrigazione-smart.png",
   "piante-pendio": "/images/blog/pendio-geotessile.png",
+  "checkup-sostenibile-aree-verdi-aziendali": "/images/blog/checkup-schema.png",
 };
 
 const quickAnswers: Record<string, string> = {
@@ -51,6 +55,8 @@ const quickAnswers: Record<string, string> = {
     "Le tendenze giardino 2026 puntano su bassa manutenzione, biodiversità e tecnologia smart: piante resistenti, irrigazione automatizzata, aree living esterne e illuminazione efficiente. L'obiettivo è avere spazi belli, funzionali e sostenibili con minori consumi nel tempo.",
   "piante-pendio":
     "Le migliori piante per terreni in pendio sono quelle con radici robuste, buona tolleranza alla siccità e funzione antierosione. In pratica: lavanda, rosmarino, coprisuolo come vinca e timo strisciante, più una posa corretta con geotessili e irrigazione a goccia.",
+  "checkup-sostenibile-aree-verdi-aziendali":
+    "Il Check-up Sostenibile è un sopralluogo tecnico di 60-90 minuti che analizza suolo, acqua, esposizione e criticità delle aree verdi aziendali o condominiali. Include tre priorità immediate, tre errori da evitare, un micro-piano in tre step e una stima di investimento per fase.",
 };
 
 const articleSteps: Record<string, string[]> = {
@@ -80,6 +86,14 @@ const articleSteps: Record<string, string[]> = {
     "Installa irrigazione a goccia seguendo le curve di livello del pendio.",
     "Mantieni irrigazione frequente il primo anno (2-3 volte/settimana in estate).",
     "Dal secondo anno riduci gli interventi: potature e controllo geotessile.",
+  ],
+  "checkup-sostenibile-aree-verdi-aziendali": [
+    "Prenotate un sopralluogo tecnico dal sito o contattate direttamente Visione Sostenibile.",
+    "Andrea analizza suolo, esposizione, microclima, acqua e impianti esistenti in 60-90 minuti.",
+    "Ricevete 3 priorità immediate e 3 errori da evitare, con motivazioni chiare.",
+    "Ottenete un micro-piano in 3 step: basi, verde e manutenzione programmata.",
+    "Valutate la stima di investimento per fase e decidete tempi e budget.",
+    "Se proseguite, si costruisce un piano di gestione su misura con regia unica.",
   ],
 };
 
@@ -165,6 +179,33 @@ const articleFaqs: Record<string, FaqItem[]> = {
         "Il primo anno e critico e richiede irrigazione frequente e diserbo manuale ogni 2-3 settimane. Dal secondo anno gli interventi si dimezzano. Dal terzo anno un pendio ben piantato diventa quasi autosufficiente, richiedendo solo potature di contenimento 1-2 volte l'anno.",
     },
   ],
+  "checkup-sostenibile-aree-verdi-aziendali": [
+    {
+      question: "Cos'è il Check-up Sostenibile di Visione Sostenibile?",
+      answer:
+        "È un sopralluogo tecnico di 60-90 minuti che analizza suolo, acqua, esposizione, impianti e criticità delle aree verdi aziendali o condominiali. L'obiettivo è fornire una diagnosi operativa con priorità, errori da evitare e un piano d'azione a fasi.",
+    },
+    {
+      question: "A chi è rivolto il Check-up Sostenibile?",
+      answer:
+        "È pensato per amministratori di condominio, facility manager aziendali, strutture ricettive e sedi rappresentative — ovvero contesti dove immagine, sicurezza e continuità del verde contano.",
+    },
+    {
+      question: "Quanto costa il Check-up Sostenibile?",
+      answer:
+        "Il costo dipende dalla superficie e complessità dell'area verde. Al termine del sopralluogo ricevete una stima di investimento suddivisa per fasi, così potete pianificare tempi e budget in modo trasparente.",
+    },
+    {
+      question: "In quali zone opera Visione Sostenibile?",
+      answer:
+        "Visione Sostenibile è operativa in Piemonte e Trentino Alto-Adige. La copertura si sta ampliando in Lombardia: Milano, hinterland e province su richiesta.",
+    },
+    {
+      question: "Cosa succede dopo il Check-up?",
+      answer:
+        "Se volete proseguire, costruiamo insieme un piano di gestione su misura con regia unica: dalla progettazione alla manutenzione programmata, con un solo referente e competenze verticali attivate solo quando servono.",
+    },
+  ],
 };
 
 const templateLabels: Record<TemplateVariant, string> = {
@@ -194,6 +235,12 @@ const serviceLinksByPostSlug: Record<
     label: "Rigenerazione Terreni",
     summary:
       "Per stabilizzare pendii e migliorare il suolo nel tempo, approfondisci il servizio di rigenerazione terreni.",
+  },
+  "checkup-sostenibile-aree-verdi-aziendali": {
+    href: "/contatti",
+    label: "Prenota il Check-up",
+    summary:
+      "Vuoi una diagnosi operativa per le tue aree verdi? Richiedi il Check-up Sostenibile: rispondiamo entro 48 ore.",
   },
 };
 

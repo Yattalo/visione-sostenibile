@@ -40,16 +40,17 @@ export default function AdminShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const isLoginPage = pathname === "/admin/login";
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { isAuthenticated, isCheckingAuth, logout } = useAdminAuth();
 
   // Auth guard: redirect to login (must be before any early return to respect Rules of Hooks)
   useEffect(() => {
-    if (!isAuthenticated && !isCheckingAuth) {
+    if (!isAuthenticated && !isCheckingAuth && !isLoginPage) {
       router.replace("/admin/login");
     }
-  }, [isAuthenticated, isCheckingAuth, router]);
+  }, [isAuthenticated, isCheckingAuth, isLoginPage, router]);
 
   const handleLogout = async () => {
     await logout();
@@ -66,6 +67,11 @@ export default function AdminShell({
         </div>
       </div>
     );
+  }
+
+  // Allow login page to render even if not authenticated
+  if (isLoginPage) {
+    return <>{children}</>;
   }
 
   // Show loading while redirecting

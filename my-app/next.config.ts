@@ -14,6 +14,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/admin/dashboard",
+        destination: "/admin",
+        permanent: true,
+      },
+      {
+        source: "/admin/crm/contacts",
+        destination: "/admin/crm",
+        permanent: true,
+      },
+      {
+        source: "/client-login",
+        destination: "/admin/login",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -359,6 +359,70 @@ Con le piante giuste, la tecnica corretta e un po' di pazienza, anche il pendio 
     publishedAt: "2026-01-10",
     readTime: "14 min",
   },
+  {
+    slug: "checkup-sostenibile-aree-verdi-aziendali",
+    title: "Check-up Sostenibile: il Primo Passo per Aree Verdi Aziendali che Non Bruciano Budget",
+    excerpt:
+      "Il Check-up Sostenibile analizza suolo, acqua e criticità delle aree verdi aziendali e condominiali. Un sopralluogo di 60-90 minuti che trasforma la gestione del verde da emergenza a strategia.",
+    content: `
+Gestire il verde aziendale o condominiale spesso significa rincorrere emergenze: piante che soffrono, impianti che perdono, fornitori diversi che non si parlano, e costi che lievitano senza un piano chiaro. Se vi riconoscete in questo scenario, non siete soli — e la soluzione non è spendere di più, ma partire dal punto giusto.
+
+Per questo abbiamo creato il **Check-up Sostenibile**: un sopralluogo tecnico di 60–90 minuti pensato per chi amministra aree verdi e vuole smettere di navigare a vista.
+
+## Cos'è il Check-up Sostenibile
+
+Non è un preventivo. Non è una consulenza generica. È una **diagnosi operativa** dello stato di salute del vostro verde, condotta sul campo da Andrea Giordano, fondatore di Visione Sostenibile e contractor del verde con oltre vent'anni di esperienza in progettazione, realizzazione e manutenzione sostenibile.
+
+In 60–90 minuti analizziamo ciò che conta davvero: la qualità del suolo, l'esposizione e il microclima, la gestione dell'acqua e degli impianti esistenti, le criticità strutturali e i vincoli di sicurezza. Non ci limitiamo a guardare le piante — leggiamo il sistema nel suo insieme.
+
+## Cosa Ottenete, Concretamente
+
+Al termine del Check-up ricevete un quadro chiaro e utilizzabile, non un documento da archiviare.
+
+**Tre priorità immediate**: le azioni più urgenti da affrontare, in ordine di impatto. Non tutto va fatto subito — ma alcune cose, se rimandate, costano il doppio.
+
+**Tre errori da evitare**: spesso il problema non è ciò che manca, ma ciò che si continua a fare nel modo sbagliato. Interventi stagionali mal calibrati, irrigazione inefficiente, scelte botaniche inadatte al microclima reale.
+
+**Un micro-piano in tre step**: una roadmap sintetica che distingue ciò che serve prima (basi, suolo, impianti), ciò che viene dopo (composizione vegetale, ottimizzazione) e ciò che completa il percorso (manutenzione programmata, eventuali integrazioni outdoor).
+
+**Una stima di range dell'investimento per step**: niente cifre al buio. Sapete cosa aspettarvi per ogni fase, così potete decidere tempi e priorità con il vostro budget reale.
+
+## Perché è Diverso da un Sopralluogo Tradizionale
+
+La differenza è nel metodo. Un sopralluogo classico parte dalla domanda "cosa volete fare?" e finisce con un preventivo. Il Check-up Sostenibile parte dalla domanda "cosa sta succedendo davvero?" e finisce con una strategia.
+
+Visione Sostenibile lavora come **contractor del verde**: un unico referente che coordina competenze verticali — irrigazione, potature tecniche, gestione fitosanitaria, outdoor living — attivandole solo quando servono. Questo significa che il Check-up non è orientato a vendervi un intervento, ma a farvi capire il quadro complessivo. Le scelte vengono dopo, motivate e condivise.
+
+Andrea spiega sempre il perché di ogni indicazione e propone alternative con pro e contro. Per un'azienda o un condominio, questo approccio ha un valore concreto: decisioni informate, meno ripensamenti, costi più prevedibili.
+
+## A Chi Serve il Check-up Sostenibile
+
+Il Check-up è pensato per chi gestisce verde in contesti dove immagine, sicurezza e continuità contano.
+
+**Amministratori di condominio** che vogliono passare dal "giardiniere a chiamata" a una gestione ordinata, con un calendario interventi e costi prevedibili. **Facility manager aziendali** che devono mantenere il decoro delle aree verdi senza sorprese a fine anno. **Strutture ricettive** dove il verde è parte dell'esperienza e della reputazione. **Sedi rappresentative** dove lo spazio esterno comunica quanto l'interno.
+
+In tutti questi casi, il verde non è un dettaglio: è un asset che può valorizzare o penalizzare. Il Check-up vi dice esattamente a che punto siete e dove conviene investire.
+
+## Il Problema che Risolve
+
+La maggior parte delle aree verdi aziendali e condominiali soffre dello stesso schema: interventi spot senza continuità, fornitori che cambiano, nessuno che abbia una visione d'insieme. Il risultato? Un verde che costa più del necessario e che non migliora mai davvero.
+
+Il Check-up Sostenibile rompe questo ciclo. Vi dà un punto di partenza solido e un percorso a fasi — così ogni euro investito ha una direzione e un ritorno misurabile nel tempo. Sostenibile non è una moda: è una strategia per non buttare via soldi.
+
+## Come Prenotare
+
+Il processo è semplice. Richiedete un sopralluogo tecnico dal nostro sito o contattateci direttamente. Rispondiamo entro 48 ore lavorative e concordiamo la data. Il Check-up si svolge in loco: serve vedere, toccare, capire il contesto reale.
+
+Dopo il sopralluogo, se volete proseguire, costruiamo insieme un piano di gestione su misura — con la stessa regia unica e lo stesso metodo che applichiamo dalla progettazione alla manutenzione programmata.
+
+Siamo operativi in Piemonte e Trentino Alto-Adige. In Lombardia stiamo ampliando la copertura: Milano, hinterland e province su richiesta.
+    `,
+    coverImage: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200&q=80",
+    category: "Servizi",
+    author: "Andrea Giordano",
+    publishedAt: "2026-02-22",
+    readTime: "8 min",
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

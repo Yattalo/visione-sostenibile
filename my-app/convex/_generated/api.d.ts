@@ -26,6 +26,7 @@ import type * as quiz from "../quiz.js";
 import type * as reviews from "../reviews.js";
 import type * as services from "../services.js";
 import type * as shareEvents from "../shareEvents.js";
+import type * as showcaseAuth from "../showcaseAuth.js";
 import type * as taskSystem_agentOps from "../taskSystem/agentOps.js";
 import type * as taskSystem_agents from "../taskSystem/agents.js";
 import type * as taskSystem_contextEntries from "../taskSystem/contextEntries.js";
@@ -65,6 +66,7 @@ declare const fullApi: ApiFromModules<{
   reviews: typeof reviews;
   services: typeof services;
   shareEvents: typeof shareEvents;
+  showcaseAuth: typeof showcaseAuth;
   "taskSystem/agentOps": typeof taskSystem_agentOps;
   "taskSystem/agents": typeof taskSystem_agents;
   "taskSystem/contextEntries": typeof taskSystem_contextEntries;
