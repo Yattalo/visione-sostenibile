@@ -546,7 +546,8 @@ export function BlogPostClient({
               <Image
                 src={articleImage}
                 alt={post.title}
-                fill
+                width={1200}
+                height={514}
                 sizes="(max-width: 1280px) 100vw, 1200px"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -678,7 +679,8 @@ export function BlogPostClient({
                             "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
                           }
                           alt={relatedPost.title}
-                          fill
+                          width={600}
+                          height={338}
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />

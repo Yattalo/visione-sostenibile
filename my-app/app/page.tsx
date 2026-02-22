@@ -492,9 +492,10 @@ export default function HomePage() {
                 <Image
                   src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800"
                   alt="Giardino realizzato"
-                  fill
+                  width={800}
+                  height={1000}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-950/40 to-transparent" />
               </div>

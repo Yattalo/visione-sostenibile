@@ -178,7 +178,8 @@ export default function BlogPage() {
                         "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600"
                       }
                       alt={featuredPost.title}
-                      fill
+                      width={800}
+                      height={600}
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
@@ -250,7 +251,8 @@ export default function BlogPage() {
                             "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
                           }
                           alt={post.title}
-                          fill
+                          width={600}
+                          height={375}
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />

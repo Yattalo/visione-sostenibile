@@ -52,9 +52,10 @@ export function ServiceCard({
           <Image
             src={image}
             alt={title}
-            fill
+            width={630}
+            height={472}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-950/60 via-forest-950/5 to-transparent" />
           <div className="absolute inset-0 bg-leaf-600/0 mix-blend-multiply transition-colors duration-700 group-hover:bg-leaf-600/10" />
