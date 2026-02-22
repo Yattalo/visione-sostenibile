@@ -4,6 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useAnimation, Variant } from "framer-motion";
 import { cn } from "../lib/utils";
 
+/**
+ * Hook to detect client-side hydration. Returns false during SSR and first
+ * client render, true after mount. This prevents animation initial states
+ * (opacity: 0) from being baked into the SSR HTML, which search engines
+ * flag as "hidden content".
+ */
+function useHasMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}
+
 export function useScrollAnimation(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: threshold });
@@ -26,9 +38,11 @@ interface FadeInProps {
 }
 
 export function FadeIn({ children, delay = 0, duration = 0.6, className }: FadeInProps) {
+  const mounted = useHasMounted();
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={mounted ? { opacity: 0 } : false}
       animate={{ opacity: 1 }}
       transition={{ duration, delay }}
       className={className}
@@ -54,11 +68,12 @@ export function SlideUp({
   threshold = 0.1,
 }: SlideUpProps) {
   const { ref, controls } = useScrollAnimation(threshold);
+  const mounted = useHasMounted();
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
+      initial={mounted ? "hidden" : false}
       animate={controls}
       variants={{
         hidden: { opacity: 0, y: 30 },
@@ -84,11 +99,12 @@ interface SlideDownProps {
 
 export function SlideDown({ children, delay = 0, duration = 0.5, className }: SlideDownProps) {
   const { ref, controls } = useScrollAnimation(0.1);
+  const mounted = useHasMounted();
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
+      initial={mounted ? "hidden" : false}
       animate={controls}
       variants={{
         hidden: { opacity: 0, y: -20 },
@@ -121,11 +137,12 @@ export function ScaleIn({
   scale = 0.95,
 }: ScaleInProps) {
   const { ref, controls } = useScrollAnimation(0.1);
+  const mounted = useHasMounted();
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
+      initial={mounted ? "hidden" : false}
       animate={controls}
       variants={{
         hidden: { opacity: 0, scale },
@@ -150,11 +167,12 @@ interface StaggerContainerProps {
 
 export function StaggerContainer({ children, className, delay = 0 }: StaggerContainerProps) {
   const { ref, controls } = useScrollAnimation(0.1);
+  const mounted = useHasMounted();
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
+      initial={mounted ? "hidden" : false}
       animate={controls}
       variants={{
         hidden: { opacity: 0 },
@@ -193,11 +211,12 @@ export function StaggerItem({
   },
 }: StaggerItemProps) {
   const { ref, controls } = useScrollAnimation(0.1);
+  const mounted = useHasMounted();
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
+      initial={mounted ? "hidden" : false}
       animate={controls}
       variants={variants}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
