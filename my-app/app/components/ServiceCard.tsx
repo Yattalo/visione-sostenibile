@@ -44,8 +44,7 @@ export function ServiceCard({
   return (
     <Link href={`/servizi/${normalizedSlug}`} className="block h-full group">
       <article
-        className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-paper-300/60 bg-paper-50
-                    transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/50 hover:shadow-floating"
+        className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-paper-300/60 bg-paper-50 transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/50 hover:shadow-floating"
       >
         {/* Image */}
         <div className="relative aspect-[4/3] overflow-hidden">
@@ -67,8 +66,7 @@ export function ServiceCard({
 
           {/* Category pill — frosted glass */}
           <span
-            className="absolute right-5 top-5 rounded-full border border-paper-50/20 bg-paper-50/15 px-3 py-1
-                        font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-paper-50/90 backdrop-blur-md"
+            className="absolute right-5 top-5 rounded-full border border-paper-50/20 bg-paper-50/15 px-3 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-paper-50/90 backdrop-blur-md"
           >
             {tagline}
           </span>
@@ -77,8 +75,7 @@ export function ServiceCard({
         {/* Content */}
         <div className="flex flex-1 flex-col p-7">
           <h3
-            className="font-display text-[22px] leading-tight text-forest-950 transition-colors duration-300
-                        group-hover:text-leaf-600"
+            className="font-display text-[22px] leading-tight text-forest-950 transition-colors duration-300 group-hover:text-leaf-600"
           >
             {title}
           </h3>
@@ -90,18 +87,15 @@ export function ServiceCard({
           {/* Separator + CTA */}
           <div className="mt-6 flex items-center justify-between border-t border-paper-300/80 pt-5">
             <span
-              className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600 transition-colors
-                          duration-300 group-hover:text-sun-500"
+              className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600 transition-colors duration-300 group-hover:text-sun-500"
             >
               Scopri il servizio
             </span>
             <span
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-200
-                          transition-all duration-300 group-hover:bg-sun-400"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-200 transition-all duration-300 group-hover:bg-sun-400"
             >
               <ArrowRight
-                className="h-3.5 w-3.5 text-leaf-700 transition-all duration-300
-                            group-hover:translate-x-0.5 group-hover:text-white"
+                className="h-3.5 w-3.5 text-leaf-700 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-white"
               />
             </span>
           </div>

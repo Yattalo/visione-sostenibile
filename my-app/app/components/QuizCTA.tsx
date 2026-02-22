@@ -17,9 +17,7 @@ export function QuizCTA({ variant = "sidebar", className }: QuizCTAProps) {
       <div className={cn("flex items-center justify-center", className)}>
         <Link
           href="/quiz"
-          className="group inline-flex items-center gap-2.5 rounded-full border border-leaf-700/25 bg-paper-50/85 px-6 py-3
-                     font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-leaf-700 transition-all duration-300
-                     hover:-translate-y-0.5 hover:border-leaf-600/45 hover:bg-leaf-50"
+          className="group inline-flex items-center gap-2.5 rounded-full border border-leaf-700/25 bg-paper-50/85 px-6 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-leaf-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-leaf-600/45 hover:bg-leaf-50"
         >
           <Sprout className="h-4 w-4 text-leaf-500 transition-colors group-hover:text-leaf-700" />
           Inizia il quiz completo

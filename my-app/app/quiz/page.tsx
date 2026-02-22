@@ -521,13 +521,10 @@ export default function QuizPage() {
                   <StaggerItem key={option.id} delay={index * 0.1}>
                     <button
                       onClick={() => handleAnswer(option.id)}
-                      className="w-full bg-white border border-paper-200/50 rounded-[30px] p-7 text-left
-                                 step-card hover-germoglio cursor-pointer group"
+                      className="w-full bg-white border border-paper-200/50 rounded-[30px] p-7 text-left step-card hover-germoglio cursor-pointer group"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-leaf-50 flex items-center justify-center
-                                        text-leaf-600 shrink-0 transition-colors duration-300
-                                        group-hover:bg-leaf-100 group-hover:text-leaf-700">
+                        <div className="w-12 h-12 rounded-2xl bg-leaf-50 flex items-center justify-center text-leaf-600 shrink-0 transition-colors duration-300 group-hover:bg-leaf-100 group-hover:text-leaf-700">
                           {option.icon}
                         </div>
                         <span className="text-base font-medium text-forest-950 pt-2 leading-snug">

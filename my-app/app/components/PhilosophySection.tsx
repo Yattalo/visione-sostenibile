@@ -170,10 +170,7 @@ export function PhilosophySection() {
 
           {/* ▸ Atmospheric glow orb */}
           <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                       w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full
-                       blur-[100px] md:blur-[150px] pointer-events-none
-                       transition-colors duration-1000"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[100px] md:blur-[150px] pointer-events-none transition-colors duration-1000"
             style={{ backgroundColor: active.glowColor, y: bgY }}
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -224,9 +221,7 @@ export function PhilosophySection() {
                     <div className="relative">
                       {/* Large decorative number */}
                       <motion.span
-                        className="absolute -top-12 -left-2 md:-top-20 md:-left-6
-                                   font-display text-[8rem] md:text-[14rem] font-bold
-                                   leading-none text-white select-none pointer-events-none"
+                        className="absolute -top-12 -left-2 md:-top-20 md:-left-6 font-display text-[8rem] md:text-[14rem] font-bold leading-none text-white select-none pointer-events-none"
                         animate={{
                           opacity: show ? 0.03 : 0,
                           y: show ? 0 : 40,
@@ -239,8 +234,7 @@ export function PhilosophySection() {
 
                       {/* Element counter */}
                       <motion.span
-                        className="relative font-sans text-xs md:text-sm
-                                   tracking-[0.3em] uppercase mb-4 md:mb-6 block"
+                        className="relative font-sans text-xs md:text-sm tracking-[0.3em] uppercase mb-4 md:mb-6 block"
                         style={{ color: el.accentColor }}
                         animate={{
                           opacity: show ? 1 : 0,
@@ -257,9 +251,7 @@ export function PhilosophySection() {
 
                       {/* Title with blur reveal */}
                       <motion.h3
-                        className="relative font-display text-6xl sm:text-7xl md:text-8xl
-                                   lg:text-9xl font-light text-white mb-4 md:mb-6
-                                   leading-[0.9]"
+                        className="relative font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white mb-4 md:mb-6 leading-[0.9]"
                         animate={{
                           opacity: show ? 1 : 0,
                           y: show ? 0 : 50,
@@ -292,8 +284,7 @@ export function PhilosophySection() {
 
                       {/* Description */}
                       <motion.p
-                        className="relative font-body text-lg md:text-xl
-                                   text-white/60 leading-relaxed max-w-lg"
+                        className="relative font-body text-lg md:text-xl text-white/60 leading-relaxed max-w-lg"
                         animate={{
                           opacity: show ? 1 : 0,
                           y: show ? 0 : 25,
@@ -365,8 +356,7 @@ export function PhilosophySection() {
 
                         {/* Icon container with element-specific animation */}
                         <motion.div
-                          className="relative w-40 h-40 md:w-52 md:h-52 rounded-full
-                                     border flex items-center justify-center backdrop-blur-sm"
+                          className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border flex items-center justify-center backdrop-blur-sm"
                           style={{
                             borderColor: `${el.accentColor}25`,
                             backgroundColor: `${el.accentColor}08`,
@@ -427,8 +417,7 @@ export function PhilosophySection() {
 
           {/* ▸ Navigation dots (right side) */}
           <div
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20
-                       flex flex-col gap-3 md:gap-4"
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3 md:gap-4"
           >
             {ELEMENTS.map((el, i) => (
               <div
@@ -436,10 +425,7 @@ export function PhilosophySection() {
                 className="relative group flex items-center justify-end"
               >
                 <span
-                  className="absolute right-7 font-sans text-[10px] md:text-xs
-                             tracking-wider uppercase text-white/0
-                             group-hover:text-white/60 transition-all duration-300
-                             whitespace-nowrap"
+                  className="absolute right-7 font-sans text-[10px] md:text-xs tracking-wider uppercase text-white/0 group-hover:text-white/60 transition-all duration-300 whitespace-nowrap"
                 >
                   {el.title}
                 </span>
@@ -460,8 +446,7 @@ export function PhilosophySection() {
 
           {/* ▸ Scroll indicator */}
           <motion.div
-            className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20
-                       flex flex-col items-center gap-2"
+            className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
             animate={{
               opacity: activeIndex < 3 ? 0.6 : 0,
               y: [0, 6, 0],

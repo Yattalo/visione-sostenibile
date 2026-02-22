@@ -40,10 +40,7 @@ export function QuizMiniPreview({ className }: QuizMiniPreviewProps) {
               key={option.id}
               onClick={handleOptionClick}
               aria-label={`Seleziona "${option.label}" e inizia il quiz`}
-              className="group relative overflow-hidden rounded-[24px] border border-paper-300/70 bg-white px-5 py-5 text-left
-                         transition-all duration-300 hover:-translate-y-0.5 hover:border-leaf-500/40 hover:shadow-soft
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-400 focus-visible:ring-offset-2
-                         focus-visible:ring-offset-paper-50"
+              className="group relative overflow-hidden rounded-[24px] border border-paper-300/70 bg-white px-5 py-5 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-leaf-500/40 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-400 focus-visible:ring-offset-2 focus-visible:ring-offset-paper-50"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-leaf-50/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative flex items-start gap-3.5">

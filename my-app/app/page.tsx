@@ -337,9 +337,7 @@ export default function HomePage() {
           >
             <Link
               href="/servizi"
-              className="border-2 border-leaf-600 text-leaf-700 hover:bg-leaf-700 hover:text-white
-                         px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase
-                         transition-all duration-300 shadow-sm hover:shadow-medium font-sans"
+              className="border-2 border-leaf-600 text-leaf-700 hover:bg-leaf-700 hover:text-white px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-sm hover:shadow-medium font-sans"
             >
               Tutti i Servizi
             </Link>
