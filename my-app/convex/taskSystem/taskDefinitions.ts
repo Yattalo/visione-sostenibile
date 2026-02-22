@@ -1926,4 +1926,33 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     ],
     filesExpected: [],
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE: DEPLOY — Pre-production checklist
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-PROD1",
+    agent: "claude",
+    title: "Aggiornare env vars Convex/Dokploy per produzione",
+    description:
+      "Prima del go-live, aggiornare tutte le environment variables che puntano a staging/dev. Convex: SITE_URL (da visione.yattalo.com a dominio prod), EMAIL_FROM (verificare dominio mittente), ADMIN_NOTIFICATION_EMAIL (confermare destinatari con Andrea). Dokploy: NEXT_PUBLIC_CONVEX_URL (deployment prod), NEXT_PUBLIC_SITE_URL (dominio prod). Se il dominio prod è diverso da visione.yattalo.com, ri-verificare dominio su Resend e aggiungere nuovi record DNS (DKIM, SPF, MX, DMARC).",
+    status: "backlog",
+    priority: "high",
+    category: "devops",
+    phaseId: "deploy",
+    wave: 15,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["env", "production", "resend", "dns", "dokploy", "convex"],
+    acceptanceCriteria: [
+      "SITE_URL punta al dominio produzione",
+      "EMAIL_FROM usa dominio verificato su Resend",
+      "ADMIN_NOTIFICATION_EMAIL confermato con Andrea",
+      "NEXT_PUBLIC_CONVEX_URL punta a deployment prod",
+      "npx convex run emails:getProviderStatus '{}' restituisce canSend: true",
+      "Email di test inviata e ricevuta correttamente",
+    ],
+    filesExpected: [],
+  },
 ];
