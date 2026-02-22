@@ -113,3 +113,33 @@ Custom CSS utilities: `.bg-cream-gradient`, `.bg-moss-gradient`, `.text-gradient
 
 For full BMAD context (palette, typography, micro-funnel, scorecard, roadmap), see:
 `my-app/docs/foundation_docs/CLAUDE.md`
+
+## Repository Structure
+
+```
+root/
+├── my-app/              ← Progetto Next.js principale (usa questo per 开发)
+├── .claude/             ← Claude Code: settings + skills
+├── tools/               ← Script eseguibili (node/python)
+├── docs/                ← Documentazione (prompt, audit, setup, screenshot baseline)
+├── artifacts/           ← Output di lavoro (ignorato da git)
+└── social-content/      ← Workspace generazione contenuti social (ignorato da git)
+```
+
+### Cartelle Speciali (Progressive Disclosure)
+
+**Solo se devi lavorare su quello specifico dominio:**
+
+- `tools/agent-ops/` — Script per orchestrazione agenti (🤖 agent-dispatch)
+- `docs/workspace/` — PowerPoint production e slide template
+- `docs/prompts/` — Prompt per generazione contenuti blog/servizi
+- `docs/screenshot-baseline/` — Reference visivo QA (legilo se fai screenshot testing)
+- `docs/quiz-screenshots/` — Screenshot quiz per reference
+- `artifacts/workspace/` — Ambiente PowerPoint production
+- `artifacts/video/` — Video generati (Sora)
+- `artifacts/pdf/` — PDF generati
+- `social-content/` — Workspace Instagram posts (💡 contenuti social)
+
+**Non toccare a meno che non ti venga chiesto esplicitamente:**
+- `artifacts/tmp/` — Work in progress temporaneo
+- `artifacts/stitching/` — Immagini stitched per preview

@@ -68,3 +68,35 @@ Visione sostenibile/Burocrazia/
 
 # Git worktrees
 .worktrees/
+.claude/worktrees/
+
+# AI Agent workspaces (runtime/local)
+.claude/
+!.claude/settings.local.json
+.agent/
+.agents/
+.cline/
+.goose/
+.windsurf/
+my-app/.agent/
+my-app/.agents/
+my-app/.claude/
+my-app/.cline/
+my-app/.goose/
+my-app/.windsurf/
+
+# Artifacts (output di lavoro, generati, temporanei)
+artifacts/
+social-content/
+
+# Local scripts and generated docs in my-app
+my-app/TASKS.md
+my-app/blog-checkup-sostenibile-b2b.md
+my-app/prompt-seo-fix-round2.md
+my-app/scripts/import-walkthrough-tasks.ts
+my-app/skills-lock.json
+my-app/.git-backup/
+.claude/settings.local.json
+
+# Root npm lockfile (progetto usa pnpm)
+/package-lock.json
