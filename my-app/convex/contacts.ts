@@ -13,8 +13,10 @@ export const submit = mutation({
     serviceInterest: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    const normalizedEmail = args.email.trim().toLowerCase();
     const submissionId = await ctx.db.insert("contactSubmissions", {
       ...args,
+      email: normalizedEmail,
       isRead: false,
       isReplied: false,
       createdAt: Date.now(),
@@ -22,6 +24,7 @@ export const submit = mutation({
 
     const payload = {
       ...args,
+      email: normalizedEmail,
       submissionId: String(submissionId),
     };
 

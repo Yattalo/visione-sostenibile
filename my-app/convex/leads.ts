@@ -50,10 +50,12 @@ export const submit = mutation({
     phone: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    const normalizedEmail = args.email.trim().toLowerCase();
     const scorecardId = generateScorecardId();
     const resultProfile = computeProfileFromScore(args.quizAnswers.map((a) => a.score));
     const leadId = await ctx.db.insert("leads", {
       ...args,
+      email: normalizedEmail,
       scorecardId,
       createdAt: Date.now(),
       isContacted: false,
@@ -63,7 +65,7 @@ export const submit = mutation({
       leadId: String(leadId),
       scorecardId,
       name: args.name,
-      email: args.email,
+      email: normalizedEmail,
       phone: args.phone,
       resultProfile,
     });
@@ -72,7 +74,7 @@ export const submit = mutation({
       leadId: String(leadId),
       scorecardId,
       name: args.name,
-      email: args.email,
+      email: normalizedEmail,
       phone: args.phone,
       resultProfile,
     });

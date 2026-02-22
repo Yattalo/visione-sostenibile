@@ -60,6 +60,15 @@ type CrmContactDetail = {
   deliveries: DeliveryItem[];
 };
 
+type EmailProviderStatus = {
+  hasResendApiKey: boolean;
+  hasEmailFrom: boolean;
+  emailFrom: string;
+  adminRecipientsCount: number;
+  hasAdminRecipients: boolean;
+  canSend: boolean;
+};
+
 export default function AdminCrmPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
@@ -95,7 +104,6 @@ export default function AdminCrmPage() {
     if (requestedEmail) {
       const byEmail = contacts.find((contact) => contact.email === requestedEmail);
       if (byEmail) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedContactId(byEmail._id);
       }
     }
@@ -110,6 +118,9 @@ export default function AdminCrmPage() {
     category: "transactional",
     includeInactive: false,
   }) ?? []) as Array<{ _id: string; key: string; name: string }>;
+  const emailProvider = useQuery(api.emails.getProviderStatus) as
+    | EmailProviderStatus
+    | undefined;
 
   const updateContact = useMutation(api.crm.updateContact);
   const addNote = useMutation(api.crm.addNote);
@@ -130,6 +141,7 @@ export default function AdminCrmPage() {
   const [notice, setNotice] = useState("");
 
   const selectedContact = detail?.contact ?? null;
+  const effectiveTemplateKey = selectedTemplateKey || templates[0]?.key || "";
 
   useEffect(() => {
     if (!selectedContact) return;
@@ -146,6 +158,11 @@ export default function AdminCrmPage() {
   }, [selectedContact?._id]);
 
   const timeline = useMemo<CrmActivity[]>(() => detail?.activities ?? [], [detail?.activities]);
+  const emailDeliveryDisabled = emailProvider ? !emailProvider.canSend : false;
+  const isErrorNotice =
+    notice.toLowerCase().includes("errore") ||
+    notice.toLowerCase().includes("mancante") ||
+    notice.toLowerCase().includes("seleziona");
 
   const saveCard = async () => {
     if (!selectedContact) return;
@@ -185,12 +202,23 @@ export default function AdminCrmPage() {
   };
 
   const sendManualEmail = async () => {
-    if (!selectedContact) return;
+    if (!selectedContact) {
+      setNotice("Seleziona prima un cliente.");
+      return;
+    }
+    if (emailDeliveryDisabled) {
+      setNotice("Invio email non disponibile: configura RESEND_API_KEY e EMAIL_FROM.");
+      return;
+    }
+    if (!manualSubject.trim() || !manualHtml.trim()) {
+      setNotice("Compila subject e contenuto prima di inviare.");
+      return;
+    }
     setNotice("");
     try {
       await sendOneOff({
-        to: selectedContact.email,
-        subject: manualSubject,
+        to: selectedContact.email.trim().toLowerCase(),
+        subject: manualSubject.trim(),
         html: manualHtml,
         crmContactId: selectedContact._id,
         relatedType: "crmContact",
@@ -203,7 +231,19 @@ export default function AdminCrmPage() {
   };
 
   const sendTemplateEmail = async () => {
-    if (!selectedContact || !selectedTemplateKey) return;
+    if (!selectedContact) {
+      setNotice("Seleziona prima un cliente.");
+      return;
+    }
+    const templateKeyToUse = effectiveTemplateKey;
+    if (!templateKeyToUse) {
+      setNotice("Seleziona un template email.");
+      return;
+    }
+    if (emailDeliveryDisabled) {
+      setNotice("Invio email non disponibile: configura RESEND_API_KEY e EMAIL_FROM.");
+      return;
+    }
     setNotice("");
 
     const variables = {
@@ -218,8 +258,8 @@ export default function AdminCrmPage() {
 
     try {
       await sendWithTemplate({
-        to: selectedContact.email,
-        templateKey: selectedTemplateKey,
+        to: selectedContact.email.trim().toLowerCase(),
+        templateKey: templateKeyToUse,
         variablesJson: JSON.stringify(variables),
         crmContactId: selectedContact._id,
         relatedType: "crmContact",
@@ -241,8 +281,19 @@ export default function AdminCrmPage() {
       </div>
 
       {notice && (
-        <div className="rounded-xl border border-leaf-200 bg-leaf-50 text-forest-900 px-4 py-3 text-sm">
+        <div
+          className={`rounded-xl px-4 py-3 text-sm ${
+            isErrorNotice
+              ? "border border-red-200 bg-red-50 text-red-800"
+              : "border border-leaf-200 bg-leaf-50 text-forest-900"
+          }`}
+        >
           {notice}
+        </div>
+      )}
+      {emailProvider && !emailProvider.canSend && (
+        <div className="rounded-xl border border-red-200 bg-red-50 text-red-800 px-4 py-3 text-sm">
+          Invio email disattivato: imposta `RESEND_API_KEY` e `EMAIL_FROM` nelle environment variables Convex.
         </div>
       )}
 
@@ -380,7 +431,7 @@ export default function AdminCrmPage() {
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">Invia da template</label>
                       <select
-                        value={selectedTemplateKey}
+                        value={effectiveTemplateKey}
                         onChange={(e) => setSelectedTemplateKey(e.target.value)}
                         className="h-12 w-full rounded-xl border border-input bg-background px-4 text-sm"
                       >
@@ -393,7 +444,11 @@ export default function AdminCrmPage() {
                       </select>
                     </div>
                     <div className="md:self-end">
-                      <Button variant="outline" onClick={sendTemplateEmail}>
+                      <Button
+                        variant="outline"
+                        onClick={sendTemplateEmail}
+                        disabled={emailDeliveryDisabled}
+                      >
                         <Send className="w-4 h-4 mr-2" />
                         Invia da template
                       </Button>
@@ -411,7 +466,7 @@ export default function AdminCrmPage() {
                     <RichHtmlEditor value={manualHtml} onChange={setManualHtml} minHeight={180} />
                   </div>
 
-                  <Button onClick={sendManualEmail}>
+                  <Button onClick={sendManualEmail} disabled={emailDeliveryDisabled}>
                     <Send className="w-4 h-4 mr-2" />
                     Invia email one-shot
                   </Button>

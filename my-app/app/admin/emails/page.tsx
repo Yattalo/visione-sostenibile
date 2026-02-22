@@ -42,6 +42,15 @@ type EmailDelivery = {
   createdAt: number;
 };
 
+type EmailProviderStatus = {
+  hasResendApiKey: boolean;
+  hasEmailFrom: boolean;
+  emailFrom: string;
+  adminRecipientsCount: number;
+  hasAdminRecipients: boolean;
+  canSend: boolean;
+};
+
 const emptyDraft: Draft = {
   key: "",
   name: "",
@@ -68,6 +77,9 @@ export default function AdminEmailsPage() {
     includeInactive: true,
   }) ?? []) as EmailTemplate[];
   const deliveries = (useQuery(api.emails.listDeliveries, { limit: 40 }) ?? []) as EmailDelivery[];
+  const emailProvider = useQuery(api.emails.getProviderStatus) as
+    | EmailProviderStatus
+    | undefined;
 
   const ensureDefaults = useMutation(api.emailTemplates.ensureDefaults);
   const upsertTemplate = useMutation(api.emailTemplates.upsert);
@@ -82,6 +94,11 @@ export default function AdminEmailsPage() {
   const [notice, setNotice] = useState<string>("");
   const [saving, setSaving] = useState(false);
   const [sending, setSending] = useState(false);
+  const emailDeliveryDisabled = emailProvider ? !emailProvider.canSend : false;
+  const isErrorNotice =
+    notice.toLowerCase().includes("errore") ||
+    notice.toLowerCase().includes("mancante") ||
+    notice.toLowerCase().includes("inserisci");
 
   useEffect(() => {
     if (hasBootstrapped.current) return;
@@ -168,6 +185,10 @@ export default function AdminEmailsPage() {
       setNotice("Inserisci email test e template valido.");
       return;
     }
+    if (emailDeliveryDisabled) {
+      setNotice("Invio email non disponibile: configura RESEND_API_KEY e EMAIL_FROM.");
+      return;
+    }
 
     setSending(true);
     setNotice("");
@@ -206,8 +227,19 @@ export default function AdminEmailsPage() {
       </div>
 
       {notice && (
-        <div className="rounded-xl border border-leaf-200 bg-leaf-50 text-forest-900 px-4 py-3 text-sm">
+        <div
+          className={`rounded-xl px-4 py-3 text-sm ${
+            isErrorNotice
+              ? "border border-red-200 bg-red-50 text-red-800"
+              : "border border-leaf-200 bg-leaf-50 text-forest-900"
+          }`}
+        >
           {notice}
+        </div>
+      )}
+      {emailProvider && !emailProvider.canSend && (
+        <div className="rounded-xl border border-red-200 bg-red-50 text-red-800 px-4 py-3 text-sm">
+          Invio email disattivato: imposta `RESEND_API_KEY` e `EMAIL_FROM` nelle environment variables Convex.
         </div>
       )}
 
@@ -358,7 +390,7 @@ export default function AdminEmailsPage() {
                   placeholder="nome@dominio.it"
                 />
                 <div className="md:self-end">
-                  <Button onClick={onSendTest} loading={sending}>
+                  <Button onClick={onSendTest} loading={sending} disabled={emailDeliveryDisabled}>
                     <Send className="w-4 h-4 mr-2" />
                     Invia test
                   </Button>
@@ -409,13 +441,12 @@ export default function AdminEmailsPage() {
                       {delivery.status}
                     </Badge>
                     {delivery.error && (
-                      <button
-                        type="button"
-                        className="text-xs text-red-600 hover:underline"
-                        title={delivery.error}
-                      >
-                        dettaglio
-                      </button>
+                      <details className="text-xs text-red-700">
+                        <summary className="cursor-pointer select-none">errore</summary>
+                        <p className="mt-1 max-w-[260px] whitespace-pre-wrap break-words">
+                          {delivery.error}
+                        </p>
+                      </details>
                     )}
                   </div>
                 </div>

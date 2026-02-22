@@ -13,6 +13,10 @@ function stripHtml(input: string): string {
   return input.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+function normalizeEmailAddress(input: string): string {
+  return input.trim().toLowerCase();
+}
+
 function parseVariablesJson(variablesJson?: string): Record<string, string> {
   if (!variablesJson) return {};
   try {
@@ -78,7 +82,7 @@ function parseRecipients(input?: string): string[] {
   if (!input) return [];
   return input
     .split(",")
-    .map((item) => item.trim().toLowerCase())
+    .map((item) => normalizeEmailAddress(item))
     .filter(Boolean);
 }
 
@@ -94,8 +98,10 @@ export const logQueued = internalMutation({
     createdBy: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    const normalizedTo = normalizeEmailAddress(args.to);
     return await ctx.db.insert("emailDeliveries", {
       ...args,
+      to: normalizedTo,
       status: "queued",
       provider: "resend",
       createdAt: Date.now(),
@@ -194,6 +200,8 @@ async function deliverTemplateEmail(ctx: any, args: {
     return { success: false, error: `Template non trovato: ${args.templateKey}` };
   }
 
+  const normalizedTo = normalizeEmailAddress(args.to);
+
   const variables = {
     ...args.variables,
     currentYear: String(new Date().getFullYear()),
@@ -207,7 +215,7 @@ async function deliverTemplateEmail(ctx: any, args: {
     : stripHtml(bodyHtml);
 
   const deliveryId: any = await ctx.runMutation(internal.emails.logQueued as any, {
-    to: args.to,
+    to: normalizedTo,
     subject,
     templateKey: template.key,
     html: fullHtml,
@@ -218,7 +226,7 @@ async function deliverTemplateEmail(ctx: any, args: {
   });
 
   const sent = await sendViaResend({
-    to: args.to,
+    to: normalizedTo,
     subject,
     html: fullHtml,
     text,
@@ -241,7 +249,7 @@ async function deliverTemplateEmail(ctx: any, args: {
 
   await ctx.runMutation(internal.crm.logEmailActivity as any, {
     contactId: args.crmContactId as any,
-    email: args.to,
+    email: normalizedTo,
     title: `Email inviata: ${subject}`,
     description: `Template ${template.key}`,
     payload: JSON.stringify({
@@ -291,13 +299,14 @@ export const deliverRaw = internalAction({
     wrapBrand: v.optional(v.boolean()),
   },
   handler: async (ctx, args): Promise<any> => {
+    const normalizedTo = normalizeEmailAddress(args.to);
     const html = args.wrapBrand === false
       ? args.html
       : wrapBrandLayout(args.html, "Messaggio Visione Sostenibile");
     const text = args.text ?? stripHtml(args.html);
 
     const deliveryId: any = await ctx.runMutation(internal.emails.logQueued as any, {
-      to: args.to,
+      to: normalizedTo,
       subject: args.subject,
       html,
       text,
@@ -307,7 +316,7 @@ export const deliverRaw = internalAction({
     });
 
     const sent = await sendViaResend({
-      to: args.to,
+      to: normalizedTo,
       subject: args.subject,
       html,
       text,
@@ -330,7 +339,7 @@ export const deliverRaw = internalAction({
 
     await ctx.runMutation(internal.crm.logEmailActivity as any, {
       contactId: args.crmContactId as any,
-      email: args.to,
+      email: normalizedTo,
       title: `Email inviata: ${args.subject}`,
       description: "Invio one-shot",
       payload: JSON.stringify({ deliveryId, providerMessageId: sent.messageId }),
@@ -430,6 +439,24 @@ export const sendQuizNotifications = internalAction({
     });
 
     return { success: true };
+  },
+});
+
+export const getProviderStatus = query({
+  args: {},
+  handler: async () => {
+    const hasResendApiKey = Boolean(process.env.RESEND_API_KEY);
+    const hasEmailFrom = Boolean(process.env.EMAIL_FROM);
+    const adminRecipients = parseRecipients(process.env.ADMIN_NOTIFICATION_EMAIL);
+
+    return {
+      hasResendApiKey,
+      hasEmailFrom,
+      emailFrom: process.env.EMAIL_FROM ?? "",
+      adminRecipientsCount: adminRecipients.length,
+      hasAdminRecipients: adminRecipients.length > 0,
+      canSend: hasResendApiKey && hasEmailFrom,
+    };
   },
 });
 
