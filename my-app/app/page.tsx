@@ -9,7 +9,6 @@ import {
   Clock,
   MapPin,
   Mail,
-  Bug,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Badge } from "./components/ui/Badge";
@@ -107,14 +106,10 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
-              Giardini sostenibili
-            </Badge>
-
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-balance uppercase tracking-tight">
-              Giardini sostenibili
-              <span className="block italic text-leaf-400 font-light lowercase">
-                a impatto zero
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-balance">
+              Giardini Sostenibili
+              <span className="block italic text-leaf-400">
+                a Impatto Zero
               </span>
             </h1>
 
@@ -301,10 +296,10 @@ export default function HomePage() {
             </Link>
           </motion.div>
         </div>
-      </section >
+      </section>
 
       {/* Stats / Trust — Stitch-inspired dark split panel */}
-      < section className="py-24 px-4 md:px-12" >
+      <section className="py-24 px-4 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -383,10 +378,10 @@ export default function HomePage() {
             </div>
           </div>
         </motion.div>
-      </section >
+      </section>
 
       {/* Quiz Section */}
-      < section className="relative overflow-hidden bg-paper-canvas px-6 py-24 lg:py-32" >
+      <section className="relative overflow-hidden bg-paper-canvas px-6 py-24 lg:py-32">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-leaf-300/45 to-transparent" />
           <div className="absolute -top-20 left-1/2 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-leaf-100/35 blur-3xl" />
@@ -420,10 +415,10 @@ export default function HomePage() {
             </div>
           </motion.div>
         </div>
-      </section >
+      </section>
 
       {/* Reviews Widget */}
-      < ReviewsWidget
+      <ReviewsWidget
         variant="featured"
         className="bg-white"
         title="La voce dei nostri clienti"
@@ -431,7 +426,7 @@ export default function HomePage() {
       />
 
       {/* Featured Project / CTA */}
-      < section className="py-32 px-6 relative overflow-hidden" >
+      <section className="py-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-leaf-50" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-leaf-100/50 rounded-full blur-3xl" />
 
@@ -498,10 +493,10 @@ export default function HomePage() {
             </motion.div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Contact CTA */}
-      < section className="py-24 bg-forest-950 text-white relative overflow-hidden" >
+      <section className="py-24 bg-forest-950 text-white relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')] bg-cover bg-center opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
@@ -551,8 +546,8 @@ export default function HomePage() {
             </span>
           </div>
         </motion.div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 }
 

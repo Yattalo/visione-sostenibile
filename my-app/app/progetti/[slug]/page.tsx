@@ -316,14 +316,6 @@ export default function ProgettiDetailPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-<<<<<<< HEAD
-=======
-          HERO IMAGE (full-width)
-      ═══════════════════════════════════════════════════ */}
-
-
-      {/* ═══════════════════════════════════════════════════
->>>>>>> feature/contatti-refactor-backup
           MAIN CONTENT
       ═══════════════════════════════════════════════════ */}
       <section className="relative py-16 lg:py-24">

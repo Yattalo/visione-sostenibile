@@ -95,11 +95,11 @@ export default function QualitaPage() {
               Scopri le nostre certificazioni e gli standard che ci guidano.
             </p>
           </SlideUp>
-        </div >
-      </section >
+        </div>
+      </section>
 
       {/* Certifications */}
-      < section className="py-24 px-6" >
+      <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
@@ -190,10 +190,10 @@ export default function QualitaPage() {
             </div>
           </SlideUp>
         </div>
-      </section >
+      </section>
 
       {/* Stats */}
-      < section className="py-20 bg-forest-950 text-white" >
+      <section className="py-20 bg-forest-950 text-white">
         <div className="max-w-6xl mx-auto px-6">
           <SlideUp>
             <div className="text-center mb-12">
@@ -221,10 +221,10 @@ export default function QualitaPage() {
             ))}
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Commitments */}
-      < section className="py-24 px-6" >
+      <section className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
@@ -255,10 +255,10 @@ export default function QualitaPage() {
             ))}
           </div>
         </div>
-      </section >
+      </section>
 
       {/* CTA */}
-      < section className="py-24 px-6 bg-paper-100" >
+      <section className="py-24 px-6 bg-paper-100">
         <div className="max-w-2xl mx-auto text-center">
           <SlideUp>
             <Badge className="bg-leaf-100 text-leaf-700 mb-4">
@@ -276,7 +276,7 @@ export default function QualitaPage() {
             </Button>
           </SlideUp>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 }
