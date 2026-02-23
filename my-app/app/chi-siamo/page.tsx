@@ -69,10 +69,10 @@ export default function ChiSiamoPage() {
   return (
     <div className="min-h-screen bg-paper-50">
       {/* Hero Section */}
-      <section className="relative py-32 md:py-40 overflow-hidden">
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/images/chi-siamo/hero.jpg')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/90 via-forest-900/80 to-forest-950/85" />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/70 via-forest-900/60 to-forest-950/65" />
           </div>
           {/* Decorative organic blobs */}
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
@@ -93,7 +93,7 @@ export default function ChiSiamoPage() {
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Il volto di Visione Sostenibile: appassionato, curioso, in continua ricerca. 
+              Il volto di Visione Sostenibile: appassionato, curioso, in continua ricerca.
               Un unico referente che coordina competenze verticali e partnership selezionate.
             </p>
           </SlideUp>

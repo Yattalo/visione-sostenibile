@@ -74,9 +74,11 @@ export function TeamSection() {
                     cardHeight="23rem"
                     cardMaxHeight="27rem"
                   />
-                  <p className="mt-4 px-2 text-center font-body text-sm leading-relaxed text-forest-800/75 min-h-[3.5rem]">
-                    {member.role}
-                  </p>
+                  <div className="mt-4 px-2 min-h-[4.5rem] flex items-center justify-center">
+                    <p className="text-center font-body text-sm leading-relaxed text-forest-800/75">
+                      {member.role}
+                    </p>
+                  </div>
                 </article>
               </StaggerItem>
             ))}

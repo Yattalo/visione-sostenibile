@@ -232,11 +232,11 @@ export default function ProgettiDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-paper-50">
+    <div className="min-h-screen bg-paper-50 overflow-x-hidden">
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center overflow-hidden bg-forest-950">
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
         {/* Background */}
         <div className="absolute inset-0">
           {project.hero_image ? (
@@ -257,14 +257,14 @@ export default function ProgettiDetailPage() {
         <div className="absolute top-1/4 -right-32 w-96 h-96 bg-sun-400/10 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-0 -left-20 w-72 h-72 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-16">
-          {/* Breadcrumb */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full text-center pt-16">
+          {/* Breadcrumb centered */}
           <motion.nav
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-sm mb-8"
+            className="flex items-center justify-center gap-2 text-sm mb-8"
           >
             <Link href="/" className="font-sans text-paper-200/80 hover:text-paper-100 transition-colors tracking-wide">
               Home
@@ -274,12 +274,12 @@ export default function ProgettiDetailPage() {
               Progetti
             </Link>
             <span className="text-paper-500">/</span>
-            <span className="font-sans text-paper-100 tracking-wide">
+            <span className="font-sans text-paper-100 tracking-wide truncate max-w-[200px] md:max-w-none">
               {project.title}
             </span>
           </motion.nav>
 
-          <div className="max-w-3xl">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -289,11 +289,11 @@ export default function ProgettiDetailPage() {
                 {project.type}
               </Badge>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-light text-white leading-tight mb-6">
+              <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight mb-8 text-balance">
                 {project.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-5 text-paper-100/90">
+              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-paper-100/90">
                 <span className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-leaf-400" />
                   <span className="font-body">{project.location}</span>
@@ -316,6 +316,14 @@ export default function ProgettiDetailPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
+<<<<<<< HEAD
+=======
+          HERO IMAGE (full-width)
+      ═══════════════════════════════════════════════════ */}
+
+
+      {/* ═══════════════════════════════════════════════════
+>>>>>>> feature/contatti-refactor-backup
           MAIN CONTENT
       ═══════════════════════════════════════════════════ */}
       <section className="relative py-16 lg:py-24">

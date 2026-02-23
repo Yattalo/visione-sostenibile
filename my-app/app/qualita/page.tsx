@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileDown, Eye } from "lucide-react";
+import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileDown, Eye, FileText, Download } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -11,7 +11,7 @@ const certifications = [
   {
     icon: Leaf,
     title: "Biodinamica Certificata",
-    description: "Andrea Giordano pratica l'agricoltura biodinamica da oltre 20 anni, integrando questi metodi in ogni progetto di giardinaggio sostenibile.",
+    description: "Metodologia certificata secondo i principi dell'agricoltura biodinamica di Rudolf Steiner. Andrea Giordano pratica la biodinamica da oltre 20 anni.",
     issuedBy: "Associazione per l'Agricoltura Biodinamica",
     year: "",
     category: "biodynamic",
@@ -19,7 +19,7 @@ const certifications = [
   {
     icon: Shield,
     title: "Giardinaggio a Impatto Zero",
-    description: "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi, garantendo un impatto ambientale netto pari a zero.",
+    description: "Compensazione totale delle emissioni CO₂ attraverso pratiche sostenibili e riforestazione. Garantiamo un impatto ambientale netto pari a zero.",
     issuedBy: "Visione Sostenibile",
     year: "",
     category: "eco",
@@ -27,7 +27,7 @@ const certifications = [
   {
     icon: CheckCircle,
     title: "Zero Prodotti Chimici",
-    description: "Eliminazione totale del rischio di intossicazione per persone, bambini e animali domestici. Nessun pesticida, nessun prodotto chimico.",
+    description: "Utilizzo esclusivo di prodotti naturali e biologici per la cura del verde. Eliminazione totale del rischio di intossicazione per persone e animali.",
     issuedBy: "Visione Sostenibile",
     year: "",
     category: "eco",
@@ -95,11 +95,11 @@ export default function QualitaPage() {
               Scopri le nostre certificazioni e gli standard che ci guidano.
             </p>
           </SlideUp>
-        </div>
-      </section>
+        </div >
+      </section >
 
       {/* Certifications */}
-      <section className="py-24 px-6">
+      < section className="py-24 px-6" >
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
@@ -136,15 +136,31 @@ export default function QualitaPage() {
                         <p className="font-body text-forest-800 mb-2">
                           {cert.description}
                         </p>
-                        <p className="font-body text-sm text-paper-500">
+                        <p className="font-body text-sm text-paper-500 mb-4">
                           <span className="font-medium">Rilasciato da:</span> {cert.issuedBy}
                         </p>
+                        <a
+                          href="#"
+                          className="text-sm text-leaf-700 hover:text-leaf-600 flex items-center gap-1.5 font-medium transition-colors"
+                        >
+                          <FileText className="w-4 h-4" />
+                          Visualizza Certificato
+                        </a>
                       </div>
                     </div>
                   </Card>
                 </StaggerItem>
               ))}
             </div>
+
+            <SlideUp delay={0.4}>
+              <div className="mt-16 text-center">
+                <Button className="bg-leaf-700 hover:bg-leaf-600 text-white px-8 py-6 rounded-full text-lg shadow-lg transition-transform hover:scale-105">
+                  <Download className="mr-2 w-5 h-5" />
+                  Richiedi Documentazione Completa
+                </Button>
+              </div>
+            </SlideUp>
           </StaggerContainer>
 
           {/* Download/View Buttons */}
@@ -174,10 +190,10 @@ export default function QualitaPage() {
             </div>
           </SlideUp>
         </div>
-      </section>
+      </section >
 
       {/* Stats */}
-      <section className="py-20 bg-forest-950 text-white">
+      < section className="py-20 bg-forest-950 text-white" >
         <div className="max-w-6xl mx-auto px-6">
           <SlideUp>
             <div className="text-center mb-12">
@@ -205,10 +221,10 @@ export default function QualitaPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Commitments */}
-      <section className="py-24 px-6">
+      < section className="py-24 px-6" >
         <div className="max-w-6xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
@@ -239,10 +255,10 @@ export default function QualitaPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-paper-100">
+      < section className="py-24 px-6 bg-paper-100" >
         <div className="max-w-2xl mx-auto text-center">
           <SlideUp>
             <Badge className="bg-leaf-100 text-leaf-700 mb-4">
@@ -260,7 +276,7 @@ export default function QualitaPage() {
             </Button>
           </SlideUp>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

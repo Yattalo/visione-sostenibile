@@ -11,12 +11,34 @@ export const submit = mutation({
     subject: v.optional(v.string()),
     message: v.string(),
     serviceInterest: v.optional(v.string()),
+    address: v.optional(v.object({
+      street: v.string(),
+      city: v.string(),
+      province: v.string(),
+      postalCode: v.string(),
+      country: v.string(),
+    })),
+    projectType: v.optional(v.union(v.literal("nuova_costruzione"), v.literal("restyling"))),
+    projectFeatures: v.optional(v.array(v.string())),
+    projectStartDate: v.optional(v.string()),
+    referralSource: v.optional(v.string()),
+    privacyConsent: v.boolean(),
+    marketingConsent: v.optional(v.boolean()),
+    attachments: v.optional(v.array(v.object({
+      storageId: v.id("_storage"),
+      fileName: v.string(),
+      mimeType: v.string(),
+      sizeBytes: v.number(),
+    }))),
   },
   handler: async (ctx, args) => {
+    const { privacyConsent, marketingConsent, ...rest } = args;
     const normalizedEmail = args.email.trim().toLowerCase();
     const submissionId = await ctx.db.insert("contactSubmissions", {
-      ...args,
+      ...rest,
       email: normalizedEmail,
+      privacyConsent: args.privacyConsent,
+      marketingConsent: args.marketingConsent,
       isRead: false,
       isReplied: false,
       createdAt: Date.now(),

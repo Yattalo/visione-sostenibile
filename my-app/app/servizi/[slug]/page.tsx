@@ -24,6 +24,7 @@ import { Badge } from "../../components/ui/Badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { ScrollCTA } from "../../components/ScrollCTA";
+import { ReviewsWidget } from "../../components/ReviewsWidget";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -946,6 +947,17 @@ export default function ServiceDetailPage() {
 
       {/* Section 7: Blog internal links */}
       <RelatedBlogSection serviceSlug={service.slug} />
+
+      {/* Section 7.5: Reviews */}
+      <div className="bg-paper-50 py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <ReviewsWidget
+            variant="featured"
+            title="La voce dei nostri clienti"
+            subtitle="Cosa dicono di questo servizio"
+          />
+        </div>
+      </div>
 
       {/* Section 8: CTA (kept as-is) */}
       <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">

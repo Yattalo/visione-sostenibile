@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube, Phone, Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export function Footer() {
@@ -18,12 +18,13 @@ export function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="mb-10"
         >
           <Image
             src="/VS_logo_completo_bianco.svg"
             alt="Visione Sostenibile"
-            width={144}
-            height={48}
+            width={240}
+            height={80}
             className="h-20 w-auto mx-auto"
             loading="lazy"
           />
@@ -44,6 +45,29 @@ export function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ delay: 0.15 }}
+          className="flex flex-wrap justify-center gap-4 mb-10"
+        >
+          <a
+            href="tel:+393920934847"
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-sm tracking-wide transition-all hover:scale-105 active:scale-95"
+          >
+            <Phone className="w-4 h-4" />
+            <span>Chiama Ora</span>
+          </a>
+          <a
+            href="mailto:info@visionesostenibile.com"
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-sm tracking-wide transition-all hover:scale-105 active:scale-95"
+          >
+            <Mail className="w-4 h-4" />
+            <span>Scrivici</span>
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.2 }}
           className="flex justify-center gap-4"
         >
@@ -58,7 +82,7 @@ export function Footer() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded bg-white/5 flex items-center justify-center hover:bg-white/20 transition-colors"
+              className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 transition-colors"
             >
               <social.icon className="w-4 h-4" />
             </a>
