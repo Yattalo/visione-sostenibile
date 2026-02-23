@@ -57,6 +57,71 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Visione Sostenibile",
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon.svg`,
+  foundingDate: "2009",
+  founder: {
+    "@type": "Person",
+    name: "Andrea Giordano",
+  },
+  areaServed: ["Piemonte", "Lombardia", "Trentino-Alto Adige"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+39-371-482-1825",
+    contactType: "customer service",
+    availableLanguage: "Italian",
+  },
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${SITE_URL}/#localbusiness`,
+  name: "Visione Sostenibile",
+  url: SITE_URL,
+  telephone: "+393714821825",
+  email: "visionesostenibile96@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Via San Francesco D'Assisi 14",
+    addressLocality: "Torino",
+    addressRegion: "Piemonte",
+    postalCode: "10121",
+    addressCountry: "IT",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 45.0703,
+    longitude: 7.6869,
+  },
+  priceRange: "€€",
+  knowsAbout: [
+    "Progettazione giardini",
+    "Manutenzione verde",
+    "Potature",
+    "Irrigazione",
+    "Gestione biodinamica",
+    "Ingegneria naturalistica",
+  ],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "18:00",
+  },
+};
+
+const webSiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,6 +129,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
+        />
+      </head>
       <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
         <ConvexClientProvider>
           <Navbar />

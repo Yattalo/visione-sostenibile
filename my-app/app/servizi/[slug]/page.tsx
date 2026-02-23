@@ -67,6 +67,21 @@ const carouselImagesPool = [
   "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800",
 ];
 
+const serviceQuestionH2: Record<string, string> = {
+  "progettazione-giardini": "Quanto costa la progettazione di un giardino sostenibile?",
+  "realizzazione-giardini": "Cosa include la realizzazione di un giardino chiavi in mano?",
+  manutenzioni: "Come funziona la manutenzione programmata del giardino?",
+  potature: "Quando e come potare gli alberi in modo corretto?",
+  "rigenerazione-terreni": "Come funziona la gestione biodinamica del verde?",
+  "scelta-piante": "Come scegliere le piante giuste per il proprio giardino?",
+  "trattamenti-piante": "Quali trattamenti servono per mantenere le piante sane?",
+  "impianti-irrigazione": "Come funziona un impianto di irrigazione efficiente?",
+  "camminamenti-pietra": "Come si realizzano camminamenti in pietra naturale?",
+  "illuminazione-esterni": "Come illuminare il giardino in modo efficace e sostenibile?",
+  "arredamento-esterni": "Come arredare gli spazi esterni per viverli tutto l'anno?",
+  "ingegneria-naturalistica": "Cos'è l'ingegneria naturalistica e quando serve?",
+};
+
 const serviceSubtitles: Record<string, string> = {
   "progettazione-giardini": "Dal concept alla realta a Torino e Piemonte",
   "realizzazione-giardini": "Realizzazione Giardini a Torino",
@@ -155,7 +170,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   "realizzazione-giardini": {
     quickAnswer:
-      "La realizzazione chiavi in mano ti permette di avere un unico referente dalla preparazione del terreno alla posa finale. In questo modo riduci coordinamento, tempi morti e rischi di incompatibilita tra fornitori diversi.",
+      "La realizzazione di giardini chiavi in mano ti permette di avere un unico referente dalla preparazione del terreno alla posa finale di piante e finiture. In questo modo riduci coordinamento tra fornitori, tempi morti in cantiere e rischi di incompatibilita. Il risultato è uno spazio verde pronto da vivere con tempi e costi piu prevedibili.",
     intro:
       "Gestiamo il cantiere verde in modo completo, con un flusso organizzato e controlli su ogni fase.",
     body: "Dalla preparazione del suolo all'impianto piante, fino a irrigazione e finiture, coordiniamo tutte le attivita in sequenza logica per consegnare uno spazio pronto da vivere.",
@@ -202,7 +217,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   manutenzioni: {
     quickAnswer:
-      "La manutenzione sostenibile mantiene il giardino sano con interventi programmati, tecniche a basso impatto e prevenzione stagionale. L'approccio riduce degrado progressivo e aiuta a contenere costi straordinari nel tempo.",
+      "La manutenzione sostenibile mantiene il giardino sano e ordinato con interventi programmati per stagione, tecniche a basso impatto ambientale e prevenzione fitosanitaria mirata. Questo approccio riduce il degrado progressivo delle piante, previene emergenze e aiuta a contenere i costi straordinari nel medio-lungo periodo.",
     intro:
       "Programmiamo la cura del verde con cadenze intelligenti, in base al ciclo stagionale reale.",
     body: "Un piano di manutenzione efficace combina taglio, controllo fitosanitario, nutrizione del suolo e monitoraggio costante. Ogni intervento e calibrato su piante, esposizione e uso dello spazio.",
@@ -249,7 +264,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   potature: {
     quickAnswer:
-      "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto e con tagli adeguati. Interventi non invasivi riducono stress vegetativo e aiutano una crescita equilibrata.",
+      "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto, con tagli adeguati alla specie e alla sua fisiologia. Interventi non invasivi e graduali riducono lo stress vegetativo, favoriscono una crescita equilibrata della chioma e abbassano i rischi legati a rami deboli o malposizionati.",
     intro:
       "Eseguiamo potature tecniche con attenzione alla fisiologia della pianta e al contesto di sicurezza.",
     body: "Ogni albero o arbusto richiede un approccio specifico. Valutiamo forma, carichi, punti critici e stagione, poi definiamo un intervento preciso che protegge la salute vegetale e migliora la gestione dello spazio.",
@@ -296,7 +311,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   "rigenerazione-terreni": {
     quickAnswer:
-      "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente, con minore dipendenza da interventi chimici e maggiore stabilita complessiva.",
+      "La gestione biodinamica del verde punta a rigenerare suolo e piante attraverso pratiche naturali, nutrizione organica e rispetto dei cicli stagionali. Il risultato e un ecosistema giardino piu resiliente e autonomo, con minore dipendenza da trattamenti chimici, maggiore fertilita biologica del terreno e una stabilita complessiva che migliora nel tempo.",
     intro:
       "Applichiamo pratiche biodinamiche per migliorare vitalita del terreno, equilibrio biologico e qualita del paesaggio.",
     body: "Il metodo integra nutrizione organica, osservazione dei cicli naturali e gestione preventiva. Cosi favoriamo biodiversita, resistenza delle piante e qualita estetica sostenibile.",
@@ -851,7 +866,7 @@ export default function ServiceDetailPage() {
   };
 
   const faqJsonLd =
-    service.slug === "progettazione-giardini"
+    content.faqs.length > 0
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
@@ -918,6 +933,19 @@ export default function ServiceDetailPage() {
 
       {/* Section 1: Full-Bleed Hero */}
       <HeroSection service={service} imageUrl={imageUrl} />
+
+      {/* Quick Answer (SEO featured snippet target) */}
+      <section className="max-w-5xl mx-auto px-6 lg:px-8 py-10 lg:py-12">
+        <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
+          <div className="flex items-center gap-2 mb-4">
+            <CheckCircle2 className="w-5 h-5 text-leaf-600" />
+            <h2 className="font-display text-2xl text-forest-950">
+              {serviceQuestionH2[service.slug] ?? "Risposta rapida"}
+            </h2>
+          </div>
+          <p className="font-body text-forest-900 leading-relaxed text-lg">{content.quickAnswer}</p>
+        </div>
+      </section>
 
       {/* Section 2: Editorial Intro */}
       <EditorialIntro content={content} />
