@@ -1,6 +1,7 @@
 "use client";
 
-import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target } from "lucide-react";
+import Image from "next/image";
+import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileDown, Eye } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -67,20 +68,29 @@ export default function QualitaPage() {
   return (
     <div className="min-h-screen bg-paper-50">
       {/* Hero */}
-      <section className="relative pt-44 pb-32 px-6 bg-forest-950 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-500/30 to-transparent" />
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center bg-forest-950 text-white overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920"
+            alt="Qualità certificata"
+            fill
+            className="object-cover opacity-60"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50 z-10" />
         </div>
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+
+        <div className="max-w-4xl mx-auto text-center relative z-20 px-6 pt-12">
           <SlideUp>
-            <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-6">
+            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               Qualità Certificata
             </Badge>
-            <h1 className="font-display text-5xl md:text-6xl font-light leading-tight mb-6">
+            <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 uppercase tracking-tight">
               Il Nostro Impegno per
-              <span className="block italic text-leaf-400">l&apos;Eccellenza</span>
+              <span className="block italic text-leaf-400 font-light lowercase">l&apos;Eccellenza</span>
             </h1>
-            <p className="font-body text-lg text-paper-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
               Ogni progetto è realizzato con professionalità, competenza e passione.
               Scopri le nostre certificazioni e gli standard che ci guidano.
             </p>
@@ -136,6 +146,33 @@ export default function QualitaPage() {
               ))}
             </div>
           </StaggerContainer>
+
+          {/* Download/View Buttons */}
+          <SlideUp delay={0.5}>
+            <div className="mt-16 flex flex-col sm:flex-row gap-6 justify-center">
+              <Button
+                size="lg"
+                className="bg-forest-950 text-white hover:bg-forest-900 px-8 py-6 rounded-2xl flex items-center gap-3 shadow-deep"
+              >
+                <FileDown className="w-5 h-5 text-sun-400" />
+                <span className="flex flex-col items-start text-left">
+                  <span className="text-xs uppercase tracking-widest opacity-60">Scarica ora</span>
+                  <span className="text-sm font-bold">Brochure Qualità .PDF</span>
+                </span>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-forest-200 text-forest-900 hover:bg-forest-50 px-8 py-6 rounded-2xl flex items-center gap-3"
+              >
+                <Eye className="w-5 h-5 text-leaf-600" />
+                <span className="flex flex-col items-start text-left">
+                  <span className="text-xs uppercase tracking-widest opacity-60">Visualizza</span>
+                  <span className="text-sm font-bold">Certificazioni Complete</span>
+                </span>
+              </Button>
+            </div>
+          </SlideUp>
         </div>
       </section>
 

@@ -77,114 +77,72 @@ export default function HomePage() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden"
       >
         {/* Background with video support */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/80 via-forest-900/60 to-forest-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50 z-10" />
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-50"
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
           >
             <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />
           </video>
           {/* Decorative organic blobs */}
           <motion.div
             style={{ y, opacity }}
-            className="absolute top-1/4 -left-20 w-96 h-96 bg-sun-400/20 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              x: [0, 30, 0],
-            }}
-            transition={{ duration: 10, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 -right-20 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              x: [0, -30, 0],
-            }}
-            transition={{ duration: 12, repeat: Infinity }}
+            className="absolute top-1/4 -left-20 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow"
           />
         </div>
 
         <motion.div
           style={{ opacity }}
-          className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white"
+          className="relative z-20 max-w-6xl mx-auto px-6 text-center text-white pt-12"
         >
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 px-6 py-2 text-sm tracking-widest uppercase">
-                Dal 2009
-              </Badge>
-              <Badge variant="eco" className="px-4 py-1.5 text-xs tracking-widest uppercase">
-                <Bug className="w-3 h-3 mr-1.5 inline" />
-                Biodinamica Certificata
-              </Badge>
-            </div>
+            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
+              Giardini sostenibili
+            </Badge>
 
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-balance">
-              Il tuo giardino sostenibile,
-              <span className="block italic text-leaf-400">
-                senza coordinare 5 fornitori
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-balance uppercase tracking-tight">
+              Giardini sostenibili
+              <span className="block italic text-leaf-400 font-light lowercase">
+                a impatto zero
               </span>
             </h1>
 
-            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto mb-12 leading-relaxed">
-              Con Visione Sostenibile hai un unico interlocutore che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos.
+            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+              Progettazione, realizzazione e manutenzione di spazi verdi che rigenerano l'ambiente e la tua qualità della vita.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contatti">
+            <div className="flex justify-center">
+              <Link href="/servizi">
                 <Button
                   size="lg"
-                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg tracking-wide"
+                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-10 py-5 text-lg tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-transform"
                 >
-                  Richiedi un sopralluogo
-                </Button>
-              </Link>
-              <Link href="/contatti">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/40 text-white hover:bg-white/10 hover:border-white px-8 py-4 text-lg tracking-wide"
-                >
-                  Sono un&apos;azienda/condominio
+                  Visualizza i servizi
                 </Button>
               </Link>
             </div>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-paper-300/90">
-              <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Un referente
-              </span>
-              <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
-              <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Team modulare
-              </span>
-              <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
-              <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Piemonte · Trentino · Lombardia
-              </span>
-            </div>
           </motion.div>
+        </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2"
-          >
-            <div className="w-px h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
-          </motion.div>
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
+        >
+          <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
         </motion.div>
       </section>
 
@@ -343,10 +301,10 @@ export default function HomePage() {
             </Link>
           </motion.div>
         </div>
-      </section>
+      </section >
 
       {/* Stats / Trust — Stitch-inspired dark split panel */}
-      <section className="py-24 px-4 md:px-12">
+      < section className="py-24 px-4 md:px-12" >
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -425,10 +383,10 @@ export default function HomePage() {
             </div>
           </div>
         </motion.div>
-      </section>
+      </section >
 
       {/* Quiz Section */}
-      <section className="relative overflow-hidden bg-paper-canvas px-6 py-24 lg:py-32">
+      < section className="relative overflow-hidden bg-paper-canvas px-6 py-24 lg:py-32" >
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-leaf-300/45 to-transparent" />
           <div className="absolute -top-20 left-1/2 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-leaf-100/35 blur-3xl" />
@@ -462,10 +420,10 @@ export default function HomePage() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section >
 
       {/* Reviews Widget */}
-      <ReviewsWidget
+      < ReviewsWidget
         variant="featured"
         className="bg-white"
         title="La voce dei nostri clienti"
@@ -473,7 +431,7 @@ export default function HomePage() {
       />
 
       {/* Featured Project / CTA */}
-      <section className="py-32 px-6 relative overflow-hidden">
+      < section className="py-32 px-6 relative overflow-hidden" >
         <div className="absolute inset-0 bg-leaf-50" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-leaf-100/50 rounded-full blur-3xl" />
 
@@ -540,10 +498,10 @@ export default function HomePage() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Contact CTA */}
-      <section className="py-24 bg-forest-950 text-white relative overflow-hidden">
+      < section className="py-24 bg-forest-950 text-white relative overflow-hidden" >
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')] bg-cover bg-center opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
@@ -593,8 +551,8 @@ export default function HomePage() {
             </span>
           </div>
         </motion.div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
 

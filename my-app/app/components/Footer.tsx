@@ -24,7 +24,7 @@ export function Footer() {
             alt="Visione Sostenibile"
             width={144}
             height={48}
-            className="h-12 w-auto mx-auto"
+            className="h-20 w-auto mx-auto"
             loading="lazy"
           />
         </motion.div>

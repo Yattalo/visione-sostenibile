@@ -67,103 +67,105 @@ export function ReviewsWidget({
   }
 
   return (
-    <section className={cn("py-16", className)}>
-      {(title || subtitle) && (
-        <div className="text-center mb-10">
-          {title && (
-            <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-3">
-              {title}
-            </h2>
-          )}
-          {subtitle && (
-            <p className="font-body text-lg text-forest-800/70 max-w-2xl mx-auto">
-              {subtitle}
-            </p>
-          )}
-        </div>
-      )}
+    <section className={cn("py-24", className)}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {(title || subtitle) && (
+          <div className="text-center mb-16">
+            {title && (
+              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-4">
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p className="font-body text-lg md:text-xl text-forest-800/70 max-w-2xl mx-auto">
+                {subtitle}
+              </p>
+            )}
+          </div>
+        )}
 
-      {variant === "grid" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayReviews.map((review) => (
-            <Card key={review._id} variant="default" className="h-full bg-paper-50">
-              <CardContent>
-                <Stars rating={review.rating} />
-                <p className="font-body text-forest-800 leading-relaxed mt-4 mb-4">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <div className="border-t border-paper-100 pt-3 mt-3">
-                  <p className="font-sans text-sm uppercase tracking-wider text-forest-900">
-                    {review.authorName}
-                  </p>
-                  <p className="font-body text-sm text-forest-800/60">
-                    {review.authorLocation}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
-
-      {variant === "featured" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {displayReviews.slice(0, 2).map((review) => (
-            <Card
-              key={review._id}
-              variant="default"
-              className="h-full bg-paper-50 border-l-4 border-l-leaf-500"
-            >
-              <CardContent>
-                <Stars rating={review.rating} />
-                <p className="font-body text-lg text-forest-800 leading-relaxed mt-4 mb-4">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-leaf-100 flex items-center justify-center">
-                    <span className="font-sans text-sm font-medium text-leaf-700">
-                      {review.authorName.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-sans text-sm uppercase tracking-wider text-forest-900">
-                      {review.authorName}
-                    </p>
-                    <p className="font-body text-sm text-forest-800/60">
-                      {review.authorLocation}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
-
-      {variant === "carousel" && (
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
-          {displayReviews.map((review) => (
-            <div key={review._id} className="snap-start shrink-0 w-full md:w-[400px]">
-              <Card variant="default" className="h-full bg-paper-50">
-                <CardContent>
+        {variant === "grid" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {displayReviews.map((review) => (
+              <Card key={review._id} variant="default" className="h-full bg-paper-50 border-paper-200">
+                <CardContent className="p-8">
                   <Stars rating={review.rating} />
-                  <p className="font-body text-forest-800 leading-relaxed mt-4 mb-4">
+                  <p className="font-body text-forest-800 leading-relaxed mt-6 mb-6 italic">
                     &ldquo;{review.text}&rdquo;
                   </p>
-                  <div className="border-t border-paper-100 pt-3 mt-3">
-                    <p className="font-sans text-sm uppercase tracking-wider text-forest-900">
+                  <div className="border-t border-paper-100 pt-4 mt-auto">
+                    <p className="font-sans text-sm font-bold uppercase tracking-widest text-forest-900">
                       {review.authorName}
                     </p>
-                    <p className="font-body text-sm text-forest-800/60">
+                    <p className="font-body text-xs text-forest-800/60 uppercase tracking-wide mt-1">
                       {review.authorLocation}
                     </p>
                   </div>
                 </CardContent>
               </Card>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+
+        {variant === "featured" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {displayReviews.slice(0, 2).map((review) => (
+              <Card
+                key={review._id}
+                variant="default"
+                className="h-full bg-paper-50 border-l-4 border-l-leaf-500 border-paper-200"
+              >
+                <CardContent className="p-10">
+                  <Stars rating={review.rating} />
+                  <p className="font-body text-xl text-forest-800 leading-relaxed mt-6 mb-8 italic">
+                    &ldquo;{review.text}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-leaf-100 flex items-center justify-center">
+                      <span className="font-display text-lg font-medium text-leaf-700">
+                        {review.authorName.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-sans text-sm font-bold uppercase tracking-widest text-forest-900">
+                        {review.authorName}
+                      </p>
+                      <p className="font-body text-xs text-forest-800/60 uppercase tracking-wide">
+                        {review.authorLocation}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+
+        {variant === "carousel" && (
+          <div className="flex gap-8 overflow-x-auto pb-8 snap-x scrollbar-hide">
+            {displayReviews.map((review) => (
+              <div key={review._id} className="snap-center shrink-0 w-[85vw] md:w-[450px]">
+                <Card variant="default" className="h-full bg-paper-50 border-paper-200">
+                  <CardContent className="p-8">
+                    <Stars rating={review.rating} />
+                    <p className="font-body text-forest-800 leading-relaxed mt-6 mb-6 italic">
+                      &ldquo;{review.text}&rdquo;
+                    </p>
+                    <div className="border-t border-paper-100 pt-4 mt-auto">
+                      <p className="font-sans text-sm font-bold uppercase tracking-widest text-forest-900">
+                        {review.authorName}
+                      </p>
+                      <p className="font-body text-xs text-forest-800/60 uppercase tracking-wide mt-1">
+                        {review.authorLocation}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

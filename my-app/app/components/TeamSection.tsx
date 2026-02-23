@@ -12,6 +12,7 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
+  { name: "Andrea Giordano", title: "Fondatore", role: "Un unico referente che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos.", image: "/images/chi-siamo/andrea.jpg", avatarFocus: "50% 15%" },
   { name: "Bogdan", title: "Tree Climbing", role: "Tree climbing, abbattimenti e potature in quota", image: "/images/team/bogdan.jpg", avatarFocus: "50% 18%" },
   { name: "Daniele", title: "Dottore Forestale", role: "Dottore forestale specializzato in funghi agenti di carie", image: "/images/team/daniele.jpg", avatarFocus: "50% 20%" },
   { name: "Moreno", title: "Fitoiatra", role: "Fitoiatra - Entomologo ETT certificato", image: "/images/team/moreno.jpg", avatarFocus: "50% 20%" },
@@ -46,8 +47,8 @@ export function TeamSection() {
               <span className="block italic text-leaf-700">servizio</span>
             </h2>
             <p className="mt-6 text-lg text-forest-800 max-w-2xl mx-auto">
-              La nostra scelta è darvi un servizio chiavi in mano, collaborando con 
-              un&apos;équipe multidisciplinare di professionisti, capaci di soddisfare 
+              La nostra scelta è darvi un servizio chiavi in mano, collaborando con
+              un&apos;équipe multidisciplinare di professionisti, capaci di soddisfare
               tutti i fabbisogni del vostro giardino.
             </p>
           </div>

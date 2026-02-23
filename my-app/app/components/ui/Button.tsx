@@ -91,7 +91,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <motion.span
           initial={{ opacity: loading ? 0 : 1 }}
           animate={{ opacity: loading ? 0 : 1 }}
-          className="relative z-10"
+          className="relative z-10 flex items-center justify-center gap-2"
         >
           {children}
         </motion.span>
