@@ -232,11 +232,11 @@ export default function ProgettiDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-paper-50">
+    <div className="min-h-screen bg-paper-50 overflow-x-hidden">
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-forest-950 pt-28 pb-20 lg:pt-36 lg:pb-28">
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
         {/* Background */}
         <div className="absolute inset-0">
           {project.hero_image ? (
@@ -244,13 +244,13 @@ export default function ProgettiDetailPage() {
               src={project.hero_image}
               alt=""
               fill
-              className="object-cover opacity-20"
+              className="object-cover opacity-40"
               priority
             />
           ) : (
             <div className="absolute inset-0 bg-forest-900" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/75 via-forest-900/65 to-forest-950/70" />
         </div>
 
         {/* Decorative blobs */}
@@ -258,14 +258,14 @@ export default function ProgettiDetailPage() {
         <div className="absolute bottom-0 -left-20 w-72 h-72 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
         <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-leaf-400/20 to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Breadcrumb */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full text-center">
+          {/* Breadcrumb centered */}
           <motion.nav
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-sm mb-10 lg:mb-14"
+            className="flex items-center justify-center gap-2 text-sm mb-8"
           >
             <Link href="/" className="font-sans text-paper-400 hover:text-paper-300 transition-colors tracking-wide">
               Home
@@ -275,12 +275,12 @@ export default function ProgettiDetailPage() {
               Progetti
             </Link>
             <span className="text-paper-600">/</span>
-            <span className="font-sans text-paper-300 tracking-wide">
+            <span className="font-sans text-paper-300 tracking-wide truncate max-w-[200px] md:max-w-none">
               {project.title}
             </span>
           </motion.nav>
 
-          <div className="max-w-3xl">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -290,11 +290,11 @@ export default function ProgettiDetailPage() {
                 {project.type}
               </Badge>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-paper-50 leading-tight mb-6">
+              <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
                 {project.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-5 text-paper-400/80">
+              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-paper-400/80">
                 <span className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-leaf-400" />
                   <span className="font-body">{project.location}</span>
@@ -319,28 +319,7 @@ export default function ProgettiDetailPage() {
       {/* ═══════════════════════════════════════════════════
           HERO IMAGE (full-width)
       ═══════════════════════════════════════════════════ */}
-      {project.hero_image && (
-        <section className="relative">
-          <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-forest-950/20 to-transparent z-10" />
-          <div
-            className="relative w-full aspect-[16/9] cursor-pointer group"
-            onClick={() => openLightbox(allViewablePhotos, 0)}
-          >
-            <Image
-              src={project.hero_image}
-              alt={project.hero_alt ?? project.title}
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-forest-950/20 to-transparent" />
-            <div className="absolute bottom-6 right-6 w-12 h-12 rounded-full bg-paper-50/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <Maximize2 className="w-5 h-5 text-forest-900" />
-            </div>
-          </div>
-        </section>
-      )}
+
 
       {/* ═══════════════════════════════════════════════════
           MAIN CONTENT

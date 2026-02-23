@@ -18,6 +18,8 @@ import {
   Link2,
   HardDrive,
   Loader2,
+  LayoutGrid,
+  List,
 } from "lucide-react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -92,11 +94,10 @@ function Toast({ notification, onDismiss }: { notification: Notification; onDism
   return (
     <div
       role="alert"
-      className={`fixed bottom-6 right-6 z-60 flex items-center gap-3 rounded-xl px-5 py-3 shadow-lg border transition-all ${
-        isSuccess
-          ? "bg-green-50 border-green-200 text-green-800"
-          : "bg-red-50 border-red-200 text-red-800"
-      }`}
+      className={`fixed bottom-6 right-6 z-60 flex items-center gap-3 rounded-xl px-5 py-3 shadow-lg border transition-all ${isSuccess
+        ? "bg-green-50 border-green-200 text-green-800"
+        : "bg-red-50 border-red-200 text-red-800"
+        }`}
     >
       {isSuccess ? (
         <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
@@ -129,6 +130,7 @@ export default function AdminGalleryPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [mediaFilter, setMediaFilter] = useState<"all" | "image" | "video">("all");
+  const [viewType, setViewType] = useState<"grid" | "list">("grid");
   const [modalOpen, setModalOpen] = useState(false);
   const [editingImage, setEditingImage] = useState<GalleryImage | null>(null);
   const [form, setForm] = useState<GalleryFormData>(EMPTY_FORM);
@@ -414,11 +416,10 @@ export default function AdminGalleryPage() {
               <button
                 key={entry.key}
                 onClick={() => setMediaFilter(entry.key)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                  mediaFilter === entry.key
-                    ? "bg-forest-900 text-white"
-                    : "bg-white border border-border hover:bg-muted"
-                }`}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${mediaFilter === entry.key
+                  ? "bg-forest-900 text-white"
+                  : "bg-white border border-border hover:bg-muted"
+                  }`}
               >
                 {entry.label} ({entry.count})
               </button>
@@ -427,11 +428,10 @@ export default function AdminGalleryPage() {
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => setCategoryFilter("all")}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                categoryFilter === "all"
-                  ? "bg-sun-500 text-white"
-                  : "bg-white border border-border hover:bg-muted"
-              }`}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${categoryFilter === "all"
+                ? "bg-sun-500 text-white"
+                : "bg-white border border-border hover:bg-muted"
+                }`}
             >
               Tutte ({gallery.length})
             </button>
@@ -441,24 +441,47 @@ export default function AdminGalleryPage() {
                 <button
                   key={cat}
                   onClick={() => setCategoryFilter(cat)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
-                  categoryFilter === cat
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${categoryFilter === cat
                     ? "bg-sun-500 text-white"
                     : "bg-white border border-border hover:bg-muted"
-                }`}
-              >
-                {cat} ({count})
-              </button>
-            );
-          })}
+                    }`}
+                >
+                  {cat} ({count})
+                </button>
+              );
+            })}
           </div>
-          <div className="w-full sm:max-w-md">
-            <Input
-              placeholder="Cerca asset..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              icon={<Search className="w-4 h-4" />}
-            />
+          <div className="flex flex-col sm:flex-row w-full sm:max-w-md gap-3 items-start sm:items-center justify-between sm:justify-start">
+            <div className="flex-1 w-full">
+              <Input
+                placeholder="Cerca asset..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                icon={<Search className="w-4 h-4" />}
+              />
+            </div>
+            <div className="flex gap-1 bg-white border border-border rounded-lg p-1 shrink-0 self-end sm:self-auto">
+              <button
+                onClick={() => setViewType("grid")}
+                className={`p-1.5 rounded-md transition-colors ${viewType === "grid"
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                  }`}
+                title="Vista a griglia"
+              >
+                <LayoutGrid className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewType("list")}
+                className={`p-1.5 rounded-md transition-colors ${viewType === "list"
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                  }`}
+                title="Vista a lista"
+              >
+                <List className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </SlideUp>
@@ -486,146 +509,245 @@ export default function AdminGalleryPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {filtered.map((item, index) => (
-              <StaggerItem key={item._id} delay={index * 0.04}>
-                <Card
-                  variant="default"
-                  className={`overflow-hidden transition-shadow hover:shadow-lg ${
-                    !item.isActive ? "opacity-60" : ""
-                  }`}
-                >
-                  {/* Thumbnail */}
-                  <div className="relative h-48 bg-paper-200 overflow-hidden rounded-t-2xl -mt-6 -mx-6 mb-4">
-                    {(item.mediaType ?? "image") === "video" ? (
-                      <video
-                        src={item.imageUrl}
-                        className="w-full h-full object-cover"
-                        controls={false}
-                        muted
-                        playsInline
-                        preload="metadata"
-                      />
-                    ) : (
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          target.style.display = "none";
-                          const parent = target.parentElement;
-                          if (parent && !parent.querySelector(".fallback-icon")) {
-                            const fallback = document.createElement("div");
-                            fallback.className =
-                              "fallback-icon absolute inset-0 flex items-center justify-center";
-                            fallback.innerHTML =
-                              '<svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-muted-foreground/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>';
-                            parent.appendChild(fallback);
-                          }
-                        }}
-                      />
-                    )}
-                    {/* Status overlay */}
-                    {!item.isActive && (
-                      <div className="absolute top-3 left-3">
-                        <Badge variant="warning" size="sm">
-                          <EyeOff className="w-3 h-3 mr-1" />
-                          Nascosta
-                        </Badge>
-                      </div>
-                    )}
-                    {/* Order badge */}
-                    <div className="absolute top-3 right-3">
-                      <span className="flex items-center gap-1 bg-black/60 text-white text-xs font-medium px-2 py-1 rounded-lg">
-                        <ArrowUpDown className="w-3 h-3" />
-                        {item.order}
-                      </span>
-                    </div>
-                  </div>
-
-                  <CardContent className="pt-0">
-                    {/* Info */}
-                    <h3 className="font-display text-lg font-bold text-foreground truncate">
-                      {item.title}
-                    </h3>
-                    {item.description && (
-                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                        {item.description}
-                      </p>
-                    )}
-
-                    {/* Tags */}
-                    <div className="flex items-center gap-2 mt-3 flex-wrap">
-                      <Badge size="sm" variant="outline">
-                        {(item.mediaType ?? "image") === "video" ? (
-                          <>
-                            <Video className="w-3 h-3 mr-1" />
-                            Video
-                          </>
-                        ) : (
-                          <>
-                            <ImageIcon className="w-3 h-3 mr-1" />
-                            Foto
-                          </>
-                        )}
-                      </Badge>
-                      <Badge size="sm" variant="earth">
-                        {item.category || "Generico"}
-                      </Badge>
-                      {item.storageId && (
-                        <Badge size="sm" variant="outline">
-                          <HardDrive className="w-3 h-3 mr-1" />
-                          Convex Storage
-                        </Badge>
+          viewType === "list" ? (
+            <Card className="overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                  <thead className="text-xs text-muted-foreground uppercase bg-muted/30 border-b border-border">
+                    <tr>
+                      <th className="px-5 py-4 font-medium">Media</th>
+                      <th className="px-5 py-4 font-medium">Dettagli</th>
+                      <th className="px-5 py-4 font-medium whitespace-nowrap">Categoria / Tipo</th>
+                      <th className="px-5 py-4 font-medium">Stato</th>
+                      <th className="px-5 py-4 font-medium text-right">Azioni</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.map((item, index) => (
+                      <tr
+                        key={item._id}
+                        className={`border-b border-border/50 hover:bg-muted/30 transition-colors ${!item.isActive ? "bg-muted/10 opacity-75" : ""
+                          }`}
+                      >
+                        <td className="px-5 py-3 w-28">
+                          <div className="relative w-20 h-14 rounded-md overflow-hidden bg-paper-200 shadow-sm">
+                            {(item.mediaType ?? "image") === "video" ? (
+                              <video
+                                src={item.imageUrl}
+                                className="w-full h-full object-cover"
+                                muted
+                                playsInline
+                              />
+                            ) : (
+                              <img
+                                src={item.imageUrl}
+                                alt={item.title}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = "none";
+                                }}
+                              />
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-5 py-3 min-w-[200px]">
+                          <p className="font-semibold text-foreground">{item.title}</p>
+                          {item.description && (
+                            <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
+                              {item.description}
+                            </p>
+                          )}
+                        </td>
+                        <td className="px-5 py-3">
+                          <div className="flex flex-col items-start gap-1.5">
+                            <Badge size="sm" variant="earth" className="py-0">
+                              {item.category || "Generico"}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground flex items-center mt-1">
+                              {item.mediaType === "video" ? (
+                                <><Video className="w-3.5 h-3.5 mr-1" /> Video</>
+                              ) : (
+                                <><ImageIcon className="w-3.5 h-3.5 mr-1" /> Foto</>
+                              )}
+                              {item.storageId && (
+                                <span title="Convex Storage">
+                                  <HardDrive className="w-3.5 h-3.5 ml-1.5" />
+                                </span>
+                              )}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-5 py-3">
+                          <div className="flex flex-col items-start gap-1.5">
+                            <Badge size="sm" variant={item.isActive ? "success" : "warning"} className="py-0">
+                              {item.isActive ? "Attiva" : "Nascosta"}
+                            </Badge>
+                            <span className="text-xs bg-black/5 text-foreground px-1.5 py-0.5 rounded-md flex items-center font-medium mt-1">
+                              <ArrowUpDown className="w-3 h-3 mr-1" /> {item.order}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-5 py-3 text-right whitespace-nowrap">
+                          <div className="flex items-center justify-end gap-0.5">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
+                              onClick={() => openEditModal(item)}
+                              title="Modifica"
+                            >
+                              <Pencil className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
+                              onClick={() => handleToggleActive(item)}
+                              title={item.isActive ? "Disattiva" : "Attiva"}
+                            >
+                              {item.isActive ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0 text-red-500/70 hover:text-red-600 hover:bg-red-50"
+                              onClick={() => handleDelete(item)}
+                              title="Elimina"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+              {filtered.map((item, index) => (
+                <StaggerItem key={item._id} delay={index * 0.04}>
+                  <Card
+                    variant="default"
+                    className={`overflow-hidden transition-all hover:shadow-md border-border/60 ${!item.isActive ? "opacity-60 grayscale-[20%]" : ""
+                      }`}
+                  >
+                    {/* Thumbnail */}
+                    <div className="relative h-44 bg-paper-200 overflow-hidden rounded-t-2xl -mt-6 -mx-6 mb-4">
+                      {(item.mediaType ?? "image") === "video" ? (
+                        <video
+                          src={item.imageUrl}
+                          className="w-full h-full object-cover"
+                          controls={false}
+                          muted
+                          playsInline
+                          preload="metadata"
+                        />
+                      ) : (
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            target.style.display = "none";
+                            const parent = target.parentElement;
+                            if (parent && !parent.querySelector(".fallback-icon")) {
+                              const fallback = document.createElement("div");
+                              fallback.className =
+                                "fallback-icon absolute inset-0 flex items-center justify-center";
+                              fallback.innerHTML =
+                                '<svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-muted-foreground/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>';
+                              parent.appendChild(fallback);
+                            }
+                          }}
+                        />
                       )}
-                      <Badge size="sm" variant={item.isActive ? "success" : "warning"}>
-                        {item.isActive ? "Attiva" : "Disattiva"}
-                      </Badge>
+                      {/* Status overlay */}
+                      {!item.isActive && (
+                        <div className="absolute top-3 left-3">
+                          <Badge variant="warning" size="sm">
+                            <EyeOff className="w-3 h-3 mr-1" />
+                            Nascosta
+                          </Badge>
+                        </div>
+                      )}
+                      {/* Order badge */}
+                      <div className="absolute top-3 right-3">
+                        <span className="flex items-center gap-1 bg-black/60 text-white text-xs font-medium px-2 py-1 rounded-lg">
+                          <ArrowUpDown className="w-3 h-3" />
+                          {item.order}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Actions */}
-                    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-border">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => openEditModal(item)}
-                        className="flex-1"
-                      >
-                        <Pencil className="w-4 h-4 mr-1" />
-                        Modifica
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleToggleActive(item)}
-                        className="flex-1"
-                      >
-                        {item.isActive ? (
-                          <>
-                            <EyeOff className="w-4 h-4 mr-1" />
-                            Disattiva
-                          </>
-                        ) : (
-                          <>
-                            <Eye className="w-4 h-4 mr-1" />
-                            Attiva
-                          </>
+                    <CardContent className="pt-0">
+                      {/* Info */}
+                      <h3 className="font-display text-lg font-bold text-foreground truncate">
+                        {item.title}
+                      </h3>
+                      {item.description && (
+                        <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
+                          {item.description}
+                        </p>
+                      )}
+
+                      {/* Tags */}
+                      <div className="flex items-center gap-1.5 mt-2.5 flex-wrap">
+                        <Badge size="sm" variant="earth" className="py-0">
+                          {item.category || "Generico"}
+                        </Badge>
+                        {item.storageId && (
+                          <span className="text-muted-foreground ml-0.5" title="Convex Storage">
+                            <HardDrive className="w-3.5 h-3.5" />
+                          </span>
                         )}
-                      </Button>
-                      <button
-                        onClick={() => handleDelete(item)}
-                        className="p-2 text-red-500 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
-                        title="Elimina"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </StaggerItem>
-            ))}
-          </div>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                          {item.mediaType === "video" ? <Video className="w-3.5 h-3.5" /> : <ImageIcon className="w-3.5 h-3.5" />}
+                          <span className="capitalize">{item.mediaType || "image"}</span>
+                        </div>
+
+                        <div className="flex items-center gap-0.5">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
+                            onClick={() => openEditModal(item)}
+                            title="Modifica"
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
+                            onClick={() => handleToggleActive(item)}
+                            title={item.isActive ? "Disattiva" : "Attiva"}
+                          >
+                            {item.isActive ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0 text-red-500/70 hover:text-red-600 hover:bg-red-50 ml-1"
+                            onClick={() => handleDelete(item)}
+                            title="Elimina"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </div>
+          )
         )}
       </SlideUp>
 
@@ -786,14 +908,12 @@ export default function AdminGalleryPage() {
                 type="button"
                 onClick={() => updateField("isActive", !form.isActive)}
                 aria-label={form.isActive ? "Disattiva asset" : "Attiva asset"}
-                className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-                  form.isActive ? "bg-green-500" : "bg-gray-300"
-                }`}
+                className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${form.isActive ? "bg-green-500" : "bg-gray-300"
+                  }`}
               >
                 <span
-                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-                    form.isActive ? "translate-x-6" : "translate-x-1"
-                  }`}
+                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${form.isActive ? "translate-x-6" : "translate-x-1"
+                    }`}
                 />
               </button>
             </div>

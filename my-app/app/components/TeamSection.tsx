@@ -12,6 +12,7 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
+  { name: "Andrea Giordano", title: "Fondatore", role: "Fondatore di Visione Sostenibile — Progettazione e direzione lavori", image: "/images/team/andrea.jpg", avatarFocus: "50% 18%" },
   { name: "Bogdan", title: "Tree Climbing", role: "Tree climbing, abbattimenti e potature in quota", image: "/images/team/bogdan.jpg", avatarFocus: "50% 18%" },
   { name: "Daniele", title: "Dottore Forestale", role: "Dottore forestale specializzato in funghi agenti di carie", image: "/images/team/daniele.jpg", avatarFocus: "50% 20%" },
   { name: "Moreno", title: "Fitoiatra", role: "Fitoiatra - Entomologo ETT certificato", image: "/images/team/moreno.jpg", avatarFocus: "50% 20%" },
@@ -46,8 +47,8 @@ export function TeamSection() {
               <span className="block italic text-leaf-700">servizio</span>
             </h2>
             <p className="mt-6 text-lg text-forest-800 max-w-2xl mx-auto">
-              La nostra scelta è darvi un servizio chiavi in mano, collaborando con 
-              un&apos;équipe multidisciplinare di professionisti, capaci di soddisfare 
+              La nostra scelta è darvi un servizio chiavi in mano, collaborando con
+              un&apos;équipe multidisciplinare di professionisti, capaci di soddisfare
               tutti i fabbisogni del vostro giardino.
             </p>
           </div>
@@ -73,9 +74,11 @@ export function TeamSection() {
                     cardHeight="23rem"
                     cardMaxHeight="27rem"
                   />
-                  <p className="mt-4 px-2 text-center font-body text-sm leading-relaxed text-forest-800/75 min-h-[3.5rem]">
-                    {member.role}
-                  </p>
+                  <div className="mt-4 px-2 min-h-[4.5rem] flex items-center justify-center">
+                    <p className="text-center font-body text-sm leading-relaxed text-forest-800/75">
+                      {member.role}
+                    </p>
+                  </div>
                 </article>
               </StaggerItem>
             ))}

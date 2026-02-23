@@ -22,6 +22,7 @@ import { normalizeServiceSlug, staticServices } from "../../lib/static-data";
 import { Button } from "../../components/ui/Button";
 import { cn } from "../../lib/utils";
 import { ScrollCTA } from "../../components/ScrollCTA";
+import { ReviewsWidget } from "../../components/ReviewsWidget";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -347,14 +348,14 @@ const serviceContents: Record<string, ServiceContent> = {
 
 function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
   const subtitle = serviceSubtitles[service.slug] ?? "";
-  
+
   // Split title for thin/bold effect
   const words = service.title.split(" ");
   const firstPart = words.slice(0, words.length > 2 ? 1 : 1).join(" ");
   const secondPart = words.slice(words.length > 2 ? 1 : 1).join(" ");
 
   return (
-    <section className="relative h-[90vh] w-full overflow-hidden">
+    <section className="relative h-[70vh] md:h-[50vh] w-full overflow-hidden flex items-center justify-center">
       <Image
         src={imageUrl}
         alt={service.title}
@@ -363,22 +364,20 @@ function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: st
         sizes="100vw"
         className="object-cover"
       />
-      {/* Double gradient: pronounced top and deep bottom for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-      
-      <div className="absolute inset-0 flex items-end">
-        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 pb-20 md:pb-32">
-          <h1 className="text-stitch-heading text-5xl md:text-8xl text-white">
-            <span className="font-light block mb-2">{firstPart}</span>
-            <span className="font-bold block">{secondPart}</span>
-            {subtitle && (
-              <span className="block font-light italic text-2xl md:text-4xl mt-6 text-paper-200/90 tracking-normal normal-case">
-                {subtitle}
-              </span>
-            )}
-          </h1>
-        </div>
+      {/* Double gradient: lower opacity for cleaner look */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8 text-center">
+        <h1 className="text-stitch-heading text-5xl md:text-8xl text-white">
+          <span className="font-light block mb-2">{firstPart}</span>
+          <span className="font-bold block">{secondPart}</span>
+          {subtitle && (
+            <span className="block font-light italic text-2xl md:text-4xl mt-6 text-paper-200/90 tracking-normal normal-case">
+              {subtitle}
+            </span>
+          )}
+        </h1>
       </div>
     </section>
   );
@@ -449,9 +448,9 @@ function ImageCarousel({ imageUrl, slug }: { imageUrl: string; slug: string }) {
             if (absOffset > 1) return null;
 
             const isCenter = offset === 0;
-            
+
             // X: Controlled overlap
-            const translateX = offset * 240; 
+            const translateX = offset * 240;
             // Scale: Sides are smaller as requested
             const scale = isCenter ? 1 : 0.85;
             const zIndex = isCenter ? 20 : 10;
@@ -853,17 +852,17 @@ export default function ServiceDetailPage() {
   const faqJsonLd =
     service.slug === "progettazione-giardini"
       ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: content.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: content.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
       : null;
 
   const handleShare = async () => {
@@ -936,6 +935,17 @@ export default function ServiceDetailPage() {
 
       {/* Section 7: Blog internal links */}
       <RelatedBlogSection serviceSlug={service.slug} />
+
+      {/* Section 7.5: Reviews */}
+      <div className="bg-paper-50 py-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <ReviewsWidget
+            variant="featured"
+            title="La voce dei nostri clienti"
+            subtitle="Cosa dicono di questo servizio"
+          />
+        </div>
+      </div>
 
       {/* Section 8: CTA (kept as-is) */}
       <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">

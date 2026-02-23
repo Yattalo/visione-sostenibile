@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target } from "lucide-react";
+import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileText, Download } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -10,7 +10,7 @@ const certifications = [
   {
     icon: Leaf,
     title: "Biodinamica Certificata",
-    description: "Andrea Giordano pratica l'agricoltura biodinamica da oltre 20 anni, integrando questi metodi in ogni progetto di giardinaggio sostenibile.",
+    description: "Metodologia certificata secondo i principi dell'agricoltura biodinamica di Rudolf Steiner. Andrea Giordano pratica la biodinamica da oltre 20 anni.",
     issuedBy: "Associazione per l'Agricoltura Biodinamica",
     year: "",
     category: "biodynamic",
@@ -18,7 +18,7 @@ const certifications = [
   {
     icon: Shield,
     title: "Giardinaggio a Impatto Zero",
-    description: "Ripristiniamo i danni causati all'ambiente durante gli interventi invasivi, garantendo un impatto ambientale netto pari a zero.",
+    description: "Compensazione totale delle emissioni CO₂ attraverso pratiche sostenibili e riforestazione. Garantiamo un impatto ambientale netto pari a zero.",
     issuedBy: "Visione Sostenibile",
     year: "",
     category: "eco",
@@ -26,7 +26,7 @@ const certifications = [
   {
     icon: CheckCircle,
     title: "Zero Prodotti Chimici",
-    description: "Eliminazione totale del rischio di intossicazione per persone, bambini e animali domestici. Nessun pesticida, nessun prodotto chimico.",
+    description: "Utilizzo esclusivo di prodotti naturali e biologici per la cura del verde. Eliminazione totale del rischio di intossicazione per persone e animali.",
     issuedBy: "Visione Sostenibile",
     year: "",
     category: "eco",
@@ -67,20 +67,22 @@ export default function QualitaPage() {
   return (
     <div className="min-h-screen bg-paper-50">
       {/* Hero */}
-      <section className="relative pt-44 pb-32 px-6 bg-forest-950 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-500/30 to-transparent" />
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950 text-white">
+        {/* Background Overlay */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')] bg-cover bg-center opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/80 via-forest-900/60 to-forest-950/70" />
         </div>
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="max-w-4xl mx-auto text-center relative z-10 px-6">
           <SlideUp>
             <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-6">
               Qualità Certificata
             </Badge>
-            <h1 className="font-display text-5xl md:text-6xl font-light leading-tight mb-6">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6">
               Il Nostro Impegno per
-              <span className="block italic text-leaf-400">l&apos;Eccellenza</span>
+              <span className="block italic text-leaf-400 text-6xl md:text-8xl">l&apos;Eccellenza</span>
             </h1>
-            <p className="font-body text-lg text-paper-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
               Ogni progetto è realizzato con professionalità, competenza e passione.
               Scopri le nostre certificazioni e gli standard che ci guidano.
             </p>
@@ -126,15 +128,31 @@ export default function QualitaPage() {
                         <p className="font-body text-forest-800 mb-2">
                           {cert.description}
                         </p>
-                        <p className="font-body text-sm text-paper-500">
+                        <p className="font-body text-sm text-paper-500 mb-4">
                           <span className="font-medium">Rilasciato da:</span> {cert.issuedBy}
                         </p>
+                        <a
+                          href="#"
+                          className="text-sm text-leaf-700 hover:text-leaf-600 flex items-center gap-1.5 font-medium transition-colors"
+                        >
+                          <FileText className="w-4 h-4" />
+                          Visualizza Certificato
+                        </a>
                       </div>
                     </div>
                   </Card>
                 </StaggerItem>
               ))}
             </div>
+
+            <SlideUp delay={0.4}>
+              <div className="mt-16 text-center">
+                <Button className="bg-leaf-700 hover:bg-leaf-600 text-white px-8 py-6 rounded-full text-lg shadow-lg transition-transform hover:scale-105">
+                  <Download className="mr-2 w-5 h-5" />
+                  Richiedi Documentazione Completa
+                </Button>
+              </div>
+            </SlideUp>
           </StaggerContainer>
         </div>
       </section>

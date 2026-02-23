@@ -77,11 +77,11 @@ export default function HomePage() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden"
       >
         {/* Background with video support */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/80 via-forest-900/60 to-forest-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50" />
           <video
             autoPlay
             loop
@@ -120,70 +120,27 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 px-6 py-2 text-sm tracking-widest uppercase">
-                Dal 2009
-              </Badge>
-              <Badge variant="eco" className="px-4 py-1.5 text-xs tracking-widest uppercase">
-                <Bug className="w-3 h-3 mr-1.5 inline" />
-                Biodinamica Certificata
-              </Badge>
-            </div>
-
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-balance">
-              Il tuo giardino sostenibile,
+              Giardini Sostenibili
               <span className="block italic text-leaf-400">
-                senza coordinare 5 fornitori
+                a Impatto Zero
               </span>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto mb-12 leading-relaxed">
-              Con Visione Sostenibile hai un unico interlocutore che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos.
+              Progettiamo e realizziamo giardini che durano nel tempo, rispettando l&apos;ecosistema e semplificando la tua vita.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contatti">
+            <div className="flex justify-center">
+              <Link href="/servizi">
                 <Button
                   size="lg"
-                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg tracking-wide"
+                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-10 py-4 text-lg tracking-wide rounded-full font-bold shadow-lg transition-transform hover:scale-105"
                 >
-                  Richiedi un sopralluogo
-                </Button>
-              </Link>
-              <Link href="/contatti">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/40 text-white hover:bg-white/10 hover:border-white px-8 py-4 text-lg tracking-wide"
-                >
-                  Sono un&apos;azienda/condominio
+                  Visualizza i Servizi
                 </Button>
               </Link>
             </div>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-paper-300/90">
-              <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Un referente
-              </span>
-              <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
-              <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Team modulare
-              </span>
-              <span className="hidden sm:block h-4 w-px bg-paper-400/40" />
-              <span className="font-sans text-xs uppercase tracking-[0.14em]">
-                Piemonte · Trentino · Lombardia
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2"
-          >
-            <div className="w-px h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
           </motion.div>
         </motion.div>
       </section>
