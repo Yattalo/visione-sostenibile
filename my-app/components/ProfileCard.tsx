@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback, useMemo, type ElementType, type ReactNode } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(150deg, rgba(11, 30, 14, 0.28) 0%, rgba(34, 88, 44, 0.24) 58%, rgba(234, 184, 49, 0.18) 100%)';
 

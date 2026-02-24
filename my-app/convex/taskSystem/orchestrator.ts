@@ -41,12 +41,17 @@ export const seed = mutation({
       await ctx.db.insert(TABLE, {
         projectId: scope,
         taskId: def.taskId,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         agent: def.agent as any,
         title: def.title,
         description: def.description,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         priority: (def.priority ?? "medium") as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         status: initStatus as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         category: def.category as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         phaseId: def.phaseId as any,
         wave: def.wave ?? 1,
         estimatedHours: def.estimatedHours,

@@ -2,17 +2,15 @@
 
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export function useAdminAuth() {
-  const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("admin_token");
-    setToken(stored);
-    setIsLoading(false);
-  }, []);
+  const [token, setToken] = useState<string | null>(
+    () => typeof window !== "undefined" ? localStorage.getItem("admin_token") : null
+  );
+  const [isLoading] = useState(
+    () => typeof window === "undefined"
+  );
 
   const sessionValid = useQuery(
     api.adminAuth.validateSession,

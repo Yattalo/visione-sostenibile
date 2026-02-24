@@ -8,13 +8,12 @@ import { Button } from "./ui/Button";
 
 export function ScrollCTA() {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(
+    () => typeof window !== "undefined" && sessionStorage.getItem("scroll_cta_dismissed") === "1"
+  );
 
   useEffect(() => {
-    if (sessionStorage.getItem("scroll_cta_dismissed")) {
-      setDismissed(true);
-      return;
-    }
+    if (dismissed) return;
 
     const handleScroll = () => {
       const scrollPercent =
@@ -26,7 +25,7 @@ export function ScrollCTA() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [dismissed]);
 
   const dismiss = () => {
     setDismissed(true);

@@ -1111,7 +1111,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     title: "Add QuizCTA sidebar to service detail pages",
     description:
       "Add <QuizCTA variant='sidebar' /> to the service detail page sidebar (app/servizi/[slug]/page.tsx), after existing contact card and video card in the aside section.",
-    status: "todo",
+    status: "done",
     priority: "medium",
     category: "frontend",
     phaseId: "features",
@@ -1135,7 +1135,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     title: "Add quiz CTAs to blog posts (mid + end article)",
     description:
       "Add QuizCTA to blog detail page (app/blog/[slug]/page.tsx). Mid-article: inline variant after quick answer section. End-article: section with Paper Canvas bg, H3 'Prossimo passo', CTA button linking to /quiz. Import QuizCTA component.",
-    status: "todo",
+    status: "done",
     priority: "medium",
     category: "frontend",
     phaseId: "features",
@@ -1455,7 +1455,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     title: "Build ImageCarousel 3-card depth component",
     description:
       "Create app/components/ImageCarousel.tsx based on Stitch carousel pattern. 3 visible cards: center card elevated (z-20, larger, shadow-2xl), side cards dimmed (brightness-75 or opacity-60, smaller). All images use rounded-[30px]. Dot pagination below (accent color active, 40% opacity inactive). Props: images (array of {src, alt}), autoPlay? (boolean). Use Framer Motion for transitions. Center card slightly translated up (-translate-y-4). Container uses perspective: 1000px for depth.",
-    status: "todo",
+    status: "done",
     priority: "high",
     category: "frontend",
     phaseId: "core",
@@ -1482,7 +1482,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     title: "Build ProcessSteps numbered card grid component",
     description:
       "Create app/components/ProcessSteps.tsx based on Stitch '4 Fasi' pattern. Layout: 12-col grid, title section (col-span-5) with H2 uppercase font-light + accent subtitle (tracking-widest xs uppercase Leaf Green), steps grid (col-span-7) as 2x2 sm:grid-cols-2. Each step card: white bg, rounded-md/xl, neumorphic shadow (.shadow-neumorphic or .step-card), oversized number (text-7xl font-display text-[#D1D1D1] font-medium), title (font-normal text-sm), description (text-xs text-slate-500 font-light). Props: title, accentSubtitle, steps[] (number, title, description). Max 4 steps per grid.",
-    status: "todo",
+    status: "done",
     priority: "high",
     category: "frontend",
     phaseId: "core",
@@ -1509,7 +1509,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     title: "Build VideoShowcase play-button overlay component",
     description:
       "Create app/components/VideoShowcase.tsx based on Stitch 'Che cosa Aspettarsi' pattern. Full-width container with rounded-[30px], image or video background covering h-[450-500px]. Dark overlay (bg-black/20-30). Centered content: H2 uppercase tracking-wide font-light with <strong> accent word, play button (white/90 backdrop-blur-sm rounded-full w-20 h-20, play_arrow icon). Group hover: image scale-105 transition 700ms, play button scale-110. Props: title, accentWord, backgroundImage, videoUrl?. If videoUrl provided, clicking play opens video in modal or inline.",
-    status: "todo",
+    status: "done",
     priority: "medium",
     category: "frontend",
     phaseId: "core",
@@ -1536,7 +1536,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     title: "Build AccordionFAQ styled component from Stitch design",
     description:
       "Create app/components/AccordionFAQ.tsx based on Stitch FAQ pattern. Uses HTML <details>/<summary> for no-JS progressive enhancement. Each item: bg-[#F5F5F5] or white, rounded-lg, shadow-lg/sm, p-6 px-8. Summary: flex between, text in primary green (Leaf Green), font-medium text-lg tracking-wide. Expand icon: material-icons expand_more (or lucide ChevronDown), rotate-180 on open via group-open. Content: px-8 pb-8 text-sm text-slate-500. Hover: translateY(-2px) with 300ms ease. Props: items[] ({question, answer}), title? (string, e.g. 'FAQ'). Title: centered uppercase font-light tracking-wide text-5xl.",
-    status: "todo",
+    status: "done",
     priority: "high",
     category: "frontend",
     phaseId: "core",

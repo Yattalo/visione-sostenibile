@@ -3,7 +3,6 @@
 // Project: my-app
 // ============================================================
 
-import { httpRouter } from "convex/server";
 import { httpAction } from "../_generated/server";
 import { api } from "../_generated/api";
 
@@ -51,7 +50,7 @@ const listTasks = httpAction(async (ctx, request) => {
 
   const tasks = await ctx.runQuery(api.taskSystem.tasks.list, {
     projectId,
-    agent: agent as any,
+    agent: agent as "claude" | "gemini" | "codex" | undefined,
     status,
     priority,
     wave,
@@ -112,8 +111,8 @@ const changeStatus = httpAction(async (ctx, request) => {
       agent: agent || undefined,
     });
     return jsonResponse({ success: true });
-  } catch (e: any) {
-    return errorResponse(e.message || "Failed to update status", 500);
+  } catch (e: unknown) {
+    return errorResponse(e instanceof Error ? e.message : "Failed to update status", 500);
   }
 });
 
@@ -124,8 +123,8 @@ const createTask = httpAction(async (ctx, request) => {
     const projectId = resolveProjectId(url, body?.projectId);
     const result = await ctx.runMutation(api.taskSystem.tasks.create, { ...body, projectId });
     return jsonResponse(result);
-  } catch (e: any) {
-    return errorResponse(e.message || "Failed to create task", 500);
+  } catch (e: unknown) {
+    return errorResponse(e instanceof Error ? e.message : "Failed to create task", 500);
   }
 });
 
@@ -139,8 +138,8 @@ const updateTask = httpAction(async (ctx, request) => {
 
     await ctx.runMutation(api.taskSystem.tasks.update, { taskId, projectId, fields });
     return jsonResponse({ success: true });
-  } catch (e: any) {
-    return errorResponse(e.message || "Failed to update task", 500);
+  } catch (e: unknown) {
+    return errorResponse(e instanceof Error ? e.message : "Failed to update task", 500);
   }
 });
 

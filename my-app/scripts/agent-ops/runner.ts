@@ -16,14 +16,14 @@
 
 import { execSync } from "node:child_process";
 import { loadConfig } from "./config.js";
-import { shouldRunNow, getNextRun } from "./scheduler.js";
+import { shouldRunNow } from "./scheduler.js";
 import { acquireLane, releaseLane } from "./lane-queue.js";
 import { createWorktree, removeWorktree, getWorktreeGitStats } from "./git-isolation.js";
 import { launchAgent } from "./agent-launcher.js";
 import { LogStreamer } from "./log-streamer.js";
 import { createPR } from "./pr-creator.js";
 import { cleanupStaleWorktrees } from "./cleanup.js";
-import type { AgentOpsConfig, RunContext, LogEntry } from "./types.js";
+import type { RunContext } from "./types.js";
 
 const config = loadConfig();
 let activeRuns = 0;
@@ -90,6 +90,7 @@ async function pollOnce(): Promise<void> {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function executeRun(run: any): Promise<void> {
   activeRuns++;
   totalRunsToday++;
