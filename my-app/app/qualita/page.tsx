@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileDown, Eye, FileText, Download, X } from "lucide-react";
+import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, Eye, FileText, Download, X } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -123,7 +123,7 @@ export default function QualitaPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50 z-10" />
         </div>
 
-        <div className="max-w-4xl mx-auto text-center relative z-20 px-6 pt-12">
+        <div className="max-w-4xl mx-auto text-center relative z-20 px-6 pt-20 md:pt-0">
           <SlideUp>
             <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               Qualità Certificata
@@ -195,42 +195,7 @@ export default function QualitaPage() {
               ))}
             </div>
 
-            <SlideUp delay={0.4}>
-              <div className="mt-16 text-center">
-                <Button className="bg-leaf-700 hover:bg-leaf-600 text-white px-8 py-6 rounded-full text-lg shadow-lg transition-transform hover:scale-105">
-                  <Download className="mr-2 w-5 h-5" />
-                  Richiedi Documentazione Completa
-                </Button>
-              </div>
-            </SlideUp>
           </StaggerContainer>
-
-          {/* Download/View Buttons */}
-          <SlideUp delay={0.5}>
-            <div className="mt-16 flex flex-col sm:flex-row gap-6 justify-center">
-              <Button
-                size="lg"
-                className="bg-forest-950 text-white hover:bg-forest-900 px-8 py-6 rounded-2xl flex items-center gap-3 shadow-deep"
-              >
-                <FileDown className="w-5 h-5 text-sun-400" />
-                <span className="flex flex-col items-start text-left">
-                  <span className="text-xs uppercase tracking-widest opacity-60">Scarica ora</span>
-                  <span className="text-sm font-bold">Brochure Qualità .PDF</span>
-                </span>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-forest-200 text-forest-900 hover:bg-forest-50 px-8 py-6 rounded-2xl flex items-center gap-3"
-              >
-                <Eye className="w-5 h-5 text-leaf-600" />
-                <span className="flex flex-col items-start text-left">
-                  <span className="text-xs uppercase tracking-widest opacity-60">Visualizza</span>
-                  <span className="text-sm font-bold">Certificazioni Complete</span>
-                </span>
-              </Button>
-            </div>
-          </SlideUp>
         </div>
       </section>
 

@@ -400,7 +400,7 @@ ${formData.message}
           <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-20 md:pt-0 text-center">
           <SlideUp>
             <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               Contatti
@@ -607,7 +607,7 @@ ${formData.message}
                             <>
                               <Input
                                 label="Ragione Sociale *"
-                                placeholder="es. Studio Architettura Besozzi"
+                                placeholder="Ragione Sociale"
                                 value={formData.companyName}
                                 onChange={(e) => updateFormData("companyName", e.target.value)}
                                 className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
@@ -615,7 +615,7 @@ ${formData.message}
                               />
                               <Input
                                 label="P.IVA / Codice Fiscale (Opzionale)"
-                                placeholder="01234567890"
+                                placeholder="P.IVA o Codice Fiscale"
                                 value={formData.vatNumber}
                                 onChange={(e) => updateFormData("vatNumber", e.target.value)}
                                 className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
@@ -624,7 +624,7 @@ ${formData.message}
                           ) : (
                             <Input
                               label="Nome completo *"
-                              placeholder="es. Mario Rossi"
+                              placeholder="Nome e Cognome"
                               value={formData.name}
                               onChange={(e) => updateFormData("name", e.target.value)}
                               className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
@@ -634,7 +634,7 @@ ${formData.message}
                           <Input
                             label="Email di contatto *"
                             type="email"
-                            placeholder="mario@email.com"
+                            placeholder="esempio@azienda.it"
                             value={formData.email}
                             onChange={(e) => updateFormData("email", e.target.value)}
                             className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
@@ -643,7 +643,7 @@ ${formData.message}
                           <Input
                             label="Recapito telefonico"
                             type="tel"
-                            placeholder="+39 333 ..."
+                            placeholder="+39 ..."
                             value={formData.phone}
                             onChange={(e) => updateFormData("phone", e.target.value)}
                             className="h-14 rounded-xl border-paper-200 bg-paper-50/50"

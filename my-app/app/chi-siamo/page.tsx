@@ -79,7 +79,7 @@ export default function ChiSiamoPage() {
           <div className="absolute bottom-1/4 -right-24 w-80 h-80 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-20 md:pt-0 text-center">
           <SlideUp>
             <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               Chi Siamo

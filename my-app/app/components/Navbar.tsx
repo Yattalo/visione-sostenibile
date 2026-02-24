@@ -129,51 +129,54 @@ export function Navbar() {
           </div>
         </div>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              id="mobile-nav"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-paper-50 rounded-b-3xl border-t border-paper-300 overflow-hidden"
-            >
-              <div className="px-6 py-5 space-y-1">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.04 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "block py-2.5 font-sans text-xs uppercase tracking-widest transition-colors border-b border-paper-200",
-                        isActivePath(link.href)
-                          ? "text-leaf-500"
-                          : "text-forest-800 hover:text-leaf-500"
-                      )}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-                <div className="pt-3">
+      </nav>
+
+      {/* Mobile dropdown — floating panel, fully rounded, spring */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="mobile-nav"
+            initial={{ opacity: 0, y: -12, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 380, damping: 28 }}
+            className="lg:hidden absolute top-full left-0 right-0 mt-3 bg-paper-50/98 backdrop-blur-xl rounded-2xl shadow-floating border border-paper-200/70 overflow-hidden"
+          >
+            <div className="px-5 py-4">
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -14 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 32, delay: index * 0.035 }}
+                >
                   <Link
-                    href="/contatti"
-                    className="inline-flex items-center justify-center w-full h-10 px-6 rounded-full bg-sun-400 text-forest-950 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover-sun"
+                    href={link.href}
+                    className={cn(
+                      "flex items-center py-3 px-2 font-sans text-xs uppercase tracking-widest rounded-xl transition-colors",
+                      isActivePath(link.href)
+                        ? "text-leaf-600 bg-leaf-50"
+                        : "text-forest-800 hover:text-leaf-600 hover:bg-paper-100"
+                    )}
                     onClick={() => setIsOpen(false)}
                   >
-                    Richiedi Preventivo
+                    {link.label}
                   </Link>
-                </div>
+                </motion.div>
+              ))}
+              <div className="mt-3 pt-3 border-t border-paper-200">
+                <Link
+                  href="/contatti"
+                  className="inline-flex items-center justify-center w-full h-11 px-6 rounded-full bg-sun-400 text-forest-950 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover-sun"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Richiedi Preventivo
+                </Link>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }

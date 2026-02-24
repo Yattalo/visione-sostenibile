@@ -23,9 +23,9 @@ export function Footer() {
           <Image
             src="/VS_logo_completo_bianco.svg"
             alt="Visione Sostenibile"
-            width={240}
-            height={80}
-            className="h-20 w-auto mx-auto"
+            width={320}
+            height={106}
+            className="h-24 md:h-28 w-auto mx-auto"
             loading="lazy"
           />
         </motion.div>
