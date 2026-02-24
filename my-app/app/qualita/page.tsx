@@ -257,7 +257,7 @@ export default function QualitaPage() {
                 <StaggerItem key={att.file} delay={index * 0.08}>
                   <Card variant="elevated" className="h-full flex flex-col gap-3 group hover:shadow-floating transition-all duration-300">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-leaf-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-leaf-100 flex items-center justify-center shrink-0">
                         <FileText className="w-5 h-5 text-leaf-700" />
                       </div>
                       <div>
@@ -268,6 +268,7 @@ export default function QualitaPage() {
                     <p className="font-body text-sm text-forest-700 flex-1">{att.description}</p>
                     <div className="flex gap-2 pt-2 border-t border-paper-200">
                       <button
+                        type="button"
                         onClick={() => setPreviewUrl(att.file)}
                         className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-leaf-700 hover:text-leaf-600 py-2 px-3 rounded-lg hover:bg-leaf-50 transition-colors"
                       >
@@ -304,6 +305,8 @@ export default function QualitaPage() {
             <div className="flex items-center justify-between px-5 py-3 border-b border-paper-200">
               <span className="font-display text-sm text-forest-950">Anteprima Attestato</span>
               <button
+                type="button"
+                aria-label="Chiudi anteprima"
                 onClick={() => setPreviewUrl(null)}
                 className="w-8 h-8 rounded-full hover:bg-paper-100 flex items-center justify-center transition-colors"
               >

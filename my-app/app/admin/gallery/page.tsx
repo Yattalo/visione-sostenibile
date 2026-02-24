@@ -550,7 +550,7 @@ export default function AdminGalleryPage() {
                             )}
                           </div>
                         </td>
-                        <td className="px-5 py-3 min-w-[200px]">
+                        <td className="px-5 py-3 min-w-50">
                           <p className="font-semibold text-foreground">{item.title}</p>
                           {item.description && (
                             <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
@@ -630,7 +630,7 @@ export default function AdminGalleryPage() {
                 <StaggerItem key={item._id} delay={index * 0.04}>
                   <Card
                     variant="default"
-                    className={`overflow-hidden transition-all hover:shadow-md border-border/60 ${!item.isActive ? "opacity-60 grayscale-[20%]" : ""
+                    className={`overflow-hidden transition-all hover:shadow-md border-border/60 ${!item.isActive ? "opacity-60 grayscale-20" : ""
                       }`}
                   >
                     {/* Thumbnail */}
@@ -795,6 +795,8 @@ export default function AdminGalleryPage() {
               <select
                 value={form.mediaType}
                 onChange={(e) => updateField("mediaType", e.target.value as "image" | "video")}
+                title="Tipo media"
+                aria-label="Tipo media"
                 className="flex h-12 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm md:text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-all duration-200"
               >
                 <option value="image">Foto</option>
