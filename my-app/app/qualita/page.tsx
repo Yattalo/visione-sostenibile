@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileDown, Eye, FileText, Download } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, FileDown, Eye, FileText, Download, X } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -57,6 +58,45 @@ const commitments = [
   },
 ];
 
+const attestati = [
+  {
+    title: "Formazione Generale Sicurezza",
+    description: "Attestato di formazione generale obbligatoria per lavoratori — D.Lgs. 81/08.",
+    file: "/attestato-formazione-generale.pdf",
+    persona: "Andrea Giordano",
+  },
+  {
+    title: "Formazione 16 Ore",
+    description: "Corso di formazione sicurezza sui luoghi di lavoro — 16 ore di aggiornamento.",
+    file: "/attestato-formazione-16h.pdf",
+    persona: "Andrea Giordano",
+  },
+  {
+    title: "Antincendio",
+    description: "Attestato di idoneità tecnica per addetto antincendio — rischio basso/medio.",
+    file: "/attestato-antincendio.pdf",
+    persona: "Andrea Giordano",
+  },
+  {
+    title: "Preposto",
+    description: "Formazione specifica per preposto — vigilanza e coordinamento del personale.",
+    file: "/attestato-preposto.pdf",
+    persona: "Andrea Giordano",
+  },
+  {
+    title: "RLS — Rappresentante Lavoratori",
+    description: "Formazione specifica per Rappresentante dei Lavoratori per la Sicurezza.",
+    file: "/attestato-rls.pdf",
+    persona: "Andrea Giordano",
+  },
+  {
+    title: "RSPP / DDL",
+    description: "Responsabile del Servizio di Prevenzione e Protezione — Datore di Lavoro.",
+    file: "/attestato-rspp-ddl.pdf",
+    persona: "Giordano Umberto",
+  },
+];
+
 const stats = [
   { value: "20+", label: "Anni in biodinamica" },
   { value: "10+", label: "Anni di giardinaggio" },
@@ -65,6 +105,8 @@ const stats = [
 ];
 
 export default function QualitaPage() {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen bg-paper-50">
       {/* Hero */}
@@ -191,6 +233,101 @@ export default function QualitaPage() {
           </SlideUp>
         </div>
       </section>
+
+      {/* Attestati di Sicurezza */}
+      <section className="py-24 px-6 bg-paper-100">
+        <div className="max-w-7xl mx-auto">
+          <SlideUp>
+            <div className="text-center mb-16">
+              <Badge className="bg-leaf-100 text-leaf-700 mb-4">
+                Sicurezza sul Lavoro
+              </Badge>
+              <h2 className="font-display text-4xl text-forest-950">
+                Attestati e Qualifiche
+              </h2>
+              <p className="font-body text-forest-700 mt-4 max-w-xl mx-auto">
+                Tutta la documentazione di sicurezza è aggiornata e verificabile.
+              </p>
+            </div>
+          </SlideUp>
+
+          <StaggerContainer delay={0.1}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {attestati.map((att, index) => (
+                <StaggerItem key={att.file} delay={index * 0.08}>
+                  <Card variant="elevated" className="h-full flex flex-col gap-3 group hover:shadow-floating transition-all duration-300">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-leaf-100 flex items-center justify-center flex-shrink-0">
+                        <FileText className="w-5 h-5 text-leaf-700" />
+                      </div>
+                      <div>
+                        <h3 className="font-display text-base text-forest-950 leading-tight">{att.title}</h3>
+                        <p className="text-xs text-paper-500 mt-0.5">{att.persona}</p>
+                      </div>
+                    </div>
+                    <p className="font-body text-sm text-forest-700 flex-1">{att.description}</p>
+                    <div className="flex gap-2 pt-2 border-t border-paper-200">
+                      <button
+                        onClick={() => setPreviewUrl(att.file)}
+                        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-leaf-700 hover:text-leaf-600 py-2 px-3 rounded-lg hover:bg-leaf-50 transition-colors"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                        Visualizza
+                      </button>
+                      <a
+                        href={att.file}
+                        download
+                        className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium text-forest-700 hover:text-forest-900 py-2 px-3 rounded-lg hover:bg-paper-200 transition-colors"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        Scarica
+                      </a>
+                    </div>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </div>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* PDF Preview Modal */}
+      {previewUrl && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setPreviewUrl(null)}
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl h-[85vh] flex flex-col overflow-hidden"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-3 border-b border-paper-200">
+              <span className="font-display text-sm text-forest-950">Anteprima Attestato</span>
+              <button
+                onClick={() => setPreviewUrl(null)}
+                className="w-8 h-8 rounded-full hover:bg-paper-100 flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4 text-forest-700" />
+              </button>
+            </div>
+            <iframe
+              src={previewUrl}
+              className="flex-1 w-full"
+              title="Anteprima attestato"
+            />
+            <div className="px-5 py-3 border-t border-paper-200 flex justify-end">
+              <a
+                href={previewUrl}
+                download
+                className="flex items-center gap-2 text-sm font-medium text-leaf-700 hover:text-leaf-600 transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                Scarica PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stats */}
       <section className="py-20 bg-forest-950 text-white">
