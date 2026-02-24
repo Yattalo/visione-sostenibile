@@ -45,7 +45,7 @@ npx convex run taskSystem/orchestrator:updateStatus '{"taskId":"F1","newStatus":
 
 ### Data Layer — Dual Strategy
 
-- **Convex** (`convex/`): Primary backend. Schema in `convex/schema.ts` with **9 domain tables**: `pages`, `services`, `gallery`, `reviews`, `contactSubmissions`, `blogPosts`, `projects`, `shareEvents`, `settings`. Plus task system tables via `...taskSystemTables`.
+- **Convex** (`convex/`): Primary backend. Schema in `convex/schema.ts` with **16 domain tables**: `pages`, `services`, `gallery`, `reviews`, `contactSubmissions`, `blogPosts`, `projects`, `shareEvents`, `settings`, `adminSessions`, `emailTemplates`, `emailDeliveries`, `crmContacts`, `crmActivities`, `leads`, `quizSubmissions`. Plus task system tables via `...taskSystemTables`.
 - **Static fallback** (`app/lib/static-data.ts`, `app/lib/blog.ts`, `app/lib/progetti-data.ts`): Hardcoded data used when Convex is not connected. **Migration target**: move blog and projects data entirely to Convex (tables exist, data doesn't yet).
 
 Seed initial services via Convex Dashboard: call `api.services.seed()`.
@@ -53,17 +53,17 @@ Seed initial services via Convex Dashboard: call `api.services.seed()`.
 ### Frontend Structure
 
 - `app/` — Next.js App Router pages.
-- `app/admin/` — Admin panel with its own layout (sidebar + header). **No auth implemented yet.**
+- `app/admin/` — Admin panel with its own layout (sidebar + header). Auth via `adminSessions` table + `useAdminAuth` hook.
 
-#### Public Routes (12)
-`/` (homepage), `/chi-siamo`, `/servizi`, `/servizi/[slug]`, `/progetti`, `/progetti/[slug]`, `/blog`, `/blog/[slug]`, `/contatti`, `/qualita`, `/privacy`, `/termini`
+#### Public Routes (17)
+`/` (homepage), `/chi-siamo`, `/servizi`, `/servizi/[slug]`, `/progetti`, `/progetti/[slug]`, `/blog`, `/blog/[slug]`, `/contatti`, `/qualita`, `/privacy`, `/termini`, `/quiz`, `/scorecard/[id]`, `/api/og`, `/robots.txt`, `/sitemap.xml`
 
-#### Admin Routes (7)
-`/admin` (dashboard), `/admin/services`, `/admin/gallery`, `/admin/contacts`, `/admin/reviews`, `/admin/blog`, `/admin/settings`
+#### Admin Routes (10)
+`/admin` (dashboard), `/admin/services`, `/admin/gallery`, `/admin/contacts`, `/admin/reviews`, `/admin/blog`, `/admin/settings`, `/admin/crm`, `/admin/emails`, `/admin/login`
 
 ### Component Library
 
-- `app/components/` — Shared: `Navbar`, `Footer`, `LoadingState`, `ServiceCard`, `ReviewsWidget`, `PhilosophySection`, `TiltedCard`, `animations.tsx`.
+- `app/components/` — Shared: `Navbar`, `Footer`, `LoadingState`, `ServiceCard`, `ReviewsWidget`, `PhilosophySection`, `TiltedCard`, `QuizCTA` (3 variants), `QuizMiniPreview`, `ScrollCTA`, `PageHero`, `TeamSection`, `CookieConsent`, `Analytics`, `ImageCarousel`, `ProcessSteps`, `VideoShowcase`, `AccordionFAQ`, `animations.tsx`.
 - `app/components/ui/` — Primitives: `Button` (4 variants), `Card` (4 variants), `Badge` (8 variants), `Input`, `Modal` (Portal), `Skeleton` (6 variants).
 - `app/template.tsx` — Framer Motion page transitions (fade + slide).
 - `app/ConvexClientProvider.tsx` — Client-side Convex provider. Requires `NEXT_PUBLIC_CONVEX_URL`.

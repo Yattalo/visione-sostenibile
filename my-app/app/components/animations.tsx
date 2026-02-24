@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { motion, useInView, useAnimation, Variant } from "framer-motion";
 import { cn } from "../lib/utils";
+
+const emptySubscribe = () => () => {};
+const returnTrue = () => true;
+const returnFalse = () => false;
 
 /**
  * Hook to detect client-side hydration. Returns false during SSR and first
@@ -11,9 +15,7 @@ import { cn } from "../lib/utils";
  * flag as "hidden content".
  */
 function useHasMounted() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return mounted;
+  return useSyncExternalStore(emptySubscribe, returnTrue, returnFalse);
 }
 
 export function useScrollAnimation(threshold = 0.1) {

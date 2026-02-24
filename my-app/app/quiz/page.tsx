@@ -27,7 +27,6 @@ import {
   Warehouse,
   User,
   Mail,
-  Phone,
 } from "lucide-react";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";

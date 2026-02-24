@@ -16,6 +16,7 @@ function resolveProjectId(projectId?: string): string {
 // ── AgentOps Trigger Helper ──
 
 async function checkAgentOpsTriggers(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: { db: any },
   projectId: string,
   eventType: string,
@@ -23,9 +24,11 @@ async function checkAgentOpsTriggers(
 ) {
   const triggerJobs = await ctx.db
     .query("agentOpsJobs")
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .withIndex("by_scheduleType", (q: any) => q.eq("scheduleType", "trigger"))
     .collect();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const enabled = triggerJobs.filter((j: any) => {
     if (!j.enabled || j.triggerType !== eventType) return false;
     if (!j.projectId) return false;
@@ -183,9 +186,9 @@ export const checkDependencies = query({
   handler: async (ctx, { taskId, projectId }) => {
     const scope = resolveProjectId(projectId);
     const task = await ctx.db.query(TABLE).withIndex("by_project_taskId", (q) => q.eq("projectId", scope).eq("taskId", taskId)).unique();
-    if (!task?.dependencies?.length) return { canStart: true, unmetDependencies: [] as string[], blockingTasks: [] as any[] };
+    if (!task?.dependencies?.length) return { canStart: true, unmetDependencies: [] as string[], blockingTasks: [] as unknown[] };
     const unmet: string[] = [];
-    const blocking: any[] = [];
+    const blocking: unknown[] = [];
     for (const depId of task.dependencies) {
       const dep = await ctx.db.query(TABLE).withIndex("by_project_taskId", (q) => q.eq("projectId", scope).eq("taskId", depId)).unique();
       if (!dep || dep.status !== "done") { unmet.push(depId); if (dep) blocking.push(dep); }
@@ -237,8 +240,11 @@ export const create = mutation({
       title: args.title,
       description: args.description,
       priority: args.priority ?? "medium",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       status: initStatus as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       category: args.category as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       phaseId: args.phaseId as any,
       wave: args.wave ?? 1,
       estimatedHours: args.estimatedHours,

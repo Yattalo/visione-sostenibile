@@ -9,6 +9,7 @@ import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, FadeIn } from "../components/animations";
+import { QuizCTA } from "../components/QuizCTA";
 import { getBlogPost as staticGetBlogPost, getRelatedPosts as staticGetRelatedPosts } from "../lib/blog";
 
 type TemplateVariant = 1 | 2 | 3;
@@ -596,6 +597,11 @@ export function BlogPostClient({
         </div>
       </section>
 
+      {/* Mid-article Quiz CTA */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pb-10">
+        <QuizCTA variant="inline" />
+      </div>
+
       {resolvedTemplate === 1 && (
         <>
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
@@ -710,6 +716,25 @@ export function BlogPostClient({
           </div>
         </section>
       )}
+
+      {/* End-article Quiz CTA */}
+      <section className="bg-paper-100 border-t border-paper-300">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 py-16 lg:py-20 text-center">
+          <h3 className="font-display text-3xl lg:text-4xl text-forest-950 mb-4">
+            Prossimo passo
+          </h3>
+          <p className="text-forest-800/70 mb-8 max-w-xl mx-auto leading-relaxed">
+            Scopri che tipo di giardino fa per te con il nostro quiz gratuito. In 6 domande ricevi un profilo personalizzato.
+          </p>
+          <Link
+            href="/quiz"
+            className="inline-flex items-center gap-2 bg-sun-400 hover:bg-sun-500 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300"
+          >
+            Fai il Quiz
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
 
       {relatedPosts && relatedPosts.length > 0 && (
         <section className="border-t border-paper-300 bg-paper-50">

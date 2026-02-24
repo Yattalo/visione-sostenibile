@@ -8,7 +8,6 @@ import {
   Award,
   Clock,
   MapPin,
-  Mail,
   Bug,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";

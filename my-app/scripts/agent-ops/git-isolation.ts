@@ -5,7 +5,7 @@
 
 import { execSync } from "node:child_process";
 import { existsSync, mkdirSync, rmSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
 import type { AgentOpsConfig } from "./types.js";
 
 const PROTECTED_BRANCHES = ["main","master"];
@@ -120,6 +120,7 @@ export function listStaleWorktrees(config: AgentOpsConfig, maxAgeMs: number = 24
   const worktreeBase = config.worktreeBase;
   if (!existsSync(worktreeBase)) return [];
 
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { readdirSync, statSync } = require("node:fs");
   const now = Date.now();
   const stale: string[] = [];
