@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { useSearchParams } from "next/navigation";
-import { Mail, Save, Send, UserRoundPlus } from "lucide-react";
+import { Mail, Save, Send, UserRoundPlus, FileImage, Camera, Upload, Trash2, UserCheck, UserPlus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Badge } from "@/app/components/ui/Badge";
 import { Button } from "@/app/components/ui/Button";
@@ -126,6 +126,28 @@ export default function AdminCrmPage() {
   const addNote = useMutation(api.crm.addNote);
   const sendOneOff = useMutation(api.emailDispatch.sendOneOff);
   const sendWithTemplate = useMutation(api.emailDispatch.sendWithTemplate);
+
+  // Area Clienti
+  const clientAccount = useQuery(
+    api.clientAuth.getByCrmContact,
+    selectedContactId ? { crmContactId: selectedContactId } : "skip"
+  );
+  const inviteFromCrm = useMutation(api.clientAuth.inviteFromCrm);
+  const addRendering = useMutation(api.gardenMedia.addRendering);
+  const removeRendering = useMutation(api.gardenMedia.removeRendering);
+  const generateUploadUrl = useMutation(api.media.generateUploadUrl);
+  const clientRenderings = useQuery(
+    api.gardenMedia.listRenderings,
+    clientAccount?._id ? { clientAccountId: clientAccount._id } : "skip"
+  );
+  const clientPhotos = useQuery(
+    api.gardenMedia.listPhotos,
+    clientAccount?._id ? { clientAccountId: clientAccount._id } : "skip"
+  );
+  const renderingFileRef = useRef<HTMLInputElement>(null);
+  const [renderingTitle, setRenderingTitle] = useState("");
+  const [renderingDesc, setRenderingDesc] = useState("");
+  const [uploadingRendering, setUploadingRendering] = useState(false);
 
   const [editing, setEditing] = useState({
     name: "",
@@ -470,6 +492,172 @@ export default function AdminCrmPage() {
                     <Send className="w-4 h-4 mr-2" />
                     Invia email one-shot
                   </Button>
+                </CardContent>
+              </Card>
+
+              {/* ── Area Clienti ── */}
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-xl">Area Clienti</CardTitle>
+                    {clientAccount ? (
+                      <Badge variant="success" size="sm">
+                        <UserCheck className="w-3 h-3 mr-1" />
+                        Attivo
+                      </Badge>
+                    ) : (
+                      <Badge variant="warning" size="sm">Non registrato</Badge>
+                    )}
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {!clientAccount ? (
+                    <div className="text-center py-4">
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Questo cliente non ha ancora un account Area Clienti.
+                      </p>
+                      <Button
+                        variant="outline"
+                        onClick={async () => {
+                          if (!selectedContact) return;
+                          setNotice("");
+                          try {
+                            await inviteFromCrm({ crmContactId: selectedContact._id });
+                            setNotice("Invito inviato via email.");
+                          } catch (error) {
+                            setNotice(error instanceof Error ? error.message : "Errore invio invito");
+                          }
+                        }}
+                      >
+                        <UserPlus className="w-4 h-4 mr-2" />
+                        Invita all&apos;Area Clienti
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Upload rendering */}
+                      <div>
+                        <h3 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+                          <FileImage className="w-4 h-4" />
+                          Invia Rendering ({clientRenderings?.length ?? 0})
+                        </h3>
+                        <div className="space-y-2">
+                          <Input
+                            placeholder="Titolo rendering"
+                            value={renderingTitle}
+                            onChange={(e) => setRenderingTitle(e.target.value)}
+                          />
+                          <Input
+                            placeholder="Descrizione (opzionale)"
+                            value={renderingDesc}
+                            onChange={(e) => setRenderingDesc(e.target.value)}
+                          />
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              onClick={() => renderingFileRef.current?.click()}
+                              disabled={uploadingRendering || !renderingTitle.trim()}
+                            >
+                              <Upload className="w-4 h-4 mr-2" />
+                              {uploadingRendering ? "Caricamento..." : "Carica file"}
+                            </Button>
+                            <input
+                              ref={renderingFileRef}
+                              type="file"
+                              accept="image/*,.pdf"
+                              className="hidden"
+                              onChange={async (e) => {
+                                const file = e.target.files?.[0];
+                                if (!file || !clientAccount) return;
+                                setUploadingRendering(true);
+                                setNotice("");
+                                try {
+                                  const uploadUrl = await generateUploadUrl({});
+                                  const res = await fetch(uploadUrl, {
+                                    method: "POST",
+                                    headers: { "Content-Type": file.type },
+                                    body: file,
+                                  });
+                                  const payload = (await res.json()) as { storageId?: string };
+                                  if (!payload.storageId) throw new Error("Upload fallito");
+                                  await addRendering({
+                                    clientAccountId: clientAccount._id,
+                                    title: renderingTitle.trim(),
+                                    description: renderingDesc.trim() || undefined,
+                                    storageId: payload.storageId as Id<"_storage">,
+                                    mimeType: file.type,
+                                    fileName: file.name,
+                                    sizeBytes: file.size,
+                                    notifyClient: true,
+                                  });
+                                  setRenderingTitle("");
+                                  setRenderingDesc("");
+                                  setNotice("Rendering caricato e notifica inviata al cliente.");
+                                } catch (error) {
+                                  setNotice(error instanceof Error ? error.message : "Errore upload rendering");
+                                } finally {
+                                  setUploadingRendering(false);
+                                  if (renderingFileRef.current) renderingFileRef.current.value = "";
+                                }
+                              }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Existing renderings */}
+                        {clientRenderings && clientRenderings.length > 0 && (
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3">
+                            {clientRenderings.map((r) => (
+                              <div key={r._id} className="relative group rounded-lg overflow-hidden bg-muted/40 border border-border">
+                                {r.url && (
+                                  // eslint-disable-next-line @next/next/no-img-element
+                                  <img src={r.url} alt={r.title} className="w-full aspect-[4/3] object-cover" />
+                                )}
+                                <div className="p-2">
+                                  <p className="text-xs font-medium truncate">{r.title}</p>
+                                  <p className="text-xs text-muted-foreground">
+                                    {new Date(r.createdAt).toLocaleDateString("it-IT")}
+                                  </p>
+                                </div>
+                                <button
+                                  onClick={async () => {
+                                    if (confirm("Eliminare questo rendering?")) {
+                                      await removeRendering({ id: r._id });
+                                    }
+                                  }}
+                                  className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 bg-red-500/90 text-white p-1 rounded transition-opacity"
+                                >
+                                  <Trash2 className="w-3 h-3" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Client photos (view only) */}
+                      <div>
+                        <h3 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+                          <Camera className="w-4 h-4" />
+                          Foto del cliente ({clientPhotos?.length ?? 0})
+                        </h3>
+                        {clientPhotos && clientPhotos.length > 0 ? (
+                          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                            {clientPhotos.map((p) => (
+                              <div key={p._id} className="rounded-lg overflow-hidden bg-muted/40 border border-border">
+                                {p.url && (
+                                  // eslint-disable-next-line @next/next/no-img-element
+                                  <img src={p.url} alt={p.caption ?? p.fileName} className="w-full aspect-square object-cover" />
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">Nessuna foto caricata dal cliente.</p>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </CardContent>
               </Card>
 

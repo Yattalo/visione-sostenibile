@@ -9,6 +9,7 @@
  */
 
 import type * as adminAuth from "../adminAuth.js";
+import type * as clientAuth from "../clientAuth.js";
 import type * as blog from "../blog.js";
 import type * as blogSeed from "../blogSeed.js";
 import type * as contacts from "../contacts.js";
@@ -17,6 +18,7 @@ import type * as emailDispatch from "../emailDispatch.js";
 import type * as emailTemplates from "../emailTemplates.js";
 import type * as emails from "../emails.js";
 import type * as gallery from "../gallery.js";
+import type * as gardenMedia from "../gardenMedia.js";
 import type * as http from "../http.js";
 import type * as leads from "../leads.js";
 import type * as media from "../media.js";
@@ -50,6 +52,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   adminAuth: typeof adminAuth;
+  clientAuth: typeof clientAuth;
   blog: typeof blog;
   blogSeed: typeof blogSeed;
   contacts: typeof contacts;
@@ -58,6 +61,7 @@ declare const fullApi: ApiFromModules<{
   emailTemplates: typeof emailTemplates;
   emails: typeof emails;
   gallery: typeof gallery;
+  gardenMedia: typeof gardenMedia;
   http: typeof http;
   leads: typeof leads;
   media: typeof media;

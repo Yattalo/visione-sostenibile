@@ -20,6 +20,7 @@ import {
   Share2,
   CheckCircle2,
   Sprout,
+  User,
 } from "lucide-react";
 
 type ProfileType = "Contemplativo" | "Sostenibile" | "Familiare" | "Rappresentativo";
@@ -402,6 +403,34 @@ export default function ScorecardPage() {
             </div>
           </div>
         </ScaleIn>
+
+        {/* Area Clienti CTA */}
+        <SlideUp delay={0.7}>
+          <div className="bg-white border border-leaf-500/20 rounded-[30px] p-8 md:p-10 text-center mb-8 shadow-soft">
+            <div className="w-14 h-14 rounded-full bg-leaf-500/10 flex items-center justify-center mx-auto mb-5">
+              <User className="w-7 h-7 text-leaf-600" />
+            </div>
+            <h3 className="font-display text-2xl text-forest-950 mb-3 uppercase tracking-tight">
+              La tua Area{" "}
+              <span className="italic font-light text-leaf-700">
+                Clienti Gratuita
+              </span>
+            </h3>
+            <p className="text-forest-800/60 font-body max-w-lg mx-auto mb-6 leading-relaxed">
+              Rivedi il tuo report quando vuoi, ricevi rendering
+              personalizzati del tuo giardino e condividi le foto del tuo
+              spazio verde — tutto gratuitamente.
+            </p>
+            <Link
+              href={`/area-clienti?email=${encodeURIComponent(lead.email)}`}
+            >
+              <Button className="bg-leaf-600 hover:bg-leaf-700 text-white px-8 py-4 font-bold uppercase tracking-wider rounded-xl shadow-medium hover:scale-105 transition-all duration-300">
+                Accedi all&apos;Area Clienti
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </SlideUp>
 
         {/* Share */}
         <div className="text-center pb-16">
