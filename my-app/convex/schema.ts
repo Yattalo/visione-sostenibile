@@ -247,6 +247,68 @@ export default defineSchema({
     .index("by_contact_date", ["contactId", "createdAt"])
     .index("by_type_date", ["type", "createdAt"]),
 
+  // ── Client Portal ──
+  clientAccounts: defineTable({
+    email: v.string(),
+    name: v.string(),
+    phone: v.optional(v.string()),
+    crmContactId: v.optional(v.id("crmContacts")),
+    leadId: v.optional(v.id("leads")),
+    scorecardId: v.optional(v.string()),
+    isActive: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_crmContact", ["crmContactId"]),
+
+  clientSessions: defineTable({
+    accountId: v.id("clientAccounts"),
+    token: v.string(),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+    isActive: v.boolean(),
+  })
+    .index("by_token", ["token"])
+    .index("by_account", ["accountId"]),
+
+  clientMagicLinks: defineTable({
+    email: v.string(),
+    token: v.string(),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+    usedAt: v.optional(v.number()),
+  })
+    .index("by_token", ["token"])
+    .index("by_email", ["email"]),
+
+  gardenRenderings: defineTable({
+    clientAccountId: v.id("clientAccounts"),
+    title: v.string(),
+    description: v.optional(v.string()),
+    storageId: v.id("_storage"),
+    mimeType: v.string(),
+    fileName: v.string(),
+    sizeBytes: v.number(),
+    uploadedBy: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_client", ["clientAccountId", "createdAt"])
+    .index("by_date", ["createdAt"]),
+
+  gardenPhotos: defineTable({
+    clientAccountId: v.id("clientAccounts"),
+    caption: v.optional(v.string()),
+    storageId: v.id("_storage"),
+    mimeType: v.string(),
+    fileName: v.string(),
+    sizeBytes: v.number(),
+    uploadedBy: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_client", ["clientAccountId", "createdAt"])
+    .index("by_date", ["createdAt"]),
+
   // ── Lead Magnet / Micro-funnel ──
   leads: defineTable({
     quizAnswers: v.array(
