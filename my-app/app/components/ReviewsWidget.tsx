@@ -5,6 +5,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Card, CardContent } from "./ui/Card";
 import { cn } from "../lib/utils";
+import { staticReviews } from "../lib/static-data";
 
 interface Review {
   _id: string;
@@ -55,7 +56,8 @@ export function ReviewsWidget({
   className,
 }: ReviewsWidgetProps) {
   const convexReviews = useQuery(api.reviews.getFeatured, { limit: maxReviews });
-  const reviews = reviewsProp ?? (convexReviews as Review[] | undefined) ?? [];
+  const convexData = convexReviews as Review[] | undefined;
+  const reviews = reviewsProp ?? (convexData && convexData.length > 0 ? convexData : staticReviews);
   const filteredReviews = filterByService
     ? reviews.filter((r) => r.serviceSlug === filterByService)
     : reviews;

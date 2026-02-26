@@ -423,6 +423,106 @@ Siamo operativi in Piemonte e Trentino Alto-Adige. In Lombardia stiamo ampliando
     publishedAt: "2026-02-22",
     readTime: "8 min",
   },
+  {
+    slug: "giardino-che-supera-agosto",
+    title: "Il giardino che supera agosto: guida pratica alla resilienza estiva",
+    excerpt: "Un giardino non salta ad agosto per caso. Succede quando suolo compattato, irrigazione casuale e specie sbagliate lavorano insieme. Questa guida spiega quali controlli fare prima del caldo.",
+    content: `## Perché il giardino soffre proprio tra luglio e agosto?
+
+Tra Torino e cintura il problema non è solo il caldo: contano anche vento secco, superfici riflettenti e suolo povero che trattiene poca acqua. Se il sistema parte debole in primavera, ad agosto collassa. Per questo conviene leggere insieme microclima, terreno e uso reale dello spazio prima di aggiungere nuove piante.
+
+## Quali piante reggono caldo e poca acqua in Piemonte?
+
+Funzionano meglio specie rustiche e radicazione profonda, con gruppi omogenei per fabbisogno idrico. Quando si mescolano piante con esigenze opposte si spreca acqua e si moltiplicano i cambi. La scelta giusta riduce sostituzioni annuali e rende la manutenzione più lineare anche per chi ha poco tempo.
+
+## Come impostare irrigazione e pacciamatura senza sprechi?
+
+Si parte da settori separati per esposizione, gocciolatori dove serve precisione e test di uniformità nei punti critici. La pacciamatura limita evaporazione e sbalzi termici, quindi l'acqua resa utile aumenta. Non è un accessorio estetico: è la leva che stabilizza il suolo nei mesi più stressanti.
+
+## Cosa controllare prima di partire per le ferie?
+
+Controlla filtri, centralina, pressioni e perdite nei raccordi; poi elimina rami secchi e protegge il colletto delle piante più giovani. Un check di un'ora evita settimane di recupero a settembre. Il principio è semplice: prevenire costa meno che ripristinare.`,
+    coverImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
+    category: "Stagionale",
+    author: "Andrea Giordano",
+    publishedAt: "2025-06-12",
+    readTime: "8 min",
+  },
+  {
+    slug: "quanto-costa-un-giardino-sostenibile",
+    title: "Quanto costa un giardino sostenibile?",
+    excerpt: "Il costo non dipende da una tariffa standard ma da obiettivi, superfici e stato di partenza del giardino. Qui trovi una guida concreta per capire cosa pesa davvero sul preventivo.",
+    content: `## Da cosa dipende davvero il costo finale?
+
+Incidono quattro variabili: stato del suolo, impianto idrico, complessità degli accessi e livello di finitura richiesto. Se una di queste è critica, ignorarla all'inizio genera extracosti dopo. Il prezzo corretto è quello che include basi solide, non quello più basso in prima riga.
+
+## Quanto incide lavorare a fasi sul budget?
+
+Lavorare a step aiuta a distribuire la spesa e riduce gli errori di sequenza. Prima si mettono in ordine suolo e acqua, poi si investe su piante e finiture. Così ogni euro sostiene quello successivo e il progetto non va rifatto quando cambiano stagione o disponibilità economica.
+
+## Quali spese evitabili pesano dopo il primo anno?
+
+Le più frequenti sono sostituzione piante non adatte, rilavorazioni dell'irrigazione e manutenzioni d'emergenza ripetute. Tutte nascono da scelte iniziali scollegate dal contesto. Una pianificazione minima con priorità tecniche riduce questi costi ricorrenti e rende il bilancio più prevedibile.
+
+## Come leggere un preventivo senza sorprese?
+
+Chiedi sempre cosa è incluso per sopralluogo, preparazione suolo, impianti, avviamento e manutenzione iniziale. Verifica anche tempi e responsabilità del coordinamento. Un preventivo chiaro non nasconde complessità: le rende leggibili e quindi governabili.`,
+    coverImage: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80",
+    category: "Guida",
+    author: "Andrea Giordano",
+    publishedAt: "2025-07-03",
+    readTime: "9 min",
+  },
+  {
+    slug: "contractor-del-verde-cosa-significa",
+    title: "Contractor del verde: cosa significa davvero",
+    excerpt: "Contractor del verde significa una regia unica: un referente che coordina progetto, cantiere e manutenzione con partner specialisti attivati solo quando servono.",
+    content: `## Che differenza c'è tra giardiniere, impresa e contractor del verde?
+
+Il giardiniere esegue, l'impresa costruisce, il contractor coordina l'intero sistema. Quando il lavoro richiede competenze diverse, la regia evita sovrapposizioni e vuoti decisionali. Non è un'etichetta commerciale: è una responsabilità operativa unica su tempi, priorità e coerenza tecnica.
+
+## Perché un referente unico riduce errori e ritardi?
+
+Con un solo interlocutore decisioni e varianti passano da un canale chiaro, quindi si riducono attese e passaggi inutili. Anche il budget è più leggibile perché ogni scelta viene motivata prima, non giustificata dopo. Il vantaggio pratico è meno caos in cantiere.
+
+## Quando entrano i partner specializzati nel progetto?
+
+Entrano solo nelle fasi in cui aggiungono valore: irrigazione, potature in quota, outdoor living o piscine. Il punto non è avere tanti fornitori, ma attivare la competenza giusta al momento giusto. Così il risultato resta coerente tra estetica, uso e gestione futura.
+
+## Come si controllano tempi e budget in pratica?
+
+Con cronoprogramma, priorità condivise e verifiche a fine fase. Ogni step deve consegnare qualcosa di stabile, non un lavoro provvisorio da riprendere due volte. Questo è il motivo per cui il metodo contractor funziona soprattutto in condomini, aziende e contesti complessi.`,
+    coverImage: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200&q=80",
+    category: "Metodo",
+    author: "Andrea Giordano",
+    publishedAt: "2025-08-01",
+    readTime: "7 min",
+  },
+  {
+    slug: "5-errori-che-bruciano-soldi-in-giardino",
+    title: "5 errori che bruciano soldi in giardino",
+    excerpt: "La maggior parte delle spese inutili nasce da errori prevedibili: piante scelte senza leggere il suolo, irrigazione non calibrata, manutenzione solo quando c'è emergenza.",
+    content: `## Perché partire dalle piante senza leggere il suolo costa di più?
+
+Se il terreno è compattato o povero, anche piante corrette faticano e si sostituiscono presto. La spesa iniziale sembra bassa ma si ripete ogni stagione. Preparare il suolo prima è meno visibile, ma evita ricambi continui e trattamenti tampone.
+
+## Cosa succede quando l'irrigazione non è calibrata?
+
+Si annaffia troppo nelle zone in ombra e troppo poco nelle zone esposte: risultato, spreco idrico e piante stressate insieme. Un impianto diviso per settori riduce entrambe le perdite. La calibrazione è una spesa una tantum che previene costi ricorrenti.
+
+## Quanto costa rinviare la manutenzione programmata?
+
+Rinviare significa accumulare piccoli problemi che diventano interventi urgenti e più cari: potature drastiche, ripristini, sostituzioni. Con un calendario minimo si lavora prima del danno, quindi con tempi brevi e margine decisionale. È la differenza tra gestione e rincorsa.
+
+## Come evitare interventi spot senza risultato?
+
+Serve un piano semplice: priorità tecniche, sequenza delle fasi e obiettivi verificabili. Anche un progetto piccolo funziona meglio se ogni scelta ha un perché. Questo approccio riduce lavori doppi e mantiene coerente il rapporto tra spesa, uso e durata.`,
+    coverImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
+    category: "Sostenibilità",
+    author: "Andrea Giordano",
+    publishedAt: "2025-09-18",
+    readTime: "8 min",
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

@@ -527,7 +527,7 @@ export function BlogPostClient({
         />
       )}
 
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="relative overflow-hidden bg-forest-950 pt-24 pb-12 lg:pt-32 lg:pb-16">
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-10"

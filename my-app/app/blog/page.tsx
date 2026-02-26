@@ -68,7 +68,7 @@ export default function BlogPage() {
   if (posts.length === 0) {
     return (
       <div className="min-h-screen bg-paper-50">
-        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+        <section className="relative overflow-hidden bg-forest-950 pt-24 pb-16 lg:pt-32 lg:pb-24">
           <div className="absolute inset-0">
             <div
               className="absolute inset-0 bg-cover bg-center opacity-10"
@@ -111,7 +111,7 @@ export default function BlogPage() {
           Matches site-wide organic aesthetic: dark moss bg,
           decorative blobs, serif italic heading
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="relative overflow-hidden bg-forest-950 pt-24 pb-16 lg:pt-32 lg:pb-24">
         {/* Background texture */}
         <div className="absolute inset-0">
           <div
