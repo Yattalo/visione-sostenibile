@@ -76,7 +76,7 @@ export function ServiziClient() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="relative overflow-hidden bg-forest-950 pt-24 pb-16 lg:pt-32 lg:pb-24">
         <div className="absolute inset-0">
           <video
             autoPlay

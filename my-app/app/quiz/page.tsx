@@ -257,7 +257,7 @@ export default function QuizPage() {
   if (!started) {
     return (
       <div className="min-h-screen bg-paper-50">
-        <section className="relative py-32 md:py-40 overflow-hidden">
+        <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=1920')] bg-cover bg-center">
               <div className="absolute inset-0 bg-gradient-to-br from-forest-950/90 via-forest-900/80 to-forest-950/85" />

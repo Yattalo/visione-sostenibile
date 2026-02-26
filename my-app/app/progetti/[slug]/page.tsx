@@ -236,7 +236,7 @@ export default function ProgettiDetailPage() {
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-forest-950 pt-28 pb-20 lg:pt-36 lg:pb-28">
+      <section className="relative overflow-hidden bg-forest-950 pt-24 pb-16 lg:pt-32 lg:pb-24">
         {/* Background */}
         <div className="absolute inset-0">
           {project.hero_image ? (

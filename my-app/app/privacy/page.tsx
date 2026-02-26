@@ -159,7 +159,7 @@ export default function PrivacyPage() {
           Matches site-wide organic aesthetic: dark moss bg,
           Shield icon, decorative blobs, serif heading
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="relative overflow-hidden bg-forest-950 pt-24 pb-16 lg:pt-32 lg:pb-24">
         {/* Background texture */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
