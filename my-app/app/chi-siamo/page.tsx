@@ -8,7 +8,6 @@ import {
   SlideUp,
   StaggerContainer,
   StaggerItem,
-  FadeIn,
 } from "../components/animations";
 import Link from "next/link";
 import { TeamSection } from "../components/TeamSection";
@@ -72,38 +71,27 @@ export default function ChiSiamoPage() {
       <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/images/chi-siamo/hero.jpg')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/70 via-forest-900/60 to-forest-950/65" />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
           </div>
           {/* Decorative organic blobs */}
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute bottom-1/4 -right-24 w-80 h-80 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-20 md:pt-0 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
-            <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
-              Chi Siamo
-            </Badge>
-
-            <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
-              Andrea Giordano:
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-white text-balance">
+              Andrea Giordano
               <span className="block italic text-leaf-400">
-                il giardiniere che ti spiega il perché
+                e una squadra su misura
               </span>
             </h1>
 
-            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Il volto di Visione Sostenibile: appassionato, curioso, in continua ricerca.
-              Un unico referente che coordina competenze verticali e partnership selezionate.
+            <p className="font-body text-lg md:text-xl text-paper-300 max-w-3xl mx-auto leading-relaxed">
+              Un referente unico che coordina competenze verticali, metodo
+              biodinamico e partnership selezionate per risultati durevoli.
             </p>
           </SlideUp>
-
-          {/* Scroll indicator */}
-          <FadeIn delay={1.2}>
-            <div className="mt-16">
-              <div className="w-px h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
-            </div>
-          </FadeIn>
         </div>
       </section>
 

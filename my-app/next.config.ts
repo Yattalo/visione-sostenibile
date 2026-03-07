@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/client-login",
-        destination: "/admin/login",
+        destination: "/sign-in",
         permanent: true,
       },
     ];

@@ -9,7 +9,6 @@ import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import {
   SlideUp,
-  FadeIn,
   StaggerContainer,
   StaggerItem,
 } from "../components/animations";
@@ -68,26 +67,27 @@ export default function BlogPage() {
   if (posts.length === 0) {
     return (
       <div className="min-h-screen bg-paper-50">
-        <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+        <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
           <div className="absolute inset-0">
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-10"
+              className="absolute inset-0 bg-cover bg-center opacity-14"
               style={{
                 backgroundImage:
                   "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
           </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 mb-8 px-6 py-2 text-xs tracking-widest uppercase">
-              Blog
-            </Badge>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
+
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
               Il Nostro
               <span className="block italic text-leaf-400">Blog</span>
             </h1>
-            <p className="font-body text-xl md:text-2xl text-paper-300/80 max-w-2xl leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
               Consigli, tendenze e approfondimenti dal mondo del giardinaggio
               sostenibile e della progettazione del verde.
             </p>
@@ -111,53 +111,37 @@ export default function BlogPage() {
           Matches site-wide organic aesthetic: dark moss bg,
           decorative blobs, serif italic heading
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
         {/* Background texture */}
         <div className="absolute inset-0">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-10"
+            className="absolute inset-0 bg-cover bg-center opacity-14"
             style={{
               backgroundImage:
                 "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
         </div>
 
         {/* Organic decorative blobs */}
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sun-400/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] bg-sun-400/5 rounded-full blur-3xl" />
 
-        {/* Thin decorative accent line */}
-        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-leaf-400/30 to-transparent" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeIn>
-            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 mb-8 px-6 py-2 text-xs tracking-widest uppercase">
-              Blog
-            </Badge>
-          </FadeIn>
-
+        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
               Il Nostro
               <span className="block italic text-leaf-400">Blog</span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.2}>
-            <p className="font-body text-xl md:text-2xl text-paper-300/80 max-w-2xl leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
               Consigli, tendenze e approfondimenti dal mondo del giardinaggio
               sostenibile e della progettazione del verde.
             </p>
-          </SlideUp>
-
-          {/* Scroll indicator */}
-          <SlideUp delay={0.5}>
-            <div className="mt-16">
-              <div className="w-px h-16 bg-gradient-to-b from-paper-400/50 to-transparent mx-0" />
-            </div>
           </SlideUp>
         </div>
       </section>

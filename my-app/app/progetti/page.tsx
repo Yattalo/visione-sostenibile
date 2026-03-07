@@ -16,9 +16,7 @@ import {
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Button } from "../components/ui/Button";
-import { Badge } from "../components/ui/Badge";
 import {
-  FadeIn,
   SlideUp,
   StaggerContainer,
   StaggerItem,
@@ -179,83 +177,42 @@ export default function ProgettiPage() {
     ? projectsWithoutPhotos.filter((p) => p.tags.includes(activeTag))
     : projectsWithoutPhotos;
 
-  const totalProjects = filteredProjects.length + filteredTextProjects.length;
-
   return (
     <div className="min-h-screen bg-paper-50">
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
         <div className="absolute inset-0">
           {projectsWithPhotos[0]?.hero_image && (
             <Image
               src={projectsWithPhotos[0].hero_image}
               alt="Progetti Visione Sostenibile"
               fill
-              className="object-cover opacity-20"
+              className="object-cover opacity-38"
               priority
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
         </div>
 
         {/* Decorative blobs */}
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
 
-        {/* Thin accent line */}
-        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-leaf-400/30 to-transparent" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeIn>
-            <Badge className="bg-white/10 backdrop-blur-sm border border-white/15 text-paper-300 px-4 py-1.5 text-xs tracking-widest uppercase mb-8">
-              I Nostri Progetti
-            </Badge>
-          </FadeIn>
-
+        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
               Progetti
-              <span className="block italic text-leaf-400">
-                realizzazioni
-              </span>
+              <span className="block italic text-leaf-400">realizzati</span>
             </h1>
           </SlideUp>
 
-          <SlideUp delay={0.2}>
-            <p className="font-body text-xl md:text-2xl text-paper-300/80 max-w-2xl leading-relaxed mb-8">
-              Ogni progetto racconta una storia unica. Scopri le nostre
-              realizzazioni: parchi, giardini e spazi verdi progettati con
-              passione e competenza. Operativi in Piemonte e Trentino
-              Alto-Adige. In espansione in Lombardia.
+          <SlideUp delay={0.1}>
+            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
+              Dall&apos;idea alla realizzazione: interventi su misura per
+              giardini, terrazzi e spazi verdi privati o professionali.
             </p>
-          </SlideUp>
-
-          <SlideUp delay={0.4}>
-            <div className="flex items-center gap-8 text-paper-400/70">
-              <div>
-                <span className="font-display text-3xl text-leaf-400">
-                  {totalProjects}
-                </span>
-                <span className="font-sans text-xs uppercase tracking-widest ml-2">
-                  Progetti
-                </span>
-              </div>
-              <div className="w-px h-8 bg-paper-600" />
-              <div>
-                <span className="font-display text-3xl text-leaf-400">2</span>
-                <span className="font-sans text-xs uppercase tracking-widest ml-2">
-                  Regioni
-                </span>
-              </div>
-            </div>
-          </SlideUp>
-
-          <SlideUp delay={0.5}>
-            <div className="mt-16">
-              <div className="w-px h-16 bg-gradient-to-b from-paper-400/50 to-transparent mx-0" />
-            </div>
           </SlideUp>
         </div>
       </section>
