@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram, Facebook, Linkedin, Youtube, Phone, Mail } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { COOKIE_PREFERENCES_OPEN_EVENT } from "./CookiePreferences";
 
 export function Footer() {
   const pathname = usePathname();
@@ -87,6 +89,28 @@ export function Footer() {
               <social.icon className="w-4 h-4" />
             </a>
           ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.24 }}
+          className="mt-10 flex flex-wrap justify-center gap-5 text-xs uppercase tracking-[0.16em] text-white/60"
+        >
+          <Link href="/privacy" className="hover:text-white transition-colors">
+            Privacy
+          </Link>
+          <Link href="/accessibilita" className="hover:text-white transition-colors">
+            Accessibilita
+          </Link>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(COOKIE_PREFERENCES_OPEN_EVENT))}
+            className="hover:text-white transition-colors"
+          >
+            Preferenze Cookie
+          </button>
         </motion.div>
 
         <motion.div

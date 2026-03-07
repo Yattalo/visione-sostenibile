@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Shield, Mail, Phone, Lock, FileText, Database, Scale, Clock, UserCheck } from "lucide-react";
 import { Card, CardContent } from "../components/ui/Card";
 import { SlideUp, FadeIn } from "../components/animations";
@@ -45,6 +46,10 @@ const sections = [
           </li>
           <li className="flex items-start gap-3 text-forest-800/70">
             <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
+            <span>Dati di quiz, scorecard e preferenze di consenso associate alla sessione guest o al profilo utente</span>
+          </li>
+          <li className="flex items-start gap-3 text-forest-800/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
             <span>Dati forniti volontariamente tramite i form di contatto</span>
           </li>
         </ul>
@@ -77,6 +82,10 @@ const sections = [
             <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
             <span>Adempiere agli obblighi di legge</span>
           </li>
+          <li className="flex items-start gap-3 text-forest-800/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
+            <span>Misurare traffico e performance solo previo consenso per analytics e marketing</span>
+          </li>
         </ul>
       </>
     ),
@@ -94,8 +103,35 @@ const sections = [
     ),
   },
   {
-    icon: Clock,
+    icon: Database,
     number: "5",
+    title: "Cookie, Analytics e Marketing",
+    content: (
+      <>
+        <p className="font-body text-forest-800/70 leading-relaxed mb-4">
+          Gli strumenti di analytics e marketing non essenziali vengono attivati solo dopo il tuo consenso.
+          Le categorie possono essere gestite e revocate in qualsiasi momento dalle preferenze cookie.
+        </p>
+        <ul className="space-y-3 pl-0 list-none">
+          <li className="flex items-start gap-3 text-forest-800/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
+            <span>Analytics: GA4, Microsoft Clarity, eventuale GTM se configurato per misurazione</span>
+          </li>
+          <li className="flex items-start gap-3 text-forest-800/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
+            <span>Marketing: Meta Pixel, LinkedIn Insight Tag e strumenti equivalenti</span>
+          </li>
+          <li className="flex items-start gap-3 text-forest-800/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-leaf-400 mt-2.5 shrink-0" />
+            <span>Script custom: eventuali strumenti aggiuntivi caricati solo con consenso dedicato</span>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    icon: Clock,
+    number: "6",
     title: "Conservazione dei Dati",
     content: (
       <p className="font-body text-forest-800/70 leading-relaxed">
@@ -106,7 +142,7 @@ const sections = [
   },
   {
     icon: UserCheck,
-    number: "6",
+    number: "7",
     title: "Diritti dell'Interessato",
     content: (
       <>
@@ -139,14 +175,35 @@ const sections = [
     ),
   },
   {
-    icon: Mail,
-    number: "7",
-    title: "Contatti",
+    icon: Scale,
+    number: "8",
+    title: "Trasferimenti Extra UE",
     content: (
       <p className="font-body text-forest-800/70 leading-relaxed">
+        Alcuni fornitori tecnologici o di analytics potrebbero trattare dati anche fuori dallo
+        Spazio Economico Europeo. In tali casi il trattamento deve basarsi su uno strumento di
+        trasferimento valido, come decisioni di adeguatezza o garanzie appropriate. La sola
+        collocazione del server in UE aiuta ma non esaurisce di per se gli obblighi privacy.
+      </p>
+    ),
+  },
+  {
+    icon: Mail,
+    number: "9",
+    title: "Contatti",
+    content: (
+      <div className="font-body text-forest-800/70 leading-relaxed space-y-3">
+        <p>
         Per esercitare i tuoi diritti o per qualsiasi informazione sul trattamento dei dati,
         puoi contattarci all&apos;indirizzo email: <strong className="text-forest-900">visionesostenibile96@gmail.com</strong>
-      </p>
+        </p>
+        <p>
+          Per le segnalazioni di accessibilita consulta anche la pagina{" "}
+          <Link href="/accessibilita" className="underline text-leaf-700">
+            Accessibilita
+          </Link>.
+        </p>
+      </div>
     ),
   },
 ];
