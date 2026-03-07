@@ -8,7 +8,6 @@
  * @module
  */
 
-import type * as adminAuth from "../adminAuth.js";
 import type * as blog from "../blog.js";
 import type * as blogSeed from "../blogSeed.js";
 import type * as contacts from "../contacts.js";
@@ -41,6 +40,7 @@ import type * as taskSystem_orchestrator from "../taskSystem/orchestrator.js";
 import type * as taskSystem_skills from "../taskSystem/skills.js";
 import type * as taskSystem_taskDefinitions from "../taskSystem/taskDefinitions.js";
 import type * as taskSystem_tasks from "../taskSystem/tasks.js";
+import type * as users from "../users.js";
 
 import type {
   ApiFromModules,
@@ -49,7 +49,6 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  adminAuth: typeof adminAuth;
   blog: typeof blog;
   blogSeed: typeof blogSeed;
   contacts: typeof contacts;
@@ -82,6 +81,7 @@ declare const fullApi: ApiFromModules<{
   "taskSystem/skills": typeof taskSystem_skills;
   "taskSystem/taskDefinitions": typeof taskSystem_taskDefinitions;
   "taskSystem/tasks": typeof taskSystem_tasks;
+  users: typeof users;
 }>;
 
 /**

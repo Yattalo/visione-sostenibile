@@ -33,9 +33,11 @@ import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
-import { Input } from "../components/ui/Input";
+import { Checkbox, Input } from "../components/ui/Input";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, FadeIn, ScaleIn, StaggerContainer, StaggerItem } from "../components/animations";
+import { trackLead, trackQuizComplete } from "../lib/analytics";
+import { getOrCreateGuestSessionId } from "../lib/guest-session";
 import { cn } from "../lib/utils";
 
 type ProfileType = "Contemplativo" | "Sostenibile" | "Familiare" | "Rappresentativo";
@@ -149,11 +151,18 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [resultProfile, setResultProfile] = useState<ProfileType | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [leadForm, setLeadForm] = useState({ name: "", email: "", phone: "" });
+  const [leadForm, setLeadForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    privacyConsent: false,
+    marketingConsent: false,
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+    getOrCreateGuestSessionId();
     const params = new URLSearchParams(window.location.search);
     if (params.get("start") === "2") {
       setStarted(true);
@@ -198,7 +207,7 @@ export default function QuizPage() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!leadForm.name || !leadForm.email || !resultProfile) return;
+    if (!leadForm.name || !leadForm.email || !resultProfile || !leadForm.privacyConsent) return;
 
     setIsSubmitting(true);
     try {
@@ -225,7 +234,10 @@ export default function QuizPage() {
         resultProfile,
         email: leadForm.email || undefined,
         phone: leadForm.phone || undefined,
+        privacyConsent: leadForm.privacyConsent,
+        marketingConsent: leadForm.marketingConsent || undefined,
         source: "quiz",
+        guestSessionId: getOrCreateGuestSessionId() || undefined,
       });
 
       const result = await submitLead({
@@ -234,8 +246,13 @@ export default function QuizPage() {
         name: leadForm.name,
         email: leadForm.email,
         phone: leadForm.phone || undefined,
+        privacyConsent: leadForm.privacyConsent,
+        marketingConsent: leadForm.marketingConsent || undefined,
+        guestSessionId: getOrCreateGuestSessionId() || undefined,
       });
 
+      trackLead("quiz");
+      trackQuizComplete(resultProfile);
       setSubmitted(true);
       setTimeout(() => {
         router.push(`/scorecard/${result.scorecardId}`);
@@ -415,16 +432,55 @@ export default function QuizPage() {
                           className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                         />
 
+                        <div className="space-y-4 rounded-2xl border border-paper-200 bg-paper-50/70 p-4">
+                          <Checkbox
+                            checked={leadForm.privacyConsent}
+                            onChange={(e) =>
+                              setLeadForm((prev) => ({
+                                ...prev,
+                                privacyConsent: e.target.checked,
+                              }))
+                            }
+                            label={
+                              <span>
+                                Accetto l&apos;informativa privacy e il trattamento dei miei dati per
+                                ricevere il report richiesto. *
+                                {" "}
+                                <a href="/privacy" className="underline text-leaf-700">
+                                  Leggi la privacy policy
+                                </a>
+                              </span>
+                            }
+                            required
+                          />
+                          <Checkbox
+                            checked={leadForm.marketingConsent}
+                            onChange={(e) =>
+                              setLeadForm((prev) => ({
+                                ...prev,
+                                marketingConsent: e.target.checked,
+                              }))
+                            }
+                            label="Acconsento a ricevere aggiornamenti, contenuti e comunicazioni commerciali da Visione Sostenibile."
+                          />
+                        </div>
+
                         <Button
                           type="submit"
-                          disabled={isSubmitting || !leadForm.name || !leadForm.email}
+                          disabled={
+                            isSubmitting ||
+                            !leadForm.name ||
+                            !leadForm.email ||
+                            !leadForm.privacyConsent
+                          }
                           className="w-full bg-sun-400 hover:bg-sun-500 text-white h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                         >
                           {isSubmitting ? "Invio in corso..." : "Ricevi il tuo Report"}
                         </Button>
 
                         <p className="text-xs text-forest-800/50 text-center font-body italic">
-                          * I tuoi dati saranno trattati secondo la Privacy Policy
+                          Il report puo essere fruito da guest subito. Se poi crei un account, i
+                          dati del report vengono associati al tuo profilo.
                         </p>
                       </form>
                     </CardContent>
