@@ -1,6 +1,8 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
+import { requireAdmin } from "./authHelpers";
+import { findUserForIdentity } from "./userHelpers";
 
 function generateScorecardId(): string {
   const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -48,15 +50,22 @@ export const submit = mutation({
     name: v.string(),
     email: v.string(),
     phone: v.optional(v.string()),
+    privacyConsent: v.boolean(),
+    marketingConsent: v.optional(v.boolean()),
+    guestSessionId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const normalizedEmail = args.email.trim().toLowerCase();
     const scorecardId = generateScorecardId();
     const resultProfile = computeProfileFromScore(args.quizAnswers.map((a) => a.score));
+    const identity = await ctx.auth.getUserIdentity();
+    const authenticatedUser = identity ? await findUserForIdentity(ctx, identity) : null;
     const leadId = await ctx.db.insert("leads", {
       ...args,
       email: normalizedEmail,
       scorecardId,
+      userId: authenticatedUser?._id,
+      claimedAt: authenticatedUser ? Date.now() : undefined,
       createdAt: Date.now(),
       isContacted: false,
     });
@@ -98,6 +107,7 @@ export const getByScorecard = query({
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     return await ctx.db
       .query("leads")
       .withIndex("by_date")
@@ -110,6 +120,7 @@ export const getAll = query({
 export const markContacted = mutation({
   args: { leadId: v.id("leads") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.leadId, { isContacted: true });
     return { success: true };
   },
@@ -122,6 +133,7 @@ export const addNotes = mutation({
     notes: v.string(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.leadId, { notes: args.notes });
     return { success: true };
   },

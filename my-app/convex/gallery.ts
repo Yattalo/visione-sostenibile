@@ -1,6 +1,7 @@
 import { query, mutation, type QueryCtx, type MutationCtx } from "./_generated/server";
 import { v } from "convex/values";
 import type { Id } from "./_generated/dataModel";
+import { requireAdmin } from "./authHelpers";
 
 const mediaTypeValidator = v.union(v.literal("image"), v.literal("video"));
 
@@ -129,6 +130,7 @@ export const getByService = query({
 export const getAllAdmin = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const rows = await ctx.db.query("gallery").order("asc").take(500);
     return await resolveAssetUrls(ctx, rows);
   },
@@ -150,6 +152,7 @@ export const add = mutation({
     order: v.number(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     if (!args.imageUrl && !args.storageId) {
       throw new Error("Fornire imageUrl o storageId");
     }
@@ -188,6 +191,7 @@ export const update = mutation({
     isActive: v.boolean(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     if (!args.imageUrl && !args.storageId) {
       throw new Error("Fornire imageUrl o storageId");
     }
@@ -212,6 +216,7 @@ export const update = mutation({
 export const remove = mutation({
   args: { id: v.id("gallery") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const existing = await ctx.db.get(args.id);
     await ctx.db.delete(args.id);
 

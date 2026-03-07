@@ -1,5 +1,6 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 // Get all active services ordered
 export const getAll = query({
@@ -55,6 +56,7 @@ export const upsert = mutation({
     metaDescription: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const { id, ...data } = args;
     const now = Date.now();
 
@@ -109,6 +111,7 @@ export const upsert = mutation({
 export const getAllAdmin = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     return await ctx.db.query("services").order("asc").take(200);
   },
 });
@@ -117,6 +120,7 @@ export const getAllAdmin = query({
 export const remove = mutation({
   args: { id: v.id("services") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.delete(args.id);
     return { success: true };
   },
@@ -126,6 +130,7 @@ export const remove = mutation({
 export const toggleActive = mutation({
   args: { id: v.id("services"), isActive: v.boolean() },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.id, { isActive: args.isActive, updatedAt: Date.now() });
     return { success: true };
   },
@@ -135,6 +140,7 @@ export const toggleActive = mutation({
 export const updateOrder = mutation({
   args: { id: v.id("services"), order: v.number() },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.id, { order: args.order, updatedAt: Date.now() });
     return { success: true };
   },
@@ -144,6 +150,7 @@ export const updateOrder = mutation({
 export const seed = mutation({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const services = [
       {
         slug: "progettazione-giardini",

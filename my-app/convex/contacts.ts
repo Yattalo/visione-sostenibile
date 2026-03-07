@@ -1,6 +1,7 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
+import { requireAdmin } from "./authHelpers";
 
 // Submit contact form
 export const submit = mutation({
@@ -61,6 +62,7 @@ export const submit = mutation({
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     return await ctx.db.query("contactSubmissions").order("desc").take(100);
   },
 });
@@ -69,6 +71,7 @@ export const getAll = query({
 export const markAsRead = mutation({
   args: { submissionId: v.id("contactSubmissions") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.submissionId, { isRead: true });
     return { success: true };
   },
@@ -78,6 +81,7 @@ export const markAsRead = mutation({
 export const remove = mutation({
   args: { submissionId: v.id("contactSubmissions") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.delete(args.submissionId);
     return { success: true };
   },

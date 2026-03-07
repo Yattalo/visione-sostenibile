@@ -1,6 +1,7 @@
 import { mutation } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 function ensureEmailProviderConfigured() {
   const missing: string[] = [];
@@ -25,6 +26,7 @@ export const sendOneOff = mutation({
     relatedId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     ensureEmailProviderConfigured();
 
     await ctx.scheduler.runAfter(0, internal.emails.deliverRaw, {
@@ -53,6 +55,7 @@ export const sendWithTemplate = mutation({
     relatedId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     ensureEmailProviderConfigured();
 
     await ctx.scheduler.runAfter(0, internal.emails.deliverTemplate, {

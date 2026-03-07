@@ -1,5 +1,6 @@
 import { internalQuery, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 function normalizeKey(value: string): string {
   return value
@@ -130,6 +131,7 @@ export const list = query({
     includeInactive: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const rows = await ctx.db
       .query("emailTemplates")
       .withIndex("by_updated")
@@ -177,6 +179,7 @@ export const upsert = mutation({
     isActive: v.boolean(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const key = normalizeKey(args.key);
     if (!key) {
       throw new Error("Chiave template non valida");
@@ -217,6 +220,7 @@ export const toggleActive = mutation({
     isActive: v.boolean(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.id, {
       isActive: args.isActive,
       updatedAt: Date.now(),
@@ -228,6 +232,7 @@ export const toggleActive = mutation({
 export const remove = mutation({
   args: { id: v.id("emailTemplates") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const template = await ctx.db.get(args.id);
     if (!template) return { success: false };
     if (template.isSystem) {

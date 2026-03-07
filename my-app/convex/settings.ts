@@ -1,10 +1,12 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 // Get all settings as key-value map
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const rows = await ctx.db.query("settings").take(100);
     const map: Record<string, unknown> = {};
     for (const row of rows) {
@@ -33,6 +35,7 @@ export const upsert = mutation({
     value: v.any(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const existing = await ctx.db
       .query("settings")
       .withIndex("by_key", (q) => q.eq("key", args.key))
@@ -65,6 +68,7 @@ export const bulkUpsert = mutation({
     ),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const now = Date.now();
     for (const { key, value } of args.settings) {
       const existing = await ctx.db

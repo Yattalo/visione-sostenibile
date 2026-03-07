@@ -1,6 +1,7 @@
 import { query, mutation, type QueryCtx, type MutationCtx } from "./_generated/server";
 import { v } from "convex/values";
 import type { Id } from "./_generated/dataModel";
+import { requireAdmin } from "./authHelpers";
 
 async function hasBlogStorageReference(
   ctx: MutationCtx,
@@ -143,6 +144,7 @@ export const create = mutation({
     readTime: v.string(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     if (args.coverStorageId) {
       const storageUrl = await ctx.storage.getUrl(args.coverStorageId);
       if (!storageUrl) {
@@ -178,6 +180,7 @@ export const update = mutation({
     isPublished: v.boolean(),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     if (args.coverStorageId) {
       const storageUrl = await ctx.storage.getUrl(args.coverStorageId);
       if (!storageUrl) {
@@ -209,6 +212,7 @@ export const update = mutation({
 export const togglePublish = mutation({
   args: { id: v.id("blogPosts"), isPublished: v.boolean() },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const publishedAt = args.isPublished ? Date.now() : undefined;
     await ctx.db.patch(args.id, {
       isPublished: args.isPublished,
@@ -223,6 +227,7 @@ export const togglePublish = mutation({
 export const remove = mutation({
   args: { id: v.id("blogPosts") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const existing = await ctx.db.get(args.id);
     await ctx.db.delete(args.id);
     if (existing?.coverStorageId) {
@@ -236,6 +241,7 @@ export const remove = mutation({
 export const getAllAdmin = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const rows = await ctx.db.query("blogPosts").order("desc").take(100);
     return await resolveCoverImages(ctx, rows);
   },
@@ -245,6 +251,7 @@ export const getAllAdmin = query({
 export const seed = mutation({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const posts = [
       {
         slug: "come-mantenere-giardino-autunno",

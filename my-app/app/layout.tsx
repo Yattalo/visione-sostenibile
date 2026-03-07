@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
 import { CookieConsent } from "./components/CookieConsent";
+import { CookiePreferences } from "./components/CookiePreferences";
+import { AuthSessionSync } from "./components/AuthSessionSync";
 import { pageSeo } from "./lib/seo-data";
 import { buildMetadata, SITE_URL, SITE_NAME } from "./lib/seo-metadata";
 import localFont from "next/font/local";
@@ -65,13 +68,17 @@ export default function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
-        <ConvexClientProvider>
-          <Navbar />
-          <Analytics />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-          <CookieConsent />
-        </ConvexClientProvider>
+        <ClerkProvider>
+          <ConvexClientProvider>
+            <AuthSessionSync />
+            <Navbar />
+            <Analytics />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            <CookieConsent />
+            <CookiePreferences />
+          </ConvexClientProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

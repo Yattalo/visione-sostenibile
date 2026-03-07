@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import NextImage from "next/image";
+import { UserButton } from "@clerk/nextjs";
 import {
   LayoutDashboard,
   FileText,
@@ -13,14 +14,11 @@ import {
   Star,
   Settings,
   Users,
-  LogOut,
   Menu,
   X,
-  ChevronDown,
   ExternalLink,
 } from "lucide-react";
 import { cn } from "../lib/utils";
-import { useAdminAuthContext } from "./AdminAuthContext";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -40,51 +38,7 @@ export default function AdminShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLoginPage = pathname === "/admin/login";
-  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isAuthenticated, isCheckingAuth, logout } = useAdminAuthContext();
-
-  // Auth guard: redirect to login (must be before any early return to respect Rules of Hooks)
-  useEffect(() => {
-    if (!isAuthenticated && !isCheckingAuth && !isLoginPage) {
-      router.replace("/admin/login");
-    }
-  }, [isAuthenticated, isCheckingAuth, isLoginPage, router]);
-
-  const handleLogout = async () => {
-    await logout();
-    router.replace("/admin/login");
-  };
-
-  // Auth guard: loading state
-  if (isCheckingAuth) {
-    return (
-      <div className="min-h-screen bg-paper-100 flex items-center justify-center">
-        <div className="animate-pulse flex flex-col items-center gap-4">
-          <NextImage src="/VS_logo_monogramma_colori.svg" alt="VS" width={40} height={40} />
-          <p className="text-forest-800/60 font-sans text-sm">Caricamento...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Allow login page to render even if not authenticated
-  if (isLoginPage) {
-    return <>{children}</>;
-  }
-
-  // Show loading while redirecting
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-paper-100 flex items-center justify-center">
-        <div className="animate-pulse flex flex-col items-center gap-4">
-          <NextImage src="/VS_logo_monogramma_colori.svg" alt="VS" width={40} height={40} />
-          <p className="text-forest-800/60 font-sans text-sm">Reindirizzamento...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-paper-100">
@@ -103,6 +57,7 @@ export default function AdminShell({
           <button
             onClick={() => setSidebarOpen(false)}
             className="lg:hidden text-paper-500 hover:text-white"
+            aria-label="Chiudi sidebar"
           >
             <X className="w-6 h-6" />
           </button>
@@ -129,7 +84,7 @@ export default function AdminShell({
           })}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-forest-900 space-y-1">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-forest-900">
           <Link
             href="/"
             className="flex items-center gap-3 w-full px-4 py-3 text-paper-300 hover:text-white hover:bg-forest-900 rounded-lg transition-colors"
@@ -137,13 +92,6 @@ export default function AdminShell({
             <ExternalLink className="w-5 h-5" />
             <span>Torna al Sito</span>
           </Link>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-4 py-3 text-paper-300 hover:text-white hover:bg-forest-900 rounded-lg transition-colors"
-          >
-            <LogOut className="w-5 h-5" />
-            <span>Logout</span>
-          </button>
         </div>
       </aside>
 
@@ -152,21 +100,19 @@ export default function AdminShell({
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden p-2 text-forest-800 hover:text-forest-950"
+            aria-label="Apri menu"
           >
             <Menu className="w-6 h-6" />
           </button>
 
           <div className="flex items-center gap-4 ml-auto">
-            <span className="text-sm text-forest-800/60">Benvenuto, Admin</span>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-paper-200 transition-colors"
-            >
-              <div className="w-8 h-8 rounded-full bg-leaf-700 flex items-center justify-center text-white font-sans font-semibold text-sm">
-                A
-              </div>
-              <ChevronDown className="w-4 h-4 text-forest-800/60" />
-            </button>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-8 h-8",
+                },
+              }}
+            />
           </div>
         </header>
 

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { internalMutation, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 function normalizeEmail(value: string): string {
   return value.trim().toLowerCase();
@@ -40,6 +41,7 @@ async function upsertContact(ctx: any, data: UpsertInput) {
     source: data.source,
     status: "new",
     tags: [],
+    userId: undefined,
     lastInteractionAt: now,
     createdAt: now,
     updatedAt: now,
@@ -185,6 +187,7 @@ export const listContacts = query({
     limit: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const limit = Math.min(args.limit ?? 200, 500);
     const rows = await ctx.db
       .query("crmContacts")
@@ -209,6 +212,7 @@ export const listContacts = query({
 export const getContactDetail = query({
   args: { contactId: v.id("crmContacts") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const contact = await ctx.db.get(args.contactId);
     if (!contact) return null;
 
@@ -255,6 +259,7 @@ export const updateContact = mutation({
     tags: v.array(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.contactId, {
       name: args.name,
       phone: args.phone,
@@ -284,6 +289,7 @@ export const addNote = mutation({
     createdBy: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await createActivity(
       ctx,
       args.contactId,

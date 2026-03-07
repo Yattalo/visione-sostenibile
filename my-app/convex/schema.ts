@@ -184,14 +184,18 @@ export default defineSchema({
     .index("by_active_order", ["isActive", "order"])
     .index("by_tag", ["isActive"]),
 
-  adminSessions: defineTable({
-    token: v.string(),
+  users: defineTable({
+    clerkId: v.string(),
+    email: v.string(),
+    name: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
+    role: v.union(v.literal("admin"), v.literal("client")),
     createdAt: v.number(),
-    expiresAt: v.number(),
-    isActive: v.boolean(),
+    lastSignInAt: v.optional(v.number()),
   })
-    .index("by_token", ["token"])
-    .index("by_active", ["isActive", "expiresAt"]),
+    .index("by_clerk_id", ["clerkId"])
+    .index("by_email", ["email"])
+    .index("by_role", ["role"]),
 
   settings: defineTable({
     key: v.string(),
@@ -246,11 +250,13 @@ export default defineSchema({
     status: v.string(), // new | contacted | qualified | archived
     tags: v.array(v.string()),
     notes: v.optional(v.string()),
+    userId: v.optional(v.id("users")),
     lastInteractionAt: v.number(),
     createdAt: v.number(),
     updatedAt: v.number(),
   })
     .index("by_email", ["email"])
+    .index("by_user", ["userId", "lastInteractionAt"])
     .index("by_status", ["status", "lastInteractionAt"])
     .index("by_last_interaction", ["lastInteractionAt"]),
 
@@ -280,12 +286,19 @@ export default defineSchema({
     name: v.string(),
     email: v.string(),
     phone: v.optional(v.string()),
+    privacyConsent: v.boolean(),
+    marketingConsent: v.optional(v.boolean()),
+    guestSessionId: v.optional(v.string()),
+    userId: v.optional(v.id("users")),
+    claimedAt: v.optional(v.number()),
     createdAt: v.number(),
     isContacted: v.boolean(),
     notes: v.optional(v.string()),
   })
     .index("by_scorecardId", ["scorecardId"])
     .index("by_email", ["email"])
+    .index("by_guest_session", ["guestSessionId", "createdAt"])
+    .index("by_user", ["userId", "createdAt"])
     .index("by_date", ["createdAt"])
     .index("by_contacted", ["isContacted", "createdAt"]),
 
@@ -299,9 +312,17 @@ export default defineSchema({
     resultProfile: v.string(),
     email: v.optional(v.string()),
     phone: v.optional(v.string()),
+    privacyConsent: v.optional(v.boolean()),
+    marketingConsent: v.optional(v.boolean()),
     source: v.string(),
+    guestSessionId: v.optional(v.string()),
+    userId: v.optional(v.id("users")),
+    claimedAt: v.optional(v.number()),
     createdAt: v.number(),
   })
     .index("by_date", ["createdAt"])
-    .index("by_profile", ["resultProfile"]),
+    .index("by_profile", ["resultProfile"])
+    .index("by_email", ["email", "createdAt"])
+    .index("by_guest_session", ["guestSessionId", "createdAt"])
+    .index("by_user", ["userId", "createdAt"]),
 });

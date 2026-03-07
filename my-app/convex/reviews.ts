@@ -1,5 +1,6 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 // Get approved reviews
 export const getApproved = query({
@@ -51,6 +52,7 @@ export const submit = mutation({
 export const approve = mutation({
   args: { reviewId: v.id("reviews") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.reviewId, { isApproved: true });
     return { success: true };
   },
@@ -60,6 +62,7 @@ export const approve = mutation({
 export const reject = mutation({
   args: { reviewId: v.id("reviews") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.delete(args.reviewId);
     return { success: true };
   },
@@ -69,6 +72,7 @@ export const reject = mutation({
 export const remove = mutation({
   args: { reviewId: v.id("reviews") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.delete(args.reviewId);
     return { success: true };
   },
@@ -78,6 +82,7 @@ export const remove = mutation({
 export const seed = mutation({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     const existing = await ctx.db.query("reviews").take(1);
     if (existing.length > 0) {
       return { seeded: 0, message: "Reviews already exist" };
@@ -151,6 +156,7 @@ export const seed = mutation({
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAdmin(ctx);
     return await ctx.db.query("reviews").order("desc").take(200);
   },
 });

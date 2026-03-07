@@ -2,6 +2,7 @@
 import { internalMutation, internalAction, query } from "./_generated/server";
 import { api, internal } from "./_generated/api";
 import { v } from "convex/values";
+import { requireAdmin } from "./authHelpers";
 
 function replaceTokens(input: string, variables: Record<string, string>): string {
   return input.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (_, key: string) => {
@@ -444,7 +445,8 @@ export const sendQuizNotifications = internalAction({
 
 export const getProviderStatus = query({
   args: {},
-  handler: async () => {
+  handler: async (ctx) => {
+    await requireAdmin(ctx);
     const hasResendApiKey = Boolean(process.env.RESEND_API_KEY);
     const hasEmailFrom = Boolean(process.env.EMAIL_FROM);
     const adminRecipients = parseRecipients(process.env.ADMIN_NOTIFICATION_EMAIL);
@@ -467,6 +469,7 @@ export const listDeliveries = query({
     limit: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const limit = Math.min(args.limit ?? 200, 500);
 
     if (args.to) {
@@ -501,7 +504,8 @@ export const previewFromTemplate = query({
     variablesJson: v.optional(v.string()),
     templateName: v.optional(v.string()),
   },
-  handler: async (_, args) => {
+  handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const variables = parseVariablesJson(args.variablesJson);
     const renderedSubject = replaceTokens(args.subject, variables);
     const renderedHtml = replaceTokens(args.html, variables);
