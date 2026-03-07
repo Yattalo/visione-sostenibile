@@ -24,6 +24,10 @@ Variabile richiesta:
 
 - `NEXT_PUBLIC_CONVEX_URL` (generata da `npx convex dev`)
 
+Variabile richiesta sul deployment Convex quando usi Clerk per autenticare le function:
+
+- `CLERK_JWT_ISSUER_DOMAIN`
+
 ## Route pubbliche
 
 - `/`
@@ -63,9 +67,18 @@ Nota: alcune sezioni frontend/admin utilizzano ancora dati statici/mock in attes
 pnpm dev
 pnpm lint
 pnpm build
+pnpm exec tsc --noEmit
+pnpm exec convex codegen
 npx convex dev
 npx convex deploy
 ```
+
+## Privacy e compliance
+
+- Checklist operativa UE / Convex / analytics vendor: `docs/compliance/CONVEX_EU_PRIVACY_CHECKLIST.md`
+- Procedura di cutover US -> EU per Convex: `docs/compliance/CONVEX_EU_CUTOVER_RUNBOOK.md`
+- Consenso e preferenze cookie: `app/components/CookieConsent.tsx`, `app/components/CookiePreferences.tsx`
+- Pagine pubbliche: `app/privacy/page.tsx`, `app/accessibilita/page.tsx`
 
 ## Deploy
 
@@ -76,4 +89,6 @@ Prima del deploy verificare:
 
 1. `pnpm lint`
 2. `pnpm build`
-3. Variabili ambiente su Vercel (`NEXT_PUBLIC_CONVEX_URL`)
+3. `pnpm exec convex codegen`
+4. Variabili ambiente su Vercel (`NEXT_PUBLIC_CONVEX_URL`)
+5. Variabili ambiente su Convex (`CLERK_JWT_ISSUER_DOMAIN` e gli altri secret usati in produzione)
