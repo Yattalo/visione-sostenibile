@@ -100,3 +100,4 @@ my-app/.git-backup/
 
 # Root npm lockfile (progetto usa pnpm)
 /package-lock.json
+.playwright-cli/
