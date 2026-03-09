@@ -41,77 +41,115 @@ import { getOrCreateGuestSessionId } from "../lib/guest-session";
 import { cn } from "../lib/utils";
 
 type ProfileType = "Contemplativo" | "Sostenibile" | "Familiare" | "Rappresentativo";
+type PercorsoType = "checkup" | "progetto-fasi" | "manutenzione" | "chiavi-in-mano";
 
 interface QuizAnswer {
   questionId: string;
   answer: string;
 }
 
+interface QuestionOption {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  profile?: ProfileType;
+  profileWeight?: number;
+  percorso?: PercorsoType;
+  isB2B?: boolean;
+}
+
 interface Question {
   id: number;
   label: string;
-  options: { id: string; label: string; icon: React.ReactNode; profile: ProfileType }[];
+  options: QuestionOption[];
 }
 
+// ── PERCORSO CONSIGLIATO definitions ──
+const percorsoDescriptions: Record<PercorsoType, { title: string; description: string; cta: string }> = {
+  checkup: {
+    title: "Check-up Sostenibile",
+    description: "Diagnosi + piano in step: ti lasciamo 3 priorità, 3 errori da evitare e un percorso chiaro.",
+    cta: "Prenota il Check-up Sostenibile",
+  },
+  "progetto-fasi": {
+    title: "Progetto a Fasi",
+    description: "Definiamo insieme un progetto strutturato con priorità, tempi e budget chiari per ogni fase.",
+    cta: "Richiedi un progetto a fasi",
+  },
+  manutenzione: {
+    title: "Manutenzione Programmata",
+    description: "Piano stagionale di interventi mirati: sai cosa succede e quando, senza sorprese.",
+    cta: "Richiedi un piano manutentivo",
+  },
+  "chiavi-in-mano": {
+    title: "Regia Completa",
+    description: "Coordinamento unico di progetto, realizzazione e manutenzione per spazi complessi.",
+    cta: "Prenota una call operativa",
+  },
+};
+
+// ── QUESTIONS ──
+// Q1, Q4, Q5, Q6 → determinano il PROFILO (pesati: Q1×3, Q5×2, Q4×2, Q6×1)
+// Q2, Q3 → determinano il PERCORSO consigliato (non influenzano il profilo)
 const questions: Question[] = [
   {
     id: 1,
     label: "Qual è il tuo rapporto ideale con il giardino?",
     options: [
-      { id: "contemplativo", label: "Un luogo di pace e contemplazione", icon: <Waves className="w-6 h-6" />, profile: "Contemplativo" },
-      { id: "sostenibile", label: "Un ecosistema sostenibile", icon: <Leaf className="w-6 h-6" />, profile: "Sostenibile" },
-      { id: "familiare", label: "Uno spazio per la famiglia", icon: <Users className="w-6 h-6" />, profile: "Familiare" },
-      { id: "rappresentativo", label: "Un biglietto da visita elegante", icon: <Star className="w-6 h-6" />, profile: "Rappresentativo" },
+      { id: "contemplativo", label: "Un luogo di pace e contemplazione", icon: <Waves className="w-6 h-6" />, profile: "Contemplativo", profileWeight: 3 },
+      { id: "sostenibile", label: "Un ecosistema sostenibile", icon: <Leaf className="w-6 h-6" />, profile: "Sostenibile", profileWeight: 3 },
+      { id: "familiare", label: "Uno spazio per la famiglia", icon: <Users className="w-6 h-6" />, profile: "Familiare", profileWeight: 3 },
+      { id: "rappresentativo", label: "Un biglietto da visita elegante", icon: <Star className="w-6 h-6" />, profile: "Rappresentativo", profileWeight: 3 },
     ],
   },
   {
     id: 2,
-    label: "Quanto tempo dedichi al giardino ogni settimana?",
+    label: "Qual è la difficoltà più comune del tuo spazio verde?",
     options: [
-      { id: "poco", label: "Il minimo indispensabile", icon: <Heart className="w-6 h-6" />, profile: "Contemplativo" },
-      { id: "medio", label: "Qualche ora qua e là", icon: <Sprout className="w-6 h-6" />, profile: "Sostenibile" },
-      { id: "tanto", label: "Ci dedico molto tempo", icon: <Shovel className="w-6 h-6" />, profile: "Familiare" },
-      { id: "varia", label: "Dipende dalle stagioni", icon: <TreeDeciduous className="w-6 h-6" />, profile: "Rappresentativo" },
+      { id: "acqua", label: "In estate soffre: acqua sempre un dubbio", icon: <Waves className="w-6 h-6" />, percorso: "checkup" },
+      { id: "disordine", label: "Cresce troppo e non resta ordinato", icon: <Sprout className="w-6 h-6" />, percorso: "manutenzione" },
+      { id: "stanchezza", label: "È stanco: piante in difficoltà, zone spente", icon: <TreeDeciduous className="w-6 h-6" />, percorso: "progetto-fasi" },
+      { id: "gestione", label: "La gestione è complicata (fornitori, tempi, costi)", icon: <Building2 className="w-6 h-6" />, percorso: "chiavi-in-mano" },
     ],
   },
   {
     id: 3,
-    label: "Qual è la dimensione del tuo spazio verde?",
+    label: "Dove si trova il tuo spazio verde?",
     options: [
-      { id: "balcone", label: "Un balcone o terrazzo", icon: <Home className="w-6 h-6" />, profile: "Contemplativo" },
-      { id: "piccolo", label: "Un giardino piccolo", icon: <Flower2 className="w-6 h-6" />, profile: "Sostenibile" },
-      { id: "medio", label: "Un giardino di media dimensione", icon: <Trees className="w-6 h-6" />, profile: "Familiare" },
-      { id: "grande", label: "Un grande spazio verde", icon: <Building2 className="w-6 h-6" />, profile: "Rappresentativo" },
+      { id: "privato", label: "Giardino privato", icon: <Home className="w-6 h-6" />, percorso: "checkup" },
+      { id: "terrazzo", label: "Terrazzo o attico", icon: <Flower2 className="w-6 h-6" />, percorso: "checkup" },
+      { id: "condominio", label: "Condominio", icon: <Building2 className="w-6 h-6" />, percorso: "chiavi-in-mano", isB2B: true },
+      { id: "azienda", label: "Azienda o struttura ricettiva", icon: <Castle className="w-6 h-6" />, percorso: "chiavi-in-mano", isB2B: true },
     ],
   },
   {
     id: 4,
     label: "Cosa non può mancare nel tuo giardino?",
     options: [
-      { id: "fiori", label: "Fiori colorati e profumati", icon: <Flower2 className="w-6 h-6" />, profile: "Contemplativo" },
-      { id: "alberi", label: "Alberi e piante autoctone", icon: <TreeDeciduous className="w-6 h-6" />, profile: "Sostenibile" },
-      { id: "orto", label: "Un orto per la famiglia", icon: <Utensils className="w-6 h-6" />, profile: "Familiare" },
-      { id: "arredamento", label: "Arredamento di design", icon: <Sofa className="w-6 h-6" />, profile: "Rappresentativo" },
+      { id: "fiori", label: "Fiori colorati e profumati", icon: <Flower2 className="w-6 h-6" />, profile: "Contemplativo", profileWeight: 2 },
+      { id: "alberi", label: "Alberi e piante autoctone", icon: <TreeDeciduous className="w-6 h-6" />, profile: "Sostenibile", profileWeight: 2 },
+      { id: "orto", label: "Un orto per la famiglia", icon: <Utensils className="w-6 h-6" />, profile: "Familiare", profileWeight: 2 },
+      { id: "arredamento", label: "Arredamento di design", icon: <Sofa className="w-6 h-6" />, profile: "Rappresentativo", profileWeight: 2 },
     ],
   },
   {
     id: 5,
     label: "Come ti piace vivere il tuo giardino?",
     options: [
-      { id: "relax", label: "Rilassarmi in tranquillità", icon: <Waves className="w-6 h-6" />, profile: "Contemplativo" },
-      { id: "intrattenere", label: "Accogliere amici e ospiti", icon: <Star className="w-6 h-6" />, profile: "Sostenibile" },
-      { id: "giocare", label: "Far giocare i bambini", icon: <Gamepad2 className="w-6 h-6" />, profile: "Familiare" },
-      { id: "lavorare", label: "Coltivare e sperimentare", icon: <Shovel className="w-6 h-6" />, profile: "Rappresentativo" },
+      { id: "relax", label: "Rilassarmi in tranquillità", icon: <Waves className="w-6 h-6" />, profile: "Contemplativo", profileWeight: 2 },
+      { id: "intrattenere", label: "Accogliere amici e ospiti", icon: <Star className="w-6 h-6" />, profile: "Rappresentativo", profileWeight: 2 },
+      { id: "giocare", label: "Far giocare i bambini", icon: <Gamepad2 className="w-6 h-6" />, profile: "Familiare", profileWeight: 2 },
+      { id: "lavorare", label: "Coltivare e sperimentare", icon: <Shovel className="w-6 h-6" />, profile: "Sostenibile", profileWeight: 2 },
     ],
   },
   {
     id: 6,
     label: "Quale stile ti attrae di più?",
     options: [
-      { id: "naturale", label: "Naturale e selvaggio", icon: <Nature className="w-6 h-6" />, profile: "Contemplativo" },
-      { id: "moderno", label: "Moderno e minimal", icon: <Building2 className="w-6 h-6" />, profile: "Sostenibile" },
-      { id: "classico", label: "Classico ed elegante", icon: <Castle className="w-6 h-6" />, profile: "Familiare" },
-      { id: "rustico", label: "Rustico e accogliente", icon: <Warehouse className="w-6 h-6" />, profile: "Rappresentativo" },
+      { id: "naturale", label: "Naturale e selvaggio", icon: <Nature className="w-6 h-6" />, profile: "Sostenibile", profileWeight: 1 },
+      { id: "moderno", label: "Moderno e minimal", icon: <Building2 className="w-6 h-6" />, profile: "Rappresentativo", profileWeight: 1 },
+      { id: "classico", label: "Classico ed elegante", icon: <Castle className="w-6 h-6" />, profile: "Rappresentativo", profileWeight: 1 },
+      { id: "rustico", label: "Rustico e accogliente", icon: <Warehouse className="w-6 h-6" />, profile: "Familiare", profileWeight: 1 },
     ],
   },
 ];
@@ -158,6 +196,8 @@ export default function QuizPage() {
     privacyConsent: false,
     marketingConsent: false,
   });
+  const [percorso, setPercorso] = useState<PercorsoType | null>(null);
+  const [isB2B, setIsB2B] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -185,23 +225,58 @@ export default function QuizPage() {
   };
 
   const calculateResult = (finalAnswers: QuizAnswer[]) => {
-    const scores: Record<ProfileType, number> = {
+    // ── A) PROFILO: weighted scoring from Q1, Q4, Q5, Q6 only ──
+    const profileScores: Record<ProfileType, number> = {
       Contemplativo: 0,
       Sostenibile: 0,
       Familiare: 0,
       Rappresentativo: 0,
     };
 
+    // ── B) PERCORSO: from Q2, Q3 ──
+    const percorsoScores: Record<PercorsoType, number> = {
+      checkup: 0,
+      "progetto-fasi": 0,
+      manutenzione: 0,
+      "chiavi-in-mano": 0,
+    };
+
+    let detectedB2B = false;
+
     finalAnswers.forEach((answer) => {
       const question = questions.find((q) => q.id === Number(answer.questionId));
       const option = question?.options.find((o) => o.id === answer.answer);
-      if (option) {
-        scores[option.profile]++;
+      if (!option) return;
+
+      // Profile scoring (only Q1, Q4, Q5, Q6 have profile + profileWeight)
+      if (option.profile && option.profileWeight) {
+        profileScores[option.profile] += option.profileWeight;
+      }
+
+      // Percorso scoring (Q2, Q3 have percorso)
+      if (option.percorso) {
+        percorsoScores[option.percorso]++;
+      }
+
+      // B2B detection (Q3)
+      if (option.isB2B) {
+        detectedB2B = true;
       }
     });
 
-    const winner = Object.entries(scores).reduce((a, b) => (a[1] > b[1] ? a : b))[0] as ProfileType;
-    setResultProfile(winner);
+    // Winner profile
+    const profileWinner = Object.entries(profileScores).reduce((a, b) =>
+      a[1] > b[1] ? a : b
+    )[0] as ProfileType;
+
+    // Winner percorso
+    const percorsoWinner = Object.entries(percorsoScores).reduce((a, b) =>
+      a[1] > b[1] ? a : b
+    )[0] as PercorsoType;
+
+    setResultProfile(profileWinner);
+    setPercorso(percorsoWinner);
+    setIsB2B(detectedB2B);
     setShowResult(true);
   };
 
@@ -211,19 +286,20 @@ export default function QuizPage() {
 
     setIsSubmitting(true);
     try {
+      const profileScoreMap: Record<ProfileType, number> = {
+        Contemplativo: 1,
+        Sostenibile: 2,
+        Familiare: 3,
+        Rappresentativo: 4,
+      };
+
       const quizAnswers = answers.map((a) => {
         const question = questions.find((q) => q.id === Number(a.questionId));
         const option = question?.options.find((o) => o.id === a.answer);
-        const scores: Record<ProfileType, number> = {
-          Contemplativo: 1,
-          Sostenibile: 2,
-          Familiare: 3,
-          Rappresentativo: 4,
-        };
         return {
           questionId: a.questionId,
           answer: a.answer,
-          score: option ? scores[option.profile] : 1,
+          score: option?.profile ? profileScoreMap[option.profile] : 1,
         };
       });
 
@@ -364,9 +440,18 @@ export default function QuizPage() {
                         {profile.title.split(" ").slice(1).join(" ")}
                       </span>
                     </h1>
-                    <p className="text-lg text-forest-800/70 font-body leading-relaxed max-w-lg mx-auto">
+                    <p className="text-lg text-forest-800/70 font-body leading-relaxed max-w-lg mx-auto mb-6">
                       {profile.description}
                     </p>
+                    {percorso && (
+                      <div className="inline-flex items-center gap-2 bg-sun-50 border border-sun-200 rounded-2xl px-5 py-3">
+                        <Sprout className="w-4 h-4 text-sun-600" />
+                        <span className="text-sm font-medium text-forest-800">
+                          Percorso consigliato: <span className="text-sun-700 font-bold">{percorsoDescriptions[percorso].title}</span>
+                          {isB2B && <span className="ml-1 text-xs text-leaf-600">(B2B)</span>}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </FadeIn>
 
@@ -493,6 +578,8 @@ export default function QuizPage() {
                     onClick={() => {
                       setShowResult(false);
                       setResultProfile(null);
+                      setPercorso(null);
+                      setIsB2B(false);
                       setAnswers([]);
                       setCurrentQuestion(0);
                     }}
