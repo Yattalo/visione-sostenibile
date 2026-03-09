@@ -96,15 +96,14 @@ export function ServiziClient() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
-              Cosa facciamo
-              <span className="block italic text-leaf-400">(e come lo facciamo)</span>
+              Cosa possiamo fare
+              <span className="block italic text-leaf-400">per te</span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.1}>
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Ogni servizio segue lo stesso metodo: ascolto, progetto, realizzazione,
-              cura nel tempo. Un referente unico, competenze verticali coordinate.
+              Visione Sostenibile progetta, realizza e mantiene giardini e spazi outdoor sostenibili con un approccio concreto: scelte motivate, lavoro a fasi e gestione nel tempo. Un unico referente che coordina competenze verticali e partnership selezionate.
             </p>
           </SlideUp>
 
@@ -245,13 +244,13 @@ export function ServiziClient() {
               Parliamone
             </Badge>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-paper-50 leading-tight mb-6">
-              Ti diciamo cosa serve
+              Non sai da dove partire?
               <span className="block italic text-leaf-400">
-                davvero
+                Parti dal Check-up Sostenibile
               </span>
             </h2>
             <p className="font-body text-lg text-paper-300/70 max-w-xl mx-auto mb-10">
-              Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a capire cosa serve — e cosa no.
+              In 60–90 minuti ti lasciamo 3 priorità, 3 errori da evitare e un piano in step.
             </p>
           </SlideUp>
 
@@ -259,7 +258,7 @@ export function ServiziClient() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contatti">
                 <Button size="lg" className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg">
-                  Richiedi un sopralluogo
+                  Prenota il Check-up
                 </Button>
               </Link>
             </div>
