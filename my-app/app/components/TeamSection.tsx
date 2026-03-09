@@ -9,27 +9,29 @@ interface TeamMember {
   role: string;
   image: string;
   avatarFocus: string;
+  competenze: string[];
+  personalStatement?: string;
 }
 
 const teamMembers: TeamMember[] = [
-  { name: "Andrea Giordano", title: "Fondatore", role: "Un unico referente che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos.", image: "/images/chi-siamo/andrea.jpg", avatarFocus: "50% 15%" },
-  { name: "Bogdan", title: "Tree Climbing", role: "Tree climbing, abbattimenti e potature in quota", image: "/images/team/bogdan.jpg", avatarFocus: "50% 18%" },
-  { name: "Daniele", title: "Dottore Forestale", role: "Dottore forestale specializzato in funghi agenti di carie", image: "/images/team/daniele.jpg", avatarFocus: "50% 20%" },
-  { name: "Moreno", title: "Fitoiatra", role: "Fitoiatra - Entomologo ETT certificato", image: "/images/team/moreno.jpg", avatarFocus: "50% 20%" },
-  { name: "Besnik", title: "Allestimento Verde", role: "Allestimento giardini e impianti di irrigazione", image: "/images/team/besnik.jpg", avatarFocus: "50% 18%" },
-  { name: "Michele", title: "Posa Prato", role: "Posa prato sintetico", image: "/images/team/michele.avif", avatarFocus: "50% 12%" },
-  { name: "Nicolò", title: "Terrazzi e Attici", role: "Allestimento terrazzi, attici e relativi impianti", image: "/images/team/nicolo.jpg", avatarFocus: "50% 18%" },
-  { name: "Agi", title: "Manutenzione Verde", role: "Manutenzioni, potatura siepi, sfalcio erba", image: "/images/team/agi.jpg", avatarFocus: "50% 16%" },
-  { name: "Flavio", title: "Antizanzare", role: "Installazione impianti antizanzare omologati", image: "/images/team/flavio.jpg", avatarFocus: "50% 16%" },
-  { name: "Danilo", title: "Robot Tagliaerba", role: "Impianti per robot taglia erba e assistenza", image: "/images/team/danilo.jpg", avatarFocus: "50% 17%" },
-  { name: "Francesca", title: "Floral Designer", role: "Arredamento floreale per esterni ed interni", image: "/images/team/francesca.jpg", avatarFocus: "50% 18%" },
-  { name: "Paolo e Dario", title: "Illuminazione", role: "Impianti elettrici e illuminazioni per esterni", image: "/images/team/paolo-dario.jpg", avatarFocus: "50% 24%" },
-  { name: "Roberto", title: "Irrigazione", role: "Impianti di irrigazione e posa prato", image: "/images/team/roberto.jpg", avatarFocus: "50% 17%" },
-  { name: "Lleshi", title: "Pietra e Cubetti", role: "Posa cubetto, ciotolo in pietra", image: "/images/team/lleshi.jpg", avatarFocus: "50% 16%" },
-  { name: "Claudio", title: "Pietra Arenaria", role: "Lavorazione pietra arenaria di Langa", image: "/images/team/claudio.jpg", avatarFocus: "50% 18%" },
-  { name: "Fabrizio", title: "Giardini Giapponesi", role: "Realizzazione giardini giapponesi", image: "/images/team/fabrizio.jpg", avatarFocus: "50% 18%" },
-  { name: "Ercole", title: "Recinzioni in Legno", role: "Recinzioni, staccionate e palificazioni in legno", image: "/images/team/ercole.jpg", avatarFocus: "50% 18%" },
-  { name: "Carlo", title: "Manutenzione", role: "Manutenzione giardini", image: "/images/team/carlo.jpg", avatarFocus: "50% 17%" },
+  { name: "Andrea Giordano", title: "Fondatore", role: "Un unico referente che progetta, realizza e mantiene il tuo giardino: specialisti e partner coordinati, niente più caos.", image: "/images/chi-siamo/andrea.jpg", avatarFocus: "50% 15%", competenze: ["Progettazione biodinamica", "Coordinamento équipe", "Consulenza verde"], personalStatement: "Il giardino è un sistema vivo: ogni intervento deve rispettarne l'equilibrio." },
+  { name: "Bogdan", title: "Tree Climbing", role: "Tree climbing, abbattimenti e potature in quota", image: "/images/team/bogdan.jpg", avatarFocus: "50% 18%", competenze: ["Tree climbing", "Abbattimenti", "Potature in quota"] },
+  { name: "Daniele", title: "Dottore Forestale", role: "Dottore forestale specializzato in funghi agenti di carie", image: "/images/team/daniele.jpg", avatarFocus: "50% 20%", competenze: ["Fitopatologia", "Funghi agenti di carie", "Diagnostica forestale"] },
+  { name: "Moreno", title: "Fitoiatra", role: "Fitoiatra - Entomologo ETT certificato", image: "/images/team/moreno.jpg", avatarFocus: "50% 20%", competenze: ["Fitoiatria", "Entomologia", "Certificazione ETT"] },
+  { name: "Besnik", title: "Allestimento Verde", role: "Allestimento giardini e impianti di irrigazione", image: "/images/team/besnik.jpg", avatarFocus: "50% 18%", competenze: ["Allestimento giardini", "Irrigazione", "Posa verde"] },
+  { name: "Michele", title: "Posa Prato", role: "Posa prato sintetico", image: "/images/team/michele.avif", avatarFocus: "50% 12%", competenze: ["Prato sintetico", "Preparazione fondi", "Drenaggio"] },
+  { name: "Nicolò", title: "Terrazzi e Attici", role: "Allestimento terrazzi, attici e relativi impianti", image: "/images/team/nicolo.jpg", avatarFocus: "50% 18%", competenze: ["Terrazzi", "Attici", "Impiantistica"] },
+  { name: "Agi", title: "Manutenzione Verde", role: "Manutenzioni, potatura siepi, sfalcio erba", image: "/images/team/agi.jpg", avatarFocus: "50% 16%", competenze: ["Potatura siepi", "Sfalcio", "Manutenzione ordinaria"] },
+  { name: "Flavio", title: "Antizanzare", role: "Installazione impianti antizanzare omologati", image: "/images/team/flavio.jpg", avatarFocus: "50% 16%", competenze: ["Impianti antizanzare", "Nebulizzazione", "Disinfestazione"] },
+  { name: "Danilo", title: "Robot Tagliaerba", role: "Impianti per robot taglia erba e assistenza", image: "/images/team/danilo.jpg", avatarFocus: "50% 17%", competenze: ["Robot tagliaerba", "Automazione", "Assistenza tecnica"] },
+  { name: "Francesca", title: "Floral Designer", role: "Arredamento floreale per esterni ed interni", image: "/images/team/francesca.jpg", avatarFocus: "50% 18%", competenze: ["Floral design", "Allestimenti", "Composizioni stagionali"] },
+  { name: "Paolo e Dario", title: "Illuminazione", role: "Impianti elettrici e illuminazioni per esterni", image: "/images/team/paolo-dario.jpg", avatarFocus: "50% 24%", competenze: ["Illuminazione LED", "Impianti elettrici", "Scenografia luce"] },
+  { name: "Roberto", title: "Irrigazione", role: "Impianti di irrigazione e posa prato", image: "/images/team/roberto.jpg", avatarFocus: "50% 17%", competenze: ["Irrigazione smart", "Posa prato", "Sensori umidità"] },
+  { name: "Lleshi", title: "Pietra e Cubetti", role: "Posa cubetto, ciotolo in pietra", image: "/images/team/lleshi.jpg", avatarFocus: "50% 16%", competenze: ["Posa cubetti", "Ciotolato", "Pavimentazioni esterne"] },
+  { name: "Claudio", title: "Pietra Arenaria", role: "Lavorazione pietra arenaria di Langa", image: "/images/team/claudio.jpg", avatarFocus: "50% 18%", competenze: ["Pietra di Langa", "Lavorazione artigianale", "Muretti a secco"] },
+  { name: "Fabrizio", title: "Giardini Giapponesi", role: "Realizzazione giardini giapponesi", image: "/images/team/fabrizio.jpg", avatarFocus: "50% 18%", competenze: ["Giardini zen", "Stile giapponese", "Composizioni minerali"] },
+  { name: "Ercole", title: "Recinzioni in Legno", role: "Recinzioni, staccionate e palificazioni in legno", image: "/images/team/ercole.jpg", avatarFocus: "50% 18%", competenze: ["Recinzioni legno", "Staccionate", "Palificazioni"] },
+  { name: "Carlo", title: "Manutenzione", role: "Manutenzione giardini", image: "/images/team/carlo.jpg", avatarFocus: "50% 17%", competenze: ["Manutenzione programmata", "Cura stagionale", "Gestione verde"] },
 ];
 
 export function TeamSection() {
@@ -74,10 +76,27 @@ export function TeamSection() {
                     cardHeight="23rem"
                     cardMaxHeight="27rem"
                   />
-                  <div className="mt-4 px-2 min-h-[4.5rem] flex items-center justify-center">
+                  <div className="mt-4 px-2 space-y-3">
                     <p className="text-center font-body text-sm leading-relaxed text-forest-800/75">
                       {member.role}
                     </p>
+                    {member.competenze.length > 0 && (
+                      <div className="flex flex-wrap justify-center gap-1.5">
+                        {member.competenze.map((comp) => (
+                          <span
+                            key={comp}
+                            className="inline-block px-2.5 py-0.5 text-[0.65rem] font-sans uppercase tracking-wider text-leaf-700 bg-leaf-50 border border-leaf-200 rounded-full"
+                          >
+                            {comp}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {member.personalStatement && (
+                      <p className="text-center font-body text-xs italic text-forest-800/60 leading-relaxed">
+                        &ldquo;{member.personalStatement}&rdquo;
+                      </p>
+                    )}
                   </div>
                 </article>
               </StaggerItem>
