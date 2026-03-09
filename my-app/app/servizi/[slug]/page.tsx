@@ -348,6 +348,349 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
+  "impianti-irrigazione": {
+    questionH2: "Come scegliere il sistema di irrigazione giusto per il giardino?",
+    quickAnswer:
+      "Il sistema di irrigazione ideale dipende da tipo di terreno, esposizione e piante presenti. Un impianto progettato su misura riduce gli sprechi idrici, garantisce copertura uniforme e semplifica la gestione quotidiana del verde.",
+    intro:
+      "Progettiamo e installiamo impianti di irrigazione efficienti, calibrati sulle esigenze reali del tuo spazio verde.",
+    body: "Ogni impianto parte da un rilievo tecnico che valuta pendenze, zone d'ombra, tipo di suolo e fabbisogno idrico delle specie presenti. Il risultato e un sistema preciso che consuma meno e irriga meglio.",
+    deliverables: [
+      "Rilievo tecnico e mappatura zone idriche",
+      "Progetto impianto con schema idraulico",
+      "Installazione linee e irrigatori",
+      "Programmazione centralina smart",
+      "Collaudo e regolazione finale",
+      "Istruzioni d'uso e manutenzione stagionale",
+    ],
+    process: [
+      "Sopralluogo e analisi fabbisogno idrico",
+      "Progettazione schema e componenti",
+      "Installazione e posa in opera",
+      "Programmazione, collaudo e consegna",
+    ],
+    results: [
+      "Riduzione consumi idrici fino al 40%",
+      "Copertura uniforme senza zone secche",
+      "Gestione automatizzata e programmabile",
+    ],
+    whenToChoose: [
+      "Il giardino soffre di irrigazione irregolare",
+      "Vuoi ridurre i consumi idrici senza sacrificare il verde",
+      "Cerchi un sistema automatico e affidabile",
+    ],
+    faqs: [
+      {
+        question: "Quanto costa un impianto di irrigazione?",
+        answer:
+          "Il costo dipende da superficie, numero di zone e tipo di irrigatori. Dopo il sopralluogo forniamo un preventivo dettagliato senza impegno.",
+      },
+      {
+        question: "Si puo installare su un giardino gia esistente?",
+        answer:
+          "Si. L'installazione su giardini esistenti e comune e viene pianificata per ridurre al minimo l'impatto sulle piante e sul prato.",
+      },
+      {
+        question: "L'impianto funziona anche con acqua di pozzo?",
+        answer:
+          "Si, previa verifica della portata e qualita dell'acqua. Adattiamo filtri e pressione per garantire il corretto funzionamento.",
+      },
+    ],
+  },
+  "camminamenti-pietra": {
+    questionH2: "Quali materiali scegliere per camminamenti e muretti in giardino?",
+    quickAnswer:
+      "I materiali migliori per camminamenti e muretti in giardino sono pietre naturali locali, resistenti al gelo e coerenti con il paesaggio. Una posa accurata garantisce stabilita nel tempo, drenaggio corretto e un risultato estetico che valorizza lo spazio.",
+    intro:
+      "Realizziamo camminamenti, muretti e bordure con materiali naturali selezionati per durabilita e coerenza estetica.",
+    body: "Ogni intervento parte dalla scelta del materiale giusto per contesto, uso e clima. La posa segue tecniche tradizionali che garantiscono stabilita strutturale e integrazione naturale con il verde circostante.",
+    deliverables: [
+      "Consulenza su materiali e finiture",
+      "Progetto esecutivo del tracciato",
+      "Preparazione del fondo e drenaggi",
+      "Posa in opera con tecniche tradizionali",
+      "Stuccatura e finiture finali",
+      "Indicazioni per manutenzione nel tempo",
+    ],
+    process: [
+      "Sopralluogo e definizione tracciato",
+      "Selezione materiali e campionatura",
+      "Preparazione fondo e sottofondo drenante",
+      "Posa, stuccatura e pulizia finale",
+    ],
+    results: [
+      "Percorsi stabili e sicuri in ogni stagione",
+      "Estetica naturale integrata nel paesaggio",
+      "Durabilita superiore con manutenzione minima",
+    ],
+    whenToChoose: [
+      "Il giardino manca di percorsi pedonali definiti",
+      "Vuoi contenere un pendio o delimitare aree",
+      "Cerchi materiali naturali e durevoli",
+    ],
+    faqs: [
+      {
+        question: "Quanto dura un camminamento in pietra naturale?",
+        answer:
+          "Con una posa corretta e materiali di qualita, un camminamento in pietra dura decenni con manutenzione minima.",
+      },
+      {
+        question: "Quali pietre sono adatte al clima piemontese?",
+        answer:
+          "Usiamo prevalentemente luserna, beola e porfido, pietre locali resistenti al gelo e all'usura tipiche del territorio.",
+      },
+      {
+        question: "E possibile posare su terreno in pendenza?",
+        answer:
+          "Si. In pendenza realizziamo gradonate, scalinate e muretti di contenimento con tecniche che garantiscono stabilita e drenaggio.",
+      },
+    ],
+  },
+  "illuminazione-esterni": {
+    questionH2: "Come illuminare il giardino in modo efficace e sostenibile?",
+    quickAnswer:
+      "Un'illuminazione esterna ben progettata valorizza il giardino di sera, migliora la sicurezza dei percorsi e consuma poco grazie a tecnologie LED a basso consumo. Il progetto parte dalla mappatura delle zone da illuminare e dalla scelta di apparecchi adatti al contesto.",
+    intro:
+      "Progettiamo sistemi di illuminazione esterna che uniscono funzionalita, atmosfera e risparmio energetico.",
+    body: "Ogni progetto illuminotecnico parte dall'analisi degli spazi, dei punti focali e degli usi serali del giardino. Scegliamo apparecchi a LED, posizioni studiate e temperature di colore che esaltano il verde senza inquinamento luminoso.",
+    deliverables: [
+      "Rilievo e mappatura punti luce",
+      "Progetto illuminotecnico con planimetria",
+      "Fornitura apparecchi LED selezionati",
+      "Installazione e cablaggio a norma",
+      "Programmazione accensioni e dimmer",
+      "Collaudo e istruzioni operative",
+    ],
+    process: [
+      "Sopralluogo serale e analisi esigenze",
+      "Progetto con posizionamento e scelta apparecchi",
+      "Installazione elettrica e posa corpi illuminanti",
+      "Collaudo notturno e regolazione finale",
+    ],
+    results: [
+      "Giardino fruibile e sicuro anche di sera",
+      "Valorizzazione estetica di piante e architetture",
+      "Consumi ridotti grazie a tecnologia LED",
+    ],
+    whenToChoose: [
+      "Il giardino e poco fruibile dopo il tramonto",
+      "Vuoi valorizzare piante o elementi architettonici di sera",
+      "Cerchi sicurezza sui percorsi con luce discreta",
+    ],
+    faqs: [
+      {
+        question: "L'illuminazione da giardino consuma molto?",
+        answer:
+          "No. Con apparecchi LED e programmazione intelligente i consumi sono contenuti, spesso inferiori a quelli di una singola lampada domestica.",
+      },
+      {
+        question: "Si possono illuminare anche alberi e siepi?",
+        answer:
+          "Si. Usiamo faretti a incasso, spot direzionabili e strip LED per evidenziare chiome, tronchi e masse verdi con effetti scenografici.",
+      },
+      {
+        question: "Serve un impianto elettrico dedicato?",
+        answer:
+          "Dipende dallo stato esistente. In molti casi integriamo l'illuminazione su linee esistenti, altrimenti prevediamo un circuito dedicato a norma.",
+      },
+    ],
+  },
+  "arredamento-esterni": {
+    questionH2: "Come scegliere l'arredamento da esterno giusto per il giardino?",
+    quickAnswer:
+      "L'arredamento da esterno ideale combina resistenza alle intemperie, comfort e coerenza estetica con il giardino. La scelta dei materiali e del layout trasforma lo spazio verde in un'area vivibile tutto l'anno, dall'angolo relax alla zona pranzo.",
+    intro:
+      "Selezioniamo e posizioniamo arredi da esterno che trasformano il giardino in uno spazio da vivere.",
+    body: "Dalla scelta dei materiali al layout funzionale, progettiamo zone outdoor coerenti con lo stile del giardino. Ogni elemento e selezionato per resistenza, comfort e integrazione estetica con il contesto verde.",
+    deliverables: [
+      "Consulenza su stile e materiali",
+      "Layout funzionale delle zone outdoor",
+      "Selezione arredi e complementi",
+      "Coordinamento consegne e posizionamento",
+      "Accessori e tessili per esterni",
+      "Indicazioni per cura e rimessaggio stagionale",
+    ],
+    process: [
+      "Analisi spazi e stile di vita all'aperto",
+      "Proposta layout e selezione arredi",
+      "Ordine, consegna e posizionamento",
+      "Verifica finale e consigli di manutenzione",
+    ],
+    results: [
+      "Spazio esterno vivibile in ogni stagione",
+      "Comfort e stile coerente con il giardino",
+      "Arredi durevoli con manutenzione semplice",
+    ],
+    whenToChoose: [
+      "Vuoi creare una zona pranzo o relax all'aperto",
+      "Gli arredi attuali sono deteriorati o inadatti",
+      "Cerchi soluzioni su misura per il tuo spazio",
+    ],
+    faqs: [
+      {
+        question: "Quali materiali resistono meglio all'esterno?",
+        answer:
+          "Teak, alluminio verniciato, resina intrecciata e tessuti tecnici offrono la migliore combinazione di resistenza e estetica per uso outdoor tutto l'anno.",
+      },
+      {
+        question: "E possibile arredare anche spazi piccoli?",
+        answer:
+          "Si. Con arredi compatti e layout studiato si ottimizzano anche terrazzi e cortili di dimensioni ridotte, senza rinunciare a comfort e funzionalita.",
+      },
+      {
+        question: "Gli arredi vanno coperti in inverno?",
+        answer:
+          "Dipende dal materiale. Forniamo indicazioni specifiche per ogni pezzo, incluse coperture protettive e consigli di rimessaggio stagionale.",
+      },
+    ],
+  },
+  "ingegneria-naturalistica": {
+    questionH2: "Quando serve l'ingegneria naturalistica per il giardino o il terreno?",
+    quickAnswer:
+      "L'ingegneria naturalistica serve quando il terreno presenta problemi di stabilita, erosione o dissesto idrogeologico. Utilizza tecniche a basso impatto ambientale per consolidare pendii, proteggere sponde e recuperare aree degradate in modo sostenibile e duraturo.",
+    intro:
+      "Applichiamo tecniche di ingegneria naturalistica per stabilizzare terreni, proteggere versanti e recuperare aree verdi compromesse.",
+    body: "Ogni intervento combina materiali naturali (legno, pietra, geotessili) con piante a radicazione profonda per creare strutture stabili che si integrano nel paesaggio e migliorano nel tempo.",
+    deliverables: [
+      "Sopralluogo e analisi geomorfologica",
+      "Relazione tecnica con soluzioni proposte",
+      "Progetto esecutivo dell'intervento",
+      "Realizzazione opere di consolidamento",
+      "Rinverdimento e messa a dimora",
+      "Monitoraggio post-intervento",
+    ],
+    process: [
+      "Rilievo del dissesto e delle cause",
+      "Progettazione intervento con tecniche naturali",
+      "Esecuzione opere strutturali e vegetazionali",
+      "Verifica stabilita e monitoraggio nel tempo",
+    ],
+    results: [
+      "Pendii e scarpate stabilizzati in modo naturale",
+      "Riduzione del rischio idrogeologico",
+      "Recupero estetico e funzionale dell'area",
+    ],
+    whenToChoose: [
+      "Il terreno presenta frane, smottamenti o erosione",
+      "Devi consolidare un pendio o una scarpata",
+      "Cerchi soluzioni a basso impatto ambientale per il dissesto",
+    ],
+    faqs: [
+      {
+        question: "L'ingegneria naturalistica e efficace come quella tradizionale?",
+        answer:
+          "Si, e in molti casi superiore nel lungo periodo perche le radici delle piante rafforzano progressivamente la struttura, aumentando la stabilita nel tempo.",
+      },
+      {
+        question: "Quanto tempo serve per completare un intervento?",
+        answer:
+          "Dipende dalla scala. Interventi su giardini privati richiedono da pochi giorni a qualche settimana, con risultati visibili gia nella prima stagione vegetativa.",
+      },
+      {
+        question: "Servono permessi per questi interventi?",
+        answer:
+          "In alcuni casi si, soprattutto per aree vincolate. Ci occupiamo della verifica normativa e, se necessario, supportiamo la pratica autorizzativa.",
+      },
+    ],
+  },
+  "scelta-piante": {
+    questionH2: "Come scegliere le piante giuste per il proprio giardino?",
+    quickAnswer:
+      "La scelta delle piante giuste parte dall'analisi di terreno, esposizione, clima e obiettivi estetici. Selezionare specie adatte al contesto riduce le sostituzioni, abbassa i costi di manutenzione e garantisce un giardino che migliora naturalmente nel tempo.",
+    intro:
+      "Selezioniamo piante autoctone e ornamentali adatte al tuo terreno, al clima e allo stile del giardino.",
+    body: "Ogni proposta botanica nasce da un'analisi approfondita di suolo, esposizione, microclima e preferenze estetiche. Il risultato e una palette vegetale coerente, resiliente e di facile gestione.",
+    deliverables: [
+      "Analisi pedoclimatica del sito",
+      "Selezione specie con schede botaniche",
+      "Piano di impianto con posizionamento",
+      "Fornitura piante da vivaisti selezionati",
+      "Messa a dimora con substrato e pacciamatura",
+      "Calendario cure e irrigazione primo anno",
+    ],
+    process: [
+      "Sopralluogo e analisi terreno e microclima",
+      "Selezione botanica e proposta palette vegetale",
+      "Approvvigionamento e messa a dimora",
+      "Istruzioni di cura e monitoraggio attecchimento",
+    ],
+    results: [
+      "Piante adatte al contesto con alto tasso di attecchimento",
+      "Giardino esteticamente coerente tutto l'anno",
+      "Manutenzione ridotta grazie a specie resilienti",
+    ],
+    whenToChoose: [
+      "Stai piantumando un nuovo giardino da zero",
+      "Vuoi sostituire piante che non si adattano al terreno",
+      "Cerchi specie autoctone e a bassa manutenzione",
+    ],
+    faqs: [
+      {
+        question: "Le piante autoctone sono meno belle di quelle esotiche?",
+        answer:
+          "No. Esistono specie autoctone con fioriture spettacolari e fogliami decorativi che offrono anche il vantaggio di adattarsi meglio al clima locale.",
+      },
+      {
+        question: "Quanto tempo serve per vedere il giardino maturo?",
+        answer:
+          "Dipende dalle specie scelte. Erbacee e arbusti danno risultati in 1-2 stagioni, mentre alberi richiedono 3-5 anni per raggiungere una dimensione significativa.",
+      },
+      {
+        question: "Garantite l'attecchimento delle piante?",
+        answer:
+          "Selezioniamo piante di qualita da vivaisti di fiducia e forniamo istruzioni precise per il primo anno. Il tasso di attecchimento con il nostro metodo e molto elevato.",
+      },
+    ],
+  },
+  "trattamenti-piante": {
+    questionH2: "Quando e come trattare le piante in modo naturale?",
+    quickAnswer:
+      "I trattamenti naturali per le piante funzionano meglio quando vengono applicati preventivamente e con dosaggi calibrati sulla specie. Questo approccio riduce la dipendenza dalla chimica di sintesi, preserva l'equilibrio biologico del giardino e protegge la salute delle piante nel lungo periodo.",
+    intro:
+      "Applichiamo trattamenti curativi e nutrizionali naturali per proteggere le piante e rafforzarne la salute.",
+    body: "Ogni intervento parte da una diagnosi dello stato fitosanitario e nutrizionale. Utilizziamo prodotti biologici, macerati e preparati biodinamici calibrati sulla specie e sul problema specifico.",
+    deliverables: [
+      "Diagnosi fitosanitaria visiva e strumentale",
+      "Piano trattamenti con prodotti naturali",
+      "Applicazione trattamenti curativi",
+      "Somministrazione nutrienti e biostimolanti",
+      "Monitoraggio risposta vegetativa",
+      "Report e raccomandazioni di follow-up",
+    ],
+    process: [
+      "Ispezione e diagnosi dello stato di salute",
+      "Definizione protocollo trattamento naturale",
+      "Applicazione trattamenti e nutrienti",
+      "Monitoraggio risultati e adattamento piano",
+    ],
+    results: [
+      "Piante piu sane e resistenti ai patogeni",
+      "Riduzione progressiva dei trattamenti chimici",
+      "Equilibrio biologico del giardino preservato",
+    ],
+    whenToChoose: [
+      "Le piante mostrano segni di sofferenza o malattia",
+      "Vuoi passare da trattamenti chimici a naturali",
+      "Cerchi una cura preventiva e non solo d'emergenza",
+    ],
+    faqs: [
+      {
+        question: "I trattamenti naturali sono efficaci quanto quelli chimici?",
+        answer:
+          "Si, soprattutto in ottica preventiva. I trattamenti naturali rafforzano le difese della pianta, riducendo la necessita di interventi d'urgenza nel tempo.",
+      },
+      {
+        question: "Ogni quanto vanno ripetuti i trattamenti?",
+        answer:
+          "Dipende dalla specie e dal problema. In genere prevediamo cicli stagionali con frequenza maggiore nei periodi di crescita attiva e minore in inverno.",
+      },
+      {
+        question: "I trattamenti sono sicuri per bambini e animali?",
+        answer:
+          "Si. Utilizziamo esclusivamente prodotti biologici e naturali, sicuri per persone, animali domestici e insetti utili come api e coccinelle.",
+      },
+    ],
+  },
 };
 
 /* ── Section Components ────────────────── */
@@ -936,6 +1279,22 @@ export default function ServiceDetailPage() {
         }
       : null;
 
+  const howToJsonLd =
+    content.process && content.process.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: `Come funziona: ${service.title}`,
+          description: content.quickAnswer,
+          step: content.process.map((stepText, index) => ({
+            "@type": "HowToStep",
+            position: index + 1,
+            name: `Step ${index + 1}`,
+            text: stepText,
+          })),
+        }
+      : null;
+
   const handleShare = async () => {
     const shareUrl = new URL(
       `${window.location.origin}${window.location.pathname}`
@@ -985,6 +1344,12 @@ export default function ServiceDetailPage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+      {howToJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
         />
       )}
 
