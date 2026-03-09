@@ -2,9 +2,10 @@ import { MetadataRoute } from "next";
 import { blogPosts } from "./lib/blog";
 import { progettiProjects } from "./lib/progetti-data";
 import { staticServices } from "./lib/static-data";
+import { siteConfig } from "./lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.visionesostenibile.it";
+  const baseUrl = siteConfig.siteUrl;
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

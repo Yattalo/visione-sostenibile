@@ -1,11 +1,13 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
+import { siteConfig } from "./lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin", "/api", "/scorecard"],
     },
-    sitemap: "https://www.visionesostenibile.it/sitemap.xml",
+    sitemap: `${siteConfig.siteUrl}/sitemap.xml`,
   };
 }

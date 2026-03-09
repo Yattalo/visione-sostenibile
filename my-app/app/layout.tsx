@@ -54,6 +54,20 @@ export const metadata: Metadata = {
     default: `${pageSeo.home.title} | ${SITE_NAME}`,
   },
   metadataBase: new URL(SITE_URL),
+  keywords: [
+    "giardinaggio biodinamico",
+    "giardini Torino",
+    "giardiniere Torino",
+    "progettazione giardini Piemonte",
+    "manutenzione giardini Torino",
+    "potatura alberi Torino",
+    "irrigazione giardino",
+    "giardino sostenibile",
+    "verde biodinamico",
+    "piante autoctone Piemonte",
+    "realizzazione giardini chiavi in mano",
+    "giardinaggio sostenibile Torino",
+  ],
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32" },
