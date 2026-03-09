@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     content: `
 L'autunno è una stagione cruciale per la cura del giardino. Con le temperature che iniziano a scendere e le giornate che si accorciano, è il momento giusto per preparare le piante al riposo invernale e assicurarsi che tornino rigogliose in primavera. In Italia centrale, dove il clima è mite ma gli sbalzi termici possono sorprendere, una buona preparazione autunnale fa la differenza tra un giardino che sopravvive e uno che prospera.
 
-## Calendario Lavori Mensile
+## Quali lavori fare in giardino mese per mese in autunno?
 
 ### Settembre
 - Ultimo sfalcio del prato a 5–6 cm di altezza
@@ -45,7 +45,7 @@ L'autunno è una stagione cruciale per la cura del giardino. Con le temperature 
 - Pianificazione dei lavori primaverili e ordine delle sementi
 - Manutenzione e affilatura degli attrezzi da potatura
 
-## Pulizia e Manutenzione
+## Come pulire e fare manutenzione al giardino in autunno?
 
 Il primo passo è una pulizia accurata del giardino. Non si tratta solo di estetica: le foglie morte accumulate sul prato creano un ambiente umido che favorisce malattie fungine e soffoca l'erba sottostante.
 
@@ -56,7 +56,7 @@ Il primo passo è una pulizia accurata del giardino. Non si tratta solo di estet
 - Pulisci le grondaie e i canali di scolo da fogliame e detriti
 - Rimuovi le piante annuali esaurite e prepara le aiuole per la stagione successiva
 
-## Guida alla Protezione delle Piante
+## Come proteggere le piante in base alla sensibilità al freddo?
 
 Non tutte le piante hanno bisogno della stessa protezione. Ecco una guida pratica in base alla sensibilità al freddo:
 
@@ -75,7 +75,7 @@ Non tutte le piante hanno bisogno della stessa protezione. Ecco una guida pratic
 - **Salvia officinale**: pacciamatura leggera alla base
 - **Edera e vinca**: non richiedono protezione particolare
 
-## Protezione dal Freddo
+## Come proteggere le piante dal freddo invernale?
 
 Per proteggere le piante più delicate occorre intervenire prima delle prime gelate. Nel Lazio, questo significa generalmente tra la fine di ottobre e l'inizio di novembre.
 
@@ -85,7 +85,7 @@ Per proteggere le piante più delicate occorre intervenire prima delle prime gel
 - Riduci l'innaffiatura ma non sospenderla completamente: una volta ogni 10–15 giorni
 - Proteggi le radici delle piante in vaso avvolgendo il contenitore con tessuto isolante
 
-## Piantumazione Autunnale
+## Cosa piantare in autunno nel giardino?
 
 L'autunno è il momento ideale per piantare, perché il terreno è ancora caldo e le piogge facilitano l'attecchimento. Le radici hanno tutto l'inverno per stabilirsi prima della spinta vegetativa primaverile.
 
@@ -95,13 +95,13 @@ L'autunno è il momento ideale per piantare, perché il terreno è ancora caldo 
 - Siepi: alloro, bosso, photinia, lauroceraso
 - Alberi da frutto a radice nuda: è il periodo migliore per metterli a dimora
 
-## Concimazione
+## Quale concime usare prima dell'inverno?
 
 Applica un concime a rilascio lento ricco di potassio per rafforzare le radici prima dell'inverno. Il potassio aumenta la resistenza al gelo e alle malattie. Evita i concimi azotati che stimolerebbero una crescita troppo tardiva e vulnerabile.
 
 Per il prato, usa un concime specifico autunnale con rapporto NPK orientato sul potassio (es. 5-5-15). Distribuisci in modo uniforme dopo uno sfalcio e prima di una pioggia prevista, oppure irriga leggermente dopo la distribuzione.
 
-## Errori da Evitare
+## Quali errori evitare nella cura autunnale del giardino?
 
 Anche i giardinieri più esperti possono commettere errori in autunno. Ecco i più comuni:
 
@@ -112,7 +112,7 @@ Anche i giardinieri più esperti possono commettere errori in autunno. Ecco i pi
 - **Trascurare il compostaggio**: le foglie raccolte sono oro per il giardino, non rifiuti
 - **Non pulire gli attrezzi**: lame sporche trasmettono malattie da una pianta all'altra
 
-## Consigli Extra per il Giardino Romano
+## Quali accorgimenti servono per il giardino nel centro Italia?
 
 Chi vive nella zona di Roma e nel Lazio gode di un clima generalmente mite, ma non bisogna abbassare la guardia. Le gelate tardive di fine febbraio e inizio marzo possono causare danni seri alle piante che si sono risvegliate troppo presto.
 
@@ -137,7 +137,7 @@ Con queste operazioni ben pianificate, il tuo giardino sarà pronto ad affrontar
     content: `
 Il 2026 porta con sé nuove tendenze nel mondo del giardinaggio e del paesaggio. Dall'attenzione alla sostenibilità fino all'integrazione tecnologica, il verde domestico si trasforma. Secondo i dati dell'Osservatorio del Paesaggio, il 72% degli italiani considera il giardino uno spazio essenziale per il benessere quotidiano. Ecco le cinque direzioni principali che stanno ridefinendo il modo in cui progettiamo e viviamo gli spazi verdi.
 
-## 1. Giardini a Bassa Manutenzione
+## Come creare un giardino a bassa manutenzione?
 
 La tendenza principale è verso spazi verdi che richiedano meno interventi e meno risorse. In un'epoca di estati sempre più calde e risorse idriche limitate, progettare un giardino che si mantenga quasi da solo non è più un lusso ma una necessità.
 
@@ -151,7 +151,7 @@ La tendenza principale è verso spazi verdi che richiedano meno interventi e men
 ### Il dato
 Un giardino a bassa manutenzione ben progettato richiede in media 2–3 ore di lavoro al mese contro le 8–12 di un giardino tradizionale, con un risparmio idrico annuo stimato in 15.000–20.000 litri per 100 mq.
 
-## 2. Biodiversità
+## Come aumentare la biodiversità nel giardino?
 
 Aumenta l'attenzione verso giardini che favoriscano la biodiversità locale. Non si tratta solo di estetica: un giardino biodiverso è più sano, più resiliente e richiede meno interventi chimici perché gli equilibri naturali tengono sotto controllo i parassiti.
 
@@ -166,7 +166,7 @@ Aumenta l'attenzione verso giardini che favoriscano la biodiversità locale. Non
 ### Il dato
 I giardini che integrano almeno 3 elementi per la biodiversità registrano una riduzione del 60% nell'uso di pesticidi e un aumento del 300% nella presenza di impollinatori.
 
-## 3. Spazi Living Esterni
+## Come trasformare il giardino in uno spazio living esterno?
 
 Il giardino diventa una vera stanza all'aperto, un'estensione funzionale della casa dove cucinare, rilassarsi, lavorare e intrattenere gli ospiti. Il concetto di "outdoor living" si è evoluto ben oltre il classico barbecue.
 
@@ -180,7 +180,7 @@ Il giardino diventa una vera stanza all'aperto, un'estensione funzionale della c
 ### Materiali di tendenza
 Legno termottrattato, corten, pietra locale, cemento architettonico e tessuti outdoor di ultima generazione resistenti a UV e pioggia.
 
-## 4. Tecnologia Verde
+## Quale tecnologia smart usare nel giardino?
 
 La tecnologia si integra con il verde in modo sempre più naturale e discreto. L'obiettivo non è sostituire il giardiniere ma dargli strumenti per lavorare meglio e con meno sprechi.
 
@@ -195,7 +195,7 @@ La tecnologia si integra con il verde in modo sempre più naturale e discreto. L
 ### Il dato
 L'adozione di tecnologia smart nel giardino riduce i consumi energetici del 30–50% e il consumo idrico del 40–60%, con un ritorno sull'investimento medio di 2–3 anni.
 
-## 5. Colori Audaci e Design Cromatico
+## Come usare il colore nel design del giardino nel 2026?
 
  Via libera ai colori vivaci nelle fioriture e negli elementi decorativi. Il 2026 segna il ritorno del colore come elemento progettuale dominante nel giardino.
 
@@ -229,7 +229,7 @@ L'adozione di tecnologia smart nel giardino riduce i consumi energetici del 30�
     content: `
 I terreni in pendio rappresentano una sfida particolare nel giardinaggio, ma anche un'opportunità unica per creare paesaggi spettacolari. In Italia, dove colline e declivi sono parte integrante del paesaggio, saper gestire un pendio significa trasformare un problema in un punto di forza. Che si tratti di un lieve declivio in giardino o di una scarpata più impegnativa, le soluzioni esistono e sono alla portata di tutti.
 
-## Perché Scegliere Piante Adeguate
+## Perché è importante scegliere piante adeguate per il pendio?
 
 Le piante sui pendii devono soddisfare requisiti specifici che le distinguono dalle piante da aiuola tradizionale:
 
@@ -239,7 +239,7 @@ Le piante sui pendii devono soddisfare requisiti specifici che le distinguono da
 - **Capacità di copertura rapida**: le piante devono colonizzare il terreno velocemente per prevenire l'erosione nei primi anni
 - **Bassa manutenzione**: lavorare su un pendio è scomodo e a volte pericoloso, quindi meno interventi servono, meglio è
 
-## Piante per Esposizione
+## Quali piante scegliere in base all'esposizione del pendio?
 
 ### Per pendii soleggiati (sud/sud-ovest)
 
@@ -273,7 +273,7 @@ I coprisuolo sono la prima linea di difesa contro l'erosione. Ecco i più effica
 - **Hypericum calycinum**: semi-sempreverde con grandi fiori gialli, si propaga rapidamente per stoloni sotterranei
 - **Cotoneaster horizontalis**: arbusto prostrato con bacche rosse invernali, ottimo per pendii soleggiati. Radici robuste
 
-## Scheda Tecnica: Installazione su Pendio
+## Come installare le piante su un terreno in pendio?
 
 ### Step 1 — Analisi del pendio
 
@@ -318,7 +318,7 @@ L'irrigazione a goccia è essenziale su pendio perché:
 
 Installa le linee gocciolanti orizzontalmente, seguendo le curve di livello del pendio. Distanza tra i gocciolatori: 30–40 cm. Portata consigliata: 2–4 litri/ora per gocciolatore.
 
-## Manutenzione Annuale
+## Come si mantiene un giardino in pendio anno per anno?
 
 ### Primo anno (critico)
 
@@ -343,7 +343,7 @@ Un pendio ben piantato diventa quasi autosufficiente. Gli interventi si riducono
 - Sostituzione sporadica di piante senescenti
 - Godere del risultato!
 
-## Errori Comuni da Evitare
+## Quali errori evitare con le piante su terreno in pendio?
 
 - **Piantare troppo rado**: le erbacce colonizzano gli spazi vuoti prima delle tue piante
 - **Usare prato su pendii ripidi**: il prato ha radici superficiali e non trattiene il terreno. Sopra il 20% di pendenza, scegli coprisuolo
@@ -369,13 +369,13 @@ Gestire il verde aziendale o condominiale spesso significa rincorrere emergenze:
 
 Per questo abbiamo creato il **Check-up Sostenibile**: un sopralluogo tecnico di 60–90 minuti pensato per chi amministra aree verdi e vuole smettere di navigare a vista.
 
-## Cos'è il Check-up Sostenibile
+## Cos'è il Check-up Sostenibile?
 
 Non è un preventivo. Non è una consulenza generica. È una **diagnosi operativa** dello stato di salute del vostro verde, condotta sul campo da Andrea Giordano, fondatore di Visione Sostenibile e contractor del verde con oltre vent'anni di esperienza in progettazione, realizzazione e manutenzione sostenibile.
 
 In 60–90 minuti analizziamo ciò che conta davvero: la qualità del suolo, l'esposizione e il microclima, la gestione dell'acqua e degli impianti esistenti, le criticità strutturali e i vincoli di sicurezza. Non ci limitiamo a guardare le piante — leggiamo il sistema nel suo insieme.
 
-## Cosa Ottenete, Concretamente
+## Cosa si ottiene dal Check-up Sostenibile?
 
 Al termine del Check-up ricevete un quadro chiaro e utilizzabile, non un documento da archiviare.
 
@@ -387,7 +387,7 @@ Al termine del Check-up ricevete un quadro chiaro e utilizzabile, non un documen
 
 **Una stima di range dell'investimento per step**: niente cifre al buio. Sapete cosa aspettarvi per ogni fase, così potete decidere tempi e priorità con il vostro budget reale.
 
-## Perché è Diverso da un Sopralluogo Tradizionale
+## Perché il Check-up è diverso da un sopralluogo tradizionale?
 
 La differenza è nel metodo. Un sopralluogo classico parte dalla domanda "cosa volete fare?" e finisce con un preventivo. Il Check-up Sostenibile parte dalla domanda "cosa sta succedendo davvero?" e finisce con una strategia.
 
@@ -395,7 +395,7 @@ Visione Sostenibile lavora come **contractor del verde**: un unico referente che
 
 Andrea spiega sempre il perché di ogni indicazione e propone alternative con pro e contro. Per un'azienda o un condominio, questo approccio ha un valore concreto: decisioni informate, meno ripensamenti, costi più prevedibili.
 
-## A Chi Serve il Check-up Sostenibile
+## A chi serve il Check-up Sostenibile?
 
 Il Check-up è pensato per chi gestisce verde in contesti dove immagine, sicurezza e continuità contano.
 
@@ -403,13 +403,13 @@ Il Check-up è pensato per chi gestisce verde in contesti dove immagine, sicurez
 
 In tutti questi casi, il verde non è un dettaglio: è un asset che può valorizzare o penalizzare. Il Check-up vi dice esattamente a che punto siete e dove conviene investire.
 
-## Il Problema che Risolve
+## Quale problema risolve il Check-up Sostenibile?
 
 La maggior parte delle aree verdi aziendali e condominiali soffre dello stesso schema: interventi spot senza continuità, fornitori che cambiano, nessuno che abbia una visione d'insieme. Il risultato? Un verde che costa più del necessario e che non migliora mai davvero.
 
 Il Check-up Sostenibile rompe questo ciclo. Vi dà un punto di partenza solido e un percorso a fasi — così ogni euro investito ha una direzione e un ritorno misurabile nel tempo. Sostenibile non è una moda: è una strategia per non buttare via soldi.
 
-## Come Prenotare
+## Come si prenota il Check-up Sostenibile?
 
 Il processo è semplice. Richiedete un sopralluogo tecnico dal nostro sito o contattateci direttamente. Rispondiamo entro 48 ore lavorative e concordiamo la data. Il Check-up si svolge in loco: serve vedere, toccare, capire il contesto reale.
 
