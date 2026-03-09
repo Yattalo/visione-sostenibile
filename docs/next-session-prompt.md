@@ -1,33 +1,41 @@
 # Session Handoff — Visione Sostenibile
 
 ## Stato attuale (fine 2026-03-09)
-- **Branch**: `feature/vs-wave16-copy` — 28 commit ahead di origin/main, NON pushato
-- **Task System**: 109 task totali, 56 done (51%), 32 todo, 17 blocked
+- **Branch**: `feature/vs-wave16-copy` — 33 commit ahead di origin/main, NON pushato
+- **Task System**: 109 task totali, 59 done (54%), 29 todo, 17 blocked
 - **Build**: `npx tsc --noEmit` OK su tutti i commit
-- **Working mode**: orchestratore + subagenti paralleli (utente richiede questo pattern)
+- **Working mode**: orchestratore + subagenti paralleli
 
-## Completato in questa sessione (2 task)
+## Completato in questa sessione (3 task)
 
-1. **C21** `298168b` — Quick answers: 7 su 9 espanse a 40-60 parole (blog 2 + servizi 5)
-2. **C22** `80da3a9` — Question H2: nuova `QuickAnswerSection` nei servizi + `quickAnswerH2s` map nel blog
+1. **C16** `3eef28c` — Quiz CTAs nel blog: `QuizCTA variant="inline"` mid-article + `variant="banner"` end-article, linkano a /quiz
+2. **P1** `18f5a93` — Contatti multi-step wizard: 3 step (chi sei → progetto → messaggio), Zod v4 per-step validation, AnimatePresence directional slides, step indicator, success state "24 ore"
+3. **P2** `3b3e7dc` — Chi Siamo BMAD: 4 pillar (sostenibilita/biodinamica/qualita/passione), founder bio con siteConfig, outcomes section "cosa cambia", dark story section con stats
 
-## Cumulativo branch (8 task in 2 sessioni)
-VS-11 (reviews category), VS-24 (blog SEO), VS-10 (team bios), C20 (blog H2 questions), C21 (quick answers 40-60w), C22 (service+blog question H2s) + copy alignment VS-6 (7 commit) + task definitions wave 16-20
+## Cumulativo branch (11 task in 3 sessioni)
+
+| Sessione | Task |
+|----------|------|
+| 1 (seo-team) | VS-11 reviews category, VS-24 blog SEO, VS-10 team bios, C20 blog H2 questions + VS-6 copy (7 commit) |
+| 2 (seo-snippet) | C21 quick answers 40-60w, C22 question H2s services+blog, MON-05 site-config |
+| 3 (page-ux-bmad) | C16 blog quiz CTAs, P1 contatti multi-step, P2 chi-siamo BMAD |
 
 ## Modifiche non committate
 ```
-?? Barbara_quiz_copy/    (doc originali Barbara — lasciare fuori da git)
+ M docs/next-session-prompt.md   (questo handoff)
+?? Barbara_quiz_copy/            (doc originali Barbara — lasciare fuori da git)
 ```
 
 ## Prossimi passi (prioritized)
 
 | # | Cosa | Perche | Effort |
 |---|------|--------|--------|
-| 1 | **MON-05**: Centralizzare settings sito (Convex) | DRY: company info, social links duplicati in 5+ file | 3h |
-| 2 | **MON-04**: Popolare libreria media Convex | Asset foto/video servono per gallery e servizi | 2h |
-| 3 | **VS-20**: Partner recruiting page + form | Feature richiesta dal cliente | 6h |
-| 4 | **VS-12**: B2C/B2B branching UX | Differenziare percorsi utente | 4h |
-| 5 | **VS-23**: Area Privata Utente (Clerk auth) | Core feature, dipende da VS-H5 (Clerk env) | 8h |
+| 1 | **FE4**: Redesign Homepage BMAD | Critical priority. Hero + trust numbers + outcome service cards + CTA quiz | 8h |
+| 2 | **FE5**: Redesign Services pages | Benefit-driven cards listing + rich detail page (hero, FAQ, gallery) | 6h |
+| 3 | **P3**: Qualita page content reale | Certificazioni, trust badges, garanzie operative | 3h |
+| 4 | **MON-04**: Popolare libreria media Convex | Asset foto/video per gallery e servizi, script import | 2h |
+| 5 | **FE6**: Redesign Projects portfolio | Filtri categoria, card progetto migliorate | 5h |
+| 6 | **VS-20**: Collabora con Noi page + form | Partner recruiting, feature richiesta dal cliente | 6h |
 
 ## Contesto per il prossimo agente
 
@@ -36,23 +44,25 @@ VS-11 (reviews category), VS-24 (blog SEO), VS-10 (team bios), C20 (blog H2 ques
 - Merge fast-forward quando l'utente da OK per staging
 - Main allineato a origin/main
 
-### Pattern SEO completato
-- Blog H2: 24 heading in formato domanda italiana (C20)
-- Quick answers: tutti 40-60 parole per Google paragraph snippets (C21)
-- Question H2 su quick answer boxes: blog (4 slug) + servizi (5 slug) con fallback "Risposta rapida" (C22)
-- Servizi: nuova `QuickAnswerSection` component tra hero e editorial intro
+### Pagine aggiornate in 3 sessioni
+- `/blog/[slug]` — H2 domande, quick answers 40-60w, QuickAnswerSection, quiz CTAs inline+banner
+- `/servizi/[slug]` — QuickAnswerSection + questionH2 per 5 servizi
+- `/contatti` — multi-step wizard 3 fasi con Zod v4 + AnimatePresence (sostituisce vecchio form 5-step)
+- `/chi-siamo` — 4 pillar BMAD, founder bio siteConfig, outcomes, dark story section
+- Tutte le pagine copy allineate a doc Barbara (VS-6)
 
-### Working mode richiesto dall'utente
-- Usare **subagenti in parallelo** per task indipendenti
-- Orchestratore (main agent) conosce il piano dall'alto
-- A fine ciclo: `/session-handoff` -> commit -> tag -> clear -> fresh context
+### Componenti nuovi/modificati
+- `QuizCTA` — 4 varianti (sidebar, inline, compact, banner)
+- `QuickAnswerSection` — box quick answer con H2 domanda
+- `TeamSection` — 18 membri con competenze + personalStatement
+- `site-config.ts` — dati centralizzati azienda (MON-05)
 
 ### Gotcha
 - `npx convex dev --once` fallisce senza `CLERK_JWT_ISSUER_DOMAIN` su Convex Dashboard (VS-H5, human task)
 - Badge non supporta `onClick` — wrappare in `<button>`
 - Zsh: quotare path con brackets `'app/blog/[slug]/page.tsx'`
-- Task list JSON da Convex e >65K chars — serve recovery parser con `rfind`
-- Build warning su `/_not-found` (useSearchParams senza Suspense) — pre-esistente, non nostro
+- Task list JSON da Convex >65K chars — serve recovery parser con `rfind`
+- Build warning su `/_not-found` (useSearchParams senza Suspense) — pre-esistente
 
 ### Preferenze utente
 - NO push su main, restare sul branch
@@ -63,9 +73,10 @@ VS-11 (reviews category), VS-24 (blog SEO), VS-10 (team bios), C20 (blog H2 ques
 
 | File | Scopo |
 |------|-------|
-| `my-app/app/servizi/[slug]/page.tsx` | QuickAnswerSection + questionH2 per 5 servizi |
-| `my-app/app/blog/BlogPostClient.tsx` | quickAnswerH2s map + JSON-LD Article enhanced |
-| `my-app/app/lib/blog.ts` | 4 articoli con H2 in formato domanda |
-| `my-app/convex/schema.ts` | Schema con reviews category + blog metaTitle/metaDescription |
-| `my-app/app/components/TeamSection.tsx` | 18 membri con competenze + personalStatement |
+| `my-app/app/contatti/page.tsx` | Multi-step wizard 3 fasi (P1) |
+| `my-app/app/chi-siamo/page.tsx` | BMAD 4 pillar + founder bio (P2) |
+| `my-app/app/blog/BlogPostClient.tsx` | Quiz CTAs + quickAnswerH2s + JSON-LD (C16) |
+| `my-app/app/components/QuizCTA.tsx` | 4 varianti: sidebar, inline, compact, banner |
+| `my-app/app/servizi/[slug]/page.tsx` | QuickAnswerSection + questionH2 |
+| `my-app/app/lib/site-config.ts` | Dati centralizzati azienda (MON-05) |
 | `docs/next-session-prompt.md` | Questo file |
