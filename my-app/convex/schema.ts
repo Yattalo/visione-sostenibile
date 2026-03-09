@@ -135,6 +135,8 @@ export default defineSchema({
     publishedAt: v.number(),
     readTime: v.string(),
     isPublished: v.boolean(),
+    metaTitle: v.optional(v.string()),
+    metaDescription: v.optional(v.string()),
     updatedAt: v.number(),
   })
     .index("by_slug", ["slug"])

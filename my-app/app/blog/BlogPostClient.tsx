@@ -444,13 +444,23 @@ export function BlogPostClient({
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
+    url: articleUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
     datePublished: new Date(post.publishedAt).toISOString(),
+    dateModified: new Date((post as { updatedAt?: number }).updatedAt ?? post.publishedAt).toISOString(),
     author: {
       "@type": "Person",
       name: post.author,
     },
+    publisher: {
+      "@type": "Organization",
+      name: "Visione Sostenibile",
+      url: SITE_URL,
+    },
     image: articleImage,
-    mainEntityOfPage: articleUrl,
+    articleSection: post.category,
+    inLanguage: "it-IT",
+    wordCount: post.content.split(/\s+/).length,
   };
 
   const breadcrumbJsonLd = {

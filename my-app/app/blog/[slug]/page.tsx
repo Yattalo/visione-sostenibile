@@ -61,9 +61,12 @@ export async function generateMetadata({
     "coverStorageId" in post &&
     Boolean((post as { coverStorageId?: string }).coverStorageId);
 
+  const seoTitle = (post as { metaTitle?: string }).metaTitle || `${post.title} | Blog`;
+  const seoDescription = (post as { metaDescription?: string }).metaDescription || post.excerpt;
+
   return buildMetadata({
-    title: `${post.title} | Blog`,
-    description: post.excerpt,
+    title: seoTitle,
+    description: seoDescription,
     path: `/blog/${post.slug}`,
     image: hasStorageCover ? undefined : post.coverImage,
     type: "article",
