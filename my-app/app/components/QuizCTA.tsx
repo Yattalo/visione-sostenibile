@@ -7,11 +7,45 @@ import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/app/lib/utils";
 
 interface QuizCTAProps {
-  variant?: "sidebar" | "inline" | "compact";
+  variant?: "sidebar" | "inline" | "compact" | "banner";
   className?: string;
 }
 
 export function QuizCTA({ variant = "sidebar", className }: QuizCTAProps) {
+  if (variant === "banner") {
+    return (
+      <div className={cn(
+        "bg-paper-100 border-t border-b border-paper-300 py-14 lg:py-16",
+        className
+      )}>
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center space-y-5">
+          <div className="w-14 h-14 rounded-2xl bg-leaf-50 flex items-center justify-center mx-auto">
+            <Sprout className="w-7 h-7 text-leaf-600" />
+          </div>
+          <h3 className="font-display text-2xl lg:text-3xl font-light text-forest-950">
+            Prossimo passo
+          </h3>
+          <p className="text-forest-800/80 font-body text-lg leading-relaxed max-w-xl mx-auto">
+            Ogni giardino ha esigenze diverse. Rispondi a 6 domande e ricevi
+            consigli su misura per il tuo spazio verde.
+          </p>
+          <div className="pt-2">
+            <Link href="/quiz">
+              <Button
+                variant="primary"
+                size="lg"
+                className="shadow-medium hover:shadow-deep"
+              >
+                Fai il Quiz
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (variant === "compact") {
     return (
       <div className={cn("flex items-center justify-center", className)}>

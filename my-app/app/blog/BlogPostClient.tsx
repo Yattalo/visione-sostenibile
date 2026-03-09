@@ -10,6 +10,7 @@ import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, FadeIn } from "../components/animations";
 import { getBlogPost as staticGetBlogPost, getRelatedPosts as staticGetRelatedPosts } from "../lib/blog";
+import { QuizCTA } from "../components/QuizCTA";
 import { siteConfig } from "../lib/site-config";
 
 type TemplateVariant = 1 | 2 | 3;
@@ -615,6 +616,12 @@ export function BlogPostClient({
         </div>
       </section>
 
+      <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-6">
+        <FadeIn delay={0.2}>
+          <QuizCTA variant="inline" />
+        </FadeIn>
+      </section>
+
       {resolvedTemplate === 1 && (
         <>
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
@@ -729,6 +736,10 @@ export function BlogPostClient({
           </div>
         </section>
       )}
+
+      <SlideUp>
+        <QuizCTA variant="banner" />
+      </SlideUp>
 
       {relatedPosts && relatedPosts.length > 0 && (
         <section className="border-t border-paper-300 bg-paper-50">
