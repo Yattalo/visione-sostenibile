@@ -20,122 +20,37 @@ import {
   Share2,
   CheckCircle2,
   Sprout,
+  AlertTriangle,
+  TrendingUp,
 } from "lucide-react";
+import { scorecardProfiles } from "../../lib/barbara-scorecard";
 
 type ProfileType = "Contemplativo" | "Sostenibile" | "Familiare" | "Rappresentativo";
 
-const profileData: Record<
-  ProfileType,
-  {
-    title: string;
-    subtitle: string;
-    description: string;
-    icon: React.ReactNode;
-    color: string;
-    traits: string[];
-    recommendations: string[];
-    idealServices: string[];
-  }
-> = {
+// Profile display data uses barbara-scorecard for professional content
+const profileIcons: Record<ProfileType, { icon: React.ReactNode; color: string }> = {
+  Contemplativo: { icon: <Leaf className="w-10 h-10" />, color: "leaf" },
+  Sostenibile: { icon: <TreeDeciduous className="w-10 h-10" />, color: "leaf" },
+  Familiare: { icon: <Users className="w-10 h-10" />, color: "sun" },
+  Rappresentativo: { icon: <Star className="w-10 h-10" />, color: "sun" },
+};
+
+const profileTitles: Record<ProfileType, { title: string; subtitle: string }> = {
   Contemplativo: {
     title: "Il Contemplativo",
-    subtitle: "Il tuo giardino è un rifugio per l'anima",
-    description:
-      "Ami gli spazi verdi come luoghi di pace e meditazione. Il tuo giardino ideale è un santuario dove il tempo rallenta, con elementi naturali che invitano alla contemplazione e al benessere interiore.",
-    icon: <Leaf className="w-10 h-10" />,
-    color: "leaf",
-    traits: [
-      "Prediligi spazi raccolti e armoniosi",
-      "Ami il suono dell'acqua e il canto degli uccelli",
-      "Cerchi un rifugio dal caos quotidiano",
-      "Apprezzi le piante perenni e a bassa manutenzione",
-    ],
-    recommendations: [
-      "Giardino zen con elementi acquatici",
-      "Angolo meditazione con piante aromatiche",
-      "Pergolato con rampicanti fioriti",
-      "Illuminazione soffusa per le sere d'estate",
-    ],
-    idealServices: [
-      "progettazione-giardini",
-      "irrigazione-smart",
-      "illuminazione-paesaggistica",
-    ],
+    subtitle: "Il tuo giardino è un rifugio di pace",
   },
   Sostenibile: {
     title: "Il Sostenibile",
     subtitle: "Il tuo giardino è un ecosistema vivo",
-    description:
-      "Per te il giardino è molto più di un elemento estetico: è un ecosistema che rispetta e nutre la biodiversità. Il tuo approccio è biodinamico, consapevole e in armonia con i cicli naturali.",
-    icon: <TreeDeciduous className="w-10 h-10" />,
-    color: "leaf",
-    traits: [
-      "Scegli piante autoctone e biodiversità",
-      "Vuoi un giardino che produce (orto, frutteto)",
-      "Riduci al minimo pesticidi e sprechi idrici",
-      "Segui i ritmi delle stagioni",
-    ],
-    recommendations: [
-      "Orto biodinamico con rotazione colturale",
-      "Sistema di raccolta acqua piovana",
-      "Compostiera e pacciamatura naturale",
-      "Siepi miste per insetti impollinatori",
-    ],
-    idealServices: [
-      "gestione-verde-biodinamica",
-      "irrigazione-smart",
-      "trattamenti-fitosanitari",
-    ],
   },
   Familiare: {
     title: "Il Familiare",
     subtitle: "Il tuo giardino è il cuore della casa",
-    description:
-      "Per te lo spazio verde è un'estensione della casa, un luogo dove la famiglia si riunisce, i bambini giocano e si creano ricordi. Funzionalità e sicurezza sono le tue priorità.",
-    icon: <Users className="w-10 h-10" />,
-    color: "sun",
-    traits: [
-      "Cerchi spazi pratici e versatili",
-      "La sicurezza dei bambini è fondamentale",
-      "Vuoi zone diverse per attività diverse",
-      "Ami il barbecue e le cene all'aperto",
-    ],
-    recommendations: [
-      "Prato calpestabile con area giochi",
-      "Zona barbecue con pergolato ombreggiante",
-      "Recinzione sicura con piante non tossiche",
-      "Illuminazione per serate in giardino",
-    ],
-    idealServices: [
-      "realizzazione-giardini",
-      "arredamento-outdoor",
-      "manutenzione-verde",
-    ],
   },
   Rappresentativo: {
     title: "Il Rappresentativo",
     subtitle: "Il tuo giardino è un biglietto da visita",
-    description:
-      "Per te il giardino è un elemento di prestigio che comunica eleganza e cura del dettaglio. Ogni pianta, ogni percorso, ogni luce è scelto per creare un impatto visivo memorabile.",
-    icon: <Star className="w-10 h-10" />,
-    color: "sun",
-    traits: [
-      "Curi l'estetica in ogni dettaglio",
-      "Vuoi un giardino che impressioni gli ospiti",
-      "Apprezzi il design contemporaneo o classico",
-      "Investi nella qualità dei materiali",
-    ],
-    recommendations: [
-      "Design paesaggistico con punti focali",
-      "Illuminazione scenografica notturna",
-      "Ingresso imponente con viale alberato",
-      "Materiali pregiati per camminamenti e bordi",
-    ],
-    idealServices: [
-      "progettazione-giardini",
-      "illuminazione-paesaggistica",
-      "camminamenti-pavimentazioni",
-    ],
   },
 };
 
@@ -242,7 +157,9 @@ export default function ScorecardPage() {
     a[1] > b[1] ? a : b
   )[0] as ProfileType;
 
-  const profile = profileData[resultProfile];
+  const profileDisplay = profileTitles[resultProfile];
+  const profileIcon = profileIcons[resultProfile];
+  const barbaraProfile = scorecardProfiles.find((p) => p.id === resultProfile.toLowerCase());
   const maxScore = lead.quizAnswers.length * 4;
 
   return (
@@ -266,23 +183,23 @@ export default function ScorecardPage() {
             <div
               className={cn(
                 "w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center",
-                profile.color === "leaf"
+                profileIcon.color === "leaf"
                   ? "bg-leaf-500/20 text-leaf-400"
                   : "bg-sun-500/20 text-sun-400"
               )}
             >
-              {profile.icon}
+              {profileIcon.icon}
             </div>
           </SlideUp>
           <SlideUp delay={0.2}>
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-4 text-balance">
-              {profile.title.split(" ")[0]}{" "}
+              {profileDisplay.title.split(" ")[0]}{" "}
               <span className="italic text-leaf-400">
-                {profile.title.split(" ").slice(1).join(" ")}
+                {profileDisplay.title.split(" ").slice(1).join(" ")}
               </span>
             </h1>
             <p className="text-lg md:text-xl text-paper-300 max-w-2xl mx-auto font-body leading-relaxed">
-              {profile.subtitle}
+              {profileDisplay.subtitle}
             </p>
           </SlideUp>
 
@@ -306,10 +223,10 @@ export default function ScorecardPage() {
                     Il tuo profilo
                   </span>
                   <h2 className="font-display text-2xl md:text-3xl text-forest-950 mb-4 uppercase tracking-tight">
-                    {profile.title}
+                    {profileDisplay.title}
                   </h2>
                   <p className="text-forest-800/70 font-body leading-relaxed">
-                    {profile.description}
+                    {barbaraProfile?.description || profileDisplay.subtitle}
                   </p>
                 </div>
               </div>
@@ -317,21 +234,21 @@ export default function ScorecardPage() {
           </Card>
         </SlideUp>
 
-        {/* Traits */}
+        {/* Strengths (Punti di forza) */}
         <SlideUp delay={0.4}>
           <Card className="bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
             <CardContent className="p-8 md:p-10">
               <span className="text-micro text-leaf-600 block mb-3">
-                Le tue caratteristiche
+                I tuoi punti di forza
               </span>
               <h2 className="font-display text-2xl text-forest-950 mb-8 uppercase tracking-tight">
-                Cosa ti <span className="italic font-light">contraddistingue</span>
+                Cosa <span className="italic font-light">funziona già</span>
               </h2>
               <div className="grid sm:grid-cols-2 gap-5">
-                {profile.traits.map((trait, i) => (
+                {(barbaraProfile?.strengths || []).map((strength, i) => (
                   <div key={i} className="flex items-start gap-4 bg-paper-50 rounded-2xl p-5">
                     <CheckCircle2 className="w-5 h-5 text-leaf-500 mt-0.5 shrink-0" />
-                    <span className="text-forest-800 font-body">{trait}</span>
+                    <span className="text-forest-800 font-body">{strength}</span>
                   </div>
                 ))}
               </div>
@@ -339,21 +256,21 @@ export default function ScorecardPage() {
           </Card>
         </SlideUp>
 
-        {/* Recommendations */}
+        {/* Improvements (Dove migliorare) */}
         <SlideUp delay={0.5}>
           <Card className="bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
             <CardContent className="p-8 md:p-10">
               <span className="text-micro text-sun-500 block mb-3">
-                I nostri consigli
+                Dove intervenire
               </span>
               <h2 className="font-display text-2xl text-forest-950 mb-8 uppercase tracking-tight">
-                Ideale <span className="italic font-light">per te</span>
+                I prossimi <span className="italic font-light">passi concreti</span>
               </h2>
               <div className="grid sm:grid-cols-2 gap-5">
-                {profile.recommendations.map((rec, i) => (
+                {(barbaraProfile?.improvements || []).map((improvement, i) => (
                   <div key={i} className="flex items-start gap-4 bg-sun-50/50 rounded-2xl p-5">
-                    <Sprout className="w-5 h-5 text-sun-500 mt-0.5 shrink-0" />
-                    <span className="text-forest-800 font-body">{rec}</span>
+                    <TrendingUp className="w-5 h-5 text-sun-500 mt-0.5 shrink-0" />
+                    <span className="text-forest-800 font-body">{improvement}</span>
                   </div>
                 ))}
               </div>
@@ -361,10 +278,9 @@ export default function ScorecardPage() {
           </Card>
         </SlideUp>
 
-        {/* CTA Section */}
+        {/* CTA Section — uses Barbara's profile-specific CTA */}
         <ScaleIn delay={0.6}>
           <div className="relative bg-forest-950 rounded-[40px] p-10 md:p-14 text-center text-white mb-12 overflow-hidden">
-            {/* Decorative blobs inside CTA */}
             <div className="absolute top-0 -right-10 w-48 h-48 bg-leaf-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 -left-10 w-40 h-40 bg-sun-400/10 rounded-full blur-3xl" />
 
@@ -373,31 +289,33 @@ export default function ScorecardPage() {
                 Prossimo passo
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-light mb-4 uppercase tracking-tight leading-tight">
-                Trasforma il tuo giardino
+                Vuoi sapere cosa fare prima
                 <span className="block italic text-leaf-400 font-light">
-                  in realtà
+                  (e cosa evitare)?
                 </span>
               </h2>
-              <p className="text-paper-300 font-body max-w-xl mx-auto mb-10 leading-relaxed">
-                Prenota una consulenza gratuita con Andrea. Analizzeremo insieme
-                le possibilità per il tuo spazio verde, basandoci sul tuo profilo.
+              <p className="text-paper-300 font-body max-w-xl mx-auto mb-6 leading-relaxed">
+                {barbaraProfile?.ctaText || "Prenota una consulenza gratuita con Andrea. Analizzeremo insieme le possibilità per il tuo spazio verde."}
+              </p>
+              <p className="text-paper-400 font-body text-sm max-w-lg mx-auto mb-10 italic">
+                Con il Check-up Sostenibile ti lasciamo un micro-piano in step: priorità, errori da evitare e range per fasi.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="tel:+393714821825">
+                <Link href="/contatti?from=scorecard&profile={resultProfile}">
                   <Button className="bg-sun-400 hover:bg-sun-500 text-white px-8 py-4 font-bold uppercase tracking-wider rounded-xl shadow-deep hover:scale-105 transition-all duration-300">
-                    <Phone className="w-5 h-5 mr-2" />
-                    Chiama Ora
+                    <Sprout className="w-5 h-5 mr-2" />
+                    Prenota il Check-up Sostenibile
                   </Button>
-                </a>
-                <Link href="/contatti">
+                </Link>
+                <a href="tel:+393714821825">
                   <Button
                     variant="outline"
                     className="border-paper-300/40 text-paper-100 hover:bg-white/10 px-8 py-4 uppercase tracking-wider rounded-xl"
                   >
-                    Richiedi Consulenza
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <Phone className="w-5 h-5 mr-2" />
+                    Chiama Ora
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -415,7 +333,7 @@ export default function ScorecardPage() {
               onClick={() => {
                 if (navigator.share) {
                   navigator.share({
-                    title: `Scorecard Giardino - ${profile.title}`,
+                    title: `Scorecard Giardino - ${profileDisplay.title}`,
                     url: window.location.href,
                   });
                 } else {
