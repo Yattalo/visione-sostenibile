@@ -107,14 +107,14 @@ export default function HomePage() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-balance">
-              Giardini Sostenibili
+              Il tuo giardino sostenibile:
               <span className="block italic text-leaf-400">
-                a Impatto Zero
+                visione, progetto, realtà.
               </span>
             </h1>
 
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              Progettazione, realizzazione e manutenzione di spazi verdi che rigenerano l'ambiente e la tua qualità della vita.
+              Con Visione Sostenibile hai un solo interlocutore per progettare, realizzare e mantenere il tuo spazio verde — con tutti gli specialisti già selezionati per te.
             </p>
 
             <div className="flex justify-center">
@@ -185,10 +185,10 @@ export default function HomePage() {
               Perché funziona
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-leaf-700 mb-6 leading-tight">
-              Un referente, una squadra su misura
+              Ogni giardino nasce dall&apos;ascolto dell&apos;ambiente e di chi lo vivrà.
             </h2>
             <p className="font-body text-lg text-forest-800/70 leading-relaxed max-w-2xl">
-              Non facciamo giardini Instagram. Facciamo giardini che superano agosto: belli oggi, funzionano domani.
+              Bellezza e sostenibilità, per noi, sono sempre la scelta migliore. Per questo progettiamo giardini che funzionano in ogni stagione — sotto la neve come sotto il sole di agosto.
             </p>
           </motion.div>
 
@@ -196,19 +196,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {[
               {
-                title: "Un referente",
-                subtitle: "Andrea coordina. Tu respiri.",
-                description: "Un solo contatto per tempi, scelte e budget: niente rimbalzi tra fornitori.",
+                title: "Biodinamica, scelta tecnica e sostenibile",
+                subtitle: "Il suolo come punto di partenza",
+                description: "Un approccio pratico che mette al centro suolo, piante e microclima. Significa osservare prima di intervenire per fare scelte più mirate: meno sprechi, più equilibrio, risultati più stabili nel tempo.",
               },
               {
-                title: "Sostenibile vero",
-                subtitle: "Meno sprechi, più durata.",
-                description: "Scelte botaniche e tecniche orientate a resilienza, acqua e suolo: il giardino è bello oggi e funziona domani.",
+                title: "Unico referente, squadra su misura",
+                subtitle: "Ottimizzazione tempi e flusso del lavoro",
+                description: "Andrea è il tuo riferimento e coordina un team modulare con competenze verticali. Entrano in campo solo i professionisti necessari, nel momento giusto, così si evitano incastri e incoerenze.",
               },
               {
-                title: "Team modulare",
-                subtitle: "Entrano solo le competenze che servono.",
-                description: "Professionisti verticali e partner affidabili che si attivano fase per fase, in un piano lavori coerente.",
+                title: "Dall\u2019idea alla cura nel tempo",
+                subtitle: "Progettiamo, realizziamo, manteniamo",
+                description: "Copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Un giardino va avviato, stabilizzato e gestito con continuità. Meno interventi d\u2019emergenza, maggior durata.",
               },
             ].map((card, index) => (
               <motion.div
@@ -248,10 +248,10 @@ export default function HomePage() {
             </h3>
             <p className="font-body text-paper-300 max-w-2xl mx-auto mb-4">
               Un referente, un metodo, una squadra su misura.<br />
-              Scelte spiegate, risultati che durano.
+              Ogni scelta condivisa, ogni risultato progettato per durare.
             </p>
             <p className="font-body text-sm text-leaf-400">
-              Non facciamo giardini Instagram. Facciamo giardini che superano agosto.
+              Un giardino che respira con te.
             </p>
           </motion.div>
 
@@ -313,7 +313,7 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-leaf-700/10 mix-blend-overlay" />
               <div className="relative z-10">
                 <span className="block font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-400 mb-4">
-                  I Nostri Numeri
+                  I nostri numeri
                 </span>
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
                   Cosa abbiamo{" "}
@@ -322,8 +322,8 @@ export default function HomePage() {
                   </span>
                 </h2>
                 <p className="font-body text-paper-400 text-sm md:text-base leading-relaxed max-w-md">
-                  Ogni numero rappresenta un passo avanti verso un futuro piu
-                  verde. La nostra dedizione alla sostenibilita e misurabile e
+                  Ogni numero rappresenta un passo avanti verso un futuro più
+                  verde. La nostra dedizione alla sostenibilità è misurabile e
                   tangibile.
                 </p>
               </div>
@@ -342,7 +342,7 @@ export default function HomePage() {
                   },
                   {
                     value: "20+",
-                    label: "Anni di Esperienza",
+                    label: "Esperienza sul campo",
                     icon: (
                       <Clock className="w-10 h-10" />
                     ),
@@ -400,12 +400,11 @@ export default function HomePage() {
                 Quiz Gratuito
               </Badge>
               <h2 className="mb-5 font-display text-5xl leading-[1.05] text-forest-950 md:text-6xl">
-                Che giardino
-                <span className="block italic text-leaf-600">fa per te?</span>
+                Qual è il giardino
+                <span className="block italic text-leaf-600">che fa per te?</span>
               </h2>
               <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-forest-800/72 md:text-xl">
-                Rispondi a 6 domande e scopri il tuo profilo verde personalizzato.
-                Riceverai consigli su misura per il tuo spazio.
+                Abbiamo creato un percorso dedicato a te. Rispondi a 6 domande e avrai il tuo profilo personalizzato con i consigli migliori per vivere il tuo spazio verde.
               </p>
             </div>
 
@@ -421,8 +420,8 @@ export default function HomePage() {
       <ReviewsWidget
         variant="featured"
         className="bg-white"
-        title="La voce dei nostri clienti"
-        subtitle="Feedback reali da chi ci ha scelto per trasformare e valorizzare i propri spazi verdi."
+        title="Ti ascoltiamo davvero"
+        subtitle="Ogni feedback è una bussola: ci aiuta a migliorare il metodo, ampliare competenze e coltivare collaborazioni che rendono i risultati più solidi nel tempo."
       />
 
       {/* Featured Project / CTA */}
@@ -464,29 +463,27 @@ export default function HomePage() {
                 Realizzazioni
               </Badge>
               <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-6 leading-tight">
-                Ogni giardino è una
+                Progetti diversi,
                 <span className="block italic text-leaf-600">
-                  storia unica
+                  radici comuni
                 </span>
               </h2>
               <p className="font-body text-lg text-forest-800 leading-relaxed mb-8">
-                Dai un&apos;occhiata ai nostri progetti realizzati. Ogni giardino
-                racconta una storia diversa, ma tutti condividono lo stesso
-                denominatore comune: la passione per il verde.
+                Lavori diversi per scala e obiettivi: progettazione, realizzazione e manutenzione sostenibile. Tutti poggiano sulla stessa base: decisioni precise basate su analisi e ascolto.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contatti">
+                <Link href="/progetti">
                   <Button className="bg-leaf-700 hover:bg-leaf-600 text-white px-8 py-4">
-                    Richiedi una Consulenza
+                    Scopri i Progetti
                   </Button>
                 </Link>
-                <Link href="/qualita">
+                <Link href="/contatti">
                   <Button
                     variant="outline"
                     className="border-forest-700 text-forest-900 hover:bg-paper-300 px-8 py-4"
                   >
-                    Perché Scegliere Noi
+                    Richiedi un sopralluogo
                   </Button>
                 </Link>
               </div>
@@ -530,7 +527,7 @@ export default function HomePage() {
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white/10 px-8 py-4"
               >
-                Richiedi una call (aziende/condomini)
+                Richiedi una chiamata
               </Button>
             </Link>
           </div>
@@ -542,7 +539,7 @@ export default function HomePage() {
             </span>
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              Operativi in Piemonte e Trentino Alto-Adige. In espansione in Lombardia.
+              Operativi in Piemonte e Lombardia
             </span>
           </div>
         </motion.div>

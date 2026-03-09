@@ -28,7 +28,7 @@ import { Flower2, Droplets, Wind, Sun, type LucideIcon } from "lucide-react";
  *    filtrata, particelle di polline che fluttuano nell'aria, atmosfera
  *    eterea e sognante, slow motion, toni azzurro cielo e argento, 4K, loop"
  *
- * FUOCO:
+ * LUCE:
  *   "Golden hour, raggi di sole che filtrano attraverso chioma di alberi,
  *    lens flare caldi, ombre che danzano sul terreno, time-lapse del sole
  *    che attraversa un giardino, toni arancio caldo e ambra, 4K, loop"
@@ -80,7 +80,7 @@ const ELEMENTS: ElementConfig[] = [
   },
   {
     icon: Sun,
-    title: "Fuoco",
+    title: "Luce",
     description:
       "Luce, energia e cicli naturali guidano ogni scelta progettuale per un equilibrio duraturo.",
     bgGradient:
@@ -130,7 +130,7 @@ export function PhilosophySection() {
               Metodo biodinamico
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
-              Terra, acqua, aria e fuoco.
+              Terra. Acqua. Aria. Luce.
               <span className="block text-leaf-700">
                 Un equilibrio reale, non solo estetico.
               </span>
