@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, Eye, FileText, Download, X } from "lucide-react";
+import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, Eye, FileText, Download, X, Droplets, TreeDeciduous, Recycle, Heart } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -12,89 +12,91 @@ import { SlideUp, StaggerContainer, StaggerItem } from "../components/animations
 const qualityBoxes = [
   {
     icon: Leaf,
-    title: "Approccio biodinamico",
-    description: "Metodo certificato: nessun prodotto chimico, terreni vivi, piante più forti. Oltre 20 anni di pratica sul campo.",
-    category: "biodynamic",
-  },
-  {
-    icon: Shield,
-    title: "Sicurezza sul lavoro certificata",
-    description: "Tutti gli attestati obbligatori aggiornati: formazione generale, antincendio, preposto, RSPP, RLS.",
-    category: "eco",
-  },
-  {
-    icon: CheckCircle,
-    title: "Zero prodotti chimici",
-    description: "Nessun fitosanitario, nessun rischio per bambini, animali o falde. L'unico trattamento è la prevenzione naturale.",
-    category: "eco",
-  },
-  {
-    icon: Users,
-    title: "Un solo referente, una squadra coordinata",
-    description: "Andrea è il tuo unico interlocutore. Coordina un team di competenze verticali e partner selezionati.",
-    category: "eco",
+    title: "Il nostro standard parte dal suolo",
+    description: "Il verde dura quando il suolo è vivo. Lavoriamo per rigenerarlo e mantenerlo fertile con pratiche coerenti con un approccio biodinamico certificato.",
   },
   {
     icon: Target,
-    title: "Preventivo trasparente",
-    description: "Ogni voce spiegata, nessun costo nascosto. Sai sempre cosa stai pagando e perché.",
-    category: "eco",
+    title: "Impatto zero è un criterio, non uno slogan",
+    description: "Riduciamo sprechi e interventi inutili: acqua gestita con criterio, scelte progettuali che semplificano la manutenzione, materiali e soluzioni che reggono nel tempo.",
+  },
+  {
+    icon: TreeDeciduous,
+    title: "Piante autoctone e scelte coerenti col contesto",
+    description: "Selezioniamo specie autoctone o pienamente adatte al territorio: richiedono meno risorse, si ammalano meno, restano equilibrate più a lungo.",
+  },
+  {
+    icon: Droplets,
+    title: "Acqua: precisione, non abbondanza",
+    description: "L\u2019irrigazione non è \u201Cpiù acqua = più verde\u201D. È gestione. Un impianto ben regolato riduce sprechi, previene problemi e protegge le piante.",
   },
   {
     icon: Clock,
-    title: "Manutenzione programmata",
-    description: "Calendario stagionale, interventi mirati, prevenzione. Il verde resta un valore, non torna un problema.",
-    category: "eco",
+    title: "Manutenzione che previene, non che rincorre",
+    description: "Preferiamo una manutenzione sostenibile e programmata: osservazione, piccoli interventi al momento giusto, correzioni mirate.",
   },
   {
-    icon: Star,
-    title: "Formazione continua",
-    description: "Corsi, aggiornamenti, confronto con altri professionisti. Il metodo evolve con il clima e le esigenze.",
-    category: "eco",
+    icon: Shield,
+    title: "Sicurezza: lavoriamo protetti, tu sei protetto",
+    description: "Ogni collaboratore opera con procedure corrette e dispositivi adeguati. Coperture assicurative regolari: se succede un imprevisto, il danno non è mai a carico del cliente.",
   },
   {
-    icon: Eye,
-    title: "Documentazione e reportistica",
-    description: "Foto prima/dopo, report di intervento, stato del verde. Tutto tracciabile e condivisibile.",
-    category: "eco",
+    icon: Heart,
+    title: "Rispetto del luogo e di chi lo vive",
+    description: "Il verde è un ambiente quotidiano. Lavoriamo con attenzione a tempi, rumori, pulizia e convivenza degli spazi.",
+  },
+  {
+    icon: FileText,
+    title: "Tracciabilità e trasparenza: te lo spieghiamo prima",
+    description: "Ogni scelta importante viene motivata: cosa facciamo, perché lo facciamo, cosa aspettarsi nel tempo. La qualità è comprensibile e verificabile.",
+  },
+  {
+    icon: Users,
+    title: "Per B2B e condomìni: standard e responsabilità",
+    description: "In contesti condivisi, la qualità include gestione del rischio, responsabilità e continuità del servizio.",
+  },
+  {
+    icon: Recycle,
+    title: "Gestione sostenibile degli scarti verdi",
+    description: "La sostenibilità non finisce quando si taglia o si pota: continua in come si gestisce ciò che si produce.",
   },
 ];
 
 const commitments = [
   {
     icon: Leaf,
-    title: "Biodinamica, non chimica",
-    description: "Metodo naturale certificato, nessun prodotto fitosanitario.",
+    title: "Suolo vivo prima di tutto",
+    description: "Rigeneriamo e proteggiamo la base: senza un terreno sano, nulla dura davvero.",
   },
   {
-    icon: Shield,
-    title: "Sicurezza verificabile",
-    description: "Attestati aggiornati e consultabili direttamente su questo sito.",
+    icon: Droplets,
+    title: "Acqua gestita con precisione",
+    description: "Impianti e regolazioni pensati per ridurre sprechi e stress alle piante.",
   },
   {
-    icon: Users,
-    title: "Un referente unico",
-    description: "Andrea coordina tutto: tempi, scelte, budget, squadra.",
+    icon: TreeDeciduous,
+    title: "Piante autoctone o pienamente adatte",
+    description: "Specie coerenti col territorio: meno problemi, più equilibrio, più durata.",
   },
   {
     icon: Target,
-    title: "Preventivi trasparenti",
-    description: "Ogni voce spiegata, nessun costo nascosto.",
+    title: "Impatto zero come criterio operativo",
+    description: "Meno sprechi, meno interventi inutili, soluzioni progettate per reggere nel tempo.",
   },
   {
     icon: Clock,
-    title: "Manutenzione programmata",
-    description: "Interventi stagionali pianificati per un verde sempre in ordine.",
+    title: "Manutenzione programmata, non correttiva",
+    description: "Interveniamo al momento giusto, con continuità: così la qualità si conserva.",
+  },
+  {
+    icon: Shield,
+    title: "Sicurezza totale e tutela del cliente",
+    description: "Squadre formate, procedure corrette e polizze in regola: se succede un imprevisto, il danno non ricade sul cliente.",
   },
   {
     icon: Star,
-    title: "Formazione continua",
-    description: "Aggiornamento costante su metodi, normative, soluzioni.",
-  },
-  {
-    icon: Eye,
-    title: "Tutto documentato",
-    description: "Foto, report, stato del verde: trasparenza totale.",
+    title: "Educazione e un bel sorriso",
+    description: "Il nostro modo di intendere la qualità: scelte chiare, responsabilità, risultati che durano.",
   },
 ];
 
@@ -169,12 +171,14 @@ export default function QualitaPage() {
               Qualità Certificata
             </Badge>
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 uppercase tracking-tight">
-              Qualità è
-              <span className="block italic text-leaf-400 font-light lowercase">metodo, sicurezza e trasparenza</span>
+              Il nostro patto
+              <span className="block italic text-leaf-400 font-light lowercase">di Qualità</span>
             </h1>
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
-              Non ci limitiamo a fare bene il lavoro. Ci assicuriamo che ogni
-              scelta sia spiegabile, ogni risultato misurabile.
+              Per noi qualità non si traduce solo in un giardino bello. È uno standard che si misura nel tempo e si riconosce nelle scelte: suolo, acqua, piante, manutenzione e sicurezza totale.
+            </p>
+            <p className="font-body text-sm text-leaf-400/80 mt-6 max-w-xl mx-auto">
+              Prima realtà a certificare il lavoro SOSTENIBILE Agri Bio Dinamica — Cert. N° 54/23 del 11-06-2023
             </p>
           </SlideUp>
         </div>
@@ -359,7 +363,7 @@ export default function QualitaPage() {
                 In sintesi
               </Badge>
               <h2 className="font-display text-4xl text-forest-950">
-                Perché scegliere Visione Sostenibile
+                I nostri Standard di Eccellenza in 7 punti
               </h2>
             </div>
           </SlideUp>
@@ -392,15 +396,14 @@ export default function QualitaPage() {
               Prossimo passo
             </Badge>
             <h2 className="font-display text-4xl text-forest-950 mb-6">
-              Vuoi verificare di persona?
+              Vuoi raggiungere questo standard?
             </h2>
             <p className="font-body text-lg text-forest-800 mb-8">
-              Prenota un sopralluogo gratuito: ti mostriamo il metodo, ti spieghiamo le scelte
-              e ti lasciamo un piano chiaro — senza impegno.
+              Parliamone: valutiamo insieme il contesto e la soluzione più sostenibile per il tuo spazio verde.
             </p>
             <Link href="/contatti">
               <Button className="bg-sun-400 hover:bg-sun-500 text-white">
-                Prenota un sopralluogo
+                Parliamone
               </Button>
             </Link>
           </SlideUp>
