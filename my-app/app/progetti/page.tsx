@@ -26,6 +26,7 @@ import {
 } from "../components/animations";
 import { cn } from "../lib/utils";
 import { progettiProjects as staticProjects } from "../lib/progetti-data";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 function formatTag(tag: string): string {
   return tag
@@ -68,6 +69,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               width={600}
               height={400}
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
@@ -348,8 +351,10 @@ export default function ProgettiPage() {
           {projectsWithPhotos[0]?.hero_image && (
             <Image
               src={projectsWithPhotos[0].hero_image}
-              alt="Progetti Visione Sostenibile"
+              alt="Progetti di giardini biodinamici realizzati da Visione Sostenibile"
               fill
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               className="object-cover opacity-38"
               priority
             />
@@ -635,8 +640,10 @@ export default function ProgettiPage() {
           {projectsWithPhotos[4]?.hero_image && (
             <Image
               src={projectsWithPhotos[4].hero_image}
-              alt=""
+              alt="Sfondo progetto giardino sostenibile"
               fill
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               className="object-cover opacity-10"
             />
           )}

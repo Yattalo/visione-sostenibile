@@ -14,6 +14,7 @@ import {
   StaggerContainer,
 } from "../components/animations";
 import { blogPosts as staticBlogPosts } from "../lib/blog";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 function EmptyState() {
   return (
@@ -203,6 +204,8 @@ export default function BlogPage() {
                         width={800}
                         height={600}
                         sizes="(max-width: 1024px) 100vw, 50vw"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-forest-950/30 to-transparent" />
@@ -351,6 +354,8 @@ export default function BlogPage() {
                                 width={600}
                                 height={375}
                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                placeholder="blur"
+                                blurDataURL={BLUR_DATA_URL}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-forest-950/25 to-transparent" />

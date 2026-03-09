@@ -31,6 +31,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "../../components/animations";
+import { BLUR_DATA_URL } from "../../lib/image-utils";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -364,10 +365,12 @@ function HeroSection({
     <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden bg-forest-950 py-32 md:py-40">
       <Image
         src={imageUrl}
-        alt={service.title}
+        alt={`Servizio di ${service.title.toLowerCase()} — Visione Sostenibile`}
         fill
         priority
         sizes="100vw"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL}
         className="object-cover opacity-50"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/70" />
@@ -615,10 +618,12 @@ function RelatedServicesSection({
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Image
                         src={image}
-                        alt={service.title}
+                        alt={`Servizio di ${service.title.toLowerCase()}`}
                         width={420}
                         height={263}
                         sizes="(max-width: 768px) 100vw, 33vw"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>

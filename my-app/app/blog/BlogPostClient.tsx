@@ -12,6 +12,7 @@ import { SlideUp, FadeIn } from "../components/animations";
 import { getBlogPost as staticGetBlogPost, getRelatedPosts as staticGetRelatedPosts } from "../lib/blog";
 import { QuizCTA } from "../components/QuizCTA";
 import { siteConfig } from "../lib/site-config";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 type TemplateVariant = 1 | 2 | 3;
 
@@ -632,6 +633,8 @@ export function BlogPostClient({
                 width={1200}
                 height={514}
                 sizes="(max-width: 1280px) 100vw, 1200px"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
@@ -771,6 +774,8 @@ export function BlogPostClient({
                           width={600}
                           height={338}
                           sizes="(max-width: 1024px) 100vw, 50vw"
+                          placeholder="blur"
+                          blurDataURL={BLUR_DATA_URL}
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-forest-950/20 to-transparent" />

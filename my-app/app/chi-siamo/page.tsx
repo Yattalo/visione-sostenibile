@@ -24,6 +24,7 @@ import { TeamSection } from "../components/TeamSection";
 import { pageSeo } from "../lib/seo-data";
 import { buildMetadata } from "../lib/seo-metadata";
 import { siteConfig } from "../lib/site-config";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 export const metadata: Metadata = {
   ...buildMetadata({
@@ -152,9 +153,11 @@ export default function ChiSiamoPage() {
                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-floating">
                   <Image
                     src="/images/chi-siamo/andrea.jpg"
-                    alt="Andrea Giordano - Fondatore Visione Sostenibile"
+                    alt="Andrea Giordano, fondatore di Visione Sostenibile, giardiniere biodinamico a Torino"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-forest-950/30 to-transparent" />

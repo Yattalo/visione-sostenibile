@@ -18,6 +18,7 @@ import { staticServices, serviceImages } from "./lib/static-data";
 import { QuizCTA } from "./components/QuizCTA";
 import { QuizMiniPreview } from "./components/QuizMiniPreview";
 import { siteConfig } from "./lib/site-config";
+import { BLUR_DATA_URL } from "./lib/image-utils";
 import { useRef } from "react";
 
 const featuredSlugs = [
@@ -372,10 +373,12 @@ export default function HomePage() {
               <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-floating">
                 <Image
                   src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800"
-                  alt="Giardino realizzato"
+                  alt="Giardino biodinamico realizzato da Visione Sostenibile con piante autoctone"
                   width={800}
                   height={1000}
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-950/40 to-transparent" />

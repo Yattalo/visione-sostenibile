@@ -27,6 +27,7 @@ import { Button } from "../../components/ui/Button";
 import { Badge } from "../../components/ui/Badge";
 import { cn } from "../../lib/utils";
 import { getProjectBySlug as staticGetProjectBySlug, progettiProjects as staticProjects } from "../../lib/progetti-data";
+import { BLUR_DATA_URL } from "../../lib/image-utils";
 
 /* ─── Lightbox Component ─── */
 
@@ -133,6 +134,8 @@ function Lightbox({
               fill
               className="object-contain"
               sizes="100vw"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               priority
             />
           </motion.div>
@@ -242,9 +245,11 @@ export default function ProgettiDetailPage() {
           {project.hero_image ? (
             <Image
               src={project.hero_image}
-              alt=""
+              alt={`Progetto ${project.title} — vista principale`}
               fill
               className="object-cover opacity-60"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               priority
             />
           ) : (
@@ -402,6 +407,8 @@ export default function ProgettiDetailPage() {
                           alt={photo.alt}
                           fill
                           sizes={index === 0 ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
+                          placeholder="blur"
+                          blurDataURL={BLUR_DATA_URL}
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-forest-950/0 group-hover:bg-forest-950/20 transition-colors" />
@@ -450,6 +457,8 @@ export default function ProgettiDetailPage() {
                           alt={render.alt}
                           fill
                           sizes="(max-width: 768px) 100vw, 50vw"
+                          placeholder="blur"
+                          blurDataURL={BLUR_DATA_URL}
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-forest-950/0 group-hover:bg-forest-950/20 transition-colors" />
@@ -710,7 +719,7 @@ export default function ProgettiDetailPage() {
       <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">
         <div className="absolute inset-0">
           {project.hero_image && (
-            <Image src={project.hero_image} alt="" fill className="object-cover opacity-10" />
+            <Image src={project.hero_image} alt="Sfondo progetto giardino" fill placeholder="blur" blurDataURL={BLUR_DATA_URL} className="object-cover opacity-10" />
           )}
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>

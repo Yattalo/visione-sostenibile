@@ -10,6 +10,7 @@ import { Button } from "../../components/ui/Button";
 import { Badge } from "../../components/ui/Badge";
 import { FadeIn, SlideUp, ScaleIn } from "../../components/animations";
 import { cn } from "../../lib/utils";
+import { BLUR_DATA_URL } from "../../lib/image-utils";
 import {
   Leaf,
   TreeDeciduous,
@@ -173,7 +174,7 @@ export default function ScorecardPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <FadeIn>
             <div className="flex justify-center mb-6">
-              <Image src="/VS_logo_monogramma_bianco.svg" alt="Visione Sostenibile" width={40} height={40} className="opacity-80" />
+              <Image src="/VS_logo_monogramma_bianco.svg" alt="Logo Visione Sostenibile" width={40} height={40} placeholder="blur" blurDataURL={BLUR_DATA_URL} className="opacity-80" />
             </div>
             <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               La tua Scorecard Personale

@@ -34,6 +34,7 @@ import {
   StaggerItem,
 } from "../components/animations";
 import { siteConfig } from "../lib/site-config";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 /* ─── Quality Standards ─── */
 
@@ -235,8 +236,10 @@ export default function QualitaPage() {
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920"
-            alt="Giardino curato con attenzione alla qualità"
+            alt="Giardino curato con attenzione alla qualità e ai dettagli naturali"
             fill
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             className="object-cover opacity-60"
             priority
           />

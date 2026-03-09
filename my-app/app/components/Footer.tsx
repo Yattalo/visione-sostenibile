@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { COOKIE_PREFERENCES_OPEN_EVENT } from "./CookiePreferences";
 import { siteConfig } from "../lib/site-config";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 export function Footer() {
   const pathname = usePathname();
@@ -25,9 +26,11 @@ export function Footer() {
         >
           <Image
             src="/VS_logo_completo_bianco.svg"
-            alt="Visione Sostenibile"
+            alt="Logo completo Visione Sostenibile — giardinaggio biodinamico a Torino"
             width={320}
             height={106}
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             className="h-24 md:h-28 w-auto mx-auto"
             loading="lazy"
           />

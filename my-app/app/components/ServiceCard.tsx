@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { normalizeServiceSlug } from "../lib/static-data";
 import { cn } from "../lib/utils";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 
 interface ServiceCardProps {
   slug: string;
@@ -69,10 +70,12 @@ export function ServiceCard({
         >
           <Image
             src={image}
-            alt={title}
+            alt={`${title} — servizio Visione Sostenibile`}
             width={630}
             height={472}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-950/60 via-forest-950/5 to-transparent" />

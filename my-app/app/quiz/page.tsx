@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
+import { BLUR_DATA_URL } from "../lib/image-utils";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
 import { Checkbox, Input } from "../components/ui/Input";
@@ -623,7 +624,7 @@ export default function QuizPage() {
       <div className="max-w-2xl mx-auto relative z-10">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <Image src="/VS_logo_monogramma_colori.svg" alt="Visione Sostenibile" width={48} height={48} loading="eager" />
+          <Image src="/VS_logo_monogramma_colori.svg" alt="Logo Visione Sostenibile" width={48} height={48} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
         </div>
 
         {/* Progress bar */}
