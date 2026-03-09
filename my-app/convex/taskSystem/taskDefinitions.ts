@@ -1955,4 +1955,588 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     ],
     filesExpected: [],
   },
+
+  // ═══════════════════════════════════════════════════════════
+  // WAVE 16 — CLIENT MEETING: Quick Wins (Phase 1)
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-10",
+    agent: "claude",
+    title: "Team Bios Enhancement — extend ProfileCard with competenze e bio",
+    description:
+      "Expand TeamSection.tsx data structure: add competenze[], personalStatement, logoUrl per member. Update ProfileCard layout to show extended bio. Data from Guglielmo (Salvatore, Fabrizio, etc.) — use placeholders until client provides final text. Each collaborator: foto, nome, logo, ruolo, competenze, frase di presentazione.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 16,
+    estimatedHours: 2,
+    dependencies: [],
+    tags: ["team", "chi-siamo", "bio", "client-meeting"],
+    acceptanceCriteria: [
+      "ProfileCard shows competenze list and personal statement",
+      "Data structure supports logoUrl per member",
+      "Placeholder text for members without final bio",
+      "Mobile responsive layout",
+      "pnpm build passes",
+    ],
+    filesExpected: ["app/components/TeamSection.tsx"],
+  },
+
+  {
+    taskId: "VS-11",
+    agent: "claude",
+    title: "Partner Reviews — add category flag to reviews schema",
+    description:
+      "Add optional 'category' field to reviews Convex table ('client' | 'partner'). Backfill existing reviews with 'client'. Update ReviewsWidget to filter by category. Allow cherry-picked reviews from partner businesses to be displayed separately.",
+    status: "todo",
+    priority: "low",
+    category: "backend",
+    phaseId: "features",
+    wave: 16,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["reviews", "partners", "schema", "client-meeting"],
+    acceptanceCriteria: [
+      "reviews schema has optional category field",
+      "Existing reviews backfilled with 'client'",
+      "ReviewsWidget supports category filter prop",
+      "Admin can set category when managing reviews",
+    ],
+    filesExpected: ["convex/schema.ts", "convex/reviews.ts", "app/components/ReviewsWidget.tsx"],
+  },
+
+  {
+    taskId: "VS-12",
+    agent: "claude",
+    title: "B2C/B2B content branching — dual copy for services and CTAs",
+    description:
+      "Use existing isB2B detection from quiz Q3 (Condominio/Azienda). Create lib/content-variants.ts with dual text sets: informal for privati, formal for istituzioni/aziende. Store audience preference in localStorage. Conditional rendering in ServiziClient.tsx and homepage. First quiz question distinguishes client type and adapts percorso.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 16,
+    estimatedHours: 4,
+    dependencies: [],
+    tags: ["b2c", "b2b", "content", "quiz", "client-meeting"],
+    acceptanceCriteria: [
+      "Services page shows different CTAs for B2C vs B2B",
+      "Homepage hero adapts tone based on detected audience",
+      "Quiz first question sets audience type",
+      "localStorage persists audience preference",
+      "Barbara B2B copy integrated when available (VS-H2)",
+    ],
+    filesExpected: [
+      "app/lib/content-variants.ts",
+      "app/servizi/ServiziClient.tsx",
+      "app/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // WAVE 17 — CLIENT MEETING: Core Features (Phase 2)
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-20",
+    agent: "claude",
+    title: "Collabora con Noi — partner recruiting page + form",
+    description:
+      "New Convex table 'partnerApplications' (name, email, phone, competenze, attrezzatura, zonaOperativa, status, createdAt). New page /collabora with form following contactSubmissions pattern. New admin route /admin/partners for application management. Email notification to admin on new application. Modulo di candidatura per giardinieri con filtri geografici e competenze.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 17,
+    estimatedHours: 6,
+    dependencies: [],
+    tags: ["partners", "recruiting", "form", "client-meeting"],
+    acceptanceCriteria: [
+      "partnerApplications table in Convex schema",
+      "/collabora page with multi-field form",
+      "Admin can view and manage applications at /admin/partners",
+      "Email notification on new application",
+      "Fields: competenze, attrezzatura, zona operativa",
+      "pnpm build passes",
+    ],
+    filesExpected: [
+      "convex/schema.ts",
+      "convex/partnerApplications.ts",
+      "app/collabora/page.tsx",
+      "app/admin/partners/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "VS-21",
+    agent: "claude",
+    title: "Blog Comments System — moderated comments with admin approval",
+    description:
+      "New Convex table 'blogComments' (postId, authorName, authorEmail, content, isApproved, createdAt). Public mutation for submitting comments. Admin moderation UI in /admin/blog. Display approved comments on blog post detail page. Rate limiting: max 3 comments per email per post per day. Guest or authenticated submission.",
+    status: "todo",
+    priority: "medium",
+    category: "backend",
+    phaseId: "features",
+    wave: 17,
+    estimatedHours: 5,
+    dependencies: [],
+    tags: ["blog", "comments", "moderation", "client-meeting"],
+    acceptanceCriteria: [
+      "blogComments table in Convex schema",
+      "Comment form on blog post pages",
+      "Admin moderation queue in /admin/blog",
+      "Only approved comments visible publicly",
+      "Rate limiting enforced",
+    ],
+    filesExpected: [
+      "convex/schema.ts",
+      "convex/blogComments.ts",
+      "app/blog/BlogPostClient.tsx",
+      "app/admin/blog/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "VS-22",
+    agent: "claude",
+    title: "Editorial Calendar — scheduled publishing in admin",
+    description:
+      "Add scheduledPublishAt optional field to blogPosts schema. Calendar view component in admin showing scheduled + published posts (month grid). Convex cron job to auto-publish when scheduledPublishAt <= now. Piano editoriale mensile come richiesto dal cliente.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 17,
+    estimatedHours: 4,
+    dependencies: ["VS-21"],
+    tags: ["blog", "editorial", "calendar", "seo", "client-meeting"],
+    acceptanceCriteria: [
+      "scheduledPublishAt field in blogPosts schema",
+      "Calendar view in admin blog section",
+      "Auto-publish cron job works correctly",
+      "Scheduled posts not visible on public blog until publish time",
+    ],
+    filesExpected: [
+      "convex/schema.ts",
+      "convex/blog.ts",
+      "convex/crons.ts",
+      "app/admin/blog/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "VS-23",
+    agent: "claude",
+    title: "Area Privata Utente — client dashboard with Clerk auth",
+    description:
+      "Clerk is already integrated (ClerkProvider, sign-in/up routes, users table, guest claim). Create /area-personale/ route group with auth-protected layout. Subpages: dashboard (overview), /quiz (my quizzes + scorecard links), /render (placeholder until AI pipeline), /preferiti (favorites). New Convex table userFavorites (userId, type, itemId, createdAt). Queries filtered by userId. Navbar shows 'Area Personale' when authenticated.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 17,
+    estimatedHours: 8,
+    dependencies: [],
+    tags: ["auth", "private-area", "clerk", "dashboard", "client-meeting"],
+    acceptanceCriteria: [
+      "/area-personale routes protected by Clerk auth",
+      "Dashboard shows user's quizzes and future renders",
+      "Favorites system works (save/remove articles, services, projects)",
+      "Navbar conditionally shows Area Personale link",
+      "Guest quiz data claimed on sign-up (existing claimGuestRecords)",
+      "Mobile responsive",
+    ],
+    filesExpected: [
+      "app/area-personale/layout.tsx",
+      "app/area-personale/page.tsx",
+      "app/area-personale/quiz/page.tsx",
+      "app/area-personale/render/page.tsx",
+      "app/area-personale/preferiti/page.tsx",
+      "convex/schema.ts",
+      "convex/userFavorites.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-24",
+    agent: "claude",
+    title: "Blog SEO Optimization — meta tags, JSON-LD Article, H-tag audit",
+    description:
+      "Add metaTitle, metaDescription optional fields to blogPosts schema. JSON-LD Article structured data on blog detail page. Auto-generate SEO titles from content if not manually set. Schema SEO: titoli, meta-descrizione, tag H. Builds on existing BreadcrumbList and HowTo JSON-LD already implemented.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 17,
+    estimatedHours: 3,
+    dependencies: [],
+    tags: ["seo", "blog", "json-ld", "meta", "client-meeting"],
+    acceptanceCriteria: [
+      "Blog posts have Article JSON-LD schema",
+      "metaTitle and metaDescription editable in admin",
+      "Auto-generated fallbacks when not set manually",
+      "H1-H2 hierarchy verified on all blog pages",
+    ],
+    filesExpected: [
+      "convex/schema.ts",
+      "app/blog/[slug]/page.tsx",
+      "app/admin/blog/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // WAVE 18 — CLIENT MEETING: Premium AI Pipeline (Phase 3)
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-30",
+    agent: "claude",
+    title: "Quiz Photo Upload Step — add photo upload to quiz flow",
+    description:
+      "Add step between profiling questions and data collection in quiz. Reuse Convex generateUploadUrl pattern from contact form. Accept max 3 photos (garden current state), store storageId array. Add photoStorageIds field to leads table. Show photo preview with remove option. Step: 'Inviaci una foto della tua pianta e una delle sue foglie'.",
+    status: "todo",
+    priority: "high",
+    category: "frontend",
+    phaseId: "features",
+    wave: 18,
+    estimatedHours: 4,
+    dependencies: [],
+    tags: ["quiz", "photo", "upload", "convex-storage", "client-meeting"],
+    acceptanceCriteria: [
+      "New step in quiz flow for photo upload",
+      "Max 3 photos accepted",
+      "Photos stored via Convex generateUploadUrl",
+      "photoStorageIds saved in leads table",
+      "Photo preview with remove button",
+      "Step is optional (can skip)",
+      "Mobile camera capture supported",
+    ],
+    filesExpected: [
+      "app/quiz/page.tsx",
+      "convex/schema.ts",
+      "convex/leads.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-31",
+    agent: "claude",
+    title: "AI Plant Identification — Google Cloud Vision integration",
+    description:
+      "New Convex internalAction (convex/aiPipeline.ts) calling Google Cloud Vision API for label + object detection on uploaded garden photos. Input: Convex storage URL. Output: identified plants, garden features, condition assessment. Store results in new aiAnalysis table. GCP API key as Convex env var. Free tier: 1000 calls/mo. Costo sostenibile per utilizzo non troppo intenso.",
+    status: "todo",
+    priority: "high",
+    category: "backend",
+    phaseId: "features",
+    wave: 18,
+    estimatedHours: 6,
+    dependencies: ["VS-30"],
+    tags: ["ai", "vision", "google", "plant-id", "client-meeting"],
+    acceptanceCriteria: [
+      "Convex internalAction calls Google Vision API",
+      "Plant identification returns species + confidence",
+      "Garden features detected (lawn, trees, flowers, paving, etc.)",
+      "Results stored in aiAnalysis table",
+      "GCP_VISION_API_KEY env var configured",
+      "Error handling with retry (max 3)",
+      "Works within Convex 10-min action timeout",
+    ],
+    filesExpected: [
+      "convex/aiPipeline.ts",
+      "convex/schema.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-32",
+    agent: "claude",
+    title: "AI Render Generation — HF Inference / nano-banana-2 image generation",
+    description:
+      "Generate garden renders using HuggingFace Inference API (Flux, SDXL) or nano-banana-2 for premium quality. @huggingface/inference already in package.json, HF_TOKEN configured, generate-images.ts script exists as pattern. Combine quiz profile + identified plants + user preferences into render prompt. Store renders in Convex _storage. New table gardenRenders (leadId, prompt, storageId, status, createdAt, completedAt). Target cost: ~EUR 0.05-0.10 per render using open-source models via HF. Consider nano-banana-2 for premium tier with minimal post-production.",
+    status: "todo",
+    priority: "high",
+    category: "backend",
+    phaseId: "features",
+    wave: 18,
+    estimatedHours: 8,
+    dependencies: ["VS-31"],
+    tags: ["ai", "render", "huggingface", "image-gen", "client-meeting"],
+    acceptanceCriteria: [
+      "Garden render generated from quiz profile + photo analysis",
+      "HF Inference API or nano-banana-2 integration working",
+      "Renders stored in Convex _storage",
+      "gardenRenders table tracks status (pending/processing/completed/failed)",
+      "Prompt engineering produces relevant garden visualizations",
+      "Cost per render < EUR 0.10",
+      "Quality acceptable for lead magnet use",
+    ],
+    filesExpected: [
+      "convex/renderPipeline.ts",
+      "convex/schema.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-33",
+    agent: "claude",
+    title: "Async Processing Queue — 48h render delivery pipeline",
+    description:
+      "Orchestrate AI pipeline with Convex scheduler.runAfter: 1) Lead submits quiz+photos → CRM upsert + quiz notification email (immediate), 2) scheduler → AI analysis (Vision API), 3) scheduler → render generation, 4) On completion → email with render preview + link to /area-personale. Retry logic: up to 3 times with backoff. Admin notification on completion/failure. SLA: render within 4-12h, email within 24h (marketed as 48h for buffer).",
+    status: "todo",
+    priority: "high",
+    category: "backend",
+    phaseId: "features",
+    wave: 18,
+    estimatedHours: 6,
+    dependencies: ["VS-32", "VS-23"],
+    tags: ["pipeline", "async", "scheduler", "email", "client-meeting"],
+    acceptanceCriteria: [
+      "Full pipeline: quiz submit → analysis → render → email delivery",
+      "Convex scheduler chains steps correctly",
+      "Retry logic on failure (max 3 with backoff)",
+      "Admin notified on pipeline completion and failure",
+      "Email contains render preview + area-personale link",
+      "emailDeliveries table tracks delivery status",
+      "Pipeline completes within 12h typical, 48h SLA max",
+    ],
+    filesExpected: [
+      "convex/renderOrchestrator.ts",
+      "convex/emails.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-34",
+    agent: "claude",
+    title: "Credit System — admin credits per lead processed",
+    description:
+      "Credit-based billing for AI pipeline. Settings key 'ai_pipeline_credits' with: balance, tier, monthlyAllocation, resetDay, totalUsed. Decrement 1 credit per successful pipeline run. Block pipeline when credits exhausted (queue with credits_exhausted status). Low-credit email warning at 20% remaining. Monthly auto-reset via Convex cron. Pricing: ~EUR 0.20 cost per lead, sold at max EUR 1.00/lead. Tiers: Starter 10/mo EUR 10, Pro 30/mo EUR 25, Business 100/mo EUR 80.",
+    status: "todo",
+    priority: "medium",
+    category: "backend",
+    phaseId: "features",
+    wave: 18,
+    estimatedHours: 5,
+    dependencies: ["VS-33"],
+    tags: ["credits", "billing", "admin", "tier", "client-meeting"],
+    acceptanceCriteria: [
+      "Credit balance tracked in Convex settings",
+      "Pipeline blocked when credits exhausted",
+      "Monthly auto-reset via cron",
+      "Low-credit warning email at 20%",
+      "Admin dashboard shows credit usage",
+      "Tier pricing: EUR 1.00/lead max, EUR 0.20 cost",
+    ],
+    filesExpected: [
+      "convex/creditSystem.ts",
+      "convex/settings.ts",
+      "convex/crons.ts",
+    ],
+  },
+
+  {
+    taskId: "VS-35",
+    agent: "claude",
+    title: "Admin AI Pipeline Dashboard — queue, renders, credits",
+    description:
+      "New admin route /admin/ai-pipeline. Views: pipeline queue (pending/processing/completed/failed), render gallery with thumbnails, credit usage chart. Actions: retry failed renders, manually trigger pipeline, adjust credit balance. Real-time updates via Convex subscriptions.",
+    status: "todo",
+    priority: "medium",
+    category: "frontend",
+    phaseId: "features",
+    wave: 18,
+    estimatedHours: 6,
+    dependencies: ["VS-34"],
+    tags: ["admin", "dashboard", "ai-pipeline", "client-meeting"],
+    acceptanceCriteria: [
+      "/admin/ai-pipeline route with pipeline queue view",
+      "Render gallery with thumbnails from Convex storage",
+      "Credit usage overview (used/remaining/tier)",
+      "Retry and manual trigger actions work",
+      "Real-time updates via Convex subscriptions",
+    ],
+    filesExpected: [
+      "app/admin/ai-pipeline/page.tsx",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // WAVE 19 — CLIENT MEETING: Nice-to-haves (Phase 4)
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-40",
+    agent: "claude",
+    title: "Video/Audio/Podcast in Blog Posts — media embedding",
+    description:
+      "Extend blogPosts schema with optional mediaUrl, mediaType ('video'|'audio'|'podcast'). Embed player component in BlogPostClient.tsx. Admin blog editor: media URL input field. Support YouTube embed, audio player, podcast links.",
+    status: "backlog",
+    priority: "low",
+    category: "frontend",
+    phaseId: "features",
+    wave: 19,
+    estimatedHours: 3,
+    dependencies: [],
+    tags: ["blog", "media", "video", "podcast", "client-meeting"],
+    acceptanceCriteria: [
+      "Blog posts support embedded video/audio/podcast",
+      "Admin can set media URL and type",
+      "Player component renders correctly on mobile",
+    ],
+    filesExpected: [
+      "convex/schema.ts",
+      "app/blog/BlogPostClient.tsx",
+      "app/admin/blog/page.tsx",
+    ],
+  },
+
+  {
+    taskId: "VS-41",
+    agent: "claude",
+    title: "Partner Showcase Page — public partner directory",
+    description:
+      "Public page /partner showing approved partners with their specializations and zones. Requires partner consent flag in partnerApplications. Map or list view with zone filtering.",
+    status: "backlog",
+    priority: "low",
+    category: "frontend",
+    phaseId: "features",
+    wave: 19,
+    estimatedHours: 4,
+    dependencies: ["VS-20"],
+    tags: ["partners", "showcase", "directory", "client-meeting"],
+    acceptanceCriteria: [
+      "/partner page shows approved partners",
+      "Partners must have consent flag to be listed",
+      "Filter by zona operativa",
+      "Mobile responsive grid",
+    ],
+    filesExpected: [
+      "app/partner/page.tsx",
+      "convex/partnerApplications.ts",
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // WAVE 20 — HUMAN TASKS + INFRA
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    taskId: "VS-H1",
+    agent: "human",
+    title: "Logo Redesign — Guglielmo: S stilizzata foglia con ramificazioni",
+    description:
+      "Guglielmo crea il logo: 'S' stilizzata a forma di foglia con ramificazioni ben visibili. Test leggibilità a piccole dimensioni (mobile, biglietto da visita). Prova stampa in bianco e nero. Deliverables: SVG + PNG a multiple risoluzioni. Se necessario definire claim/tagline.",
+    status: "todo",
+    priority: "high",
+    category: "uiux",
+    phaseId: "polish",
+    wave: 20,
+    estimatedHours: 8,
+    dependencies: [],
+    tags: ["logo", "guglielmo", "human-task", "brand"],
+    acceptanceCriteria: [
+      "Logo SVG consegnato",
+      "Logo PNG a 3+ risoluzioni",
+      "Test leggibilità piccolo formato superato",
+      "Test stampa B/N superato",
+      "Claim/tagline definito se necessario",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "VS-H2",
+    agent: "human",
+    title: "Barbara B2B Copy — varianti formali servizi e CTA",
+    description:
+      "Barbara crea le varianti B2B dei testi servizi e CTA. Tono formale per istituzioni/aziende. Necessario prima di VS-12 (B2C/B2B content branching). Copy per: servizi page hero, CTA principali, quiz intro per aziende.",
+    status: "todo",
+    priority: "medium",
+    category: "documentation",
+    phaseId: "features",
+    wave: 20,
+    estimatedHours: 4,
+    dependencies: [],
+    tags: ["barbara", "copy", "b2b", "human-task"],
+    acceptanceCriteria: [
+      "B2B copy per servizi page consegnato",
+      "B2B CTA variants consegnati",
+      "Tono formale verificato",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "VS-H3",
+    agent: "human",
+    title: "Client Approval — pricing tier AI pipeline",
+    description:
+      "Presentare al cliente il modello di costo AI pipeline: ~EUR 0.20 costo per lead, vendita a EUR 1.00/lead max. Tiers: Starter 10 leads/mo EUR 10, Pro 30/mo EUR 25, Business 100/mo EUR 80. Conferma prima di implementare VS-34.",
+    status: "todo",
+    priority: "high",
+    category: "review",
+    phaseId: "features",
+    wave: 20,
+    estimatedHours: 1,
+    dependencies: [],
+    tags: ["pricing", "approval", "human-task", "client-meeting"],
+    acceptanceCriteria: [
+      "Cliente conferma tier pricing",
+      "Decisione su modello HF Inference vs nano-banana-2",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "VS-H4",
+    agent: "human",
+    title: "DNS Setup — Netlify + Siteground (dominio + mail)",
+    description:
+      "Configurare DNS: Netlify per hosting sito, Siteground per dominio e mail. Valutare se continuare con Resend (account gratuito email cliente) o preparare fallback SMTP/Nodemailer. Free tier Resend (3K emails/mo) dovrebbe coprire volumi bassi. Preparare comunque fallback SMTP per non dipendere totalmente da Resend.",
+    status: "todo",
+    priority: "high",
+    category: "devops",
+    phaseId: "deploy",
+    wave: 20,
+    estimatedHours: 2,
+    dependencies: [],
+    tags: ["dns", "netlify", "siteground", "email", "resend", "smtp", "human-task"],
+    acceptanceCriteria: [
+      "DNS configurato su Netlify per il sito",
+      "Siteground configurato per dominio e mail",
+      "Resend valutato vs SMTP fallback",
+      "Fallback SMTP pronto (Nodemailer) se necessario",
+      "Email di test funzionante",
+    ],
+    filesExpected: [],
+  },
+
+  {
+    taskId: "VS-36",
+    agent: "claude",
+    title: "SMTP Fallback — Nodemailer transport alternativo a Resend",
+    description:
+      "Implementare transport SMTP alternativo usando Nodemailer come fallback a Resend. Convex env var SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS. Toggle in settings: 'email_provider' = 'resend' | 'smtp'. Il free tier Resend (3K/mo) copre volumi bassi ma non vogliamo dipendenza totale. Fallback attivabile da admin senza redeploy.",
+    status: "backlog",
+    priority: "medium",
+    category: "backend",
+    phaseId: "deploy",
+    wave: 20,
+    estimatedHours: 3,
+    dependencies: [],
+    tags: ["email", "smtp", "nodemailer", "resend", "fallback"],
+    acceptanceCriteria: [
+      "Nodemailer transport configurato come alternativa",
+      "Toggle provider in admin settings",
+      "SMTP env vars documentate",
+      "Fallback automatico se Resend fallisce",
+      "Email di test funziona con entrambi i provider",
+    ],
+    filesExpected: [
+      "convex/emails.ts",
+      "convex/settings.ts",
+    ],
+  },
 ];
