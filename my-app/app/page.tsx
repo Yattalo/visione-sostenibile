@@ -5,16 +5,15 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Phone,
-  Award,
-  Clock,
   MapPin,
-  Mail,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Badge } from "./components/ui/Badge";
 import { ServiceCard } from "./components/ServiceCard";
 import { ReviewsWidget } from "./components/ReviewsWidget";
 import { PhilosophySection } from "./components/PhilosophySection";
+import { TrustNumbers } from "./components/TrustNumbers";
 import { staticServices, serviceImages } from "./lib/static-data";
 import { QuizCTA } from "./components/QuizCTA";
 import { QuizMiniPreview } from "./components/QuizMiniPreview";
@@ -110,21 +109,31 @@ export default function HomePage() {
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-balance">
               Il tuo giardino sostenibile:
               <span className="block italic text-leaf-400">
-                visione, progetto, realtà.
+                visione, progetto, realt&agrave;.
               </span>
             </h1>
 
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              Con Visione Sostenibile hai un solo interlocutore per progettare, realizzare e mantenere il tuo spazio verde — con tutti gli specialisti già selezionati per te.
+              Con Visione Sostenibile hai un solo interlocutore per progettare, realizzare e mantenere il tuo spazio verde — con tutti gli specialisti gi&agrave; selezionati per te.
             </p>
 
-            <div className="flex justify-center">
-              <Link href="/servizi">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/quiz">
                 <Button
                   size="lg"
                   className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-10 py-5 text-lg tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-transform"
                 >
-                  Visualizza i servizi
+                  Scopri il Tuo Giardino
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/servizi">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white/40 text-white hover:bg-white/10 px-10 py-5 text-lg tracking-wider font-bold rounded-2xl"
+                >
+                  I Nostri Servizi
                 </Button>
               </Link>
             </div>
@@ -142,10 +151,10 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Philosophy — Cinematic sticky scroll */}
+      {/* Philosophy -- Cinematic sticky scroll */}
       <PhilosophySection />
 
-      {/* Services — Stitch-inspired card grid */}
+      {/* Services -- Stitch-inspired card grid */}
       <section className="py-24 md:py-32 relative overflow-hidden">
         {/* Topographic background pattern */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
@@ -183,13 +192,13 @@ export default function HomePage() {
             className="mb-16 md:mb-20 max-w-3xl"
           >
             <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
-              Perché funziona
+              Perch&eacute; funziona
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-leaf-700 mb-6 leading-tight">
-              Ogni giardino nasce dall&apos;ascolto dell&apos;ambiente e di chi lo vivrà.
+              Ogni giardino nasce dall&apos;ascolto dell&apos;ambiente e di chi lo vivr&agrave;.
             </h2>
             <p className="font-body text-lg text-forest-800/70 leading-relaxed max-w-2xl">
-              Bellezza e sostenibilità, per noi, sono sempre la scelta migliore. Per questo progettiamo giardini che funzionano in ogni stagione — sotto la neve come sotto il sole di agosto.
+              Bellezza e sostenibilit&agrave;, per noi, sono sempre la scelta migliore. Per questo progettiamo giardini che funzionano in ogni stagione — sotto la neve come sotto il sole di agosto.
             </p>
           </motion.div>
 
@@ -199,17 +208,17 @@ export default function HomePage() {
               {
                 title: "Biodinamica, scelta tecnica e sostenibile",
                 subtitle: "Il suolo come punto di partenza",
-                description: "Un approccio pratico che mette al centro suolo, piante e microclima. Significa osservare prima di intervenire per fare scelte più mirate: meno sprechi, più equilibrio, risultati più stabili nel tempo.",
+                description: "Un approccio pratico che mette al centro suolo, piante e microclima. Significa osservare prima di intervenire per fare scelte pi\u00f9 mirate: meno sprechi, pi\u00f9 equilibrio, risultati pi\u00f9 stabili nel tempo.",
               },
               {
                 title: "Unico referente, squadra su misura",
                 subtitle: "Ottimizzazione tempi e flusso del lavoro",
-                description: "Andrea è il tuo riferimento e coordina un team modulare con competenze verticali. Entrano in campo solo i professionisti necessari, nel momento giusto, così si evitano incastri e incoerenze.",
+                description: "Andrea \u00e8 il tuo riferimento e coordina un team modulare con competenze verticali. Entrano in campo solo i professionisti necessari, nel momento giusto, cos\u00ec si evitano incastri e incoerenze.",
               },
               {
                 title: "Dall\u2019idea alla cura nel tempo",
                 subtitle: "Progettiamo, realizziamo, manteniamo",
-                description: "Copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Un giardino va avviato, stabilizzato e gestito con continuità. Meno interventi d\u2019emergenza, maggior durata.",
+                description: "Copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Un giardino va avviato, stabilizzato e gestito con continuit\u00e0. Meno interventi d\u2019emergenza, maggior durata.",
               },
             ].map((card, index) => (
               <motion.div
@@ -299,87 +308,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats / Trust — Stitch-inspired dark split panel */}
-      <section className="py-24 px-4 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-deep"
-        >
-          <div className="bg-forest-950 grid grid-cols-1 lg:grid-cols-12">
-            {/* Left — Title panel */}
-            <div className="lg:col-span-5 bg-forest-900 p-10 md:p-16 flex flex-col justify-center relative">
-              <div className="absolute inset-0 bg-leaf-700/10 mix-blend-overlay" />
-              <div className="relative z-10">
-                <span className="block font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-400 mb-4">
-                  I nostri numeri
-                </span>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
-                  Cosa abbiamo{" "}
-                  <span className="block italic text-paper-300">
-                    fatto finora
-                  </span>
-                </h2>
-                <p className="font-body text-paper-400 text-sm md:text-base leading-relaxed max-w-md">
-                  Ogni numero rappresenta un passo avanti verso un futuro più
-                  verde. La nostra dedizione alla sostenibilità è misurabile e
-                  tangibile.
-                </p>
-              </div>
-            </div>
-
-            {/* Right — Stats grid */}
-            <div className="lg:col-span-7 p-10 md:p-16 flex items-center">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
-                {[
-                  {
-                    value: "250+",
-                    label: "Progetti Completati",
-                    icon: (
-                      <Award className="w-10 h-10" />
-                    ),
-                  },
-                  {
-                    value: "20+",
-                    label: "Esperienza sul campo",
-                    icon: (
-                      <Clock className="w-10 h-10" />
-                    ),
-                  },
-                  {
-                    value: "100%",
-                    label: "Impatto Zero",
-                    icon: (
-                      <Heart className="w-10 h-10" />
-                    ),
-                  },
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 }}
-                    className="flex flex-col items-center md:items-start text-center md:text-left group"
-                  >
-                    <div className="mb-4 text-white group-hover:text-leaf-400 transition-colors duration-300">
-                      {stat.icon}
-                    </div>
-                    <span className="font-sans text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2">
-                      {stat.value}
-                    </span>
-                    <span className="text-xs font-bold tracking-widest text-paper-400 uppercase border-t border-paper-600/30 pt-4 w-full">
-                      {stat.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
+      {/* Stats / Trust -- Extracted reusable component */}
+      <TrustNumbers variant="dark" />
 
       {/* Quiz Section */}
       <section className="relative overflow-hidden bg-paper-canvas px-6 py-24 lg:py-32">
@@ -401,7 +331,7 @@ export default function HomePage() {
                 Quiz Gratuito
               </Badge>
               <h2 className="mb-5 font-display text-5xl leading-[1.05] text-forest-950 md:text-6xl">
-                Qual è il giardino
+                Qual &egrave; il giardino
                 <span className="block italic text-leaf-600">che fa per te?</span>
               </h2>
               <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-forest-800/72 md:text-xl">
@@ -422,7 +352,7 @@ export default function HomePage() {
         variant="featured"
         className="bg-white"
         title="Ti ascoltiamo davvero"
-        subtitle="Ogni feedback è una bussola: ci aiuta a migliorare il metodo, ampliare competenze e coltivare collaborazioni che rendono i risultati più solidi nel tempo."
+        subtitle="Ogni feedback \u00e8 una bussola: ci aiuta a migliorare il metodo, ampliare competenze e coltivare collaborazioni che rendono i risultati pi\u00f9 solidi nel tempo."
       />
 
       {/* Featured Project / CTA */}
@@ -513,24 +443,38 @@ export default function HomePage() {
             </span>
           </h2>
           <p className="font-body text-lg text-paper-300 mb-10 max-w-2xl mx-auto">
-            Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorità, fasi e investimenti.
+            Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorit&agrave;, fasi e investimenti.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={`tel:${siteConfig.phoneRaw}`}>
-              <Button className="bg-sun-400 hover:bg-sun-500 text-forest-950 px-8 py-4">
-                <Phone className="mr-2 w-5 h-5" />
-                Richiedi un sopralluogo
+            <Link href="/quiz">
+              <Button
+                size="lg"
+                className="bg-sun-400 hover:bg-sun-500 text-forest-950 px-8 py-4"
+              >
+                Scopri il Tuo Giardino
+                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-            </a>
+            </Link>
             <Link href="/contatti">
               <Button
                 variant="outline"
+                size="lg"
                 className="border-white/30 text-white hover:bg-white/10 px-8 py-4"
               >
-                Richiedi una chiamata
+                Scrivici
               </Button>
             </Link>
+            <a href={`tel:${siteConfig.phoneRaw}`}>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 px-8 py-4"
+              >
+                <Phone className="mr-2 w-5 h-5" />
+                Chiamaci
+              </Button>
+            </a>
           </div>
 
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-paper-400">
@@ -546,19 +490,5 @@ export default function HomePage() {
         </motion.div>
       </section>
     </div>
-  );
-}
-
-function Heart({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-    </svg>
   );
 }
