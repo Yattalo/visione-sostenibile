@@ -33,6 +33,7 @@ import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { Input, Textarea, Checkbox, RadioGroup, CheckboxGroup } from "../components/ui/Input";
 import { SlideUp, FadeIn } from "../components/animations";
+import { siteConfig } from "../lib/site-config";
 
 interface UploadedFile {
   storageId: string;
@@ -368,17 +369,17 @@ ${formData.message}
     {
       icon: MapPin,
       title: "Indirizzo",
-      lines: ["Via San Francesco D'Assisi, 14", "10122 Torino (TO)", "Italia"],
+      lines: [siteConfig.address.street, `${siteConfig.address.postalCode} ${siteConfig.address.city} (${siteConfig.address.province})`, siteConfig.address.country],
     },
     {
       icon: Phone,
       title: "Telefono",
-      lines: ["+39 371 482 1825"],
+      lines: [siteConfig.phone],
     },
     {
       icon: Mail,
       title: "Email",
-      lines: ["visionesostenibile96@gmail.com"],
+      lines: [siteConfig.email],
     },
     {
       icon: Clock,

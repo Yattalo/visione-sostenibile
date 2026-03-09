@@ -18,6 +18,7 @@ import { PhilosophySection } from "./components/PhilosophySection";
 import { staticServices, serviceImages } from "./lib/static-data";
 import { QuizCTA } from "./components/QuizCTA";
 import { QuizMiniPreview } from "./components/QuizMiniPreview";
+import { siteConfig } from "./lib/site-config";
 import { useRef } from "react";
 
 const featuredSlugs = [
@@ -40,30 +41,30 @@ export default function HomePage() {
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "Visione Sostenibile",
+    name: siteConfig.companyName,
     description:
       "Progettazione, realizzazione e manutenzione di giardini biodinamici a impatto zero",
-    url: "https://www.visionesostenibile.it",
-    telephone: "+393714821825",
-    email: "visionesostenibile96@gmail.com",
+    url: siteConfig.siteUrl,
+    telephone: siteConfig.phoneRaw,
+    email: siteConfig.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Via San Francesco D'Assisi, 14",
-      addressLocality: "Torino",
-      postalCode: "10122",
-      addressCountry: "IT",
+      streetAddress: siteConfig.address.street,
+      addressLocality: siteConfig.address.city,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.countryCode,
     },
-    areaServed: ["Torino", "Piemonte", "Trentino Alto-Adige", "Lombardia"],
+    areaServed: siteConfig.areaServed,
     founder: {
       "@type": "Person",
-      name: "Andrea Giordano",
+      name: siteConfig.founder,
     },
-    foundingDate: "2009",
+    foundingDate: siteConfig.foundingDate,
     sameAs: [
-      "https://www.instagram.com/visionesostenibile",
-      "https://www.facebook.com/visionesostenibilegiardinieortisostenibili",
-      "https://www.linkedin.com/in/andrea-giordano-16810626a",
-      "https://www.youtube.com/@AndreaGiordano-vk8el",
+      siteConfig.socialLinks.instagram,
+      siteConfig.socialLinks.facebook,
+      siteConfig.socialLinks.linkedin,
+      siteConfig.socialLinks.youtube,
     ],
   };
 
@@ -516,7 +517,7 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+393714821825">
+            <a href={`tel:${siteConfig.phoneRaw}`}>
               <Button className="bg-sun-400 hover:bg-sun-500 text-forest-950 px-8 py-4">
                 <Phone className="mr-2 w-5 h-5" />
                 Richiedi un sopralluogo

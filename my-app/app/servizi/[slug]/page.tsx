@@ -26,6 +26,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { ScrollCTA } from "../../components/ScrollCTA";
 import { ReviewsWidget } from "../../components/ReviewsWidget";
+import { siteConfig } from "../../lib/site-config";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -46,7 +47,7 @@ type ServiceContent = {
   faqs: FaqItem[];
 };
 
-const SITE_URL = "https://www.visionesostenibile.it";
+const SITE_URL = siteConfig.siteUrl;
 
 const serviceImageMap: Record<string, string> = {
   "progettazione-giardini": "/images/servizi/progettazione-giardini-cover.png",
@@ -847,13 +848,13 @@ export default function ServiceDetailPage() {
     serviceType: service.title,
     name: service.title,
     description: content.quickAnswer,
-    areaServed: ["Torino", "Piemonte", "Trentino Alto-Adige", "Lombardia"],
+    areaServed: siteConfig.areaServed,
     provider: {
       "@type": "LocalBusiness",
-      name: "Visione Sostenibile",
+      name: siteConfig.companyName,
       url: SITE_URL,
-      telephone: "+393714821825",
-      email: "visionesostenibile96@gmail.com",
+      telephone: siteConfig.phoneRaw,
+      email: siteConfig.email,
     },
     url: serviceUrl,
   };
@@ -1008,7 +1009,7 @@ export default function ServiceDetailPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+393714821825">
+            <a href={`tel:${siteConfig.phoneRaw}`}>
               <Button
                 size="lg"
                 className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8"

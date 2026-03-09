@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://www.visionesostenibile.it";
-export const SITE_NAME = "Visione Sostenibile";
+import { siteConfig } from "./site-config";
+
+export const SITE_URL = siteConfig.siteUrl;
+export const SITE_NAME = siteConfig.companyName;
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 
 type OpenGraphType = "website" | "article";

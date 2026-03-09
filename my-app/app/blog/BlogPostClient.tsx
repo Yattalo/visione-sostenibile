@@ -10,6 +10,7 @@ import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, FadeIn } from "../components/animations";
 import { getBlogPost as staticGetBlogPost, getRelatedPosts as staticGetRelatedPosts } from "../lib/blog";
+import { siteConfig } from "../lib/site-config";
 
 type TemplateVariant = 1 | 2 | 3;
 
@@ -18,7 +19,7 @@ type FaqItem = {
   answer: string;
 };
 
-const SITE_URL = "https://www.visionesostenibile.it";
+const SITE_URL = siteConfig.siteUrl;
 
 const quickAnswerH2s: Record<string, string> = {
   "come-mantenere-giardino-autunno": "Come mantenere il giardino in autunno?",
@@ -462,7 +463,7 @@ export function BlogPostClient({
     },
     publisher: {
       "@type": "Organization",
-      name: "Visione Sostenibile",
+      name: siteConfig.companyName,
       url: SITE_URL,
     },
     image: articleImage,

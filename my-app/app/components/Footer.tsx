@@ -6,6 +6,7 @@ import { Instagram, Facebook, Linkedin, Youtube, Phone, Mail } from "lucide-reac
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { COOKIE_PREFERENCES_OPEN_EVENT } from "./CookiePreferences";
+import { siteConfig } from "../lib/site-config";
 
 export function Footer() {
   const pathname = usePathname();
@@ -51,14 +52,14 @@ export function Footer() {
           className="flex flex-wrap justify-center gap-4 mb-10"
         >
           <a
-            href="tel:+393920934847"
+            href={`tel:${siteConfig.phoneRaw}`}
             className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-sm tracking-wide transition-all hover:scale-105 active:scale-95"
           >
             <Phone className="w-4 h-4" />
             <span>Chiama Ora</span>
           </a>
           <a
-            href="mailto:info@visionesostenibile.com"
+            href={`mailto:${siteConfig.email}`}
             className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-sm tracking-wide transition-all hover:scale-105 active:scale-95"
           >
             <Mail className="w-4 h-4" />
@@ -74,10 +75,10 @@ export function Footer() {
           className="flex justify-center gap-4"
         >
           {[
-            { icon: Instagram, href: "https://www.instagram.com/visionesostenibile", key: "instagram" },
-            { icon: Facebook, href: "https://www.facebook.com/visionesostenibilegiardinieortisostenibili", key: "facebook" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/andrea-giordano-16810626a", key: "linkedin" },
-            { icon: Youtube, href: "https://www.youtube.com/@AndreaGiordano-vk8el", key: "youtube" },
+            { icon: Instagram, href: siteConfig.socialLinks.instagram, key: "instagram" },
+            { icon: Facebook, href: siteConfig.socialLinks.facebook, key: "facebook" },
+            { icon: Linkedin, href: siteConfig.socialLinks.linkedin, key: "linkedin" },
+            { icon: Youtube, href: siteConfig.socialLinks.youtube, key: "youtube" },
           ].map((social) => (
             <a
               key={social.key}
@@ -120,7 +121,7 @@ export function Footer() {
           transition={{ delay: 0.3 }}
           className="text-[10px] text-white/30 uppercase tracking-widest font-medium border-t border-white/5 pt-8 mt-16"
         >
-          © {new Date().getFullYear()} Visione Sostenibile. Tutti i diritti riservati.
+          © {new Date().getFullYear()} {siteConfig.companyName}. Tutti i diritti riservati.
         </motion.div>
       </div>
     </footer>
