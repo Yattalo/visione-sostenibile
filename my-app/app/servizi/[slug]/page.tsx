@@ -111,7 +111,7 @@ const relatedBlogSlugsByService: Record<string, string[]> = {
 const serviceContents: Record<string, ServiceContent> = {
   "progettazione-giardini": {
     quickAnswer:
-      "La progettazione di giardini e orti sostenibili funziona meglio quando parte da analisi del sito, obiettivi d'uso e scelta botanica locale. Cosi ottieni un progetto realizzabile, riduci errori in cantiere e abbassi i costi di manutenzione nel medio periodo.",
+      "La progettazione di giardini e orti sostenibili funziona meglio quando parte da un'analisi del sito, degli obiettivi d'uso e dalla scelta botanica locale. Con questo approccio ottieni un progetto realizzabile e coerente, riduci gli errori in fase di cantiere e abbassi sensibilmente i costi di manutenzione nel medio e lungo periodo.",
     intro:
       "Progettiamo spazi verdi su misura, con equilibrio tra estetica, funzionalita e sostenibilita.",
     body: "Ogni proposta parte da sopralluogo, lettura del suolo, esposizione e abitudini di utilizzo. Definiamo schema distributivo, palette vegetale e materiali, cosi il giardino cresce coerente nel tempo.",
@@ -158,7 +158,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   "realizzazione-giardini": {
     quickAnswer:
-      "La realizzazione chiavi in mano ti permette di avere un unico referente dalla preparazione del terreno alla posa finale. In questo modo riduci coordinamento, tempi morti e rischi di incompatibilita tra fornitori diversi.",
+      "La realizzazione chiavi in mano ti permette di avere un unico referente professionale dalla preparazione del terreno alla posa finale di piante e impianti. In questo modo riduci i tempi di coordinamento, elimini i tempi morti tra le fasi e abbassi i rischi di incompatibilita tra fornitori e materiali diversi.",
     intro:
       "Gestiamo il cantiere verde in modo completo, con un flusso organizzato e controlli su ogni fase.",
     body: "Dalla preparazione del suolo all'impianto piante, fino a irrigazione e finiture, coordiniamo tutte le attivita in sequenza logica per consegnare uno spazio pronto da vivere.",
@@ -205,7 +205,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   manutenzioni: {
     quickAnswer:
-      "La manutenzione sostenibile mantiene il giardino sano con interventi programmati, tecniche a basso impatto e prevenzione stagionale. L'approccio riduce degrado progressivo e aiuta a contenere costi straordinari nel tempo.",
+      "La manutenzione sostenibile mantiene il giardino sano e ordinato attraverso interventi programmati, tecniche a basso impatto ambientale e prevenzione stagionale mirata. Questo approccio riduce il degrado progressivo del verde, previene le emergenze fitosanitarie e aiuta a contenere i costi straordinari e imprevisti nel medio e lungo periodo.",
     intro:
       "Programmiamo la cura del verde con cadenze intelligenti, in base al ciclo stagionale reale.",
     body: "Un piano di manutenzione efficace combina taglio, controllo fitosanitario, nutrizione del suolo e monitoraggio costante. Ogni intervento e calibrato su piante, esposizione e uso dello spazio.",
@@ -252,7 +252,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   potature: {
     quickAnswer:
-      "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto e con tagli adeguati. Interventi non invasivi riducono stress vegetativo e aiutano una crescita equilibrata.",
+      "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto con tagli adeguati alla specie. Gli interventi graduali e non invasivi riducono lo stress vegetativo, favoriscono la cicatrizzazione naturale e aiutano una crescita equilibrata che mantiene la forma nel tempo.",
     intro:
       "Eseguiamo potature tecniche con attenzione alla fisiologia della pianta e al contesto di sicurezza.",
     body: "Ogni albero o arbusto richiede un approccio specifico. Valutiamo forma, carichi, punti critici e stagione, poi definiamo un intervento preciso che protegge la salute vegetale e migliora la gestione dello spazio.",
@@ -299,7 +299,7 @@ const serviceContents: Record<string, ServiceContent> = {
   },
   "rigenerazione-terreni": {
     quickAnswer:
-      "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente, con minore dipendenza da interventi chimici e maggiore stabilita complessiva.",
+      "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali, compostaggio e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente e autonomo, con minore dipendenza da interventi chimici, maggiore biodiversita nel terreno e una stabilita complessiva che migliora anno dopo anno.",
     intro:
       "Applichiamo pratiche biodinamiche per migliorare vitalita del terreno, equilibrio biologico e qualita del paesaggio.",
     body: "Il metodo integra nutrizione organica, osservazione dei cicli naturali e gestione preventiva. Cosi favoriamo biodiversita, resistenza delle piante e qualita estetica sostenibile.",

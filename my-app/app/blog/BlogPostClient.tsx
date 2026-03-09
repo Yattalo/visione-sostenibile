@@ -24,9 +24,9 @@ const quickAnswers: Record<string, string> = {
   "come-mantenere-giardino-autunno":
     "Per mantenere il giardino in autunno conviene pulire foglie e residui, proteggere le piante sensibili dal freddo, ridurre ma non azzerare l'irrigazione e concimare con prodotti ricchi di potassio. In questa fase prepari le radici all'inverno e migliori la ripresa vegetativa primaverile.",
   "tendenze-giardini-2026":
-    "Le tendenze giardino 2026 puntano su bassa manutenzione, biodiversità e tecnologia smart: piante resistenti, irrigazione automatizzata, aree living esterne e illuminazione efficiente. L'obiettivo è avere spazi belli, funzionali e sostenibili con minori consumi nel tempo.",
+    "Le tendenze giardino 2026 puntano su bassa manutenzione, biodiversità e tecnologia smart: piante resistenti alla siccità, irrigazione automatizzata con sensori, aree living esterne e illuminazione a LED. L'obiettivo è creare spazi belli, funzionali e sostenibili che richiedano meno risorse idriche ed energetiche nel tempo.",
   "piante-pendio":
-    "Le migliori piante per terreni in pendio sono quelle con radici robuste, buona tolleranza alla siccità e funzione antierosione. In pratica: lavanda, rosmarino, coprisuolo come vinca e timo strisciante, più una posa corretta con geotessili e irrigazione a goccia.",
+    "Le migliori piante per terreni in pendio sono quelle con radici profonde e robuste, buona tolleranza alla siccità e capacità antierosione. In pratica funzionano bene lavanda, rosmarino, coprisuolo come vinca e timo strisciante. Per risultati duraturi serve anche una posa corretta con geotessili, terrazzamenti leggeri e irrigazione a goccia.",
   "checkup-sostenibile-aree-verdi-aziendali":
     "Il Check-up Sostenibile è un sopralluogo tecnico di 60-90 minuti che analizza suolo, acqua, esposizione e criticità delle aree verdi aziendali o condominiali. Include tre priorità immediate, tre errori da evitare, un micro-piano in tre step e una stima di investimento per fase.",
 };
