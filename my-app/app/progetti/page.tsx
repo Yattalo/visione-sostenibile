@@ -12,6 +12,9 @@ import {
   Filter,
   X,
   Leaf,
+  Map,
+  Layers,
+  Tag,
 } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -145,10 +148,76 @@ function TextProjectCard({ project }: { project: Project }) {
   );
 }
 
+/* ─── Filter pill component ─── */
+
+function FilterPill({
+  label,
+  isActive,
+  onClick,
+  count,
+}: {
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+  count?: number;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "px-3 py-1.5 rounded-full text-sm font-sans transition-all inline-flex items-center gap-1.5",
+        isActive
+          ? "bg-leaf-700 text-white shadow-sm"
+          : "bg-paper-100 text-forest-800 hover:bg-paper-300"
+      )}
+    >
+      {label}
+      {count !== undefined && (
+        <span
+          className={cn(
+            "text-xs rounded-full px-1.5 py-0.5 min-w-[1.25rem] text-center leading-none",
+            isActive ? "bg-white/20" : "bg-paper-300/80"
+          )}
+        >
+          {count}
+        </span>
+      )}
+    </button>
+  );
+}
+
+/* ─── Active filter chip ─── */
+
+function ActiveFilterChip({
+  label,
+  categoryIcon,
+  onRemove,
+}: {
+  label: string;
+  categoryIcon: React.ReactNode;
+  onRemove: () => void;
+}) {
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      onClick={onRemove}
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-leaf-50 text-leaf-700 text-sm font-sans hover:bg-leaf-100 transition-colors"
+    >
+      {categoryIcon}
+      {label}
+      <X className="w-3.5 h-3.5" />
+    </motion.button>
+  );
+}
+
 export default function ProgettiPage() {
   const convexProjects = useQuery(api.projects.getAll);
   const allProjects = convexProjects ?? staticProjects;
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const [activeType, setActiveType] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
   const projectsWithPhotos = useMemo(() => {
@@ -158,6 +227,8 @@ export default function ProgettiPage() {
   const projectsWithoutPhotos = useMemo(() => {
     return allProjects.filter((p) => !p.has_photos);
   }, [allProjects]);
+
+  /* ─── Extract unique values for each filter dimension ─── */
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -169,13 +240,103 @@ export default function ProgettiPage() {
     return Array.from(tags).sort();
   }, [allProjects]);
 
-  const filteredProjects = activeTag
-    ? projectsWithPhotos.filter((p) => p.tags.includes(activeTag))
-    : projectsWithPhotos;
+  const allRegions = useMemo(() => {
+    const regions = new Set<string>();
+    for (const project of allProjects) {
+      if (project.region) {
+        regions.add(project.region);
+      }
+    }
+    return Array.from(regions).sort();
+  }, [allProjects]);
 
-  const filteredTextProjects = activeTag
-    ? projectsWithoutPhotos.filter((p) => p.tags.includes(activeTag))
-    : projectsWithoutPhotos;
+  const allTypes = useMemo(() => {
+    const types = new Set<string>();
+    for (const project of allProjects) {
+      if (project.type) {
+        types.add(project.type);
+      }
+    }
+    return Array.from(types).sort();
+  }, [allProjects]);
+
+  /* ─── Count active filters ─── */
+
+  const activeFilterCount = useMemo(() => {
+    let count = 0;
+    if (activeTag) count++;
+    if (activeRegion) count++;
+    if (activeType) count++;
+    return count;
+  }, [activeTag, activeRegion, activeType]);
+
+  /* ─── Apply all filters simultaneously ─── */
+
+  function matchesFilters(project: Project): boolean {
+    if (activeTag && !project.tags.includes(activeTag)) return false;
+    if (activeRegion && project.region !== activeRegion) return false;
+    if (activeType && project.type !== activeType) return false;
+    return true;
+  }
+
+  const filteredProjects = useMemo(
+    () => projectsWithPhotos.filter(matchesFilters),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [projectsWithPhotos, activeTag, activeRegion, activeType]
+  );
+
+  const filteredTextProjects = useMemo(
+    () => projectsWithoutPhotos.filter(matchesFilters),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [projectsWithoutPhotos, activeTag, activeRegion, activeType]
+  );
+
+  /* ─── Count projects per filter value (for badges) ─── */
+
+  const regionCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const region of allRegions) {
+      counts[region] = allProjects.filter(
+        (p) =>
+          p.region === region &&
+          (!activeTag || p.tags.includes(activeTag)) &&
+          (!activeType || p.type === activeType)
+      ).length;
+    }
+    return counts;
+  }, [allProjects, allRegions, activeTag, activeType]);
+
+  const typeCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const type of allTypes) {
+      counts[type] = allProjects.filter(
+        (p) =>
+          p.type === type &&
+          (!activeTag || p.tags.includes(activeTag)) &&
+          (!activeRegion || p.region === activeRegion)
+      ).length;
+    }
+    return counts;
+  }, [allProjects, allTypes, activeTag, activeRegion]);
+
+  const tagCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const tag of allTags) {
+      counts[tag] = allProjects.filter(
+        (p) =>
+          p.tags.includes(tag) &&
+          (!activeRegion || p.region === activeRegion) &&
+          (!activeType || p.type === activeType)
+      ).length;
+    }
+    return counts;
+  }, [allProjects, allTags, activeRegion, activeType]);
+
+  function clearAllFilters() {
+    setActiveTag(null);
+    setActiveRegion(null);
+    setActiveType(null);
+  }
 
   return (
     <div className="min-h-screen bg-paper-50">
@@ -217,38 +378,66 @@ export default function ProgettiPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          TAG FILTERS
+          FILTERS
       ═══════════════════════════════════════════════════ */}
       <section className="relative py-8 border-b border-paper-300 bg-paper-50/80 backdrop-blur-sm sticky top-20 z-30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center gap-4">
+          {/* Filter bar top row */}
+          <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-full font-sans text-sm transition-all",
-                showFilters || activeTag
+                showFilters || activeFilterCount > 0
                   ? "bg-leaf-700 text-white"
                   : "bg-paper-100 text-forest-800 hover:bg-paper-300"
               )}
             >
               <Filter className="w-4 h-4" />
               Filtra
-              {activeTag && (
+              {activeFilterCount > 0 && (
                 <span className="bg-white/20 rounded-full px-2 py-0.5 text-xs">
-                  1
+                  {activeFilterCount}
                 </span>
               )}
             </button>
 
-            {activeTag && (
+            {/* Active filter chips */}
+            <AnimatePresence>
+              {activeRegion && (
+                <ActiveFilterChip
+                  key={`region-${activeRegion}`}
+                  label={activeRegion}
+                  categoryIcon={<Map className="w-3 h-3" />}
+                  onRemove={() => setActiveRegion(null)}
+                />
+              )}
+              {activeType && (
+                <ActiveFilterChip
+                  key={`type-${activeType}`}
+                  label={activeType}
+                  categoryIcon={<Layers className="w-3 h-3" />}
+                  onRemove={() => setActiveType(null)}
+                />
+              )}
+              {activeTag && (
+                <ActiveFilterChip
+                  key={`tag-${activeTag}`}
+                  label={formatTag(activeTag)}
+                  categoryIcon={<Tag className="w-3 h-3" />}
+                  onRemove={() => setActiveTag(null)}
+                />
+              )}
+            </AnimatePresence>
+
+            {activeFilterCount > 1 && (
               <motion.button
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                onClick={() => setActiveTag(null)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-leaf-50 text-leaf-700 text-sm font-sans hover:bg-leaf-100 transition-colors"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                onClick={clearAllFilters}
+                className="text-sm font-sans text-forest-800/60 hover:text-leaf-700 underline underline-offset-2 transition-colors"
               >
-                {formatTag(activeTag)}
-                <X className="w-3.5 h-3.5" />
+                Rimuovi tutti
               </motion.button>
             )}
 
@@ -257,6 +446,7 @@ export default function ProgettiPage() {
             </span>
           </div>
 
+          {/* Expandable filter panel */}
           <AnimatePresence>
             {showFilters && (
               <motion.div
@@ -266,23 +456,77 @@ export default function ProgettiPage() {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="flex flex-wrap gap-2 pt-4">
-                  {allTags.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => {
-                        setActiveTag(activeTag === tag ? null : tag);
-                      }}
-                      className={cn(
-                        "px-3 py-1.5 rounded-full text-sm font-sans transition-all",
-                        activeTag === tag
-                          ? "bg-leaf-700 text-white"
-                          : "bg-paper-100 text-forest-800 hover:bg-paper-300"
-                      )}
-                    >
-                      {formatTag(tag)}
-                    </button>
-                  ))}
+                <div className="pt-6 space-y-5">
+                  {/* Region filter */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <Map className="w-3.5 h-3.5 text-leaf-600" />
+                      <span className="font-sans text-xs uppercase tracking-widest text-forest-800/60">
+                        Regione
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allRegions.map((region) => (
+                        <FilterPill
+                          key={region}
+                          label={region}
+                          isActive={activeRegion === region}
+                          count={regionCounts[region]}
+                          onClick={() =>
+                            setActiveRegion(
+                              activeRegion === region ? null : region
+                            )
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Type filter */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <Layers className="w-3.5 h-3.5 text-leaf-600" />
+                      <span className="font-sans text-xs uppercase tracking-widest text-forest-800/60">
+                        Tipologia
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allTypes.map((type) => (
+                        <FilterPill
+                          key={type}
+                          label={type}
+                          isActive={activeType === type}
+                          count={typeCounts[type]}
+                          onClick={() =>
+                            setActiveType(activeType === type ? null : type)
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tag filter */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <Tag className="w-3.5 h-3.5 text-leaf-600" />
+                      <span className="font-sans text-xs uppercase tracking-widest text-forest-800/60">
+                        Caratteristiche
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allTags.map((tag) => (
+                        <FilterPill
+                          key={tag}
+                          label={formatTag(tag)}
+                          isActive={activeTag === tag}
+                          count={tagCounts[tag]}
+                          onClick={() =>
+                            setActiveTag(activeTag === tag ? null : tag)
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -314,7 +558,7 @@ export default function ProgettiPage() {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeTag || "all"}
+              key={`${activeTag}-${activeRegion}-${activeType}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -330,13 +574,13 @@ export default function ProgettiPage() {
                 <div className="text-center py-16">
                   <Leaf className="w-12 h-12 text-paper-400 mx-auto mb-4" />
                   <p className="font-body text-forest-800/70">
-                    Nessun progetto fotografato per questo filtro.
+                    Nessun progetto fotografato per questi filtri.
                   </p>
                   <button
-                    onClick={() => setActiveTag(null)}
+                    onClick={clearAllFilters}
                     className="mt-4 font-sans text-sm text-leaf-600 hover:text-leaf-700 underline"
                   >
-                    Rimuovi filtro
+                    Rimuovi tutti i filtri
                   </button>
                 </div>
               )}
