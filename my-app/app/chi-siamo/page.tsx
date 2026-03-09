@@ -40,7 +40,7 @@ const values = [
     icon: Award,
     title: "Visione armonica",
     description:
-      "Andrea vede il giardino come un organismo unico: ogni elemento ha un ruolo. Progettiamo equilibri tra estetica, funzione e natura.",
+      "Un solo interlocutore per ottimizzare tempi, scelte e budget: niente rimbalzi tra fornitori, comunicazione interna organizzata, coordinamento puntuale delle competenze verticali coinvolte nel progetto.",
   },
   {
     icon: Users,

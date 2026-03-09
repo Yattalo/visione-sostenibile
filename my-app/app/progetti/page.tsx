@@ -210,8 +210,7 @@ export default function ProgettiPage() {
 
           <SlideUp delay={0.1}>
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Giardini privati, spazi condominiali, aree aziendali: ogni progetto
-              nasce dall&apos;ascolto e diventa un risultato concreto.
+              La bellezza è la naturale conseguenza di un progetto ben realizzato. Ogni intervento nasce da un bisogno reale: analisi, ascolto e decisioni che si apprezzano subito e reggono nel tempo.
             </p>
           </SlideUp>
         </div>
