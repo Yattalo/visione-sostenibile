@@ -10,6 +10,8 @@ import { CookiePreferences } from "./components/CookiePreferences";
 import { AuthSessionSync } from "./components/AuthSessionSync";
 import { pageSeo } from "./lib/seo-data";
 import { buildMetadata, SITE_URL, SITE_NAME } from "./lib/seo-metadata";
+import { JsonLd } from "./components/JsonLd";
+import { organizationJsonLd } from "./lib/json-ld";
 import localFont from "next/font/local";
 
 const walkway = localFont({
@@ -68,6 +70,7 @@ export default function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
+        <JsonLd data={organizationJsonLd()} />
         <ClerkProvider>
           <ConvexClientProvider>
             <AuthSessionSync />
