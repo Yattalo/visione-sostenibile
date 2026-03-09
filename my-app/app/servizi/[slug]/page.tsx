@@ -16,6 +16,7 @@ import {
   Sprout,
   Play,
   ChevronDown,
+  ListChecks,
 } from "lucide-react";
 import { api } from "../../../convex/_generated/api";
 import { normalizeServiceSlug, staticServices } from "../../lib/static-data";
@@ -34,6 +35,7 @@ type FaqItem = {
 };
 
 type ServiceContent = {
+  questionH2?: string;
   quickAnswer: string;
   intro: string;
   body: string;
@@ -110,6 +112,7 @@ const relatedBlogSlugsByService: Record<string, string[]> = {
 
 const serviceContents: Record<string, ServiceContent> = {
   "progettazione-giardini": {
+    questionH2: "Come funziona la progettazione di un giardino sostenibile?",
     quickAnswer:
       "La progettazione di giardini e orti sostenibili funziona meglio quando parte da un'analisi del sito, degli obiettivi d'uso e dalla scelta botanica locale. Con questo approccio ottieni un progetto realizzabile e coerente, riduci gli errori in fase di cantiere e abbassi sensibilmente i costi di manutenzione nel medio e lungo periodo.",
     intro:
@@ -157,6 +160,7 @@ const serviceContents: Record<string, ServiceContent> = {
     ],
   },
   "realizzazione-giardini": {
+    questionH2: "Quali vantaggi offre la realizzazione chiavi in mano del giardino?",
     quickAnswer:
       "La realizzazione chiavi in mano ti permette di avere un unico referente professionale dalla preparazione del terreno alla posa finale di piante e impianti. In questo modo riduci i tempi di coordinamento, elimini i tempi morti tra le fasi e abbassi i rischi di incompatibilita tra fornitori e materiali diversi.",
     intro:
@@ -204,6 +208,7 @@ const serviceContents: Record<string, ServiceContent> = {
     ],
   },
   manutenzioni: {
+    questionH2: "Come funziona la manutenzione sostenibile del giardino?",
     quickAnswer:
       "La manutenzione sostenibile mantiene il giardino sano e ordinato attraverso interventi programmati, tecniche a basso impatto ambientale e prevenzione stagionale mirata. Questo approccio riduce il degrado progressivo del verde, previene le emergenze fitosanitarie e aiuta a contenere i costi straordinari e imprevisti nel medio e lungo periodo.",
     intro:
@@ -251,6 +256,7 @@ const serviceContents: Record<string, ServiceContent> = {
     ],
   },
   potature: {
+    questionH2: "Quando e come potare le piante in modo professionale?",
     quickAnswer:
       "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto con tagli adeguati alla specie. Gli interventi graduali e non invasivi riducono lo stress vegetativo, favoriscono la cicatrizzazione naturale e aiutano una crescita equilibrata che mantiene la forma nel tempo.",
     intro:
@@ -298,6 +304,7 @@ const serviceContents: Record<string, ServiceContent> = {
     ],
   },
   "rigenerazione-terreni": {
+    questionH2: "Cos'è la gestione biodinamica del verde e come funziona?",
     quickAnswer:
       "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali, compostaggio e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente e autonomo, con minore dipendenza da interventi chimici, maggiore biodiversita nel terreno e una stabilita complessiva che migliora anno dopo anno.",
     intro:
@@ -390,6 +397,21 @@ function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: st
             </p>
           )}
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function QuickAnswerSection({ content }: { content: ServiceContent }) {
+  const heading = content.questionH2 ?? "Risposta rapida";
+  return (
+    <section className="max-w-5xl mx-auto px-6 lg:px-8 py-10 lg:py-12">
+      <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
+        <div className="flex items-center gap-2 mb-4">
+          <ListChecks className="w-5 h-5 text-leaf-600" />
+          <h2 className="font-display text-2xl text-forest-950">{heading}</h2>
+        </div>
+        <p className="font-body text-forest-900 leading-relaxed text-lg">{content.quickAnswer}</p>
       </div>
     </section>
   );
@@ -929,6 +951,9 @@ export default function ServiceDetailPage() {
 
       {/* Section 1: Full-Bleed Hero */}
       <HeroSection service={service} imageUrl={imageUrl} />
+
+      {/* Section 1.5: Quick Answer (SEO featured snippet) */}
+      <QuickAnswerSection content={content} />
 
       {/* Section 2: Editorial Intro */}
       <EditorialIntro content={content} />

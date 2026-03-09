@@ -20,6 +20,13 @@ type FaqItem = {
 
 const SITE_URL = "https://www.visionesostenibile.it";
 
+const quickAnswerH2s: Record<string, string> = {
+  "come-mantenere-giardino-autunno": "Come mantenere il giardino in autunno?",
+  "tendenze-giardini-2026": "Quali sono le tendenze giardino 2026?",
+  "piante-pendio": "Quali piante scegliere per un terreno in pendio?",
+  "checkup-sostenibile-aree-verdi-aziendali": "Cos'è il Check-up Sostenibile per aree verdi aziendali?",
+};
+
 const quickAnswers: Record<string, string> = {
   "come-mantenere-giardino-autunno":
     "Per mantenere il giardino in autunno conviene pulire foglie e residui, proteggere le piante sensibili dal freddo, ridurre ma non azzerare l'irrigazione e concimare con prodotti ricchi di potassio. In questa fase prepari le radici all'inverno e migliori la ripresa vegetativa primaverile.",
@@ -412,6 +419,7 @@ export function BlogPostClient({
   const resolvedTemplate = resolveTemplate(template, postIndex);
 
   const quickAnswer = quickAnswers[slug] ?? post.excerpt;
+  const quickAnswerHeading = quickAnswerH2s[slug] ?? "Risposta rapida";
   const relatedService = serviceLinksByPostSlug[slug];
   const videoAssets = (galleryAssets ?? []).filter(
     (asset) => (asset.mediaType ?? "image") === "video" && Boolean(asset.imageUrl)
@@ -600,7 +608,7 @@ export function BlogPostClient({
         <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
           <div className="flex items-center gap-2 mb-4">
             <ListChecks className="w-5 h-5 text-leaf-600" />
-            <h2 className="font-display text-2xl text-forest-950">Risposta rapida</h2>
+            <h2 className="font-display text-2xl text-forest-950">{quickAnswerHeading}</h2>
           </div>
           <p className="font-body text-forest-900 leading-relaxed text-lg">{quickAnswer}</p>
         </div>
