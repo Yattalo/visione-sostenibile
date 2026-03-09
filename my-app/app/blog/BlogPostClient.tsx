@@ -422,7 +422,7 @@ export function BlogPostClient({
   const resolvedTemplate = resolveTemplate(template, postIndex);
 
   const quickAnswer = quickAnswers[slug] ?? post.excerpt;
-  const quickAnswerHeading = quickAnswerH2s[slug] ?? "Risposta rapida";
+  const quickAnswerHeading = quickAnswerH2s[slug] ?? "Qual è la risposta rapida?";
   const relatedService = serviceLinksByPostSlug[slug];
   const videoAssets = (galleryAssets ?? []).filter(
     (asset) => (asset.mediaType ?? "image") === "video" && Boolean(asset.imageUrl)

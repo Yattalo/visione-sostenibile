@@ -363,7 +363,7 @@ Con le piante giuste, la tecnica corretta e un po' di pazienza, anche il pendio 
     slug: "checkup-sostenibile-aree-verdi-aziendali",
     title: "Check-up Sostenibile: il Primo Passo per Aree Verdi Aziendali che Non Bruciano Budget",
     excerpt:
-      "Il Check-up Sostenibile analizza suolo, acqua e criticità delle aree verdi aziendali e condominiali. Un sopralluogo di 60-90 minuti che trasforma la gestione del verde da emergenza a strategia.",
+      "Il Check-up Sostenibile analizza suolo, acqua e criticità delle aree verdi aziendali. 60-90 minuti per trasformare la gestione del verde in strategia.",
     content: `
 Gestire il verde aziendale o condominiale spesso significa rincorrere emergenze: piante che soffrono, impianti che perdono, fornitori diversi che non si parlano, e costi che lievitano senza un piano chiaro. Se vi riconoscete in questo scenario, non siete soli — e la soluzione non è spendere di più, ma partire dal punto giusto.
 
