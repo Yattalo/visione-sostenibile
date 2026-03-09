@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { CheckCircle, Shield, Star, Leaf, Users, Clock, Target, Eye, FileText, Download, X } from "lucide-react";
 import { Button } from "../components/ui/Button";
@@ -8,53 +9,92 @@ import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, StaggerContainer, StaggerItem } from "../components/animations";
 
-const certifications = [
+const qualityBoxes = [
   {
     icon: Leaf,
-    title: "Biodinamica Certificata",
-    description: "Metodologia certificata secondo i principi dell'agricoltura biodinamica di Rudolf Steiner. Andrea Giordano pratica la biodinamica da oltre 20 anni.",
-    issuedBy: "Associazione per l'Agricoltura Biodinamica",
-    year: "",
+    title: "Approccio biodinamico",
+    description: "Metodo certificato: nessun prodotto chimico, terreni vivi, piante più forti. Oltre 20 anni di pratica sul campo.",
     category: "biodynamic",
   },
   {
     icon: Shield,
-    title: "Giardinaggio a Impatto Zero",
-    description: "Compensazione totale delle emissioni CO₂ attraverso pratiche sostenibili e riforestazione. Garantiamo un impatto ambientale netto pari a zero.",
-    issuedBy: "Visione Sostenibile",
-    year: "",
+    title: "Sicurezza sul lavoro certificata",
+    description: "Tutti gli attestati obbligatori aggiornati: formazione generale, antincendio, preposto, RSPP, RLS.",
     category: "eco",
   },
   {
     icon: CheckCircle,
-    title: "Zero Prodotti Chimici",
-    description: "Utilizzo esclusivo di prodotti naturali e biologici per la cura del verde. Eliminazione totale del rischio di intossicazione per persone e animali.",
-    issuedBy: "Visione Sostenibile",
-    year: "",
+    title: "Zero prodotti chimici",
+    description: "Nessun fitosanitario, nessun rischio per bambini, animali o falde. L'unico trattamento è la prevenzione naturale.",
+    category: "eco",
+  },
+  {
+    icon: Users,
+    title: "Un solo referente, una squadra coordinata",
+    description: "Andrea è il tuo unico interlocutore. Coordina un team di competenze verticali e partner selezionati.",
+    category: "eco",
+  },
+  {
+    icon: Target,
+    title: "Preventivo trasparente",
+    description: "Ogni voce spiegata, nessun costo nascosto. Sai sempre cosa stai pagando e perché.",
+    category: "eco",
+  },
+  {
+    icon: Clock,
+    title: "Manutenzione programmata",
+    description: "Calendario stagionale, interventi mirati, prevenzione. Il verde resta un valore, non torna un problema.",
+    category: "eco",
+  },
+  {
+    icon: Star,
+    title: "Formazione continua",
+    description: "Corsi, aggiornamenti, confronto con altri professionisti. Il metodo evolve con il clima e le esigenze.",
+    category: "eco",
+  },
+  {
+    icon: Eye,
+    title: "Documentazione e reportistica",
+    description: "Foto prima/dopo, report di intervento, stato del verde. Tutto tracciabile e condivisibile.",
     category: "eco",
   },
 ];
 
 const commitments = [
   {
-    icon: Star,
-    title: "Eccellenza Garantita",
-    description: "Ogni progetto è curato nei minimi dettagli con standard qualitativi elevati.",
+    icon: Leaf,
+    title: "Biodinamica, non chimica",
+    description: "Metodo naturale certificato, nessun prodotto fitosanitario.",
+  },
+  {
+    icon: Shield,
+    title: "Sicurezza verificabile",
+    description: "Attestati aggiornati e consultabili direttamente su questo sito.",
   },
   {
     icon: Users,
-    title: "Professionisti Qualificati",
-    description: "Team di esperti con formazione continua e certificazioni aggiornate.",
-  },
-  {
-    icon: Clock,
-    title: "Puntualità Assicurata",
-    description: "Rispetto dei tempi concordati con comunicazione trasparente.",
+    title: "Un referente unico",
+    description: "Andrea coordina tutto: tempi, scelte, budget, squadra.",
   },
   {
     icon: Target,
-    title: "Soddisfazione Garantita",
-    description: "Garanzia su tutti i lavori con supporto post-intervento dedicato.",
+    title: "Preventivi trasparenti",
+    description: "Ogni voce spiegata, nessun costo nascosto.",
+  },
+  {
+    icon: Clock,
+    title: "Manutenzione programmata",
+    description: "Interventi stagionali pianificati per un verde sempre in ordine.",
+  },
+  {
+    icon: Star,
+    title: "Formazione continua",
+    description: "Aggiornamento costante su metodi, normative, soluzioni.",
+  },
+  {
+    icon: Eye,
+    title: "Tutto documentato",
+    description: "Foto, report, stato del verde: trasparenza totale.",
   },
 ];
 
@@ -129,12 +169,12 @@ export default function QualitaPage() {
               Qualità Certificata
             </Badge>
             <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 uppercase tracking-tight">
-              Il Nostro Impegno per
-              <span className="block italic text-leaf-400 font-light lowercase">l&apos;Eccellenza</span>
+              Qualità è
+              <span className="block italic text-leaf-400 font-light lowercase">metodo, sicurezza e trasparenza</span>
             </h1>
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
-              Ogni progetto è realizzato con professionalità, competenza e passione.
-              Scopri le nostre certificazioni e gli standard che ci guidano.
+              Non ci limitiamo a fare bene il lavoro. Ci assicuriamo che ogni
+              scelta sia spiegabile, ogni risultato misurabile.
             </p>
           </SlideUp>
         </div>
@@ -146,48 +186,30 @@ export default function QualitaPage() {
           <SlideUp>
             <div className="text-center mb-16">
               <Badge className="bg-leaf-100 text-leaf-700 mb-4">
-                Le Nostre Certificazioni
+                I Nostri Standard
               </Badge>
               <h2 className="font-display text-4xl text-forest-950">
-                Standard di Eccellenza
+                Cosa garantiamo, concretamente
               </h2>
             </div>
           </SlideUp>
 
           <StaggerContainer delay={0.2}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {certifications.map((cert, index) => (
-                <StaggerItem key={cert.title} delay={index * 0.1}>
+              {qualityBoxes.map((box, index) => (
+                <StaggerItem key={box.title} delay={index * 0.1}>
                   <Card variant="elevated" className="h-full group hover:shadow-floating transition-all duration-500">
                     <div className="flex items-start gap-6">
                       <div className="w-16 h-16 rounded-2xl bg-leaf-100 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
-                        <cert.icon className="w-8 h-8 text-leaf-600" />
+                        <box.icon className="w-8 h-8 text-leaf-600" />
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-display text-xl text-forest-950">
-                            {cert.title}
-                          </h3>
-                          <Badge
-                            variant={cert.category === "eco" || cert.category === "biodynamic" ? "eco" : "primary"}
-                            size="sm"
-                          >
-                            {cert.year}
-                          </Badge>
-                        </div>
-                        <p className="font-body text-forest-800 mb-2">
-                          {cert.description}
+                        <h3 className="font-display text-xl text-forest-950 mb-2">
+                          {box.title}
+                        </h3>
+                        <p className="font-body text-forest-800">
+                          {box.description}
                         </p>
-                        <p className="font-body text-sm text-paper-500 mb-4">
-                          <span className="font-medium">Rilasciato da:</span> {cert.issuedBy}
-                        </p>
-                        <a
-                          href="#"
-                          className="text-sm text-leaf-700 hover:text-leaf-600 flex items-center gap-1.5 font-medium transition-colors"
-                        >
-                          <FileText className="w-4 h-4" />
-                          Visualizza Certificato
-                        </a>
                       </div>
                     </div>
                   </Card>
@@ -334,15 +356,15 @@ export default function QualitaPage() {
           <SlideUp>
             <div className="text-center mb-16">
               <Badge className="bg-paper-300 text-forest-900 mb-4">
-                I Nostri Valori
+                In sintesi
               </Badge>
               <h2 className="font-display text-4xl text-forest-950">
-                Cosa Ci Guida
+                Perché scegliere Visione Sostenibile
               </h2>
             </div>
           </SlideUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {commitments.map((commitment, index) => (
               <StaggerItem key={commitment.title} delay={index * 0.1}>
                 <Card variant="outline" className="h-full text-center group hover:border-leaf-500 transition-colors duration-300">
@@ -367,18 +389,20 @@ export default function QualitaPage() {
         <div className="max-w-2xl mx-auto text-center">
           <SlideUp>
             <Badge className="bg-leaf-100 text-leaf-700 mb-4">
-              Garanzia
+              Prossimo passo
             </Badge>
             <h2 className="font-display text-4xl text-forest-950 mb-6">
-              La Tua Tranquillità è la Nostra Priorità
+              Vuoi verificare di persona?
             </h2>
             <p className="font-body text-lg text-forest-800 mb-8">
-              Ogni servizio è coperto da garanzia. Il nostro team è sempre a tua disposizione
-              per qualsiasi necessità post-intervento.
+              Prenota un sopralluogo gratuito: ti mostriamo il metodo, ti spieghiamo le scelte
+              e ti lasciamo un piano chiaro — senza impegno.
             </p>
-            <Button className="bg-leaf-700 hover:bg-leaf-600 text-white">
-              Contattaci per una Consulenza
-            </Button>
+            <Link href="/contatti">
+              <Button className="bg-sun-400 hover:bg-sun-500 text-white">
+                Prenota un sopralluogo
+              </Button>
+            </Link>
           </SlideUp>
         </div>
       </section>

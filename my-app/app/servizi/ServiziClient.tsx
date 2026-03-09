@@ -96,15 +96,15 @@ export function ServiziClient() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
-              Servizi su misura
-              <span className="block italic text-leaf-400">per il tuo spazio verde</span>
+              Cosa facciamo
+              <span className="block italic text-leaf-400">(e come lo facciamo)</span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.1}>
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Progettazione, realizzazione e manutenzione con un referente unico
-              e competenze verticali coordinate.
+              Ogni servizio segue lo stesso metodo: ascolto, progetto, realizzazione,
+              cura nel tempo. Un referente unico, competenze verticali coordinate.
             </p>
           </SlideUp>
 
@@ -135,7 +135,7 @@ export function ServiziClient() {
               </h2>
             </div>
             <p className="font-body text-forest-800/70 max-w-2xl mb-8">
-              Il cuore del nostro lavoro: progettazione, realizzazione e manutenzione di giardini che resistono al clima di oggi.
+              Il cuore del nostro lavoro: progettazione, realizzazione e cura di giardini che funzionano in ogni stagione.
             </p>
             <StaggerContainer>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -167,7 +167,7 @@ export function ServiziClient() {
               </h2>
             </div>
             <p className="font-body text-forest-800/70 max-w-2xl mb-8">
-              Trasformiamo il tuo giardino in uno spazio da vivere: luce, arredi, strutture per stare all&apos;aperto.
+              Trasformiamo il giardino in uno spazio da vivere: luce, materiali, arredi, camminamenti per stare all&apos;aperto tutto l&apos;anno.
             </p>
             <StaggerContainer>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -195,11 +195,11 @@ export function ServiziClient() {
                 Livello 3
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-forest-950">
-                Acqua e benessere <span className="italic text-leaf-700">(premium)</span>
+                Specializzazioni <span className="italic text-leaf-700">(premium)</span>
               </h2>
             </div>
             <p className="font-body text-forest-800/70 max-w-2xl mb-8">
-              In partnership con selezionati specialisti: laghetti, punti acqua e integrazioni paesaggistiche che valorizzano lo spazio.
+              Servizi avanzati in partnership con specialisti selezionati: ingegneria naturalistica, elementi acquatici e integrazioni paesaggistiche.
             </p>
             <StaggerContainer>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

@@ -38,9 +38,9 @@ const values = [
   },
   {
     icon: Award,
-    title: "Un referente",
+    title: "Visione armonica",
     description:
-      "Un solo interlocutore per tempi, scelte e budget: niente rimbalzi tra fornitori. Andrea coordina competenze verticali e partner selezionati.",
+      "Andrea vede il giardino come un organismo unico: ogni elemento ha un ruolo. Progettiamo equilibri tra estetica, funzione e natura.",
   },
   {
     icon: Users,
@@ -83,7 +83,7 @@ export default function ChiSiamoPage() {
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-white text-balance">
               Andrea Giordano
               <span className="block italic text-leaf-400">
-                e una squadra su misura
+                il giardiniere che ti spiega i perché
               </span>
             </h1>
 
@@ -218,7 +218,7 @@ export default function ChiSiamoPage() {
               <h2 className="font-display text-4xl md:text-5xl text-paper-50 leading-tight mb-8">
                 È una strategia.
                 <span className="block italic text-leaf-400">
-                  Meno sprechi, più durata.
+                  Meno sprechi, più equilibrio, maggiore durata.
                 </span>
               </h2>
               <div className="space-y-6 font-body text-paper-300/80 leading-relaxed">

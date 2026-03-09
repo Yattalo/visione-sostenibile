@@ -203,15 +203,15 @@ export default function ProgettiPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
-              Progetti
-              <span className="block italic text-leaf-400">realizzati</span>
+              I progetti che ci rendono
+              <span className="block italic text-leaf-400">orgogliosi</span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.1}>
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Dall&apos;idea alla realizzazione: interventi su misura per
-              giardini, terrazzi e spazi verdi privati o professionali.
+              Giardini privati, spazi condominiali, aree aziendali: ogni progetto
+              nasce dall&apos;ascolto e diventa un risultato concreto.
             </p>
           </SlideUp>
         </div>
@@ -410,14 +410,14 @@ export default function ProgettiPage() {
               Il tuo progetto
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-light text-paper-50 mt-4 mb-6 leading-tight">
-              Vuoi realizzare il tuo
+              Hai uno spazio che merita
               <span className="block italic text-leaf-400">
-                spazio verde?
+                di più?
               </span>
             </h2>
             <p className="font-body text-lg text-paper-300/80 mb-10 max-w-2xl mx-auto leading-relaxed">
               Ogni progetto inizia da un incontro. Raccontaci la tua visione e
-              insieme la trasformeremo in realta.
+              insieme la trasformeremo in realtà.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
