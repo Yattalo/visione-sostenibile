@@ -20,7 +20,9 @@ export default function AdminReviewsPage() {
   const approveReview = useMutation(api.reviews.approve);
   const rejectReview = useMutation(api.reviews.reject);
   const removeReview = useMutation(api.reviews.remove);
+  const setCategoryMutation = useMutation(api.reviews.setCategory);
   const [filter, setFilter] = useState<"all" | "pending" | "approved">("all");
+  const [categoryFilter, setCategoryFilter] = useState<"all" | "client" | "partner">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredReviews = reviews.filter((review) => {
@@ -31,7 +33,10 @@ export default function AdminReviewsPage() {
       filter === "all" ||
       (filter === "pending" && !review.isApproved) ||
       (filter === "approved" && review.isApproved);
-    return matchesSearch && matchesFilter;
+    const matchesCategory =
+      categoryFilter === "all" ||
+      (review as { category?: string }).category === categoryFilter;
+    return matchesSearch && matchesFilter && matchesCategory;
   });
 
   const renderStars = (rating: number) => {
@@ -85,6 +90,21 @@ export default function AdminReviewsPage() {
               </button>
             ))}
           </div>
+          <div className="flex gap-2">
+            {(["all", "client", "partner"] as const).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCategoryFilter(c)}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  categoryFilter === c
+                    ? "bg-leaf-500 text-white"
+                    : "bg-white border border-border hover:bg-muted"
+                }`}
+              >
+                {c === "all" ? "Tutti" : c === "client" ? "Clienti" : "Partner"}
+              </button>
+            ))}
+          </div>
           <div className="flex-1">
             <Input
               placeholder="Cerca recensioni..."
@@ -123,6 +143,17 @@ export default function AdminReviewsPage() {
                       <Badge variant={review.isApproved ? "success" : "warning"}>
                         {review.isApproved ? "Approvata" : "In attesa"}
                       </Badge>
+                      <button
+                        onClick={() => {
+                          const current = (review as { category?: string }).category ?? "client";
+                          const next = current === "client" ? "partner" : "client";
+                          setCategoryMutation({ reviewId: review._id, category: next as "client" | "partner" });
+                        }}
+                      >
+                        <Badge variant={(review as { category?: string }).category === "partner" ? "primary" : "default"}>
+                          {(review as { category?: string }).category === "partner" ? "Partner" : "Cliente"}
+                        </Badge>
+                      </button>
                     </div>
                     <p className="text-foreground">&ldquo;{review.text}&rdquo;</p>
                   </div>

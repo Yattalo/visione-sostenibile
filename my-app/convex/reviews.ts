@@ -2,11 +2,22 @@ import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { requireAdmin } from "./authHelpers";
 
-// Get approved reviews
+// Get approved reviews, optionally filtered by category
 export const getApproved = query({
-  args: { limit: v.optional(v.number()) },
+  args: {
+    limit: v.optional(v.number()),
+    category: v.optional(v.union(v.literal("client"), v.literal("partner"))),
+  },
   handler: async (ctx, args) => {
     const limit = args.limit ?? 100;
+    if (args.category) {
+      return await ctx.db
+        .query("reviews")
+        .withIndex("by_category", (q) =>
+          q.eq("category", args.category).eq("isApproved", true)
+        )
+        .take(limit);
+    }
     return await ctx.db
       .query("reviews")
       .withIndex("by_approved", (q) => q.eq("isApproved", true))
@@ -37,10 +48,12 @@ export const submit = mutation({
     authorLocation: v.optional(v.string()),
     rating: v.number(),
     text: v.string(),
+    category: v.optional(v.union(v.literal("client"), v.literal("partner"))),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("reviews", {
       ...args,
+      category: args.category ?? "client",
       date: new Date().toISOString(),
       isApproved: false, // require moderation
       createdAt: Date.now(),
@@ -64,6 +77,19 @@ export const reject = mutation({
   handler: async (ctx, args) => {
     await requireAdmin(ctx);
     await ctx.db.delete(args.reviewId);
+    return { success: true };
+  },
+});
+
+// Set review category (admin)
+export const setCategory = mutation({
+  args: {
+    reviewId: v.id("reviews"),
+    category: v.union(v.literal("client"), v.literal("partner")),
+  },
+  handler: async (ctx, args) => {
+    await requireAdmin(ctx);
+    await ctx.db.patch(args.reviewId, { category: args.category });
     return { success: true };
   },
 });
@@ -95,6 +121,7 @@ export const seed = mutation({
         rating: 5,
         text: "Andrea ha trasformato il nostro giardino in un'oasi di pace. La sua conoscenza delle piante biodinamiche è straordinaria. Il progetto ha superato ogni aspettativa.",
         date: "2025-11-15",
+        category: "client" as const,
         isApproved: true,
         createdAt: Date.now() - 86400000 * 90,
       },
@@ -104,6 +131,7 @@ export const seed = mutation({
         rating: 5,
         text: "Professionalità e passione incredibili. Il giardino che ci ha realizzato è bellissimo e richiede pochissima manutenzione. I vicini ci fermano sempre per farci i complimenti!",
         date: "2025-12-02",
+        category: "client" as const,
         isApproved: true,
         createdAt: Date.now() - 86400000 * 75,
       },
@@ -113,6 +141,7 @@ export const seed = mutation({
         rating: 5,
         text: "Avevamo uno spazio abbandonato e Andrea lo ha rigenerato completamente. Ora è il nostro angolo preferito della casa. Approccio biodinamico serio e risultati visibili.",
         date: "2026-01-10",
+        category: "client" as const,
         isApproved: true,
         createdAt: Date.now() - 86400000 * 40,
       },
@@ -122,6 +151,7 @@ export const seed = mutation({
         rating: 4,
         text: "Ottimo lavoro di progettazione. Andrea ascolta davvero le esigenze del cliente. Il sistema di irrigazione che ha installato è efficientissimo e ci fa risparmiare acqua.",
         date: "2026-01-25",
+        category: "client" as const,
         isApproved: true,
         createdAt: Date.now() - 86400000 * 25,
       },
@@ -131,6 +161,7 @@ export const seed = mutation({
         rating: 5,
         text: "Dalla potatura alla manutenzione stagionale, Visione Sostenibile è il partner perfetto per chi ama il proprio giardino. Competenza e puntualità sempre al top.",
         date: "2026-02-05",
+        category: "client" as const,
         isApproved: true,
         createdAt: Date.now() - 86400000 * 14,
       },
@@ -140,6 +171,7 @@ export const seed = mutation({
         rating: 5,
         text: "Ho scelto Andrea per il mio terrazzo in centro a Torino. Ha creato un giardino pensile meraviglioso con piante autoctone. Ogni mattina mi sembra di essere in campagna!",
         date: "2026-02-12",
+        category: "client" as const,
         isApproved: true,
         createdAt: Date.now() - 86400000 * 7,
       },

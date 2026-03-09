@@ -12,6 +12,7 @@ interface Review {
   authorLocation?: string;
   rating: number;
   text: string;
+  category?: "client" | "partner";
   serviceSlug?: string;
   isApproved: boolean;
 }
@@ -24,6 +25,7 @@ interface ReviewsWidgetProps {
   maxReviews?: number;
   variant?: "grid" | "carousel" | "featured";
   filterByService?: string;
+  filterByCategory?: "client" | "partner";
   className?: string;
 }
 
@@ -52,13 +54,16 @@ export function ReviewsWidget({
   maxReviews = 6,
   variant = "grid",
   filterByService,
+  filterByCategory,
   className,
 }: ReviewsWidgetProps) {
   const convexReviews = useQuery(api.reviews.getFeatured, { limit: maxReviews });
   const reviews = reviewsProp ?? (convexReviews as Review[] | undefined) ?? [];
-  const filteredReviews = filterByService
-    ? reviews.filter((r) => r.serviceSlug === filterByService)
-    : reviews;
+  const filteredReviews = reviews.filter((r) => {
+    if (filterByService && r.serviceSlug !== filterByService) return false;
+    if (filterByCategory && r.category !== filterByCategory) return false;
+    return true;
+  });
 
   const displayReviews = filteredReviews.slice(0, maxReviews);
 

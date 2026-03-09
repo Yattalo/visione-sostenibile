@@ -66,12 +66,14 @@ export default defineSchema({
     rating: v.number(),
     text: v.string(),
     date: v.optional(v.string()),
+    category: v.optional(v.union(v.literal("client"), v.literal("partner"))),
     isApproved: v.boolean(),
     order: v.optional(v.number()),
     createdAt: v.number(),
   })
     .index("by_approved", ["isApproved", "order"])
-    .index("by_rating", ["isApproved", "rating"]),
+    .index("by_rating", ["isApproved", "rating"])
+    .index("by_category", ["category", "isApproved"]),
 
   contactSubmissions: defineTable({
     name: v.string(),
