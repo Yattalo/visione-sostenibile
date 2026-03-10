@@ -62,6 +62,7 @@ export function Navbar() {
       className="fixed top-6 left-1/2 -translate-x-1/2 z-header w-[92%] max-w-5xl"
     >
       <nav
+        aria-label="Navigazione principale"
         className={cn(
           "rounded-full transition-all duration-500",
           useDarkText

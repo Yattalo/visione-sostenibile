@@ -167,6 +167,7 @@ function FilterPill({
   return (
     <button
       onClick={onClick}
+      aria-pressed={isActive}
       className={cn(
         "px-3 py-1.5 rounded-full text-sm font-sans transition-all inline-flex items-center gap-1.5",
         isActive
@@ -206,6 +207,7 @@ function ActiveFilterChip({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       onClick={onRemove}
+      aria-label={`Rimuovi filtro: ${label}`}
       className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-leaf-50 text-leaf-700 text-sm font-sans hover:bg-leaf-100 transition-colors"
     >
       {categoryIcon}
@@ -391,6 +393,8 @@ export default function ProgettiPage() {
           <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => setShowFilters(!showFilters)}
+              aria-expanded={showFilters}
+              aria-controls="project-filters"
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-full font-sans text-sm transition-all",
                 showFilters || activeFilterCount > 0
@@ -455,6 +459,7 @@ export default function ProgettiPage() {
           <AnimatePresence>
             {showFilters && (
               <motion.div
+                id="project-filters"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}

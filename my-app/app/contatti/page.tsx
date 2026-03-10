@@ -500,12 +500,14 @@ export default function ContattiPage() {
                                 className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
                               />
                               <div className="w-full">
-                                <label className="block text-sm font-medium text-foreground mb-2">
+                                <label htmlFor="service-interest-select" className="block text-sm font-medium text-foreground mb-2">
                                   Servizio di interesse *
                                 </label>
                                 <div className="relative">
                                   <select
+                                    id="service-interest-select"
                                     value={formData.serviceInterest}
+                                    aria-invalid={errors.serviceInterest ? true : undefined}
                                     onChange={(e) =>
                                       updateField(
                                         "serviceInterest",

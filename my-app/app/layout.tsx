@@ -86,12 +86,18 @@ export default function RootLayout({
     <html lang="it" suppressHydrationWarning>
       <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
         <JsonLd data={organizationJsonLd()} />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[999] focus:bg-sun-400 focus:text-forest-950 focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold focus:outline-none"
+        >
+          Vai al contenuto principale
+        </a>
         <ClerkProvider>
           <ConvexClientProvider>
             <AuthSessionSync />
             <Navbar />
             <Suspense fallback={null}><Analytics /></Suspense>
-            <main className="flex-grow">{children}</main>
+            <main id="main-content" className="flex-grow">{children}</main>
             <Footer />
             <CookieConsent />
             <CookiePreferences />

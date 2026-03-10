@@ -69,6 +69,7 @@ export function ServiziClient() {
             loop
             muted
             playsInline
+            aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           >
             <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />

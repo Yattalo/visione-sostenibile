@@ -352,9 +352,9 @@ export default function ChiSiamoPage() {
                     <div className="w-12 h-12 rounded-xl bg-leaf-100 flex items-center justify-center mb-4">
                       <item.icon className="w-6 h-6 text-leaf-700" />
                     </div>
-                    <h4 className="font-display text-lg text-forest-950 mb-2">
+                    <h3 className="font-display text-lg text-forest-950 mb-2">
                       {item.label}
-                    </h4>
+                    </h3>
                     <p className="font-body text-sm text-forest-800/70 leading-relaxed">
                       {item.detail}
                     </p>

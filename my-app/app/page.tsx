@@ -87,6 +87,7 @@ export default function HomePage() {
             loop
             muted
             playsInline
+            aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           >
             <source src="/videos/garden-bloom-timelapse.mp4" type="video/mp4" />

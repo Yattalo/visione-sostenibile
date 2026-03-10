@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   CheckCircle,
   Shield,
@@ -228,6 +228,22 @@ const stats = [
 
 export default function QualitaPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  const closePreview = useCallback(() => setPreviewUrl(null), []);
+
+  // Close modal on Escape key and trap body scroll
+  useEffect(() => {
+    if (!previewUrl) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closePreview();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [previewUrl, closePreview]);
 
   return (
     <div className="min-h-screen bg-paper-50">
@@ -564,8 +580,11 @@ export default function QualitaPage() {
       {/* ── PDF Preview Modal ── */}
       {previewUrl && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Anteprima attestato PDF"
           className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setPreviewUrl(null)}
+          onClick={closePreview}
         >
           <div
             className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl h-[85vh] flex flex-col overflow-hidden"
@@ -578,7 +597,8 @@ export default function QualitaPage() {
               <button
                 type="button"
                 aria-label="Chiudi anteprima"
-                onClick={() => setPreviewUrl(null)}
+                onClick={closePreview}
+                autoFocus
                 className="w-8 h-8 rounded-full hover:bg-paper-100 flex items-center justify-center transition-colors"
               >
                 <X className="w-4 h-4 text-forest-700" />

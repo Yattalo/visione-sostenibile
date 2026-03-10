@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 import { cn } from "../../lib/utils";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,11 +10,15 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, error, icon, type = "text", ...props }, ref) => {
+  ({ className, label, error, icon, type = "text", id: idProp, ...props }, ref) => {
+    const autoId = useId();
+    const id = idProp ?? autoId;
+    const errorId = error ? `${id}-error` : undefined;
+
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-sm font-medium text-foreground mb-2">
+          <label htmlFor={id} className="block text-sm font-medium text-foreground mb-2">
             {label}
           </label>
         )}
@@ -26,7 +30,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
           <input
             type={type}
+            id={id}
             ref={ref}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={errorId}
             className={cn(
               "flex h-12 w-full rounded-xl border border-input bg-background px-4 py-2",
               "text-sm md:text-base ring-offset-background",
@@ -42,7 +49,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
         </div>
         {error && (
-          <p className="mt-1.5 text-sm text-red-500">{error}</p>
+          <p id={errorId} className="mt-1.5 text-sm text-red-500" role="alert">{error}</p>
         )}
       </div>
     );
@@ -57,16 +64,23 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, error, ...props }, ref) => {
+  ({ className, label, error, id: idProp, ...props }, ref) => {
+    const autoId = useId();
+    const id = idProp ?? autoId;
+    const errorId = error ? `${id}-error` : undefined;
+
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-sm font-medium text-foreground mb-2">
+          <label htmlFor={id} className="block text-sm font-medium text-foreground mb-2">
             {label}
           </label>
         )}
         <textarea
+          id={id}
           ref={ref}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={errorId}
           className={cn(
             "flex min-h-[120px] w-full rounded-xl border border-input bg-background px-4 py-3",
             "text-sm md:text-base ring-offset-background",
@@ -80,7 +94,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p className="mt-1.5 text-sm text-red-500">{error}</p>
+          <p id={errorId} className="mt-1.5 text-sm text-red-500" role="alert">{error}</p>
         )}
       </div>
     );

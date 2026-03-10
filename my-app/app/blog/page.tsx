@@ -264,6 +264,7 @@ export default function BlogPage() {
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
+                    aria-pressed={isActive}
                     className={`
                       relative px-5 py-2.5 rounded-full font-sans text-sm font-medium
                       transition-all duration-300 cursor-pointer
@@ -350,9 +351,9 @@ export default function BlogPage() {
 
                             {/* Content */}
                             <CardContent className="p-6">
-                              <h2 className="font-display text-lg lg:text-xl font-light uppercase tracking-wide text-forest-950 mb-2.5 leading-snug group-hover:text-leaf-700 transition-colors duration-300 line-clamp-2">
+                              <h3 className="font-display text-lg lg:text-xl font-light uppercase tracking-wide text-forest-950 mb-2.5 leading-snug group-hover:text-leaf-700 transition-colors duration-300 line-clamp-2">
                                 {post.title}
-                              </h2>
+                              </h3>
                               <p className="font-body text-forest-800/65 text-sm leading-relaxed mb-5 line-clamp-3">
                                 {post.excerpt}
                               </p>

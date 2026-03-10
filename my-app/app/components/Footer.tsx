@@ -78,16 +78,17 @@ export function Footer() {
           className="flex justify-center gap-4"
         >
           {[
-            { icon: Instagram, href: siteConfig.socialLinks.instagram, key: "instagram" },
-            { icon: Facebook, href: siteConfig.socialLinks.facebook, key: "facebook" },
-            { icon: Linkedin, href: siteConfig.socialLinks.linkedin, key: "linkedin" },
-            { icon: Youtube, href: siteConfig.socialLinks.youtube, key: "youtube" },
+            { icon: Instagram, href: siteConfig.socialLinks.instagram, key: "instagram", label: "Seguici su Instagram" },
+            { icon: Facebook, href: siteConfig.socialLinks.facebook, key: "facebook", label: "Seguici su Facebook" },
+            { icon: Linkedin, href: siteConfig.socialLinks.linkedin, key: "linkedin", label: "Seguici su LinkedIn" },
+            { icon: Youtube, href: siteConfig.socialLinks.youtube, key: "youtube", label: "Seguici su YouTube" },
           ].map((social) => (
             <a
               key={social.key}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={social.label}
               className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 transition-colors"
             >
               <social.icon className="w-4 h-4" />
@@ -100,21 +101,23 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.24 }}
-          className="mt-10 flex flex-wrap justify-center gap-5 text-xs uppercase tracking-[0.16em] text-white/60"
+          className="mt-10"
         >
-          <Link href="/privacy" className="hover:text-white transition-colors">
-            Privacy
-          </Link>
-          <Link href="/accessibilita" className="hover:text-white transition-colors">
-            Accessibilita
-          </Link>
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new Event(COOKIE_PREFERENCES_OPEN_EVENT))}
-            className="hover:text-white transition-colors"
-          >
-            Preferenze Cookie
-          </button>
+          <nav aria-label="Link legali e accessibilità" className="flex flex-wrap justify-center gap-5 text-xs uppercase tracking-[0.16em] text-white/60">
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Privacy
+            </Link>
+            <Link href="/accessibilita" className="hover:text-white transition-colors">
+              Accessibilita
+            </Link>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(COOKIE_PREFERENCES_OPEN_EVENT))}
+              className="hover:text-white transition-colors"
+            >
+              Preferenze Cookie
+            </button>
+          </nav>
         </motion.div>
 
         <motion.div
