@@ -77,7 +77,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden"
+        className="relative h-[85vh] md:h-[95vh] flex items-end overflow-hidden"
       >
         {/* Background with video support */}
         <div className="absolute inset-0">
@@ -100,25 +100,27 @@ export default function HomePage() {
 
         <motion.div
           style={{ opacity }}
-          className="relative z-20 max-w-6xl mx-auto px-6 text-center text-white pt-12"
+          className="relative z-20 max-w-6xl mx-auto px-6 md:px-12 text-white pb-16 md:pb-24 w-full"
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-3xl"
           >
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-balance">
-              Il tuo giardino sostenibile:
-              <span className="block italic text-leaf-400">
-                visione, progetto, realt&agrave;.
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light uppercase tracking-wide leading-tight mb-6">
+              GIARDINI CHE{" "}
+              <em className="italic font-normal text-leaf-400">Ispirano</em>
+              <span className="block text-paper-200 mt-2">
+                VISIONE, PROGETTO, REALT&Agrave;
               </span>
             </h1>
 
-            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mb-10 leading-relaxed font-light">
               Con Visione Sostenibile hai un solo interlocutore per progettare, realizzare e mantenere il tuo spazio verde — con tutti gli specialisti gi&agrave; selezionati per te.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/quiz">
                 <Button
                   size="lg"
@@ -195,8 +197,9 @@ export default function HomePage() {
             <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
               Perch&eacute; funziona
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-leaf-700 mb-6 leading-tight">
-              Ogni giardino nasce dall&apos;ascolto dell&apos;ambiente e di chi lo vivr&agrave;.
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-wide text-forest-950 mb-6 leading-tight">
+              OGNI GIARDINO NASCE DALL&apos;
+              <em className="italic font-normal text-leaf-600">Ascolto</em>
             </h2>
             <p className="font-body text-lg text-forest-800/70 leading-relaxed max-w-2xl">
               Bellezza e sostenibilit&agrave;, per noi, sono sempre la scelta migliore. Per questo progettiamo giardini che funzionano in ogni stagione — sotto la neve come sotto il sole di agosto.
@@ -228,12 +231,12 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-white rounded-2xl p-8 shadow-soft hover:shadow-medium transition-all duration-500 border border-paper-100"
+                className="rounded-2xl border border-paper-100 bg-paper-50 p-8 transition-all duration-300 hover:border-leaf-200 hover:shadow-soft"
               >
-                <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-600 mb-4 block">
-                  {index + 1}
+                <span className="font-display text-5xl font-light text-paper-300 mb-4 block select-none">
+                  {(index + 1).toString().padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-2xl text-forest-950 mb-2">
+                <h3 className="font-display text-2xl font-light uppercase tracking-wide text-forest-950 mb-2">
                   {card.title}
                 </h3>
                 <p className="font-display text-lg italic text-leaf-700 mb-4">
@@ -254,8 +257,8 @@ export default function HomePage() {
             transition={{ duration: 0.7 }}
             className="bg-forest-950 rounded-3xl p-10 md:p-14 text-center mb-16"
           >
-            <h3 className="font-display text-2xl md:text-3xl text-paper-50 mb-6 italic">
-              Bello. Sostenibile. Gestibile.
+            <h3 className="font-display text-2xl md:text-3xl font-light uppercase tracking-wide text-paper-50 mb-6">
+              BELLO. <em className="italic font-normal text-leaf-400">Sostenibile.</em> GESTIBILE.
             </h3>
             <p className="font-body text-paper-300 max-w-2xl mx-auto mb-4">
               Un referente, un metodo, una squadra su misura.<br />
@@ -331,9 +334,10 @@ export default function HomePage() {
               <Badge className="mb-6 border border-leaf-300/70 bg-leaf-50 px-5 py-1.5 text-leaf-700">
                 Quiz Gratuito
               </Badge>
-              <h2 className="mb-5 font-display text-5xl leading-[1.05] text-forest-950 md:text-6xl">
-                Qual &egrave; il giardino
-                <span className="block italic text-leaf-600">che fa per te?</span>
+              <h2 className="mb-5 font-display text-5xl font-light uppercase tracking-wide leading-[1.05] text-forest-950 md:text-6xl">
+                QUAL &Egrave; IL GIARDINO{" "}
+                <em className="italic font-normal text-leaf-600">Perfetto</em>
+                <span className="block text-forest-950">PER TE?</span>
               </h2>
               <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-forest-800/72 md:text-xl">
                 Abbiamo creato un percorso dedicato a te. Rispondi a 6 domande e avrai il tuo profilo personalizzato con i consigli migliori per vivere il tuo spazio verde.
@@ -370,7 +374,7 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-floating">
+              <div className="aspect-[4/5] rounded-[30px] overflow-hidden shadow-floating">
                 <Image
                   src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800"
                   alt="Giardino biodinamico realizzato da Visione Sostenibile con piante autoctone"
@@ -384,7 +388,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-950/40 to-transparent" />
               </div>
               {/* Decorative element */}
-              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-leaf-200/30 rounded-3xl -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-leaf-200/30 rounded-[30px] -z-10" />
             </motion.div>
 
             <motion.div
@@ -396,11 +400,10 @@ export default function HomePage() {
               <Badge className="bg-leaf-100 text-leaf-700 mb-6">
                 Realizzazioni
               </Badge>
-              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-6 leading-tight">
-                Progetti diversi,
-                <span className="block italic text-leaf-600">
-                  radici comuni
-                </span>
+              <h2 className="font-display text-4xl md:text-5xl font-light uppercase tracking-wide text-forest-950 mb-6 leading-tight">
+                PROGETTI DIVERSI,{" "}
+                <em className="italic font-normal text-leaf-600">Radici</em>
+                <span className="block text-forest-950">COMUNI</span>
               </h2>
               <p className="font-body text-lg text-forest-800 leading-relaxed mb-8">
                 Lavori diversi per scala e obiettivi: progettazione, realizzazione e manutenzione sostenibile. Tutti poggiano sulla stessa base: decisioni precise basate su analisi e ascolto.
@@ -439,11 +442,10 @@ export default function HomePage() {
           viewport={{ once: true }}
           className="relative z-10 max-w-4xl mx-auto text-center px-6"
         >
-          <h2 className="font-display text-4xl md:text-5xl mb-6 leading-tight">
-            Parliamone:
-            <span className="block italic text-leaf-400">
-              ti diciamo cosa serve davvero
-            </span>
+          <h2 className="font-display text-4xl md:text-5xl font-light uppercase tracking-wide mb-6 leading-tight">
+            PARLIAMONE:{" "}
+            <em className="italic font-normal text-leaf-400">Chiarezza</em>
+            <span className="block text-paper-50">SU COSA SERVE DAVVERO</span>
           </h2>
           <p className="font-body text-lg text-paper-300 mb-10 max-w-2xl mx-auto">
             Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorit&agrave;, fasi e investimenti.
