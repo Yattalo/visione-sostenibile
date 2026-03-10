@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Show,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -13,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Lock } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
+
+const AUTH_ENABLED = process.env.NEXT_PUBLIC_AUTH_ENABLED === "true";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -22,7 +19,6 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/qualita", label: "Qualità" },
   { href: "/contatti", label: "Contatti" },
-  { href: "/collabora", label: "Collabora" },
 ];
 
 // Pages that do NOT have a dark hero at top
@@ -59,7 +55,7 @@ export function Navbar() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-header w-[92%] max-w-5xl"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-header w-[94%] max-w-6xl"
     >
       <nav
         aria-label="Navigazione principale"
@@ -70,9 +66,9 @@ export function Navbar() {
             : "glass-nav"
         )}
       >
-        <div className="px-4 sm:px-8 py-3">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="relative flex items-center gap-2.5 group">
+        <div className="px-5 sm:px-8 py-3">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="relative flex items-center gap-2.5 group shrink-0">
               <span
                 className={cn(
                   "absolute -inset-2 rounded-2xl blur-lg transition-opacity duration-500 pointer-events-none",
@@ -93,13 +89,13 @@ export function Navbar() {
               />
             </Link>
 
-            <div className="hidden lg:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-7">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "font-sans text-[11px] uppercase tracking-[0.18em] font-semibold transition-colors relative py-1",
+                    "font-sans text-[11px] uppercase tracking-[0.18em] font-semibold transition-colors relative py-1 whitespace-nowrap",
                     isActivePath(link.href)
                       ? useDarkText
                         ? "text-leaf-500"
@@ -115,44 +111,40 @@ export function Navbar() {
             </div>
 
             <div className="hidden lg:flex items-center gap-3">
-              <Show when="signed-out">
-                <SignInButton mode="modal">
-                  <button
-                    type="button"
-                    className={cn(
-                      "px-4 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold transition-colors border",
-                      useDarkText
-                        ? "border-forest-950/15 text-forest-900 hover:border-leaf-500 hover:text-leaf-600"
-                        : "border-paper-50/30 text-paper-50 hover:border-paper-50/60"
-                    )}
-                  >
-                    Accedi
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button
-                    type="button"
-                    className="px-4 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold bg-leaf-500 text-paper-50 hover:bg-leaf-600 transition-colors"
-                  >
-                    Registrati
-                  </button>
-                </SignUpButton>
-              </Show>
-              <Show when="signed-in">
-                <Link
-                  href="/area-privata"
-                  className={cn(
-                    "flex items-center gap-1.5 px-4 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold transition-colors border",
-                    useDarkText
-                      ? "border-leaf-500/30 text-leaf-700 hover:bg-leaf-50 hover:border-leaf-500"
-                      : "border-paper-50/30 text-paper-50 hover:border-paper-50/60"
-                  )}
-                >
-                  <Lock className="w-3 h-3" />
-                  Area Privata
-                </Link>
-                <UserButton />
-              </Show>
+              {AUTH_ENABLED && (
+                <>
+                  <Show when="signed-out">
+                    <SignInButton mode="modal">
+                      <button
+                        type="button"
+                        className={cn(
+                          "px-4 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold transition-colors border",
+                          useDarkText
+                            ? "border-forest-950/15 text-forest-900 hover:border-leaf-500 hover:text-leaf-600"
+                            : "border-paper-50/30 text-paper-50 hover:border-paper-50/60"
+                        )}
+                      >
+                        Accedi
+                      </button>
+                    </SignInButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Link
+                      href="/area-privata"
+                      className={cn(
+                        "flex items-center gap-1.5 px-4 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold transition-colors border",
+                        useDarkText
+                          ? "border-leaf-500/30 text-leaf-700 hover:bg-leaf-50 hover:border-leaf-500"
+                          : "border-paper-50/30 text-paper-50 hover:border-paper-50/60"
+                      )}
+                    >
+                      <Lock className="w-3 h-3" />
+                      Area Privata
+                    </Link>
+                    <UserButton />
+                  </Show>
+                </>
+              )}
               <Link
                 href="/contatti"
                 className="px-5 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold bg-sun-400 text-forest-950 hover-sun"
@@ -211,41 +203,34 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <div className="mt-3 grid gap-2">
-                <Show when="signed-out">
-                  <SignInButton mode="modal">
-                    <button
-                      type="button"
-                      className="inline-flex items-center justify-center w-full h-11 px-6 rounded-full border border-paper-300 text-forest-900 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover:border-leaf-500 hover:text-leaf-600 transition-colors"
+              {AUTH_ENABLED && (
+                <div className="mt-3 grid gap-2">
+                  <Show when="signed-out">
+                    <SignInButton mode="modal">
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center w-full h-11 px-6 rounded-full border border-paper-300 text-forest-900 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover:border-leaf-500 hover:text-leaf-600 transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Accedi
+                      </button>
+                    </SignInButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Link
+                      href="/area-privata"
+                      className="inline-flex items-center justify-center gap-2 w-full h-11 px-6 rounded-full border border-leaf-500/30 text-leaf-700 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover:bg-leaf-50 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      Accedi
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button
-                      type="button"
-                      className="inline-flex items-center justify-center w-full h-11 px-6 rounded-full bg-leaf-500 text-paper-50 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover:bg-leaf-600 transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Registrati
-                    </button>
-                  </SignUpButton>
-                </Show>
-                <Show when="signed-in">
-                  <Link
-                    href="/area-privata"
-                    className="inline-flex items-center justify-center gap-2 w-full h-11 px-6 rounded-full border border-leaf-500/30 text-leaf-700 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover:bg-leaf-50 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Lock className="w-3.5 h-3.5" />
-                    Area Privata
-                  </Link>
-                  <div className="flex justify-center py-2">
-                    <UserButton />
-                  </div>
-                </Show>
-              </div>
+                      <Lock className="w-3.5 h-3.5" />
+                      Area Privata
+                    </Link>
+                    <div className="flex justify-center py-2">
+                      <UserButton />
+                    </div>
+                  </Show>
+                </div>
+              )}
               <div className="mt-3 pt-3 border-t border-paper-200">
                 <Link
                   href="/contatti"
