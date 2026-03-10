@@ -19,6 +19,7 @@ import {
   X,
   ExternalLink,
   ClipboardCheck,
+  CalendarDays,
 } from "lucide-react";
 import { cn } from "../lib/utils";
 
@@ -32,6 +33,7 @@ const navItems = [
   { href: "/admin/reviews", label: "Recensioni", icon: Star },
   { href: "/admin/comments", label: "Commenti", icon: MessageCircle },
   { href: "/admin/blog", label: "Blog", icon: FileText },
+  { href: "/admin/editorial", label: "Calendario", icon: CalendarDays },
   { href: "/admin/scorecard", label: "Scorecard", icon: ClipboardCheck },
   { href: "/admin/settings", label: "Impostazioni", icon: Settings },
 ];

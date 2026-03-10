@@ -136,6 +136,9 @@ export default defineSchema({
     publishedAt: v.number(),
     readTime: v.string(),
     isPublished: v.boolean(),
+    // Editorial calendar fields
+    status: v.optional(v.union(v.literal("draft"), v.literal("scheduled"), v.literal("published"))),
+    scheduledAt: v.optional(v.number()),
     metaTitle: v.optional(v.string()),
     metaDescription: v.optional(v.string()),
     updatedAt: v.number(),
