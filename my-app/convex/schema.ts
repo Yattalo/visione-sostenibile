@@ -228,11 +228,18 @@ export default defineSchema({
     privacyConsent: v.boolean(),
     isRead: v.boolean(),
     isContacted: v.boolean(),
+    // Public showcase fields (admin-managed)
+    isApproved: v.optional(v.boolean()),
+    publicDescription: v.optional(v.string()),
+    website: v.optional(v.string()),
+    logo: v.optional(v.string()),
+    specialties: v.optional(v.array(v.string())),
     createdAt: v.number(),
   })
     .index("by_date", ["createdAt"])
     .index("by_read", ["isRead"])
-    .index("by_type", ["partnershipType", "createdAt"]),
+    .index("by_type", ["partnershipType", "createdAt"])
+    .index("by_approved", ["isApproved", "createdAt"]),
 
   settings: defineTable({
     key: v.string(),
