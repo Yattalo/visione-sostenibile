@@ -19,6 +19,7 @@ import type * as emailDispatch from "../emailDispatch.js";
 import type * as emailTemplates from "../emailTemplates.js";
 import type * as emails from "../emails.js";
 import type * as gallery from "../gallery.js";
+import type * as gallerySeed from "../gallerySeed.js";
 import type * as http from "../http.js";
 import type * as leads from "../leads.js";
 import type * as media from "../media.js";
@@ -66,6 +67,7 @@ declare const fullApi: ApiFromModules<{
   emailTemplates: typeof emailTemplates;
   emails: typeof emails;
   gallery: typeof gallery;
+  gallerySeed: typeof gallerySeed;
   http: typeof http;
   leads: typeof leads;
   media: typeof media;
