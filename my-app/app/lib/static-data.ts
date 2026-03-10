@@ -31,18 +31,18 @@ export const staticServices = [
 
 // Immagini servizi - usa path locali dalla cartella servizi
 export const serviceImages: Record<string, string> = {
-  "progettazione-giardini": "/images/servizi/progettazione-giardini-cover.png",
-  "realizzazione-giardini": "/images/servizi/realizzazione-giardini-cover.png",
-  "scelta-piante": "/images/servizi/scelta-piante-cover.png",
-  "trattamenti-piante": "/images/servizi/trattamenti-piante-cover.png",
-  "impianti-irrigazione": "/images/servizi/impianti-irrigazione-cover.png",
-  "camminamenti-pietra": "/images/servizi/camminamenti-pietra-cover.png",
-  "illuminazione-esterni": "/images/servizi/illuminazione-esterni-cover.png",
-  "ingegneria-naturalistica": "/images/servizi/ingegneria-naturalistica-cover.png",
-  "arredamento-esterni": "/images/servizi/arredamento-esterni-cover.png",
-  "potature": "/images/servizi/potature-cover.png",
-  "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.png",
-  "manutenzioni": "/images/servizi/manutenzioni-cover.png",
+  "progettazione-giardini": "/images/servizi/progettazione-giardini-cover.webp",
+  "realizzazione-giardini": "/images/servizi/realizzazione-giardini-cover.webp",
+  "scelta-piante": "/images/servizi/scelta-piante-cover.webp",
+  "trattamenti-piante": "/images/servizi/trattamenti-piante-cover.webp",
+  "impianti-irrigazione": "/images/servizi/impianti-irrigazione-cover.webp",
+  "camminamenti-pietra": "/images/servizi/camminamenti-pietra-cover.webp",
+  "illuminazione-esterni": "/images/servizi/illuminazione-esterni-cover.webp",
+  "ingegneria-naturalistica": "/images/servizi/ingegneria-naturalistica-cover.webp",
+  "arredamento-esterni": "/images/servizi/arredamento-esterni-cover.webp",
+  "potature": "/images/servizi/potature-cover.webp",
+  "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.webp",
+  "manutenzioni": "/images/servizi/manutenzioni-cover.webp",
 };
 
 // Recensioni vuote - da popolare con recensioni reali del cliente

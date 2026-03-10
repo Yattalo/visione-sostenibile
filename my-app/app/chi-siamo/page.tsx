@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: pageSeo.chiSiamo.title,
     description: pageSeo.chiSiamo.description,
     path: "/chi-siamo",
-    image: "/images/chi-siamo/hero.jpg",
+    image: "/images/chi-siamo/hero.webp",
   }),
 };
 
@@ -113,7 +113,15 @@ export default function ChiSiamoPage() {
       {/* ── Hero Section ──────────────────────────────────────────── */}
       <section className="relative flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/images/chi-siamo/hero.jpg')] bg-cover bg-center">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/chi-siamo/hero.webp"
+              alt="Giardino biodinamico Visione Sostenibile"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50" />
           </div>
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
@@ -152,7 +160,7 @@ export default function ChiSiamoPage() {
                 <div className="absolute -bottom-6 -right-6 w-full h-full bg-leaf-200/40 rounded-[30px]" />
                 <div className="relative aspect-[4/5] rounded-[30px] overflow-hidden shadow-floating">
                   <Image
-                    src="/images/chi-siamo/andrea.jpg"
+                    src="/images/chi-siamo/andrea.webp"
                     alt="Andrea Giordano, fondatore di Visione Sostenibile, giardiniere biodinamico a Torino"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -198,11 +206,13 @@ export default function ChiSiamoPage() {
       {/* ── Company Story ─────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-forest-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/images/chi-siamo/approccio.jpg')",
-            }}
+          <Image
+            src="/images/chi-siamo/approccio.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            loading="lazy"
           />
         </div>
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-leaf-500/40 to-transparent" />

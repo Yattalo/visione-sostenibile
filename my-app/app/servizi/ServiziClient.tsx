@@ -32,7 +32,7 @@ export function ServiziClient() {
     const normalizedSlug = normalizeServiceSlug(slug);
     return (
       serviceImages[normalizedSlug] ||
-      "/images/servizi/progettazione-giardini-cover.png"
+      "/images/servizi/progettazione-giardini-cover.webp"
     );
   };
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: pageSeo.blog.title,
     description: pageSeo.blog.description,
     path: "/blog",
-    image: "/images/blog/tendenze-cover.png",
+    image: "/images/blog/tendenze-cover.webp",
   }),
 };
 

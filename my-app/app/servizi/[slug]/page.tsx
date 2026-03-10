@@ -337,7 +337,7 @@ function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: st
   const secondPart = words.slice(words.length > 2 ? 1 : 1).join(" ");
 
   return (
-    <section className="relative h-[90vh] w-full overflow-hidden">
+    <section className="relative h-[60vh] w-full overflow-hidden">
       <Image
         src={imageUrl}
         alt={service.title}

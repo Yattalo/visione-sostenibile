@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: pageSeo.servizi.title,
     description: pageSeo.servizi.description,
     path: "/servizi",
-    image: "/images/servizi/progettazione-giardini-cover.png",
+    image: "/images/servizi/progettazione-giardini-cover.webp",
   }),
 };
 

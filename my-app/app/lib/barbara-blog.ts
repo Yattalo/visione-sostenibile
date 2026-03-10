@@ -18,7 +18,7 @@ export const barbaraBlogPosts: BarbaraBlogPost[] = [
     excerpt:
       "Un giardino non salta ad agosto per caso. Succede quando suolo compattato, irrigazione casuale e specie sbagliate lavorano insieme. Questa guida spiega quali controlli fare prima del caldo e come distribuire il budget in priorita che reggono davvero nel tempo.",
     category: "stagionale",
-    coverImage: "/images/blog/giardino-che-supera-agosto.jpg",
+    coverImage: "/images/blog/autunno-cover.webp",
     readTime: 8,
     sections: [
       {
@@ -53,7 +53,7 @@ export const barbaraBlogPosts: BarbaraBlogPost[] = [
     excerpt:
       "Il costo non dipende da una tariffa standard ma da obiettivi, superfici e stato di partenza del giardino. Qui trovi una guida concreta per capire cosa pesa davvero sul preventivo, come lavorare a fasi e quali scelte evitano spese doppie nei primi due anni.",
     category: "guida",
-    coverImage: "/images/blog/quanto-costa-un-giardino-sostenibile.jpg",
+    coverImage: "/images/blog/tendenze-cover.webp",
     readTime: 9,
     sections: [
       {
@@ -88,7 +88,7 @@ export const barbaraBlogPosts: BarbaraBlogPost[] = [
     excerpt:
       "Contractor del verde significa una regia unica: un referente che coordina progetto, cantiere e manutenzione con partner specialisti attivati solo quando servono. In questa guida spieghiamo perche questo metodo riduce ritardi, rimbalzi tra fornitori e costi non previsti nel tempo.",
     category: "metodo",
-    coverImage: "/images/blog/contractor-del-verde-cosa-significa.jpg",
+    coverImage: "/images/blog/pendio-cover.webp",
     readTime: 7,
     sections: [
       {
@@ -123,7 +123,7 @@ export const barbaraBlogPosts: BarbaraBlogPost[] = [
     excerpt:
       "La maggior parte delle spese inutili nasce da errori prevedibili: piante scelte senza leggere il suolo, irrigazione non calibrata, manutenzione solo quando c'e emergenza. Qui trovi i cinque sbagli piu costosi e il motivo tecnico per cui conviene correggerli subito.",
     category: "sostenibilita",
-    coverImage: "/images/blog/5-errori-che-bruciano-soldi-in-giardino.jpg",
+    coverImage: "/images/blog/autunno-cover.webp",
     readTime: 8,
     sections: [
       {
