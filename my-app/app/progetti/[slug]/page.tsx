@@ -239,7 +239,7 @@ export default function ProgettiDetailPage() {
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
+      <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-24 md:py-32 lg:py-40">
         {/* Background */}
         <div className="absolute inset-0">
           {project.hero_image ? (
@@ -294,7 +294,7 @@ export default function ProgettiDetailPage() {
                 {project.type}
               </Badge>
 
-              <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight mb-8 text-balance">
+              <h1 className="text-stitch-heading text-4xl md:text-5xl lg:text-6xl text-white mb-8 text-balance">
                 {project.title}
               </h1>
 
@@ -352,14 +352,14 @@ export default function ProgettiDetailPage() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   custom={0.1}
-                  className="bg-paper-100 rounded-2xl p-8 lg:p-10 mb-12"
+                  className="border border-paper-100 bg-paper-50 rounded-[30px] p-8 lg:p-10 mb-12"
                 >
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-leaf-600 to-forest-900 flex items-center justify-center">
                       <Check className="w-5 h-5 text-white" />
                     </div>
-                    <h2 className="font-display text-2xl lg:text-3xl text-forest-950">
-                      Caratteristiche
+                    <h2 className="text-stitch-heading text-2xl lg:text-3xl text-forest-950">
+                      <em className="italic font-normal text-leaf-600">Caratteristiche</em>
                     </h2>
                   </div>
 
@@ -388,8 +388,9 @@ export default function ProgettiDetailPage() {
                   custom={0.2}
                   className="mb-12"
                 >
-                  <h2 className="font-display text-2xl lg:text-3xl text-forest-950 mb-8">
-                    Galleria fotografica
+                  <h2 className="text-stitch-heading text-2xl lg:text-3xl text-forest-950 mb-8">
+                    GALLERIA{" "}
+                    <em className="italic font-normal text-leaf-600">Fotografica</em>
                   </h2>
 
                   <div className="grid grid-cols-2 gap-3 lg:gap-4">
@@ -397,7 +398,7 @@ export default function ProgettiDetailPage() {
                       <figure
                         key={photo.src}
                         className={cn(
-                          "relative rounded-xl overflow-hidden cursor-pointer group",
+                          "relative rounded-[30px] overflow-hidden cursor-pointer group",
                           index === 0 && galleryPhotos.length >= 3 ? "col-span-2 aspect-[16/9]" : "aspect-[3/2]"
                         )}
                         onClick={() => openLightbox(allViewablePhotos, project.photos.indexOf(photo))}
@@ -440,8 +441,9 @@ export default function ProgettiDetailPage() {
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-leaf-500 to-leaf-700 flex items-center justify-center">
                       <PenTool className="w-5 h-5 text-white" />
                     </div>
-                    <h2 className="font-display text-2xl lg:text-3xl text-forest-950">
-                      Progetto e Render
+                    <h2 className="text-stitch-heading text-2xl lg:text-3xl text-forest-950">
+                      PROGETTO E{" "}
+                      <em className="italic font-normal text-leaf-600">Render</em>
                     </h2>
                   </div>
 
@@ -449,7 +451,7 @@ export default function ProgettiDetailPage() {
                     {project.renders.map((render, index) => (
                       <figure
                         key={render.src}
-                        className="relative rounded-xl overflow-hidden cursor-pointer group aspect-[3/2]"
+                        className="relative rounded-[30px] overflow-hidden cursor-pointer group aspect-[3/2]"
                         onClick={() => openLightbox(project.renders, index)}
                       >
                         <Image
@@ -489,13 +491,13 @@ export default function ProgettiDetailPage() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   custom={0.15}
-                  className="bg-white rounded-2xl border border-paper-300 p-8 shadow-soft"
+                  className="border border-paper-100 bg-paper-50 rounded-[30px] p-8 shadow-soft"
                 >
-                  <span className="font-display italic text-leaf-600 text-base">
+                  <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 block">
                     Dettagli progetto
                   </span>
-                  <h3 className="font-display text-2xl text-forest-950 mt-1 mb-6">
-                    Informazioni
+                  <h3 className="text-stitch-heading text-xl text-forest-950 mt-2 mb-6">
+                    <em className="italic font-normal text-leaf-600">Informazioni</em>
                   </h3>
 
                   <div className="space-y-4">
@@ -567,7 +569,7 @@ export default function ProgettiDetailPage() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     custom={0.25}
-                    className="bg-paper-100 rounded-2xl p-8"
+                    className="border border-paper-100 bg-paper-50 rounded-[30px] p-8"
                   >
                     <h3 className="font-display text-xl text-forest-950 mb-4">
                       Categorie
@@ -593,13 +595,14 @@ export default function ProgettiDetailPage() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   custom={0.3}
-                  className="bg-forest-950 rounded-2xl p-8 text-paper-50"
+                  className="bg-forest-950 rounded-[30px] p-8 text-paper-50"
                 >
-                  <span className="font-display italic text-leaf-400 text-base">
+                  <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-leaf-400 block">
                     Ti piace questo progetto?
                   </span>
-                  <h3 className="font-display text-2xl text-paper-50 mt-1 mb-3">
-                    Realizziamo il tuo
+                  <h3 className="text-stitch-heading text-xl text-paper-50 mt-2 mb-3">
+                    REALIZZIAMO IL{" "}
+                    <em className="italic font-normal text-leaf-400">Tuo</em>
                   </h3>
                   <p className="font-body text-paper-300/80 leading-relaxed mb-6">
                     Contattaci per una consulenza gratuita e un preventivo
@@ -734,12 +737,12 @@ export default function ProgettiDetailPage() {
           transition={{ duration: 0.7 }}
           className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center"
         >
-          <span className="font-display italic text-leaf-400 text-lg">
+          <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-paper-400 mb-4 block">
             Preventivo gratuito
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-paper-50 mt-4 mb-6 leading-tight">
-            Vuoi un progetto simile per il tuo
-            <span className="block italic text-leaf-400">spazio verde?</span>
+          <h2 className="text-stitch-heading text-4xl md:text-5xl text-paper-50 mt-4 mb-6">
+            VUOI UN PROGETTO SIMILE PER IL TUO{" "}
+            <em className="italic font-normal text-leaf-400">Spazio Verde</em>
           </h2>
           <p className="font-body text-lg text-paper-300/80 mb-10 max-w-2xl mx-auto leading-relaxed">
             Contattaci per una consulenza senza impegno. Ogni progetto nasce

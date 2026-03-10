@@ -232,7 +232,7 @@ export default function QualitaPage() {
   return (
     <div className="min-h-screen bg-paper-50">
       {/* ── Hero ── */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center bg-forest-950 text-white overflow-hidden">
+      <section className="relative flex items-center justify-center bg-forest-950 text-white overflow-hidden py-24 md:py-32 lg:py-40">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920"
@@ -251,11 +251,9 @@ export default function QualitaPage() {
             <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               I Nostri Standard
             </Badge>
-            <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 uppercase tracking-tight">
-              La Nostra
-              <span className="block italic text-leaf-400 font-light lowercase">
-                Qualità
-              </span>
+            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-white mb-6 text-balance">
+              LA NOSTRA{" "}
+              <em className="italic font-normal text-leaf-400">Qualità</em>
             </h1>
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
               Ogni intervento di {siteConfig.companyName} segue standard
@@ -288,15 +286,16 @@ export default function QualitaPage() {
       </section>
 
       {/* ── Quality Standards ── */}
-      <section className="py-24 px-6">
+      <section className="py-24 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
               <Badge variant="primary" className="mb-4">
                 Standard Operativi
               </Badge>
-              <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-4">
-                Cosa garantiamo, concretamente
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mb-4">
+                COSA GARANTIAMO,{" "}
+                <em className="italic font-normal text-leaf-600">Concretamente</em>
               </h2>
               <p className="font-body text-lg text-forest-700 max-w-2xl mx-auto">
                 Non promesse generiche, ma criteri operativi verificabili che
@@ -311,7 +310,7 @@ export default function QualitaPage() {
                 <StaggerItem key={standard.title} delay={index * 0.1}>
                   <Card
                     variant="elevated"
-                    className="h-full group hover:shadow-floating transition-all duration-500"
+                    className="h-full group border border-paper-100 bg-paper-50 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
                   >
                     <div className="flex items-start gap-6">
                       <div className="w-14 h-14 rounded-2xl bg-leaf-100 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
@@ -344,15 +343,16 @@ export default function QualitaPage() {
       </section>
 
       {/* ── Methodology (Biodinamica) ── */}
-      <section className="py-24 px-6 bg-paper-100">
+      <section className="py-24 lg:py-32 px-6 bg-paper-100">
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
               <Badge variant="biodynamic" className="mb-4">
                 Metodo Biodinamico
               </Badge>
-              <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-4">
-                Il nostro approccio, passo per passo
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mb-4">
+                IL NOSTRO APPROCCIO, PASSO PER{" "}
+                <em className="italic font-normal text-leaf-600">Passo</em>
               </h2>
               <p className="font-body text-lg text-forest-700 max-w-2xl mx-auto">
                 Un metodo che parte dall&apos;osservazione del luogo e segue i
@@ -364,7 +364,7 @@ export default function QualitaPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {methodology.map((step, index) => (
               <SlideUp key={step.title} delay={index * 0.15}>
-                <div className="bg-white rounded-2xl shadow-soft border border-paper-100 p-8 h-full group hover:shadow-floating transition-all duration-500">
+                <div className="border border-paper-100 bg-paper-50 rounded-[30px] p-8 h-full group hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
                       <span className="font-display text-5xl font-light text-leaf-300 group-hover:text-leaf-400 transition-colors duration-300">
@@ -391,15 +391,16 @@ export default function QualitaPage() {
       </section>
 
       {/* ── Environmental Certifications ── */}
-      <section className="py-24 px-6">
+      <section className="py-24 lg:py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
               <Badge variant="eco" className="mb-4">
                 Impegno Ambientale
               </Badge>
-              <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-4">
-                I nostri impegni per l&apos;ambiente
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mb-4">
+                I NOSTRI IMPEGNI PER L&apos;
+                <em className="italic font-normal text-leaf-600">Ambiente</em>
               </h2>
               <p className="font-body text-lg text-forest-700 max-w-2xl mx-auto">
                 La sostenibilità non è un argomento di marketing. È il criterio
@@ -412,7 +413,7 @@ export default function QualitaPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {environmentalCommitments.map((commitment, index) => (
                 <StaggerItem key={commitment.title} delay={index * 0.1}>
-                  <div className="bg-white rounded-2xl shadow-soft border border-paper-100 p-6 h-full text-center group hover:shadow-floating transition-all duration-500">
+                  <div className="border border-paper-100 bg-paper-50 rounded-[30px] p-6 h-full text-center group hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
                     <div
                       className={`w-16 h-16 rounded-full ${commitment.color.split(" ")[0]} flex items-center justify-center mx-auto mb-5`}
                     >
@@ -441,15 +442,17 @@ export default function QualitaPage() {
       </section>
 
       {/* ── Operational Guarantees ── */}
-      <section className="py-24 px-6 bg-forest-950 text-white">
+      <section className="py-24 lg:py-32 px-6 bg-forest-950 text-white">
         <div className="max-w-6xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
               <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-4">
                 Garanzie Operative
               </Badge>
-              <h2 className="font-display text-3xl md:text-4xl mb-4">
-                Quello che puoi aspettarti da noi
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-paper-50 mb-4">
+                QUELLO CHE PUOI{" "}
+                <em className="italic font-normal text-leaf-400">Aspettarti</em>{" "}
+                DA NOI
               </h2>
               <p className="font-body text-lg text-paper-400 max-w-2xl mx-auto">
                 Impegni concreti, non clausole generiche. Ogni garanzia si
@@ -490,15 +493,16 @@ export default function QualitaPage() {
       </section>
 
       {/* ── Attestati di Sicurezza ── */}
-      <section className="py-24 px-6 bg-paper-100">
+      <section className="py-24 lg:py-32 px-6 bg-paper-100">
         <div className="max-w-7xl mx-auto">
           <SlideUp>
             <div className="text-center mb-16">
               <Badge variant="primary" className="mb-4">
                 Sicurezza sul Lavoro
               </Badge>
-              <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-4">
-                Attestati e qualifiche
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mb-4">
+                ATTESTATI E{" "}
+                <em className="italic font-normal text-leaf-600">Qualifiche</em>
               </h2>
               <p className="font-body text-forest-700 mt-2 max-w-xl mx-auto">
                 Tutta la documentazione di sicurezza è aggiornata e
@@ -513,7 +517,7 @@ export default function QualitaPage() {
                 <StaggerItem key={att.file} delay={index * 0.08}>
                   <Card
                     variant="elevated"
-                    className="h-full flex flex-col gap-3 group hover:shadow-floating transition-all duration-300"
+                    className="h-full flex flex-col gap-3 group border border-paper-100 bg-paper-50 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
                   >
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 rounded-xl bg-leaf-100 flex items-center justify-center shrink-0">
@@ -600,14 +604,15 @@ export default function QualitaPage() {
       )}
 
       {/* ── CTA ── */}
-      <section className="py-24 px-6 bg-paper-50">
+      <section className="py-24 lg:py-32 px-6 bg-paper-50">
         <div className="max-w-2xl mx-auto text-center">
           <SlideUp>
             <Badge variant="primary" className="mb-4">
               Prossimo Passo
             </Badge>
-            <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-6">
-              Vuoi saperne di più?
+            <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mb-6">
+              VUOI SAPERNE DI{" "}
+              <em className="italic font-normal text-leaf-600">Più</em>
             </h2>
             <p className="font-body text-lg text-forest-800 mb-8 leading-relaxed">
               Contattaci per un sopralluogo gratuito: valutiamo insieme il tuo

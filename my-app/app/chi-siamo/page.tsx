@@ -111,10 +111,10 @@ export default function ChiSiamoPage() {
   return (
     <div className="min-h-screen bg-paper-50">
       {/* ── Hero Section ──────────────────────────────────────────── */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
+      <section className="relative flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/images/chi-siamo/hero.jpg')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50" />
           </div>
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute bottom-1/4 -right-24 w-80 h-80 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
@@ -129,9 +129,9 @@ export default function ChiSiamoPage() {
               <Leaf className="w-3 h-3 mr-1.5 inline" />
               Dal {siteConfig.foundingDate} a {siteConfig.address.city}
             </Badge>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-white text-balance">
-              Chi siamo
-              <span className="block italic text-leaf-400">
+            <h1 className="text-stitch-heading text-4xl md:text-6xl lg:text-7xl text-white mb-6 text-balance">
+              CHI <em className="italic font-normal text-leaf-400">Siamo</em>
+              <span className="block text-paper-200 mt-2">
                 il giardiniere che ti spiega i perche
               </span>
             </h1>
@@ -149,8 +149,8 @@ export default function ChiSiamoPage() {
           <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
             <SlideUp>
               <div className="relative">
-                <div className="absolute -bottom-6 -right-6 w-full h-full bg-leaf-200/40 rounded-3xl" />
-                <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-floating">
+                <div className="absolute -bottom-6 -right-6 w-full h-full bg-leaf-200/40 rounded-[30px]" />
+                <div className="relative aspect-[4/5] rounded-[30px] overflow-hidden shadow-floating">
                   <Image
                     src="/images/chi-siamo/andrea.jpg"
                     alt="Andrea Giordano, fondatore di Visione Sostenibile, giardiniere biodinamico a Torino"
@@ -169,7 +169,7 @@ export default function ChiSiamoPage() {
               <Badge variant="primary" className="mb-4">
                 Fondatore
               </Badge>
-              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-2 mb-4 leading-tight">
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mt-2 mb-4">
                 {siteConfig.founder}
               </h2>
               <p className="font-display italic text-leaf-700 text-xl mb-8">
@@ -216,10 +216,11 @@ export default function ChiSiamoPage() {
               <TreePine className="w-3 h-3 mr-1.5 inline" />
               La nostra storia
             </Badge>
-            <h2 className="font-display text-3xl md:text-5xl text-paper-50 leading-tight mb-8">
-              Un giardino non e un lavoro da finire.
-              <span className="block italic text-leaf-400 mt-2">
-                E un equilibrio da costruire.
+            <h2 className="text-stitch-heading text-3xl md:text-5xl text-paper-50 mb-8">
+              UN GIARDINO NON E UN LAVORO DA{" "}
+              <em className="italic font-normal text-leaf-400">Finire</em>
+              <span className="block mt-2">
+                E UN EQUILIBRIO DA COSTRUIRE
               </span>
             </h2>
           </SlideUp>
@@ -268,18 +269,18 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* ── 4 Pillars / Values ────────────────────────────────────── */}
-      <section className="py-28 md:py-36 px-6 bg-paper-100 relative overflow-hidden">
+      <section className="py-24 lg:py-32 px-6 bg-paper-100 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-leaf-100/30 to-transparent" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <SlideUp>
             <div className="text-center mb-20">
-              <span className="font-display italic text-leaf-600 text-lg">
+              <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
                 I nostri valori
               </span>
-              <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 leading-tight">
-                Quattro pilastri per un verde
-                <span className="italic text-leaf-700"> che dura</span>
+              <h2 className="text-stitch-heading text-3xl md:text-4xl lg:text-5xl text-forest-950 mt-4">
+                QUATTRO PILASTRI PER UN VERDE CHE{" "}
+                <em className="italic font-normal text-leaf-600">Dura</em>
               </h2>
               <p className="mt-6 text-lg text-forest-800 max-w-2xl mx-auto font-body">
                 Ogni progetto Visione Sostenibile si fonda su principi precisi.
@@ -294,7 +295,7 @@ export default function ChiSiamoPage() {
                 <StaggerItem key={pillar.title} delay={index * 0.1}>
                   <Card
                     variant="default"
-                    className="h-full text-center bg-white border-paper-300 hover:shadow-medium transition-shadow duration-500"
+                    className="h-full text-center border border-paper-100 bg-paper-50 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
                   >
                     <CardContent className="p-8">
                       <div className="w-16 h-16 rounded-2xl bg-leaf-100 flex items-center justify-center mx-auto mb-6">
@@ -319,18 +320,16 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* ── Outcomes: What Clients Gain ────────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-leaf-50 relative overflow-hidden">
+      <section className="py-24 lg:py-32 px-6 bg-leaf-50 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <SlideUp>
-              <span className="font-display italic text-leaf-600 text-lg">
+              <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
                 Il risultato per te
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-forest-950 mt-4 mb-6 leading-tight">
-                Cosa cambia scegliendo
-                <span className="block italic text-leaf-700">
-                  un approccio biodinamico?
-                </span>
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mt-4 mb-6">
+                COSA CAMBIA SCEGLIENDO UN APPROCCIO{" "}
+                <em className="italic font-normal text-leaf-600">Biodinamico</em>
               </h2>
               <p className="font-body text-lg text-forest-800 leading-relaxed mb-4">
                 Non facciamo giardini Instagram. Facciamo giardini che superano
@@ -348,7 +347,7 @@ export default function ChiSiamoPage() {
                 {outcomes.map((item) => (
                   <div
                     key={item.label}
-                    className="bg-white border border-leaf-200 rounded-2xl p-6 shadow-soft hover:shadow-medium transition-shadow duration-300"
+                    className="border border-paper-100 bg-paper-50 rounded-[30px] p-6 transition-all duration-300 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating"
                   >
                     <div className="w-12 h-12 rounded-xl bg-leaf-100 flex items-center justify-center mb-4">
                       <item.icon className="w-6 h-6 text-leaf-700" />
@@ -371,20 +370,22 @@ export default function ChiSiamoPage() {
       <TeamSection />
 
       {/* ── CTA Section ───────────────────────────────────────────── */}
-      <section className="py-28 md:py-36 px-6 relative overflow-hidden">
+      <section className="py-24 lg:py-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-paper-50" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-leaf-100/40 rounded-full blur-3xl" />
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-leaf-100/50 rounded-full blur-3xl" />
 
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <SlideUp>
-            <span className="font-display italic text-leaf-600 text-lg">
+            <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
               Inizia da qui
             </span>
-            <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 mb-8 leading-tight">
-              Bello. Sostenibile. Gestibile.
-              <span className="block italic text-leaf-700">
-                Un referente, un metodo, una squadra su misura.
+            <h2 className="text-stitch-heading text-3xl md:text-4xl lg:text-5xl text-forest-950 mt-4 mb-8">
+              BELLO.{" "}
+              <em className="italic font-normal text-leaf-600">Sostenibile.</em>{" "}
+              GESTIBILE.
+              <span className="block mt-2">
+                UN REFERENTE, UN METODO, UNA SQUADRA SU MISURA
               </span>
             </h2>
             <div className="font-body text-lg text-forest-800 leading-relaxed max-w-2xl mx-auto space-y-4 mb-10">

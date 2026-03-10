@@ -223,7 +223,7 @@ export default function ContattiPage() {
   return (
     <div className="min-h-screen bg-paper-50">
       {/* Hero Section */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
+      <section className="relative flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=1920')] bg-cover bg-center">
             <div className="absolute inset-0 bg-gradient-to-br from-forest-950/70 via-forest-900/60 to-forest-950/65" />
@@ -239,11 +239,9 @@ export default function ContattiPage() {
               Contatti
             </Badge>
 
-            <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
-              Parliamone:
-              <span className="block italic text-leaf-400">
-                ti diciamo cosa serve davvero
-              </span>
+            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-white mb-6 text-balance">
+              PARLIAMONE: TI DICIAMO COSA SERVE{" "}
+              <em className="italic font-normal text-leaf-400">Davvero</em>
             </h1>
 
             <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
@@ -263,14 +261,12 @@ export default function ContattiPage() {
             <SlideUp>
               <div className="space-y-12">
                 <div>
-                  <span className="text-micro text-leaf-600 block mb-4">
+                  <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
                     Contatti diretti
                   </span>
-                  <h2 className="font-display text-4xl md:text-6xl text-forest-950 leading-[1.1] tracking-tight">
-                    I nostri
-                    <span className="block italic text-leaf-700 font-light">
-                      recapiti ufficiali
-                    </span>
+                  <h2 className="text-stitch-heading text-3xl md:text-4xl lg:text-5xl text-forest-950">
+                    I NOSTRI RECAPITI{" "}
+                    <em className="italic font-normal text-leaf-600">Ufficiali</em>
                   </h2>
                 </div>
 
@@ -330,12 +326,12 @@ export default function ContattiPage() {
               <Card className="bg-white shadow-floating border-paper-100 rounded-[40px] sticky top-32 overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sun-400 to-leaf-500" />
                 <CardContent className="p-8 md:p-12">
-                  <span className="text-micro text-sun-500 block mb-4">
+                  <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-sun-500 block mb-4">
                     Digital Desk
                   </span>
-                  <h2 className="font-display text-3xl md:text-4xl text-forest-950 mb-10 leading-tight uppercase tracking-tight">
-                    Invia una{" "}
-                    <span className="italic font-light">richiesta</span>
+                  <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mb-10">
+                    INVIA UNA{" "}
+                    <em className="italic font-normal text-leaf-600">Richiesta</em>
                   </h2>
 
                   {/* Step Indicator */}
@@ -624,7 +620,7 @@ export default function ContattiPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-24 bg-forest-950 text-paper-50 relative overflow-hidden">
+      <section className="py-24 lg:py-32 bg-forest-950 text-paper-50 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')] bg-cover bg-center opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
@@ -633,11 +629,9 @@ export default function ContattiPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <SlideUp>
-            <h2 className="font-display text-4xl md:text-6xl font-light mb-6 leading-tight uppercase tracking-tight">
-              Ti diciamo cosa serve
-              <span className="block italic text-leaf-400 font-light">
-                davvero
-              </span>
+            <h2 className="text-stitch-heading text-4xl md:text-5xl lg:text-6xl mb-6 text-paper-50">
+              TI DICIAMO COSA SERVE{" "}
+              <em className="italic font-normal text-leaf-400">Davvero</em>
             </h2>
             <p className="font-body text-xl text-paper-300 mb-12 max-w-2xl mx-auto leading-relaxed">
               Che tu stia partendo da zero o che tu voglia riqualificare un

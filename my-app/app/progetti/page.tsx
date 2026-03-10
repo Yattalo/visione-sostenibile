@@ -58,7 +58,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.08 }}
-        className="relative bg-white rounded-2xl overflow-hidden border border-paper-300 shadow-soft hover:shadow-floating transition-all duration-500"
+        className="relative bg-paper-50 rounded-[30px] overflow-hidden border border-paper-100 shadow-soft hover:shadow-floating hover:-translate-y-1.5 transition-all duration-300"
       >
         {/* Image */}
         <div className="relative aspect-[3/2] overflow-hidden">
@@ -171,7 +171,7 @@ function FilterPill({
         "px-3 py-1.5 rounded-full text-sm font-sans transition-all inline-flex items-center gap-1.5",
         isActive
           ? "bg-leaf-700 text-white shadow-sm"
-          : "bg-paper-100 text-forest-800 hover:bg-paper-300"
+          : "rounded-full border border-paper-200/50 bg-paper-50/80 backdrop-blur-sm text-forest-800 hover:bg-paper-300"
       )}
     >
       {label}
@@ -346,7 +346,7 @@ export default function ProgettiPage() {
       {/* ═══════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
+      <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-24 md:py-32 lg:py-40">
         <div className="absolute inset-0">
           {projectsWithPhotos[0]?.hero_image && (
             <Image
@@ -368,9 +368,9 @@ export default function ProgettiPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
-              I progetti che ci rendono
-              <span className="block italic text-leaf-400">orgogliosi</span>
+            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-paper-50 mb-8 text-balance">
+              I PROGETTI CHE CI RENDONO{" "}
+              <em className="italic font-normal text-leaf-400">Orgogliosi</em>
             </h1>
           </SlideUp>
 
@@ -550,12 +550,12 @@ export default function ProgettiPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <SlideUp>
             <div className="max-w-2xl mb-12 lg:mb-16">
-              <span className="font-display italic text-leaf-600 text-lg">
+              <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
                 Le nostre realizzazioni
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-forest-950 mt-3 leading-tight">
-                Progetti completati con{" "}
-                <span className="text-leaf-700">documentazione fotografica</span>
+              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mt-3">
+                PROGETTI COMPLETATI CON DOCUMENTAZIONE{" "}
+                <em className="italic font-normal text-leaf-600">Fotografica</em>
               </h2>
               <div className="w-16 h-px bg-leaf-400 mt-6" />
             </div>
@@ -605,12 +605,12 @@ export default function ProgettiPage() {
           <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
             <SlideUp>
               <div className="mb-10">
-                <span className="font-display italic text-leaf-600 text-lg">
+                <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
                   Altre realizzazioni
                 </span>
-                <h2 className="font-display text-2xl md:text-3xl text-forest-950 mt-3 leading-tight">
-                  Progetti in{" "}
-                  <span className="italic text-leaf-700">fase di documentazione</span>
+                <h2 className="text-stitch-heading text-2xl md:text-3xl text-forest-950 mt-3">
+                  PROGETTI IN FASE DI{" "}
+                  <em className="italic font-normal text-leaf-600">Documentazione</em>
                 </h2>
                 <p className="font-body text-forest-800/70 mt-4">
                   Questi progetti sono stati completati con successo e saranno
@@ -620,7 +620,7 @@ export default function ProgettiPage() {
             </SlideUp>
 
             <StaggerContainer delay={0.1}>
-              <div className="bg-white rounded-2xl p-6 border border-paper-300 shadow-soft">
+              <div className="border border-paper-100 bg-paper-50 rounded-[30px] p-6 shadow-soft">
                 {filteredTextProjects.map((project) => (
                   <StaggerItem key={project.slug}>
                     <TextProjectCard project={project} />
@@ -656,14 +656,12 @@ export default function ProgettiPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <SlideUp>
-            <span className="font-display italic text-leaf-400 text-lg">
+            <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-paper-400 mb-4 block">
               Il tuo progetto
             </span>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-paper-50 mt-4 mb-6 leading-tight">
-              Hai uno spazio che merita
-              <span className="block italic text-leaf-400">
-                di più?
-              </span>
+            <h2 className="text-stitch-heading text-4xl md:text-5xl text-paper-50 mt-4 mb-6">
+              HAI UNO SPAZIO CHE MERITA DI{" "}
+              <em className="italic font-normal text-leaf-400">Più</em>
             </h2>
             <p className="font-body text-lg text-paper-300/80 mb-10 max-w-2xl mx-auto leading-relaxed">
               Ogni progetto inizia da un incontro. Raccontaci la tua visione e
