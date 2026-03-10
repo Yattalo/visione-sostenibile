@@ -17,6 +17,7 @@ import {
   Menu,
   X,
   ExternalLink,
+  ClipboardCheck,
 } from "lucide-react";
 import { cn } from "../lib/utils";
 
@@ -29,6 +30,7 @@ const navItems = [
   { href: "/admin/emails", label: "Email", icon: Mail },
   { href: "/admin/reviews", label: "Recensioni", icon: Star },
   { href: "/admin/blog", label: "Blog", icon: FileText },
+  { href: "/admin/scorecard", label: "Scorecard", icon: ClipboardCheck },
   { href: "/admin/settings", label: "Impostazioni", icon: Settings },
 ];
 
