@@ -37,6 +37,9 @@ const step2Schema = z.object({
 
 const step3Schema = z.object({
   message: z.string().min(10, "Il messaggio deve avere almeno 10 caratteri"),
+  privacyConsent: z.literal(true, {
+    error: "Devi accettare l'informativa sulla privacy per procedere",
+  }),
 });
 
 /* ---------- Services list ---------- */
@@ -75,6 +78,7 @@ interface StepErrors {
   phone?: string;
   serviceInterest?: string;
   message?: string;
+  privacyConsent?: string;
 }
 
 /* ---------- Component ---------- */
@@ -91,6 +95,7 @@ export default function ContattiPage() {
     serviceInterest: "",
     message: "",
   });
+  const [privacyConsent, setPrivacyConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -113,7 +118,7 @@ export default function ContattiPage() {
     const dataSlices = [
       { name: formData.name, email: formData.email },
       { phone: formData.phone, serviceInterest: formData.serviceInterest },
-      { message: formData.message },
+      { message: formData.message, privacyConsent },
     ] as const;
 
     if (step < 0 || step > 2) return false;
@@ -159,7 +164,7 @@ export default function ContattiPage() {
         subject: formData.serviceInterest,
         message: formData.message,
         serviceInterest: formData.serviceInterest,
-        privacyConsent: true,
+        privacyConsent,
       });
       setShowSuccess(true);
     } catch (error) {
@@ -176,6 +181,7 @@ export default function ContattiPage() {
     setCurrentStep(0);
     setDirection(1);
     setErrors({});
+    setPrivacyConsent(false);
     setFormData({
       name: "",
       email: "",
@@ -569,6 +575,39 @@ export default function ContattiPage() {
                                 error={errors.message}
                                 className="min-h-[180px] rounded-xl border-paper-200 bg-paper-50/50"
                               />
+                              <label className="flex items-start gap-3 cursor-pointer group">
+                                <input
+                                  type="checkbox"
+                                  checked={privacyConsent}
+                                  onChange={(e) => {
+                                    setPrivacyConsent(e.target.checked);
+                                    if (errors.privacyConsent) {
+                                      setErrors((prev) => {
+                                        const next = { ...prev };
+                                        delete next.privacyConsent;
+                                        return next;
+                                      });
+                                    }
+                                  }}
+                                  className="mt-1 h-5 w-5 rounded border-paper-300 text-leaf-600 focus:ring-leaf-500 shrink-0"
+                                />
+                                <span className="text-sm font-body text-forest-800/70 leading-relaxed">
+                                  Ho letto e accetto l&apos;
+                                  <Link
+                                    href="/privacy"
+                                    target="_blank"
+                                    className="underline text-leaf-600 hover:text-leaf-700"
+                                  >
+                                    informativa sulla privacy
+                                  </Link>{" "}
+                                  *
+                                </span>
+                              </label>
+                              {errors.privacyConsent && (
+                                <p className="text-sm text-red-500">
+                                  {errors.privacyConsent}
+                                </p>
+                              )}
                             </motion.div>
                           )}
                         </AnimatePresence>

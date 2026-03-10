@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { useSearchParams } from "next/navigation";
-import { Mail, Save, Send, UserRoundPlus } from "lucide-react";
+import { Loader2, Mail, Save, Send, UserRoundPlus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Badge } from "@/app/components/ui/Badge";
 import { Button } from "@/app/components/ui/Button";
@@ -75,11 +75,13 @@ export default function AdminCrmPage() {
   const [status, setStatus] = useState("all");
   const [selectedContactId, setSelectedContactId] = useState<Id<"crmContacts"> | null>(null);
 
-  const contacts = (useQuery(api.crm.listContacts, {
+  const contactsRaw = useQuery(api.crm.listContacts, {
     search: search || undefined,
     status: status === "all" ? undefined : status,
     limit: 300,
-  }) ?? []) as CrmContact[];
+  });
+  const contacts = (contactsRaw ?? []) as CrmContact[];
+  const isLoadingContacts = contactsRaw === undefined;
 
   useEffect(() => {
     if (!selectedContactId && contacts.length > 0) {
@@ -323,6 +325,18 @@ export default function AdminCrmPage() {
             </select>
 
             <div className="space-y-2 max-h-[70vh] overflow-y-auto pr-1">
+              {isLoadingContacts && (
+                <div className="flex items-center justify-center py-8 text-muted-foreground">
+                  <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                  Caricamento...
+                </div>
+              )}
+              {!isLoadingContacts && contacts.length === 0 && (
+                <div className="py-8 text-center text-muted-foreground text-sm">
+                  <UserRoundPlus className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                  Nessun contatto trovato.
+                </div>
+              )}
               {contacts.map((contact) => (
                 <button
                   key={contact._id}

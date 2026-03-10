@@ -33,11 +33,24 @@ export const submit = mutation({
     }))),
   },
   handler: async (ctx, args) => {
-    const { privacyConsent, marketingConsent, ...rest } = args;
+    if (!args.privacyConsent) {
+      throw new Error("Il consenso alla privacy è obbligatorio");
+    }
+
     const normalizedEmail = args.email.trim().toLowerCase();
     const submissionId = await ctx.db.insert("contactSubmissions", {
-      ...rest,
+      name: args.name,
       email: normalizedEmail,
+      phone: args.phone,
+      subject: args.subject,
+      message: args.message,
+      serviceInterest: args.serviceInterest,
+      address: args.address,
+      projectType: args.projectType,
+      projectFeatures: args.projectFeatures,
+      projectStartDate: args.projectStartDate,
+      referralSource: args.referralSource,
+      attachments: args.attachments,
       privacyConsent: args.privacyConsent,
       marketingConsent: args.marketingConsent,
       isRead: false,
@@ -45,14 +58,29 @@ export const submit = mutation({
       createdAt: Date.now(),
     });
 
-    const payload = {
-      ...args,
+    // Build scheduler payloads with only the fields each function expects
+    const crmPayload = {
+      name: args.name,
       email: normalizedEmail,
+      phone: args.phone,
+      subject: args.subject,
+      message: args.message,
+      serviceInterest: args.serviceInterest,
       submissionId: String(submissionId),
     };
 
-    await ctx.scheduler.runAfter(0, internal.crm.upsertFromContactSubmission, payload);
-    await ctx.scheduler.runAfter(0, internal.emails.sendContactFormNotifications, payload);
+    const emailPayload = {
+      submissionId: String(submissionId),
+      name: args.name,
+      email: normalizedEmail,
+      phone: args.phone,
+      subject: args.subject,
+      message: args.message,
+      serviceInterest: args.serviceInterest,
+    };
+
+    await ctx.scheduler.runAfter(0, internal.crm.upsertFromContactSubmission, crmPayload);
+    await ctx.scheduler.runAfter(0, internal.emails.sendContactFormNotifications, emailPayload);
 
     return submissionId;
   },
@@ -63,7 +91,11 @@ export const getAll = query({
   args: {},
   handler: async (ctx) => {
     await requireAdmin(ctx);
-    return await ctx.db.query("contactSubmissions").order("desc").take(100);
+    return await ctx.db
+      .query("contactSubmissions")
+      .withIndex("by_date")
+      .order("desc")
+      .take(100);
   },
 });
 

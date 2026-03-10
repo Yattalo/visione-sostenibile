@@ -10,6 +10,8 @@ import {
   Trash2,
   EyeOff,
   ExternalLink,
+  Loader2,
+  Inbox,
 } from "lucide-react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -19,7 +21,9 @@ import { SlideUp } from "../../components/animations";
 import { api } from "../../../convex/_generated/api";
 
 export default function AdminContactsPage() {
-  const contacts = useQuery(api.contacts.getAll) ?? [];
+  const contactsRaw = useQuery(api.contacts.getAll);
+  const contacts = contactsRaw ?? [];
+  const isLoading = contactsRaw === undefined;
   const markAsRead = useMutation(api.contacts.markAsRead);
   const removeContact = useMutation(api.contacts.remove);
   const [filter, setFilter] = useState<"all" | "unread" | "replied">("all");
@@ -100,6 +104,20 @@ export default function AdminContactsPage() {
       </SlideUp>
 
       <SlideUp delay={0.2}>
+        {isLoading && (
+          <div className="flex items-center justify-center py-16 text-muted-foreground">
+            <Loader2 className="w-5 h-5 animate-spin mr-2" />
+            Caricamento contatti...
+          </div>
+        )}
+        {!isLoading && filteredContacts.length === 0 && (
+          <Card variant="default">
+            <CardContent className="py-16 text-center text-muted-foreground">
+              <Inbox className="w-10 h-10 mx-auto mb-3 opacity-50" />
+              <p>Nessun messaggio trovato.</p>
+            </CardContent>
+          </Card>
+        )}
         <div className="grid gap-4">
           {filteredContacts.map((contact) => (
             <Card
