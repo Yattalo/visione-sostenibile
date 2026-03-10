@@ -8,11 +8,13 @@
  * @module
  */
 
+import type * as authHelpers from "../authHelpers.js";
 import type * as blog from "../blog.js";
 import type * as blogComments from "../blogComments.js";
 import type * as blogSeed from "../blogSeed.js";
 import type * as contacts from "../contacts.js";
 import type * as crm from "../crm.js";
+import type * as editorial from "../editorial.js";
 import type * as emailDispatch from "../emailDispatch.js";
 import type * as emailTemplates from "../emailTemplates.js";
 import type * as emails from "../emails.js";
@@ -43,6 +45,7 @@ import type * as taskSystem_skills from "../taskSystem/skills.js";
 import type * as taskSystem_taskDefinitions from "../taskSystem/taskDefinitions.js";
 import type * as taskSystem_tasks from "../taskSystem/tasks.js";
 import type * as uploads from "../uploads.js";
+import type * as userHelpers from "../userHelpers.js";
 import type * as users from "../users.js";
 
 import type {
@@ -52,11 +55,13 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  authHelpers: typeof authHelpers;
   blog: typeof blog;
   blogComments: typeof blogComments;
   blogSeed: typeof blogSeed;
   contacts: typeof contacts;
   crm: typeof crm;
+  editorial: typeof editorial;
   emailDispatch: typeof emailDispatch;
   emailTemplates: typeof emailTemplates;
   emails: typeof emails;
@@ -87,6 +92,7 @@ declare const fullApi: ApiFromModules<{
   "taskSystem/taskDefinitions": typeof taskSystem_taskDefinitions;
   "taskSystem/tasks": typeof taskSystem_tasks;
   uploads: typeof uploads;
+  userHelpers: typeof userHelpers;
   users: typeof users;
 }>;
 

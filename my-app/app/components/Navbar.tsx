@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Lock } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
 import { BLUR_DATA_URL } from "../lib/image-utils";
@@ -53,8 +53,8 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Hide public navbar on admin routes
-  if (pathname.startsWith("/admin")) return null;
+  // Hide public navbar on admin and area-privata routes (they have their own shell)
+  if (pathname.startsWith("/admin") || pathname.startsWith("/area-privata")) return null;
 
   return (
     <motion.header
@@ -141,6 +141,18 @@ export function Navbar() {
                 </SignUpButton>
               </Show>
               <Show when="signed-in">
+                <Link
+                  href="/area-privata"
+                  className={cn(
+                    "flex items-center gap-1.5 px-4 py-2 rounded-full font-sans text-[11px] uppercase tracking-[0.14em] font-semibold transition-colors border",
+                    useDarkText
+                      ? "border-leaf-500/30 text-leaf-700 hover:bg-leaf-50 hover:border-leaf-500"
+                      : "border-paper-50/30 text-paper-50 hover:border-paper-50/60"
+                  )}
+                >
+                  <Lock className="w-3 h-3" />
+                  Area Privata
+                </Link>
                 <UserButton />
               </Show>
               <Link
@@ -223,6 +235,14 @@ export function Navbar() {
                   </SignUpButton>
                 </Show>
                 <Show when="signed-in">
+                  <Link
+                    href="/area-privata"
+                    className="inline-flex items-center justify-center gap-2 w-full h-11 px-6 rounded-full border border-leaf-500/30 text-leaf-700 font-sans text-xs uppercase tracking-[0.14em] font-semibold hover:bg-leaf-50 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Lock className="w-3.5 h-3.5" />
+                    Area Privata
+                  </Link>
                   <div className="flex justify-center py-2">
                     <UserButton />
                   </div>
