@@ -12,29 +12,58 @@ Usage:
   just task-list | python3 tools/task-filter.py inprogress
 """
 import json
+import os
 import sys
 
 
+CACHE_FILE = "/tmp/vs-tasks.json"
+
+
 def load_tasks():
-    raw = sys.stdin.read()
-    # Handle truncated JSON from Convex CLI output.
-    # Strategy: find the last complete object (ending with '}') before
-    # any truncation, then close the array.
+    """Load tasks from cache file. Use `just task-fetch` to refresh."""
+    if not os.path.exists(CACHE_FILE):
+        print(f"ERROR: {CACHE_FILE} not found. Run: just task-fetch", file=sys.stderr)
+        sys.exit(1)
+
+    with open(CACHE_FILE) as f:
+        raw = f.read()
+
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
-        # Find last complete object boundary
-        last_obj = raw.rfind("}")
-        if last_obj == -1:
-            print("ERROR: No valid JSON objects in input", file=sys.stderr)
+        # Handle truncated JSON: find last complete task object
+        # Tasks are top-level array elements ending with }
+        # We need to find the last } that closes a task (depth 1), not a nested object
+        depth = 0
+        last_valid = -1
+        in_string = False
+        escape_next = False
+
+        for i, ch in enumerate(raw):
+            if escape_next:
+                escape_next = False
+                continue
+            if ch == "\\":
+                escape_next = True
+                continue
+            if ch == '"':
+                in_string = not in_string
+                continue
+            if in_string:
+                continue
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 1:  # closing a top-level array element
+                    last_valid = i
+
+        if last_valid == -1:
+            print("ERROR: No complete task objects found", file=sys.stderr)
             sys.exit(1)
-        # Find the next comma or bracket after it to trim cleanly
-        trimmed = raw[: last_obj + 1].rstrip().rstrip(",") + "\n]"
-        # Ensure we start with [
+
+        trimmed = raw[: last_valid + 1].rstrip().rstrip(",") + "\n]"
         start = trimmed.find("[")
-        if start == -1:
-            print("ERROR: No JSON array start found", file=sys.stderr)
-            sys.exit(1)
         return json.loads(trimmed[start:])
 
 

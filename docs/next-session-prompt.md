@@ -2,11 +2,11 @@
 
 ## Stato attuale (fine 2026-03-10)
 - **Branch**: `feature/vs-wave16-copy` → merged in main, pushato
-- **Task System**: 109 task totali, 91 done (83%), 4 todo, 11 blocked
+- **Task System**: 109 task totali, 95 done (87%), 4 human-only todo, 3 blocked, 6 backlog
 - **Build**: `pnpm build` + `npx tsc --noEmit` OK su tutti i commit
 - **Working mode**: orchestratore + subagenti paralleli
 
-## Completato in questa sessione (22 task + 2 fix)
+## Completato in questa sessione (26 task + 2 fix)
 
 1. **C25** `4c27b12` — Build fix: wrap Analytics in Suspense for /_not-found prerender
 2. **SD10** `09c0cde` — Homepage Stitch alignment: 95vh hero, uppercase headings, neumorphic cards
@@ -30,6 +30,10 @@
 20. **MON-07** `5e52f73` — Email provider status: monitoring dashboard, stats cards, dispatch log
 21. **MON-08** `5707715` — Email operational runbook documentation
 22. **MON-03** `97576c9` — CRM/Email smoke test audit: explicit payloads, GDPR checkbox, loading states
+23. **VS-H5** (human) — Clerk JWT env var set on Convex Dashboard
+24. **FE3** (verified) — Admin CRUD audit: all operations already functional
+25. **MON-04** `a580e76` — Gallery seed: 24 curated entries + orchestrator just recipes
+26. **MON-06** (verified) — Admin CRUD regression: confirmed all working via FE3 audit
 
 ## Cumulativo branch (41 task in 14 sessioni)
 
@@ -50,24 +54,25 @@
 | 13 (calendar-auth-perf) | VS-22, VS-23, D3 |
 | 14 (partner-email-deploy) | D4, VS-41, MON-07 |
 | 15 (crm-audit-deploy) | MON-08, MON-03 |
+| 16 (gallery-tooling-cleanup) | VS-H5, FE3, MON-04, MON-06 |
 
 ## Prossimi passi (prioritized)
 
 | # | Cosa | Perche | Effort |
 |---|------|--------|--------|
-| 1 | **MON-04**: Popolare libreria media Convex | Asset foto/video per gallery | 4h |
-| 2 | **VS-31**: AI Plant Identification | Google Cloud Vision integration | 4h |
-| 3 | **VS-32-PRE**: AI Studio Scaffold | Mini-app render pipeline con Gemini | 4h |
-| 4 | **MON-03**: ~~Smoke test E2E CRM/Email~~ | ~~DONE~~ | ~~2h~~ |
-| 5 | **MON-08**: ~~Runbook operativo email~~ | ~~DONE~~ | ~~2h~~ |
+| 1 | **Consolidamento**: QA visivo + regression check | Verificare che nulla sia rotto | 2h |
+| 2 | **VS-H1**: Logo Redesign (human — Guglielmo) | Brand identity | human |
+| 3 | **VS-H4**: DNS Setup (human) | Go-live dominio | human |
+| 4 | **VS-H2**: Barbara B2B Copy (human) | Testi formali | human |
+| 5 | **VS-H3**: Client Approval pricing (human) | Business model | human |
 
 ### Blocked/Human tasks
 - **VS-H1** (human): Logo Redesign — Guglielmo
 - **VS-H2** (human): Barbara B2B Copy — varianti formali
 - **VS-H3** (human): Client Approval — pricing tier AI
 - **VS-H4** (human): DNS Setup — Netlify + Siteground
-- **VS-H5** (human): Clerk JWT env var su Convex Dashboard
-- **TS4** (critical): Fix dashboard SPA — needs task-system-scaffold context
+- ~~**VS-H5** (human): Clerk JWT env var su Convex Dashboard~~ DONE
+- ~~**TS4** (critical): Fix dashboard SPA~~ → backlog (wrong project context)
 
 ## Contesto per il prossimo agente
 
@@ -82,6 +87,8 @@
 - **Email Status**: `/admin/email-status`, stats + dispatch log monitoring
 - **Performance**: Dynamic imports, preconnect hints, AVIF, video lazy loading
 - **CRM Fix**: `contacts.submit` explicit payloads (was crashing with `...args` spread), GDPR privacy checkbox
+- **Gallery Seed**: `convex/gallerySeed.ts` — 24 entries from existing public assets
+- **Orchestrator Tooling**: `tools/task-filter.py` + just recipes (`task-actionable`, `task-stats-full`, etc.)
 
 ### Architecture changes
 - `proxy.ts` replaces `middleware.ts` (Next.js 16 requirement) — handles Clerk + route protection

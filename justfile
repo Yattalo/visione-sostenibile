@@ -98,30 +98,36 @@ seed:
     cd {{app}} && npx convex run taskSystem/orchestrator:seed '{}'
 
 # ── Orchestrator Filters (tools/task-filter.py) ────────────
+# Pattern: fetch to file (avoids pipe truncation), then filter
+
+# Fetch tasks to /tmp/vs-tasks.json (run once per cycle)
+task-fetch:
+    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null > /tmp/vs-tasks.json
+    @python3 -c "import json; t=json.load(open('/tmp/vs-tasks.json')); print(f'Fetched {len(t)} tasks')"
 
 # Actionable tasks: todo, deps met, not human, sorted by priority
-task-actionable:
-    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null | python3 ../tools/task-filter.py actionable
+task-actionable: task-fetch
+    python3 tools/task-filter.py actionable
 
 # Task stats: done/total/percentage breakdown
-task-stats-full:
-    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null | python3 ../tools/task-filter.py stats
+task-stats-full: task-fetch
+    python3 tools/task-filter.py stats
 
 # In-progress tasks
-task-wip:
-    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null | python3 ../tools/task-filter.py inprogress
+task-wip: task-fetch
+    python3 tools/task-filter.py inprogress
 
 # Blocked tasks with unmet dependencies
-task-blocked:
-    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null | python3 ../tools/task-filter.py blocked
+task-blocked: task-fetch
+    python3 tools/task-filter.py blocked
 
 # Human-assigned pending tasks
-task-human:
-    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null | python3 ../tools/task-filter.py human
+task-human: task-fetch
+    python3 tools/task-filter.py human
 
 # Detail for a specific task (JSON): just task-detail VS-31
-task-detail id:
-    cd {{app}} && npx convex run taskSystem/tasks:list '{}' 2>/dev/null | python3 ../tools/task-filter.py detail {{id}}
+task-detail id: task-fetch
+    python3 tools/task-filter.py detail {{id}}
 
 # ── Scripts (package.json) ───────────────────────────────────
 
