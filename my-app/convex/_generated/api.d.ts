@@ -9,6 +9,7 @@
  */
 
 import type * as blog from "../blog.js";
+import type * as blogComments from "../blogComments.js";
 import type * as blogSeed from "../blogSeed.js";
 import type * as contacts from "../contacts.js";
 import type * as crm from "../crm.js";
@@ -40,6 +41,7 @@ import type * as taskSystem_orchestrator from "../taskSystem/orchestrator.js";
 import type * as taskSystem_skills from "../taskSystem/skills.js";
 import type * as taskSystem_taskDefinitions from "../taskSystem/taskDefinitions.js";
 import type * as taskSystem_tasks from "../taskSystem/tasks.js";
+import type * as uploads from "../uploads.js";
 import type * as users from "../users.js";
 
 import type {
@@ -50,6 +52,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   blog: typeof blog;
+  blogComments: typeof blogComments;
   blogSeed: typeof blogSeed;
   contacts: typeof contacts;
   crm: typeof crm;
@@ -81,6 +84,7 @@ declare const fullApi: ApiFromModules<{
   "taskSystem/skills": typeof taskSystem_skills;
   "taskSystem/taskDefinitions": typeof taskSystem_taskDefinitions;
   "taskSystem/tasks": typeof taskSystem_tasks;
+  uploads: typeof uploads;
   users: typeof users;
 }>;
 

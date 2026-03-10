@@ -50,6 +50,7 @@ export const submit = mutation({
     name: v.string(),
     email: v.string(),
     phone: v.optional(v.string()),
+    photoStorageIds: v.optional(v.array(v.string())),
     privacyConsent: v.boolean(),
     marketingConsent: v.optional(v.boolean()),
     guestSessionId: v.optional(v.string()),

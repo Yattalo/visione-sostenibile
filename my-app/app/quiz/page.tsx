@@ -37,6 +37,7 @@ import { Card, CardContent } from "../components/ui/Card";
 import { Checkbox, Input } from "../components/ui/Input";
 import { Badge } from "../components/ui/Badge";
 import { SlideUp, FadeIn, ScaleIn, StaggerContainer, StaggerItem } from "../components/animations";
+import PhotoUploadStep from "../components/PhotoUploadStep";
 import { trackLead, trackQuizComplete } from "../lib/analytics";
 import { getOrCreateGuestSessionId } from "../lib/guest-session";
 import { cn } from "../lib/utils";
@@ -199,6 +200,8 @@ export default function QuizPage() {
   });
   const [percorso, setPercorso] = useState<PercorsoType | null>(null);
   const [isB2B, setIsB2B] = useState(false);
+  const [showPhotoUpload, setShowPhotoUpload] = useState(false);
+  const [photoStorageIds, setPhotoStorageIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -278,6 +281,17 @@ export default function QuizPage() {
     setResultProfile(profileWinner);
     setPercorso(percorsoWinner);
     setIsB2B(detectedB2B);
+    setShowPhotoUpload(true);
+  };
+
+  const handlePhotoComplete = (storageIds: string[]) => {
+    setPhotoStorageIds(storageIds);
+    setShowPhotoUpload(false);
+    setShowResult(true);
+  };
+
+  const handlePhotoSkip = () => {
+    setShowPhotoUpload(false);
     setShowResult(true);
   };
 
@@ -323,6 +337,7 @@ export default function QuizPage() {
         name: leadForm.name,
         email: leadForm.email,
         phone: leadForm.phone || undefined,
+        photoStorageIds: photoStorageIds.length > 0 ? photoStorageIds : undefined,
         privacyConsent: leadForm.privacyConsent,
         marketingConsent: leadForm.marketingConsent || undefined,
         guestSessionId: getOrCreateGuestSessionId() || undefined,
@@ -345,7 +360,10 @@ export default function QuizPage() {
     }
   };
 
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
+  // Total steps: 6 questions + 1 photo upload = 7
+  const totalSteps = questions.length + 1;
+  const currentStep = showPhotoUpload ? questions.length + 1 : currentQuestion + 1;
+  const progress = (currentStep / totalSteps) * 100;
 
   // ── HERO / LANDING ──────────────────────────────────────
   if (!started) {
@@ -407,6 +425,48 @@ export default function QuizPage() {
             </FadeIn>
           </div>
         </section>
+      </div>
+    );
+  }
+
+  // ── PHOTO UPLOAD STEP ──────────────────────────────────
+  if (showPhotoUpload && resultProfile) {
+    return (
+      <div className="min-h-screen bg-paper-canvas py-10 px-6 relative overflow-hidden">
+        <div className="absolute top-1/4 -right-32 w-80 h-80 bg-leaf-100/30 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-1/3 -left-20 w-64 h-64 bg-sun-100/20 rounded-full blur-3xl animate-drift" />
+
+        <div className="max-w-2xl mx-auto relative z-10">
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <Image src="/VS_logo_monogramma_colori.svg" alt="Logo Visione Sostenibile" width={48} height={48} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+          </div>
+
+          {/* Progress bar */}
+          <div className="mb-10">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-micro text-forest-800/60">
+                Foto del giardino (facoltativo)
+              </span>
+              <span className="text-micro text-leaf-600">
+                {Math.round(progress)}%
+              </span>
+            </div>
+            <div className="h-2 bg-paper-200 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-sun-400 to-leaf-500 rounded-full"
+                initial={{ width: `${((questions.length) / totalSteps) * 100}%` }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          </div>
+
+          <PhotoUploadStep
+            onComplete={handlePhotoComplete}
+            onSkip={handlePhotoSkip}
+          />
+        </div>
       </div>
     );
   }
@@ -578,9 +638,11 @@ export default function QuizPage() {
                     variant="ghost"
                     onClick={() => {
                       setShowResult(false);
+                      setShowPhotoUpload(false);
                       setResultProfile(null);
                       setPercorso(null);
                       setIsB2B(false);
+                      setPhotoStorageIds([]);
                       setAnswers([]);
                       setCurrentQuestion(0);
                     }}
