@@ -23,6 +23,7 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/qualita", label: "Qualità" },
   { href: "/contatti", label: "Contatti" },
+  { href: "/collabora", label: "Collabora" },
 ];
 
 // Pages that do NOT have a dark hero at top

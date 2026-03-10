@@ -198,7 +198,7 @@ export default function HomePage() {
             <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
               Perch&eacute; funziona
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light uppercase tracking-wide text-forest-950 mb-6 leading-tight">
+            <h2 className="text-stitch-heading text-4xl md:text-5xl lg:text-6xl text-forest-950 mb-6">
               OGNI GIARDINO NASCE DALL&apos;
               <em className="italic font-normal text-leaf-600">Ascolto</em>
             </h2>
@@ -232,7 +232,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="rounded-2xl border border-paper-100 bg-paper-50 p-8 transition-all duration-300 hover:border-leaf-200 hover:shadow-soft"
+                className="rounded-[30px] border border-paper-100 bg-paper-50 p-8 transition-all duration-300 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating"
               >
                 <span className="font-display text-5xl font-light text-paper-300 mb-4 block select-none">
                   {(index + 1).toString().padStart(2, "0")}
@@ -256,9 +256,9 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="bg-forest-950 rounded-3xl p-10 md:p-14 text-center mb-16"
+            className="bg-forest-950 rounded-[30px] p-10 md:p-14 text-center mb-16"
           >
-            <h3 className="font-display text-2xl md:text-3xl font-light uppercase tracking-wide text-paper-50 mb-6">
+            <h3 className="text-stitch-heading text-2xl md:text-3xl text-paper-50 mb-6">
               BELLO. <em className="italic font-normal text-leaf-400">Sostenibile.</em> GESTIBILE.
             </h3>
             <p className="font-body text-paper-300 max-w-2xl mx-auto mb-4">
@@ -335,7 +335,7 @@ export default function HomePage() {
               <Badge className="mb-6 border border-leaf-300/70 bg-leaf-50 px-5 py-1.5 text-leaf-700">
                 Quiz Gratuito
               </Badge>
-              <h2 className="mb-5 font-display text-5xl font-light uppercase tracking-wide leading-[1.05] text-forest-950 md:text-6xl">
+              <h2 className="mb-5 text-stitch-heading text-4xl text-forest-950 md:text-5xl lg:text-6xl">
                 QUAL &Egrave; IL GIARDINO{" "}
                 <em className="italic font-normal text-leaf-600">Perfetto</em>
                 <span className="block text-forest-950">PER TE?</span>
@@ -362,7 +362,7 @@ export default function HomePage() {
       />
 
       {/* Featured Project / CTA */}
-      <section className="py-32 px-6 relative overflow-hidden">
+      <section className="py-24 lg:py-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-leaf-50" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-leaf-100/50 rounded-full blur-3xl" />
 
@@ -401,7 +401,7 @@ export default function HomePage() {
               <Badge className="bg-leaf-100 text-leaf-700 mb-6">
                 Realizzazioni
               </Badge>
-              <h2 className="font-display text-4xl md:text-5xl font-light uppercase tracking-wide text-forest-950 mb-6 leading-tight">
+              <h2 className="text-stitch-heading text-4xl md:text-5xl text-forest-950 mb-6">
                 PROGETTI DIVERSI,{" "}
                 <em className="italic font-normal text-leaf-600">Radici</em>
                 <span className="block text-forest-950">COMUNI</span>
@@ -443,7 +443,7 @@ export default function HomePage() {
           viewport={{ once: true }}
           className="relative z-10 max-w-4xl mx-auto text-center px-6"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-light uppercase tracking-wide mb-6 leading-tight">
+          <h2 className="text-stitch-heading text-4xl md:text-5xl mb-6">
             PARLIAMONE:{" "}
             <em className="italic font-normal text-leaf-400">Chiarezza</em>
             <span className="block text-paper-50">SU COSA SERVE DAVVERO</span>

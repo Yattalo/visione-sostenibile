@@ -370,7 +370,7 @@ export default function ProgettiPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
           <SlideUp>
-            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-paper-50 mb-8 text-balance">
+            <h1 className="text-stitch-heading text-4xl md:text-5xl lg:text-7xl text-paper-50 mb-8 text-balance">
               I PROGETTI CHE CI RENDONO{" "}
               <em className="italic font-normal text-leaf-400">Orgogliosi</em>
             </h1>
@@ -677,7 +677,7 @@ export default function ProgettiPage() {
               <a href="tel:+393714821825">
                 <Button
                   size="lg"
-                  className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8"
+                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8"
                 >
                   <Phone className="mr-2 w-5 h-5" />
                   Chiama Ora

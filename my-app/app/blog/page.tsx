@@ -95,7 +95,7 @@ export default function BlogPage() {
   if (posts.length === 0) {
     return (
       <div className="min-h-screen bg-paper-50">
-        <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-32 md:py-40 lg:py-48">
+        <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-24 md:py-32 lg:py-40">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-leaf-900/30 via-forest-950 to-forest-950" />
             <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-sun-400/10 blur-3xl" />
@@ -103,7 +103,7 @@ export default function BlogPage() {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-paper-50 mb-8 text-balance">
+            <h1 className="text-stitch-heading text-4xl md:text-5xl lg:text-7xl text-paper-50 mb-8 text-balance">
               ARTICOLI E{" "}
               <em className="italic font-normal text-leaf-400">Ispirazioni</em>
             </h1>
@@ -129,7 +129,7 @@ export default function BlogPage() {
           Dark background with radial gradient, uppercase
           heading with italic accent, wide tracking
       ═══════════════════════════════════════════════════ */}
-      <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-32 md:py-40 lg:py-48">
+      <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-24 md:py-32 lg:py-40">
         {/* Decorative background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-leaf-900/30 via-forest-950 to-forest-950" />
@@ -139,7 +139,7 @@ export default function BlogPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <SlideUp>
-            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-paper-50 mb-8 text-balance">
+            <h1 className="text-stitch-heading text-4xl md:text-5xl lg:text-7xl text-paper-50 mb-8 text-balance">
               ARTICOLI E{" "}
               <em className="italic font-normal text-leaf-400">Ispirazioni</em>
             </h1>

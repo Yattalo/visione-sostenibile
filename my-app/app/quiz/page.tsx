@@ -281,6 +281,12 @@ export default function QuizPage() {
     setResultProfile(profileWinner);
     setPercorso(percorsoWinner);
     setIsB2B(detectedB2B);
+
+    // Persist audience preference for servizi page B2C/B2B branching
+    if (detectedB2B) {
+      try { localStorage.setItem("vs-audience", "b2b"); } catch { /* noop */ }
+    }
+
     setShowPhotoUpload(true);
   };
 
@@ -384,7 +390,7 @@ export default function QuizPage() {
                 Quiz Interattivo
               </Badge>
 
-              <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-6 text-white text-balance">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-light leading-tight mb-6 text-white text-balance">
                 Che giardino
                 <span className="block italic text-leaf-400">fa per te?</span>
               </h1>
@@ -396,7 +402,7 @@ export default function QuizPage() {
 
               <Button
                 onClick={handleStart}
-                className="bg-sun-400 hover:bg-sun-500 text-white px-12 py-5 text-lg tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-all duration-300 uppercase"
+                className="bg-sun-400 hover:bg-sun-500 text-forest-950 px-12 py-5 text-lg tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-all duration-300 uppercase"
               >
                 Inizia il Quiz
                 <ArrowRight className="ml-3 w-5 h-5" />
@@ -495,7 +501,7 @@ export default function QuizPage() {
                     <span className="text-micro text-leaf-600 block mb-4">
                       Il tuo profilo
                     </span>
-                    <h1 className="font-display text-4xl md:text-6xl text-forest-950 leading-[1.1] tracking-tight mb-6">
+                    <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-forest-950 leading-[1.1] tracking-tight mb-6">
                       {profile.title.split(" ")[0]}
                       <span className="block italic text-leaf-700 font-light">
                         {profile.title.split(" ").slice(1).join(" ")}
@@ -619,7 +625,7 @@ export default function QuizPage() {
                             !leadForm.email ||
                             !leadForm.privacyConsent
                           }
-                          className="w-full bg-sun-400 hover:bg-sun-500 text-white h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
+                          className="w-full bg-sun-400 hover:bg-sun-500 text-forest-950 h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                         >
                           {isSubmitting ? "Invio in corso..." : "Ricevi il tuo Report"}
                         </Button>

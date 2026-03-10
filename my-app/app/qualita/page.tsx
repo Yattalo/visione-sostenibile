@@ -267,11 +267,11 @@ export default function QualitaPage() {
             <Badge className="bg-white/10 backdrop-blur-sm border-white/20 text-paper-100 mb-8 px-6 py-2 text-sm tracking-widest uppercase">
               I Nostri Standard
             </Badge>
-            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-white mb-6 text-balance">
+            <h1 className="text-stitch-heading text-4xl md:text-5xl lg:text-7xl text-white mb-6 text-balance">
               LA NOSTRA{" "}
               <em className="italic font-normal text-leaf-400">Qualità</em>
             </h1>
-            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
+            <p className="font-body text-lg md:text-xl lg:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
               Ogni intervento di {siteConfig.companyName} segue standard
               operativi precisi: dalla scelta dei materiali alla sicurezza in
               cantiere, dalla metodologia biodinamica alle garanzie
@@ -480,7 +480,7 @@ export default function QualitaPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {guarantees.map((guarantee, index) => (
               <SlideUp key={guarantee.title} delay={index * 0.12}>
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 h-full group hover:bg-white/10 transition-all duration-500">
+                <div className="bg-white/5 backdrop-blur-sm rounded-[30px] border border-white/10 p-8 h-full group hover:bg-white/10 transition-all duration-500">
                   <div className="flex items-start gap-5">
                     <div className="flex-shrink-0">
                       <div className="w-14 h-14 rounded-xl bg-leaf-500/20 flex items-center justify-center">

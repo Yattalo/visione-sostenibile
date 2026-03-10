@@ -753,7 +753,7 @@ export default function ProgettiDetailPage() {
             <a href="tel:+393714821825">
               <Button
                 size="lg"
-                className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8"
+                className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8"
               >
                 <Phone className="mr-2 w-5 h-5" />
                 Chiama Ora

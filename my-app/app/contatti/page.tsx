@@ -239,7 +239,7 @@ export default function ContattiPage() {
               Contatti
             </Badge>
 
-            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-white mb-6 text-balance">
+            <h1 className="text-stitch-heading text-4xl md:text-5xl lg:text-7xl text-white mb-6 text-balance">
               PARLIAMONE: TI DICIAMO COSA SERVE{" "}
               <em className="italic font-normal text-leaf-400">Davvero</em>
             </h1>
@@ -310,7 +310,7 @@ export default function ContattiPage() {
                     <div className="w-16 h-16 rounded-full bg-white shadow-medium flex items-center justify-center mb-5 transition-transform group-hover:scale-110 duration-500">
                       <MapPin className="w-8 h-8 text-leaf-700" />
                     </div>
-                    <p className="font-display text-3xl text-forest-950 uppercase tracking-tight font-bold">
+                    <p className="font-display text-xl md:text-3xl text-forest-950 uppercase tracking-tight font-bold">
                       Piemonte · Trentino · Lombardia
                     </p>
                     <p className="font-body text-base text-leaf-600/80 mt-2 font-medium">
@@ -597,7 +597,7 @@ export default function ContattiPage() {
                           <Button
                             type="button"
                             onClick={nextStep}
-                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-white h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
+                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-forest-950 h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                           >
                             Avanti
                             <ArrowRight className="ml-2 w-4 h-4" />
@@ -606,7 +606,7 @@ export default function ContattiPage() {
                           <Button
                             type="submit"
                             loading={isSubmitting}
-                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-white h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
+                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-forest-950 h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                           >
                             Invia Richiesta
                           </Button>
@@ -645,7 +645,7 @@ export default function ContattiPage() {
               <Link href="/contatti">
                 <Button
                   size="lg"
-                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-12 py-5 text-xl tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-transform"
+                  className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-5 text-base md:text-xl tracking-wider font-bold rounded-2xl shadow-deep hover:scale-105 transition-transform"
                 >
                   Richiedi un sopralluogo
                 </Button>
@@ -654,7 +654,7 @@ export default function ContattiPage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-paper-400/30 text-paper-100 hover:bg-paper-100/10 px-12 py-5 text-xl tracking-wider font-bold rounded-2xl"
+                  className="border-paper-400/30 text-paper-100 hover:bg-paper-100/10 px-8 py-5 text-base md:text-xl tracking-wider font-bold rounded-2xl"
                 >
                   Richiedi una call (aziende/condomini)
                 </Button>
