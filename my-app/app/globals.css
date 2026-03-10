@@ -436,7 +436,167 @@ h4, h5, h6 {
     display: block;
   }
   .no-print {
-    display: none;
+    display: none !important;
+  }
+
+  /* ── Page setup ────────────────── */
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+
+  /* ── Global print resets ────────────────── */
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #0B1E0E !important;
+    background: white !important;
+    min-height: auto;
+  }
+
+  /* Hide chrome: Navbar, Footer, CookieConsent, Analytics */
+  nav,
+  footer,
+  [data-cookie-consent],
+  [data-cookie-preferences] {
+    display: none !important;
+  }
+
+  /* ── Scorecard print styles ────────────────── */
+
+  /* Hero section: condense for print, keep brand identity */
+  .scorecard-hero {
+    background: #0B1E0E !important;
+    color: white !important;
+    padding: 24pt 20pt !important;
+    break-after: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .scorecard-hero .blur-3xl {
+    display: none !important;
+  }
+
+  /* Score card: keep visible, avoid page break inside */
+  .scorecard-score-card,
+  .scorecard-strengths,
+  .scorecard-improvements {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #D4CFC6 !important;
+    border-radius: 12px !important;
+    margin-bottom: 16pt !important;
+    page-break-inside: avoid;
+  }
+
+  /* SVG gauge: ensure it prints with colors */
+  .scorecard-score-card svg {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* CTA section: reformat for print (no dark bg, just text) */
+  .scorecard-cta {
+    background: white !important;
+    color: #0B1E0E !important;
+    border: 2px solid #22582C !important;
+    border-radius: 12px !important;
+    padding: 20pt !important;
+    break-before: page;
+  }
+
+  .scorecard-cta .blur-3xl {
+    display: none !important;
+  }
+
+  .scorecard-cta * {
+    color: #0B1E0E !important;
+  }
+
+  .scorecard-cta .text-micro {
+    color: #22582C !important;
+  }
+
+  .scorecard-cta h2 span.italic {
+    color: #22582C !important;
+  }
+
+  /* Share section: hide in print */
+  .scorecard-share {
+    display: none !important;
+  }
+
+  /* Print header & footer branding */
+  .print-header {
+    display: flex !important;
+    align-items: center;
+    gap: 8pt;
+    padding-bottom: 10pt;
+    margin-bottom: 10pt;
+    border-bottom: 1px solid #D4CFC6;
+  }
+
+  .print-footer {
+    display: block !important;
+    text-align: center;
+    padding-top: 10pt;
+    margin-top: 16pt;
+    border-top: 1px solid #D4CFC6;
+    font-size: 9pt;
+    color: #7D776C;
+  }
+
+  /* Remove decorative elements in print */
+  .bg-blob,
+  .bg-organic-noise::before,
+  .bg-paper-canvas::before {
+    display: none !important;
+  }
+
+  /* Ensure links show URL in print */
+  .scorecard-cta a[href^="tel"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #7D776C;
+  }
+
+  /* Remove Framer Motion transforms that may break print */
+  [style*="transform"] {
+    transform: none !important;
+  }
+
+  /* Flatten shadows and gradients */
+  .shadow-floating,
+  .shadow-soft,
+  .shadow-deep,
+  .shadow-medium {
+    box-shadow: none !important;
+  }
+
+  .bg-paper-gradient {
+    background: white !important;
+  }
+
+  /* Strength/improvement items: clean print style */
+  .scorecard-strengths .bg-paper-50,
+  .scorecard-improvements .bg-sun-50\/50 {
+    background: #FAF9F7 !important;
+    border: 1px solid #E8E5DF;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Badge: ensure readable in print */
+  .scorecard-hero [class*="Badge"] {
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 

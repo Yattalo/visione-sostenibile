@@ -23,6 +23,7 @@ import {
   Sprout,
   AlertTriangle,
   TrendingUp,
+  Printer,
 } from "lucide-react";
 import { scorecardProfiles } from "../../lib/barbara-scorecard";
 
@@ -165,8 +166,19 @@ export default function ScorecardPage() {
 
   return (
     <div className="min-h-screen bg-paper-50">
+      {/* Print Header (visible only in print) */}
+      <div className="print-header print-only">
+        <Image src="/VS_logo_monogramma_colori.svg" alt="Visione Sostenibile" width={28} height={28} />
+        <div>
+          <strong style={{ fontSize: "11pt" }}>Visione Sostenibile</strong>
+          <span style={{ fontSize: "9pt", color: "#7D776C", marginLeft: "8pt" }}>
+            Scorecard Giardino Sostenibile
+          </span>
+        </div>
+      </div>
+
       {/* Hero */}
-      <section className="relative bg-forest-950 text-white py-20 md:py-28 overflow-hidden">
+      <section className="scorecard-hero relative bg-forest-950 text-white py-20 md:py-28 overflow-hidden">
         {/* Decorative organic blobs */}
         <div className="absolute top-1/3 -left-24 w-80 h-80 bg-leaf-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-sun-400/10 rounded-full blur-3xl" />
@@ -213,9 +225,22 @@ export default function ScorecardPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-6 -mt-10 relative z-10">
+        {/* Print Button (visible only on screen) */}
+        <div className="no-print flex justify-end mb-4 -mt-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => window.print()}
+            className="gap-2"
+          >
+            <Printer className="w-4 h-4" />
+            Stampa / Scarica PDF
+          </Button>
+        </div>
+
         {/* Score + Description */}
         <SlideUp delay={0.3}>
-          <Card className="bg-white shadow-floating border-paper-100 rounded-[30px] mb-8">
+          <Card className="scorecard-score-card bg-white shadow-floating border-paper-100 rounded-[30px] mb-8">
             <CardContent className="p-8 md:p-10">
               <div className="grid md:grid-cols-[200px_1fr] gap-8 items-center">
                 <ScoreGauge score={lead.totalScore} maxScore={maxScore} />
@@ -237,7 +262,7 @@ export default function ScorecardPage() {
 
         {/* Strengths (Punti di forza) */}
         <SlideUp delay={0.4}>
-          <Card className="bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
+          <Card className="scorecard-strengths bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
             <CardContent className="p-8 md:p-10">
               <span className="text-micro text-leaf-600 block mb-3">
                 I tuoi punti di forza
@@ -259,7 +284,7 @@ export default function ScorecardPage() {
 
         {/* Improvements (Dove migliorare) */}
         <SlideUp delay={0.5}>
-          <Card className="bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
+          <Card className="scorecard-improvements bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
             <CardContent className="p-8 md:p-10">
               <span className="text-micro text-sun-500 block mb-3">
                 Dove intervenire
@@ -281,7 +306,7 @@ export default function ScorecardPage() {
 
         {/* CTA Section — uses Barbara's profile-specific CTA */}
         <ScaleIn delay={0.6}>
-          <div className="relative bg-forest-950 rounded-[40px] p-10 md:p-14 text-center text-white mb-12 overflow-hidden">
+          <div className="scorecard-cta relative bg-forest-950 rounded-[40px] p-10 md:p-14 text-center text-white mb-12 overflow-hidden">
             <div className="absolute top-0 -right-10 w-48 h-48 bg-leaf-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 -left-10 w-40 h-40 bg-sun-400/10 rounded-full blur-3xl" />
 
@@ -323,7 +348,7 @@ export default function ScorecardPage() {
         </ScaleIn>
 
         {/* Share */}
-        <div className="text-center pb-16">
+        <div className="scorecard-share text-center pb-16">
           <p className="text-micro text-forest-800/40 mb-5">
             Condividi la scorecard
           </p>
@@ -346,6 +371,14 @@ export default function ScorecardPage() {
               Condividi
             </Button>
           </div>
+        </div>
+
+        {/* Print Footer (visible only in print) */}
+        <div className="print-footer print-only">
+          <p>visione-sostenibile.it &mdash; Giardinaggio Biodinamico a Torino</p>
+          <p style={{ fontSize: "8pt", marginTop: "4pt" }}>
+            Scorecard generata il {new Date().toLocaleDateString("it-IT")}
+          </p>
         </div>
       </div>
     </div>
