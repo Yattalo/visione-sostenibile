@@ -186,25 +186,31 @@ export function PhilosophySection() {
             aria-hidden="true"
           />
 
-          {/* ▸ Video layer */}
-          {ELEMENTS.map((el, i) => (
-            <motion.div
-              key={`vid-${el.title}`}
-              className="absolute inset-0"
-              animate={{ opacity: i === activeIndex ? 0.15 : 0 }}
-              transition={{ duration: 1.2 }}
-            >
-              <video
-                autoPlay loop muted playsInline
-                className="w-full h-full object-cover"
+          {/* ▸ Video layer — only render active + adjacent for perf */}
+          {ELEMENTS.map((el, i) => {
+            const shouldLoad = Math.abs(i - activeIndex) <= 1 || (activeIndex === 0 && i === 3) || (activeIndex === 3 && i === 0);
+            return (
+              <motion.div
+                key={`vid-${el.title}`}
+                className="absolute inset-0"
+                animate={{ opacity: i === activeIndex ? 0.15 : 0 }}
+                transition={{ duration: 1.2 }}
               >
-                <source
-                  src={`/videos/element-${el.title.toLowerCase()}.mp4`}
-                  type="video/mp4"
-                />
-              </video>
-            </motion.div>
-          ))}
+                {shouldLoad && (
+                  <video
+                    autoPlay loop muted playsInline
+                    preload="metadata"
+                    className="w-full h-full object-cover"
+                  >
+                    <source
+                      src={`/videos/element-${el.title.toLowerCase()}.mp4`}
+                      type="video/mp4"
+                    />
+                  </video>
+                )}
+              </motion.div>
+            );
+          })}
 
           {/* ▸ Content for each element */}
           {ELEMENTS.map((el, i) => {

@@ -17,23 +17,16 @@ import localFont from "next/font/local";
 
 const walkway = localFont({
   src: [
-    { path: "../public/walkway/Walkway SemiBold.woff2", weight: "300", style: "normal" },
-    { path: "../public/walkway/Walkway SemiBold.woff2", weight: "400", style: "normal" },
-    { path: "../public/walkway/Walkway SemiBold.woff2", weight: "500", style: "normal" },
-    { path: "../public/walkway/Walkway SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../public/walkway/Walkway SemiBold.woff2", weight: "300 600", style: "normal" },
     { path: "../public/walkway/Walkway Bold.woff2", weight: "700", style: "normal" },
-    { path: "../public/walkway/Walkway Black.woff2", weight: "800", style: "normal" },
-    { path: "../public/walkway/Walkway Black.woff2", weight: "900", style: "normal" },
-    { path: "../public/walkway/Walkway Oblique.woff2", weight: "300", style: "italic" },
-    { path: "../public/walkway/Walkway Oblique.woff2", weight: "400", style: "italic" },
-    { path: "../public/walkway/Walkway Oblique.woff2", weight: "500", style: "italic" },
-    { path: "../public/walkway/Walkway Oblique Bold.woff2", weight: "600", style: "italic" },
-    { path: "../public/walkway/Walkway Oblique Bold.woff2", weight: "700", style: "italic" },
-    { path: "../public/walkway/Walkway Oblique Black.woff2", weight: "800", style: "italic" },
-    { path: "../public/walkway/Walkway Oblique Black.woff2", weight: "900", style: "italic" },
+    { path: "../public/walkway/Walkway Black.woff2", weight: "800 900", style: "normal" },
+    { path: "../public/walkway/Walkway Oblique.woff2", weight: "300 500", style: "italic" },
+    { path: "../public/walkway/Walkway Oblique Bold.woff2", weight: "600 700", style: "italic" },
+    { path: "../public/walkway/Walkway Oblique Black.woff2", weight: "800 900", style: "italic" },
   ],
   variable: "--font-walkway",
   display: "swap",
+  preload: true,
 });
 
 export const viewport: Viewport = {
@@ -84,6 +77,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to critical third-party origins */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/* Clerk frontend API — preconnect for faster auth loading */}
+        <link rel="dns-prefetch" href="https://clerk.clerk.accounts.dev" />
+        {/* Preconnect to Convex backend */}
+        {process.env.NEXT_PUBLIC_CONVEX_URL && (
+          <link
+            rel="preconnect"
+            href={new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin}
+            crossOrigin="anonymous"
+          />
+        )}
+      </head>
       <body className={`${walkway.variable} antialiased min-h-screen flex flex-col bg-paper-gradient`}>
         <JsonLd data={organizationJsonLd()} />
         <a

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Phone,
@@ -11,15 +12,32 @@ import {
 import { Button } from "./components/ui/Button";
 import { Badge } from "./components/ui/Badge";
 import { ServiceCard } from "./components/ServiceCard";
-import { ReviewsWidget } from "./components/ReviewsWidget";
-import { PhilosophySection } from "./components/PhilosophySection";
-import { TrustNumbers } from "./components/TrustNumbers";
 import { staticServices, serviceImages } from "./lib/static-data";
-import { QuizCTA } from "./components/QuizCTA";
-import { QuizMiniPreview } from "./components/QuizMiniPreview";
 import { siteConfig } from "./lib/site-config";
 import { BLUR_DATA_URL } from "./lib/image-utils";
 import { useRef } from "react";
+
+// Dynamically import heavy below-fold components to reduce initial JS bundle
+const ReviewsWidget = dynamic(
+  () => import("./components/ReviewsWidget").then((mod) => ({ default: mod.ReviewsWidget })),
+  { ssr: true }
+);
+const PhilosophySection = dynamic(
+  () => import("./components/PhilosophySection").then((mod) => ({ default: mod.PhilosophySection })),
+  { ssr: true }
+);
+const TrustNumbers = dynamic(
+  () => import("./components/TrustNumbers").then((mod) => ({ default: mod.TrustNumbers })),
+  { ssr: true }
+);
+const QuizCTA = dynamic(
+  () => import("./components/QuizCTA").then((mod) => ({ default: mod.QuizCTA })),
+  { ssr: true }
+);
+const QuizMiniPreview = dynamic(
+  () => import("./components/QuizMiniPreview").then((mod) => ({ default: mod.QuizMiniPreview })),
+  { ssr: true }
+);
 
 const featuredSlugs = [
   "progettazione-giardini",
@@ -87,6 +105,7 @@ export default function HomePage() {
             loop
             muted
             playsInline
+            preload="auto"
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           >
@@ -384,6 +403,7 @@ export default function HomePage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   placeholder="blur"
                   blurDataURL={BLUR_DATA_URL}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-950/40 to-transparent" />
@@ -433,7 +453,7 @@ export default function HomePage() {
       {/* Contact CTA */}
       <section className="py-24 bg-forest-950 text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')] bg-cover bg-center opacity-10" />
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30')] bg-cover bg-center opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
 

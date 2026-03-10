@@ -13,7 +13,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Lock } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
-import { BLUR_DATA_URL } from "../lib/image-utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -49,7 +48,7 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -88,10 +87,9 @@ export function Navbar() {
                 alt="Visione Sostenibile — torna alla homepage"
                 width={40}
                 height={40}
-                placeholder="blur"
-                blurDataURL={BLUR_DATA_URL}
                 className="relative h-9 w-auto drop-shadow-[0_0_8px_rgba(234,184,49,0.25)]"
                 priority
+                unoptimized
               />
             </Link>
 

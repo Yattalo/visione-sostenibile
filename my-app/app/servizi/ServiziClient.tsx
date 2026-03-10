@@ -89,6 +89,7 @@ export function ServiziClient() {
             loop
             muted
             playsInline
+            preload="metadata"
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           >
