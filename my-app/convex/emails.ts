@@ -497,6 +497,92 @@ export const listDeliveries = query({
   },
 });
 
+export const getEmailStats = query({
+  args: {},
+  handler: async (ctx) => {
+    await requireAdmin(ctx);
+
+    const allDeliveries = await ctx.db
+      .query("emailDeliveries")
+      .withIndex("by_date")
+      .order("desc")
+      .take(5000);
+
+    let sent = 0;
+    let failed = 0;
+    let queued = 0;
+    let skipped = 0;
+
+    for (const d of allDeliveries) {
+      if (d.status === "sent") sent++;
+      else if (d.status === "failed") failed++;
+      else if (d.status === "queued") queued++;
+      else if (d.status === "skipped") skipped++;
+    }
+
+    const total = allDeliveries.length;
+    const successRate = total > 0 ? Math.round((sent / total) * 100) : 0;
+
+    return {
+      total,
+      sent,
+      failed,
+      queued,
+      skipped,
+      successRate,
+    };
+  },
+});
+
+export const getRecentDispatches = query({
+  args: {
+    status: v.optional(v.string()),
+    limit: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    await requireAdmin(ctx);
+    const limit = Math.min(args.limit ?? 50, 200);
+
+    if (args.status) {
+      const rows = await ctx.db
+        .query("emailDeliveries")
+        .withIndex("by_status_date", (q) => q.eq("status", args.status!))
+        .order("desc")
+        .take(limit);
+
+      return rows.map((row) => ({
+        _id: row._id,
+        to: row.to,
+        subject: row.subject,
+        templateKey: row.templateKey,
+        status: row.status,
+        error: row.error,
+        provider: row.provider,
+        createdAt: row.createdAt,
+        sentAt: row.sentAt,
+      }));
+    }
+
+    const rows = await ctx.db
+      .query("emailDeliveries")
+      .withIndex("by_date")
+      .order("desc")
+      .take(limit);
+
+    return rows.map((row) => ({
+      _id: row._id,
+      to: row.to,
+      subject: row.subject,
+      templateKey: row.templateKey,
+      status: row.status,
+      error: row.error,
+      provider: row.provider,
+      createdAt: row.createdAt,
+      sentAt: row.sentAt,
+    }));
+  },
+});
+
 export const previewFromTemplate = query({
   args: {
     subject: v.string(),
