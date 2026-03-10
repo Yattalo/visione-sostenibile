@@ -21,6 +21,7 @@ import type * as http from "../http.js";
 import type * as leads from "../leads.js";
 import type * as media from "../media.js";
 import type * as pages from "../pages.js";
+import type * as partners from "../partners.js";
 import type * as projects from "../projects.js";
 import type * as projectsSeed from "../projectsSeed.js";
 import type * as quiz from "../quiz.js";
@@ -64,6 +65,7 @@ declare const fullApi: ApiFromModules<{
   leads: typeof leads;
   media: typeof media;
   pages: typeof pages;
+  partners: typeof partners;
   projects: typeof projects;
   projectsSeed: typeof projectsSeed;
   quiz: typeof quiz;
