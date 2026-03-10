@@ -26,6 +26,7 @@ export default defineSchema({
     slug: v.string(),
     title: v.string(),
     shortDescription: v.string(),
+    b2bDescription: v.optional(v.string()),
     fullDescription: v.optional(v.string()),
     icon: v.optional(v.string()),
     image: v.optional(v.string()),
@@ -213,6 +214,22 @@ export default defineSchema({
   })
     .index("by_post_slug", ["postSlug", "status"])
     .index("by_status", ["status", "createdAt"]),
+
+  partners: defineTable({
+    companyName: v.string(),
+    contactName: v.string(),
+    email: v.string(),
+    phone: v.optional(v.string()),
+    partnershipType: v.string(),
+    message: v.string(),
+    privacyConsent: v.boolean(),
+    isRead: v.boolean(),
+    isContacted: v.boolean(),
+    createdAt: v.number(),
+  })
+    .index("by_date", ["createdAt"])
+    .index("by_read", ["isRead"])
+    .index("by_type", ["partnershipType", "createdAt"]),
 
   settings: defineTable({
     key: v.string(),
