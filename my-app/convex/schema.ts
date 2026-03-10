@@ -201,6 +201,19 @@ export default defineSchema({
     .index("by_email", ["email"])
     .index("by_role", ["role"]),
 
+  blogComments: defineTable({
+    postSlug: v.string(),
+    authorName: v.string(),
+    authorEmail: v.string(),
+    content: v.string(),
+    status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected")),
+    createdAt: v.number(),
+    moderatedAt: v.optional(v.number()),
+    moderatedBy: v.optional(v.string()),
+  })
+    .index("by_post_slug", ["postSlug", "status"])
+    .index("by_status", ["status", "createdAt"]),
+
   settings: defineTable({
     key: v.string(),
     value: v.any(),
@@ -290,6 +303,7 @@ export default defineSchema({
     name: v.string(),
     email: v.string(),
     phone: v.optional(v.string()),
+    photoStorageIds: v.optional(v.array(v.string())),
     privacyConsent: v.boolean(),
     marketingConsent: v.optional(v.boolean()),
     guestSessionId: v.optional(v.string()),

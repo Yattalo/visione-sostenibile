@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Calendar, User, ArrowRight, ListChecks, Loader2 } from "lucide-react";
-import { useQuery } from "convex/react";
+import { ArrowLeft, Clock, Calendar, User, ArrowRight, ListChecks, Loader2, MessageCircle, Send } from "lucide-react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -376,6 +377,235 @@ function renderArticleContent(content: string) {
   }
 
   return processed;
+}
+
+function formatRelativeDate(timestamp: number): string {
+  const now = Date.now();
+  const diffMs = now - timestamp;
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const diffWeeks = Math.floor(diffDays / 7);
+  const diffMonths = Math.floor(diffDays / 30);
+
+  if (diffMinutes < 1) return "adesso";
+  if (diffMinutes < 60) return `${diffMinutes} ${diffMinutes === 1 ? "minuto" : "minuti"} fa`;
+  if (diffHours < 24) return `${diffHours} ${diffHours === 1 ? "ora" : "ore"} fa`;
+  if (diffDays < 7) return `${diffDays} ${diffDays === 1 ? "giorno" : "giorni"} fa`;
+  if (diffWeeks < 5) return `${diffWeeks} ${diffWeeks === 1 ? "settimana" : "settimane"} fa`;
+  return `${diffMonths} ${diffMonths === 1 ? "mese" : "mesi"} fa`;
+}
+
+function BlogCommentsSection({ postSlug, hasConvexConfig }: { postSlug: string; hasConvexConfig: boolean }) {
+  const approvedComments = useQuery(
+    api.blogComments.getApprovedByPost,
+    hasConvexConfig ? { postSlug } : "skip"
+  );
+  const submitComment = useMutation(api.blogComments.submit);
+
+  const [authorName, setAuthorName] = useState("");
+  const [authorEmail, setAuthorEmail] = useState("");
+  const [content, setContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
+
+    try {
+      await submitComment({
+        postSlug,
+        authorName,
+        authorEmail,
+        content,
+      });
+      setSubmitStatus("success");
+      setAuthorName("");
+      setAuthorEmail("");
+      setContent("");
+    } catch (err) {
+      setSubmitStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Errore nell'invio del commento."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!hasConvexConfig) return null;
+
+  const comments = approvedComments ?? [];
+
+  return (
+    <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-24">
+      <FadeIn>
+        <h2 className="font-display text-3xl md:text-4xl font-light uppercase tracking-wide text-forest-950 mb-8">
+          COMMENTI{" "}
+          <em className="italic font-normal text-leaf-600">
+            ({comments.length})
+          </em>
+        </h2>
+      </FadeIn>
+
+      {/* Approved comments list */}
+      {comments.length > 0 && (
+        <SlideUp>
+          <div className="space-y-4 mb-12">
+            {comments.map((comment) => (
+              <div
+                key={comment._id}
+                className="border border-paper-100 bg-paper-50 p-6 rounded-xl hover:border-leaf-200 hover:shadow-soft transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-leaf-100 flex items-center justify-center">
+                      <span className="text-leaf-700 font-semibold text-sm">
+                        {comment.authorName.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    <span className="font-sans text-sm font-medium text-forest-950">
+                      {comment.authorName}
+                    </span>
+                  </div>
+                  <span className="text-xs text-forest-800/50">
+                    {formatRelativeDate(comment.createdAt)}
+                  </span>
+                </div>
+                <p className="text-forest-800 leading-relaxed text-sm">
+                  {comment.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        </SlideUp>
+      )}
+
+      {comments.length === 0 && (
+        <SlideUp>
+          <div className="border border-paper-100 bg-paper-50 p-8 rounded-xl text-center mb-12">
+            <MessageCircle className="w-8 h-8 text-leaf-400 mx-auto mb-3" />
+            <p className="text-forest-800/60 text-sm">
+              Nessun commento ancora. Sii il primo a commentare!
+            </p>
+          </div>
+        </SlideUp>
+      )}
+
+      {/* Comment form */}
+      <SlideUp delay={0.1}>
+        <div className="border border-paper-100 bg-paper-50 rounded-2xl p-6 lg:p-8 shadow-neumorphic">
+          <h3 className="font-display text-xl font-light uppercase tracking-wide text-forest-950 mb-6">
+            Lascia un commento
+          </h3>
+
+          {submitStatus === "success" ? (
+            <div className="bg-leaf-50 border border-leaf-200 rounded-xl p-6 text-center">
+              <p className="text-leaf-800 font-medium mb-1">
+                Commento inviato!
+              </p>
+              <p className="text-leaf-700 text-sm">
+                Sara visibile dopo la moderazione.
+              </p>
+              <button
+                type="button"
+                onClick={() => setSubmitStatus("idle")}
+                className="mt-4 text-leaf-600 hover:text-leaf-700 text-sm font-sans uppercase tracking-widest transition-colors"
+              >
+                Scrivi un altro commento
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="comment-name"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
+                    Nome *
+                  </label>
+                  <input
+                    id="comment-name"
+                    type="text"
+                    placeholder="Il tuo nome"
+                    value={authorName}
+                    onChange={(e) => setAuthorName(e.target.value)}
+                    required
+                    minLength={2}
+                    maxLength={50}
+                    className="flex h-12 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm md:text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-all duration-200"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="comment-email"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
+                    Email *
+                  </label>
+                  <input
+                    id="comment-email"
+                    type="email"
+                    placeholder="La tua email (non sara pubblicata)"
+                    value={authorEmail}
+                    onChange={(e) => setAuthorEmail(e.target.value)}
+                    required
+                    className="flex h-12 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm md:text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-all duration-200"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="comment-content"
+                  className="block text-sm font-medium text-foreground mb-2"
+                >
+                  Commento *
+                </label>
+                <textarea
+                  id="comment-content"
+                  placeholder="Scrivi il tuo commento (5-500 caratteri)..."
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  required
+                  minLength={5}
+                  maxLength={500}
+                  rows={4}
+                  className="flex min-h-[120px] w-full rounded-xl border border-input bg-background px-4 py-3 text-sm md:text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-all duration-200 resize-none"
+                />
+                <p className="mt-1 text-xs text-forest-800/40">
+                  {content.length}/500 caratteri
+                </p>
+              </div>
+
+              {submitStatus === "error" && (
+                <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                  <p className="text-red-700 text-sm">{errorMessage}</p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center gap-2 rounded-full font-sans uppercase tracking-[0.12em] font-medium whitespace-nowrap transition-all duration-300 bg-sun-400 text-forest-950 hover:bg-sun-300 border border-transparent h-12 px-7 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
+                {isSubmitting ? "Invio in corso..." : "Invia commento"}
+              </button>
+            </form>
+          )}
+        </div>
+      </SlideUp>
+    </section>
+  );
 }
 
 export function BlogPostClient({
@@ -761,6 +991,8 @@ export function BlogPostClient({
       <SlideUp>
         <QuizCTA variant="banner" />
       </SlideUp>
+
+      <BlogCommentsSection postSlug={slug} hasConvexConfig={hasConvexConfig} />
 
       {relatedPosts && relatedPosts.length > 0 && (
         <section className="border-t border-paper-200/50 bg-paper-50">
