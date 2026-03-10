@@ -82,7 +82,7 @@ export function QuizCTA({ variant = "sidebar", className }: QuizCTAProps) {
           </p>
         </div>
         <Link href="/quiz">
-          <Button className="bg-sun-400 hover:bg-sun-500 text-white font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300">
+          <Button className="bg-sun-400 hover:bg-sun-500 text-forest-950 font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300">
             Fai il Quiz
           </Button>
         </Link>
@@ -107,7 +107,7 @@ export function QuizCTA({ variant = "sidebar", className }: QuizCTAProps) {
           6 domande per scoprire il tuo stile di giardino ideale
         </p>
         <Link href="/quiz" className="block">
-          <Button className="w-full bg-sun-400 hover:bg-sun-500 text-white font-bold uppercase tracking-wider text-xs py-3 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300">
+          <Button className="w-full bg-sun-400 hover:bg-sun-500 text-forest-950 font-bold uppercase tracking-wider text-xs py-3 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300">
             Fai il Quiz
           </Button>
         </Link>

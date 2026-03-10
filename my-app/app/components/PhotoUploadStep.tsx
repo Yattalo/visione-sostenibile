@@ -312,7 +312,7 @@ export default function PhotoUploadStep({ onComplete, onSkip }: PhotoUploadStepP
           <Button
             onClick={handleContinue}
             disabled={uploading}
-            className="w-full sm:w-auto bg-sun-400 hover:bg-sun-500 text-white px-10 py-4 rounded-2xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
+            className="w-full sm:w-auto bg-sun-400 hover:bg-sun-500 text-forest-950 px-10 py-4 rounded-2xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
           >
             <Upload className="w-4 h-4 mr-2" />
             Continua con {photos.length} {photos.length === 1 ? "foto" : "foto"}

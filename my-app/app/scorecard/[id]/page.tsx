@@ -124,7 +124,7 @@ export default function ScorecardPage() {
             Il link potrebbe essere errato o la scorecard potrebbe essere scaduta.
           </p>
           <Link href="/quiz">
-            <Button className="bg-sun-400 hover:bg-sun-500 text-white font-bold uppercase tracking-wider px-8 py-3 rounded-xl shadow-medium">
+            <Button className="bg-sun-400 hover:bg-sun-500 text-forest-950 font-bold uppercase tracking-wider px-8 py-3 rounded-xl shadow-medium">
               Rifai il Quiz
             </Button>
           </Link>
@@ -205,7 +205,7 @@ export default function ScorecardPage() {
             </div>
           </SlideUp>
           <SlideUp delay={0.2}>
-            <h1 className="font-display text-5xl md:text-7xl font-light leading-tight mb-4 text-balance">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-light leading-tight mb-4 text-balance">
               {profileDisplay.title.split(" ")[0]}{" "}
               <span className="italic text-leaf-400">
                 {profileDisplay.title.split(" ").slice(1).join(" ")}
