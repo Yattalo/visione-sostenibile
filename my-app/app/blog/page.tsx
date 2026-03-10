@@ -95,25 +95,17 @@ export default function BlogPage() {
   if (posts.length === 0) {
     return (
       <div className="min-h-screen bg-paper-50">
-        <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
+        <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-32 md:py-40 lg:py-48">
           <div className="absolute inset-0">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-14"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-leaf-900/30 via-forest-950 to-forest-950" />
+            <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-sun-400/10 blur-3xl" />
+            <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-leaf-500/15 blur-3xl" />
           </div>
 
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
-
-          <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
-              Il Nostro
-              <span className="block italic text-leaf-400">Blog</span>
+          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-paper-50 mb-8 text-balance">
+              ARTICOLI E{" "}
+              <em className="italic font-normal text-leaf-400">Ispirazioni</em>
             </h1>
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
               Consigli, tendenze e approfondimenti dal mondo del giardinaggio
@@ -133,33 +125,23 @@ export default function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* ═══════════════════════════════════════════════════
-          HERO SECTION
-          Matches site-wide organic aesthetic: dark moss bg,
-          decorative blobs, serif italic heading
+          HERO SECTION — Stitch design language
+          Dark background with radial gradient, uppercase
+          heading with italic accent, wide tracking
       ═══════════════════════════════════════════════════ */}
-      <section className="relative h-[70vh] md:h-[50vh] flex items-center justify-center overflow-hidden bg-forest-950">
-        {/* Background texture */}
+      <section className="relative flex items-center justify-center overflow-hidden bg-forest-950 py-32 md:py-40 lg:py-48">
+        {/* Decorative background */}
         <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-14"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920')",
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/48 via-forest-900/30 to-forest-950/40" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-leaf-900/30 via-forest-950 to-forest-950" />
+          <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-sun-400/10 blur-3xl" />
+          <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-leaf-500/15 blur-3xl" />
         </div>
 
-        {/* Organic decorative blobs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] bg-sun-400/5 rounded-full blur-3xl" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-24 md:pt-24 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <SlideUp>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight mb-8 text-balance">
-              Il Nostro
-              <span className="block italic text-leaf-400">Blog</span>
+            <h1 className="text-stitch-heading text-5xl md:text-6xl lg:text-7xl text-paper-50 mb-8 text-balance">
+              ARTICOLI E{" "}
+              <em className="italic font-normal text-leaf-400">Ispirazioni</em>
             </h1>
           </SlideUp>
 
@@ -177,7 +159,7 @@ export default function BlogPage() {
           Large horizontal card for the first article,
           creating visual hierarchy and editorial weight
       ═══════════════════════════════════════════════════ */}
-      <section className="relative py-20 lg:py-28">
+      <section className="relative py-24 lg:py-32">
         {/* Subtle top gradient blending hero into content */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-forest-950/5 to-transparent" />
 
@@ -188,11 +170,11 @@ export default function BlogPage() {
                 <Card
                   variant="elevated"
                   hover
-                  className="overflow-hidden p-0"
+                  className="overflow-hidden p-0 hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
                 >
                   <div className="grid lg:grid-cols-2">
                     {/* Image */}
-                    <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
+                    <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden rounded-[30px]">
                       <Image
                         src={
                           resolveCoverImage(
@@ -221,7 +203,7 @@ export default function BlogPage() {
                       <span className="font-sans text-xs uppercase tracking-widest text-leaf-500 mb-4">
                         Articolo in evidenza
                       </span>
-                      <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-light text-forest-950 mb-4 leading-snug group-hover:text-leaf-700 transition-colors duration-300">
+                      <h2 className="text-stitch-heading text-2xl md:text-3xl lg:text-4xl text-forest-950 mb-4 leading-snug group-hover:text-leaf-700 transition-colors duration-300">
                         {featuredPost.title}
                       </h2>
                       <p className="font-body text-forest-800/70 text-lg leading-relaxed mb-6 line-clamp-3">
@@ -263,7 +245,7 @@ export default function BlogPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
               <div className="flex items-center gap-2 text-forest-800/60">
                 <SlidersHorizontal className="w-4 h-4" />
-                <span className="font-sans text-sm uppercase tracking-wider">
+                <span className="font-sans text-sm uppercase tracking-widest font-light">
                   Filtra per categoria
                 </span>
               </div>
@@ -283,12 +265,12 @@ export default function BlogPage() {
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
                     className={`
-                      relative px-5 py-2 rounded-full font-sans text-sm font-medium
+                      relative px-5 py-2.5 rounded-full font-sans text-sm font-medium
                       transition-all duration-300 cursor-pointer
                       ${
                         isActive
                           ? "bg-forest-950 text-paper-50 shadow-md"
-                          : "bg-paper-200/60 text-forest-800/70 hover:bg-paper-300 hover:text-forest-900"
+                          : "border border-paper-200/50 bg-paper-50/80 backdrop-blur-sm text-forest-800/70 hover:bg-paper-100 hover:text-forest-900 hover:border-leaf-200"
                       }
                     `}
                   >
@@ -344,10 +326,10 @@ export default function BlogPage() {
                           <Card
                             variant="elevated"
                             hover
-                            className="h-full overflow-hidden p-0"
+                            className="h-full overflow-hidden p-0 hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
                           >
                             {/* Image */}
-                            <div className="relative aspect-[16/10] overflow-hidden">
+                            <div className="relative aspect-[16/10] overflow-hidden rounded-[30px]">
                               <Image
                                 src={resolveCoverImage(post.coverImage)}
                                 alt={post.title}
@@ -368,13 +350,13 @@ export default function BlogPage() {
 
                             {/* Content */}
                             <CardContent className="p-6">
-                              <h2 className="font-display text-lg lg:text-xl font-light text-forest-950 mb-2.5 leading-snug group-hover:text-leaf-700 transition-colors duration-300 line-clamp-2">
+                              <h2 className="font-display text-lg lg:text-xl font-light uppercase tracking-wide text-forest-950 mb-2.5 leading-snug group-hover:text-leaf-700 transition-colors duration-300 line-clamp-2">
                                 {post.title}
                               </h2>
                               <p className="font-body text-forest-800/65 text-sm leading-relaxed mb-5 line-clamp-3">
                                 {post.excerpt}
                               </p>
-                              <div className="flex items-center justify-between pt-4 border-t border-paper-300">
+                              <div className="flex items-center justify-between pt-4 border-t border-paper-200/50">
                                 <div className="flex items-center gap-3 text-xs text-forest-800/55">
                                   <span className="flex items-center gap-1.5">
                                     <Calendar className="w-3.5 h-3.5" />

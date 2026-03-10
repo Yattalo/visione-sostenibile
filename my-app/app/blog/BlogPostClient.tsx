@@ -299,7 +299,7 @@ function renderArticleContent(content: string) {
       processed.push(
         <h2
           key={`h2-${i}`}
-          className="font-display text-3xl lg:text-4xl font-bold text-forest-900 mt-12 mb-6 tracking-tight"
+          className="font-display text-3xl lg:text-4xl font-light uppercase tracking-wide text-forest-900 mt-16 mb-8"
         >
           {block.replace("## ", "")}
         </h2>
@@ -548,26 +548,31 @@ export function BlogPostClient({
         />
       )}
 
-      <section className="relative overflow-hidden bg-forest-950 pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <section className="relative overflow-hidden bg-forest-950">
+        {/* Full-bleed cover image */}
         <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-10"
-            style={{ backgroundImage: `url('${articleImage}')` }}
+          <Image
+            src={articleImage}
+            alt={post.title}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/95 via-forest-900/85 to-forest-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/70 to-forest-950/40" />
         </div>
 
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-leaf-500/20 rounded-full blur-3xl animate-drift" />
+        <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-sun-400/10 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-leaf-500/15 blur-3xl" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 pt-32 pb-16 lg:pt-40 lg:pb-20 flex flex-col justify-end min-h-[50vh] lg:min-h-[60vh]">
           <FadeIn>
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-paper-400 hover:text-leaf-400 transition-colors duration-300 mb-8 group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
-              <span className="font-sans text-sm tracking-wide">Torna al Blog</span>
+              <span className="font-sans text-sm uppercase tracking-widest">Torna al Blog</span>
             </Link>
           </FadeIn>
 
@@ -581,7 +586,7 @@ export function BlogPostClient({
               </Badge>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-paper-50 mb-6 leading-tight">
+            <h1 className="text-stitch-heading text-3xl sm:text-4xl lg:text-5xl text-paper-50 mb-6">
               {post.title}
             </h1>
 
@@ -607,11 +612,13 @@ export function BlogPostClient({
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 lg:px-8 py-10 lg:py-12">
-        <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
+      <section className="max-w-5xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+        <div className="border border-paper-100 bg-paper-50 rounded-2xl p-6 lg:p-8 shadow-neumorphic">
           <div className="flex items-center gap-2 mb-4">
             <ListChecks className="w-5 h-5 text-leaf-600" />
-            <h2 className="font-display text-2xl text-forest-950">{quickAnswerHeading}</h2>
+            <h2 className="font-display text-2xl font-light uppercase tracking-wide text-forest-950">
+              {quickAnswerHeading}
+            </h2>
           </div>
           <p className="font-body text-forest-900 leading-relaxed text-lg">{quickAnswer}</p>
         </div>
@@ -626,7 +633,7 @@ export function BlogPostClient({
       {resolvedTemplate === 1 && (
         <>
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
-            <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-deep">
+            <div className="relative aspect-[21/9] rounded-[30px] overflow-hidden shadow-deep">
               <Image
                 src={articleImage}
                 alt={post.title}
@@ -640,23 +647,25 @@ export function BlogPostClient({
             </div>
           </div>
 
-          <article className="max-w-3xl mx-auto px-6 lg:px-8 py-16">
+          <article className="max-w-3xl mx-auto px-6 lg:px-8 py-24">
             <div className="font-body text-lg text-forest-900">{renderArticleContent(post.content)}</div>
           </article>
         </>
       )}
 
       {resolvedTemplate === 2 && (
-        <section className="max-w-6xl mx-auto px-6 lg:px-8 py-14 lg:py-16">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
-            <article className="lg:col-span-2 bg-white rounded-2xl border border-paper-300 p-7 lg:p-10">
-              <h2 className="font-display text-3xl text-forest-950 mb-6">Guida pratica</h2>
+            <article className="lg:col-span-2 border border-paper-100 bg-paper-50 rounded-2xl p-7 lg:p-10 shadow-neumorphic">
+              <h2 className="font-display text-3xl font-light uppercase tracking-wide text-forest-950 mb-6">
+                GUIDA <em className="italic font-normal text-leaf-600">Pratica</em>
+              </h2>
               <div className="font-body text-lg text-forest-900">{renderArticleContent(post.content)}</div>
             </article>
 
             <aside className="space-y-6">
-              <div className="bg-paper-100 rounded-2xl p-6">
-                <h3 className="font-display text-xl text-forest-950 mb-4">Passi chiave</h3>
+              <div className="border border-paper-100 bg-paper-50 rounded-2xl p-6 shadow-neumorphic">
+                <h3 className="font-display text-xl font-light uppercase tracking-wide text-forest-950 mb-4">Passi chiave</h3>
                 <ol className="space-y-3">
                   {steps.map((step, index) => (
                     <li key={step} className="flex gap-3 text-forest-900">
@@ -667,9 +676,9 @@ export function BlogPostClient({
                 </ol>
               </div>
               <div className="bg-forest-950 rounded-2xl p-6 text-paper-100">
-                <h3 className="font-display text-xl mb-3">Da vedere</h3>
+                <h3 className="font-display text-xl font-light uppercase tracking-wide mb-3">Da vedere</h3>
                 <p className="text-paper-300/90 mb-4">Video dimostrativo del metodo operativo.</p>
-                <video controls className="w-full rounded-xl" preload="metadata">
+                <video controls className="w-full rounded-[20px]" preload="metadata">
                   <source src={templateTwoVideoUrl} type="video/mp4" />
                 </video>
               </div>
@@ -679,9 +688,11 @@ export function BlogPostClient({
       )}
 
       {resolvedTemplate === 3 && (
-        <section className="max-w-5xl mx-auto px-6 lg:px-8 py-14 lg:py-16 space-y-8">
-          <div className="bg-white border border-paper-300 rounded-2xl p-6 lg:p-8">
-            <h2 className="font-display text-3xl text-forest-950 mb-5">Checklist operativa</h2>
+        <section className="max-w-5xl mx-auto px-6 lg:px-8 py-24 lg:py-32 space-y-8">
+          <div className="border border-paper-100 bg-paper-50 rounded-2xl p-6 lg:p-8 shadow-neumorphic">
+            <h2 className="font-display text-3xl font-light uppercase tracking-wide text-forest-950 mb-5">
+              CHECKLIST <em className="italic font-normal text-leaf-600">Operativa</em>
+            </h2>
             <ol className="space-y-4">
               {steps.map((step, index) => (
                 <li key={step} className="flex items-start gap-3 text-forest-900 text-lg">
@@ -692,46 +703,53 @@ export function BlogPostClient({
             </ol>
           </div>
 
-          <div className="bg-paper-100 rounded-2xl p-6 lg:p-8">
-            <h3 className="font-display text-2xl text-forest-950 mb-4">Approfondimento</h3>
+          <div className="border border-paper-100 bg-paper-50 rounded-2xl p-6 lg:p-8 shadow-neumorphic">
+            <h3 className="font-display text-2xl font-light uppercase tracking-wide text-forest-950 mb-4">
+              APPROFONDIMENTO
+            </h3>
             <div className="font-body text-lg text-forest-900">{renderArticleContent(post.content)}</div>
           </div>
 
           <div className="bg-forest-950 rounded-2xl p-6 lg:p-8 text-paper-100">
-            <h3 className="font-display text-2xl mb-4">Video esplicativo</h3>
-            <video controls className="w-full rounded-xl" preload="metadata">
+            <h3 className="font-display text-2xl font-light uppercase tracking-wide mb-4">Video esplicativo</h3>
+            <video controls className="w-full rounded-[20px]" preload="metadata">
               <source src={templateThreeVideoUrl} type="video/mp4" />
             </video>
           </div>
         </section>
       )}
 
-      <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-16">
-        <div className="bg-white rounded-2xl border border-paper-300 p-6 lg:p-8">
-          <h2 className="font-display text-3xl text-forest-950 mb-6">FAQ</h2>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="group rounded-xl border border-paper-300 p-4 open:bg-paper-50">
-                <summary className="cursor-pointer list-none font-display text-lg text-forest-950">
-                  {faq.question}
-                </summary>
-                <p className="mt-3 text-forest-800 leading-relaxed">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
+      <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-24">
+        <h2 className="font-display text-3xl md:text-4xl font-light uppercase tracking-wide text-forest-950 mb-8">
+          DOMANDE <em className="italic font-normal text-leaf-600">Frequenti</em>
+        </h2>
+        <div className="space-y-4">
+          {faqs.map((faq) => (
+            <details
+              key={faq.question}
+              className="group border border-paper-100 bg-paper-50 rounded-xl p-6 hover:border-leaf-200 hover:shadow-soft transition-all duration-300 faq-card"
+            >
+              <summary className="cursor-pointer list-none font-display text-lg text-forest-950 flex items-center justify-between gap-4">
+                <span>{faq.question}</span>
+                <span className="shrink-0 text-leaf-600 transition-transform duration-300 group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-4 text-forest-800 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
       {relatedService && (
-        <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-16">
-          <div className="bg-paper-100 rounded-2xl border border-paper-300 p-6 lg:p-8">
-            <h2 className="font-display text-3xl text-forest-950 mb-4">
-              Approfondisci con un servizio dedicato
+        <section className="max-w-5xl mx-auto px-6 lg:px-8 pb-24">
+          <div className="border border-paper-100 bg-paper-50 rounded-2xl p-6 lg:p-8 shadow-neumorphic">
+            <h2 className="font-display text-3xl font-light uppercase tracking-wide text-forest-950 mb-4">
+              APPROFONDISCI CON UN{" "}
+              <em className="italic font-normal text-leaf-600">Servizio Dedicato</em>
             </h2>
             <p className="text-forest-800 leading-relaxed mb-6">{relatedService.summary}</p>
             <Link
               href={relatedService.href}
-              className="inline-flex items-center gap-2 text-leaf-700 font-sans text-sm uppercase tracking-wide hover:text-leaf-600 transition-colors"
+              className="inline-flex items-center gap-2 text-leaf-700 font-sans text-sm uppercase tracking-widest hover:text-leaf-600 transition-colors"
             >
               Scopri {relatedService.label}
               <ArrowRight className="w-4 h-4" />
@@ -745,11 +763,11 @@ export function BlogPostClient({
       </SlideUp>
 
       {relatedPosts && relatedPosts.length > 0 && (
-        <section className="border-t border-paper-300 bg-paper-50">
-          <div className="max-w-5xl mx-auto px-6 lg:px-8 py-20 lg:py-24">
+        <section className="border-t border-paper-200/50 bg-paper-50">
+          <div className="max-w-5xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
             <SlideUp>
-              <h2 className="font-display text-3xl lg:text-4xl font-light text-forest-950 mb-12">
-                Articoli <span className="italic text-leaf-700">Correlati</span>
+              <h2 className="font-display text-3xl md:text-4xl font-light uppercase tracking-wide text-forest-950 mb-12">
+                ARTICOLI <em className="italic font-normal text-leaf-600">Correlati</em>
               </h2>
             </SlideUp>
 
@@ -761,8 +779,8 @@ export function BlogPostClient({
                     href={`/blog/${relatedPost.slug}`}
                     className="group block"
                   >
-                    <Card variant="elevated" hover className="h-full overflow-hidden p-0">
-                      <div className="relative aspect-[16/9] overflow-hidden">
+                    <Card variant="elevated" hover className="h-full overflow-hidden p-0 hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">
+                      <div className="relative aspect-[16/9] overflow-hidden rounded-[30px]">
                         <Image
                           src={
                             resolveCoverImage(
@@ -787,7 +805,7 @@ export function BlogPostClient({
                       </div>
 
                       <CardContent className="p-6">
-                        <h3 className="font-display text-xl font-light text-forest-950 mb-2 group-hover:text-leaf-700 transition-colors duration-300 leading-snug">
+                        <h3 className="font-display text-xl font-light uppercase tracking-wide text-forest-950 mb-2 group-hover:text-leaf-700 transition-colors duration-300 leading-snug">
                           {relatedPost.title}
                         </h3>
                         <p className="font-body text-sm text-forest-800/70 line-clamp-2 mb-4">
