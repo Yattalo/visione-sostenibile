@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ConvexClientProvider } from "./ConvexClientProvider";
@@ -89,7 +90,7 @@ export default function RootLayout({
           <ConvexClientProvider>
             <AuthSessionSync />
             <Navbar />
-            <Analytics />
+            <Suspense fallback={null}><Analytics /></Suspense>
             <main className="flex-grow">{children}</main>
             <Footer />
             <CookieConsent />
