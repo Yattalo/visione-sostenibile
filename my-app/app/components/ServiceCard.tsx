@@ -12,8 +12,6 @@ interface ServiceCardProps {
   title: string;
   category?: string;
   shortDescription: string;
-  b2bShortDescription?: string;
-  isB2B?: boolean;
   image: string;
   index: number;
   variant?: "vertical" | "horizontal";
@@ -39,8 +37,6 @@ export function ServiceCard({
   title,
   category,
   shortDescription,
-  b2bShortDescription,
-  isB2B = false,
   image,
   index,
   variant = "vertical",
@@ -49,13 +45,12 @@ export function ServiceCard({
   const tagline = category || serviceCategoryMap[normalizedSlug] || "Servizio";
   const indexLabel = (index + 1).toString().padStart(2, "0");
   const isHorizontal = variant === "horizontal";
-  const displayDescription = isB2B && b2bShortDescription ? b2bShortDescription : shortDescription;
 
   return (
     <Link href={`/servizi/${normalizedSlug}`} className="block h-full group">
       <article
         className={cn(
-          "relative flex h-full overflow-hidden rounded-[30px] border border-paper-300/60 bg-paper-50",
+          "relative flex h-full overflow-hidden rounded-3xl border border-paper-300/60 bg-paper-50",
           "transition-all duration-500",
           "hover:-translate-y-1.5 hover:border-leaf-500/50 hover:shadow-floating",
           "focus-within:ring-2 focus-within:ring-leaf-500/40 focus-within:ring-offset-2 focus-within:ring-offset-paper-50",
@@ -115,14 +110,8 @@ export function ServiceCard({
             {title}
           </h3>
 
-          {isB2B && (
-            <span className="mt-2 inline-block self-start rounded-full border border-leaf-500/30 bg-leaf-50/80 px-2.5 py-0.5 font-sans text-[9px] font-bold uppercase tracking-[0.18em] text-leaf-700">
-              Convenzioni e contratti annuali
-            </span>
-          )}
-
           <p className="mt-3 flex-1 font-body text-[15px] leading-relaxed text-forest-800/70">
-            {displayDescription}
+            {shortDescription}
           </p>
 
           {/* Separator + CTA */}
@@ -130,7 +119,7 @@ export function ServiceCard({
             <span
               className="font-sans text-[11px] uppercase tracking-[0.16em] text-leaf-600 transition-colors duration-300 group-hover:text-sun-500"
             >
-              {isB2B ? "Richiedi preventivo aziendale" : "Scopri il servizio"}
+              Scopri il servizio
             </span>
             <span
               className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-200 transition-all duration-300 group-hover:bg-sun-400"

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Phone, Bug, Building2, Home } from "lucide-react";
+import { ArrowRight, Phone, Bug } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Button } from "../components/ui/Button";
@@ -15,8 +15,6 @@ import {
   serviceImages,
 } from "../lib/static-data";
 import { siteConfig } from "../lib/site-config";
-import { useAudience } from "../lib/useAudience";
-import { cn } from "../lib/utils";
 import {
   FadeIn,
   SlideUp,
@@ -24,16 +22,8 @@ import {
   StaggerItem,
 } from "../components/animations";
 
-// B2B descriptions lookup from staticServices
-const b2bDescriptionMap: Record<string, string> = Object.fromEntries(
-  staticServices
-    .filter((s) => s.b2bShortDescription)
-    .map((s) => [normalizeServiceSlug(s.slug), s.b2bShortDescription])
-);
-
 export function ServiziClient() {
   const siteUrl = siteConfig.siteUrl;
-  const { audience, setAudience, isB2B } = useAudience();
   const servicesQuery = useQuery(api.services.getAll);
   const services =
     servicesQuery && servicesQuery.length > 0 ? servicesQuery : staticServices;
@@ -44,16 +34,6 @@ export function ServiziClient() {
       serviceImages[normalizedSlug] ||
       "/images/servizi/progettazione-giardini-cover.png"
     );
-  };
-
-  const getB2BDescription = (slug: string): string | undefined => {
-    const normalizedSlug = normalizeServiceSlug(slug);
-    // Prefer Convex b2bDescription if available, fallback to static map
-    const service = services.find((s) => normalizeServiceSlug(s.slug) === normalizedSlug);
-    if (service && "b2bDescription" in service && service.b2bDescription) {
-      return service.b2bDescription as string;
-    }
-    return b2bDescriptionMap[normalizedSlug];
   };
 
   const breadcrumbJsonLd = {
@@ -89,8 +69,6 @@ export function ServiziClient() {
             loop
             muted
             playsInline
-            preload="metadata"
-            aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           >
             <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
@@ -117,64 +95,21 @@ export function ServiziClient() {
           </FadeIn>
 
           <SlideUp>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
-              {isB2B ? (
-                <>
-                  Gestione del verde
-                  <span className="block italic text-leaf-400">
-                    per la vostra azienda
-                  </span>
-                </>
-              ) : (
-                <>
-                  Cosa possiamo
-                  <span className="block italic text-leaf-400">
-                    fare per te
-                  </span>
-                </>
-              )}
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-paper-50 leading-tight max-w-4xl mb-8">
+              Cosa possiamo
+              <span className="block italic text-leaf-400">
+                fare per te
+              </span>
             </h1>
           </SlideUp>
 
           <SlideUp delay={0.1}>
             <p className="font-body text-lg text-paper-300/80 max-w-2xl mb-6">
-              {isB2B
-                ? "Soluzioni integrate per aziende, condomini e strutture ricettive: decoro costante, costi certi, un solo referente."
-                : <>Organizziamo i servizi in tre livelli, cos&igrave; puoi scegliere quello che ti serve davvero — senza pezzi inutili.</>}
+              Organizziamo i servizi in tre livelli, cos&igrave; puoi scegliere quello che ti serve davvero — senza pezzi inutili.
             </p>
-            <p className="font-body text-lg italic text-leaf-400 max-w-2xl mb-6">
-              {isB2B
-                ? "Un unico contractor del verde. Zero pensieri operativi."
-                : "Non vendiamo pezzi. Progettiamo sistemi."}
+            <p className="font-body text-lg italic text-leaf-400 max-w-2xl mb-10">
+              Non vendiamo pezzi. Progettiamo sistemi.
             </p>
-
-            {/* Audience toggle pill */}
-            <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 backdrop-blur-md p-1 mb-4">
-              <button
-                onClick={() => setAudience("b2c")}
-                className={cn(
-                  "flex items-center gap-1.5 rounded-full px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-300",
-                  audience === "b2c"
-                    ? "bg-paper-50/20 text-paper-50 shadow-sm"
-                    : "text-paper-300/60 hover:text-paper-300"
-                )}
-              >
-                <Home className="w-3 h-3" />
-                Privati
-              </button>
-              <button
-                onClick={() => setAudience("b2b")}
-                className={cn(
-                  "flex items-center gap-1.5 rounded-full px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-300",
-                  audience === "b2b"
-                    ? "bg-paper-50/20 text-paper-50 shadow-sm"
-                    : "text-paper-300/60 hover:text-paper-300"
-                )}
-              >
-                <Building2 className="w-3 h-3" />
-                Aziende
-              </button>
-            </div>
           </SlideUp>
 
           <SlideUp delay={0.2}>
@@ -182,7 +117,7 @@ export function ServiziClient() {
               <Link href="/contatti">
                 <Button size="lg" className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-6 py-3">
                   <Phone className="w-4 h-4 mr-2" />
-                  {isB2B ? "Richiedi un preventivo aziendale" : "Richiedi un Preventivo"}
+                  Richiedi un Preventivo
                 </Button>
               </Link>
             </div>
@@ -216,8 +151,6 @@ export function ServiziClient() {
                       slug={normalizeServiceSlug(service.slug)}
                       title={service.title}
                       shortDescription={service.shortDescription}
-                      b2bShortDescription={getB2BDescription(service.slug)}
-                      isB2B={isB2B}
                       image={getImageForService(service.slug)}
                       index={index}
                     />
@@ -250,8 +183,6 @@ export function ServiziClient() {
                       slug={normalizeServiceSlug(service.slug)}
                       title={service.title}
                       shortDescription={service.shortDescription}
-                      b2bShortDescription={getB2BDescription(service.slug)}
-                      isB2B={isB2B}
                       image={getImageForService(service.slug)}
                       index={index}
                     />
@@ -284,8 +215,6 @@ export function ServiziClient() {
                       slug={normalizeServiceSlug(service.slug)}
                       title={service.title}
                       shortDescription={service.shortDescription}
-                      b2bShortDescription={getB2BDescription(service.slug)}
-                      isB2B={isB2B}
                       image={getImageForService(service.slug)}
                       index={index}
                     />
@@ -319,27 +248,14 @@ export function ServiziClient() {
             <Badge className="bg-sun-400/20 border-leaf-500/30 text-leaf-300 mb-6">
               Parliamone
             </Badge>
-            <h2 className="text-stitch-heading text-4xl md:text-5xl lg:text-6xl text-paper-50 mb-6">
-              {isB2B ? (
-                <>
-                  Un referente unico
-                  <span className="block italic text-leaf-400">
-                    per il vostro verde
-                  </span>
-                </>
-              ) : (
-                <>
-                  Ti diciamo cosa serve
-                  <span className="block italic text-leaf-400">
-                    davvero
-                  </span>
-                </>
-              )}
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-paper-50 leading-tight mb-6">
+              Ti diciamo cosa serve
+              <span className="block italic text-leaf-400">
+                davvero
+              </span>
             </h2>
             <p className="font-body text-lg text-paper-300/70 max-w-xl mx-auto mb-10">
-              {isB2B
-                ? "Sopralluogo tecnico, proposta operativa e piano manutentivo: tutto in un unico incontro."
-                : "Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a capire cosa serve \u2014 e cosa no."}
+              Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a capire cosa serve — e cosa no.
             </p>
           </SlideUp>
 
@@ -347,7 +263,7 @@ export function ServiziClient() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contatti">
                 <Button size="lg" className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg">
-                  {isB2B ? "Prenota una call operativa" : "Richiedi un sopralluogo"}
+                  Richiedi un sopralluogo
                 </Button>
               </Link>
             </div>
