@@ -4,34 +4,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import type { ElementType } from "react";
 import { useMutation } from "convex/react";
 import {
   ArrowLeft,
   ArrowRight,
   Phone,
+  Mail,
   Clock,
   MapPin,
+  Check,
   MessageCircle,
   CheckCircle2,
   Sprout,
-  ChevronDown,
-  ListChecks,
+  PenTool,
+  Hammer,
+  Scissors,
   Leaf,
+  Flower2,
+  Play,
+  ChevronDown,
 } from "lucide-react";
 import { api } from "../../../convex/_generated/api";
-import { normalizeServiceSlug, staticServices, serviceImages } from "../../lib/static-data";
+import { staticServices } from "../../lib/static-data";
 import { Button } from "../../components/ui/Button";
-import { Badge } from "../../components/ui/Badge";
-import { ScrollCTA } from "../../components/ScrollCTA";
-import { ReviewsWidget } from "../../components/ReviewsWidget";
-import { siteConfig } from "../../lib/site-config";
-import {
-  SlideUp,
-  FadeIn,
-  StaggerContainer,
-  StaggerItem,
-} from "../../components/animations";
-import { BLUR_DATA_URL } from "../../lib/image-utils";
+import { cn } from "../../lib/utils";
 
 type ServiceItem = (typeof staticServices)[number];
 
@@ -41,7 +38,6 @@ type FaqItem = {
 };
 
 type ServiceContent = {
-  questionH2?: string;
   quickAnswer: string;
   intro: string;
   body: string;
@@ -52,66 +48,50 @@ type ServiceContent = {
   faqs: FaqItem[];
 };
 
-const SITE_URL = siteConfig.siteUrl;
+const SITE_URL = "https://www.visionesostenibile.it";
+
+const serviceIconMap: Record<string, ElementType> = {
+  "progettazione-giardini-orti": PenTool,
+  "realizzazione-chiavi-in-mano": Hammer,
+  "manutenzione-sostenibile": Leaf,
+  "potatura-professionale": Scissors,
+  "gestione-verde-biodinamica": Flower2,
+};
 
 const serviceImageMap: Record<string, string> = {
-  "progettazione-giardini": "/images/servizi/progettazione-giardini-cover.png",
-  "realizzazione-giardini": "/images/servizi/realizzazione-giardini-cover.png",
-  "scelta-piante": "/images/servizi/scelta-piante-cover.png",
-  "trattamenti-piante": "/images/servizi/trattamenti-piante-cover.png",
-  "impianti-irrigazione": "/images/servizi/impianti-irrigazione-cover.png",
-  "camminamenti-pietra": "/images/servizi/camminamenti-pietra-cover.png",
-  "illuminazione-esterni": "/images/servizi/illuminazione-esterni-cover.png",
-  "ingegneria-naturalistica": "/images/servizi/ingegneria-naturalistica-cover.png",
-  "arredamento-esterni": "/images/servizi/arredamento-esterni-cover.png",
-  potature: "/images/servizi/potature-cover.png",
-  "rigenerazione-terreni": "/images/servizi/rigenerazione-terreni-cover.png",
-  manutenzioni: "/images/servizi/manutenzioni-cover.png",
+  "progettazione-giardini-orti":
+    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200",
+  "realizzazione-chiavi-in-mano":
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200",
+  "manutenzione-sostenibile":
+    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200",
+  "potatura-professionale":
+    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200",
+  "gestione-verde-biodinamica":
+    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
 };
+
+// All carousel images pool — service images + generic garden photos
+const carouselImagesPool = [
+  "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800",
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+  "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800",
+  "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800",
+  "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800",
+];
 
 const serviceSubtitles: Record<string, string> = {
-  "progettazione-giardini": "Dal concept alla realta a Torino e Piemonte",
-  "realizzazione-giardini": "Realizzazione Giardini a Torino",
-  manutenzioni: "Cura continua a Torino e Piemonte",
-  potature: "Potatura Alberi a Torino",
-  "rigenerazione-terreni": "Equilibrio naturale",
-};
-
-const blogArticlesBySlug: Record<string, { title: string; slug: string }> = {
-  "come-mantenere-giardino-autunno": {
-    slug: "come-mantenere-giardino-autunno",
-    title: "Come Mantenere il Giardino in Autunno: Guida Completa",
-  },
-  "tendenze-giardini-2026": {
-    slug: "tendenze-giardini-2026",
-    title: "Tendenze Giardini 2026: Le Novita del Verde",
-  },
-  "piante-pendio": {
-    slug: "piante-pendio",
-    title: "Le Migliori Piante per Terreni in Pendio",
-  },
-};
-
-const relatedBlogSlugsByService: Record<string, string[]> = {
-  "progettazione-giardini": ["tendenze-giardini-2026"],
-  "realizzazione-giardini": ["tendenze-giardini-2026"],
-  manutenzioni: ["come-mantenere-giardino-autunno"],
-  potature: ["come-mantenere-giardino-autunno"],
-  "rigenerazione-terreni": ["piante-pendio"],
-  "scelta-piante": ["piante-pendio"],
-  "trattamenti-piante": ["come-mantenere-giardino-autunno"],
-  "impianti-irrigazione": ["tendenze-giardini-2026"],
-  "camminamenti-pietra": ["tendenze-giardini-2026"],
-  "illuminazione-esterni": ["tendenze-giardini-2026"],
-  "arredamento-esterni": ["tendenze-giardini-2026"],
-  "ingegneria-naturalistica": ["piante-pendio"],
+  "progettazione-giardini-orti": "Dal concept alla realtà",
+  "realizzazione-chiavi-in-mano": "Senza pensieri",
+  "manutenzione-sostenibile": "Cura continua",
+  "potatura-professionale": "Precisione e rispetto",
+  "gestione-verde-biodinamica": "Equilibrio naturale",
 };
 
 const serviceContents: Record<string, ServiceContent> = {
-  "progettazione-giardini": {
-    questionH2: "Come funziona la progettazione di un giardino sostenibile?",
+  "progettazione-giardini-orti": {
     quickAnswer:
-      "La progettazione di giardini e orti sostenibili funziona meglio quando parte da un'analisi del sito, degli obiettivi d'uso e dalla scelta botanica locale. Con questo approccio ottieni un progetto realizzabile e coerente, riduci gli errori in fase di cantiere e abbassi sensibilmente i costi di manutenzione nel medio e lungo periodo.",
+      "La progettazione di giardini e orti sostenibili funziona meglio quando parte da analisi del sito, obiettivi d'uso e scelta botanica locale. Cosi ottieni un progetto realizzabile, riduci errori in cantiere e abbassi i costi di manutenzione nel medio periodo.",
     intro:
       "Progettiamo spazi verdi su misura, con equilibrio tra estetica, funzionalita e sostenibilita.",
     body: "Ogni proposta parte da sopralluogo, lettura del suolo, esposizione e abitudini di utilizzo. Definiamo schema distributivo, palette vegetale e materiali, cosi il giardino cresce coerente nel tempo.",
@@ -156,10 +136,9 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "realizzazione-giardini": {
-    questionH2: "Quali vantaggi offre la realizzazione chiavi in mano del giardino?",
+  "realizzazione-chiavi-in-mano": {
     quickAnswer:
-      "La realizzazione chiavi in mano ti permette di avere un unico referente professionale dalla preparazione del terreno alla posa finale di piante e impianti. In questo modo riduci i tempi di coordinamento, elimini i tempi morti tra le fasi e abbassi i rischi di incompatibilita tra fornitori e materiali diversi.",
+      "La realizzazione chiavi in mano ti permette di avere un unico referente dalla preparazione del terreno alla posa finale. In questo modo riduci coordinamento, tempi morti e rischi di incompatibilita tra fornitori diversi.",
     intro:
       "Gestiamo il cantiere verde in modo completo, con un flusso organizzato e controlli su ogni fase.",
     body: "Dalla preparazione del suolo all'impianto piante, fino a irrigazione e finiture, coordiniamo tutte le attivita in sequenza logica per consegnare uno spazio pronto da vivere.",
@@ -204,10 +183,9 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  manutenzioni: {
-    questionH2: "Come funziona la manutenzione sostenibile del giardino?",
+  "manutenzione-sostenibile": {
     quickAnswer:
-      "La manutenzione sostenibile mantiene il giardino sano e ordinato attraverso interventi programmati, tecniche a basso impatto ambientale e prevenzione stagionale mirata. Questo approccio riduce il degrado progressivo del verde, previene le emergenze fitosanitarie e aiuta a contenere i costi straordinari e imprevisti nel medio e lungo periodo.",
+      "La manutenzione sostenibile mantiene il giardino sano con interventi programmati, tecniche a basso impatto e prevenzione stagionale. L'approccio riduce degrado progressivo e aiuta a contenere costi straordinari nel tempo.",
     intro:
       "Programmiamo la cura del verde con cadenze intelligenti, in base al ciclo stagionale reale.",
     body: "Un piano di manutenzione efficace combina taglio, controllo fitosanitario, nutrizione del suolo e monitoraggio costante. Ogni intervento e calibrato su piante, esposizione e uso dello spazio.",
@@ -252,10 +230,9 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  potature: {
-    questionH2: "Quando e come potare le piante in modo professionale?",
+  "potatura-professionale": {
     quickAnswer:
-      "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto con tagli adeguati alla specie. Gli interventi graduali e non invasivi riducono lo stress vegetativo, favoriscono la cicatrizzazione naturale e aiutano una crescita equilibrata che mantiene la forma nel tempo.",
+      "La potatura professionale migliora struttura, sicurezza e vitalita delle piante quando viene eseguita nel periodo corretto e con tagli adeguati. Interventi non invasivi riducono stress vegetativo e aiutano una crescita equilibrata.",
     intro:
       "Eseguiamo potature tecniche con attenzione alla fisiologia della pianta e al contesto di sicurezza.",
     body: "Ogni albero o arbusto richiede un approccio specifico. Valutiamo forma, carichi, punti critici e stagione, poi definiamo un intervento preciso che protegge la salute vegetale e migliora la gestione dello spazio.",
@@ -300,10 +277,9 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "rigenerazione-terreni": {
-    questionH2: "Cos'e la gestione biodinamica del verde e come funziona?",
+  "gestione-verde-biodinamica": {
     quickAnswer:
-      "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali, compostaggio e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente e autonomo, con minore dipendenza da interventi chimici, maggiore biodiversita nel terreno e una stabilita complessiva che migliora anno dopo anno.",
+      "La gestione biodinamica del verde punta a rigenerare suolo e piante con pratiche naturali e cicli stagionali coerenti. Il risultato e un ecosistema piu resiliente, con minore dipendenza da interventi chimici e maggiore stabilita complessiva.",
     intro:
       "Applichiamo pratiche biodinamiche per migliorare vitalita del terreno, equilibrio biologico e qualita del paesaggio.",
     body: "Il metodo integra nutrizione organica, osservazione dei cicli naturali e gestione preventiva. Cosi favoriamo biodiversita, resistenza delle piante e qualita estetica sostenibile.",
@@ -348,575 +324,170 @@ const serviceContents: Record<string, ServiceContent> = {
       },
     ],
   },
-  "impianti-irrigazione": {
-    questionH2: "Come scegliere il sistema di irrigazione giusto per il giardino?",
-    quickAnswer:
-      "Il sistema di irrigazione ideale dipende da tipo di terreno, esposizione e piante presenti. Un impianto progettato su misura riduce gli sprechi idrici, garantisce copertura uniforme e semplifica la gestione quotidiana del verde.",
-    intro:
-      "Progettiamo e installiamo impianti di irrigazione efficienti, calibrati sulle esigenze reali del tuo spazio verde.",
-    body: "Ogni impianto parte da un rilievo tecnico che valuta pendenze, zone d'ombra, tipo di suolo e fabbisogno idrico delle specie presenti. Il risultato e un sistema preciso che consuma meno e irriga meglio.",
-    deliverables: [
-      "Rilievo tecnico e mappatura zone idriche",
-      "Progetto impianto con schema idraulico",
-      "Installazione linee e irrigatori",
-      "Programmazione centralina smart",
-      "Collaudo e regolazione finale",
-      "Istruzioni d'uso e manutenzione stagionale",
-    ],
-    process: [
-      "Sopralluogo e analisi fabbisogno idrico",
-      "Progettazione schema e componenti",
-      "Installazione e posa in opera",
-      "Programmazione, collaudo e consegna",
-    ],
-    results: [
-      "Riduzione consumi idrici fino al 40%",
-      "Copertura uniforme senza zone secche",
-      "Gestione automatizzata e programmabile",
-    ],
-    whenToChoose: [
-      "Il giardino soffre di irrigazione irregolare",
-      "Vuoi ridurre i consumi idrici senza sacrificare il verde",
-      "Cerchi un sistema automatico e affidabile",
-    ],
-    faqs: [
-      {
-        question: "Quanto costa un impianto di irrigazione?",
-        answer:
-          "Il costo dipende da superficie, numero di zone e tipo di irrigatori. Dopo il sopralluogo forniamo un preventivo dettagliato senza impegno.",
-      },
-      {
-        question: "Si puo installare su un giardino gia esistente?",
-        answer:
-          "Si. L'installazione su giardini esistenti e comune e viene pianificata per ridurre al minimo l'impatto sulle piante e sul prato.",
-      },
-      {
-        question: "L'impianto funziona anche con acqua di pozzo?",
-        answer:
-          "Si, previa verifica della portata e qualita dell'acqua. Adattiamo filtri e pressione per garantire il corretto funzionamento.",
-      },
-    ],
-  },
-  "camminamenti-pietra": {
-    questionH2: "Quali materiali scegliere per camminamenti e muretti in giardino?",
-    quickAnswer:
-      "I materiali migliori per camminamenti e muretti in giardino sono pietre naturali locali, resistenti al gelo e coerenti con il paesaggio. Una posa accurata garantisce stabilita nel tempo, drenaggio corretto e un risultato estetico che valorizza lo spazio.",
-    intro:
-      "Realizziamo camminamenti, muretti e bordure con materiali naturali selezionati per durabilita e coerenza estetica.",
-    body: "Ogni intervento parte dalla scelta del materiale giusto per contesto, uso e clima. La posa segue tecniche tradizionali che garantiscono stabilita strutturale e integrazione naturale con il verde circostante.",
-    deliverables: [
-      "Consulenza su materiali e finiture",
-      "Progetto esecutivo del tracciato",
-      "Preparazione del fondo e drenaggi",
-      "Posa in opera con tecniche tradizionali",
-      "Stuccatura e finiture finali",
-      "Indicazioni per manutenzione nel tempo",
-    ],
-    process: [
-      "Sopralluogo e definizione tracciato",
-      "Selezione materiali e campionatura",
-      "Preparazione fondo e sottofondo drenante",
-      "Posa, stuccatura e pulizia finale",
-    ],
-    results: [
-      "Percorsi stabili e sicuri in ogni stagione",
-      "Estetica naturale integrata nel paesaggio",
-      "Durabilita superiore con manutenzione minima",
-    ],
-    whenToChoose: [
-      "Il giardino manca di percorsi pedonali definiti",
-      "Vuoi contenere un pendio o delimitare aree",
-      "Cerchi materiali naturali e durevoli",
-    ],
-    faqs: [
-      {
-        question: "Quanto dura un camminamento in pietra naturale?",
-        answer:
-          "Con una posa corretta e materiali di qualita, un camminamento in pietra dura decenni con manutenzione minima.",
-      },
-      {
-        question: "Quali pietre sono adatte al clima piemontese?",
-        answer:
-          "Usiamo prevalentemente luserna, beola e porfido, pietre locali resistenti al gelo e all'usura tipiche del territorio.",
-      },
-      {
-        question: "E possibile posare su terreno in pendenza?",
-        answer:
-          "Si. In pendenza realizziamo gradonate, scalinate e muretti di contenimento con tecniche che garantiscono stabilita e drenaggio.",
-      },
-    ],
-  },
-  "illuminazione-esterni": {
-    questionH2: "Come illuminare il giardino in modo efficace e sostenibile?",
-    quickAnswer:
-      "Un'illuminazione esterna ben progettata valorizza il giardino di sera, migliora la sicurezza dei percorsi e consuma poco grazie a tecnologie LED a basso consumo. Il progetto parte dalla mappatura delle zone da illuminare e dalla scelta di apparecchi adatti al contesto.",
-    intro:
-      "Progettiamo sistemi di illuminazione esterna che uniscono funzionalita, atmosfera e risparmio energetico.",
-    body: "Ogni progetto illuminotecnico parte dall'analisi degli spazi, dei punti focali e degli usi serali del giardino. Scegliamo apparecchi a LED, posizioni studiate e temperature di colore che esaltano il verde senza inquinamento luminoso.",
-    deliverables: [
-      "Rilievo e mappatura punti luce",
-      "Progetto illuminotecnico con planimetria",
-      "Fornitura apparecchi LED selezionati",
-      "Installazione e cablaggio a norma",
-      "Programmazione accensioni e dimmer",
-      "Collaudo e istruzioni operative",
-    ],
-    process: [
-      "Sopralluogo serale e analisi esigenze",
-      "Progetto con posizionamento e scelta apparecchi",
-      "Installazione elettrica e posa corpi illuminanti",
-      "Collaudo notturno e regolazione finale",
-    ],
-    results: [
-      "Giardino fruibile e sicuro anche di sera",
-      "Valorizzazione estetica di piante e architetture",
-      "Consumi ridotti grazie a tecnologia LED",
-    ],
-    whenToChoose: [
-      "Il giardino e poco fruibile dopo il tramonto",
-      "Vuoi valorizzare piante o elementi architettonici di sera",
-      "Cerchi sicurezza sui percorsi con luce discreta",
-    ],
-    faqs: [
-      {
-        question: "L'illuminazione da giardino consuma molto?",
-        answer:
-          "No. Con apparecchi LED e programmazione intelligente i consumi sono contenuti, spesso inferiori a quelli di una singola lampada domestica.",
-      },
-      {
-        question: "Si possono illuminare anche alberi e siepi?",
-        answer:
-          "Si. Usiamo faretti a incasso, spot direzionabili e strip LED per evidenziare chiome, tronchi e masse verdi con effetti scenografici.",
-      },
-      {
-        question: "Serve un impianto elettrico dedicato?",
-        answer:
-          "Dipende dallo stato esistente. In molti casi integriamo l'illuminazione su linee esistenti, altrimenti prevediamo un circuito dedicato a norma.",
-      },
-    ],
-  },
-  "arredamento-esterni": {
-    questionH2: "Come scegliere l'arredamento da esterno giusto per il giardino?",
-    quickAnswer:
-      "L'arredamento da esterno ideale combina resistenza alle intemperie, comfort e coerenza estetica con il giardino. La scelta dei materiali e del layout trasforma lo spazio verde in un'area vivibile tutto l'anno, dall'angolo relax alla zona pranzo.",
-    intro:
-      "Selezioniamo e posizioniamo arredi da esterno che trasformano il giardino in uno spazio da vivere.",
-    body: "Dalla scelta dei materiali al layout funzionale, progettiamo zone outdoor coerenti con lo stile del giardino. Ogni elemento e selezionato per resistenza, comfort e integrazione estetica con il contesto verde.",
-    deliverables: [
-      "Consulenza su stile e materiali",
-      "Layout funzionale delle zone outdoor",
-      "Selezione arredi e complementi",
-      "Coordinamento consegne e posizionamento",
-      "Accessori e tessili per esterni",
-      "Indicazioni per cura e rimessaggio stagionale",
-    ],
-    process: [
-      "Analisi spazi e stile di vita all'aperto",
-      "Proposta layout e selezione arredi",
-      "Ordine, consegna e posizionamento",
-      "Verifica finale e consigli di manutenzione",
-    ],
-    results: [
-      "Spazio esterno vivibile in ogni stagione",
-      "Comfort e stile coerente con il giardino",
-      "Arredi durevoli con manutenzione semplice",
-    ],
-    whenToChoose: [
-      "Vuoi creare una zona pranzo o relax all'aperto",
-      "Gli arredi attuali sono deteriorati o inadatti",
-      "Cerchi soluzioni su misura per il tuo spazio",
-    ],
-    faqs: [
-      {
-        question: "Quali materiali resistono meglio all'esterno?",
-        answer:
-          "Teak, alluminio verniciato, resina intrecciata e tessuti tecnici offrono la migliore combinazione di resistenza e estetica per uso outdoor tutto l'anno.",
-      },
-      {
-        question: "E possibile arredare anche spazi piccoli?",
-        answer:
-          "Si. Con arredi compatti e layout studiato si ottimizzano anche terrazzi e cortili di dimensioni ridotte, senza rinunciare a comfort e funzionalita.",
-      },
-      {
-        question: "Gli arredi vanno coperti in inverno?",
-        answer:
-          "Dipende dal materiale. Forniamo indicazioni specifiche per ogni pezzo, incluse coperture protettive e consigli di rimessaggio stagionale.",
-      },
-    ],
-  },
-  "ingegneria-naturalistica": {
-    questionH2: "Quando serve l'ingegneria naturalistica per il giardino o il terreno?",
-    quickAnswer:
-      "L'ingegneria naturalistica serve quando il terreno presenta problemi di stabilita, erosione o dissesto idrogeologico. Utilizza tecniche a basso impatto ambientale per consolidare pendii, proteggere sponde e recuperare aree degradate in modo sostenibile e duraturo.",
-    intro:
-      "Applichiamo tecniche di ingegneria naturalistica per stabilizzare terreni, proteggere versanti e recuperare aree verdi compromesse.",
-    body: "Ogni intervento combina materiali naturali (legno, pietra, geotessili) con piante a radicazione profonda per creare strutture stabili che si integrano nel paesaggio e migliorano nel tempo.",
-    deliverables: [
-      "Sopralluogo e analisi geomorfologica",
-      "Relazione tecnica con soluzioni proposte",
-      "Progetto esecutivo dell'intervento",
-      "Realizzazione opere di consolidamento",
-      "Rinverdimento e messa a dimora",
-      "Monitoraggio post-intervento",
-    ],
-    process: [
-      "Rilievo del dissesto e delle cause",
-      "Progettazione intervento con tecniche naturali",
-      "Esecuzione opere strutturali e vegetazionali",
-      "Verifica stabilita e monitoraggio nel tempo",
-    ],
-    results: [
-      "Pendii e scarpate stabilizzati in modo naturale",
-      "Riduzione del rischio idrogeologico",
-      "Recupero estetico e funzionale dell'area",
-    ],
-    whenToChoose: [
-      "Il terreno presenta frane, smottamenti o erosione",
-      "Devi consolidare un pendio o una scarpata",
-      "Cerchi soluzioni a basso impatto ambientale per il dissesto",
-    ],
-    faqs: [
-      {
-        question: "L'ingegneria naturalistica e efficace come quella tradizionale?",
-        answer:
-          "Si, e in molti casi superiore nel lungo periodo perche le radici delle piante rafforzano progressivamente la struttura, aumentando la stabilita nel tempo.",
-      },
-      {
-        question: "Quanto tempo serve per completare un intervento?",
-        answer:
-          "Dipende dalla scala. Interventi su giardini privati richiedono da pochi giorni a qualche settimana, con risultati visibili gia nella prima stagione vegetativa.",
-      },
-      {
-        question: "Servono permessi per questi interventi?",
-        answer:
-          "In alcuni casi si, soprattutto per aree vincolate. Ci occupiamo della verifica normativa e, se necessario, supportiamo la pratica autorizzativa.",
-      },
-    ],
-  },
-  "scelta-piante": {
-    questionH2: "Come scegliere le piante giuste per il proprio giardino?",
-    quickAnswer:
-      "La scelta delle piante giuste parte dall'analisi di terreno, esposizione, clima e obiettivi estetici. Selezionare specie adatte al contesto riduce le sostituzioni, abbassa i costi di manutenzione e garantisce un giardino che migliora naturalmente nel tempo.",
-    intro:
-      "Selezioniamo piante autoctone e ornamentali adatte al tuo terreno, al clima e allo stile del giardino.",
-    body: "Ogni proposta botanica nasce da un'analisi approfondita di suolo, esposizione, microclima e preferenze estetiche. Il risultato e una palette vegetale coerente, resiliente e di facile gestione.",
-    deliverables: [
-      "Analisi pedoclimatica del sito",
-      "Selezione specie con schede botaniche",
-      "Piano di impianto con posizionamento",
-      "Fornitura piante da vivaisti selezionati",
-      "Messa a dimora con substrato e pacciamatura",
-      "Calendario cure e irrigazione primo anno",
-    ],
-    process: [
-      "Sopralluogo e analisi terreno e microclima",
-      "Selezione botanica e proposta palette vegetale",
-      "Approvvigionamento e messa a dimora",
-      "Istruzioni di cura e monitoraggio attecchimento",
-    ],
-    results: [
-      "Piante adatte al contesto con alto tasso di attecchimento",
-      "Giardino esteticamente coerente tutto l'anno",
-      "Manutenzione ridotta grazie a specie resilienti",
-    ],
-    whenToChoose: [
-      "Stai piantumando un nuovo giardino da zero",
-      "Vuoi sostituire piante che non si adattano al terreno",
-      "Cerchi specie autoctone e a bassa manutenzione",
-    ],
-    faqs: [
-      {
-        question: "Le piante autoctone sono meno belle di quelle esotiche?",
-        answer:
-          "No. Esistono specie autoctone con fioriture spettacolari e fogliami decorativi che offrono anche il vantaggio di adattarsi meglio al clima locale.",
-      },
-      {
-        question: "Quanto tempo serve per vedere il giardino maturo?",
-        answer:
-          "Dipende dalle specie scelte. Erbacee e arbusti danno risultati in 1-2 stagioni, mentre alberi richiedono 3-5 anni per raggiungere una dimensione significativa.",
-      },
-      {
-        question: "Garantite l'attecchimento delle piante?",
-        answer:
-          "Selezioniamo piante di qualita da vivaisti di fiducia e forniamo istruzioni precise per il primo anno. Il tasso di attecchimento con il nostro metodo e molto elevato.",
-      },
-    ],
-  },
-  "trattamenti-piante": {
-    questionH2: "Quando e come trattare le piante in modo naturale?",
-    quickAnswer:
-      "I trattamenti naturali per le piante funzionano meglio quando vengono applicati preventivamente e con dosaggi calibrati sulla specie. Questo approccio riduce la dipendenza dalla chimica di sintesi, preserva l'equilibrio biologico del giardino e protegge la salute delle piante nel lungo periodo.",
-    intro:
-      "Applichiamo trattamenti curativi e nutrizionali naturali per proteggere le piante e rafforzarne la salute.",
-    body: "Ogni intervento parte da una diagnosi dello stato fitosanitario e nutrizionale. Utilizziamo prodotti biologici, macerati e preparati biodinamici calibrati sulla specie e sul problema specifico.",
-    deliverables: [
-      "Diagnosi fitosanitaria visiva e strumentale",
-      "Piano trattamenti con prodotti naturali",
-      "Applicazione trattamenti curativi",
-      "Somministrazione nutrienti e biostimolanti",
-      "Monitoraggio risposta vegetativa",
-      "Report e raccomandazioni di follow-up",
-    ],
-    process: [
-      "Ispezione e diagnosi dello stato di salute",
-      "Definizione protocollo trattamento naturale",
-      "Applicazione trattamenti e nutrienti",
-      "Monitoraggio risultati e adattamento piano",
-    ],
-    results: [
-      "Piante piu sane e resistenti ai patogeni",
-      "Riduzione progressiva dei trattamenti chimici",
-      "Equilibrio biologico del giardino preservato",
-    ],
-    whenToChoose: [
-      "Le piante mostrano segni di sofferenza o malattia",
-      "Vuoi passare da trattamenti chimici a naturali",
-      "Cerchi una cura preventiva e non solo d'emergenza",
-    ],
-    faqs: [
-      {
-        question: "I trattamenti naturali sono efficaci quanto quelli chimici?",
-        answer:
-          "Si, soprattutto in ottica preventiva. I trattamenti naturali rafforzano le difese della pianta, riducendo la necessita di interventi d'urgenza nel tempo.",
-      },
-      {
-        question: "Ogni quanto vanno ripetuti i trattamenti?",
-        answer:
-          "Dipende dalla specie e dal problema. In genere prevediamo cicli stagionali con frequenza maggiore nei periodi di crescita attiva e minore in inverno.",
-      },
-      {
-        question: "I trattamenti sono sicuri per bambini e animali?",
-        answer:
-          "Si. Utilizziamo esclusivamente prodotti biologici e naturali, sicuri per persone, animali domestici e insetti utili come api e coccinelle.",
-      },
-    ],
-  },
 };
 
 /* ── Section Components ────────────────── */
 
-function HeroSection({
-  service,
-  imageUrl,
-}: {
-  service: ServiceItem;
-  imageUrl: string;
-}) {
+function HeroSection({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
   const subtitle = serviceSubtitles[service.slug] ?? "";
+  
+  // Split title for thin/bold effect
+  const words = service.title.split(" ");
+  const firstPart = words.slice(0, words.length > 2 ? 1 : 1).join(" ");
+  const secondPart = words.slice(words.length > 2 ? 1 : 1).join(" ");
 
   return (
-    <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden bg-forest-950 py-32 md:py-40">
+    <section className="relative h-[90vh] w-full overflow-hidden">
       <Image
         src={imageUrl}
-        alt={`Servizio di ${service.title.toLowerCase()} — Visione Sostenibile`}
+        alt={service.title}
         fill
         priority
         sizes="100vw"
-        placeholder="blur"
-        blurDataURL={BLUR_DATA_URL}
-        className="object-cover opacity-50"
+        className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/70" />
-
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        <FadeIn>
-          <Link
-            href="/servizi"
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-paper-50/20 bg-paper-50/10 px-4 py-2 font-sans text-xs uppercase tracking-widest text-paper-200 backdrop-blur-sm transition-colors hover:bg-paper-50/20"
-          >
-            <ArrowLeft className="h-3 w-3" />
-            Tutti i servizi
-          </Link>
-        </FadeIn>
-
-        <SlideUp>
-          <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-paper-50 md:text-5xl lg:text-6xl">
-            {service.title}
-          </h1>
-        </SlideUp>
-
-        {subtitle && (
-          <SlideUp delay={0.1}>
-            <p className="mx-auto mt-4 max-w-xl font-body text-lg italic text-paper-300/90 md:text-xl">
-              {subtitle}
-            </p>
-          </SlideUp>
-        )}
-
-        <SlideUp delay={0.15}>
-          <p className="mx-auto mt-4 max-w-2xl font-body text-base leading-relaxed text-paper-300/70 md:text-lg">
-            {service.shortDescription}
-          </p>
-        </SlideUp>
-      </div>
-    </section>
-  );
-}
-
-function QuickAnswerSection({ content }: { content: ServiceContent }) {
-  const heading = content.questionH2 ?? "Risposta rapida";
-  return (
-    <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-14">
-      <SlideUp>
-        <div className="rounded-2xl border border-paper-200 bg-white p-6 shadow-soft lg:p-8">
-          <div className="mb-4 flex items-center gap-2">
-            <ListChecks className="h-5 w-5 text-leaf-600" />
-            <h2 className="font-display text-xl text-forest-950 md:text-2xl">
-              {heading}
-            </h2>
-          </div>
-          <p className="font-body text-base leading-relaxed text-forest-900 md:text-lg">
-            {content.quickAnswer}
-          </p>
-        </div>
-      </SlideUp>
-    </section>
-  );
-}
-
-function BenefitsSection({ content }: { content: ServiceContent }) {
-  return (
-    <section className="bg-paper-50 py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:gap-16">
-          {/* Intro + Body */}
-          <div>
-            <SlideUp>
-              <Badge
-                variant="primary"
-                className="mb-4 bg-leaf-50 text-leaf-700"
-              >
-                <Leaf className="mr-1.5 h-3 w-3" />
-                Il nostro approccio
-              </Badge>
-              <h2 className="font-display text-3xl leading-tight text-forest-950 md:text-4xl">
-                Come lavoriamo
-              </h2>
-              <p className="mt-4 font-body text-lg leading-relaxed text-forest-800/80">
-                {content.intro}
-              </p>
-              <p className="mt-3 font-body text-base leading-relaxed text-forest-800/60">
-                {content.body}
-              </p>
-            </SlideUp>
-          </div>
-
-          {/* Deliverables */}
-          <div>
-            <SlideUp delay={0.1}>
-              <h3 className="mb-6 font-display text-lg font-bold uppercase tracking-wide text-forest-950">
-                Cosa comprende
-              </h3>
-              <ul className="space-y-4">
-                {content.deliverables.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" />
-                    <span className="font-body text-base leading-relaxed text-forest-800/80">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </SlideUp>
-          </div>
-        </div>
-
-        {/* Results */}
-        {content.results.length > 0 && (
-          <StaggerContainer className="mt-16">
-            <div className="grid gap-6 sm:grid-cols-3">
-              {content.results.map((result, index) => (
-                <StaggerItem key={result}>
-                  <div className="rounded-xl border border-leaf-100 bg-leaf-50/50 p-6 text-center">
-                    <span className="mb-2 block font-display text-3xl font-light text-leaf-700">
-                      {(index + 1).toString().padStart(2, "0")}
-                    </span>
-                    <p className="font-body text-sm leading-relaxed text-forest-800/70">
-                      {result}
-                    </p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </div>
-          </StaggerContainer>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function ProcessSteps({ content }: { content: ServiceContent }) {
-  return (
-    <section className="bg-white py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <SlideUp>
-          <div className="mb-12 text-center">
-            <h2 className="font-display text-3xl text-forest-950 md:text-4xl">
-              Processo in{" "}
-              <span className="text-leaf-700">
-                {content.process.length} fasi
+      {/* Double gradient: pronounced top and deep bottom for text legibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+      
+      <div className="absolute inset-0 flex items-end">
+        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 pb-20 md:pb-32">
+          <h1 className="text-stitch-heading text-5xl md:text-8xl text-white">
+            <span className="font-light block mb-2">{firstPart}</span>
+            <span className="font-bold block">{secondPart}</span>
+            {subtitle && (
+              <span className="block font-light italic text-2xl md:text-4xl mt-6 text-paper-200/90 tracking-normal normal-case">
+                {subtitle}
               </span>
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg font-body text-forest-800/60">
-              Dall&apos;idea alla realizzazione, ogni fase e monitorata.
-            </p>
-          </div>
-        </SlideUp>
-
-        <StaggerContainer>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {content.process.map((step, index) => (
-              <StaggerItem key={step}>
-                <div className="group relative rounded-2xl border border-paper-100 bg-paper-50 p-6 transition-all duration-300 hover:border-leaf-200 hover:shadow-soft">
-                  <span className="mb-4 block font-display text-5xl font-light text-paper-200 transition-colors group-hover:text-leaf-200">
-                    {(index + 1).toString().padStart(2, "0")}
-                  </span>
-                  <p className="font-body text-base font-medium leading-snug text-forest-900">
-                    {step}
-                  </p>
-                  {index < content.process.length - 1 && (
-                    <ArrowRight className="absolute right-4 top-1/2 hidden h-4 w-4 -translate-y-1/2 text-paper-300 lg:block" />
-                  )}
-                </div>
-              </StaggerItem>
-            ))}
-          </div>
-        </StaggerContainer>
+            )}
+          </h1>
+        </div>
       </div>
     </section>
   );
 }
 
-function FaqAccordion({ content }: { content: ServiceContent }) {
-  if (content.faqs.length === 0) return null;
+function EditorialIntro({ content }: { content: ServiceContent }) {
+  return (
+    <section className="py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+          <div>
+            <h2 className="font-display text-4xl md:text-5xl text-leaf-700 leading-[1.1] tracking-tight uppercase">
+              <span className="font-light block">Il tuo giardino</span>
+              <span className="font-light block">può tingersi di</span>
+              <span className="font-bold block">Fascino</span>
+            </h2>
+            <p className="mt-4 text-micro text-leaf-600/60 font-bold italic tracking-widest">Anche nelle ore serali</p>
+          </div>
+          <div className="space-y-8">
+            <p className="text-lg text-forest-900/80 leading-relaxed">
+              {content.intro}
+            </p>
+            <p className="text-lg text-forest-800/60 leading-relaxed">
+              {content.body}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ImageCarousel({ imageUrl, slug }: { imageUrl: string; slug: string }) {
+  const [current, setCurrent] = useState(0);
+
+  // Build image list: main image first, then pool (deduplicated)
+  const mainThumb = imageUrl.replace("?w=1200", "?w=800");
+  const images = [mainThumb, ...carouselImagesPool.filter((img) => img !== mainThumb)];
+  const total = images.length;
+
+  const prev = () => setCurrent((c) => (c - 1 + total) % total);
+  const next = () => setCurrent((c) => (c + 1) % total);
+
+  // Auto-advance every 4s
+  useEffect(() => {
+    const timer = setInterval(() => setCurrent((c) => (c + 1) % total), 4000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  // Positions: -1, 0 (center), +1
+  const getOffset = (index: number) => {
+    let diff = index - current;
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+    return diff;
+  };
 
   return (
-    <section className="bg-paper-50 py-16 lg:py-24">
-      <div className="mx-auto max-w-3xl px-6 lg:px-8">
-        <SlideUp>
-          <div className="mb-12 text-center">
-            <h2 className="font-display text-3xl text-forest-950 md:text-4xl">
-              Domande frequenti
-            </h2>
-          </div>
-        </SlideUp>
+    <section className="bg-paper-100 py-24 overflow-hidden">
+      <div className="carousel-container max-w-5xl mx-auto px-6">
+        {/* Horizontal Carousel - Single Level, No Tilt */}
+        <div className="relative h-[480px] flex items-center justify-center">
+          {images.map((img, index) => {
+            const offset = getOffset(index);
+            const absOffset = Math.abs(offset);
 
-        <div className="space-y-3">
-          {content.faqs.map((faq) => (
-            <details
-              key={faq.question}
-              className="group overflow-hidden rounded-xl border border-paper-200 bg-white shadow-sm"
-            >
-              <summary className="flex cursor-pointer items-center justify-between p-5 font-medium text-forest-900 md:p-6">
-                <span className="pr-4 text-base md:text-lg">
-                  {faq.question}
-                </span>
-                <ChevronDown className="h-5 w-5 shrink-0 text-leaf-600 transition-transform duration-300 group-open:rotate-180" />
-              </summary>
-              <div className="border-t border-paper-100 px-5 pb-5 pt-4 font-body text-base leading-relaxed text-forest-800/70 md:px-6 md:pb-6">
-                {faq.answer}
+            // Show 3 cards (center + sides)
+            if (absOffset > 1) return null;
+
+            const isCenter = offset === 0;
+            
+            // X: Controlled overlap
+            const translateX = offset * 240; 
+            // Scale: Sides are smaller as requested
+            const scale = isCenter ? 1 : 0.85;
+            const zIndex = isCenter ? 20 : 10;
+            const opacity = isCenter ? 1 : 0.7;
+
+            return (
+              <div
+                key={img}
+                className="absolute transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer"
+                style={{
+                  transform: `translateX(${translateX}px) scale(${scale})`,
+                  zIndex,
+                  opacity,
+                }}
+                onClick={() => {
+                  if (offset < 0) prev();
+                  if (offset > 0) next();
+                }}
+              >
+                <div
+                  className={cn(
+                    "relative w-64 md:w-80 aspect-[3.5/4.5] rounded-[40px] overflow-hidden transition-all duration-500",
+                    isCenter
+                      ? "shadow-floating"
+                      : "shadow-medium"
+                  )}
+                >
+                  <Image
+                    src={img}
+                    alt={`${slug} foto ${index + 1}`}
+                    fill
+                    sizes="400px"
+                    className="object-cover"
+                  />
+                  {!isCenter && <div className="absolute inset-0 bg-black/10" />}
+                </div>
               </div>
-            </details>
+            );
+          })}
+        </div>
+
+        {/* Dot indicators - Gold/Yellow */}
+        <div className="flex justify-center gap-2.5 mt-12">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Vai alla foto ${i + 1}`}
+              className={cn(
+                "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                i === current ? "bg-sun-400 w-8" : "bg-sun-200/40"
+              )}
+            />
           ))}
         </div>
       </div>
@@ -924,102 +495,99 @@ function FaqAccordion({ content }: { content: ServiceContent }) {
   );
 }
 
-function RelatedServicesSection({
-  currentSlug,
-}: {
-  currentSlug: string;
-}) {
-  const related = staticServices
-    .filter((s) => s.slug !== currentSlug)
-    .slice(0, 3);
-
-  if (related.length === 0) return null;
-
+function ProcessSteps({ content }: { content: ServiceContent }) {
   return (
-    <section className="bg-white py-16 lg:py-24">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <SlideUp>
-          <h2 className="mb-10 text-center font-display text-3xl text-forest-950 md:text-4xl">
-            Servizi correlati
-          </h2>
-        </SlideUp>
-
-        <StaggerContainer>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((service) => {
-              const slug = normalizeServiceSlug(service.slug);
-              const image =
-                serviceImages[slug] ||
-                "/images/servizi/progettazione-giardini-cover.png";
-
-              return (
-                <StaggerItem key={service._id}>
-                  <Link
-                    href={`/servizi/${slug}`}
-                    className="group block overflow-hidden rounded-2xl border border-paper-100 bg-paper-50 transition-all duration-300 hover:-translate-y-1 hover:border-leaf-300 hover:shadow-soft"
-                  >
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <Image
-                        src={image}
-                        alt={`Servizio di ${service.title.toLowerCase()}`}
-                        width={420}
-                        height={263}
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        placeholder="blur"
-                        blurDataURL={BLUR_DATA_URL}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <h3 className="font-display text-lg text-forest-950 transition-colors group-hover:text-leaf-700">
-                        {service.title}
-                      </h3>
-                      <div className="mt-3 flex items-center gap-2 font-sans text-[11px] font-semibold uppercase tracking-widest text-sun-500">
-                        Scopri
-                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                      </div>
-                    </div>
-                  </Link>
-                </StaggerItem>
-              );
-            })}
+    <section className="py-24 lg:py-32 bg-paper-50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="lg:grid lg:grid-cols-12 gap-16 items-center">
+          {/* Left: title block */}
+          <div className="lg:col-span-4 mb-16 lg:mb-0">
+            <h2 className="font-display text-5xl md:text-6xl text-leaf-600 uppercase tracking-tight leading-none">
+              <span className="font-light block">Processo in</span>
+              <span className="font-bold block">{content.process.length} Fasi</span>
+            </h2>
+            <p className="mt-6 text-micro text-forest-800/40">
+              Dall&apos;idea alla realizzazione
+            </p>
           </div>
-        </StaggerContainer>
+
+          {/* Right: step cards - 2x2 Neumorphic Grid */}
+          <div className="lg:col-span-8">
+            <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
+              {content.process.map((step, index) => (
+                <div
+                  key={step}
+                  className="step-card bg-white p-6 md:p-10 rounded-[20px] flex gap-6 md:gap-10 items-center min-h-[160px]"
+                >
+                  <span className="text-7xl md:text-8xl font-display text-paper-200/50 font-black leading-none shrink-0">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p className="text-base md:text-lg text-forest-900 leading-snug font-medium">
+                      {step}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-function RelatedBlogSection({ serviceSlug }: { serviceSlug: string }) {
-  const relatedBlogPosts = (relatedBlogSlugsByService[serviceSlug] ?? [])
-    .map((slug) => blogArticlesBySlug[slug])
-    .filter(Boolean);
-
-  if (relatedBlogPosts.length === 0) return null;
-
+function VideoShowcase({ service, imageUrl }: { service: ServiceItem; imageUrl: string }) {
   return (
-    <section className="bg-paper-50 py-16 lg:py-20">
-      <div className="mx-auto max-w-5xl px-6 lg:px-8">
-        <SlideUp>
-          <h2 className="mb-8 font-display text-2xl text-forest-950 md:text-3xl">
-            Approfondisci nel blog
+    <section className="py-12 lg:py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="relative rounded-[30px] md:rounded-[50px] overflow-hidden h-[400px] md:h-[600px] group cursor-pointer shadow-deep">
+          <Image
+            src={imageUrl}
+            alt={`${service.title} video`}
+            fill
+            sizes="100vw"
+            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+            <h2 className="text-stitch-heading text-4xl md:text-7xl text-white mb-10 drop-shadow-lg">
+              Che cosa
+              <span className="block font-bold">Aspettarsi</span>
+            </h2>
+            <div className="bg-white/90 backdrop-blur-md rounded-full p-6 md:p-8 transition-all duration-500 group-hover:scale-110 shadow-xl">
+              <Play className="w-8 h-8 md:w-12 md:h-12 text-forest-900 fill-forest-900" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FaqAccordion({ content }: { content: ServiceContent }) {
+  return (
+    <section className="py-24 lg:py-32 bg-paper-50">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-4xl md:text-5xl text-leaf-600 uppercase tracking-tight">
+            FAQ
           </h2>
-        </SlideUp>
-        <div className="grid gap-4 md:grid-cols-2">
-          {relatedBlogPosts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group rounded-2xl border border-paper-200 bg-white px-6 py-5 transition-all hover:border-leaf-400 hover:shadow-soft"
+        </div>
+        <div className="space-y-4">
+          {content.faqs.map((faq) => (
+            <details
+              key={faq.question}
+              className="faq-card bg-white rounded-xl overflow-hidden shadow-sm group border border-paper-200/30"
             >
-              <p className="mb-3 font-display text-xl text-forest-950 transition-colors group-hover:text-leaf-700">
-                {post.title}
-              </p>
-              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-leaf-700">
-                Leggi articolo
-                <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-            </Link>
+              <summary className="flex items-center justify-between p-6 cursor-pointer font-medium text-forest-900">
+                <span className="text-lg">{faq.question}</span>
+                <ChevronDown className="w-5 h-5 text-leaf-600 transition-transform duration-500 group-open:rotate-180 shrink-0 ml-4" />
+              </summary>
+              <div className="px-6 pb-6 text-forest-800/70 leading-relaxed text-lg border-t border-paper-50 pt-4">
+                {faq.answer}
+              </div>
+            </details>
           ))}
         </div>
       </div>
@@ -1036,39 +604,29 @@ function PrevNextNav({
 }) {
   return (
     <section className="border-t border-paper-300">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 divide-y divide-paper-300 md:grid-cols-2 md:divide-x md:divide-y-0">
-          <div className="py-8 pr-0 md:pr-8 lg:py-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-paper-300">
+          <div className="py-8 lg:py-12 pr-0 md:pr-8">
             {prevService ? (
-              <Link
-                href={`/servizi/${prevService.slug}`}
-                className="group flex items-center gap-4"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-paper-400 transition-all group-hover:border-leaf-500 group-hover:bg-leaf-50">
-                  <ArrowLeft className="h-5 w-5 text-forest-800/60 transition-colors group-hover:text-leaf-600" />
+              <Link href={`/servizi/${prevService.slug}`} className="group flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                 </div>
                 <div>
-                  <p className="mb-1 font-sans text-xs uppercase tracking-widest text-forest-800/60">
-                    Precedente
-                  </p>
-                  <p className="font-display text-lg text-forest-900 transition-colors group-hover:text-leaf-600">
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Precedente</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                     {prevService.title}
                   </p>
                 </div>
               </Link>
             ) : (
-              <Link
-                href="/servizi"
-                className="group flex items-center gap-4"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-paper-400 transition-all group-hover:border-leaf-500 group-hover:bg-leaf-50">
-                  <ArrowLeft className="h-5 w-5 text-forest-800/60 transition-colors group-hover:text-leaf-600" />
+              <Link href="/servizi" className="group flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowLeft className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                 </div>
                 <div>
-                  <p className="mb-1 font-sans text-xs uppercase tracking-widest text-forest-800/60">
-                    Torna a
-                  </p>
-                  <p className="font-display text-lg text-forest-900 transition-colors group-hover:text-leaf-600">
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Torna a</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                     Tutti i Servizi
                   </p>
                 </div>
@@ -1076,39 +634,32 @@ function PrevNextNav({
             )}
           </div>
 
-          <div className="py-8 pl-0 md:pl-8 lg:py-12">
+          <div className="py-8 lg:py-12 pl-0 md:pl-8">
             {nextService ? (
               <Link
                 href={`/servizi/${nextService.slug}`}
                 className="group flex items-center justify-end gap-4 text-right"
               >
                 <div>
-                  <p className="mb-1 font-sans text-xs uppercase tracking-widest text-forest-800/60">
-                    Successivo
-                  </p>
-                  <p className="font-display text-lg text-forest-900 transition-colors group-hover:text-leaf-600">
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Successivo</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                     {nextService.title}
                   </p>
                 </div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-paper-400 transition-all group-hover:border-leaf-500 group-hover:bg-leaf-50">
-                  <ArrowRight className="h-5 w-5 text-forest-800/60 transition-colors group-hover:text-leaf-600" />
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                 </div>
               </Link>
             ) : (
-              <Link
-                href="/servizi"
-                className="group flex items-center justify-end gap-4 text-right"
-              >
+              <Link href="/servizi" className="group flex items-center justify-end gap-4 text-right">
                 <div>
-                  <p className="mb-1 font-sans text-xs uppercase tracking-widest text-forest-800/60">
-                    Esplora
-                  </p>
-                  <p className="font-display text-lg text-forest-900 transition-colors group-hover:text-leaf-600">
+                  <p className="font-sans text-xs uppercase tracking-widest text-forest-800/60 mb-1">Esplora</p>
+                  <p className="font-display text-lg text-forest-900 group-hover:text-leaf-600 transition-colors">
                     Tutti i Servizi
                   </p>
                 </div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-paper-400 transition-all group-hover:border-leaf-500 group-hover:bg-leaf-50">
-                  <ArrowRight className="h-5 w-5 text-forest-800/60 transition-colors group-hover:text-leaf-600" />
+                <div className="w-12 h-12 rounded-full border border-paper-400 flex items-center justify-center group-hover:border-leaf-500 group-hover:bg-leaf-50 transition-all">
+                  <ArrowRight className="w-5 h-5 text-forest-800/60 group-hover:text-leaf-600 transition-colors" />
                 </div>
               </Link>
             )}
@@ -1126,24 +677,16 @@ export default function ServiceDetailPage() {
   const searchParams = useSearchParams();
   const trackShareEvent = useMutation(api.shareEvents.track);
   const landingTrackedRef = useRef(false);
-  const [shareState, setShareState] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
+  const [shareState, setShareState] = useState<"idle" | "success" | "error">("idle");
 
-  const slugParam = params.slug as string;
-  const normalizedSlug = normalizeServiceSlug(slugParam);
-  const service = staticServices.find(
-    (item) => item.slug === normalizedSlug
-  );
-  const serviceIndex = staticServices.findIndex(
-    (item) => item.slug === normalizedSlug
-  );
+  const slug = params.slug as string;
+  const service = staticServices.find((item) => item.slug === slug);
+  const serviceIndex = staticServices.findIndex((item) => item.slug === slug);
   const nextService =
     serviceIndex >= 0 && serviceIndex < staticServices.length - 1
       ? staticServices[serviceIndex + 1]
       : null;
-  const prevService =
-    serviceIndex > 0 ? staticServices[serviceIndex - 1] : null;
+  const prevService = serviceIndex > 0 ? staticServices[serviceIndex - 1] : null;
 
   useEffect(() => {
     if (!service || landingTrackedRef.current) return;
@@ -1160,21 +703,18 @@ export default function ServiceDetailPage() {
 
   if (!service) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-paper-50">
-        <div className="max-w-md px-6 text-center">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-paper-300">
-            <Sprout className="h-10 w-10 text-forest-800/60" />
+      <div className="min-h-screen flex items-center justify-center bg-paper-50">
+        <div className="text-center max-w-md px-6">
+          <div className="w-20 h-20 rounded-full bg-paper-300 flex items-center justify-center mx-auto mb-6">
+            <Sprout className="w-10 h-10 text-forest-800/60" />
           </div>
-          <h1 className="mb-4 font-display text-3xl text-forest-950">
-            Servizio non trovato
-          </h1>
-          <p className="mb-8 font-body text-forest-800/70">
-            Il servizio che stai cercando non esiste o potrebbe essere stato
-            rimosso.
+          <h1 className="font-display text-3xl text-forest-950 mb-4">Servizio non trovato</h1>
+          <p className="font-body text-forest-800/70 mb-8">
+            Il servizio che stai cercando non esiste o potrebbe essere stato rimosso.
           </p>
           <Link href="/servizi">
             <Button variant="secondary">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <ArrowLeft className="mr-2 w-4 h-4" />
               Torna ai Servizi
             </Button>
           </Link>
@@ -1185,7 +725,7 @@ export default function ServiceDetailPage() {
 
   const imageUrl =
     serviceImageMap[service.slug] ||
-    "/images/servizi/progettazione-giardini-cover.png";
+    "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200";
 
   const fallbackContent: ServiceContent = {
     quickAnswer:
@@ -1199,16 +739,8 @@ export default function ServiceDetailPage() {
       "Verifica finale",
     ],
     process: ["Brief", "Piano", "Esecuzione", "Controllo"],
-    results: [
-      "Maggior controllo",
-      "Qualita costante",
-      "Gestione semplificata",
-    ],
-    whenToChoose: [
-      "Serve una soluzione strutturata",
-      "Vuoi ridurre errori",
-      "Cerchi continuita",
-    ],
+    results: ["Maggior controllo", "Qualita costante", "Gestione semplificata"],
+    whenToChoose: ["Serve una soluzione strutturata", "Vuoi ridurre errori", "Cerchi continuita"],
     faqs: [
       {
         question: "Come funziona il servizio?",
@@ -1220,85 +752,35 @@ export default function ServiceDetailPage() {
 
   const content = serviceContents[service.slug] ?? fallbackContent;
 
-  const serviceUrl = `${SITE_URL}/servizi/${service.slug}`;
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: service.title,
     name: service.title,
     description: content.quickAnswer,
-    areaServed: siteConfig.areaServed,
     provider: {
       "@type": "LocalBusiness",
-      name: siteConfig.companyName,
-      url: SITE_URL,
-      telephone: siteConfig.phoneRaw,
-      email: siteConfig.email,
+      name: "Visione Sostenibile",
+      areaServed: "Piemonte e Lombardia",
     },
-    url: serviceUrl,
+    url: `${SITE_URL}/servizi/${service.slug}`,
   };
 
-  const breadcrumbJsonLd = {
+  const faqJsonLd = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_URL,
+    "@type": "FAQPage",
+    mainEntity: content.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Servizi",
-        item: `${SITE_URL}/servizi`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: service.title,
-        item: serviceUrl,
-      },
-    ],
+    })),
   };
-
-  const faqJsonLd =
-    content.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: content.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null;
-
-  const howToJsonLd =
-    content.process && content.process.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "HowTo",
-          name: `Come funziona: ${service.title}`,
-          description: content.quickAnswer,
-          step: content.process.map((stepText, index) => ({
-            "@type": "HowToStep",
-            position: index + 1,
-            name: `Step ${index + 1}`,
-            text: stepText,
-          })),
-        }
-      : null;
 
   const handleShare = async () => {
-    const shareUrl = new URL(
-      `${window.location.origin}${window.location.pathname}`
-    );
+    const shareUrl = new URL(`${window.location.origin}${window.location.pathname}`);
     shareUrl.searchParams.set("ref", "wa-share");
     shareUrl.searchParams.set("utm_source", "whatsapp");
     shareUrl.searchParams.set("utm_medium", "share");
@@ -1338,108 +820,79 @@ export default function ServiceDetailPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
-      {howToJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
-        />
-      )}
 
-      {/* Hero */}
+      {/* Section 1: Full-Bleed Hero */}
       <HeroSection service={service} imageUrl={imageUrl} />
 
-      {/* Quick Answer (SEO featured snippet) */}
-      <QuickAnswerSection content={content} />
+      {/* Section 2: Editorial Intro */}
+      <EditorialIntro content={content} />
 
-      {/* Benefits + Deliverables */}
-      <BenefitsSection content={content} />
+      {/* Section 3: Image Carousel */}
+      <ImageCarousel imageUrl={imageUrl} slug={service.slug} />
 
-      {/* Process Steps */}
+      {/* Section 4: Process Steps */}
       <ProcessSteps content={content} />
 
-      {/* FAQ Accordion */}
+      {/* Section 5: Video Showcase */}
+      <VideoShowcase service={service} imageUrl={imageUrl} />
+
+      {/* Section 6: FAQ Accordion */}
       <FaqAccordion content={content} />
 
-      {/* Related Blog */}
-      <RelatedBlogSection serviceSlug={service.slug} />
-
-      {/* Related Services */}
-      <RelatedServicesSection currentSlug={service.slug} />
-
-      {/* Reviews */}
-      <div className="bg-paper-50 py-16">
-        <div className="mx-auto max-w-5xl px-6">
-          <ReviewsWidget
-            variant="featured"
-            title="La voce dei nostri clienti"
-            subtitle="Cosa dicono di questo servizio"
-          />
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <section className="relative overflow-hidden bg-forest-950 py-20 text-paper-50 lg:py-28">
+      {/* Section 7: CTA (kept as-is) */}
+      <section className="relative py-24 lg:py-32 bg-forest-950 text-paper-50 overflow-hidden">
         <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-10"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')",
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
-          <div className="absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-sun-400/10 blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-8">
-          <SlideUp>
-            <span className="font-display text-lg italic text-leaf-400">
-              Preventivo gratuito
-            </span>
-            <h2 className="mt-4 font-display text-4xl font-light leading-tight text-paper-50 md:text-5xl">
-              Inizia il tuo progetto di
-              <span className="block italic text-leaf-400">
-                {service.title.toLowerCase()}
-              </span>
-            </h2>
-            <p className="mx-auto mb-10 mt-6 max-w-2xl text-lg leading-relaxed text-paper-300/80">
-              Contattaci per una consulenza senza impegno. Definiamo insieme il
-              percorso migliore per il tuo spazio verde.
-            </p>
-          </SlideUp>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <span className="font-display italic text-leaf-400 text-lg">Preventivo gratuito</span>
+          <h2 className="font-display text-4xl md:text-5xl font-light text-paper-50 mt-4 mb-6 leading-tight">
+            Inizia il tuo progetto di
+            <span className="block italic text-leaf-400">{service.title.toLowerCase()}</span>
+          </h2>
+          <p className="text-lg text-paper-300/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Contattaci per una consulenza senza impegno. Definiamo insieme il percorso migliore per il tuo spazio verde.
+          </p>
 
-          <SlideUp delay={0.1}>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <a href={`tel:${siteConfig.phoneRaw}`}>
-                <Button
-                  size="lg"
-                  className="border-0 bg-sun-400 px-8 text-forest-950 hover:bg-sun-500"
-                >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Chiama ora
-                </Button>
-              </a>
-              <Link href="/contatti">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-paper-400/30 px-8 text-paper-100 hover:border-paper-400/50 hover:bg-paper-100/10"
-                >
-                  Richiedi preventivo
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </SlideUp>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+39061234567">
+              <Button
+                size="lg"
+                className="bg-sun-400 hover:bg-sun-500 text-white border-0 px-8"
+              >
+                <Phone className="mr-2 w-5 h-5" />
+                Chiama ora
+              </Button>
+            </a>
+            <Link href="/contatti">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-paper-400/30 text-paper-100 hover:bg-paper-100/10 hover:border-paper-400/50 px-8"
+              >
+                Richiedi preventivo
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
 
-          <div className="mt-8 flex flex-col justify-center gap-4 text-sm text-paper-400/80 sm:flex-row">
-            <span className="inline-flex items-center justify-center gap-2">
-              <MapPin className="h-4 w-4" />
-              Piemonte, Trentino, Lombardia
+          <div className="mt-8 text-sm text-paper-400/80 flex flex-col sm:flex-row justify-center gap-4">
+            <span className="inline-flex items-center gap-2 justify-center">
+              <MapPin className="w-4 h-4" />
+              Piemonte e Lombardia
             </span>
-            <span className="inline-flex items-center justify-center gap-2">
-              <Clock className="h-4 w-4" />
+            <span className="inline-flex items-center gap-2 justify-center">
+              <Clock className="w-4 h-4" />
               Lun-Ven: 8:00-18:00
             </span>
           </div>
@@ -1450,14 +903,14 @@ export default function ServiceDetailPage() {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={handleShare}
-          className="rounded-full bg-leaf-600 p-4 text-white shadow-deep transition-all hover:scale-110 hover:bg-leaf-700"
+          className="bg-leaf-600 hover:bg-leaf-700 text-white rounded-full p-4 shadow-deep transition-all hover:scale-110"
           aria-label="Condividi su WhatsApp"
         >
-          <MessageCircle className="h-6 w-6" />
+          <MessageCircle className="w-6 h-6" />
         </button>
         {shareState === "success" && (
-          <div className="absolute bottom-full right-0 mb-2 flex items-center gap-2 whitespace-nowrap rounded-lg bg-white px-4 py-2 text-sm text-forest-800 shadow-medium">
-            <CheckCircle2 className="h-4 w-4 text-leaf-500" />
+          <div className="absolute bottom-full right-0 mb-2 bg-white rounded-lg shadow-medium px-4 py-2 text-sm text-forest-800 whitespace-nowrap flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-leaf-500" />
             WhatsApp aperto
           </div>
         )}
@@ -1465,9 +918,6 @@ export default function ServiceDetailPage() {
 
       {/* Prev/Next Navigation */}
       <PrevNextNav prevService={prevService} nextService={nextService} />
-
-      {/* Scroll-triggered Quiz CTA */}
-      <ScrollCTA />
     </div>
   );
 }
