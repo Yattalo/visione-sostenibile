@@ -15,18 +15,18 @@ export function normalizeServiceSlug(slug: string): string {
 }
 
 export const staticServices = [
-  { _id: "1", slug: "progettazione-giardini", title: "Progettazione Giardini", shortDescription: "Progetti personalizzati per giardini e orti a impatto zero", fullDescription: "", order: 1, isActive: true },
-  { _id: "2", slug: "realizzazione-giardini", title: "Realizzazione Giardini", shortDescription: "Dalla progettazione alla posa, un servizio completo chiavi in mano", fullDescription: "", order: 2, isActive: true },
-  { _id: "3", slug: "scelta-piante", title: "Ampia Scelta di Piante", shortDescription: "Piante autoctone, ornamentali e da frutto selezionate per il tuo territorio", fullDescription: "", order: 3, isActive: true },
-  { _id: "4", slug: "trattamenti-piante", title: "Trattamenti Curativi e Nutrizionali", shortDescription: "Interventi biologici per la salute e la nutrizione delle piante", fullDescription: "", order: 4, isActive: true },
-  { _id: "5", slug: "impianti-irrigazione", title: "Impianti di Irrigazione", shortDescription: "Sistemi di irrigazione efficienti per ridurre sprechi e consumi idrici", fullDescription: "", order: 5, isActive: true },
-  { _id: "6", slug: "camminamenti-pietra", title: "Posa Camminamenti e Muretti in Pietra", shortDescription: "Realizzazione di percorsi e muretti con materiali naturali e locali", fullDescription: "", order: 6, isActive: true },
-  { _id: "7", slug: "illuminazione-esterni", title: "Illuminazione per Esterni", shortDescription: "Soluzioni luminose a basso consumo per valorizzare gli spazi verdi", fullDescription: "", order: 7, isActive: true },
-  { _id: "8", slug: "ingegneria-naturalistica", title: "Ingegneria Naturalistica", shortDescription: "Tecniche di consolidamento e recupero ambientale con metodi naturali", fullDescription: "", order: 8, isActive: true },
-  { _id: "9", slug: "arredamento-esterni", title: "Arredamento per Esterni", shortDescription: "Arredi e complementi sostenibili per vivere al meglio il tuo giardino", fullDescription: "", order: 9, isActive: true },
-  { _id: "10", slug: "potature", title: "Potature e Abbattimenti in Quota", shortDescription: "Potatura e abbattimento controllato con tecniche di tree climbing", fullDescription: "", order: 10, isActive: true },
-  { _id: "11", slug: "rigenerazione-terreni", title: "Rigenerazione dei Terreni", shortDescription: "Metodologie biodinamiche per rigenerare suoli impoveriti e compattati", fullDescription: "", order: 11, isActive: true },
-  { _id: "12", slug: "manutenzioni", title: "Manutenzioni", shortDescription: "Cura del verde con metodi naturali e biodinamici durante tutto l'anno", fullDescription: "", order: 12, isActive: true },
+  { _id: "1", slug: "progettazione-giardini", title: "Progettazione giardini sostenibili", shortDescription: "Bellezza, gestione e durata su misura per te.", fullDescription: "", order: 1, isActive: true },
+  { _id: "2", slug: "realizzazione-giardini", title: "Realizzazione Giardini", shortDescription: "Uno per tutta la vita: dal progetto al cantiere, senza rimbalzi.", fullDescription: "", order: 2, isActive: true },
+  { _id: "3", slug: "scelta-piante", title: "Selezione Piante e Vivaio Interno", shortDescription: "La pianta giusta al posto giusto.", fullDescription: "", order: 3, isActive: true },
+  { _id: "4", slug: "trattamenti-piante", title: "Trattamenti curativi e nutrizionali", shortDescription: "Prevenzione, diagnosi e interventi mirati per riportare equilibrio.", fullDescription: "", order: 4, isActive: true },
+  { _id: "5", slug: "impianti-irrigazione", title: "Impianti di irrigazione", shortDescription: "L’acqua è un bene prezioso: va gestita con intelligenza.", fullDescription: "", order: 5, isActive: true },
+  { _id: "6", slug: "camminamenti-pietra", title: "Posa camminamenti e muretti in pietra", shortDescription: "La natura che arreda la natura: percorsi, contenimenti, scalinate.", fullDescription: "", order: 6, isActive: true },
+  { _id: "7", slug: "illuminazione-esterni", title: "Illuminazione per esterni", shortDescription: "Creiamo atmosfera: luce che guida, accoglie e valorizza.", fullDescription: "", order: 7, isActive: true },
+  { _id: "8", slug: "ingegneria-naturalistica", title: "Ingegneria naturalistica", shortDescription: "Sostituiamo il cemento con materiali naturali.", fullDescription: "", order: 8, isActive: true },
+  { _id: "9", slug: "arredamento-esterni", title: "Arredi e outdoor living", shortDescription: "Il giardino da vivere, in solitudine, in famiglia, con gli amici.", fullDescription: "", order: 9, isActive: true },
+  { _id: "10", slug: "potature", title: "Potature e abbattimenti in quota", shortDescription: "La pianta si pota dall’interno: sicurezza e salute dell’albero.", fullDescription: "", order: 10, isActive: true },
+  { _id: "11", slug: "rigenerazione-terreni", title: "Rigenerazione del suolo", shortDescription: "La terra è viva: se il suolo sta bene, tutto il giardino lavora meglio.", fullDescription: "", order: 11, isActive: true },
+  { _id: "12", slug: "manutenzioni", title: "Manutenzione programmata del verde", shortDescription: "Pensaci una volta sola, poi ci pensiamo noi.", fullDescription: "", order: 12, isActive: true },
 ];
 
 // Immagini servizi - usa path locali dalla cartella servizi

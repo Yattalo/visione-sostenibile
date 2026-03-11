@@ -20,6 +20,7 @@ interface Review {
 interface ReviewsWidgetProps {
   reviews?: Review[];
   title?: string;
+  subtitleHeading?: string;
   subtitle?: string;
   showLoadMore?: boolean;
   maxReviews?: number;
@@ -50,6 +51,7 @@ function Stars({ rating }: { rating: number }) {
 export function ReviewsWidget({
   reviews: reviewsProp,
   title = "Cosa dicono i nostri clienti",
+  subtitleHeading,
   subtitle,
   maxReviews = 6,
   variant = "grid",
@@ -74,12 +76,17 @@ export function ReviewsWidget({
   return (
     <section className={cn("py-24", className)}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {(title || subtitle) && (
+        {(title || subtitleHeading || subtitle) && (
           <div className="text-center mb-16">
             {title && (
               <h2 className="font-display text-4xl md:text-5xl text-forest-950 mb-4">
                 {title}
               </h2>
+            )}
+            {subtitleHeading && (
+              <p className="font-display text-xl md:text-2xl italic text-leaf-700 mb-3">
+                {subtitleHeading}
+              </p>
             )}
             {subtitle && (
               <p className="font-body text-lg md:text-xl text-forest-800/70 max-w-2xl mx-auto">

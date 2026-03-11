@@ -66,7 +66,7 @@ export const pageSeo = {
 export const serviceSeoBySlug: Record<string, SeoEntry> = {
   "progettazione-giardini": {
     title:
-      "Progettazione Giardini Torino | Design Biodinamico",
+      "Progettazione Giardini Sostenibili Torino",
     description:
       "Progettazione giardini a Torino e Piemonte con approccio biodinamico: layout, piante e roadmap lavori. Prenota un sopralluogo gratuito.",
   },
@@ -96,7 +96,7 @@ export const serviceSeoBySlug: Record<string, SeoEntry> = {
   },
   "rigenerazione-terreni": {
     title:
-      "Rigenerazione Terreni e Suoli Torino",
+      "Rigenerazione del Suolo Torino",
     description:
       "Rigenerazione terreni a Torino con pratiche biodinamiche: suolo fertile, piante piu resilienti e meno chimica. Richiedi una consulenza.",
   },
@@ -114,7 +114,7 @@ export const serviceSeoBySlug: Record<string, SeoEntry> = {
   },
   "arredamento-esterni": {
     title:
-      "Arredamento per Esterni e Outdoor Living",
+      "Arredi Outdoor e Outdoor Living",
     description:
       "Arredamento per esterni e outdoor living: soluzioni su misura per vivere il giardino tutto l'anno. Prenota una consulenza gratuita.",
   },
@@ -126,13 +126,13 @@ export const serviceSeoBySlug: Record<string, SeoEntry> = {
   },
   "scelta-piante": {
     title:
-      "Scelta Piante Autoctone per Giardini",
+      "Selezione Piante e Vivaio Interno",
     description:
       "Selezioniamo piante autoctone e ornamentali adatte al tuo terreno per un giardino piu stabile e resiliente. Richiedi una consulenza.",
   },
   "trattamenti-piante": {
     title:
-      "Trattamenti Naturali per la Salute delle Piante",
+      "Trattamenti Curativi e Nutrizionali per le Piante",
     description:
       "Trattamenti naturali e nutrizionali per piante sane, senza eccessi chimici e con monitoraggio mirato. Richiedi un intervento dedicato.",
   },

@@ -1,14 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { ConvexClientProvider } from "./ConvexClientProvider";
+import { AppProvider } from "./components/AppProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
 import { CookieConsent } from "./components/CookieConsent";
 import { CookiePreferences } from "./components/CookiePreferences";
-import { AuthSessionSync } from "./components/AuthSessionSync";
 import { pageSeo } from "./lib/seo-data";
 import { buildMetadata, SITE_URL, SITE_NAME } from "./lib/seo-metadata";
 import { JsonLd } from "./components/JsonLd";
@@ -81,8 +79,10 @@ export default function RootLayout({
         {/* Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        {/* Clerk frontend API — preconnect for faster auth loading */}
-        <link rel="dns-prefetch" href="https://clerk.clerk.accounts.dev" />
+        {/* Clerk frontend API — prefetch only when auth is enabled */}
+        {process.env.NEXT_PUBLIC_AUTH_ENABLED === "true" && (
+          <link rel="dns-prefetch" href="https://clerk.clerk.accounts.dev" />
+        )}
         {/* Preconnect to Convex backend */}
         {process.env.NEXT_PUBLIC_CONVEX_URL && (
           <link
@@ -100,17 +100,14 @@ export default function RootLayout({
         >
           Vai al contenuto principale
         </a>
-        <ClerkProvider>
-          <ConvexClientProvider>
-            <AuthSessionSync />
-            <Navbar />
-            <Suspense fallback={null}><Analytics /></Suspense>
-            <main id="main-content" className="flex-grow">{children}</main>
-            <Footer />
-            <CookieConsent />
-            <CookiePreferences />
-          </ConvexClientProvider>
-        </ClerkProvider>
+        <AppProvider>
+          <Navbar />
+          <Suspense fallback={null}><Analytics /></Suspense>
+          <main id="main-content" className="grow">{children}</main>
+          <Footer />
+          <CookieConsent />
+          <CookiePreferences />
+        </AppProvider>
       </body>
     </html>
   );

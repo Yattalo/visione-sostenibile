@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone, Bug } from "lucide-react";
 import { useQuery } from "convex/react";
@@ -7,7 +8,6 @@ import { api } from "../../convex/_generated/api";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { ReviewsWidget } from "../components/ReviewsWidget";
-import { QuizCTA } from "../components/QuizCTA";
 import { ServiceCard } from "../components/ServiceCard";
 import {
   normalizeServiceSlug,
@@ -22,11 +22,60 @@ import {
   StaggerItem,
 } from "../components/animations";
 
+const extraServiceBoxes = [
+  {
+    title: "Riqualificazione giardini esistenti",
+    subtitle: "PRESERVIAMO L’ESISTENTE",
+    kicker: "interveniamo per fasi, senza rifare tutto",
+    text:
+      "Un giardino può perdere equilibrio per suolo, acqua, scelte botaniche o manutenzione discontinua o errata. Non sempre, però, è necessario rifare l’intero giardino. Semplici interventi possono comunque fare la differenza. Noi partiamo dall’analisi e costruiamo un percorso a fasi: basi (suolo/irrigazione), verde, finiture e gestione nel tempo. In questo modo recuperiamo ordine e vitalità con interventi mirati e risultati garantiti.",
+    cta: "Prenota il tuo Check-up Sostenibile",
+  },
+  {
+    title: "Terrazzi e attici",
+    subtitle: "TETTI VERDI, PENSILI, IN VASO",
+    kicker: "belli, leggeri, gestibili",
+    text:
+      "Grazie alle nuove tecnologie dei materiali esistenti possiamo realizzare il tuo giardino anche all’ultimo piano del palazzo. Progettiamo terrazzi e attici sostenibili valutando esposizione, vento, irrigazione e gestione reale del tempo. Scegliamo soluzioni e piante adatte, per avere un outdoor vivibile e stabile senza affanno, inoltre coordiniamo anche finiture e arredi outdoor se parte del progetto.",
+    cta: "Richiedi un sopralluogo",
+  },
+  {
+    title: "Gestione del verde per condomìni e aziende",
+    subtitle: "L’INGRESSO È IL TUO BIGLIETTO DA VISITA",
+    kicker: "continuità, sicurezza e immagine",
+    text:
+      "L’accoglienza data da un ingresso curato e verde (azienda, condominio, struttura pubblica o privata) è fondamentale per il benessere di tutti. Per condomìni, aziende e strutture ricettive offriamo manutenzione programmata e gestione tecnica del verde, con un referente unico e squadre specializzate. Calendario stagionale, interventi mirati, ottimizzazione dove serve: meno emergenze e costi più prevedibili.",
+    cta: "Richiedi una proposta (B2B)",
+  },
+  {
+    title: "Orti sostenibili",
+    subtitle: "LA TUA VERDURA A KM 0",
+    kicker: "sana, stagionale, gustosa",
+    text:
+      "Progettiamo e realizziamo orti sostenibili su misura: per chi vuole coltivare in modo semplice, ordinato e produttivo, con una gestione dell’acqua e del suolo pensata per reggere nel tempo. Un orto non è solo “piantare qualcosa”: è esposizione, terreno, irrigazione, rotazioni, accessi, protezioni. Se uno di questi elementi è fuori posto, l’orto diventa fatica, spreco e delusione. Noi partiamo dall’ascolto e dall’analisi del contesto, poi impostiamo spazi, materiali e impianti perché l’orto funzioni davvero, sia bello da vedere e sostenibile da mantenere stagione dopo stagione.",
+    cta: "Parliamone: ti consigliamo la soluzione più adatta al tuo spazio",
+  },
+];
+
 export function ServiziClient() {
   const siteUrl = siteConfig.siteUrl;
   const servicesQuery = useQuery(api.services.getAll);
-  const services =
+  const serviceOverrides = new Map(
+    staticServices.map((service) => [service.slug, service])
+  );
+  const rawServices =
     servicesQuery && servicesQuery.length > 0 ? servicesQuery : staticServices;
+  const services = rawServices
+    .map((service) => {
+      const normalizedSlug = normalizeServiceSlug(service.slug);
+      const override = serviceOverrides.get(normalizedSlug);
+      return {
+        ...service,
+        ...override,
+        slug: normalizedSlug,
+      };
+    })
+    .sort((left, right) => left.order - right.order);
 
   const getImageForService = (slug: string): string => {
     const normalizedSlug = normalizeServiceSlug(slug);
@@ -64,11 +113,22 @@ export function ServiziClient() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
         <div className="absolute inset-0">
+          {/* Poster image — fast LCP element */}
+          <Image
+            src="/images/servizi-hero-poster.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-50"
+          />
+          {/* Video loads lazily on top of poster */}
           <video
             autoPlay
             loop
             muted
             playsInline
+            preload="none"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           >
             <source src="/videos/nature-garden-flowers.mp4" type="video/mp4" />
@@ -104,11 +164,14 @@ export function ServiziClient() {
           </SlideUp>
 
           <SlideUp delay={0.1}>
-            <p className="font-body text-lg text-paper-300/80 max-w-2xl mb-6">
-              Organizziamo i servizi in tre livelli, cos&igrave; puoi scegliere quello che ti serve davvero — senza pezzi inutili.
+            <p className="font-body text-lg text-paper-300/80 max-w-3xl mb-4">
+              Visione Sostenibile progetta, realizza e mantiene giardini e spazi outdoor sostenibili con un approccio concreto: scelte motivate, lavoro a fasi e gestione nel tempo.
             </p>
-            <p className="font-body text-lg italic text-leaf-400 max-w-2xl mb-10">
-              Non vendiamo pezzi. Progettiamo sistemi.
+            <p className="font-body text-lg text-paper-300/80 max-w-3xl mb-6">
+              Hai un unico referente che coordina un team modulare di competenze verticali e partnership selezionate.
+            </p>
+            <p className="font-body text-lg italic text-leaf-400 max-w-3xl mb-10">
+              Se non sai da dove partire, il modo più semplice è uno: Check-up Sostenibile.
             </p>
           </SlideUp>
 
@@ -117,7 +180,12 @@ export function ServiziClient() {
               <Link href="/contatti">
                 <Button size="lg" className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-6 py-3">
                   <Phone className="w-4 h-4 mr-2" />
-                  Richiedi un Preventivo
+                  Prenota il Check-up Sostenibile
+                </Button>
+              </Link>
+              <Link href="/contatti">
+                <Button size="lg" variant="outline" className="border-white/30 bg-white/5 px-6 py-3 text-paper-50 hover:bg-white/10">
+                  Richiedi una proposta (B2B)
                 </Button>
               </Link>
             </div>
@@ -139,7 +207,7 @@ export function ServiziClient() {
               </h2>
             </div>
             <p className="font-body text-forest-800/70 max-w-2xl mb-8">
-              Il cuore del nostro lavoro: progettazione, realizzazione e manutenzione di giardini che resistono al clima di oggi.
+              La Visione Sostenibile che racchiude tutto il nostro lavoro. Progettiamo, realizziamo e curiamo giardini che resistono al clima di oggi.
             </p>
             <StaggerContainer>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -171,7 +239,7 @@ export function ServiziClient() {
               </h2>
             </div>
             <p className="font-body text-forest-800/70 max-w-2xl mb-8">
-              Trasformiamo il tuo giardino in uno spazio da vivere: luce, arredi, strutture per stare all&apos;aperto.
+              Progettiamo il tuo spazio verde per accogliere i tuoi ricordi migliore: luce, arredi, strutture per stare all&apos;aperto davvero.
             </p>
             <StaggerContainer>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -203,7 +271,7 @@ export function ServiziClient() {
               </h2>
             </div>
             <p className="font-body text-forest-800/70 max-w-2xl mb-8">
-              Servizi specialistici: dalla scelta botanica mirata ai trattamenti fitosanitari biologici, fino all&apos;ingegneria naturalistica.
+              Dalla scelta botanica ai trattamenti fitosanitari biologici, fino all&apos;ingegneria naturalistica: competenze che raramente si trovano sotto lo stesso tetto.
             </p>
             <StaggerContainer>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -226,10 +294,50 @@ export function ServiziClient() {
         </div>
       </section>
 
-      {/* Quiz CTA */}
+      <section className="py-10 lg:py-16 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid gap-6 lg:grid-cols-2">
+          {extraServiceBoxes.map((box) => (
+            <div
+              key={box.title}
+              className="rounded-[30px] border border-paper-200 bg-white p-8 shadow-soft"
+            >
+              <p className="font-display text-sm italic text-leaf-600">{box.title}</p>
+              <h3 className="mt-3 font-display text-2xl text-forest-950">
+                {box.subtitle}
+              </h3>
+              <p className="mt-2 font-sans text-xs uppercase tracking-[0.18em] text-leaf-700">
+                {box.kicker}
+              </p>
+              <p className="mt-5 font-body leading-relaxed text-forest-800/80">
+                {box.text}
+              </p>
+              <p className="mt-6 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-leaf-700">
+                {box.cta}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="py-12 px-6">
-        <div className="max-w-4xl mx-auto">
-          <QuizCTA variant="inline" />
+        <div className="max-w-4xl mx-auto rounded-[32px] border border-paper-200 bg-white p-8 md:p-10 shadow-soft text-center">
+          <Badge className="mb-4 bg-leaf-50 text-leaf-700 border border-leaf-200">
+            Check-up Sostenibile
+          </Badge>
+          <h3 className="font-display text-2xl md:text-3xl text-forest-950">
+            Non sai quale servizio ti serve? Parti dal Check-up Sostenibile.
+          </h3>
+          <p className="mt-4 font-body text-lg text-forest-800/75">
+            In 60–90 minuti ti lasciamo 3 priorità, 3 errori da evitare e un piano in step.
+          </p>
+          <div className="mt-8">
+            <Link href="/contatti">
+              <Button size="lg" className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8 py-4 text-lg">
+                Prenota il Check-up
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

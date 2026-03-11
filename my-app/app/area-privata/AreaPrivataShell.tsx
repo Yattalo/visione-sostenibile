@@ -9,8 +9,6 @@ import {
   LayoutDashboard,
   FolderKanban,
   FileText,
-  Files,
-  UserCircle,
   Menu,
   X,
   ExternalLink,
@@ -23,8 +21,6 @@ const navItems = [
   { href: "/area-privata", label: "Dashboard", icon: LayoutDashboard },
   { href: "/area-privata/progetti", label: "I Miei Progetti", icon: FolderKanban },
   { href: "/area-privata/preventivi", label: "Preventivi", icon: FileText },
-  { href: "/area-privata/documenti", label: "Documenti", icon: Files },
-  { href: "/area-privata/profilo", label: "Profilo", icon: UserCircle },
 ];
 
 interface AreaPrivataShellProps {

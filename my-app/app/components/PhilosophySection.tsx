@@ -38,6 +38,7 @@ interface ElementConfig {
   icon: LucideIcon;
   title: string;
   description: string;
+  quote: string;
   bgGradient: string;
   accentColor: string;
   glowColor: string;
@@ -49,7 +50,9 @@ const ELEMENTS: ElementConfig[] = [
     icon: Flower2,
     title: "Terra",
     description:
-      "Rigeneriamo il suolo con pratiche biodinamiche che aumentano fertilita, vita microbica e stabilita.",
+      "Rigeneriamo il suolo con pratiche biodinamiche che aumentano fertilità, vita microbica e stabilità.",
+    quote:
+      "“Tutta la vita vegetale inizia dalla terra. Suolo vivo = piante sane. Il nostro obiettivo è mantenere viva la microvita fungino/batterica del terreno.” Andrea Giordano",
     bgGradient:
       "linear-gradient(135deg, #1a1a1a 0%, #351716 40%, #1f1f1f 100%)",
     accentColor: "#cb6a56",
@@ -61,6 +64,8 @@ const ELEMENTS: ElementConfig[] = [
     title: "Acqua",
     description:
       "Gestione idrica efficiente per ridurre sprechi e mantenere il verde sano durante tutto l'anno.",
+    quote:
+      "“L’acqua è la prima fonte di vita, se gestita correttamente, diversamente si potrebbe trasformare in uno strumento di morte per le nostre piante. Poca acqua = disidratazione, troppa acqua = terreno fertile per funghi patogeni.” Andrea Giordano",
     bgGradient:
       "linear-gradient(135deg, #0f0f0f 0%, #1a2112 40%, #1a1a1a 100%)",
     accentColor: "#95a668",
@@ -72,6 +77,8 @@ const ELEMENTS: ElementConfig[] = [
     title: "Aria",
     description:
       "Progettiamo spazi aperti e vitali che migliorano il microclima e il benessere delle persone.",
+    quote:
+      "“Lo sapevi che le piante devono proprio all’aria oltre il 70% del loro benessere? Le piante assorbono anidride carbonica, ecco perché siamo attenti nel metterle a dimora mantenendo le giuste distanze tra loro. Proprio per far sì che l’aria possa circolare liberamente.” Andrea Giordano",
     bgGradient:
       "linear-gradient(135deg, #1a1a1a 0%, #262626 40%, #1f1f1f 100%)",
     accentColor: "#e4d4b8",
@@ -83,6 +90,8 @@ const ELEMENTS: ElementConfig[] = [
     title: "Luce",
     description:
       "Luce, energia e cicli naturali guidano ogni scelta progettuale per un equilibrio duraturo.",
+    quote:
+      "“Senza la luce tutto muore. La luce costituisce la fonte di energia primaria per la fotosintesi clorofilliana e senza la luce la magia non avviene.” Andrea Giordano",
     bgGradient:
       "linear-gradient(135deg, #1f1f1f 0%, #32281a 40%, #1a1a1a 100%)",
     accentColor: "#d98876",
@@ -186,31 +195,28 @@ export function PhilosophySection() {
             aria-hidden="true"
           />
 
-          {/* ▸ Video layer — only render active + adjacent for perf */}
-          {ELEMENTS.map((el, i) => {
-            const shouldLoad = Math.abs(i - activeIndex) <= 1 || (activeIndex === 0 && i === 3) || (activeIndex === 3 && i === 0);
-            return (
-              <motion.div
-                key={`vid-${el.title}`}
-                className="absolute inset-0"
-                animate={{ opacity: i === activeIndex ? 0.15 : 0 }}
-                transition={{ duration: 1.2 }}
-              >
-                {shouldLoad && (
-                  <video
-                    autoPlay loop muted playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover"
-                  >
-                    <source
-                      src={`/videos/element-${el.title.toLowerCase()}.mp4`}
-                      type="video/mp4"
-                    />
-                  </video>
-                )}
-              </motion.div>
-            );
-          })}
+          {/* ▸ Video layer — only render active element to avoid Chrome WebMediaPlayer limit */}
+          {ELEMENTS.map((el, i) => (
+            <motion.div
+              key={`vid-${el.title}`}
+              className="absolute inset-0"
+              animate={{ opacity: i === activeIndex ? 0.15 : 0 }}
+              transition={{ duration: 1.2 }}
+            >
+              {i === activeIndex && (
+                <video
+                  autoPlay loop muted playsInline
+                  preload="none"
+                  className="w-full h-full object-cover"
+                >
+                  <source
+                    src={`/videos/element-${el.title.toLowerCase()}.mp4`}
+                    type="video/mp4"
+                  />
+                </video>
+              )}
+            </motion.div>
+          ))}
 
           {/* ▸ Content for each element */}
           {ELEMENTS.map((el, i) => {
@@ -302,6 +308,21 @@ export function PhilosophySection() {
                         }}
                       >
                         {el.description}
+                      </motion.p>
+
+                      <motion.p
+                        className="relative mt-6 max-w-2xl font-body text-base italic leading-relaxed text-paper-200/85"
+                        animate={{
+                          opacity: show ? 1 : 0,
+                          y: show ? 0 : 30,
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          delay: show ? 0.55 : 0,
+                          ease: EASE,
+                        }}
+                      >
+                        {el.quote}
                       </motion.p>
                     </div>
 

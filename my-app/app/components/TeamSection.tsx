@@ -42,17 +42,20 @@ export function TeamSection() {
         <SlideUp>
           <div className="text-center mb-16">
             <span className="font-display italic text-leaf-600 text-lg">
-              Il nostro team
+              Visione Sostenibile Team
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-forest-950 mt-4 leading-tight">
-              Professionisti al tuo
-              <span className="block italic text-leaf-700">servizio</span>
+              Più squadre, un solo
+              <span className="block italic text-leaf-700">standard</span>
             </h2>
-            <p className="mt-6 text-lg text-forest-800 max-w-2xl mx-auto">
-              La nostra scelta è darvi un servizio chiavi in mano, collaborando con
-              un&apos;équipe multidisciplinare di professionisti, capaci di soddisfare
-              tutti i fabbisogni del vostro giardino.
-            </p>
+            <div className="mt-6 max-w-3xl mx-auto space-y-4 text-lg text-forest-800">
+              <p>
+                Il progetto Visione Sostenibile esiste grazie al team che lo compone: giardinieri specializzati e professionisti che lavorano insieme come fossero un’orchestra. Ognuno di loro indispensabile per offrire un servizio completo di altissima qualità: progettazione, realizzazione e manutenzione non sono fasi separate, bensì un unico percorso.
+              </p>
+              <p>
+                Ci piace lavorare bene, non in fretta. Per questo mettiamo in campo le competenze giuste al momento giusto: chi progetta ascolta, chi realizza esegue con precisione il progetto, chi mantiene protegge il risultato nel tempo.
+              </p>
+            </div>
           </div>
         </SlideUp>
 

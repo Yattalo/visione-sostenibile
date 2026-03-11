@@ -46,6 +46,31 @@ const featuredSlugs = [
   "manutenzioni",
 ];
 
+const homeManifesto = [
+  "Visione Sostenibile nasce dall’ascolto: delle persone, dei luoghi, della natura che cambia.",
+  "Crediamo in giardini belli, sì — ma soprattutto stabili, gestibili e capaci di durare. Ogni scelta ha un motivo: spieghiamo il perché, valutiamo alternative, costruiamo consapevolezza.",
+  "Lavoriamo con un’unica regia e competenze verticali: un referente, una squadra su misura. Perché il futuro del verde non è una moda: è cura, metodo e responsabilità.",
+];
+
+const homeSystemBoxes = [
+  {
+    title: "COME OPERIAMO",
+    rows: [
+      "Sopralluogo, Analisi & obiettivi — Partiamo da uso dello spazio, esposizione, suolo, disponibilità idrica, vincoli, budget e tempi. Obiettivo: capire cosa serve davvero (e cosa no).",
+      "Progetto + piano lavori — Soluzioni sostenibili e realizzabili, con priorità e fasi. Traduciamo le esigenze in scelte concrete: materiali, specie, impianti e fasi operative. Così sai cosa succede, quando e perché.",
+      "Direzione & realizzazione — Visione Sostenibile coordina le attività e le competenze degli specialisti lungo tutto il percorso. E poi restiamo: con una manutenzione programmata il verde non si trasforma in un “problema”.",
+    ],
+  },
+  {
+    title: "PROGETTIAMO SISTEMI",
+    rows: [
+      "A. Verde sostenibile (core) — Progettazione • Realizzazione • Manutenzione programmata e gestione stagionale • Rigenerazione suolo • Irrigazione smart • Potature/Tree climbing",
+      "B. Outdoor living (comfort) — Pavimentazioni e percorsi • Illuminazione esterna • Arredi esterni e finiture • Pergole/strutture leggere (in partnership)",
+      "C. Acqua & benessere (premium) — Laghetti/punti acqua/integrazioni paesaggistiche • Piscine (partner selezionati + coordinamento completo con integrazione estetica nel progetto)",
+    ],
+  },
+];
+
 export default function HomePage() {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -100,12 +125,22 @@ export default function HomePage() {
         {/* Background with video support */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50 z-10" />
+          {/* Poster image — fast LCP element */}
+          <Image
+            src="/images/hero-poster.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60"
+          />
+          {/* Video loads lazily on top of poster */}
           <video
             autoPlay
             loop
             muted
             playsInline
-            preload="auto"
+            preload="none"
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           >
@@ -129,10 +164,10 @@ export default function HomePage() {
             className="max-w-3xl"
           >
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light uppercase tracking-wide leading-tight mb-6">
-              GIARDINI CHE{" "}
-              <em className="italic font-normal text-leaf-400">Ispirano</em>
+              IL TUO GIARDINO{" "}
+              <em className="italic font-normal text-leaf-400">Sostenibile:</em>
               <span className="block text-paper-200 mt-2">
-                VISIONE, PROGETTO, REALT&Agrave;
+                VISIONE, PROGETTO, REALTÀ
               </span>
             </h1>
 
@@ -172,6 +207,23 @@ export default function HomePage() {
         >
           <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
         </motion.div>
+      </section>
+
+      <section className="bg-paper-50 py-20 md:py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="rounded-[34px] border border-paper-200 bg-white px-8 py-10 md:px-12 md:py-12 shadow-soft">
+            <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-5 block">
+              Visione Sostenibile
+            </span>
+            <div className="space-y-5 text-forest-900">
+              {homeManifesto.map((paragraph) => (
+                <p key={paragraph} className="font-body text-lg leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Philosophy -- Cinematic sticky scroll */}
@@ -232,17 +284,17 @@ export default function HomePage() {
               {
                 title: "Biodinamica, scelta tecnica e sostenibile",
                 subtitle: "Il suolo come punto di partenza",
-                description: "Un approccio pratico che mette al centro suolo, piante e microclima. Significa osservare prima di intervenire per fare scelte pi\u00f9 mirate: meno sprechi, pi\u00f9 equilibrio, risultati pi\u00f9 stabili nel tempo.",
+                description: "Non seguiamo una moda, ma un sottile. Un approccio pratico che mette al centro suolo, piante e microclima. Significa osservare prima di intervenire per fare scelte più mirate: meno sprechi, più equilibrio, risultati più stabili nel tempo. Un giardino sostenibile si costruisce dalla base, non dalla superficie.",
               },
               {
                 title: "Unico referente, squadra su misura",
                 subtitle: "Ottimizzazione tempi e flusso del lavoro",
-                description: "Andrea \u00e8 il tuo riferimento e coordina un team modulare con competenze verticali. Entrano in campo solo i professionisti necessari, nel momento giusto, cos\u00ec si evitano incastri e incoerenze.",
+                description: "Il nostro punto di forza è l’unione e non la separazione. Visione Sostenibile lavora come contractor del verde: Andrea è il tuo riferimento e coordina un team modulare con competenze verticali. Entrano in campo solo i professionisti necessari, nel momento giusto (irrigazione, potature tecniche, outdoor living, piscine), così si evitano incastri, rimbalzi e incoerenze.",
               },
               {
                 title: "Dall\u2019idea alla cura nel tempo",
                 subtitle: "Progettiamo, realizziamo, manteniamo",
-                description: "Copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Un giardino va avviato, stabilizzato e gestito con continuit\u00e0. Meno interventi d\u2019emergenza, maggior durata.",
+                description: "Garantiamo una copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Perché un giardino non è “lavoro finito” quando lo si consegna: va avviato, stabilizzato e gestito con continuità. Il risultato? Meno interventi d'emergenza, maggior durata, piena e serena vivibilità del tuo spazio verde.",
               },
             ].map((card, index) => (
               <motion.div
@@ -275,18 +327,25 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="bg-forest-950 rounded-[30px] p-10 md:p-14 text-center mb-16"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16"
           >
-            <h3 className="text-stitch-heading text-2xl md:text-3xl text-paper-50 mb-6">
-              BELLO. <em className="italic font-normal text-leaf-400">Sostenibile.</em> GESTIBILE.
-            </h3>
-            <p className="font-body text-paper-300 max-w-2xl mx-auto mb-4">
-              Un referente, un metodo, una squadra su misura.<br />
-              Ogni scelta condivisa, ogni risultato progettato per durare.
-            </p>
-            <p className="font-body text-sm text-leaf-400">
-              Un giardino che respira con te.
-            </p>
+            {homeSystemBoxes.map((box) => (
+              <div
+                key={box.title}
+                className="rounded-[30px] bg-forest-950 p-8 md:p-10 text-left"
+              >
+                <h3 className="text-stitch-heading text-2xl text-paper-50 mb-6">
+                  {box.title}
+                </h3>
+                <div className="space-y-4">
+                  {box.rows.map((row) => (
+                    <p key={row} className="font-body text-paper-300 leading-relaxed">
+                      {row}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
           </motion.div>
 
           {/* Card grid */}
@@ -377,7 +436,8 @@ export default function HomePage() {
         variant="featured"
         className="bg-white"
         title="Ti ascoltiamo davvero"
-        subtitle="Ogni feedback \u00e8 una bussola: ci aiuta a migliorare il metodo, ampliare competenze e coltivare collaborazioni che rendono i risultati pi\u00f9 solidi nel tempo."
+        subtitleHeading="Costruiamo la fiducia con responsabilità"
+        subtitle="Ogni feedback è una bussola: ci aiuta a migliorare il metodo, ampliare competenze e coltiviamo collaborazioni che rendono i risultati più solidi nel tempo. Le vostre recensioni ci permettono di lavorare meglio, correggendo, affinando, innovando. Perché uno spazio verde cambia con chi lo vive, e noi cambiamo con lui."
       />
 
       {/* Featured Project / CTA */}
@@ -427,7 +487,7 @@ export default function HomePage() {
                 <span className="block text-forest-950">COMUNI</span>
               </h2>
               <p className="font-body text-lg text-forest-800 leading-relaxed mb-8">
-                Lavori diversi per scala e obiettivi: progettazione, realizzazione e manutenzione sostenibile. Tutti poggiano sulla stessa base: decisioni precise basate su analisi e ascolto.
+                Questi sono alcuni dei nostri lavori, diversi per scala e obiettivi: progettazione, realizzazione e manutenzione sostenibile. C’è chi voleva più ombra, chi meno manutenzione, chi un giardino da vivere con i bambini, chi un esterno che valorizzasse la casa. Tutti questi progetti poggiano sulla stessa base: decisioni precise basate su analisi e ascolto.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -453,7 +513,14 @@ export default function HomePage() {
       {/* Contact CTA */}
       <section className="py-24 bg-forest-950 text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30')] bg-cover bg-center opacity-10" />
+          <Image
+            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-10"
+            loading="lazy"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
 
@@ -464,9 +531,8 @@ export default function HomePage() {
           className="relative z-10 max-w-4xl mx-auto text-center px-6"
         >
           <h2 className="text-stitch-heading text-4xl md:text-5xl mb-6">
-            PARLIAMONE:{" "}
-            <em className="italic font-normal text-leaf-400">Chiarezza</em>
-            <span className="block text-paper-50">SU COSA SERVE DAVVERO</span>
+            PARLIAMONE: TI DICIAMO COSA
+            <span className="block text-paper-50">SERVE DAVVERO</span>
           </h2>
           <p className="font-body text-lg text-paper-300 mb-10 max-w-2xl mx-auto">
             Che tu stia partendo da zero o che tu voglia riqualificare un giardino esistente, ti aiutiamo a fare chiarezza su priorit&agrave;, fasi e investimenti.

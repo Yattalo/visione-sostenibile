@@ -40,39 +40,37 @@ export const metadata: Metadata = {
 const pillars = [
   {
     icon: Leaf,
-    title: "Sostenibilita",
-    subtitle: "In ogni progetto",
+    title: "Sostenibile",
+    subtitle: "NON È UNA MODA",
     description:
-      "Un giardino sostenibile riduce sprechi e interventi inutili, gestisce meglio l\u2019acqua, favorisce la biodiversita e dura nel tempo con costi controllabili. Non e una moda: e una strategia.",
+      "È una strategia. Un giardino sostenibile è progettato per ridurre sprechi e interventi inutili, gestire meglio l'acqua, favorire equilibrio e biodiversità, durare nel tempo con costi più controllabili. La sostenibilità, però, è anche gestione. Interventi mirati, prevenzione, calendario stagionale: il verde resta un valore, non si trasforma in un problema.",
   },
   {
     icon: TreePine,
-    title: "Biodinamica",
-    subtitle: "Approccio naturale",
+    title: "Approccio naturale",
+    subtitle: "IN CONDIZIONI NORMALI",
     description:
-      "Nessun prodotto fitosanitario. L\u2019approccio biodinamico crea terreni ricchi di vita che favoriscono la crescita naturale delle piante, rispettando i cicli della natura.",
+      "Nessun prodotto fitosanitario perché l'approccio biodinamico parte dal presupposto che il terreno sia un organo vivente che, in una condizione di massima salute, deve risultare soffice, fertile e ricco di microrganismi e sostanza organica. In un terreno ricco di vita viene favorita la crescita naturale delle piante. Laddove per cause maggiori il terreno necessiti di un intervento più invasivo, ci avvaliamo di agronomi di fiducia che mettono a disposizione la propria esperienza professionale affinché il trattamento sia regolamentato e sicuro.",
   },
   {
     icon: Award,
-    title: "Qualita",
-    subtitle: "Materiali ed esecuzione",
+    title: "Visione armonica",
+    subtitle: "IN CONDIZIONI NORMALI",
     description:
-      "Un solo interlocutore per ottimizzare tempi, scelte e budget. Niente rimbalzi tra fornitori: coordinamento puntuale delle competenze verticali coinvolte nel progetto.",
+      "Un solo interlocutore per ottimizzare tempi, scelte e budget: azzeramento del problema rimbalzi tra i fornitori, potenziamento della comunicazione interna organizzata, coordinamento puntuale delle diverse competenze verticali coinvolte nel progetto. Ogni imprevisto viene preso in carico con la massima tempestività e con l’esperto che può risolvere davvero il problema. Il nostro obiettivo è far fede all’impegno che nulla è mai lasciato al caso, è il nostro modo per dimostrare la cura e la responsabilità con cui lavoriamo.",
   },
   {
     icon: Heart,
     title: "Passione",
-    subtitle: "Per gli spazi verdi",
+    subtitle: "PER GLI SPAZI VERDI",
     description:
-      "Formazione continua, confronto con specialisti e attenzione ai dettagli. Per Andrea un giardino non e un lavoro da finire: e un equilibrio da costruire, con cura e responsabilita.",
+      "Formazione continua, confronto con specialisti e attenzione ai dettagli. Per Andrea un giardino non è un lavoro da finire: è un equilibrio da costruire, con cura e responsabilità.",
   },
 ];
 
 const founderBio = [
-  "Andrea e il volto di Visione Sostenibile: appassionato, curioso, in continua ricerca.",
-  "Lavora in ascolto: delle persone, degli spazi, e di cio che la natura sta dicendo oggi \u2014 anche quando e scomodo.",
-  "Ama raccontare cosa fa e come lo fa, ma soprattutto perche sceglie una soluzione e non un\u2019altra: perche per Andrea un giardino non e un lavoro da finire, e un equilibrio da costruire.",
-  "Coordina un team di competenze verticali e partnership selezionate, e nel frattempo continua a formarsi, confrontarsi e tenere corsi dal vivo: perche il futuro del verde \u2014 tra clima che cambia e risorse da gestire meglio \u2014 si costruisce con scelte consapevoli, non con scorciatoie.",
+  "“Una ventina di anni fa ho iniziato a capire che qualcosa nel clima non funzionava più come doveva, che i cibi di cui ci nutriamo quotidianamente non avevano più le caratteristiche nutrizionali di qualche decennio prima. Ho iniziato a preoccuparmi dello sfruttamento del suolo, della non corretta gestione delle lavorazioni e dello spropositato utilizzo di prodotti fito sanitari che causano la sterilità dei terreni e l’avanzamento della desertificazione. Ho intrapreso così la strada della sostenibilità, un cammino lungo che ancora oggi non smette di insegnarmi sempre qualcosa e di stupirmi.”",
+  "Visione Sostenibile lavora in ascolto: delle persone, degli spazi e di ciò che la natura sta dicendo oggi.",
 ];
 
 const stats = [
@@ -85,23 +83,23 @@ const stats = [
 const outcomes = [
   {
     icon: Droplets,
-    label: "Consumo idrico ridotto",
-    detail: "Irrigazione efficiente e piante adatte al territorio",
+    label: "Equilibrio degli elementi",
+    detail: "Si basa sull'armonizzazione dei quattro elementi aristotelici (terra, acqua, aria, fuoco), calibrando irrigazione, temperatura, illuminazione e fertilità del suolo per ottimizzare la crescita delle piante.",
   },
   {
     icon: Bug,
-    label: "Zero rischio intossicazione",
-    detail: "Nessun prodotto fitosanitario, sicuro per famiglie e animali",
+    label: "Calendario lunare",
+    detail: "Le attività come semine, trapianti e potature seguono un calendario biodinamico influenzato da fasi lunari e posizioni astrali, adattandosi annualmente ai movimenti celesti per massimizzare i risultati.",
   },
   {
     icon: Flower2,
-    label: "Bassa manutenzione",
-    detail: "Progetti pensati per durare e richiedere meno interventi",
+    label: "Preparati specifici",
+    detail: "Si utilizzano preparati naturali (es. cornoletame o cornosilice) per vitalizzare il suolo e le piante, rigenerando la fertilità senza chimici e promuovendo un terreno come organismo vivente.",
   },
   {
     icon: Sparkles,
-    label: "Valore che cresce",
-    detail: "Un giardino biodinamico migliora nel tempo, non degrada",
+    label: "Promozione biodiversità",
+    detail: "Favorisce policolture, rotazioni, consociazioni e aree rifugio (almeno 10% del terreno), vietando pesticidi sintetici e creando un ecosistema autosufficiente con piante, animali e insetti utili.",
   },
 ];
 
@@ -138,14 +136,11 @@ export default function ChiSiamoPage() {
               Dal {siteConfig.foundingDate} a {siteConfig.address.city}
             </Badge>
             <h1 className="text-stitch-heading text-4xl md:text-6xl lg:text-7xl text-white mb-6 text-balance">
-              CHI <em className="italic font-normal text-leaf-400">Siamo</em>
-              <span className="block text-paper-200 mt-2">
-                il giardiniere che ti spiega i perche
-              </span>
+              IL GIARDINIERE CHE TI SPIEGA I
+              <span className="block text-paper-200 mt-2">PERCHÉ</span>
             </h1>
             <p className="font-body text-lg md:text-xl text-paper-300 max-w-3xl mx-auto leading-relaxed">
-              Un referente unico che coordina competenze verticali, metodo
-              biodinamico e partnership selezionate per risultati durevoli.
+              Visione Sostenibile nasce dalla mente appassionata, curiosa, in continua ricerca di Andrea Giordano che, grazie alle partnership consolidate nel tempo, si presenta come unico referente che coordina le diverse competenze verticali dei membri del team.
             </p>
           </SlideUp>
         </div>
@@ -174,14 +169,11 @@ export default function ChiSiamoPage() {
             </SlideUp>
 
             <SlideUp delay={0.2}>
-              <Badge variant="primary" className="mb-4">
-                Fondatore
-              </Badge>
               <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mt-2 mb-4">
-                {siteConfig.founder}
+                ANDREA GIORDANO
               </h2>
               <p className="font-display italic text-leaf-700 text-xl mb-8">
-                Giardiniere biodinamico a {siteConfig.address.city}
+                Passione, Ricerca, Visione
               </p>
               <div className="space-y-5 font-body text-forest-800">
                 {founderBio.map((paragraph, index) => (
@@ -189,14 +181,6 @@ export default function ChiSiamoPage() {
                     {paragraph}
                   </p>
                 ))}
-              </div>
-              <div className="flex flex-wrap gap-3 mt-8">
-                <Badge variant="biodynamic" className="px-4 py-2">
-                  20+ Anni di Biodinamica
-                </Badge>
-                <Badge variant="eco" className="px-4 py-2">
-                  Zero Chimica
-                </Badge>
               </div>
             </SlideUp>
           </div>
@@ -224,38 +208,27 @@ export default function ChiSiamoPage() {
               className="mb-8 bg-white/5 border-white/10 text-leaf-300"
             >
               <TreePine className="w-3 h-3 mr-1.5 inline" />
-              La nostra storia
+              Visione
             </Badge>
             <h2 className="text-stitch-heading text-3xl md:text-5xl text-paper-50 mb-8">
-              UN GIARDINO NON E UN LAVORO DA{" "}
-              <em className="italic font-normal text-leaf-400">Finire</em>
-              <span className="block mt-2">
-                E UN EQUILIBRIO DA COSTRUIRE
-              </span>
+              VISIONE SOSTENIBILE NASCE DALL’
+              <em className="italic font-normal text-leaf-400">Ascolto</em>
             </h2>
           </SlideUp>
 
           <SlideUp delay={0.15}>
             <div className="font-body text-lg md:text-xl text-paper-300/90 leading-relaxed max-w-3xl mx-auto space-y-6">
               <p>
-                Visione Sostenibile nasce dall&apos;ascolto: delle persone, dei
-                luoghi, della natura che cambia. Fondata da{" "}
-                <strong className="text-paper-100">{siteConfig.founder}</strong>{" "}
-                a {siteConfig.address.city}, e cresciuta intorno a
-                un&apos;idea semplice: il verde che funziona davvero e quello
-                che rispetta i cicli naturali.
+                Visione Sostenibile nasce dall&apos;ascolto delle persone, dei luoghi, della natura che cambia, ed è cresciuta attorno a un&apos;idea semplice: il verde che funziona davvero e quello che rispetta i cicli naturali.
               </p>
               <p>
-                Il metodo biodinamico non e solo una tecnica: e una visione.
-                Significa costruire terreni vivi, scegliere piante adatte al
-                territorio, eliminare la chimica e progettare giardini che
-                migliorano con il tempo invece di degradare.
+                Il metodo biodinamico si impegna a costruire terreni vivi, scegliere piante adatte al territorio, eliminare la chimica e progettare giardini che migliorano con il tempo in modo naturale.
               </p>
               <p>
-                Oggi collaboriamo con un&apos;equipe multidisciplinare di
-                specialisti \u2014 dal tree climbing alla fitoiatria,
-                dall&apos;illuminazione all&apos;ingegneria naturalistica \u2014
-                per offrire un servizio chiavi in mano con un unico referente.
+                Visione Sostenibile è un team multidisciplinare di specialisti che lavorano in sinergia per offrire un servizio completo e sicuro da tutti i punti di vista.
+              </p>
+              <p>
+                Inoltre, grazie alla direzione di un referente unico si ottimizzano tempi, costi e risultati.
               </p>
             </div>
           </SlideUp>
@@ -286,15 +259,14 @@ export default function ChiSiamoPage() {
           <SlideUp>
             <div className="text-center mb-20">
               <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-forest-800/60 mb-4 block">
-                I nostri valori
+                Cosa ci guida
               </span>
               <h2 className="text-stitch-heading text-3xl md:text-4xl lg:text-5xl text-forest-950 mt-4">
                 QUATTRO PILASTRI PER UN VERDE CHE{" "}
-                <em className="italic font-normal text-leaf-600">Dura</em>
+                <em className="italic font-normal text-leaf-600">Vive</em>
               </h2>
               <p className="mt-6 text-lg text-forest-800 max-w-2xl mx-auto font-body">
-                Ogni progetto Visione Sostenibile si fonda su principi precisi.
-                Non slogan: metodo.
+                Il metodo di Visione Sostenibile è la garanzia migliore
               </p>
             </div>
           </SlideUp>
@@ -342,13 +314,13 @@ export default function ChiSiamoPage() {
                 <em className="italic font-normal text-leaf-600">Biodinamico</em>
               </h2>
               <p className="font-body text-lg text-forest-800 leading-relaxed mb-4">
-                Non facciamo giardini Instagram. Facciamo giardini che superano
-                agosto, che richiedono meno manutenzione e che diventano piu
-                belli anno dopo anno.
+                Scegliere un approccio biodinamico per la gestione del giardino o dell’orto implica una visione olistica che va oltre il biologico, integrando ritmi cosmici e naturali per un ecosistema più equilibrato.
               </p>
               <p className="font-body text-lg text-forest-800 leading-relaxed">
-                Scelte spiegate, un referente unico, una squadra su misura: il
-                tuo giardino e un investimento che cresce.
+                La bellezza di un giardino o orto biodinamico risiede nella sua armonia naturale: siepi, fiori e consociazioni attirano insetti utili generando un ambiente colorato, resiliente e autosufficiente privo di chimica.
+              </p>
+              <p className="font-body text-lg text-forest-800 leading-relaxed">
+                Un orto biodinamico produce piante sane, nutrienti e gustose con suolo vivo popolato da microorganismi.
               </p>
             </SlideUp>
 
@@ -400,17 +372,13 @@ export default function ChiSiamoPage() {
             </h2>
             <div className="font-body text-lg text-forest-800 leading-relaxed max-w-2xl mx-auto space-y-4 mb-10">
               <p>
-                Crediamo in giardini belli, si \u2014 ma soprattutto{" "}
-                <strong>stabili, gestibili e capaci di durare</strong>.
+                Giardini belli, stabili, gestibili e capaci di durare.
               </p>
               <p>
-                Ogni scelta ha un motivo:{" "}
-                <strong>spieghiamo il perche</strong>, valutiamo alternative,
-                costruiamo consapevolezza.
+                Ogni scelta parte da presupposti di salute del suolo e delle piante che lo vivono. Ti spieghiamo il perché e valutiamo insieme le alternative possibili.
               </p>
               <p>
-                Perche il futuro del verde non e una moda: e{" "}
-                <strong>cura, metodo e responsabilita</strong>.
+                Il futuro del verde, per noi, è cura, metodo e responsabilità.
               </p>
             </div>
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Handshake,
   Leaf,
@@ -170,7 +171,14 @@ export default function CollaboraClient() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-forest-950 pt-32 pb-24 lg:pt-40 lg:pb-32">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=40')] bg-cover bg-center opacity-40" />
+          <Image
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=40"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-40"
+          />
           <div className="absolute inset-0 bg-gradient-to-br from-forest-950/75 via-forest-900/55 to-forest-950/65" />
         </div>
 
@@ -588,7 +596,14 @@ export default function CollaboraClient() {
       {/* Bottom CTA */}
       <section className="py-24 lg:py-32 bg-forest-950 text-paper-50 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30')] bg-cover bg-center opacity-10" />
+          <Image
+            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-10"
+            loading="lazy"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
         <div className="absolute top-1/3 -left-20 w-72 h-72 bg-sun-400/10 rounded-full blur-3xl" />

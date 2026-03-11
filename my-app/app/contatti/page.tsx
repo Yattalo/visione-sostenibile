@@ -20,6 +20,7 @@ import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { Input, Textarea } from "../components/ui/Input";
+import Image from "next/image";
 import { SlideUp, FadeIn } from "../components/animations";
 import { siteConfig } from "../lib/site-config";
 
@@ -231,7 +232,15 @@ export default function ContattiPage() {
       {/* Hero Section */}
       <section className="relative flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=1200&q=40')] bg-cover bg-center">
+          <div className="absolute inset-0">
+            <Image
+              src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=1200&q=40"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-br from-forest-950/70 via-forest-900/60 to-forest-950/65" />
           </div>
           {/* Decorative organic blobs */}
@@ -663,7 +672,14 @@ export default function ContattiPage() {
       {/* Bottom CTA */}
       <section className="py-24 lg:py-32 bg-forest-950 text-paper-50 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30')] bg-cover bg-center opacity-10" />
+          <Image
+            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=30"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-10"
+            loading="lazy"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-900/90 to-forest-950" />
         </div>
         <div className="absolute top-1/3 -left-20 w-72 h-72 bg-sun-400/10 rounded-full blur-3xl" />
