@@ -47,30 +47,41 @@ const DEFAULT_TEMPLATES = [
     key: "transactional-quiz-admin",
     name: "Quiz completato - Admin",
     category: "transactional",
-    subject: "[Visione Sostenibile] Quiz completato da {{name}}",
+    subject: "[VS] Nuovo lead: {{name}} — profilo {{resultProfile}}",
     html: `
-<h2>Nuovo lead da quiz</h2>
-<p><strong>Nome:</strong> {{name}}</p>
-<p><strong>Email:</strong> {{email}}</p>
-<p><strong>Telefono:</strong> {{phone}}</p>
-<p><strong>Profilo:</strong> {{resultProfile}}</p>
-<p><strong>Scorecard:</strong> {{scorecardUrl}}</p>
+<h2 style="color:#0B1E0E;">Nuovo lead dal quiz</h2>
+<table style="width:100%;border-collapse:collapse;margin:16px 0;">
+  <tr><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-weight:bold;width:120px;">Nome</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;">{{name}}</td></tr>
+  <tr><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-weight:bold;">Email</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;"><a href="mailto:{{email}}">{{email}}</a></td></tr>
+  <tr><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-weight:bold;">Telefono</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;">{{phone}}</td></tr>
+  <tr><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-weight:bold;">Profilo</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;"><strong style="color:#22582C;">{{resultProfile}}</strong></td></tr>
+</table>
+{{photoSection}}
+<p style="margin-top:16px;"><a href="{{scorecardUrl}}" style="display:inline-block;padding:10px 20px;background:#22582C;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">Vedi Scorecard</a></p>
+<p style="font-size:12px;color:#6b7280;margin-top:16px;">Rispondi entro 48h con il rendering personalizzato.</p>
 `,
-    text: "Quiz completato da {{name}} ({{email}}), profilo {{resultProfile}}",
+    text: "Nuovo lead: {{name}} ({{email}}), tel: {{phone}}, profilo {{resultProfile}}. Scorecard: {{scorecardUrl}}",
     isSystem: true,
   },
   {
     key: "transactional-quiz-customer",
     name: "Conferma quiz - Cliente",
     category: "transactional",
-    subject: "La tua scorecard verde e pronta",
+    subject: "{{name}}, la tua scorecard verde e pronta",
     html: `
-<h2>Ciao {{name}}, ecco il tuo risultato.</h2>
-<p>Il tuo profilo e <strong>{{resultProfile}}</strong>.</p>
-<p>Apri la tua scorecard personale:</p>
-<p><a href="{{scorecardUrl}}">{{scorecardUrl}}</a></p>
+<h2 style="color:#0B1E0E;">Ciao {{name}},</h2>
+<p>Grazie per aver completato il quiz. Il tuo profilo verde e <strong style="color:#22582C;">{{resultProfile}}</strong>.</p>
+<p>Abbiamo preparato una scorecard personalizzata con:</p>
+<ul>
+  <li>I tuoi punti di forza</li>
+  <li>Le priorita su cui intervenire</li>
+  <li>I servizi consigliati per il tuo spazio verde</li>
+</ul>
+<p style="margin-top:16px;"><a href="{{scorecardUrl}}" style="display:inline-block;padding:12px 24px;background:#EAB831;color:#0B1E0E;text-decoration:none;border-radius:8px;font-weight:bold;">Apri la tua Scorecard</a></p>
+<p style="font-size:13px;color:#6b7280;margin-top:20px;">Vuoi fare il passo successivo? Prenota un <strong>Check-up Sostenibile</strong> gratuito: analizziamo il tuo giardino e ti lasciamo 3 priorita concrete.</p>
+<p><a href="https://www.visionesostenibile.it/contatti" style="color:#22582C;font-weight:bold;">Prenota il Check-up</a></p>
 `,
-    text: "La tua scorecard: {{scorecardUrl}}",
+    text: "Ciao {{name}}, il tuo profilo e {{resultProfile}}. Apri la tua scorecard: {{scorecardUrl}}",
     isSystem: true,
   },
   {

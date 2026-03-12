@@ -326,6 +326,7 @@ export default defineSchema({
       })
     ),
     totalScore: v.number(),
+    resultProfile: v.optional(v.string()),
     scorecardId: v.string(),
     name: v.string(),
     email: v.string(),

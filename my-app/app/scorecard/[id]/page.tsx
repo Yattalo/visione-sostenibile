@@ -133,31 +133,33 @@ export default function ScorecardPage() {
     );
   }
 
-  // Determine profile from highest scoring category
-  const profileScores: Record<ProfileType, number> = {
-    Contemplativo: 0,
-    Sostenibile: 0,
-    Familiare: 0,
-    Rappresentativo: 0,
-  };
-
-  const scoreMap: Record<number, ProfileType> = {
-    1: "Contemplativo",
-    2: "Sostenibile",
-    3: "Familiare",
-    4: "Rappresentativo",
-  };
-
-  lead.quizAnswers.forEach((a) => {
-    const profile = scoreMap[a.score];
-    if (profile) {
-      profileScores[profile]++;
-    }
-  });
-
-  const resultProfile = Object.entries(profileScores).reduce((a, b) =>
-    a[1] > b[1] ? a : b
-  )[0] as ProfileType;
+  // Use stored profile if available, else recompute from scores (backward compat)
+  let resultProfile: ProfileType;
+  if (lead.resultProfile && ["Contemplativo", "Sostenibile", "Familiare", "Rappresentativo"].includes(lead.resultProfile)) {
+    resultProfile = lead.resultProfile as ProfileType;
+  } else {
+    const profileScores: Record<ProfileType, number> = {
+      Contemplativo: 0,
+      Sostenibile: 0,
+      Familiare: 0,
+      Rappresentativo: 0,
+    };
+    const scoreMap: Record<number, ProfileType> = {
+      1: "Contemplativo",
+      2: "Sostenibile",
+      3: "Familiare",
+      4: "Rappresentativo",
+    };
+    lead.quizAnswers.forEach((a) => {
+      const profile = scoreMap[a.score];
+      if (profile) {
+        profileScores[profile]++;
+      }
+    });
+    resultProfile = Object.entries(profileScores).reduce((a, b) =>
+      a[1] > b[1] ? a : b
+    )[0] as ProfileType;
+  }
 
   const profileDisplay = profileTitles[resultProfile];
   const profileIcon = profileIcons[resultProfile];

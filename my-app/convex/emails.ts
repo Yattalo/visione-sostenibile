@@ -405,10 +405,20 @@ export const sendQuizNotifications = internalAction({
     email: v.string(),
     phone: v.optional(v.string()),
     resultProfile: v.string(),
+    photoUrls: v.optional(v.array(v.string())),
   },
   handler: async (ctx, args) => {
     const adminRecipients = parseRecipients(process.env.ADMIN_NOTIFICATION_EMAIL);
     const scorecardUrl = `${siteUrl()}/scorecard/${args.scorecardId}`;
+
+    // Build photo section for admin email
+    let photoSection = "";
+    if (args.photoUrls && args.photoUrls.length > 0) {
+      const photoLinks = args.photoUrls
+        .map((url, i) => `<a href="${url}" style="color:#22582C;font-weight:bold;">Foto ${i + 1}</a>`)
+        .join(" &nbsp;|&nbsp; ");
+      photoSection = `<p><strong>Foto giardino (${args.photoUrls.length}):</strong> ${photoLinks}</p>`;
+    }
 
     const common = {
       name: args.name,
@@ -417,6 +427,7 @@ export const sendQuizNotifications = internalAction({
       resultProfile: args.resultProfile,
       scorecardId: args.scorecardId,
       scorecardUrl,
+      photoSection,
     };
 
     for (const to of adminRecipients) {

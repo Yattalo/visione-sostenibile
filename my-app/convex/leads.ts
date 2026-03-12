@@ -61,9 +61,19 @@ export const submit = mutation({
     const resultProfile = computeProfileFromScore(args.quizAnswers.map((a) => a.score));
     const identity = await ctx.auth.getUserIdentity();
     const authenticatedUser = identity ? await findUserForIdentity(ctx, identity) : null;
+    // Generate public download URLs for uploaded photos
+    const photoUrls: string[] = [];
+    if (args.photoStorageIds && args.photoStorageIds.length > 0) {
+      for (const storageId of args.photoStorageIds) {
+        const url = await ctx.storage.getUrl(storageId as never);
+        if (url) photoUrls.push(url);
+      }
+    }
+
     const leadId = await ctx.db.insert("leads", {
       ...args,
       email: normalizedEmail,
+      resultProfile,
       scorecardId,
       userId: authenticatedUser?._id,
       claimedAt: authenticatedUser ? Date.now() : undefined,
@@ -87,6 +97,7 @@ export const submit = mutation({
       email: normalizedEmail,
       phone: args.phone,
       resultProfile,
+      photoUrls: photoUrls.length > 0 ? photoUrls : undefined,
     });
 
     return { scorecardId };

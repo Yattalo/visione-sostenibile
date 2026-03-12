@@ -10,7 +10,7 @@ import { FadeIn } from "./animations";
 import { Button } from "./ui/Button";
 
 const MAX_FILES = 3;
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 interface UploadedPhoto {
@@ -40,7 +40,7 @@ export default function PhotoUploadStep({ onComplete, onSkip }: PhotoUploadStepP
       return `"${file.name}" non è un formato supportato. Usa JPG, PNG o WebP.`;
     }
     if (file.size > MAX_FILE_SIZE) {
-      return `"${file.name}" supera i 5 MB. Riduci le dimensioni e riprova.`;
+      return `"${file.name}" supera i 10 MB. Riduci le dimensioni e riprova.`;
     }
     return null;
   }, []);
@@ -218,7 +218,7 @@ export default function PhotoUploadStep({ onComplete, onSkip }: PhotoUploadStepP
                 <span className="text-leaf-600 underline underline-offset-2">sfoglia</span>
               </p>
               <p className="text-xs text-forest-800/50 font-body">
-                JPG, PNG o WebP — max 5 MB per foto
+                JPG, PNG o WebP — max 10 MB per foto
               </p>
             </>
           ) : (
