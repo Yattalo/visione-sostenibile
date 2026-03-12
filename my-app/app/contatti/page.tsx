@@ -467,7 +467,7 @@ export default function ContattiPage() {
                                   updateField("name", e.target.value)
                                 }
                                 error={errors.name}
-                                className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
+                                className="h-12 sm:h-14 rounded-xl border-paper-200 bg-paper-50/50"
                                 autoFocus
                               />
                               <Input
@@ -479,7 +479,7 @@ export default function ContattiPage() {
                                   updateField("email", e.target.value)
                                 }
                                 error={errors.email}
-                                className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
+                                className="h-12 sm:h-14 rounded-xl border-paper-200 bg-paper-50/50"
                               />
                             </motion.div>
                           )}
@@ -512,7 +512,7 @@ export default function ContattiPage() {
                                   updateField("phone", e.target.value)
                                 }
                                 error={errors.phone}
-                                className="h-14 rounded-xl border-paper-200 bg-paper-50/50"
+                                className="h-12 sm:h-14 rounded-xl border-paper-200 bg-paper-50/50"
                               />
                               <div className="w-full">
                                 <label htmlFor="service-interest-select" className="block text-sm font-medium text-foreground mb-2">
@@ -529,7 +529,7 @@ export default function ContattiPage() {
                                         e.target.value
                                       )
                                     }
-                                    className={`flex h-14 w-full rounded-xl border bg-paper-50/50 px-4 py-2 text-sm md:text-base ring-offset-background appearance-none cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                                    className={`flex h-12 sm:h-14 w-full rounded-xl border bg-paper-50/50 px-4 py-2 text-sm md:text-base ring-offset-background appearance-none cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                                       errors.serviceInterest
                                         ? "border-red-500 focus-visible:ring-red-500"
                                         : "border-paper-200"
@@ -645,7 +645,7 @@ export default function ContattiPage() {
                           <Button
                             type="button"
                             onClick={nextStep}
-                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-forest-950 h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
+                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-forest-950 h-12 sm:h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                           >
                             Avanti
                             <ArrowRight className="ml-2 w-4 h-4" />
@@ -654,7 +654,7 @@ export default function ContattiPage() {
                           <Button
                             type="submit"
                             loading={isSubmitting}
-                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-forest-950 h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
+                            className="flex-1 bg-sun-400 hover:bg-sun-500 text-forest-950 h-12 sm:h-14 rounded-xl shadow-medium hover:shadow-deep transition-all duration-300 uppercase font-bold tracking-wider"
                           >
                             Invia Richiesta
                           </Button>

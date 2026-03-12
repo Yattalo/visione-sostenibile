@@ -161,11 +161,11 @@ function ServiceContentSection({
             )}
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {content.primaryItems.map((item) => (
               <div
                 key={item}
-                className="rounded-[24px] border border-paper-200 bg-white p-6 shadow-soft"
+                className="rounded-[20px] sm:rounded-[24px] border border-paper-200 bg-white p-5 sm:p-6 shadow-soft"
               >
                 <Check className="w-5 h-5 text-leaf-600 mb-4" />
                 <p className="font-body text-forest-800/85 leading-relaxed">
@@ -192,16 +192,17 @@ function ServiceContentSection({
                   </p>
                 )}
                 {panel.items && (
-                  <div className="mt-5 space-y-3">
+                  <ul className="mt-5 space-y-3">
                     {panel.items.map((item) => (
-                      <p
+                      <li
                         key={item}
-                        className="font-body text-forest-800/80 leading-relaxed"
+                        className="flex items-start gap-3 font-body text-forest-800/80 leading-relaxed"
                       >
-                        {item}
-                      </p>
+                        <Check className="w-4 h-4 text-leaf-600 mt-1 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 )}
                 {panel.paragraphs && (
                   <div className="mt-5 space-y-3">
@@ -221,10 +222,7 @@ function ServiceContentSection({
         )}
 
         <div className="mt-10 rounded-[30px] bg-forest-950 p-8 md:p-10 text-paper-50 shadow-deep">
-          <p className="font-sans text-xs uppercase tracking-[0.2em] text-leaf-300">
-            Micro-CTA
-          </p>
-          <p className="mt-4 font-body text-lg leading-relaxed">
+          <p className="font-body text-lg leading-relaxed">
             {content.microCta}
           </p>
           {content.closingLine && (
@@ -232,6 +230,17 @@ function ServiceContentSection({
               {content.closingLine}
             </p>
           )}
+          <div className="mt-6">
+            <Link href="/contatti">
+              <Button
+                size="lg"
+                className="bg-sun-400 hover:bg-sun-500 text-forest-950 border-0 px-8"
+              >
+                Contattaci
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

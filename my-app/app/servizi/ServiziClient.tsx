@@ -311,9 +311,10 @@ export function ServiziClient() {
               <p className="mt-5 font-body leading-relaxed text-forest-800/80">
                 {box.text}
               </p>
-              <p className="mt-6 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-leaf-700">
+              <Link href="/contatti" className="mt-6 inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-leaf-700 hover:text-leaf-600 transition-colors">
                 {box.cta}
-              </p>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           ))}
         </div>

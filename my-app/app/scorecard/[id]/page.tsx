@@ -63,7 +63,7 @@ function ScoreGauge({ score, maxScore }: { score: number; maxScore: number }) {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="relative w-40 h-40 mx-auto">
+    <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto">
       <svg className="w-full h-full -rotate-90" viewBox="0 0 140 140">
         <circle
           cx="70"
@@ -243,14 +243,14 @@ export default function ScorecardPage() {
         {/* Score + Description */}
         <SlideUp delay={0.3}>
           <Card className="scorecard-score-card bg-white shadow-floating border-paper-100 rounded-[30px] mb-8">
-            <CardContent className="p-8 md:p-10">
-              <div className="grid md:grid-cols-[200px_1fr] gap-8 items-center">
+            <CardContent className="p-6 sm:p-8 md:p-10">
+              <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-8 items-center text-center md:text-left">
                 <ScoreGauge score={lead.totalScore} maxScore={maxScore} />
                 <div>
                   <span className="text-micro text-leaf-600 block mb-3">
                     Il tuo profilo
                   </span>
-                  <h2 className="font-display text-2xl md:text-3xl text-forest-950 mb-4 uppercase tracking-tight">
+                  <h2 className="font-display text-xl sm:text-2xl md:text-3xl text-forest-950 mb-4 uppercase tracking-tight">
                     {profileDisplay.title}
                   </h2>
                   <p className="text-forest-800/70 font-body leading-relaxed">
@@ -265,11 +265,11 @@ export default function ScorecardPage() {
         {/* Strengths (Punti di forza) */}
         <SlideUp delay={0.4}>
           <Card className="scorecard-strengths bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
-            <CardContent className="p-8 md:p-10">
+            <CardContent className="p-6 sm:p-8 md:p-10">
               <span className="text-micro text-leaf-600 block mb-3">
                 I tuoi punti di forza
               </span>
-              <h2 className="font-display text-2xl text-forest-950 mb-8 uppercase tracking-tight">
+              <h2 className="font-display text-xl sm:text-2xl text-forest-950 mb-6 sm:mb-8 uppercase tracking-tight">
                 Cosa <span className="italic font-light">funziona già</span>
               </h2>
               <div className="grid sm:grid-cols-2 gap-5">
@@ -287,11 +287,11 @@ export default function ScorecardPage() {
         {/* Improvements (Dove migliorare) */}
         <SlideUp delay={0.5}>
           <Card className="scorecard-improvements bg-white border-paper-200/50 rounded-[30px] shadow-soft mb-8">
-            <CardContent className="p-8 md:p-10">
+            <CardContent className="p-6 sm:p-8 md:p-10">
               <span className="text-micro text-sun-500 block mb-3">
                 Dove intervenire
               </span>
-              <h2 className="font-display text-2xl text-forest-950 mb-8 uppercase tracking-tight">
+              <h2 className="font-display text-xl sm:text-2xl text-forest-950 mb-6 sm:mb-8 uppercase tracking-tight">
                 I prossimi <span className="italic font-light">passi concreti</span>
               </h2>
               <div className="grid sm:grid-cols-2 gap-5">
@@ -308,7 +308,7 @@ export default function ScorecardPage() {
 
         {/* CTA Section — uses Barbara's profile-specific CTA */}
         <ScaleIn delay={0.6}>
-          <div className="scorecard-cta relative bg-forest-950 rounded-[40px] p-10 md:p-14 text-center text-white mb-12 overflow-hidden">
+          <div className="scorecard-cta relative bg-forest-950 rounded-[28px] sm:rounded-[40px] p-6 sm:p-10 md:p-14 text-center text-white mb-12 overflow-hidden">
             <div className="absolute top-0 -right-10 w-48 h-48 bg-leaf-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 -left-10 w-40 h-40 bg-sun-400/10 rounded-full blur-3xl" />
 
@@ -316,7 +316,7 @@ export default function ScorecardPage() {
               <span className="text-micro text-leaf-400 block mb-4">
                 Prossimo passo
               </span>
-              <h2 className="font-display text-3xl md:text-4xl font-light mb-4 uppercase tracking-tight leading-tight">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light mb-4 uppercase tracking-tight leading-tight">
                 Vuoi sapere cosa fare prima
                 <span className="block italic text-leaf-400 font-light">
                   (e cosa evitare)?
@@ -330,7 +330,7 @@ export default function ScorecardPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contatti?from=scorecard&profile={resultProfile}">
-                  <Button className="bg-sun-400 hover:bg-sun-500 text-white px-8 py-4 font-bold uppercase tracking-wider rounded-xl shadow-deep hover:scale-105 transition-all duration-300">
+                  <Button className="bg-sun-400 hover:bg-sun-500 text-white px-6 sm:px-8 py-3 sm:py-4 font-bold uppercase tracking-wider rounded-xl shadow-deep hover:scale-105 transition-all duration-300 text-sm sm:text-base">
                     <Sprout className="w-5 h-5 mr-2" />
                     Prenota il Check-up Sostenibile
                   </Button>
@@ -338,7 +338,7 @@ export default function ScorecardPage() {
                 <a href="tel:+393714821825">
                   <Button
                     variant="outline"
-                    className="border-paper-300/40 text-paper-100 hover:bg-white/10 px-8 py-4 uppercase tracking-wider rounded-xl"
+                    className="border-paper-300/40 text-paper-100 hover:bg-white/10 px-6 sm:px-8 py-3 sm:py-4 uppercase tracking-wider rounded-xl text-sm sm:text-base"
                   >
                     <Phone className="w-5 h-5 mr-2" />
                     Chiama Ora

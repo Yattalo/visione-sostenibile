@@ -114,9 +114,9 @@ const environmentalCommitments = [
   },
   {
     icon: Bug,
-    title: "Zero pesticidi chimici",
+    title: "Approccio naturale alla difesa",
     description:
-      "Utilizziamo esclusivamente trattamenti biologici e preparati biodinamici. Lotta integrata, macerati vegetali, insetti utili: proteggiamo le piante senza avvelenare il suolo.",
+      "In condizioni normali utilizziamo esclusivamente trattamenti biologici e preparati biodinamici: lotta integrata, macerati vegetali, insetti utili. Quando si tratta di interventi d'emergenza, ci avvaliamo di un esperto che in sicurezza procede con la soluzione adeguata — anche utilizzando chimica, se necessario — nel rispetto delle normative e della salute del suolo.",
     color: "bg-emerald-100 text-emerald-700",
   },
   {
@@ -219,7 +219,7 @@ const attestati = [
 
 const stats = [
   { value: `Dal ${siteConfig.foundingDate}`, label: "Approccio biodinamico" },
-  { value: "0", label: "Pesticidi chimici" },
+  { value: "0", label: "Pesticidi in condizioni normali" },
   { value: "100%", label: "Materiali tracciabili" },
   { value: "48h", label: "Per il preventivo" },
 ];
@@ -426,7 +426,7 @@ export default function QualitaPage() {
           </SlideUp>
 
           <StaggerContainer delay={0.2}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {environmentalCommitments.map((commitment, index) => (
                 <StaggerItem key={commitment.title} delay={index * 0.1}>
                   <div className="border border-paper-100 bg-paper-50 rounded-[30px] p-6 h-full text-center group hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300">

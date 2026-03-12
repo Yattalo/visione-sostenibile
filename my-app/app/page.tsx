@@ -338,11 +338,16 @@ export default function HomePage() {
                   {box.title}
                 </h3>
                 <div className="space-y-4">
-                  {box.rows.map((row) => (
-                    <p key={row} className="font-body text-paper-300 leading-relaxed">
-                      {row}
-                    </p>
-                  ))}
+                  {box.rows.map((row) => {
+                    const [title, ...rest] = row.split(" — ");
+                    const description = rest.join(" — ");
+                    return (
+                      <p key={row} className="font-body text-paper-300 leading-relaxed">
+                        <strong className="font-bold text-paper-50">{title}</strong>
+                        {description && <><br />{description}</>}
+                      </p>
+                    );
+                  })}
                 </div>
               </div>
             ))}

@@ -531,9 +531,9 @@ export default function QuizPage() {
                 </FadeIn>
 
                 <ScaleIn delay={0.2}>
-                  <Card className="bg-white shadow-floating border-paper-100 rounded-[40px] overflow-hidden">
+                  <Card className="bg-white shadow-floating border-paper-100 rounded-[28px] sm:rounded-[40px] overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sun-400 to-leaf-500" />
-                    <CardContent className="p-8 md:p-12 pt-10">
+                    <CardContent className="p-5 sm:p-8 md:p-12 pt-8 sm:pt-10">
                       <span className="text-micro text-sun-500 block mb-4">
                         Ultimo passaggio
                       </span>
@@ -571,7 +571,7 @@ export default function QuizPage() {
                           placeholder="es. Mario Rossi"
                           value={leadForm.name}
                           onChange={(e) => setLeadForm((prev) => ({ ...prev, name: e.target.value }))}
-                          className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
+                          className="h-12 sm:h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                           required
                         />
                         <Input
@@ -580,7 +580,7 @@ export default function QuizPage() {
                           placeholder="mario@email.com"
                           value={leadForm.email}
                           onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
-                          className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
+                          className="h-12 sm:h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                           required
                         />
                         <Input
@@ -589,7 +589,7 @@ export default function QuizPage() {
                           placeholder="+39 333 ..."
                           value={leadForm.phone}
                           onChange={(e) => setLeadForm((prev) => ({ ...prev, phone: e.target.value }))}
-                          className="h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
+                          className="h-12 sm:h-14 rounded-xl border-paper-200 bg-paper-50/50 focus-visible:ring-sun-400 focus-visible:border-leaf-500"
                         />
 
                         <div className="space-y-4 rounded-2xl border border-paper-200 bg-paper-50/70 p-4">
@@ -741,7 +741,7 @@ export default function QuizPage() {
                   <StaggerItem key={option.id} delay={index * 0.1}>
                     <button
                       onClick={() => handleAnswer(option.id)}
-                      className="w-full bg-white border border-paper-200/50 rounded-[30px] p-7 text-left step-card hover-germoglio cursor-pointer group"
+                      className="w-full bg-white border border-paper-200/50 rounded-[24px] sm:rounded-[30px] p-5 sm:p-7 text-left step-card hover-germoglio cursor-pointer group"
                     >
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 rounded-2xl bg-leaf-50 flex items-center justify-center text-leaf-600 shrink-0 transition-colors duration-300 group-hover:bg-leaf-100 group-hover:text-leaf-700">

@@ -55,7 +55,7 @@ const pillars = [
   {
     icon: Award,
     title: "Visione armonica",
-    subtitle: "IN CONDIZIONI NORMALI",
+    subtitle: "COLLABORAZIONE COME EVOLUZIONE",
     description:
       "Un solo interlocutore per ottimizzare tempi, scelte e budget: azzeramento del problema rimbalzi tra i fornitori, potenziamento della comunicazione interna organizzata, coordinamento puntuale delle diverse competenze verticali coinvolte nel progetto. Ogni imprevisto viene preso in carico con la massima tempestività e con l’esperto che può risolvere davvero il problema. Il nostro obiettivo è far fede all’impegno che nulla è mai lasciato al caso, è il nostro modo per dimostrare la cura e la responsabilità con cui lavoriamo.",
   },
@@ -64,7 +64,7 @@ const pillars = [
     title: "Passione",
     subtitle: "PER GLI SPAZI VERDI",
     description:
-      "Formazione continua, confronto con specialisti e attenzione ai dettagli. Per Andrea un giardino non è un lavoro da finire: è un equilibrio da costruire, con cura e responsabilità.",
+      "Formazione continua, confronto con specialisti e attenzione ai dettagli. Per noi, un giardino non è un lavoro da finire, ma è un equilibrio da costruire, con cura e responsabilità.",
   },
 ];
 
@@ -177,7 +177,7 @@ export default function ChiSiamoPage() {
               </p>
               <div className="space-y-5 font-body text-forest-800">
                 {founderBio.map((paragraph, index) => (
-                  <p key={index} className="text-lg leading-relaxed">
+                  <p key={index} className={`text-lg leading-relaxed ${index === 0 ? "italic" : ""}`}>
                     {paragraph}
                   </p>
                 ))}

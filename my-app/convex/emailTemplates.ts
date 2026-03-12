@@ -136,6 +136,56 @@ export const ensureDefaults = mutation({
   },
 });
 
+/**
+ * One-time migration: refresh system templates with latest content from code.
+ * Run manually: npx convex run emailTemplates:refreshSystemTemplates '{}'
+ * Safe to re-run — only updates isSystem templates that differ.
+ */
+export const refreshSystemTemplates = mutation({
+  args: {},
+  handler: async (ctx) => {
+    let updated = 0;
+    let created = 0;
+
+    for (const tmpl of DEFAULT_TEMPLATES) {
+      const existing = await ctx.db
+        .query("emailTemplates")
+        .withIndex("by_key", (q) => q.eq("key", tmpl.key))
+        .first();
+
+      if (!existing) {
+        await ctx.db.insert("emailTemplates", {
+          ...tmpl,
+          isActive: true,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        });
+        created += 1;
+      } else if (existing.isSystem) {
+        // Update only if content actually changed
+        if (
+          existing.subject !== tmpl.subject ||
+          existing.html !== tmpl.html ||
+          existing.text !== tmpl.text ||
+          existing.name !== tmpl.name
+        ) {
+          await ctx.db.patch(existing._id, {
+            subject: tmpl.subject,
+            html: tmpl.html,
+            text: tmpl.text,
+            name: tmpl.name,
+            updatedAt: Date.now(),
+          });
+          updated += 1;
+        }
+      }
+      // Skip non-system templates (user-customized)
+    }
+
+    return { updated, created, total: DEFAULT_TEMPLATES.length };
+  },
+});
+
 export const list = query({
   args: {
     category: v.optional(v.string()),
