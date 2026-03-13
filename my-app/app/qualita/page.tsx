@@ -271,11 +271,10 @@ export default function QualitaPage() {
               LA NOSTRA{" "}
               <em className="italic font-normal text-leaf-400">Qualità</em>
             </h1>
-            <p className="font-body text-lg md:text-xl lg:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed font-light">
-              Ogni intervento di {siteConfig.companyName} segue standard
-              operativi precisi: dalla scelta dei materiali alla sicurezza in
-              cantiere, dalla metodologia biodinamica alle garanzie
-              post-intervento.
+            <p className="text-hero-subtitle text-lg md:text-xl lg:text-2xl text-paper-200/90 max-w-2xl mx-auto">
+              Ogni intervento segue standard operativi precisi:
+              dalla scelta dei materiali alla sicurezza in cantiere,
+              dalla metodologia biodinamica alle garanzie post-intervento.
             </p>
           </SlideUp>
         </div>

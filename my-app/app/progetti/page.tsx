@@ -377,15 +377,18 @@ export default function ProgettiPage() {
           </SlideUp>
 
           <SlideUp delay={0.1}>
-            <div className="font-body text-lg md:text-xl text-paper-300 max-w-3xl mx-auto leading-relaxed space-y-4">
+            <div className="text-hero-subtitle text-lg md:text-xl text-paper-200/90 max-w-3xl mx-auto space-y-5">
               <p>
-                Quello che ci interessa è mostrare cosa succede quando un esterno viene pensato per funzionare davvero. La bellezza è la naturale conseguenza di un progetto ben realizzato.
+                La bellezza è la naturale conseguenza
+                di un progetto ben realizzato.
               </p>
               <p>
-                Lavori diversi per scala e obiettivi, dalla progettazione alla realizzazione, fino alla manutenzione sostenibile.
+                Lavori diversi per scala e obiettivi — dalla progettazione
+                alla realizzazione, fino alla manutenzione sostenibile.
               </p>
               <p>
-                Ogni intervento nasce da un bisogno reale: più ombra, meno manutenzione, spazi da vivere, esterni che valorizzino casa o struttura. Il filo conduttore è sempre lo stesso: analisi, ascolto e decisioni finalizzate a ottenere risultati che si apprezzano subito e che reggono nel tempo.
+                Il filo conduttore è sempre lo stesso:
+                analisi, ascolto e decisioni che reggono nel tempo.
               </p>
             </div>
           </SlideUp>

@@ -739,6 +739,15 @@ h4, h5, h6 {
   line-height: 0.9;
 }
 
+/* Hero subtitle: elegant Walkway light for hero body text */
+.text-hero-subtitle {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
 /* FAQ card hover lift */
 .faq-card {
   transition: transform 300ms ease;

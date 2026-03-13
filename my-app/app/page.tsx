@@ -171,8 +171,10 @@ export default function HomePage() {
               </span>
             </h1>
 
-            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mb-10 leading-relaxed font-light">
-              Con Visione Sostenibile hai un solo interlocutore per progettare, realizzare e mantenere il tuo spazio verde — con tutti gli specialisti gi&agrave; selezionati per te.
+            <p className="text-hero-subtitle text-xl md:text-2xl text-paper-200/90 max-w-2xl mb-10">
+              Con Visione Sostenibile hai un solo interlocutore
+              per progettare, realizzare e mantenere il tuo spazio verde
+              — con tutti gli specialisti gi&agrave; selezionati per te.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

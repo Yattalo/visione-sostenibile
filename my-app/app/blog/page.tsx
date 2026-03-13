@@ -107,9 +107,9 @@ export default function BlogPage() {
               ARTICOLI E{" "}
               <em className="italic font-normal text-leaf-400">Ispirazioni</em>
             </h1>
-            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Consigli, tendenze e approfondimenti dal mondo del giardinaggio
-              sostenibile e della progettazione del verde.
+            <p className="text-hero-subtitle text-lg md:text-xl text-paper-200/90 max-w-2xl mx-auto">
+              Consigli, tendenze e approfondimenti
+              dal mondo del giardinaggio sostenibile.
             </p>
           </div>
         </section>
@@ -146,9 +146,9 @@ export default function BlogPage() {
           </SlideUp>
 
           <SlideUp delay={0.2}>
-            <p className="font-body text-lg md:text-xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Consigli, tendenze e approfondimenti dal mondo del giardinaggio
-              sostenibile e della progettazione del verde.
+            <p className="text-hero-subtitle text-lg md:text-xl text-paper-200/90 max-w-2xl mx-auto">
+              Consigli, tendenze e approfondimenti
+              dal mondo del giardinaggio sostenibile.
             </p>
           </SlideUp>
         </div>

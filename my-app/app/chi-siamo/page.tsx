@@ -139,8 +139,11 @@ export default function ChiSiamoPage() {
               IL GIARDINIERE CHE TI SPIEGA I
               <span className="block text-paper-200 mt-2">PERCHÉ</span>
             </h1>
-            <p className="font-body text-lg md:text-xl text-paper-300 max-w-3xl mx-auto leading-relaxed">
-              Visione Sostenibile nasce dalla mente appassionata, curiosa, in continua ricerca di Andrea Giordano che, grazie alle partnership consolidate nel tempo, si presenta come unico referente che coordina le diverse competenze verticali dei membri del team.
+            <p className="text-hero-subtitle text-lg md:text-xl lg:text-2xl text-paper-200/90 max-w-3xl mx-auto">
+              Visione Sostenibile nasce dalla mente appassionata, curiosa,
+              in continua ricerca di Andrea Giordano che, grazie alle partnership
+              consolidate nel tempo, si presenta come unico referente
+              che coordina le diverse competenze verticali dei membri del team.
             </p>
           </SlideUp>
         </div>

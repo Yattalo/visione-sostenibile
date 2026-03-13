@@ -259,10 +259,9 @@ export default function ContattiPage() {
               <em className="italic font-normal text-leaf-400">Davvero</em>
             </h1>
 
-            <p className="font-body text-xl md:text-2xl text-paper-300 max-w-2xl mx-auto leading-relaxed">
-              Che tu stia partendo da zero o che tu voglia riqualificare un
-              giardino esistente, ti aiutiamo a fare chiarezza su priorità e
-              investimenti.
+            <p className="text-hero-subtitle text-xl md:text-2xl text-paper-200/90 max-w-2xl mx-auto">
+              Che tu stia partendo da zero o riqualificando un giardino esistente,
+              ti aiutiamo a fare chiarezza su priorità e investimenti.
             </p>
           </SlideUp>
         </div>

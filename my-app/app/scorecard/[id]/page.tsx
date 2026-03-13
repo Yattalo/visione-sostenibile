@@ -213,7 +213,7 @@ export default function ScorecardPage() {
                 {profileDisplay.title.split(" ").slice(1).join(" ")}
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-paper-300 max-w-2xl mx-auto font-body leading-relaxed">
+            <p className="text-hero-subtitle text-lg md:text-xl lg:text-2xl text-paper-200/90 max-w-2xl mx-auto">
               {profileDisplay.subtitle}
             </p>
           </SlideUp>

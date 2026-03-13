@@ -164,15 +164,18 @@ export function ServiziClient() {
           </SlideUp>
 
           <SlideUp delay={0.1}>
-            <p className="font-body text-lg text-paper-300/80 max-w-3xl mb-4">
-              Visione Sostenibile progetta, realizza e mantiene giardini e spazi outdoor sostenibili con un approccio concreto: scelte motivate, lavoro a fasi e gestione nel tempo.
-            </p>
-            <p className="font-body text-lg text-paper-300/80 max-w-3xl mb-6">
-              Hai un unico referente che coordina un team modulare di competenze verticali e partnership selezionate.
-            </p>
-            <p className="font-body text-lg italic text-leaf-400 max-w-3xl mb-10">
-              Se non sai da dove partire, il modo più semplice è uno: Check-up Sostenibile.
-            </p>
+            <div className="text-hero-subtitle text-lg md:text-xl text-paper-200/85 max-w-3xl space-y-4 mb-10">
+              <p>
+                Progetta, realizza e mantieni giardini e spazi outdoor sostenibili.
+                Scelte motivate, lavoro a fasi, gestione nel tempo.
+              </p>
+              <p>
+                Un unico referente. Un team modulare. Partnership selezionate.
+              </p>
+              <p className="italic text-leaf-400">
+                Se non sai da dove partire — Check-up Sostenibile.
+              </p>
+            </div>
           </SlideUp>
 
           <SlideUp delay={0.2}>

@@ -66,7 +66,7 @@ function HeroSection({
           <h1 className="text-stitch-heading text-4xl md:text-6xl lg:text-7xl text-paper-50 max-w-4xl">
             {service.title}
           </h1>
-          <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-paper-200/85">
+          <p className="mt-6 max-w-2xl text-hero-subtitle text-lg md:text-xl text-paper-200/90">
             {summary}
           </p>
         </div>
