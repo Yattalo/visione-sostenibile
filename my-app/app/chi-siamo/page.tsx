@@ -70,7 +70,7 @@ const pillars = [
 ];
 
 const founderBio = [
-  "“Una ventina di anni fa ho iniziato a capire che qualcosa nel clima non funzionava più come doveva, che i cibi di cui ci nutriamo quotidianamente non avevano più le caratteristiche nutrizionali di qualche decennio prima. Ho iniziato a preoccuparmi dello sfruttamento del suolo, della non corretta gestione delle lavorazioni e dello spropositato utilizzo di prodotti fito sanitari che causano la sterilità dei terreni e l’avanzamento della desertificazione. Ho intrapreso così la strada della sostenibilità, un cammino lungo che ancora oggi non smette di insegnarmi sempre qualcosa e di stupirmi.”",
+  "Una ventina di anni fa ho iniziato a capire che qualcosa nel clima non funzionava più come doveva, che i cibi di cui ci nutriamo quotidianamente non avevano più le caratteristiche nutrizionali di qualche decennio prima. Ho iniziato a preoccuparmi dello sfruttamento del suolo, della non corretta gestione delle lavorazioni e dello spropositato utilizzo di prodotti fito sanitari che causano la sterilità dei terreni e l’avanzamento della desertificazione. Ho intrapreso così la strada della sostenibilità, un cammino lungo che ancora oggi non smette di insegnarmi sempre qualcosa e di stupirmi.",
   "Visione Sostenibile lavora in ascolto: delle persone, degli spazi e di ciò che la natura sta dicendo oggi.",
 ];
 
