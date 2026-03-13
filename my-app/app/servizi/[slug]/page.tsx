@@ -146,38 +146,61 @@ function ServiceContentSection({
 }: {
   content: (typeof serviceDetailCopyBySlug)[string];
 }) {
+  const hasSummaryCard = Boolean(content.primarySubtitle);
+
   return (
     <section className="py-20 lg:py-28 bg-paper-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] items-start">
-          <div>
+        <div
+          className={`mb-10 grid gap-6 ${
+            hasSummaryCard
+              ? "lg:grid-cols-[minmax(0,1fr)_280px] lg:items-end"
+              : ""
+          }`}
+        >
+          <div className="max-w-3xl">
             <h2 className="text-stitch-heading text-4xl md:text-5xl text-forest-950">
               {content.primaryTitle}
             </h2>
-            {content.primarySubtitle && (
-              <p className="mt-4 font-sans text-sm uppercase tracking-[0.2em] text-leaf-700">
-                {content.primarySubtitle}
-              </p>
-            )}
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {content.primaryItems.map((item) => (
-              <div
-                key={item}
-                className="rounded-[20px] sm:rounded-[24px] border border-paper-200 bg-white p-5 sm:p-6 shadow-soft"
-              >
-                <Check className="w-5 h-5 text-leaf-600 mb-4" />
-                <p className="font-body text-forest-800/85 leading-relaxed">
-                  {item}
-                </p>
+          {content.primarySubtitle && (
+            <div className="rounded-[28px] border border-paper-200 bg-white px-6 py-5 shadow-soft lg:justify-self-end">
+              <span className="font-display text-5xl font-light leading-none text-leaf-300">
+                {content.primaryItems.length.toString().padStart(2, "0")}
+              </span>
+              <p className="mt-3 font-sans text-sm uppercase tracking-[0.2em] text-leaf-700">
+                {content.primarySubtitle}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {content.primaryItems.map((item, index) => (
+            <div
+              key={item}
+              className="rounded-[24px] border border-paper-200 bg-white p-5 sm:p-6 shadow-soft"
+            >
+              <div className="mb-5 flex items-center gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-leaf-50 font-sans text-sm font-bold text-leaf-700">
+                  {(index + 1).toString().padStart(2, "0")}
+                </span>
+                <span className="h-px flex-1 bg-paper-200" />
               </div>
-            ))}
-          </div>
+              <p className="font-body text-lg text-forest-800/85 leading-relaxed">
+                {item}
+              </p>
+            </div>
+          ))}
         </div>
 
         {content.panels && content.panels.length > 0 && (
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div
+            className={`mt-8 grid gap-6 ${
+              content.panels.length > 1 ? "lg:grid-cols-2" : "max-w-4xl"
+            }`}
+          >
             {content.panels.map((panel) => (
               <div
                 key={panel.title}
@@ -221,16 +244,19 @@ function ServiceContentSection({
           </div>
         )}
 
-        <div className="mt-10 rounded-[30px] bg-forest-950 p-8 md:p-10 text-paper-50 shadow-deep">
-          <p className="font-body text-lg leading-relaxed">
-            {content.microCta}
-          </p>
-          {content.closingLine && (
-            <p className="mt-5 font-display italic text-xl text-leaf-300">
-              {content.closingLine}
+        <div className="mt-10 rounded-[30px] bg-forest-950 p-8 md:p-10 text-paper-50 shadow-deep lg:flex lg:items-center lg:justify-between lg:gap-10">
+          <div className="max-w-3xl">
+            <p className="font-body text-lg leading-relaxed">
+              {content.microCta}
             </p>
-          )}
-          <div className="mt-6">
+            {content.closingLine && (
+              <p className="mt-5 font-display italic text-xl text-leaf-300">
+                {content.closingLine}
+              </p>
+            )}
+          </div>
+
+          <div className="mt-6 lg:mt-0 lg:shrink-0">
             <Link href="/contatti">
               <Button
                 size="lg"
