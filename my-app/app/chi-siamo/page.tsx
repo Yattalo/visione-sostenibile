@@ -120,7 +120,7 @@ export default function ChiSiamoPage() {
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-forest-950/80 via-forest-900/65 to-forest-950/75" />
           </div>
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sun-400/15 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute bottom-1/4 -right-24 w-80 h-80 bg-leaf-500/15 rounded-full blur-3xl animate-drift" />
@@ -140,10 +140,11 @@ export default function ChiSiamoPage() {
               <span className="block text-paper-200 mt-2">PERCHÉ</span>
             </h1>
             <p className="text-hero-subtitle text-lg md:text-xl lg:text-2xl text-paper-200/90 max-w-3xl mx-auto">
-              Visione Sostenibile nasce dalla mente appassionata, curiosa,
-              in continua ricerca di Andrea Giordano che, grazie alle partnership
-              consolidate nel tempo, si presenta come unico referente
-              che coordina le diverse competenze verticali dei membri del team.
+              Nasce dalla <em className="italic text-leaf-400">passione</em> e dalla ricerca continua di Andrea Giordano.
+              <span className="block mt-3">
+                Un unico referente, <em className="italic text-leaf-400">partnership consolidate</em>,
+                competenze verticali coordinate — per il tuo spazio verde.
+              </span>
             </p>
           </SlideUp>
         </div>

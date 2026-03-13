@@ -56,17 +56,17 @@ const homeSystemBoxes = [
   {
     title: "COME OPERIAMO",
     rows: [
-      "Sopralluogo, Analisi & obiettivi — Partiamo da uso dello spazio, esposizione, suolo, disponibilità idrica, vincoli, budget e tempi. Obiettivo: capire cosa serve davvero (e cosa no).",
-      "Progetto + piano lavori — Soluzioni sostenibili e realizzabili, con priorità e fasi. Traduciamo le esigenze in scelte concrete: materiali, specie, impianti e fasi operative. Così sai cosa succede, quando e perché.",
-      "Direzione & realizzazione — Visione Sostenibile coordina le attività e le competenze degli specialisti lungo tutto il percorso. E poi restiamo: con una manutenzione programmata il verde non si trasforma in un “problema”.",
+      "Sopralluogo, Analisi & Obiettivi — Partiamo da uso dello spazio, esposizione, suolo, disponibilità idrica, vincoli, budget e tempi. Obiettivo: capire cosa serve davvero (e cosa no).",
+      "Progetto + Piano lavori — Soluzioni sostenibili e realizzabili, con priorità e fasi. Traduciamo le esigenze in scelte concrete: materiali, specie, impianti e fasi operative. Così sai cosa succede, quando e perché.",
+      "Direzione & Realizzazione — Visione Sostenibile coordina le attività e le competenze degli specialisti lungo tutto il percorso. E poi restiamo: con una manutenzione programmata il verde non si trasforma in un 'problema'.",
     ],
   },
   {
     title: "PROGETTIAMO SISTEMI",
     rows: [
-      "A. Verde sostenibile (core) — Progettazione • Realizzazione • Manutenzione programmata e gestione stagionale • Rigenerazione suolo • Irrigazione smart • Potature/Tree climbing",
-      "B. Outdoor living (comfort) — Pavimentazioni e percorsi • Illuminazione esterna • Arredi esterni e finiture • Pergole/strutture leggere (in partnership)",
-      "C. Acqua & benessere (premium) — Laghetti/punti acqua/integrazioni paesaggistiche • Piscine (partner selezionati + coordinamento completo con integrazione estetica nel progetto)",
+      "A. Verde Sostenibile (core) — Progettazione • Realizzazione • Manutenzione programmata e gestione stagionale • Rigenerazione suolo • Irrigazione smart • Potature/Tree climbing",
+      "B. Outdoor Living (comfort) — Pavimentazioni e percorsi • Illuminazione esterna • Arredi esterni e finiture • Pergole/strutture leggere (in partnership)",
+      "C. Acqua & Benessere (premium) — Laghetti/punti acqua/integrazioni paesaggistiche • Piscine (partner selezionati + coordinamento completo con integrazione estetica nel progetto)",
     ],
   },
 ];
@@ -296,7 +296,7 @@ export default function HomePage() {
               {
                 title: "Dall\u2019idea alla cura nel tempo",
                 subtitle: "Progettiamo, realizziamo, manteniamo",
-                description: "Garantiamo una copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Perché un giardino non è “lavoro finito” quando lo si consegna: va avviato, stabilizzato e gestito con continuità. Il risultato? Meno interventi d'emergenza, maggior durata, piena e serena vivibilità del tuo spazio verde.",
+                description: "Garantiamo una copertura totale del servizio: progettazione, realizzazione e manutenzione programmata. Perché un giardino non è 'lavoro finito' quando lo si consegna: va avviato, stabilizzato e gestito con continuità. Il risultato? Meno interventi d'emergenza, maggior durata, piena e serena vivibilità del tuo spazio verde.",
               },
             ].map((card, index) => (
               <motion.div
