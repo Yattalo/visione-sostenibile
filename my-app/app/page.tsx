@@ -3,12 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import {
   Phone,
   MapPin,
   ArrowRight,
-  ChevronDown,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Badge } from "./components/ui/Badge";
@@ -72,7 +71,21 @@ const homeSystemBoxes = [
   },
 ];
 
-function HomeSystemAccordion({
+function parseSystemRow(row: string) {
+  const [title, ...rest] = row.split(" — ");
+  const description = rest.join(" — ");
+  const bulletItems = description.includes(" • ")
+    ? description.split(" • ").map((item) => item.trim()).filter(Boolean)
+    : [];
+
+  return {
+    title,
+    description,
+    bulletItems,
+  };
+}
+
+function HomeSystemShowcase({
   title,
   rows,
   panelIndex,
@@ -82,121 +95,121 @@ function HomeSystemAccordion({
   panelIndex: number;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const entries = rows.map(parseSystemRow);
+  const activeEntry = entries[activeIndex] ?? entries[0];
+  const activeLabel = title === "COME OPERIAMO" ? "Step" : "Ambito";
 
   return (
-    <div className="relative overflow-hidden rounded-[34px] border border-forest-900/70 bg-gradient-to-br from-forest-950 via-[#042511] to-[#001709] p-8 md:p-10 text-left shadow-deep">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(169,214,163,0.16),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(245,200,74,0.12),_transparent_26%)]" />
-      <div className="absolute inset-x-10 top-20 h-px bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
-
-      <div className="relative z-10">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <span className="mb-3 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-[0.24em] text-paper-300/80">
+    <article className="rounded-[36px] border border-paper-200 bg-white p-4 shadow-soft md:p-5">
+      <div className="grid gap-5 lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[360px_minmax(0,1fr)]">
+        <div className="rounded-[30px] border border-leaf-100 bg-gradient-to-br from-leaf-50 via-paper-50 to-white p-6 md:p-7">
+          <div className="mb-8">
+            <span className="mb-3 inline-flex rounded-full border border-leaf-200 bg-white px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-[0.24em] text-leaf-700">
               {(panelIndex + 1).toString().padStart(2, "0")}
             </span>
-            <h3 className="text-stitch-heading text-2xl text-paper-50">
+            <h3 className="text-stitch-heading text-2xl text-forest-950">
               {title}
             </h3>
           </div>
 
-          <div className="hidden gap-2 md:flex">
-            {rows.map((row, index) => {
-              const [rowTitle] = row.split(" — ");
+          <div className="space-y-3">
+            {entries.map((entry, index) => {
               const isActive = index === activeIndex;
 
               return (
                 <button
-                  key={row}
+                  key={entry.title}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`rounded-full border px-3 py-2 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] transition-all ${
+                  className={`group w-full rounded-[24px] border px-4 py-4 text-left transition-all md:px-5 ${
                     isActive
-                      ? "border-sun-400/60 bg-sun-400 text-forest-950"
-                      : "border-white/10 bg-white/5 text-paper-300 hover:border-white/20 hover:bg-white/10"
+                      ? "border-forest-950 bg-forest-950 text-paper-50 shadow-deep"
+                      : "border-paper-200 bg-white text-forest-950 hover:border-leaf-300 hover:bg-leaf-50"
                   }`}
-                  aria-label={`${title} — ${rowTitle}`}
+                  aria-pressed={isActive}
                 >
-                  {(index + 1).toString().padStart(2, "0")}
+                  <div className="flex items-start gap-4">
+                    <span
+                      className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl font-sans text-sm font-bold ${
+                        isActive
+                          ? "bg-sun-400 text-forest-950"
+                          : "bg-leaf-100 text-leaf-800"
+                      }`}
+                    >
+                      {(index + 1).toString().padStart(2, "0")}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <strong className="block font-body text-xl font-bold leading-tight">
+                        {entry.title}
+                      </strong>
+                      <span
+                        className={`mt-2 block font-sans text-[11px] font-semibold uppercase tracking-[0.2em] ${
+                          isActive ? "text-paper-300/75" : "text-forest-800/45"
+                        }`}
+                      >
+                        {activeLabel} {(index + 1).toString().padStart(2, "0")}
+                      </span>
+                    </div>
+                  </div>
                 </button>
               );
             })}
           </div>
         </div>
 
-        <div className="space-y-4">
-          {rows.map((row, index) => {
-            const [rowTitle, ...rest] = row.split(" — ");
-            const description = rest.join(" — ");
-            const isActive = index === activeIndex;
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeEntry.title}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            className="relative overflow-hidden rounded-[30px] bg-gradient-to-br from-forest-950 via-[#042712] to-[#00190c] p-7 text-paper-50 shadow-deep md:p-9 lg:min-h-[340px]"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(169,214,163,0.18),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(245,200,74,0.14),_transparent_24%)]" />
+            <div className="absolute right-0 top-0 h-48 w-48 translate-x-1/3 -translate-y-1/3 rounded-full border border-white/10" />
 
-            return (
-              <div
-                key={row}
-                className={`overflow-hidden rounded-[26px] border transition-all duration-300 ${
-                  isActive
-                    ? "border-leaf-300/35 bg-white/[0.08] shadow-soft"
-                    : "border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]"
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setActiveIndex(isActive ? -1 : index)}
-                  className="flex w-full items-start gap-4 p-5 text-left md:p-6"
-                  aria-expanded={isActive}
-                >
-                  <span
-                    className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl font-sans text-sm font-bold ${
-                      isActive
-                        ? "bg-sun-400 text-forest-950"
-                        : "bg-white/10 text-paper-200"
-                    }`}
-                  >
-                    {(index + 1).toString().padStart(2, "0")}
+            <div className="relative z-10">
+              <div className="mb-8 flex items-start justify-between gap-6">
+                <div>
+                  <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-[0.24em] text-paper-300/80">
+                    {activeLabel} {(activeIndex + 1).toString().padStart(2, "0")}
                   </span>
+                  <h4 className="mt-4 max-w-3xl font-display text-3xl leading-tight text-paper-50 md:text-4xl">
+                    {activeEntry.title}
+                  </h4>
+                </div>
 
-                  <div className="min-w-0 flex-1">
-                    <strong className="block font-body text-[1.35rem] font-bold leading-tight text-paper-50 md:text-[1.55rem]">
-                      {rowTitle}
-                    </strong>
-                  </div>
-
-                  <span
-                    className={`mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all ${
-                      isActive
-                        ? "border-white/15 bg-white/10 text-paper-50"
-                        : "border-white/10 bg-transparent text-paper-300/70"
-                    }`}
-                  >
-                    <ChevronDown
-                      className={`h-5 w-5 transition-transform duration-300 ${
-                        isActive ? "rotate-180" : ""
-                      }`}
-                    />
-                  </span>
-                </button>
-
-                {isActive && description && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-5 pb-5 md:px-6 md:pb-6">
-                      <div className="ml-[3.75rem] rounded-[22px] border border-white/10 bg-black/20 px-5 py-4 md:ml-[4.4rem]">
-                        <p className="font-body text-lg leading-relaxed text-paper-200/88">
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
+                <span className="font-display text-6xl font-light leading-none text-white/12">
+                  {(activeIndex + 1).toString().padStart(2, "0")}
+                </span>
               </div>
-            );
-          })}
-        </div>
+
+              {activeEntry.bulletItems.length > 1 ? (
+                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                  {activeEntry.bulletItems.map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-[20px] border border-white/10 bg-white/5 px-4 py-4"
+                    >
+                      <p className="font-body text-lg leading-relaxed text-paper-100/92">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="max-w-3xl rounded-[24px] border border-white/10 bg-white/5 px-5 py-5 md:px-6">
+                  <p className="font-body text-xl leading-relaxed text-paper-100/92">
+                    {activeEntry.description}
+                  </p>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -458,10 +471,10 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16"
+            className="grid grid-cols-1 gap-6 mb-16"
           >
             {homeSystemBoxes.map((box, index) => (
-              <HomeSystemAccordion
+              <HomeSystemShowcase
                 key={box.title}
                 title={box.title}
                 rows={box.rows}
