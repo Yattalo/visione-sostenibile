@@ -8,6 +8,7 @@ import {
   Phone,
   MapPin,
   ArrowRight,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "./components/ui/Button";
 import { Badge } from "./components/ui/Badge";
@@ -15,7 +16,7 @@ import { ServiceCard } from "./components/ServiceCard";
 import { staticServices, serviceImages } from "./lib/static-data";
 import { siteConfig } from "./lib/site-config";
 import { BLUR_DATA_URL } from "./lib/image-utils";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 // Dynamically import heavy below-fold components to reduce initial JS bundle
 const ReviewsWidget = dynamic(
@@ -70,6 +71,134 @@ const homeSystemBoxes = [
     ],
   },
 ];
+
+function HomeSystemAccordion({
+  title,
+  rows,
+  panelIndex,
+}: {
+  title: string;
+  rows: string[];
+  panelIndex: number;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="relative overflow-hidden rounded-[34px] border border-forest-900/70 bg-gradient-to-br from-forest-950 via-[#042511] to-[#001709] p-8 md:p-10 text-left shadow-deep">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(169,214,163,0.16),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(245,200,74,0.12),_transparent_26%)]" />
+      <div className="absolute inset-x-10 top-20 h-px bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
+
+      <div className="relative z-10">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <span className="mb-3 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-[0.24em] text-paper-300/80">
+              {(panelIndex + 1).toString().padStart(2, "0")}
+            </span>
+            <h3 className="text-stitch-heading text-2xl text-paper-50">
+              {title}
+            </h3>
+          </div>
+
+          <div className="hidden gap-2 md:flex">
+            {rows.map((row, index) => {
+              const [rowTitle] = row.split(" — ");
+              const isActive = index === activeIndex;
+
+              return (
+                <button
+                  key={row}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  className={`rounded-full border px-3 py-2 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] transition-all ${
+                    isActive
+                      ? "border-sun-400/60 bg-sun-400 text-forest-950"
+                      : "border-white/10 bg-white/5 text-paper-300 hover:border-white/20 hover:bg-white/10"
+                  }`}
+                  aria-label={`${title} — ${rowTitle}`}
+                >
+                  {(index + 1).toString().padStart(2, "0")}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {rows.map((row, index) => {
+            const [rowTitle, ...rest] = row.split(" — ");
+            const description = rest.join(" — ");
+            const isActive = index === activeIndex;
+
+            return (
+              <div
+                key={row}
+                className={`overflow-hidden rounded-[26px] border transition-all duration-300 ${
+                  isActive
+                    ? "border-leaf-300/35 bg-white/[0.08] shadow-soft"
+                    : "border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]"
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveIndex(isActive ? -1 : index)}
+                  className="flex w-full items-start gap-4 p-5 text-left md:p-6"
+                  aria-expanded={isActive}
+                >
+                  <span
+                    className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl font-sans text-sm font-bold ${
+                      isActive
+                        ? "bg-sun-400 text-forest-950"
+                        : "bg-white/10 text-paper-200"
+                    }`}
+                  >
+                    {(index + 1).toString().padStart(2, "0")}
+                  </span>
+
+                  <div className="min-w-0 flex-1">
+                    <strong className="block font-body text-[1.35rem] font-bold leading-tight text-paper-50 md:text-[1.55rem]">
+                      {rowTitle}
+                    </strong>
+                  </div>
+
+                  <span
+                    className={`mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all ${
+                      isActive
+                        ? "border-white/15 bg-white/10 text-paper-50"
+                        : "border-white/10 bg-transparent text-paper-300/70"
+                    }`}
+                  >
+                    <ChevronDown
+                      className={`h-5 w-5 transition-transform duration-300 ${
+                        isActive ? "rotate-180" : ""
+                      }`}
+                    />
+                  </span>
+                </button>
+
+                {isActive && description && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-5 pb-5 md:px-6 md:pb-6">
+                      <div className="ml-[3.75rem] rounded-[22px] border border-white/10 bg-black/20 px-5 py-4 md:ml-[4.4rem]">
+                        <p className="font-body text-lg leading-relaxed text-paper-200/88">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const heroRef = useRef(null);
@@ -331,27 +460,13 @@ export default function HomePage() {
             transition={{ duration: 0.7 }}
             className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16"
           >
-            {homeSystemBoxes.map((box) => (
-              <div
+            {homeSystemBoxes.map((box, index) => (
+              <HomeSystemAccordion
                 key={box.title}
-                className="rounded-[30px] bg-forest-950 p-8 md:p-10 text-left"
-              >
-                <h3 className="text-stitch-heading text-2xl text-paper-50 mb-6">
-                  {box.title}
-                </h3>
-                <div className="space-y-4">
-                  {box.rows.map((row) => {
-                    const [title, ...rest] = row.split(" — ");
-                    const description = rest.join(" — ");
-                    return (
-                      <p key={row} className="font-body text-paper-300 leading-relaxed">
-                        <strong className="font-bold text-paper-50">{title}</strong>
-                        {description && <><br />{description}</>}
-                      </p>
-                    );
-                  })}
-                </div>
-              </div>
+                title={box.title}
+                rows={box.rows}
+                panelIndex={index}
+              />
             ))}
           </motion.div>
 
