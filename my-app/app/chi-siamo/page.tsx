@@ -21,6 +21,7 @@ import {
 } from "../components/animations";
 import Link from "next/link";
 import { TeamSection } from "../components/TeamSection";
+import { QuoteHighlight } from "../components/QuoteHighlight";
 import { pageSeo } from "../lib/seo-data";
 import { buildMetadata } from "../lib/seo-metadata";
 import { siteConfig } from "../lib/site-config";
@@ -71,6 +72,13 @@ const pillars = [
 const founderBio = [
   "“Una ventina di anni fa ho iniziato a capire che qualcosa nel clima non funzionava più come doveva, che i cibi di cui ci nutriamo quotidianamente non avevano più le caratteristiche nutrizionali di qualche decennio prima. Ho iniziato a preoccuparmi dello sfruttamento del suolo, della non corretta gestione delle lavorazioni e dello spropositato utilizzo di prodotti fito sanitari che causano la sterilità dei terreni e l’avanzamento della desertificazione. Ho intrapreso così la strada della sostenibilità, un cammino lungo che ancora oggi non smette di insegnarmi sempre qualcosa e di stupirmi.”",
   "Visione Sostenibile lavora in ascolto: delle persone, degli spazi e di ciò che la natura sta dicendo oggi.",
+];
+
+const storyParagraphs = [
+  "Visione Sostenibile nasce dall'ascolto delle persone, dei luoghi, della natura che cambia, ed è cresciuta attorno a un'idea semplice: il verde che funziona davvero e quello che rispetta i cicli naturali.",
+  "Il metodo biodinamico si impegna a costruire terreni vivi, scegliere piante adatte al territorio, eliminare la chimica e progettare giardini che migliorano con il tempo in modo naturale.",
+  "Visione Sostenibile è un team multidisciplinare di specialisti che lavorano in sinergia per offrire un servizio completo e sicuro da tutti i punti di vista.",
+  "Inoltre, grazie alla direzione di un referente unico si ottimizzano tempi, costi e risultati.",
 ];
 
 const stats = [
@@ -173,18 +181,25 @@ export default function ChiSiamoPage() {
             </SlideUp>
 
             <SlideUp delay={0.2}>
-              <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mt-2 mb-4">
-                ANDREA GIORDANO
-              </h2>
-              <p className="font-display italic text-leaf-700 text-xl mb-8">
-                Passione, Ricerca, Visione
-              </p>
-              <div className="space-y-5 font-body text-forest-800">
-                {founderBio.map((paragraph, index) => (
-                  <p key={index} className={`text-lg leading-relaxed ${index === 0 ? "italic" : ""}`}>
-                    {paragraph}
+              <div className="max-w-2xl">
+                <span className="font-sans text-xs font-bold uppercase tracking-[0.22em] text-forest-800/55">
+                  Fondatore
+                </span>
+                <h2 className="text-stitch-heading text-3xl md:text-4xl text-forest-950 mt-3 mb-4">
+                  ANDREA GIORDANO
+                </h2>
+                <p className="font-display italic text-leaf-700 text-xl mb-8">
+                  Passione, Ricerca, Visione
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <QuoteHighlight quote={founderBio[0]} />
+                <div className="rounded-[28px] border border-paper-200 bg-white/90 px-6 py-5 shadow-soft backdrop-blur-sm">
+                  <p className="font-body text-lg leading-relaxed text-forest-800">
+                    {founderBio[1]}
                   </p>
-                ))}
+                </div>
               </div>
             </SlideUp>
           </div>
@@ -221,19 +236,32 @@ export default function ChiSiamoPage() {
           </SlideUp>
 
           <SlideUp delay={0.15}>
-            <div className="font-body text-lg md:text-xl text-paper-300/90 leading-relaxed max-w-3xl mx-auto space-y-6">
-              <p>
-                Visione Sostenibile nasce dall&apos;ascolto delle persone, dei luoghi, della natura che cambia, ed è cresciuta attorno a un&apos;idea semplice: il verde che funziona davvero e quello che rispetta i cicli naturali.
-              </p>
-              <p>
-                Il metodo biodinamico si impegna a costruire terreni vivi, scegliere piante adatte al territorio, eliminare la chimica e progettare giardini che migliorano con il tempo in modo naturale.
-              </p>
-              <p>
-                Visione Sostenibile è un team multidisciplinare di specialisti che lavorano in sinergia per offrire un servizio completo e sicuro da tutti i punti di vista.
-              </p>
-              <p>
-                Inoltre, grazie alla direzione di un referente unico si ottimizzano tempi, costi e risultati.
-              </p>
+            <div className="max-w-4xl mx-auto">
+              <div className="rounded-[30px] border border-white/10 bg-white/5 px-8 py-7 backdrop-blur-sm">
+                <p className="font-body text-xl md:text-2xl text-paper-100 leading-relaxed text-balance">
+                  {storyParagraphs[0]}
+                </p>
+              </div>
+
+              <div className="mt-6 grid gap-6 md:grid-cols-2 text-left">
+                {storyParagraphs.slice(1, 3).map((paragraph) => (
+                  <div
+                    key={paragraph}
+                    className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                  >
+                    <p className="font-body text-lg text-paper-300/90 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex max-w-2xl items-start gap-4 rounded-[28px] border border-leaf-500/20 bg-leaf-500/10 px-6 py-4 text-left md:rounded-full">
+                <span className="mt-1 h-2.5 w-2.5 rounded-full bg-leaf-400" />
+                <p className="font-body text-base md:text-lg text-paper-200 leading-relaxed">
+                  {storyParagraphs[3]}
+                </p>
+              </div>
             </div>
           </SlideUp>
 
@@ -276,26 +304,36 @@ export default function ChiSiamoPage() {
           </SlideUp>
 
           <StaggerContainer delay={0.2}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               {pillars.map((pillar, index) => (
                 <StaggerItem key={pillar.title} delay={index * 0.1}>
                   <Card
                     variant="default"
-                    className="h-full text-center border border-paper-100 bg-paper-50 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
+                    className="h-full border border-paper-100 bg-paper-50 hover:border-leaf-200 hover:shadow-soft hover:-translate-y-1.5 hover:shadow-floating transition-all duration-300"
                   >
-                    <CardContent className="p-8">
-                      <div className="w-16 h-16 rounded-2xl bg-leaf-100 flex items-center justify-center mx-auto mb-6">
-                        <pillar.icon className="w-8 h-8 text-leaf-700" />
+                    <CardContent className="p-8 md:p-9">
+                      <div className="flex items-start gap-5">
+                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-leaf-100">
+                          <pillar.icon className="w-8 h-8 text-leaf-700" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className="font-sans text-[11px] font-bold uppercase tracking-[0.24em] text-forest-800/45">
+                              {(index + 1).toString().padStart(2, "0")}
+                            </span>
+                            <span className="h-px flex-1 bg-paper-300" />
+                          </div>
+                          <h3 className="font-display text-2xl text-forest-950 mb-1">
+                            {pillar.title}
+                          </h3>
+                          <p className="font-sans text-sm text-leaf-600 uppercase tracking-wider mb-4">
+                            {pillar.subtitle}
+                          </p>
+                          <p className="font-body text-base md:text-lg text-forest-800/75 leading-relaxed max-w-xl">
+                            {pillar.description}
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="font-display text-2xl text-forest-950 mb-1">
-                        {pillar.title}
-                      </h3>
-                      <p className="font-sans text-sm text-leaf-600 uppercase tracking-wider mb-4">
-                        {pillar.subtitle}
-                      </p>
-                      <p className="font-body text-forest-800/70 leading-relaxed">
-                        {pillar.description}
-                      </p>
                     </CardContent>
                   </Card>
                 </StaggerItem>
