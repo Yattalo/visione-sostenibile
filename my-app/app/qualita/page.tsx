@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useId } from "react";
 import {
   CheckCircle,
   Shield,
@@ -68,6 +68,71 @@ const qualityStandards = [
     badge: "Ambiente",
   },
 ];
+
+function ActiveCommitmentBadge() {
+  const gradientId = useId().replace(/:/g, "");
+
+  return (
+    <div className="mt-5 flex items-center justify-center gap-2 text-forest-700/55 transition-colors duration-300 group-hover:text-leaf-700">
+      <svg
+        viewBox="0 0 20 20"
+        aria-hidden="true"
+        className="h-[18px] w-[18px] overflow-visible"
+        fill="none"
+      >
+        <defs>
+          <linearGradient
+            id={gradientId}
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop offset="0%" stopColor="#BCE5C3" />
+            <stop offset="45%" stopColor="#F7DC65" />
+            <stop offset="100%" stopColor="#3A8744" />
+          </linearGradient>
+        </defs>
+
+        <circle
+          cx="10"
+          cy="10"
+          r="8.25"
+          className="stroke-current opacity-60 transition-opacity duration-300 group-hover:opacity-35"
+          strokeWidth="1.6"
+        />
+        <path
+          d="M6.2 10.3 8.8 12.8 13.9 7.3"
+          className="stroke-current opacity-70 transition-opacity duration-300 group-hover:opacity-35"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+
+        <circle
+          cx="10"
+          cy="10"
+          r="8.25"
+          className="commitment-shimmer-stroke"
+          stroke={`url(#${gradientId})`}
+          strokeWidth="1.8"
+        />
+        <path
+          d="M6.2 10.3 8.8 12.8 13.9 7.3"
+          className="commitment-shimmer-stroke"
+          stroke={`url(#${gradientId})`}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
+
+      <span className="text-[11px] font-semibold uppercase tracking-[0.22em]">
+        Impegno attivo
+      </span>
+    </div>
+  );
+}
 
 /* ─── Biodinamica Methodology ─── */
 
@@ -259,7 +324,7 @@ export default function QualitaPage() {
             className="object-cover opacity-60"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/60 via-forest-900/40 to-forest-950/50 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-forest-950/80 via-forest-900/65 to-forest-950/75 z-10" />
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-20 px-6 pt-20 md:pt-0">
@@ -442,12 +507,7 @@ export default function QualitaPage() {
                     <p className="font-body text-sm text-forest-800 leading-relaxed">
                       {commitment.description}
                     </p>
-                    <div className="mt-4 flex items-center justify-center gap-1.5 text-leaf-600">
-                      <CheckCircle className="w-4 h-4" />
-                      <span className="text-xs font-medium uppercase tracking-wider">
-                        Impegno attivo
-                      </span>
-                    </div>
+                    <ActiveCommitmentBadge />
                   </div>
                 </StaggerItem>
               ))}
